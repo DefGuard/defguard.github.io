@@ -1,0 +1,15 @@
+---
+import Footer from "../components/base/Footer.astro";
+import Navigation from "../components/base/Navigation.astro";
+import BaseLayout from "./BaseLayout.astro";
+---
+
+<BaseLayout>
+  <Navigation />
+  <main id="product-content">
+    <slot />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style lang="scss"></style>

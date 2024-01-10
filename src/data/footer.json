@@ -1,0 +1,52 @@
+[
+  {
+    "header": "Company",
+    "children": [
+      {
+        "text": "About Us",
+        "external": false,
+        "link": ""
+      },
+      {
+        "text": "Business Model",
+        "external": false,
+        "link": ""
+      },
+      {
+        "text": "Ownership",
+        "external": false,
+        "link": ""
+      },
+      {
+        "text": "Support",
+        "external": false,
+        "link": ""
+      }
+    ]
+  },
+  {
+    "header": "Community",
+    "children": [
+      {
+        "text": "GitHub",
+        "external": true,
+        "link": ""
+      },
+      {
+        "text": "Blog",
+        "external": true,
+        "link": ""
+      },
+      {
+        "text": "Twitter",
+        "external": true,
+        "link": ""
+      },
+      {
+        "text": "Matrix",
+        "external": true,
+        "link": ""
+      }
+    ]
+  }
+]

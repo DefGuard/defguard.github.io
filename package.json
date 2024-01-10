@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "defguard",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -14,6 +14,7 @@
     "@astrojs/mdx": "^2.0.3",
     "astro": "^4.1.0",
     "astro-compress": "2.2.7",
+    "astro-font": "^0.0.67",
     "astro-imagetools": "^0.9.0",
     "sass": "^1.69.7",
     "typescript": "^5.3.3"

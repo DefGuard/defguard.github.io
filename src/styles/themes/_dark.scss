@@ -1,0 +1,16 @@
+@use './primitives' as *;
+
+[data-theme="dark"] {
+    --text-body-primary: #{$grayscale-0};
+    --text-body-secondary: #{$grayscale-40};
+    --text-body-tertiary: #{$grayscale-50};
+    --text-button-primary: #{$grayscale-0};
+    --text-button-tertiary: #{$brand-default-main};
+    --text-button-secondary: #{$grayscale-0};
+
+    --surface-main-primary: #{$brand-default-main};
+    --surface-main-secondary: #{$brand-hover-main-secondary};
+    --surface-frame-bg: #{$grayscale-90};
+    --surface-scroll-inactive: #{$grayscale-30};
+    --surface-scroll-active: #{$grayscale-50};
+}

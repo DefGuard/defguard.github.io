@@ -1,0 +1,82 @@
+---
+import { AstroFont } from "astro-font";
+import "../styles/global.scss";
+---
+
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>defguard</title>
+    <AstroFont
+      config={[
+        {
+          name: "Poppins",
+          src: [
+            {
+              style: "normal",
+              weight: 300,
+              path: "./public/fonts/poppins/Poppins-Light.woff2",
+            },
+            {
+              style: "italic",
+              weight: 300,
+              path: "./public/fonts/poppins/Poppins-LightItalic.woff2",
+            },
+            {
+              style: "normal",
+              weight: 400,
+              path: "./public/fonts/poppins/Poppins-Regular.woff2",
+            },
+            {
+              style: "italic",
+              weight: 400,
+              path: "./public/fonts/poppins/Poppins-Italic.woff2",
+            },
+            {
+              style: "normal",
+              weight: 500,
+              path: "./public/fonts/poppins/Poppins-Medium.woff2",
+            },
+            {
+              style: "italic",
+              weight: 500,
+              path: "./public/fonts/poppins/Poppins-MediumItalic.woff2",
+            },
+            {
+              style: "normal",
+              weight: 600,
+              path: "./public/fonts/poppins/Poppins-SemiBold.woff2",
+            },
+            {
+              style: "italic",
+              weight: 600,
+              path: "./public/fonts/poppins/Poppins-SemiBoldItalic.woff2",
+            },
+            {
+              style: "normal",
+              weight: 700,
+              path: "./public/fonts/poppins/Poppins-Bold.woff2",
+            },
+            {
+              style: "italic",
+              weight: 700,
+              path: "./public/fonts/poppins/Poppins-BoldItalic.woff2",
+            },
+          ],
+          preload: false,
+          display: "swap",
+          selector: "body",
+          fallback: "sans-serif",
+        },
+      ]}
+    />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

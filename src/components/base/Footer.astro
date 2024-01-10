@@ -1,0 +1,30 @@
+---
+import footerData from "../../data/footer.json";
+---
+
+<footer>
+  <p class="copyright"></p>
+  <div class="footer-cols">
+    {
+      footerData.map((col) => (
+        <div class="col">
+          <p>{col.header}</p>{" "}
+          <ul>
+            {col.children.map((colItem) => (
+              <li>
+                <a class:list={[{ external: colItem.external }]} href={colItem.link}>
+                  {colItem.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</footer>
+
+<style lang="scss">
+  footer {
+  }
+</style>

@@ -1,0 +1,36 @@
+---
+import navItems from "../../data/nav.json";
+import logoSVG from "/public/svg/logo-full.svg?raw";
+---
+
+<Fragment>
+  <nav id="desktop-nav">
+    <Fragment set:html={logoSVG} />
+    <ul class="nav-items">
+      {
+        navItems.map((item) => (
+          <li>
+            {item.prefetch && (
+              <a href={item.url} data-astro-prefetch>
+                {item.display}
+              </a>
+            )}
+            {!item.prefetch && <a href={item.url}>{item.display}</a>}
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</Fragment>
+
+<style lang="scss" is:global>
+  #desktop-nav {
+    svg {
+      g {
+        path {
+          fill: var(--text-body-primary);
+        }
+      }
+    }
+  }
+</style>

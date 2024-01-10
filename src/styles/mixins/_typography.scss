@@ -1,0 +1,4 @@
+// replace with typography mixin later
+@mixin font-scalable($size) {
+    font-size: calc($size * var(--font-scale-factor));
+}
