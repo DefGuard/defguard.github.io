@@ -23,6 +23,18 @@ body {
     font-size: 20px;
     font-weight: 400;
     color: var(--text-body-primary);
-    min-width: 100dvw;
     min-height: 100dvh;
+    position: relative;
+    background-color: var(--surface-frame-bg);
+}
+
+main {
+    padding-top: var(--nav-height);
+}
+
+// main vars
+html {
+    --font-scale-factor: 1.0;
+    --nav-height: 75px;
+    --box-shadow: 0px 12px 24px 0px rgba(0, 0, 0, 0.08);
 }

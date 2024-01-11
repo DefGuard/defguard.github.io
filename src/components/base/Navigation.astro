@@ -5,17 +5,23 @@ import logoSVG from "/public/svg/logo-full.svg?raw";
 
 <Fragment>
   <nav id="desktop-nav">
-    <Fragment set:html={logoSVG} />
+    <a href="/" class="nav-logo">
+      <Fragment set:html={logoSVG} />
+    </a>
     <ul class="nav-items">
       {
         navItems.map((item) => (
-          <li>
+          <li class="nav-item">
             {item.prefetch && (
               <a href={item.url} data-astro-prefetch>
-                {item.display}
+                <span>{item.display}</span>
               </a>
             )}
-            {!item.prefetch && <a href={item.url}>{item.display}</a>}
+            {!item.prefetch && (
+              <a href={item.url}>
+                <span>{item.display}</span>
+              </a>
+            )}
           </li>
         ))
       }
@@ -25,10 +31,76 @@ import logoSVG from "/public/svg/logo-full.svg?raw";
 
 <style lang="scss" is:global>
   #desktop-nav {
-    svg {
-      g {
-        path {
-          fill: var(--text-body-primary);
+    // vars
+
+    --main-padding: 12px 32px;
+    --items-gap: 6px;
+
+    @include break-up(lg) {
+      --items-gap: 12px;
+    }
+
+    @include break-up(xl) {
+      --main-padding: 12px 64px;
+      --items-gap: 32px;
+    }
+
+    background-color: var(--surface-frame-bg);
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    height: var(--nav-height);
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: var(--main-padding);
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: 10px;
+
+    .nav-logo {
+      svg {
+        g {
+          path {
+            fill: var(--text-body-primary);
+          }
+        }
+      }
+    }
+
+    .nav-items {
+      margin: 0;
+      padding: 0;
+      margin-left: auto;
+      display: flex;
+      flex-flow: row nowrap;
+      list-style: none;
+      column-gap: var(--items-gap);
+
+      li {
+        user-select: none;
+        display: block;
+        a {
+          display: flex;
+          flex-flow: row nowrap;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none;
+          padding: 5px 20px;
+          height: 31px;
+          border-bottom: 1px solid transparent;
+          box-sizing: border-box;
+
+          span {
+            display: block;
+            @include typography(menu);
+            text-align: center;
+          }
+          &:hover {
+            border-bottom-color: var(--text-body-primary);
+          }
         }
       }
     }

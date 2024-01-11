@@ -1,0 +1,49 @@
+---
+interface Props {
+  id?: string;
+  className?: string;
+  dark?: boolean;
+  padding?: "large" | "small" | "mid";
+}
+
+const { dark = false, padding = "large", className, id } = Astro.props;
+
+const theme = dark ? "dark" : "light";
+---
+
+<div
+  id={id}
+  class:list={["product-section", `padding-${padding}`, className]}
+  data-theme={theme}
+>
+  <slot />
+</div>
+
+<style lang="scss" is:global>
+  .product-section {
+    --product-section-items-gap: 20px;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: var(--surface-frame-bg);
+
+    & > * {
+      max-width: 1100px;
+    }
+
+    &.padding-large {
+      padding: 200px 50px;
+    }
+
+    &.padding-mid {
+      padding: 150px 50px;
+    }
+
+    &.padding-small {
+      padding: 50px;
+    }
+  }
+</style>

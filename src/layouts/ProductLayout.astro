@@ -1,15 +1,23 @@
 ---
-import Footer from "../components/base/Footer.astro";
 import Navigation from "../components/base/Navigation.astro";
+import ProductHeader from "../components/product/ProductHeader.astro";
 import BaseLayout from "./BaseLayout.astro";
 ---
 
 <BaseLayout>
   <Navigation />
   <main id="product-content">
+    <ProductHeader />
     <slot />
   </main>
-  <Footer />
+  <!-- <Footer /> -->
 </BaseLayout>
 
-<style lang="scss"></style>
+<style is:global lang="scss">
+  .product-features {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    row-gap: 20px;
+  }
+</style>

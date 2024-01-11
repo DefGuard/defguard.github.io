@@ -1,3 +1,4 @@
+import preact from "@astrojs/preact";
 import { defineConfig } from "astro/config";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -12,7 +13,7 @@ const __dirname = path.dirname(__filename);
 // https://astro.build/config
 export default defineConfig({
   prefetch: true,
-  integrations: [mdx(), compress()],
+  integrations: [mdx(), compress(), preact()],
   vite: {
     resolve: {
       alias: {

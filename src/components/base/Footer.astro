@@ -1,30 +1,124 @@
 ---
 import footerData from "../../data/footer.json";
+import LogoFull from "/public/svg/logo-full.svg?raw";
 ---
 
 <footer>
-  <p class="copyright"></p>
-  <div class="footer-cols">
-    {
-      footerData.map((col) => (
-        <div class="col">
-          <p>{col.header}</p>{" "}
-          <ul>
-            {col.children.map((colItem) => (
-              <li>
-                <a class:list={[{ external: colItem.external }]} href={colItem.link}>
-                  {colItem.text}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))
-    }
+  <div class="content-container">
+    <header>
+      <Fragment set:html={LogoFull} />
+    </header>
+    <div class="footer-cols">
+      {
+        footerData.map((col) => (
+          <div class="col">
+            <p>{col.header}</p>{" "}
+            <ul>
+              {col.children.map((colItem) => (
+                <li>
+                  <a class:list={[{ external: colItem.external }]} href={colItem.link}>
+                    {colItem.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+    <p class="copyright">
+      © 2024 <a href="https://teonite.com">teonite</a> services sp. z .o .o
+    </p>
   </div>
 </footer>
 
 <style lang="scss">
   footer {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    justify-content: center;
+    background-color: var(--surface-frame-bg);
+
+    header {
+      display: flex;
+      flex-flow: row;
+      min-height: 55px;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .content-container {
+      width: 100%;
+      max-width: 1100px;
+      padding: 0 50px;
+      display: flex;
+      flex-flow: column;
+      row-gap: 40px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    a {
+      text-decoration: none;
+      @include typography(h3);
+
+      span {
+        display: block;
+        @include typography(h3);
+      }
+
+      .external {
+        min-height: 27px;
+        min-width: 92px;
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: flex-start;
+
+        svg {
+          user-select: none;
+          margin-left: auto;
+        }
+      }
+    }
+
+    .copyright {
+      @include typography(footer);
+      width: 100%;
+      text-align: left;
+      height: 61px;
+      padding-bottom: 24px;
+
+      a {
+        @include typography(footer);
+        text-decoration: none;
+      }
+    }
+  }
+
+  .footer-cols {
+    display: flex;
+    flex-flow: row;
+    column-gap: 15px;
+    row-gap: 20px;
+    .col {
+      min-width: 300px;
+      & > p {
+        min-height: 35px;
+        padding-bottom: 5px;
+        @include typography(footer-section);
+      }
+      & > ul {
+        display: flex;
+        flex-flow: column;
+        row-gap: 5px;
+      }
+    }
   }
 </style>

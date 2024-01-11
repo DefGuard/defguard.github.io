@@ -1,6 +1,26 @@
 [
   {
-    "display": "",
+    "display": "Features",
+    "url": "",
+    "prefetch": false
+  },
+  {
+    "display": "Enterprise",
+    "url": "",
+    "prefetch": false
+  },
+  {
+    "display": "Pricing",
+    "url": "",
+    "prefetch": false
+  },
+  {
+    "display": "Documentation",
+    "url": "",
+    "prefetch": false
+  },
+  {
+    "display": "Github",
     "url": "",
     "prefetch": false
   }

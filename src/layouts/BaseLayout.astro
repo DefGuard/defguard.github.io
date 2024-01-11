@@ -1,5 +1,5 @@
 ---
-import { AstroFont } from "astro-font";
+import Footer from "../components/base/Footer.astro";
 import "../styles/global.scss";
 ---
 
@@ -12,71 +12,16 @@ import "../styles/global.scss";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>defguard</title>
-    <AstroFont
-      config={[
-        {
-          name: "Poppins",
-          src: [
-            {
-              style: "normal",
-              weight: 300,
-              path: "./public/fonts/poppins/Poppins-Light.woff2",
-            },
-            {
-              style: "italic",
-              weight: 300,
-              path: "./public/fonts/poppins/Poppins-LightItalic.woff2",
-            },
-            {
-              style: "normal",
-              weight: 400,
-              path: "./public/fonts/poppins/Poppins-Regular.woff2",
-            },
-            {
-              style: "italic",
-              weight: 400,
-              path: "./public/fonts/poppins/Poppins-Italic.woff2",
-            },
-            {
-              style: "normal",
-              weight: 500,
-              path: "./public/fonts/poppins/Poppins-Medium.woff2",
-            },
-            {
-              style: "italic",
-              weight: 500,
-              path: "./public/fonts/poppins/Poppins-MediumItalic.woff2",
-            },
-            {
-              style: "normal",
-              weight: 600,
-              path: "./public/fonts/poppins/Poppins-SemiBold.woff2",
-            },
-            {
-              style: "italic",
-              weight: 600,
-              path: "./public/fonts/poppins/Poppins-SemiBoldItalic.woff2",
-            },
-            {
-              style: "normal",
-              weight: 700,
-              path: "./public/fonts/poppins/Poppins-Bold.woff2",
-            },
-            {
-              style: "italic",
-              weight: 700,
-              path: "./public/fonts/poppins/Poppins-BoldItalic.woff2",
-            },
-          ],
-          preload: false,
-          display: "swap",
-          selector: "body",
-          fallback: "sans-serif",
-        },
-      ]}
+    <!-- FIXME: USE LOCAL -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
     />
   </head>
   <body>
     <slot />
+    <Footer />
   </body>
 </html>
