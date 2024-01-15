@@ -26,8 +26,8 @@ const matrixIconId = svgId();
         clientFeatures.map(async (f) => {
           const { Content } = await f.render();
           return (
-            <ProductFeature title={f.data.title}>
-              <Content slot="content" />
+            <ProductFeature title={f.data.title} client:load>
+              <Content />
             </ProductFeature>
           );
         })

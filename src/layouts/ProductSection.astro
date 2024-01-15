@@ -3,17 +3,25 @@ interface Props {
   id?: string;
   className?: string;
   dark?: boolean;
-  padding?: "large" | "small" | "mid";
+  padding?: "large" | "small" | "mid" | "none";
+  bordered?: boolean;
 }
 
-const { dark = false, padding = "large", className, id } = Astro.props;
+const { dark = false, padding = "large", className, id, bordered = false } = Astro.props;
 
 const theme = dark ? "dark" : "light";
 ---
 
 <div
   id={id}
-  class:list={["product-section", `padding-${padding}`, className]}
+  class:list={[
+    "product-section",
+    `padding-${padding}`,
+    className,
+    {
+      bordered,
+    },
+  ]}
   data-theme={theme}
 >
   <slot />
@@ -44,6 +52,15 @@ const theme = dark ? "dark" : "light";
 
     &.padding-small {
       padding: 50px;
+    }
+
+    &.padding-none {
+      padding: 0 50px;
+    }
+
+    &.bordered {
+      border-top: 1px solid var(--text-body-primary);
+      border-bottom: 1px solid var(--text-body-primary);
     }
   }
 </style>

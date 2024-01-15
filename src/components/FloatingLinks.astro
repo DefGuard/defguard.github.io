@@ -1,0 +1,59 @@
+---
+
+---
+
+<ul id="floating-links">
+  <li>
+    <a href="/newsletter" data-astro-prefetch> <span> Newsletter</span></a>
+  </li>
+  <li>
+    <a href="">
+      <span> Github</span>
+    </a>
+  </li>
+  <li>
+    <a href=""><span> Matrix</span></a>
+  </li>
+</ul>
+
+<script>
+  const defaultTheme = document.documentElement.dataset["theme"];
+  const componentElement = document.getElementById("floating-links");
+  if (componentElement) {
+    componentElement.dataset.theme = defaultTheme;
+  }
+</script>
+
+<style lang="scss">
+  #floating-links {
+    position: fixed;
+    z-index: 2;
+    top: clamp(250px, 25dvh, 500px);
+    right: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-flow: column;
+    row-gap: 15px;
+    width: 175px;
+
+    li {
+      margin: 0;
+      padding: 0;
+
+      a {
+        height: 37px;
+        width: 100%;
+        @include typography(menu);
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: flex-start;
+        box-sizing: border-box;
+        border-bottom: 1px solid var(--text-body-primary);
+        text-decoration: none;
+      }
+    }
+  }
+</style>

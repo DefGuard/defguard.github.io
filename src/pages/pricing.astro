@@ -1,0 +1,236 @@
+---
+import Navigation from "../components/base/Navigation.astro";
+import { Button } from "../components/buttons/Button/Button";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProductSection from "../layouts/ProductSection.astro";
+---
+
+<BaseLayout>
+  <Navigation />
+  <main id="pricing-page">
+    <ProductSection padding="large" id="pricing-tiers">
+      <header><h1>Support & Pricing</h1></header>
+      <div class="tiers">
+        <div class="tier">
+          <header>
+            <h2>Open Source</h2>
+            <h3>Free!</h3>
+          </header>
+          <div class="description">
+            <h4>All functionalities:</h4>
+            <ul class="functionalities">
+              <li>OpenID Identity</li>
+              <li>Multi-Factor Authentication</li>
+              <li>Group Management</li>
+              <li>Secure Remote Enrollment</li>
+              <li>User onboarding</li>
+              <li>OpenLDAP synchronisation</li>
+              <li>Enterprise Wireguard VPN</li>
+              <li>Desktop Clients with 2FA</li>
+              <li>Multiple Instances</li>
+              <li>Multiple Locations</li>
+              <li>High Availability & Failover</li>
+              <li>Site-to-Site VPN (in development)</li>
+              <li>Yubikey Hardware keys provisioning</li>
+              <li>Webhooks</li>
+              <li>API</li>
+              <li>Web3 Wallets Validation</li>
+            </ul>
+          </div>
+          <div class="footer"></div>
+        </div>
+        <div class="tier">
+          <header>
+            <h2>Premium</h2>
+            <h3>$10/month</h3>
+          </header>
+          <div class="description">
+            <h4>All functionalities:</h4>
+            <ul class="functionalities">
+              <li>OpenID Identity</li>
+              <li>Multi-Factor Authentication</li>
+              <li>Group Management</li>
+              <li>Secure Remote Enrollment</li>
+              <li>User onboarding</li>
+              <li>OpenLDAP synchronisation</li>
+              <li>Enterprise Wireguard VPN</li>
+              <li>Desktop Clients with 2FA</li>
+              <li>Multiple Instances</li>
+              <li>Multiple Locations</li>
+              <li>High Availability & Failover</li>
+              <li>Site-to-Site VPN (in development)</li>
+              <li>Yubikey Hardware keys provisioning</li>
+              <li>Webhooks</li>
+              <li>API</li>
+              <li>Web3 Wallets Validation</li>
+            </ul>
+          </div>
+          <div class="footer"></div>
+        </div>
+        <div class="tier">
+          <header>
+            <h2>Enterprise</h2>
+            <h3>$70/month</h3>
+          </header>
+          <div class="description">
+            <h4>All functionalities:</h4>
+            <ul class="functionalities">
+              <li>OpenID Identity</li>
+              <li>Multi-Factor Authentication</li>
+              <li>Group Management</li>
+              <li>Secure Remote Enrollment</li>
+              <li>User onboarding</li>
+              <li>OpenLDAP synchronisation</li>
+              <li>Enterprise Wireguard VPN</li>
+              <li>Desktop Clients with 2FA</li>
+              <li>Multiple Instances</li>
+              <li>Multiple Locations</li>
+              <li>High Availability & Failover</li>
+              <li>Site-to-Site VPN (in development)</li>
+              <li>Yubikey Hardware keys provisioning</li>
+              <li>Webhooks</li>
+              <li>API</li>
+              <li>Web3 Wallets Validation</li>
+            </ul>
+          </div>
+          <div class="footer"></div>
+        </div>
+      </div>
+      <div class="contact">
+        <Button size="large" text="Contact Sales" client:load />
+      </div>
+    </ProductSection>
+  </main>
+</BaseLayout>
+
+<style lang="scss" is:global>
+  #pricing-tiers {
+    h1 {
+      @include typography(section);
+    }
+
+    h2 {
+      @include typography(pricebox-title);
+    }
+
+    h3 {
+      @include typography(pricebox-price);
+    }
+
+    h4 {
+      @include typography(pricebox-section);
+    }
+
+    header {
+      display: flex;
+      flex-flow: row;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+      padding-bottom: 50px;
+
+      h1 {
+        text-align: left;
+      }
+    }
+
+    .contact {
+      border-top: 1px solid var(--border-separator);
+      display: flex;
+      flex-flow: row;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      padding: 30px 10px 10px;
+    }
+
+    & > * {
+      width: 100%;
+    }
+
+    .tiers {
+      --tiers-col-gap: 25px;
+      --tiers-row-gap: 20px;
+
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: var(--tiers-col-gap);
+      row-gap: var(--tiers-row-gap);
+      padding-bottom: 50px;
+
+      .tier {
+        width: 100%;
+        border: 1px solid var(--text-body-primary);
+        box-sizing: border-box;
+
+        & > header {
+          width: 100%;
+          display: flex;
+          flex-flow: column;
+          align-items: center;
+          justify-content: center;
+          padding-bottom: 20px;
+
+          & > * {
+            display: block;
+          }
+
+          h2 {
+            width: 100%;
+            padding: 20px 10px;
+            border-bottom: 1px solid var(--text-body-primary);
+            box-sizing: border-box;
+            text-align: center;
+          }
+
+          h3 {
+            width: 100%;
+            padding: 10px;
+            border-bottom: 1px solid var(--text-body-primary);
+            box-sizing: border-box;
+            text-align: center;
+          }
+        }
+
+        .description {
+          display: flex;
+          flex-flow: column;
+          align-items: flex-start;
+          justify-content: flex-start;
+          row-gap: 20px;
+          box-sizing: border-box;
+          padding: 20px;
+
+          ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            flex-flow: column;
+            row-gap: 8px;
+            @include typography(pricebox-list);
+
+            li {
+              margin: 0;
+              box-sizing: border-box;
+              padding: 0 0 0 20px;
+              position: relative;
+
+              &::before {
+                display: block;
+                position: absolute;
+                top: 1.3ch;
+                left: 0.5ch;
+                content: "\2022";
+                user-select: none;
+                transform: translateY(-50%);
+                color: var(--text-body-primary);
+                @include font-scalable(18px);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+</style>
