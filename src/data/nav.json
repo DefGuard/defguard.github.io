@@ -1,27 +1,19 @@
 [
   {
-    "display": "Features",
-    "url": "",
-    "prefetch": false
-  },
-  {
-    "display": "Enterprise",
-    "url": "",
-    "prefetch": false
-  },
-  {
     "display": "Pricing",
-    "url": "",
-    "prefetch": false
+    "url": "/pricing",
+    "prefetch": true
   },
   {
     "display": "Documentation",
-    "url": "",
-    "prefetch": false
+    "url": "https://defguard.gitbook.io/defguard/",
+    "prefetch": false,
+    "external": true
   },
   {
-    "display": "Github",
-    "url": "",
-    "prefetch": false
+    "display": "GitHub",
+    "url": "https://github.com/DefGuard",
+    "prefetch": false,
+    "external": true
   }
 ]

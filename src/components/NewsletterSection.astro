@@ -3,20 +3,26 @@ import ProductSection from "../layouts/ProductSection.astro";
 import { Button } from "./buttons/Button/Button";
 ---
 
-<ProductSection padding="small" bordered>
+<ProductSection padding="newsletter" bordered>
   <section id="newsletter">
     <h2>Sign up for our newsletter</h2>
     <p>Get the latest defguard news and updates in your inbox.</p>
-    <form id="newsletter-form">
+    <form
+      id="newsletter-form"
+      action="https://buttondown.email/api/emails/embed-subscribe/defguard"
+      method="post"
+      target="popupwindow"
+      onsubmit={`window.open('https://buttondown.email/defguard', 'popupwindow')`}
+    >
       <div class="form-row field-email field">
-        <label for="newsletter-email">Email:</label>
-        <input id="newsletter-email" placeholder="" />
+        <label for="bd-email">Email:</label>
+        <input id="bd-email" name="email" type="email" placeholder="" />
       </div>
       <div class="terms">
         <div class="form-row"></div>
         <p></p>
       </div>
-      <Button text="Subscribe Now" size="normal" />
+      <Button type="submit" text="Subscribe Now" size="normal" />
     </form>
   </section>
 </ProductSection>

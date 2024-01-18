@@ -1,0 +1,51 @@
+---
+import Navigation from "../components/base/Navigation.astro";
+import { Button } from "../components/buttons/Button/Button";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProductSection from "../layouts/ProductSection.astro";
+---
+
+<BaseLayout>
+  <Navigation />
+  <main id="purchase-confirm">
+    <ProductSection padding="mid">
+      <section id="thanks-section">
+        <h1>Thank you for your purchase!</h1>
+        <p>Your contribution helps us improve defguard.</p>
+        <a href="/" data-astro-prefetch>
+          <Button text="Home" size="large" />
+        </a>
+      </section>
+    </ProductSection>
+  </main>
+</BaseLayout>
+
+<style lang="scss" is:global>
+  #thanks-section {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    h1 {
+      @include typography(section);
+      text-align: left;
+    }
+
+    p {
+      @include typography(paragraph);
+      padding: 20px 0;
+      text-align: left;
+    }
+
+    & > a {
+      display: flex;
+      text-decoration: none;
+      padding-top: 50px;
+      .btn {
+        min-width: 130px;
+      }
+    }
+  }
+</style>

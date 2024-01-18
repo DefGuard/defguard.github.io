@@ -3,7 +3,7 @@ interface Props {
   id?: string;
   className?: string;
   dark?: boolean;
-  padding?: "large" | "small" | "mid" | "none";
+  padding?: "large" | "small" | "mid" | "none" | "newsletter";
   bordered?: boolean;
 }
 
@@ -29,7 +29,14 @@ const theme = dark ? "dark" : "light";
 
 <style lang="scss" is:global>
   .product-section {
+    --product-section-edge-padding: 20px;
     --product-section-items-gap: 20px;
+
+    --product-section-padding-large: 200px;
+    --product-section-padding-mid: 150px;
+    --product-section-padding-small: 20px;
+    --product-section-padding-newsletter: 50px;
+
     box-sizing: border-box;
     width: 100%;
     display: flex;
@@ -43,19 +50,24 @@ const theme = dark ? "dark" : "light";
     }
 
     &.padding-large {
-      padding: 200px 50px;
+      padding: var(--product-section-padding-large) var(--product-section-edge-padding);
     }
 
     &.padding-mid {
-      padding: 150px 50px;
+      padding: var(--product-section-padding-mid) var(--product-section-edge-padding);
     }
 
     &.padding-small {
-      padding: 50px;
+      padding: var(--product-section-padding-small) var(--product-section-edge-padding);
     }
 
     &.padding-none {
-      padding: 0 50px;
+      padding: 0 var(--product-section-edge-padding);
+    }
+
+    &.padding-newsletter {
+      padding: var(--product-section-padding-newsletter)
+        var(--product-section-edge-padding);
     }
 
     &.bordered {

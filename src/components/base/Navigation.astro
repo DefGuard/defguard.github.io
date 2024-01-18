@@ -1,27 +1,116 @@
 ---
 import navItems from "../../data/nav.json";
 import logoSVG from "/public/svg/logo-full.svg?raw";
+
+const pathname = Astro.url.pathname;
 ---
 
 <Fragment>
   <nav id="desktop-nav">
-    <a href="/" class="nav-logo">
+    <a href="/" class="nav-logo" data-astro-prefetch>
       <Fragment set:html={logoSVG} />
     </a>
     <ul class="nav-items">
       {
+        pathname !== "/" && (
+          <li class="nav-item">
+            <a href="/" data-astro-prefetch>
+              <span>Serwer</span>
+            </a>
+          </li>
+        )
+      }
+      {
+        pathname !== "/client" && (
+          <li class="nav-item">
+            <a href="/client" data-astro-prefetch>
+              <span>Client</span>
+            </a>
+          </li>
+        )
+      }
+      {
         navItems.map((item) => (
           <li class="nav-item">
-            {item.prefetch && (
-              <a href={item.url} data-astro-prefetch>
-                <span>{item.display}</span>
-              </a>
-            )}
-            {!item.prefetch && (
-              <a href={item.url}>
-                <span>{item.display}</span>
-              </a>
-            )}
+            <a
+              href={item.url}
+              target={item.external ? "_blank" : "_self"}
+              data-astro-prefetch={item.prefetch ? "hover" : "false"}
+              class:list={{
+                active: item.url === pathname,
+              }}
+            >
+              <span>{item.display}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+  <section id="mobile-nav-bar">
+    <a href="/" class="nav-logo">
+      <Fragment set:html={logoSVG} />
+    </a>
+    <button id="mobile-nav-menu-burger">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="32"
+        height="33"
+        viewBox="0 0 32 33"
+        fill="none"
+        id="mobile-nav-burger-closed"
+      >
+        <path
+          d="M7 23.5H25M7 9.5H25M7 16.5H25"
+          style={{ stroke: "var(--text-body-primary)" }}></path>
+      </svg>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="32"
+        height="33"
+        viewBox="0 0 32 33"
+        fill="none"
+        id="mobile-nav-burger-open"
+        class="hidden"
+      >
+        <path d="M9 9.5L23 23.5" style={{ stroke: "var(--text-body-primary)" }}></path>
+        <path d="M23 9.5L9 23.5" style={{ stroke: "var(--text-body-primary)" }}></path>
+      </svg>
+    </button>
+  </section>
+  <nav id="mobile-nav">
+    <ul>
+      {
+        pathname !== "/" && (
+          <li class="nav-item">
+            <a href="/" data-astro-prefetch>
+              <span>Serwer</span>
+            </a>
+          </li>
+        )
+      }
+      {
+        pathname !== "/client" && (
+          <li class="nav-item">
+            <a href="/client" data-astro-prefetch>
+              <span>Client</span>
+            </a>
+          </li>
+        )
+      }
+      {
+        navItems.map((item) => (
+          <li class="nav-item">
+            <a
+              href={item.url}
+              target={item.external ? "_blank" : "_self"}
+              data-astro-prefetch={item.prefetch ? "hover" : "false"}
+              class:list={{
+                active: item.url === pathname,
+              }}
+            >
+              <span>{item.display}</span>
+            </a>
           </li>
         ))
       }
@@ -29,15 +118,125 @@ import logoSVG from "/public/svg/logo-full.svg?raw";
   </nav>
 </Fragment>
 
-<style lang="scss" is:global>
-  #desktop-nav {
-    // vars
+<script>
+  const mobileNavElement = document.getElementById("mobile-nav");
+  const navBurgerElement = document.getElementById("mobile-nav-menu-burger");
+  const navIconOpen = document.getElementById("mobile-nav-burger-open");
+  const navIconClosed = document.getElementById("mobile-nav-burger-closed");
 
-    --main-padding: 12px 32px;
-    --items-gap: 6px;
+  if (navBurgerElement && navIconOpen && navIconClosed && mobileNavElement) {
+    navBurgerElement.addEventListener("click", (e) => {
+      e.preventDefault();
+      mobileNavElement.classList.toggle("open");
+      navIconClosed.classList.toggle("hidden");
+      navIconOpen.classList.toggle("hidden");
+    });
+  }
+</script>
+
+<style lang="scss" is:global>
+  .nav-logo {
+    display: flex;
+    padding: 12px 0;
+  }
+
+  #mobile-nav {
+    display: none;
+    &.open {
+      display: block;
+    }
 
     @include break-up(lg) {
-      --items-gap: 12px;
+      display: none !important;
+    }
+
+    width: 100%;
+    padding-top: var(--nav-height);
+    box-sizing: border-box;
+    background-color: var(--surface-frame-bg);
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+
+    ul {
+      list-style: none;
+      padding: 40px 60px;
+      margin: 0;
+      display: flex;
+      flex-flow: column;
+      row-gap: 30px;
+      li {
+        margin: 0;
+        padding: 0;
+        a {
+          display: flex;
+          width: 100%;
+          text-decoration: none;
+          @include typography(menu);
+          // FIXME: to be decided
+          font-size: 18px;
+          border-left: 1px solid transparent;
+          box-sizing: border-box;
+          padding: 5px 20px;
+
+          &.active {
+            border-left-color: var(--text-body-primary);
+          }
+        }
+      }
+    }
+  }
+
+  #mobile-nav-bar {
+    box-sizing: border-box;
+    width: 100%;
+    height: var(--nav-height);
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 20px;
+    position: fixed;
+    z-index: 3;
+    inset: 0;
+    background-color: var(--surface-frame-bg);
+
+    @include break-up(lg) {
+      display: none;
+    }
+
+    button {
+      user-select: none;
+      cursor: pointer;
+      display: flex;
+      flex-flow: row;
+      align-items: center;
+      justify-content: center;
+      height: 32px;
+      width: 32px;
+      padding: 0;
+      border: none;
+      background-color: transparent;
+      margin: 0;
+      margin-left: auto;
+
+      svg {
+        &.hidden {
+          display: none;
+        }
+      }
+    }
+  }
+
+  #desktop-nav {
+    // vars
+    --main-padding: 12px 32px;
+    --items-gap: 12px;
+
+    display: none;
+
+    @include break-up(lg) {
+      display: flex;
     }
 
     @include break-up(xl) {
@@ -51,7 +250,6 @@ import logoSVG from "/public/svg/logo-full.svg?raw";
     left: 0;
     position: fixed;
     width: 100%;
-    display: flex;
     flex-flow: row nowrap;
     height: var(--nav-height);
     overflow: hidden;
@@ -91,6 +289,7 @@ import logoSVG from "/public/svg/logo-full.svg?raw";
           text-decoration: none;
           padding: 5px 20px;
           height: 31px;
+          border-top: 1px solid transparent;
           border-bottom: 1px solid transparent;
           box-sizing: border-box;
 
@@ -99,8 +298,13 @@ import logoSVG from "/public/svg/logo-full.svg?raw";
             @include typography(menu);
             text-align: center;
           }
+
           &:hover {
             border-bottom-color: var(--text-body-primary);
+          }
+
+          &.active {
+            border-top-color: var(--text-body-primary);
           }
         }
       }

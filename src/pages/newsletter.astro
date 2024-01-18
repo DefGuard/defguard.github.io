@@ -1,18 +1,17 @@
 ---
-import Newsletter from "../components/Newsletter.astro";
+import NewsletterSection from "../components/NewsletterSection.astro";
 import Navigation from "../components/base/Navigation.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ProductSection from "../layouts/ProductSection.astro";
 ---
 
 <BaseLayout>
   <Navigation />
   <main id="newsletter-page">
-    <ProductSection padding="none" id="thanks">
+    <!-- <ProductSection padding="none" id="thanks">
       <h2>Thank you for downloading defguard</h2>
       <p>Your download should start automatically. If it doesn't, download now.</p>
-    </ProductSection>
-    <Newsletter />
+    </ProductSection> -->
+    <NewsletterSection />
   </main>
 </BaseLayout>
 

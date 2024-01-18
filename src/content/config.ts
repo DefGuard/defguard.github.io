@@ -1,6 +1,6 @@
 import { defineCollection, z } from "astro:content";
 
-const clientFeatures = defineCollection({
+const productFeatures = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
@@ -8,6 +8,20 @@ const clientFeatures = defineCollection({
   })
 })
 
+const pricing = defineCollection({
+  type: 'content',
+  schema: z.object({
+    name: z.string(),
+    order: z.number(),
+    price: z.string(),
+    link: z.string(),
+    linkTarget: z.string().optional(),
+    buttonText: z.string().optional(),
+  })
+})
+
 export const collections = {
-  'client-features': clientFeatures,
+  'client-features': productFeatures,
+  'core-features': productFeatures,
+  'pricing': pricing,
 }

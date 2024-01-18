@@ -1,0 +1,27 @@
+---
+import ProductSection from "../../layouts/ProductSection.astro";
+---
+
+<ProductSection padding="none">
+  <div class="product-image-section">
+    <slot />
+  </div>
+</ProductSection>
+
+<style lang="scss" is:global>
+  .product-image-section {
+    display: flex;
+    flex-flow: row;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--box-shadow);
+
+    & > img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      border-radius: 8px;
+    }
+  }
+</style>

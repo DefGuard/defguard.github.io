@@ -1,4 +1,4 @@
-@mixin animate($key) {
+@mixin animate($key: "standard") {
     @if $key =="standard" {
         transition-duration: 100ms;
         transition-timing-function: ease-in-out;

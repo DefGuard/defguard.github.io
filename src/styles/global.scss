@@ -8,6 +8,7 @@ body {
 
 p,
 span,
+a,
 h1,
 h2,
 h3,
@@ -16,6 +17,7 @@ h5,
 h6 {
     margin: 0;
     padding: 0;
+    color: var(--text-body-primary);
 }
 
 body {
@@ -34,7 +36,15 @@ main {
 
 // main vars
 html {
-    --font-scale-factor: 1.0;
+    --font-scale-factor: 0.75;
     --nav-height: 75px;
     --box-shadow: 0px 12px 24px 0px rgba(0, 0, 0, 0.08);
+
+    @include break-up(lg) {
+        --font-scale-factor: 1.0;
+    }
+}
+
+.no-decoration {
+    text-decoration: none;
 }

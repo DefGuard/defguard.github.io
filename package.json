@@ -1,5 +1,5 @@
 {
-  "name": "defguard",
+  "name": "defguard-website",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -14,6 +14,7 @@
     "@astrojs/mdx": "^2.0.3",
     "@astrojs/preact": "^3.1.0",
     "@preact/signals": "^1.2.2",
+    "@tuplo/numberfmt": "^1.11.0",
     "@types/lodash-es": "^4.17.12",
     "astro": "^4.1.0",
     "astro-compress": "2.2.7",
@@ -22,6 +23,7 @@
     "clsx": "^2.1.0",
     "lodash-es": "^4.17.21",
     "preact": "^10.19.3",
+    "rehype-external-links": "^3.0.0",
     "sass": "^1.69.7",
     "short-unique-id": "^5.0.3",
     "typescript": "^5.3.3"
@@ -32,5 +34,9 @@
     "eslint-plugin-astro": "^0.31.0",
     "prettier": "^3.1.1",
     "prettier-plugin-astro": "^0.12.3"
+  },
+  "overrides": {
+    "react": "npm:@preact/compat@latest",
+    "react-dom": "npm:@preact/compat@latest"
   }
 }

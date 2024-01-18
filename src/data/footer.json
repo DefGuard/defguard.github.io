@@ -5,7 +5,7 @@
       {
         "text": "About Us",
         "external": false,
-        "link": ""
+        "link": "https://teonite.com/about"
       },
       {
         "text": "Business Model",
@@ -30,22 +30,22 @@
       {
         "text": "GitHub",
         "external": true,
-        "link": ""
+        "link": "https://github.com/DefGuard"
       },
       {
         "text": "Blog",
         "external": true,
-        "link": ""
+        "link": "https://teonite.com/blog/"
       },
       {
         "text": "Twitter",
         "external": true,
-        "link": ""
+        "link": "https://twitter.com/defguard_net"
       },
       {
         "text": "Matrix",
         "external": true,
-        "link": ""
+        "link": "https://matrix.to/#/#defguard:teonite.com"
       }
     ]
   }

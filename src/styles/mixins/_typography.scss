@@ -1,3 +1,5 @@
+@use './breakpoints' as *;
+
 // replace with typography mixin later
 @mixin font-scalable($size) {
     font-size: calc($size * var(--font-scale-factor));
@@ -26,7 +28,7 @@
 
     @if $key =="menu" {
         font-weight: 300;
-        @include font-scalable(14px);
+        @include font-scalable(18px);
     }
 
     @if $key =="h2" {

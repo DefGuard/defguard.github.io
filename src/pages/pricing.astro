@@ -1,8 +1,13 @@
 ---
+import { getCollection } from "astro:content";
 import Navigation from "../components/base/Navigation.astro";
 import { Button } from "../components/buttons/Button/Button";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProductSection from "../layouts/ProductSection.astro";
+
+const pricing = (await getCollection("pricing")).sort(
+  (p1, p2) => p1.data.order - p2.data.order,
+);
 ---
 
 <BaseLayout>
@@ -11,90 +16,29 @@ import ProductSection from "../layouts/ProductSection.astro";
     <ProductSection padding="large" id="pricing-tiers">
       <header><h1>Support & Pricing</h1></header>
       <div class="tiers">
-        <div class="tier">
-          <header>
-            <h2>Open Source</h2>
-            <h3>Free!</h3>
-          </header>
-          <div class="description">
-            <h4>All functionalities:</h4>
-            <ul class="functionalities">
-              <li>OpenID Identity</li>
-              <li>Multi-Factor Authentication</li>
-              <li>Group Management</li>
-              <li>Secure Remote Enrollment</li>
-              <li>User onboarding</li>
-              <li>OpenLDAP synchronisation</li>
-              <li>Enterprise Wireguard VPN</li>
-              <li>Desktop Clients with 2FA</li>
-              <li>Multiple Instances</li>
-              <li>Multiple Locations</li>
-              <li>High Availability & Failover</li>
-              <li>Site-to-Site VPN (in development)</li>
-              <li>Yubikey Hardware keys provisioning</li>
-              <li>Webhooks</li>
-              <li>API</li>
-              <li>Web3 Wallets Validation</li>
-            </ul>
-          </div>
-          <div class="footer"></div>
-        </div>
-        <div class="tier">
-          <header>
-            <h2>Premium</h2>
-            <h3>$10/month</h3>
-          </header>
-          <div class="description">
-            <h4>All functionalities:</h4>
-            <ul class="functionalities">
-              <li>OpenID Identity</li>
-              <li>Multi-Factor Authentication</li>
-              <li>Group Management</li>
-              <li>Secure Remote Enrollment</li>
-              <li>User onboarding</li>
-              <li>OpenLDAP synchronisation</li>
-              <li>Enterprise Wireguard VPN</li>
-              <li>Desktop Clients with 2FA</li>
-              <li>Multiple Instances</li>
-              <li>Multiple Locations</li>
-              <li>High Availability & Failover</li>
-              <li>Site-to-Site VPN (in development)</li>
-              <li>Yubikey Hardware keys provisioning</li>
-              <li>Webhooks</li>
-              <li>API</li>
-              <li>Web3 Wallets Validation</li>
-            </ul>
-          </div>
-          <div class="footer"></div>
-        </div>
-        <div class="tier">
-          <header>
-            <h2>Enterprise</h2>
-            <h3>$70/month</h3>
-          </header>
-          <div class="description">
-            <h4>All functionalities:</h4>
-            <ul class="functionalities">
-              <li>OpenID Identity</li>
-              <li>Multi-Factor Authentication</li>
-              <li>Group Management</li>
-              <li>Secure Remote Enrollment</li>
-              <li>User onboarding</li>
-              <li>OpenLDAP synchronisation</li>
-              <li>Enterprise Wireguard VPN</li>
-              <li>Desktop Clients with 2FA</li>
-              <li>Multiple Instances</li>
-              <li>Multiple Locations</li>
-              <li>High Availability & Failover</li>
-              <li>Site-to-Site VPN (in development)</li>
-              <li>Yubikey Hardware keys provisioning</li>
-              <li>Webhooks</li>
-              <li>API</li>
-              <li>Web3 Wallets Validation</li>
-            </ul>
-          </div>
-          <div class="footer"></div>
-        </div>
+        {
+          pricing.map(async (p) => {
+            const { link, name, price, buttonText, linkTarget } = p.data;
+            const { Content } = await p.render();
+
+            return (
+              <div class="tier">
+                <header>
+                  <h2>{name}</h2>
+                  <h3>{price}</h3>
+                </header>
+                <div class="content">
+                  <Content />
+                </div>
+                <div class="footer">
+                  <a href={link} target={linkTarget ?? "_self"}>
+                    <Button text={buttonText ?? "Buy"} size="normal" />
+                  </a>
+                </div>
+              </div>
+            );
+          })
+        }
       </div>
       <div class="contact">
         <Button size="large" text="Contact Sales" client:load />
@@ -105,6 +49,7 @@ import ProductSection from "../layouts/ProductSection.astro";
 
 <style lang="scss" is:global>
   #pricing-tiers {
+    padding-top: calc(200px - var(--nav-height));
     h1 {
       @include typography(section);
     }
@@ -153,10 +98,19 @@ import ProductSection from "../layouts/ProductSection.astro";
       --tiers-row-gap: 20px;
 
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
       column-gap: var(--tiers-col-gap);
       row-gap: var(--tiers-row-gap);
       padding-bottom: 50px;
+
+      grid-template-columns: 1fr;
+
+      @include break-up(md) {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      @include break-up(lg) {
+        grid-template-columns: repeat(3, 1fr);
+      }
 
       .tier {
         width: 100%;
@@ -192,7 +146,7 @@ import ProductSection from "../layouts/ProductSection.astro";
           }
         }
 
-        .description {
+        .content {
           display: flex;
           flex-flow: column;
           align-items: flex-start;
@@ -200,6 +154,10 @@ import ProductSection from "../layouts/ProductSection.astro";
           row-gap: 20px;
           box-sizing: border-box;
           padding: 20px;
+
+          & > p {
+            @include typography(pricebox-section);
+          }
 
           ul {
             margin: 0;
@@ -228,6 +186,25 @@ import ProductSection from "../layouts/ProductSection.astro";
                 @include font-scalable(18px);
               }
             }
+          }
+        }
+
+        .footer {
+          padding: 48px 0 32px 0;
+          .btn {
+            width: 150px;
+            span {
+              @include typography(h3);
+              font-size: 18px;
+            }
+          }
+
+          a {
+            display: flex;
+            width: 100%;
+            text-decoration: none;
+            align-items: center;
+            justify-content: center;
           }
         }
       }
