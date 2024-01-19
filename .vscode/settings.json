@@ -1,5 +1,6 @@
 {
     "cSpell.words": [
         "pricebox"
-    ]
+    ],
+    "typescript.tsdk": "node_modules\\typescript\\lib"
 }

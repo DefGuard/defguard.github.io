@@ -1,0 +1,7 @@
+type TableProps = {
+
+};
+
+const FeaturesTable = () => {
+
+}
