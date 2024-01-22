@@ -4,6 +4,7 @@ import Navigation from "../components/base/Navigation.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProductSection from "../layouts/ProductSection.astro";
 import {featuresTableData} from "../data/compare-table";
+import { Button } from "../components/buttons/Button/Button";
 ---
 
 <BaseLayout>
@@ -16,13 +17,35 @@ import {featuresTableData} from "../data/compare-table";
       <div id="features-table">
         <FeaturesTable data={featuresTableData} client:only="preact" />
       </div>
+      <div class="contact">
+        <a href="mailto:">
+          <Button size="large" text="Contact Sales" client:load />
+        </a>
+      </div>
     </ProductSection>
   </main>
 </BaseLayout>
 
 <style lang="scss" is:global>
+  #compare-page {
+    .contact {
+      width: 100%;
+      border-top: 1px solid var(--border-separator);
+      display: flex;
+      flex-flow: row;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      padding: 30px 10px 0px 10px;
+
+      a {
+        text-decoration: none;
+      }
+    }
+  }
   #features-table {
     width: 100%;
+    padding-bottom: 70px;
   }
   #compare-header {
     width: 100%;

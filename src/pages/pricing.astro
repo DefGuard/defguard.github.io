@@ -41,7 +41,9 @@ const pricing = (await getCollection("pricing")).sort(
         }
       </div>
       <div class="contact">
-        <Button size="large" text="Contact Sales" client:load />
+        <a href="mailto:">
+          <Button size="large" text="Contact Sales" client:load />
+        </a>
       </div>
     </ProductSection>
   </main>
@@ -87,6 +89,10 @@ const pricing = (await getCollection("pricing")).sort(
       justify-content: center;
       box-sizing: border-box;
       padding: 30px 10px 10px;
+
+      a {
+        text-decoration: none;
+      }
     }
 
     & > * {
