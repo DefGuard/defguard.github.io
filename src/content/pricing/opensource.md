@@ -2,9 +2,9 @@
 name: Open Source
 order: 1
 price: Free!
-buttonText: Download
+buttonText: Support
 linkTarget: _blank
-link: https://github.com/DefGuard/defguard/releases
+link: https://ko-fi.com/defguard
 ---
 All functionalities:
 
