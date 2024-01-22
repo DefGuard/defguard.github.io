@@ -131,14 +131,20 @@ const pathname = Astro.url.pathname;
     });
   }
 
-  const navItems = document.querySelectorAll('nav .nav-item a');
-  if(navItems) {
+  const navItems = document.querySelectorAll("nav .nav-item a");
+  if (navItems) {
     const path = document.location.pathname;
     navItems.forEach((item) => {
-      const {dataset} = item as HTMLLinkElement;
-      if(!(dataset['link-external'] === "true")) {
-        if(dataset['url'] === path) {
-          item.classList.add('active');
+      const { dataset } = item as HTMLLinkElement;
+      if (!(dataset["link-external"] === "true")) {
+        let linkUrl = dataset["url"];
+        if (linkUrl) {
+          if (linkUrl[linkUrl?.length - 1] === "/") {
+            linkUrl = linkUrl.slice(0, linkUrl.length - 2);
+          }
+          if (linkUrl === path) {
+            item.classList.add("active");
+          }
         }
       }
     });
