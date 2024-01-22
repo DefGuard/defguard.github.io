@@ -1,14 +1,24 @@
+.features-table-scroll-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  @include break-up(xl) {
+    overflow: visible;
+  }
+}
+
 .features-table {
   width: 100%;
   box-sizing: border-box;
-  --table-feature-col: minmax(200px, 1fr);
+  --table-feature-col: minmax(250px, 1fr);
   position: relative;
+  max-width: 100%;
 
   & > header {
     z-index: 2;
     background-color: var(--surface-frame-bg);
-    position: sticky;
-    top: var(--nav-height);
     display: grid;
     // columns defined in JS
     box-sizing: border-box;
@@ -17,6 +27,14 @@
     border-bottom: 1px solid var(--text-body-primary);
     align-items: center;
     grid-template-columns: var(--table-feature-col) var(--table-cols);
+    overflow: hidden;
+    min-width: max-content;
+    width: 100%;
+
+    @include break-up(xl) {
+      position: sticky;
+      top: var(--nav-height);
+    }
 
     .col-header {
       width: 100%;

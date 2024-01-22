@@ -11,7 +11,7 @@ const pricing = (await getCollection("pricing")).sort(
 ---
 
 <BaseLayout>
-  <Navigation />
+  <Navigation activeSlug="/pricing"/>
   <main id="pricing-page">
     <ProductSection padding="large" id="pricing-tiers">
       <header><h1>Support & Pricing</h1></header>
@@ -41,7 +41,9 @@ const pricing = (await getCollection("pricing")).sort(
         }
       </div>
       <div class="contact">
-        <Button size="large" text="Contact Sales" client:load />
+        <a href="mailto:">
+          <Button size="large" text="Contact Sales" client:load />
+        </a>
       </div>
     </ProductSection>
   </main>
@@ -87,6 +89,10 @@ const pricing = (await getCollection("pricing")).sort(
       justify-content: center;
       box-sizing: border-box;
       padding: 30px 10px 10px;
+
+      a {
+        text-decoration: none;
+      }
     }
 
     & > * {
@@ -116,6 +122,8 @@ const pricing = (await getCollection("pricing")).sort(
         width: 100%;
         border: 1px solid var(--text-body-primary);
         box-sizing: border-box;
+        display: flex;
+        flex-flow: column;
 
         & > header {
           width: 100%;
@@ -190,6 +198,7 @@ const pricing = (await getCollection("pricing")).sort(
         }
 
         .footer {
+          margin-top: auto;
           padding: 48px 0 32px 0;
           .btn {
             width: 150px;

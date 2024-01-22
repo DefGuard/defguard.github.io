@@ -2,7 +2,12 @@
 import navItems from "../../data/nav.json";
 import logoSVG from "/public/svg/logo-full.svg?raw";
 
-const pathname = Astro.url.pathname;
+interface Props {
+  activeSlug: string;
+};
+
+const {activeSlug} = Astro.props;
+
 ---
 
 <Fragment>
@@ -12,7 +17,7 @@ const pathname = Astro.url.pathname;
     </a>
     <ul class="nav-items">
       {
-        pathname !== "/" && (
+        activeSlug !== "/" && (
           <li class="nav-item">
             <a href="/" data-astro-prefetch>
               <span>Server</span>
@@ -21,7 +26,7 @@ const pathname = Astro.url.pathname;
         )
       }
       {
-        pathname !== "/client" && (
+        activeSlug !== "/client" && (
           <li class="nav-item">
             <a href="/client" data-astro-prefetch>
               <span>Client</span>
@@ -36,9 +41,9 @@ const pathname = Astro.url.pathname;
               href={item.url}
               target={item.external ? "_blank" : "_self"}
               data-astro-prefetch={item.prefetch ? "hover" : "false"}
-              class:list={{
-                active: item.url === pathname,
-              }}
+              class:list={[{
+                active: activeSlug === item.url
+              }]}
             >
               <span>{item.display}</span>
             </a>
@@ -81,7 +86,7 @@ const pathname = Astro.url.pathname;
   <nav id="mobile-nav">
     <ul>
       {
-        pathname !== "/" && (
+        activeSlug !== "/" && (
           <li class="nav-item">
             <a href="/" data-astro-prefetch>
               <span>Server</span>
@@ -90,7 +95,7 @@ const pathname = Astro.url.pathname;
         )
       }
       {
-        pathname !== "/client" && (
+        activeSlug !== "/client" && (
           <li class="nav-item">
             <a href="/client" data-astro-prefetch>
               <span>Client</span>
@@ -105,9 +110,9 @@ const pathname = Astro.url.pathname;
               href={item.url}
               target={item.external ? "_blank" : "_self"}
               data-astro-prefetch={item.prefetch ? "hover" : "false"}
-              class:list={{
-                active: item.url === pathname,
-              }}
+              class:list={[{
+                active: activeSlug === item.url
+              }]}
             >
               <span>{item.display}</span>
             </a>
