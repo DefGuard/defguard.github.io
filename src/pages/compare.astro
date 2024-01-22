@@ -1,0 +1,36 @@
+---
+import FeaturesTable from "../components/FeaturesTable/FeaturesTable";
+import Navigation from "../components/base/Navigation.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProductSection from "../layouts/ProductSection.astro";
+import {featuresTableData} from "../data/compare-table";
+---
+
+<BaseLayout>
+  <Navigation />
+  <main id="compare-page">
+    <ProductSection>
+      <header id="compare-header">
+        <h1>Compare with competition</h1>
+      </header>
+      <div id="features-table">
+        <FeaturesTable data={featuresTableData} client:only="preact" />
+      </div>
+    </ProductSection>
+  </main>
+</BaseLayout>
+
+<style lang="scss" is:global>
+  #features-table {
+    width: 100%;
+  }
+  #compare-header {
+    width: 100%;
+
+    h1 {
+      @include typography(section);
+      text-align: left;
+      padding-bottom: 50px;
+    }
+  }
+</style>

@@ -1,5 +1,10 @@
 [
   {
+    "display": "Compare",
+    "url": "/compare",
+    "prefetch": true
+  },
+  {
     "display": "Pricing",
     "url": "/pricing",
     "prefetch": true
