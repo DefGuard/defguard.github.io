@@ -41,6 +41,9 @@ dependencies:
   lodash-es:
     specifier: ^4.17.21
     version: 4.17.21
+  pnpm:
+    specifier: ^8.14.2
+    version: 8.14.2
   preact:
     specifier: ^10.19.3
     version: 10.19.3
@@ -5009,6 +5012,12 @@ packages:
   /pngjs@3.4.0:
     resolution: {integrity: sha512-NCrCHhWmnQklfH4MtJMRjZ2a8c80qXeMlQMv2uVp9ISJMTt562SbGd6n2oq0PaPgKm7Z6pL9E2UlLIhC+SHL3w==}
     engines: {node: '>=4.0.0'}
+    dev: false
+
+  /pnpm@8.14.2:
+    resolution: {integrity: sha512-enyyRtKg4kQSBglRHotK2uJLIkrEWS58DaXraUiRtDU3YZECK/u475wDMkDuihoBk7Xg/gtxLgTpLzotcXC4nA==}
+    engines: {node: '>=16.14'}
+    hasBin: true
     dev: false
 
   /postcss-selector-parser@6.0.15:

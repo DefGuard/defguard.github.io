@@ -22,6 +22,7 @@
     "astro-imagetools": "^0.9.0",
     "clsx": "^2.1.0",
     "lodash-es": "^4.17.21",
+    "pnpm": "^8.14.2",
     "preact": "^10.19.3",
     "rehype-external-links": "^3.0.0",
     "sass": "^1.69.7",

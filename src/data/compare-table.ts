@@ -27,13 +27,14 @@ export const featuresTableData: FeatureTableData = {
         ],
       },
       {
-        title: "Identity, SSO & User Management",
+        title: "Authentication and User Management",
         rows: [
           {
-            description: "Built in Identity Provider / SSO",
+            description: "OpenID Connect Provider",
             features: [
               {
                 status: "yes",
+                hover: "Fully integrated, simplifying operations",
               },
               {
                 status: "no",
@@ -50,19 +51,22 @@ export const featuresTableData: FeatureTableData = {
             ],
           },
           {
-            description: "Secure User remote enrollment",
+            description: "Secure Remote User Registration",
             features: [
-              { status: "yes" },
+              { status: "yes",
+                link: "https://defguard.gitbook.io/defguard/help/remote-user-enrollment",
+              },
               { status: "no" },
               { status: "no" },
               { status: "no" },
             ],
           },
           {
-            description: "User onboarding after enrollment",
+            description: "User onboarding process",
             features: [
               {
                 status: "yes",
+                link: "https://defguard.gitbook.io/defguard/help/remote-user-enrollment/user-onboarding-after-enrollment",
               },
               {
                 status: "no",
@@ -79,7 +83,7 @@ export const featuresTableData: FeatureTableData = {
             description: "Groups & ACLs",
             features: [
               {
-                status: "yes",
+                status: "in-progress",
                 hover: "Full groups in OpenID Connect - feb 2024",
               },
               {
@@ -96,22 +100,18 @@ export const featuresTableData: FeatureTableData = {
               },
             ],
           },
-        ],
-      },
-      {
-        title: "Wireguard VPN",
-        rows: [
           {
-            description: "Wireguard VPN failover & clustering",
+            description: "LDAP Synchronization",
             features: [
               {
                 status: "yes",
+                link: "https://defguard.gitbook.io/defguard/features/ldap-synchronization-setup"
               },
               {
                 status: "no",
               },
               {
-                status: "yes",
+                status: "no",
               },
               {
                 status: "no",
@@ -119,7 +119,47 @@ export const featuresTableData: FeatureTableData = {
             ],
           },
           {
-            description: "2FA for Wireguard",
+            description: "Forward Authentication for Reverse Proxy",
+            features: [
+              {
+                status: "yes",
+                link: "https://defguard.gitbook.io/defguard/features/forward-auth"
+              },
+              {
+                status: "no",
+              },
+              {
+                status: "no",
+              },
+              {
+                status: "no",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        title: "VPN Network Management",
+        rows: [
+          {
+            description: "Wireguard VPN Configuration",
+            features: [
+              {
+                status: "yes",
+              },
+              {
+                status: "yes",
+              },
+              {
+                status: "yes",
+              },
+              {
+                status: "yes",
+              },
+            ],
+          },
+          {
+            description: "2FA for WireGuard",
             features: [
               {
                 status: "yes",
@@ -140,21 +180,54 @@ export const featuresTableData: FeatureTableData = {
             ],
           },
           {
-            description: "Wireguard Road Warrior Server",
+            description: "Multiple VPN Locations (networks/sites)",
             features: [
               {
                 status: "yes",
               },
               {
-                status: "in-progress",
-                hover: "Mesh VPN",
+                status: "no",
+                hover: "Based on mesh ACLS",
               },
               {
                 status: "yes",
               },
               {
-                status: "in-progress",
-                hover: "Mesh VPN",
+                status: "no",
+              },
+            ],
+          },
+          {
+            description: "Multiple Gateway Support and Failover",
+            features: [
+              {
+                status: "yes",
+              },
+              {
+                status: "no",
+              },
+              {
+                status: "yes",
+              },
+              {
+                status: "no",
+              },
+            ],
+          },
+          {
+            description: "Wireguard Server Configuration Import",
+            features: [
+              {
+                status: "yes",
+              },
+              {
+                status: "no",
+              },
+              {
+                status: "no",
+              },
+              {
+                status: "no",
               },
             ],
           },
@@ -163,7 +236,7 @@ export const featuresTableData: FeatureTableData = {
             features: [
               {
                 status: "no",
-                hover: "In development: Feb 2024",
+                hover: "In development - est. Feb 2024",
               },
               {
                 status: "in-progress",
@@ -175,25 +248,6 @@ export const featuresTableData: FeatureTableData = {
               {
                 status: "in-progress",
                 hover: "Mesh can be treated like specific s2s",
-              },
-            ],
-          },
-          {
-            description: "Multiple VPNs/Locations",
-            features: [
-              {
-                status: "yes",
-              },
-              {
-                status: "in-progress",
-                hover: "Based on mesh ACLS",
-              },
-              {
-                status: "in-progress",
-                hover: "Based on mesh ACLS",
-              },
-              {
-                status: "no",
               },
             ],
           },
@@ -212,23 +266,6 @@ export const featuresTableData: FeatureTableData = {
               },
               {
                 status: "yes",
-              },
-            ],
-          },
-          {
-            description: "VPN Failover & Redundancy",
-            features: [
-              {
-                status: "yes",
-              },
-              {
-                status: "no",
-              },
-              {
-                status: "yes",
-              },
-              {
-                status: "no",
               },
             ],
           },
