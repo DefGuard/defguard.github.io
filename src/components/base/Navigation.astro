@@ -35,10 +35,9 @@ const pathname = Astro.url.pathname;
             <a
               href={item.url}
               target={item.external ? "_blank" : "_self"}
+              data-link-external={item.external ? "true" : "false"}
               data-astro-prefetch={item.prefetch ? "hover" : "false"}
-              class:list={{
-                active: item.url === pathname,
-              }}
+              data-url={item.url}
             >
               <span>{item.display}</span>
             </a>
@@ -104,10 +103,9 @@ const pathname = Astro.url.pathname;
             <a
               href={item.url}
               target={item.external ? "_blank" : "_self"}
+              data-link-external={item.external}
               data-astro-prefetch={item.prefetch ? "hover" : "false"}
-              class:list={{
-                active: item.url === pathname,
-              }}
+              data-url={item.url}
             >
               <span>{item.display}</span>
             </a>
@@ -130,6 +128,19 @@ const pathname = Astro.url.pathname;
       mobileNavElement.classList.toggle("open");
       navIconClosed.classList.toggle("hidden");
       navIconOpen.classList.toggle("hidden");
+    });
+  }
+
+  const navItems = document.querySelectorAll('nav .nav-item a');
+  if(navItems) {
+    const path = document.location.pathname;
+    navItems.forEach((item) => {
+      const {dataset} = item as HTMLLinkElement;
+      if(!(dataset['link-external'] === "true")) {
+        if(dataset['url'] === path) {
+          item.classList.add('active');
+        }
+      }
     });
   }
 </script>
