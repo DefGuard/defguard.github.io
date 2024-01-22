@@ -6,7 +6,6 @@ interface Props {
   activeSlug: string;
 };
 
-const pathname = Astro.url.pathname;
 const {activeSlug} = Astro.props;
 
 ---
@@ -18,7 +17,7 @@ const {activeSlug} = Astro.props;
     </a>
     <ul class="nav-items">
       {
-        pathname !== "/" && (
+        activeSlug !== "/" && (
           <li class="nav-item">
             <a href="/" data-astro-prefetch>
               <span>Server</span>
@@ -27,7 +26,7 @@ const {activeSlug} = Astro.props;
         )
       }
       {
-        pathname !== "/client" && (
+        activeSlug !== "/client" && (
           <li class="nav-item">
             <a href="/client" data-astro-prefetch>
               <span>Client</span>
@@ -87,7 +86,7 @@ const {activeSlug} = Astro.props;
   <nav id="mobile-nav">
     <ul>
       {
-        pathname !== "/" && (
+        activeSlug !== "/" && (
           <li class="nav-item">
             <a href="/" data-astro-prefetch>
               <span>Server</span>
@@ -96,7 +95,7 @@ const {activeSlug} = Astro.props;
         )
       }
       {
-        pathname !== "/client" && (
+        activeSlug !== "/client" && (
           <li class="nav-item">
             <a href="/client" data-astro-prefetch>
               <span>Client</span>
