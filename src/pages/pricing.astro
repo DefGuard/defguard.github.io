@@ -122,6 +122,8 @@ const pricing = (await getCollection("pricing")).sort(
         width: 100%;
         border: 1px solid var(--text-body-primary);
         box-sizing: border-box;
+        display: flex;
+        flex-flow: column;
 
         & > header {
           width: 100%;
@@ -196,6 +198,7 @@ const pricing = (await getCollection("pricing")).sort(
         }
 
         .footer {
+          margin-top: auto;
           padding: 48px 0 32px 0;
           .btn {
             width: 150px;
