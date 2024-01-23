@@ -14,6 +14,9 @@ dependencies:
   '@astrojs/preact':
     specifier: ^3.1.0
     version: 3.1.0(@babel/core@7.23.7)(preact@10.19.3)(vite@5.0.12)
+  '@astrolib/analytics':
+    specifier: ^0.5.0
+    version: 0.5.0(astro@4.2.1)
   '@floating-ui/react':
     specifier: ^0.26.6
     version: 0.26.6(react-dom@18.2.0)(react@18.2.0)
@@ -257,6 +260,14 @@ packages:
       semver: 7.5.4
       vscode-languageserver-textdocument: 1.0.11
     dev: true
+
+  /@astrolib/analytics@0.5.0(astro@4.2.1):
+    resolution: {integrity: sha512-NlTFTUtsjVEAb2ZzYXZ5XBvak7JH3ixaQTq5r+q5PZtealHajUSPzaY1UrcJOJDJrOFHf5pvxBnYmCEzE9fIjw==}
+    peerDependencies:
+      astro: ^1.2.1 || ^2.0.0 || ^3.0.0-beta.0 || ^3.0.0 || ^4.0.0
+    dependencies:
+      astro: 4.2.1(sass@1.70.0)(typescript@5.3.3)
+    dev: false
 
   /@astropub/codecs@0.4.4:
     resolution: {integrity: sha512-jHmdZK2B7dfelTsVzkWVb93WPjuKkHz07xUcyg5WtUxTeCCxdDVLnvZlsB5PC2r7HmJLf03TP1QYb1ZgrEebyQ==}

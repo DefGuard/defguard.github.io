@@ -1,7 +1,7 @@
 ---
 import FloatingLinks from "../components/FloatingLinks.astro";
 import Footer from "../components/base/Footer.astro";
-import "../styles/global.scss";
+import { GoogleAnalytics } from "@astrolib/analytics";
 
 const favSizes = [16,32,57,60,70,72,76,96,114,120,128,144,150,152,180,192,310,384,512];
 ---
@@ -9,14 +9,6 @@ const favSizes = [16,32,57,60,70,72,76,96,114,120,128,144,150,152,180,192,310,38
 <!doctype html>
 <html lang="en" data-theme="light">
   <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z2X2PB0P4E"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-Z2X2PB0P4E');
-    </script>
     <meta charset="UTF-8" />
     <meta name="description" content="Enterprise Open Source SSO & VPN (with Multi-Factor Authentication)" />
     <meta name="viewport" content="width=device-width" />
@@ -33,6 +25,7 @@ const favSizes = [16,32,57,60,70,72,76,96,114,120,128,144,150,152,180,192,310,38
     <!-- Favicons -->
     {favSizes.map((size) => (<link rel="icon" type="image/png" sizes={`${size}x${size}`} href={`/favicon/favicon-${size}x${size}.png`} />) )}
     <link rel="icon" type="image/ico" href="/favicon/favicon.ico" />
+    <GoogleAnalytics id="G-Z2X2PB0P4E" />
   </head>
   <body>
     <slot />
