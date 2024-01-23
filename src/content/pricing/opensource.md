@@ -2,7 +2,7 @@
 name: Open Source
 order: 1
 price: Free!
-buttonText: Support
+buttonText: Support Us!
 linkTarget: _blank
 link: https://ko-fi.com/defguard
 ---
@@ -15,7 +15,7 @@ All functionalities:
 * User onboarding
 * OpenLDAP synchronization
 * Enterprise Wireguard VPN
-* Desktop Clients with 2FA
+* Desktop Clients with MFA/2FA
 * Multiple Instances
 * Multiple Locations
 * High Availability & Failover

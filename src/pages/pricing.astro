@@ -40,9 +40,14 @@ const pricing = (await getCollection("pricing")).sort(
           })
         }
       </div>
+      <div>
+        <p>
+          Didn't find what you were looking for? Have special requests?
+        </p>
+      </div>
       <div class="contact">
-        <a href="/pricing">
-          <Button size="large" text="Buy Enterprise Support" client:load />
+        <a href="mailto:sales@defguard.net">
+          <Button size="large" text="Contact sales" client:load />
         </a>
       </div>
     </ProductSection>

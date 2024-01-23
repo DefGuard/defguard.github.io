@@ -8,20 +8,21 @@
         "link": "https://teonite.com/about"
       },
       {
-        "text": "Business Model",
-        "external": false,
-        "link": ""
-      },
-      {
-        "text": "Ownership",
-        "external": false,
-        "link": ""
-      },
-      {
         "text": "Support",
         "external": false,
-        "link": ""
+        "link": "/pricing"
+      },
+      {
+        "text": "Documentation",
+        "external": true,
+        "link": "https://defguard.gitbook.io"
+      },
+      {
+        "text": "Contact Us",
+        "external": true,
+        "link": "mailto:sales@defguard.net"
       }
+
     ]
   },
   {
@@ -38,14 +39,19 @@
         "link": "https://teonite.com/blog/"
       },
       {
-        "text": "Twitter",
+        "text": "Mastodon",
         "external": true,
-        "link": "https://twitter.com/defguard_net"
+        "link": "https://floss.social/@defguard"
       },
       {
         "text": "Matrix",
         "external": true,
         "link": "https://matrix.to/#/#defguard:teonite.com"
+      },
+      {
+        "text": "Twitter",
+        "external": true,
+        "link": "https://twitter.com/defguard_net"
       }
     ]
   }

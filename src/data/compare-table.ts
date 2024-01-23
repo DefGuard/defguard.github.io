@@ -159,23 +159,23 @@ export const featuresTableData: FeatureTableData = {
             ],
           },
           {
-            description: "2FA for WireGuard",
+            description: "MFA/2FA for WireGuard",
             features: [
               {
                 status: "yes",
-                hover: "With session PSK keys",
+                hover: "With TOTP/Email + WireGuard Pre-Shared session keys (PSK)",
               },
               {
                 status: "no",
-                hover: "2FA during application authorization",
+                hover: "Only 2FA during application authorization",
               },
               {
                 status: "no",
-                hover: "2FA during application authorization",
+                hover: "Only MFA during application authorization",
               },
               {
                 status: "no",
-                hover: "2FA during application authorization",
+                hover: "Only 2FA during application authorization",
               },
             ],
           },
