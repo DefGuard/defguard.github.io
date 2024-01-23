@@ -4,10 +4,9 @@ import logoSVG from "/public/svg/logo-full.svg?raw";
 
 interface Props {
   activeSlug: string;
-};
+}
 
-const {activeSlug} = Astro.props;
-
+const { activeSlug } = Astro.props;
 ---
 
 <Fragment>
@@ -16,24 +15,32 @@ const {activeSlug} = Astro.props;
       <Fragment set:html={logoSVG} />
     </a>
     <ul class="nav-items">
-      {
-        activeSlug !== "/" && (
-          <li class="nav-item">
-            <a href="/" data-astro-prefetch>
-              <span>Server</span>
-            </a>
-          </li>
-        )
-      }
-      {
-        activeSlug !== "/client" && (
-          <li class="nav-item">
-            <a href="/client" data-astro-prefetch>
-              <span>Client</span>
-            </a>
-          </li>
-        )
-      }
+      <li class="nav-item">
+        <a
+          href="/"
+          data-astro-prefetch
+          class:list={[
+            {
+              active: activeSlug === "/",
+            },
+          ]}
+        >
+          <span>Server</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          href="/client"
+          data-astro-prefetch
+          class:list={[
+            {
+              active: activeSlug === "/client",
+            },
+          ]}
+        >
+          <span>Client</span>
+        </a>
+      </li>
       {
         navItems.map((item) => (
           <li class="nav-item">
@@ -41,9 +48,11 @@ const {activeSlug} = Astro.props;
               href={item.url}
               target={item.external ? "_blank" : "_self"}
               data-astro-prefetch={item.prefetch ? "hover" : "false"}
-              class:list={[{
-                active: activeSlug === item.url
-              }]}
+              class:list={[
+                {
+                  active: activeSlug === item.url,
+                },
+              ]}
             >
               <span>{item.display}</span>
             </a>
@@ -85,24 +94,32 @@ const {activeSlug} = Astro.props;
   </section>
   <nav id="mobile-nav">
     <ul>
-      {
-        activeSlug !== "/" && (
-          <li class="nav-item">
-            <a href="/" data-astro-prefetch>
-              <span>Server</span>
-            </a>
-          </li>
-        )
-      }
-      {
-        activeSlug !== "/client" && (
-          <li class="nav-item">
-            <a href="/client" data-astro-prefetch>
-              <span>Client</span>
-            </a>
-          </li>
-        )
-      }
+      <li class="nav-item">
+        <a
+          href="/"
+          data-astro-prefetch
+          class:list={[
+            {
+              active: activeSlug === "/",
+            },
+          ]}
+        >
+          <span>Server</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          href="/client"
+          data-astro-prefetch
+          class:list={[
+            {
+              active: activeSlug === "/client",
+            },
+          ]}
+        >
+          <span>Client</span>
+        </a>
+      </li>
       {
         navItems.map((item) => (
           <li class="nav-item">
@@ -110,9 +127,11 @@ const {activeSlug} = Astro.props;
               href={item.url}
               target={item.external ? "_blank" : "_self"}
               data-astro-prefetch={item.prefetch ? "hover" : "false"}
-              class:list={[{
-                active: activeSlug === item.url
-              }]}
+              class:list={[
+                {
+                  active: activeSlug === item.url,
+                },
+              ]}
             >
               <span>{item.display}</span>
             </a>
