@@ -2,7 +2,7 @@
 name: Enterprise
 order: 3
 price: €919/month
-link: https://buy.stripe.com/test_14kaFCc7u9aU3Xa8ww
+link: https://buy.stripe.com/aEUaGNgJm1fZ3qUbII
 ---
 All features listed in the Premium Package with the addition:
 

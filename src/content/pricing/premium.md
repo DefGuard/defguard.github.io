@@ -2,7 +2,7 @@
 name: Premium
 order: 2
 price: €90/month
-link: https://buy.stripe.com/test_cN2aFCb3qcn6bpC289
+link: https://buy.stripe.com/28og1750E7EngdG5kl
 ---
 All features listed in Open Source package with:
 
