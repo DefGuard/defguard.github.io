@@ -1,0 +1,20 @@
+#cookie-bar {
+  display: flex;
+  flex-flow: row wrap;
+  background-color: var(--surface-frame-bg);
+  column-gap: 20px;
+  box-sizing: border-box;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+
+  & > p,
+  a {
+    @include typography(paragraph);
+  }
+}

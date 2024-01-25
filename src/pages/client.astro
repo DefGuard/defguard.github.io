@@ -52,10 +52,15 @@ const matrixIconId = svgId();
     <ProductSection padding="large">
       <div class="product-features">
         {
-          clientFeatures.map(async (f) => {
+          clientFeatures.map(async (f, index) => {
             const { Content } = await f.render();
             return (
-              <ProductFeature title={f.data.title} client:load>
+              <ProductFeature
+                title={f.data.title}
+                id={index}
+                context="client"
+                client:only="preact"
+              >
                 <Content />
               </ProductFeature>
             );
@@ -68,7 +73,10 @@ const matrixIconId = svgId();
         <div class="top">
           <h2>Enterprise VPN & SSO</h2>
           <p>
-            Get most features out of your WireGuard VPN with <a href="/">defguard VPN & SSO</a> - <a href="/compare">see a detailed comparison</a> with other Open Source VPN management solutions to understand all the benefits!
+            Get most features out of your WireGuard VPN with <a href="/"
+              >defguard VPN & SSO</a
+            > - <a href="/compare">see a detailed comparison</a> with other Open Source VPN
+            management solutions to understand all the benefits!
           </p>
         </div>
         <div class="image-with-title">
