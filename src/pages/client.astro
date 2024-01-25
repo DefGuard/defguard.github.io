@@ -9,6 +9,7 @@ import { ProductFeature } from "../components/product/ProductFeature/ProductFeat
 import ProductImage from "../components/product/ProductImage.astro";
 import ProductLayout from "../layouts/ProductLayout.astro";
 import ProductSection from "../layouts/ProductSection.astro";
+import ProductFeatureContext from "../components/product/ProductFeature/ProductFeatureContext";
 
 const clientFeatures = (await getCollection("client-features")).sort(
   (f1, f2) => f1.data.order - f2.data.order,
@@ -51,16 +52,18 @@ const matrixIconId = svgId();
     </ProductImage>
     <ProductSection padding="large">
       <div class="product-features">
-        {
-          clientFeatures.map(async (f) => {
-            const { Content } = await f.render();
-            return (
-              <ProductFeature title={f.data.title} client:load>
-                <Content />
-              </ProductFeature>
-            );
-          })
-        }
+        <ProductFeatureContext contextId="client">
+          {
+            clientFeatures.map(async (f, index) => {
+              const { Content } = await f.render();
+              return (
+                <ProductFeature title={f.data.title} id={index} client:load>
+                  <Content />
+                </ProductFeature>
+              );
+            })
+          }
+        </ProductFeatureContext>
       </div>
     </ProductSection>
     <ProductSection padding="large" dark>

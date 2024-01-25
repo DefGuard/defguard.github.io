@@ -9,6 +9,7 @@ import { ProductFeature } from "../components/product/ProductFeature/ProductFeat
 import ProductImage from "../components/product/ProductImage.astro";
 import ProductLayout from "../layouts/ProductLayout.astro";
 import ProductSection from "../layouts/ProductSection.astro";
+import ProductFeatureContext from "../components/product/ProductFeature/ProductFeatureContext";
 
 const coreFeatures = (await getCollection("core-features")).sort(
   (f1, f2) => f1.data.order - f2.data.order,
@@ -30,8 +31,10 @@ const matrixIconId = svgId();
       <header id="main-header">
         <h1>Open Source Enterprise SSO & VPN</h1>
         <p>
-          Privacy requires controlling your own data - start with own Identity. Securing your data requires authentication and authorization: SSO with Multi-Factor Authentication.
-          Accessing your data securely & privatly requires to encrypt all traffic to your data: VPN. All <strong>and more done by defguard.</strong>
+          Privacy requires controlling your own data - start with own Identity. Securing
+          your data requires authentication and authorization: SSO with Multi-Factor
+          Authentication. Accessing your data securely & privatly requires to encrypt all
+          traffic to your data: VPN. All <strong>and more done by defguard.</strong>
         </p>
         <GithubStars owner="defguard" repo="defguard" client:only="preact" />
         <div class="product-download">
@@ -51,16 +54,18 @@ const matrixIconId = svgId();
     </ProductImage>
     <ProductSection padding="large">
       <div class="product-features">
-        {
-          coreFeatures.map(async (f) => {
-            const { Content } = await f.render();
-            return (
-              <ProductFeature title={f.data.title} client:load>
-                <Content />
-              </ProductFeature>
-            );
-          })
-        }
+        <ProductFeatureContext contextId="core">
+          {
+            coreFeatures.map(async (f, index) => {
+              const { Content } = await f.render();
+              return (
+                <ProductFeature title={f.data.title} id={index} client:load>
+                  <Content />
+                </ProductFeature>
+              );
+            })
+          }
+        </ProductFeatureContext>
       </div>
     </ProductSection>
     <ProductBuiltBy />
@@ -93,7 +98,9 @@ const matrixIconId = svgId();
           </div>
           <p>
             <!-- FIXME: Source link from data -->
-            Matrix: <a href="https://matrix.to/#/#defguard:teonite.com">#defguard:teonite.com</a>
+            Matrix: <a href="https://matrix.to/#/#defguard:teonite.com"
+              >#defguard:teonite.com</a
+            >
           </p>
         </div>
       </section>

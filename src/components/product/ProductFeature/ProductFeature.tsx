@@ -1,21 +1,30 @@
-import { useSignal } from "@preact/signals";
+import { useSignal, useSignalEffect } from "@preact/signals";
 import { clsx } from 'clsx';
 
 import type { ComponentChildren } from "preact";
+import { useContext, useEffect, useMemo, useState } from "preact/hooks";
 import './style.scss';
+import { FeatureContext } from "./ProductFeatureContext";
 
 interface Props {
     title: string;
-    children: ComponentChildren,
+    children: ComponentChildren;
+    id: number;
 }
 
-export const ProductFeature = ({ title, children }: Props) => {
-    const expanded = useSignal(false);
+export const ProductFeature = ({ title, children, id }: Props) => {
+    const {openFeature, setOpen} = useContext(FeatureContext);
+
+    const isOpen = openFeature === id;
 
     return (
         <div class="product-feature">
             <header onClick={() => {
-                expanded.value = !expanded.value;
+                if(isOpen) {
+                    setOpen(undefined);
+                } else {
+                    setOpen(id);
+                }
             }}>
                 <h2>{title}</h2>
                 <div class="icon-container">
@@ -26,7 +35,7 @@ export const ProductFeature = ({ title, children }: Props) => {
                         viewBox="0 0 16 16"
                         fill="none"
                         class={clsx({
-                            expanded: expanded.value
+                            expanded: isOpen
                         })}
                     >
                         <path d="M8 2V14" style="stroke: var(--text-body-primary);"></path>
@@ -35,7 +44,7 @@ export const ProductFeature = ({ title, children }: Props) => {
                 </div>
             </header>
             <div class={clsx('content-container', {
-                expanded: expanded.value
+                expanded: isOpen
             })}>
                 <div slot="content">
                     {children}
