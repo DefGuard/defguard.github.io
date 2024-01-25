@@ -9,7 +9,6 @@ import { ProductFeature } from "../components/product/ProductFeature/ProductFeat
 import ProductImage from "../components/product/ProductImage.astro";
 import ProductLayout from "../layouts/ProductLayout.astro";
 import ProductSection from "../layouts/ProductSection.astro";
-import ProductFeatureContext from "../components/product/ProductFeature/ProductFeatureContext";
 
 const clientFeatures = (await getCollection("client-features")).sort(
   (f1, f2) => f1.data.order - f2.data.order,
@@ -52,18 +51,21 @@ const matrixIconId = svgId();
     </ProductImage>
     <ProductSection padding="large">
       <div class="product-features">
-        <ProductFeatureContext contextId="client">
-          {
-            clientFeatures.map(async (f, index) => {
-              const { Content } = await f.render();
-              return (
-                <ProductFeature title={f.data.title} id={index} client:load>
-                  <Content />
-                </ProductFeature>
-              );
-            })
-          }
-        </ProductFeatureContext>
+        {
+          clientFeatures.map(async (f, index) => {
+            const { Content } = await f.render();
+            return (
+              <ProductFeature
+                title={f.data.title}
+                id={index}
+                context="client"
+                client:only="preact"
+              >
+                <Content />
+              </ProductFeature>
+            );
+          })
+        }
       </div>
     </ProductSection>
     <ProductSection padding="large" dark>
@@ -71,7 +73,10 @@ const matrixIconId = svgId();
         <div class="top">
           <h2>Enterprise VPN & SSO</h2>
           <p>
-            Get most features out of your WireGuard VPN with <a href="/">defguard VPN & SSO</a> - <a href="/compare">see a detailed comparison</a> with other Open Source VPN management solutions to understand all the benefits!
+            Get most features out of your WireGuard VPN with <a href="/"
+              >defguard VPN & SSO</a
+            > - <a href="/compare">see a detailed comparison</a> with other Open Source VPN
+            management solutions to understand all the benefits!
           </p>
         </div>
         <div class="image-with-title">

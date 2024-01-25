@@ -28,7 +28,9 @@
     "rehype-external-links": "^3.0.0",
     "sass": "^1.69.7",
     "short-unique-id": "^5.0.3",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "typescript-cookie": "^1.0.6",
+    "zustand": "^4.5.0"
   },
   "devDependencies": {
     "@astrojs/ts-plugin": "^1.4.0",
