@@ -186,14 +186,15 @@ export const featuresTableData: FeatureTableData = {
                 status: "yes",
               },
               {
-                status: "no",
+                status: "in-progress",
                 hover: "Based on mesh ACLS",
               },
               {
                 status: "yes",
               },
               {
-                status: "no",
+                status: "in-progress",
+                hover: "Based on mesh ACLS",
               },
             ],
           },
@@ -525,7 +526,8 @@ export const featuresTableData: FeatureTableData = {
                 status: "no",
               },
               {
-                status: "no",
+                status: "in-progress",
+                hover: "ssh management for peers"
               },
             ],
           },
