@@ -108,7 +108,9 @@ const pricing = (await getCollection("pricing")).sort(
         @include typography(paragraph);
 
         .license-about {
-          width: 700px;
+          width: 100%;
+          max-width: 55ch;
+          padding-right: 30px;
         }
 
         hr {
@@ -120,12 +122,11 @@ const pricing = (await getCollection("pricing")).sort(
           & > a {
             text-decoration: underline;
           }
-          width: auto;
-          @include typography(license-list);
+          @include font-scalable(16px);
         }
       }
 
-      @media (max-width: 600px) {
+      @include break-down(lg) {
         section.license-section {
           display: flex;
           flex-flow: column;

@@ -69,9 +69,4 @@
         font-weight: 700;
         @include font-scalable(18px);
     }
-
-    @if $key =="license-list" {
-        font-weight: 300;
-        @include font-scalable(16px);
-    }
 }
