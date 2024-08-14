@@ -6,15 +6,35 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import ProductSection from "../layouts/ProductSection.astro";
 
 const pricing = (await getCollection("pricing")).sort(
-  (p1, p2) => p1.data.order - p2.data.order,
+  (p1, p2) => p1.data.order - p2.data.order
 );
 ---
 
 <BaseLayout>
-  <Navigation activeSlug="/pricing"/>
+  <Navigation activeSlug="/pricing" />
   <main id="pricing-page">
     <ProductSection padding="large" id="pricing-tiers">
-      <header><h1>Support & Pricing</h1></header>
+      <header>
+        <h1>Support & Pricing</h1>
+        <section class="license-section">
+          <div class="license-about">
+            As much as we would like defguard to be absolutely free and completely open
+            source for everyone, to have the possibility to work and create defguard we
+            have an open core & paid license for some business features.
+          </div>
+          <hr />
+          <div class="license-points">
+            But there are exceptions to that, if you are a: 
+            <ul>
+              <li>student</li>
+              <li>non profit organisation</li>
+              <li>open source project</li>
+              <li>startup</li>
+            </ul> 
+            Please contact us <a href="#">for a free license</a>.
+          </div>
+        </section>
+      </header>
       <div class="tiers">
         {
           pricing.map(async (p) => {
@@ -41,9 +61,7 @@ const pricing = (await getCollection("pricing")).sort(
         }
       </div>
       <div>
-        <p>
-          Didn't find what you were looking for? Have special requests?
-        </p>
+        <p>Didn't find what you were looking for? Have special requests?</p>
       </div>
       <div class="contact">
         <a href="mailto:sales@defguard.net">
@@ -75,14 +93,57 @@ const pricing = (await getCollection("pricing")).sort(
 
     header {
       display: flex;
-      flex-flow: row;
-      align-items: center;
+      flex-flow: column;
       justify-content: flex-start;
       width: 100%;
+      gap: 20px;
       padding-bottom: 50px;
 
       h1 {
         text-align: left;
+      }
+
+      section.license-section {
+        display: flex;
+        @include typography(paragraph);
+
+        .license-about {
+          width: 700px;
+        }
+
+        hr {
+          padding: 0;
+          margin: 0 20px 0 20px;
+        }
+
+        .license-points {
+          & > a {
+            text-decoration: underline;
+          }
+          width: auto;
+          @include typography(license-list);
+        }
+      }
+
+      @media (max-width: 600px) {
+        section.license-section {
+          display: flex;
+          flex-flow: column;
+
+
+        .license-about {
+          max-width: 100%;
+        }
+
+        hr {
+          margin: 20px 0 20px 0;
+        }
+
+        .license-points {
+          justify-content: flex-start;
+          @include typography(paragraph);
+        }
+        }
       }
     }
 
