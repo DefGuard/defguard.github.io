@@ -1,6 +1,8 @@
 ---
 import ProductSection from "../layouts/ProductSection.astro";
 import { Button } from "./buttons/Button/Button";
+import Checkbox from "./Checkbox/Checkbox";
+import Test from "./Checkbox/Test";
 ---
 
 <ProductSection padding="newsletter" bordered>
@@ -19,11 +21,19 @@ import { Button } from "./buttons/Button/Button";
         <input id="bd-email" name="email" type="email" placeholder="" />
       </div>
       <div class="terms">
-        <div class="form-row"></div>
-        <p></p>
+        <div class="form-row">
+          <Checkbox />
+          <p>I agree to receive information about defguard’s products and services.</p>
+          <p>
+            By submitting this form, I confirm that I have read and agree to defguard’s
+            Privacy Notice and Privacy Policy.
+          </p>
+        </div>
       </div>
       <Button type="submit" text="Subscribe Now" size="normal" />
     </form>
+    <Test/>
+    <Checkbox />
   </section>
 </ProductSection>
 
