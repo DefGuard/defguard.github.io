@@ -5,4 +5,100 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout>
   <Navigation activeSlug="/newsletter" />
+  <main id="download-page">
+    <header>
+      <h1>Download defguard Desktop Client</h1>
+    </header>
+    <section class="download-section">
+      <section class="download-platform">
+        <p>
+          lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
+          ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum
+        </p>
+        <p>
+          lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
+          ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum
+        </p>
+        <p>
+          lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
+          ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum
+        </p>
+      </section>
+      <section class="download-version">
+        <p>
+          lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
+          ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum
+        </p>
+        <p>
+          lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
+          ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum
+        </p>
+        <p>
+          lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
+          ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum
+        </p>
+        <p>
+          lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
+          ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum
+        </p>
+      </section>
+    </section>
+    <hr />
+    <h3>
+      By downloading and using defguard, you agree to its <a href="#" target="_self">terms and conditions</a>.
+    </h3>
+  </main>
 </BaseLayout>
+
+<style lang="scss" is:global>
+  #download-page {
+    padding: 100px 240px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+
+    h1 {
+      @include typography(section);
+    }
+
+    h3 {
+      @include typography(h3);
+      align-self: stretch;
+      text-align: center;
+      a {
+        text-decoration-line: underline;
+      }
+    }
+
+    hr {
+      padding: 40px 0;
+      border: var(--border-separator);
+    }
+
+    .download-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      align-self: stretch;
+
+      .download-platform {
+        display: flex;
+        width: 569px;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+        background-color: aqua;
+      }
+
+      .download-version {
+        display: flex;
+        width: 382px;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        align-self: stretch;
+        background-color: red;
+      }
+    }
+  }
+</style>
