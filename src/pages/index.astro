@@ -30,14 +30,16 @@ const matrixIconId = svgId();
       <header id="main-header">
         <h1>Open Source Enterprise SSO & VPN</h1>
         <p>
-            The only open-source solution with <strong>real WireGuard MFA/2FA & integrated OpenID Connect SSO</strong>.
+          The only open-source solution with <strong
+            >real WireGuard MFA/2FA & integrated OpenID Connect SSO</strong
+          >.
         </p>
         <GithubStars owner="defguard" repo="defguard" client:only="preact" />
         <div class="product-download">
           <a
-            href="https://github.com/DefGuard/defguard/releases"
-            target="_blank"
+            href="/download" 
             rel="nofollow noopener noreferrer"
+            data-astro-prefetch
           >
             <Button text="Download" size="large" />
           </a>
@@ -50,16 +52,21 @@ const matrixIconId = svgId();
     </ProductImage>
     <ProductSection padding="large">
       <div class="product-features">
-          {
-            coreFeatures.map(async (f, index) => {
-              const { Content } = await f.render();
-              return (
-                <ProductFeature title={f.data.title} id={index} context="core" client:only="preact">
-                  <Content />
-                </ProductFeature>
-              );
-            })
-          }
+        {
+          coreFeatures.map(async (f, index) => {
+            const { Content } = await f.render();
+            return (
+              <ProductFeature
+                title={f.data.title}
+                id={index}
+                context="core"
+                client:only="preact"
+              >
+                <Content />
+              </ProductFeature>
+            );
+          })
+        }
       </div>
     </ProductSection>
     <ProductBuiltBy />

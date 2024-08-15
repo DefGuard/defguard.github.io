@@ -1,9 +1,9 @@
-@use './themes/' as *;
+@use "./themes/" as *;
 
 html,
 body {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 p,
@@ -15,37 +15,37 @@ h3,
 h4,
 h5,
 h6 {
-    margin: 0;
-    padding: 0;
-    color: var(--text-body-primary);
+  margin: 0;
+  padding: 0;
+  color: var(--text-body-primary);
 }
 
 body {
-    font-family: 'Poppins';
-    font-size: 20px;
-    font-weight: 400;
-    color: var(--text-body-primary);
-    min-height: 100dvh;
-    position: relative;
-    background-color: var(--surface-frame-bg);
+  font-family: "Poppins";
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text-body-primary);
+  min-height: 100dvh;
+  position: relative;
+  background-color: var(--surface-frame-bg);
 }
 
 main {
-    padding-top: var(--nav-height);
+  padding-top: var(--nav-height);
 }
 
 // main vars
 html {
-    --font-scale-factor: 0.75;
-    --nav-height: 75px;
-    --box-shadow: 0px 12px 24px 0px rgba(0, 0, 0, 0.08);
-    --max-section-width: 1100px;
+  --font-scale-factor: 0.75;
+  --nav-height: 75px;
+  --box-shadow: 0px 12px 24px 0px rgba(0, 0, 0, 0.08);
+  --max-section-width: 1100px;
 
-    @include break-up(lg) {
-        --font-scale-factor: 1.0;
-    }
+  @include break-up(lg) {
+    --font-scale-factor: 1;
+  }
 }
 
 .no-decoration {
-    text-decoration: none;
+  text-decoration: none;
 }

@@ -1,0 +1,44 @@
+---
+import NewsletterSection from "../components/NewsletterSection.astro";
+import ProductSection from "../layouts/ProductSection.astro";
+import Navigation from "../components/base/Navigation.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+  <Navigation activeSlug="/newsletter" />
+  <main id="newsletter-page">
+    <ProductSection padding="none" id="thanks">
+        <h2>Thank you for downloading defguard</h2>
+        <p>Your download should start automatically. If it doesn't, download now.</p>
+    </ProductSection>
+    <NewsletterSection />
+  </main>
+</BaseLayout>
+
+<style lang="scss" is:global>
+  #newsletter-page {
+    padding: calc(var(--nav-height) + 100px) 0 100px;
+  }
+
+  #thanks {
+    padding-bottom: 40px;
+    & > * {
+      width: 100%;
+    }
+
+    h2,
+    p {
+      text-align: left;
+    }
+
+    h2 {
+      @include typography(section);
+    }
+
+    p {
+      @include typography(paragraph);
+      padding: 20px 0;
+    }
+  }
+</style>
