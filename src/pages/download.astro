@@ -1,6 +1,8 @@
 ---
 import Navigation from "../components/base/Navigation.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { DownloadButton } from "../components/buttons/DownloadButton/DownloadButton";
+import { PlatformType } from "../components/base/types/platform";
 ---
 
 <BaseLayout>
@@ -11,18 +13,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </header>
     <section class="download-section">
       <section class="download-platform">
-        <p>
-          lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
-          ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum
-        </p>
-        <p>
-          lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
-          ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum
-        </p>
-        <p>
-          lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
-          ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum
-        </p>
+        <DownloadButton type={PlatformType.WINDOWS} />
+        <DownloadButton type={PlatformType.LINUX} />
+        <DownloadButton type={PlatformType.MACOS} />
       </section>
       <section class="download-version">
         <p>
@@ -43,7 +36,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </p>
       </section>
     </section>
-    <hr />
+    <div style="width: 100%;">
+      <hr />
+    </div>
     <h3>
       By downloading and using defguard, you agree to its <a href="#" target="_self">terms and conditions</a>.
     </h3>
@@ -72,7 +67,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     }
 
     hr {
-      border: var(--border-separator);
+      border-top: 1px solid var(--border-separator);
     }
 
     .download-section {
@@ -87,7 +82,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         flex-direction: column;
         align-items: center;
         gap: 40px;
-        background-color: aqua;
       }
 
       .download-version {

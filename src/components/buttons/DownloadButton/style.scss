@@ -1,0 +1,49 @@
+#download-page {
+  svg {
+    path {
+      fill: var(--text-body-primary);
+    }
+  }
+
+  .download-button {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    align-self: stretch;
+    @include typography(footer);
+
+    .download-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .download-main {
+      display: flex;
+      height: 78px;
+      padding: 0px var(--spacing-S, 20px);
+
+      justify-content: space-between;
+      align-items: center;
+      align-self: stretch;
+
+      border: 1px solid var(--text-body-primary);
+
+      h3 {
+        @include typography(paragraph);
+      }
+
+      svg {
+        path,
+        rect {
+          fill: none;
+          stroke: var(--text-body-primary);
+        }
+      }
+    }
+
+    .download-footer {
+    }
+  }
+}
