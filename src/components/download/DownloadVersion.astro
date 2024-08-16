@@ -1,5 +1,10 @@
 ---
 import { DefguardIcon } from "../base/icons/DefguardIcon";
+
+const response = await fetch('https://api.github.com/repos/defguard/client/releases');
+const data = await response.json();
+const latestVersion = data[0].name.slice(1);
+const published = data[0].published_at.split('T')[0].split('-').reverse().join('.');
 ---
 
 <section class="download-version">
@@ -9,13 +14,11 @@ import { DefguardIcon } from "../base/icons/DefguardIcon";
   <div class="download-version-info">
     <div class="download-version-current">
       <p>Current version:</p>
-      <!-- TODO(cpprian): fetch latest version -->
-      <p>0.4.0</p>
+      <p>{latestVersion}</p>
     </div>
     <div class="download-changelog">
       <a href="https://github.com/DefGuard/client/releases">View changelog →</a>
-      <!-- TODO(cpprian): fetch actual data -->
-      <p>16.07.2024</p>
+      <p>{published}</p>
     </div>
   </div>
 </section>
