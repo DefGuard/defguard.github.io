@@ -14,6 +14,11 @@ import { PlatformType } from "../components/base/types/platform";
     <section class="download-section">
       <section class="download-platform">
         <DownloadButton type={PlatformType.WINDOWS} />
+        <div class="download-separator">
+          <hr />
+          <p>other variants</p>
+          <hr />
+        </div>
         <DownloadButton type={PlatformType.LINUX} />
         <DownloadButton type={PlatformType.MACOS} />
       </section>
@@ -36,9 +41,7 @@ import { PlatformType } from "../components/base/types/platform";
         </p>
       </section>
     </section>
-    <div style="width: 100%;">
-      <hr />
-    </div>
+    <hr />
     <h3>
       By downloading and using defguard, you agree to its <a href="#" target="_self">terms and conditions</a>.
     </h3>
@@ -67,7 +70,7 @@ import { PlatformType } from "../components/base/types/platform";
     }
 
     hr {
-      border-top: 1px solid var(--border-separator);
+      width: 100%;
     }
 
     .download-section {
@@ -82,6 +85,19 @@ import { PlatformType } from "../components/base/types/platform";
         flex-direction: column;
         align-items: center;
         gap: 40px;
+
+        .download-separator {
+          display: flex;
+          align-items: center;
+          gap: 40px;
+          align-self: stretch;
+          text-align: center;
+          @include typography(footer);
+
+          p {
+            width: 50%;
+          }
+        }
       }
 
       .download-version {

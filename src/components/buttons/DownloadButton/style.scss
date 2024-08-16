@@ -1,10 +1,4 @@
 #download-page {
-  svg {
-    path {
-      fill: var(--text-body-primary);
-    }
-  }
-
   .download-button {
     display: flex;
     flex-direction: column;
@@ -41,9 +35,6 @@
           stroke: var(--text-body-primary);
         }
       }
-    }
-
-    .download-footer {
     }
   }
 }
