@@ -1,9 +1,7 @@
-version: v3
-
 services:
   site-build:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.build
     volumes:
       - ./docker-dist:/app/dist
