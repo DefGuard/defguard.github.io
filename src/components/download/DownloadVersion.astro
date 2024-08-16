@@ -1,0 +1,70 @@
+---
+import { DefguardIcon } from "../base/icons/DefguardIcon";
+---
+
+<section class="download-version">
+  <div class="download-logo">
+    <DefguardIcon />
+  </div>
+  <div class="download-version-info">
+    <div class="download-version-current">
+      <p>Current version:</p>
+      <!-- TODO(cpprian): fetch latest version -->
+      <p>0.4.0</p>
+    </div>
+    <div class="download-changelog">
+      <a href="https://github.com/DefGuard/client/releases">View changelog →</a>
+      <!-- TODO(cpprian): fetch actual data -->
+      <p>16.07.2024</p>
+    </div>
+  </div>
+</section>
+
+<style lang="scss" is:global>
+  #download-page {
+    .download-version {
+      display: flex;
+      width: 100%;
+      max-width: 382px;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      align-self: stretch;
+
+      .download-logo {
+        display: flex;
+        // height: 382px;
+        padding: 47.75px 120.262px 47.75px 122.359px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 30px;
+        background: #0c8ce0;
+      }
+
+      .download-version-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 8px;
+        align-self: stretch;
+
+        .download-version-current,
+        .download-changelog {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          align-self: stretch;
+        }
+
+        .download-version-current {
+          @include typography(pricebox-price);
+        }
+
+        .download-changelog {
+          @include typography(pricebox-list);
+        }
+      }
+    }
+  }
+</style>
