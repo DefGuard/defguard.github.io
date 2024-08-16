@@ -11,12 +11,26 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      justify-content: space-between;
+      align-self: stretch;
+
+      .download-icon {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .download-choice {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
     }
 
     .download-main {
       display: flex;
       height: 78px;
-      padding: 0px var(--spacing-S, 20px);
+      padding: 0px 20px;
 
       justify-content: space-between;
       align-items: center;
@@ -34,6 +48,13 @@
           fill: none;
           stroke: var(--text-body-primary);
         }
+      }
+    }
+
+    @include break-down(sm) {
+      P {
+        font-size: 12px;
+        font-weight: 300;
       }
     }
   }

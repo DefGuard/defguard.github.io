@@ -4,7 +4,7 @@ import { DefguardIcon } from "../base/icons/DefguardIcon";
 
 <section class="download-version">
   <div class="download-logo">
-    <DefguardIcon />
+    <DefguardIcon client:only />
   </div>
   <div class="download-version-info">
     <div class="download-version-current">
@@ -63,6 +63,20 @@ import { DefguardIcon } from "../base/icons/DefguardIcon";
 
         .download-changelog {
           @include typography(pricebox-list);
+        }
+      }
+    }
+
+    @include break-down(sm) {
+      .download-version {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+        align-self: stretch;
+
+        .download-logo {
+          background: none;
         }
       }
     }

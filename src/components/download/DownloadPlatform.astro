@@ -35,5 +35,17 @@ import { PlatformType } from "../base/types/platform";
         width: 50%;
       }
     }
+
+    @include break-down(sm) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      align-self: stretch;
+
+      .download-separator p {
+        width: 60%;
+      }
+    }
   }
 </style>

@@ -1,9 +1,10 @@
+import "./style.scss";
 import { WindowsIcon } from "../../base/icons/WindowsIcon";
 import { MacOsIcon } from "../../base/icons/MacOsIcon";
 import { LinuxIcon } from "../../base/icons/LinuxIcon";
 import { DownloadIcon } from "../../base/icons/DownloadIcon";
 import { CopyIcon } from "../../base/icons/CopyIcon";
-import "./style.scss";
+import { VectorIcon } from "../../base/icons/VectorIcon";
 import { PlatformType } from "../../base/types/platform";
 
 interface Platform {
@@ -16,20 +17,34 @@ export const DownloadButton = ({ type }: Platform) => {
       <div class="download-header">
         {type === PlatformType.WINDOWS && (
           <>
-            <WindowsIcon />
-            Windows
+            <div class="download-icon">
+              <WindowsIcon />
+              Windows
+            </div>
           </>
         )}
         {type === PlatformType.LINUX && (
           <>
-            <LinuxIcon />
-            Linux
+            <div class="download-icon">
+              <LinuxIcon />
+              Linux
+            </div>
+            <div class="download-choice">
+              Stable
+              <VectorIcon />
+            </div>
           </>
         )}
         {type === PlatformType.MACOS && (
           <>
-            <MacOsIcon />
-            macOS
+            <div class="download-icon">
+              <MacOsIcon />
+              macOS
+            </div>
+            <div class="download-choice">
+              Apple Silicon
+              <VectorIcon />
+            </div>
           </>
         )}
       </div>
@@ -60,9 +75,11 @@ export const DownloadButton = ({ type }: Platform) => {
       <div class="download-footer">
         {type === PlatformType.LINUX && (
           <>
-            <a href="https://github.com/DefGuard/client/releases">
-              Other ways to install defguard on linux →
-            </a>
+            {/* TODO(cpprian): add links to AppImage and Binary */}
+            <p>
+              Other ways to install defguard on linux → <a href="#">AppImage</a> |{" "}
+              <a href="#">Binary</a>
+            </p>
           </>
         )}
         {type === PlatformType.MACOS && (
