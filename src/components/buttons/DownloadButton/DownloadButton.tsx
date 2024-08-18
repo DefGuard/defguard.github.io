@@ -11,11 +11,9 @@ interface Platform {
   type: PlatformType;
 }
 
-// https://github.com/DefGuard/client/releases/download/v0.4.0/defguard-client_0.4.0_x64_en-US.exe
 export const DownloadButton = ({ type }: Platform) => {
   const handleClick = () => {
-    // fetch("https://github.com/DefGuard/client/releases/download/v0.4.0/defguard-client_0.4.0_x64_en-US.exe");
-    console.log("dupa");
+    console.log('download');
   };
 
   return (
@@ -83,7 +81,7 @@ export const DownloadButton = ({ type }: Platform) => {
           <>
             {/* TODO(cpprian): add links to AppImage and Binary */}
             <p>
-              Other ways to install defguard on linux → <a href="#">AppImage</a> |{" "}
+              Other ways to install defguard on linux → <a href="">AppImage</a> |{" "}
               <a href="#">Binary</a>
             </p>
           </>

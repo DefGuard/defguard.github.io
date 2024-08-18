@@ -4,14 +4,14 @@ import { PlatformType } from "../base/types/platform";
 ---
 
 <section class="download-platform">
-  <DownloadButton type={PlatformType.WINDOWS} />
+  <DownloadButton type={PlatformType.WINDOWS} client:only="preact" />
   <div class="download-separator">
     <hr />
     <p>other variants</p>
     <hr />
   </div>
-  <DownloadButton type={PlatformType.LINUX} />
-  <DownloadButton type={PlatformType.MACOS} />
+  <DownloadButton type={PlatformType.LINUX} client:only="preact" />
+  <DownloadButton type={PlatformType.MACOS} client:only="preact" />
 </section>
 
 <style lang="scss" is:global>

@@ -11,7 +11,6 @@ export default function Checkbox() {
         type="checkbox"
         id="agree-terms"
         onClick={() => {
-          console.log("dupa");
           isChecked.set(!$isChecked);
         }}
       />

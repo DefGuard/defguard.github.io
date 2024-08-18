@@ -38,6 +38,10 @@
 
       border: 1px solid var(--text-body-primary);
 
+      .btn-download {
+        all: unset;
+      }
+
       h3 {
         @include typography(paragraph);
       }
