@@ -11,7 +11,13 @@ interface Platform {
   type: PlatformType;
 }
 
+// https://github.com/DefGuard/client/releases/download/v0.4.0/defguard-client_0.4.0_x64_en-US.exe
 export const DownloadButton = ({ type }: Platform) => {
+  const handleClick = () => {
+    // fetch("https://github.com/DefGuard/client/releases/download/v0.4.0/defguard-client_0.4.0_x64_en-US.exe");
+    console.log("dupa");
+  }
+
   return (
     <div class="download-button">
       <div class="download-header">
@@ -48,7 +54,7 @@ export const DownloadButton = ({ type }: Platform) => {
           </>
         )}
       </div>
-      <div class="download-main" onClick={() => console.log("dupa")}>
+      <div class="download-main" onClick={() => handleClick()}>
         <div class="download-text">
           {type === PlatformType.WINDOWS && (
             <>
