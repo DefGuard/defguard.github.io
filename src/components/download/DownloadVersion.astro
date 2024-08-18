@@ -1,34 +1,13 @@
 ---
 import { DefguardIcon } from "../base/icons/DefguardIcon";
-
-// const data = await fetch('https://api.github.com/repos/defguard/client/releases').then((response) =>
-//   response.json()
-// ).catch(error => {
-//   console.log("Error" + error);
-// });
-// const latestVersion = data[0].name.slice(1);
-// // 2024-07-08T12:58:59Z -> 08.07.2024
-// const published = data[0].published_at.split('T')[0].split('-').reverse().join('.');
+import DefguardInfo from "../download/DownloadInfo/DownloadInfo";
 ---
 
-
-<!-- TODO(cpprian): write react component and while waiting add null as a text -->
 <section class="download-version">
   <div class="download-logo">
     <DefguardIcon client:only />
   </div>
-  <div class="download-version-info">
-    <div class="download-version-current">
-      <p>Current version:</p>
-      <!-- <p>{latestVersion}</p> -->
-       <p>0.4.0</p>
-    </div>
-    <div class="download-changelog">
-      <a href="https://github.com/DefGuard/client/releases">View changelog →</a>
-      <!-- <p>{published}</p> -->
-      <p>16.07.2024</p>
-    </div>
-  </div>
+  <DefguardInfo owner="Defguard" repo="client" client:only="preact" />
 </section>
 
 <style lang="scss" is:global>
@@ -50,31 +29,6 @@ import { DefguardIcon } from "../base/icons/DefguardIcon";
         align-items: center;
         border-radius: 30px;
         background: #0c8ce0;
-      }
-
-      .download-version-info {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        gap: 8px;
-        align-self: stretch;
-
-        .download-version-current,
-        .download-changelog {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-          align-self: stretch;
-        }
-
-        .download-version-current {
-          @include typography(pricebox-price);
-        }
-
-        .download-changelog {
-          @include typography(pricebox-list);
-        }
       }
     }
 

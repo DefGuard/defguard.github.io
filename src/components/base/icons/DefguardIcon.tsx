@@ -12,7 +12,6 @@ export const DefguardIcon = () => {
   }, []);
 
   const isMobile = () => {
-    console.log(width);
     return width < MD_SIZE;
   };
 

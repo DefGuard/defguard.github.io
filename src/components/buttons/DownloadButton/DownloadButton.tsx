@@ -16,7 +16,7 @@ export const DownloadButton = ({ type }: Platform) => {
   const handleClick = () => {
     // fetch("https://github.com/DefGuard/client/releases/download/v0.4.0/defguard-client_0.4.0_x64_en-US.exe");
     console.log("dupa");
-  }
+  };
 
   return (
     <div class="download-button">
