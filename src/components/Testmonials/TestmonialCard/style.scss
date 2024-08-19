@@ -1,0 +1,51 @@
+#testmonial-card {
+    display: flex;
+    width: 538px;
+    height: 420px;
+    padding: 20px;
+    align-items: flex-start;
+    gap: 25px;
+    border: 1px solid #222;
+
+    .testmonial-image {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        align-self: stretch;
+    }
+
+    .testmonial-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 32px;
+        flex: 1 0 0;
+
+        .testmonial-title{
+            h2 {
+                @include typography(h2);
+                color: #222;
+            }
+    
+            p {
+                @include typography(footer);
+                color: #222;
+            }
+        }
+
+        .testmonial-description {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+            align-self: stretch;
+
+            p {
+                @include typography(paragraph);
+                color: #222;
+            }
+        }
+    }
+}

@@ -1,0 +1,50 @@
+---
+import { getCollection } from "astro:content";
+import { TestmonialCard } from "./TestmonialCard/TestmonialCard";
+
+const testmonials = (await getCollection("testmonials")).sort(
+  (f1, f2) => f1.data.order - f2.data.order,
+);
+---
+
+<section id="testmonials">
+    <h3 class="">Testmonials</h3>
+    <div class="testmonials-cards">
+        {
+            testmonials.map(async (f, index) => {
+                const { Content } = await f.render();
+                return (
+                    <TestmonialCard name={f.data.name} about={f.data.about} profile={f.data.profile} logo={f.data.logo} id={index} context="core" client:only="preact">
+                        <Content />
+                    </TestmonialCard>
+                );
+            })
+        }
+    </div>
+    <div>
+    </div>
+</section>
+
+<style lang="scss" is:global>
+#testmonials {
+    display: flex;
+    padding: 200px 240px 150px 240px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 8px;
+    align-self: stretch;
+    background: #F9F9F9;
+
+    h3 {
+        @include typography(h3);
+        color: #222;
+    }
+
+    .testmonials-cards {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+}
+</style>

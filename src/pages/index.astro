@@ -9,6 +9,7 @@ import { ProductFeature } from "../components/product/ProductFeature/ProductFeat
 import ProductImage from "../components/product/ProductImage.astro";
 import ProductLayout from "../layouts/ProductLayout.astro";
 import ProductSection from "../layouts/ProductSection.astro";
+import Testmonials from "../components/Testmonials/Testmonials.astro";
 
 const coreFeatures = (await getCollection("core-features")).sort(
   (f1, f2) => f1.data.order - f2.data.order,
@@ -62,6 +63,7 @@ const matrixIconId = svgId();
           }
       </div>
     </ProductSection>
+    <Testmonials />
     <ProductBuiltBy />
     <ProductSection dark padding="large">
       <section id="matrix">
