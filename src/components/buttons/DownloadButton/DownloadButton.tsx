@@ -11,8 +11,8 @@ interface DownloadProps {
   platformType: PlatformType;
   owner: string;
   repo: string;
-  version?: string;
-  platform?: string;
+  version: string;
+  platformVersion?: string;
   architecture?: string;
 }
 
@@ -21,7 +21,6 @@ export const DownloadButton = ({
   owner,
   repo,
   version,
-  platform,
   architecture,
 }: DownloadProps) => {
   return (
@@ -80,20 +79,10 @@ export const DownloadButton = ({
           )}
         </div>
         {platformType === PlatformType.WINDOWS && (
-          <DownloadIcon
-            owner={owner}
-            repo={repo}
-            version={version}
-            platform={platform}
-          />
+          <DownloadIcon owner={owner} repo={repo} version={version} />
         )}
         {platformType === PlatformType.MACOS && (
-          <DownloadIcon
-            owner={owner}
-            repo={repo}
-            version={version}
-            platform={platform}
-          />
+          <DownloadIcon owner={owner} repo={repo} version={version} />
         )}
         {platformType === PlatformType.LINUX && <CopyIcon />}
       </div>

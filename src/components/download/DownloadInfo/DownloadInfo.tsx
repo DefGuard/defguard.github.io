@@ -1,7 +1,7 @@
 import { useEffect, useState } from "preact/hooks";
 import "./style.scss";
 import { useStore } from "@nanostores/preact";
-import { clientVersion } from "./versionStore";
+import { clientVersion } from "../../store/versionStore";
 
 type GithubProps = {
   owner: string;

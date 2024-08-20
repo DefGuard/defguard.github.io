@@ -2,10 +2,9 @@ interface DownloadProps {
   owner: string;
   repo: string;
   version: string;
-  platform: string;
 }
 
-export const DownloadIcon = ({ owner, repo, version, platform }: DownloadProps) => {
+export const DownloadIcon = ({ owner, repo, version }: DownloadProps) => {
   return (
     <a
       href={`https://github.com/${owner}/${repo}/releases/download/v${version}/defguard-${repo}_${version}_x64_en-US.exe`}
