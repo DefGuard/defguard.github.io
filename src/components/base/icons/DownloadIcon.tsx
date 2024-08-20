@@ -1,10 +1,13 @@
+import type { PlatformType } from "../types/platform";
+
 interface DownloadProps {
+  platformType: PlatformType;
   owner: string;
   repo: string;
   version: string;
 }
 
-export const DownloadIcon = ({ owner, repo, version }: DownloadProps) => {
+export const DownloadIcon = ({ platformType, owner, repo, version }: DownloadProps) => {
   return (
     <a
       href={`https://github.com/${owner}/${repo}/releases/download/v${version}/defguard-${repo}_${version}_x64_en-US.exe`}

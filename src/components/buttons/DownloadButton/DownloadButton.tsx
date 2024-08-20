@@ -12,8 +12,6 @@ interface DownloadProps {
   owner: string;
   repo: string;
   version: string;
-  platformVersion?: string;
-  architecture?: string;
 }
 
 export const DownloadButton = ({
@@ -21,7 +19,6 @@ export const DownloadButton = ({
   owner,
   repo,
   version,
-  architecture,
 }: DownloadProps) => {
   return (
     <div class="download-button">
@@ -46,7 +43,7 @@ export const DownloadButton = ({
             </div>
           </>
         )}
-        {platformType === PlatformType.MACOS && (
+        {(platformType === PlatformType.MACOSARM || platformType === PlatformType.MACOSINTEL) && (
           <>
             <div class="download-icon">
               <MacOsIcon />
@@ -71,19 +68,25 @@ export const DownloadButton = ({
               <p>curl -f https://defguard.net/install.sh | sh</p>
             </>
           )}
-          {platformType === PlatformType.MACOS && (
+          {platformType === PlatformType.MACOSINTEL && (
+            <>
+              <h3>Download now</h3>
+              <p>Apple Intel</p>
+            </>
+          )}
+          {platformType === PlatformType.MACOSARM && (
             <>
               <h3>Download now</h3>
               <p>Apple Silicon</p>
             </>
           )}
         </div>
-        {platformType === PlatformType.WINDOWS && (
-          <DownloadIcon owner={owner} repo={repo} version={version} />
-        )}
-        {platformType === PlatformType.MACOS && (
-          <DownloadIcon owner={owner} repo={repo} version={version} />
-        )}
+        {(platformType === PlatformType.WINDOWS ||
+          platformType === PlatformType.MACOSINTEL ||
+          platformType === PlatformType.MACOSARM
+        ) && (
+            <DownloadIcon platformType={platformType} owner={owner} repo={repo} version={version} />
+          )}
         {platformType === PlatformType.LINUX && <CopyIcon />}
       </div>
       <div class="download-footer">
@@ -96,7 +99,7 @@ export const DownloadButton = ({
             </p>
           </>
         )}
-        {platformType === PlatformType.MACOS && (
+        {(platformType === PlatformType.MACOSINTEL || platformType === PlatformType.MACOSARM) && (
           <>
             <p>Requires version 10.5 or later</p>
           </>
