@@ -146,7 +146,10 @@ export const featuresTableData: FeatureTableData = {
                 status: "yes",
                 hover: "With TOTP/Email + WireGuard Pre-Shared session keys (PSK)",
               },
-              { status: "yes" },
+              {
+                  status: "yes",
+                  hover: "For OpenVPN",
+              },
               {
                 status: "no",
                 hover: "Only 2FA during application authorization",
@@ -187,7 +190,7 @@ export const featuresTableData: FeatureTableData = {
             features: [
               {
                 status: "in-progress",
-                hover: "Planned for release 1.2",
+                hover: "Planned for release 1.1",
               },
               {
                 status: "in-progress",
