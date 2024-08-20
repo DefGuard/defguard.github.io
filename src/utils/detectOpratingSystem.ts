@@ -31,8 +31,12 @@ async function getArchitecture(): Promise<"Intel" | "ARM" | "Unknown OS"> {
     } else if (uaData.platform === "macOS") {
       return "Intel";
     }
+  } else {
+    // Fallback using userAgent string analysis
+    const isARM = /mac os x.*(arm64|aarch64)/i.test(navigator.userAgent);
+    if (isARM) return "ARM";
+    const isIntel = /mac os x.*(x86_64|intel)/i.test(navigator.userAgent);
+    if (isIntel) return "Intel";
   }
-  // Fallback using userAgent string analysis
-  const isARM = /mac os x.*(arm64|aarch64)/i.test(navigator.userAgent);
-  return isARM ? "ARM" : "Intel";
+  return "ARM";
 }
