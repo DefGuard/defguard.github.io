@@ -6,6 +6,8 @@ import { DownloadIcon } from "../../base/icons/DownloadIcon";
 import { CopyIcon } from "../../base/icons/CopyIcon";
 import { VectorIcon } from "../../base/icons/VectorIcon";
 import { PlatformType } from "../../base/types/platform";
+import { CheckIcon } from "../../base/icons/CheckIcon";
+import { useState } from "preact/hooks";
 
 interface DownloadProps {
   platformType: PlatformType;
@@ -16,12 +18,27 @@ interface DownloadProps {
 
 const COMMAND = "curl -f https://defguard.net/install.sh | sh";
 
-export const DownloadButton = ({
-  platformType,
-  owner,
-  repo,
-  version,
-}: DownloadProps) => {
+export const DownloadButton = ({ platformType, owner, repo, version }: DownloadProps) => {
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const [isLinuxMenuClicked, setIsLinuxMenuClicked] = useState(false);
+  const [isAppleMenuClicked, setIsAppleMenuClicked] = useState(false);
+  console.log(owner);
+
+  const handleClick = () => {
+    setIsButtonClicked(true);
+    setTimeout(() => {
+      setIsButtonClicked(false);
+    }, 800);
+  };
+
+  const handleToggleAppleMenu = () => {
+    setIsAppleMenuClicked(!isAppleMenuClicked);
+  };
+
+  const handleToggleLinuxMenu = () => {
+    setIsLinuxMenuClicked(!isLinuxMenuClicked);
+  };
+
   return (
     <div class="download-button">
       <div class="download-header">
@@ -39,21 +56,78 @@ export const DownloadButton = ({
               <LinuxIcon />
               Linux
             </div>
-            <div class="download-choice">
-              Stable
-              <VectorIcon />
+            <div>
+              {isLinuxMenuClicked && (
+                <>
+                  <div class="download-choice" onClick={handleToggleLinuxMenu}>
+                    Stable
+                    <VectorIcon />
+                  </div>
+                  <div
+                    className={`download-menu ${isLinuxMenuClicked ? "open" : "closed"}`}
+                  >
+                    <ul>
+                      <li>
+                        <a>DEB</a>
+                      </li>
+                      <li>
+                        <a>RPM</a>
+                      </li>
+                    </ul>
+                  </div>
+                </>
+              )}
+              {!isLinuxMenuClicked && (
+                <div class="download-choice" onClick={handleToggleLinuxMenu}>
+                  Stable
+                  <VectorIcon />
+                </div>
+              )}
             </div>
           </>
         )}
-        {(platformType === PlatformType.MACOSARM || platformType === PlatformType.MACOSINTEL) && (
+        {(platformType === PlatformType.MACOSARM ||
+          platformType === PlatformType.MACOSINTEL) && (
           <>
             <div class="download-icon">
               <MacOsIcon />
               macOS
             </div>
-            <div class="download-choice">
-              Apple Silicon
-              <VectorIcon />
+            <div>
+              {isAppleMenuClicked && (
+                <>
+                  <div class="download-choice" onClick={handleToggleAppleMenu}>
+                    Apple Chip
+                    <VectorIcon />
+                  </div>
+                  <div
+                    className={`download-menu ${isAppleMenuClicked ? "open" : "closed"}`}
+                  >
+                    <ul>
+                      <li>
+                        <a
+                          href={`https://github.com/${owner}/${repo}/releases/download/v${version}/defguard-x86_64-apple-darwin-${version}.pkg`}
+                        >
+                          Intel
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href={`https://github.com/${owner}/${repo}/releases/download/v${version}/defguard-aarch64-apple-darwin-${version}.pkg`}
+                        >
+                          ARM
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </>
+              )}
+              {!isAppleMenuClicked && (
+                <div class="download-choice" onClick={handleToggleAppleMenu}>
+                  Apple Chip
+                  <VectorIcon />
+                </div>
+              )}
             </div>
           </>
         )}
@@ -83,25 +157,49 @@ export const DownloadButton = ({
             </>
           )}
         </div>
-        {(platformType === PlatformType.WINDOWS ||
-          platformType === PlatformType.MACOSINTEL ||
-          platformType === PlatformType.MACOSARM
-        ) && (
-            <DownloadIcon platformType={platformType} owner={owner} repo={repo} version={version} />
+        <div class="copy" onClick={handleClick}>
+          {(platformType === PlatformType.WINDOWS ||
+            platformType === PlatformType.MACOSINTEL ||
+            platformType === PlatformType.MACOSARM) && (
+            <>
+              {isButtonClicked ? (
+                <CheckIcon />
+              ) : (
+                <DownloadIcon
+                  platformType={platformType}
+                  owner={owner}
+                  repo={repo}
+                  version={version}
+                />
+              )}
+            </>
           )}
-        {platformType === PlatformType.LINUX && <CopyIcon textToCopy={COMMAND} />}
+          {platformType === PlatformType.LINUX && (
+            <>{isButtonClicked ? <CheckIcon /> : <CopyIcon textToCopy={COMMAND} />}</>
+          )}
+        </div>
       </div>
       <div class="download-footer">
         {platformType === PlatformType.LINUX && (
           <>
-            {/* TODO(cpprian): add links to AppImage and Binary */}
             <p>
-              Other ways to install defguard on linux → <a href="">AppImage</a> |{" "}
-              <a href="#">Binary</a>
+              Other ways to install defguard on linux →{" "}
+              <a
+                href={`https://github.com/${owner}/${repo}/releases/download/v${version}/defguard-client_${version}_amd64.AppImage`}
+              >
+                AppImage
+              </a>{" "}
+              |{" "}
+              <a
+                href={`https://github.com/${owner}/${repo}/releases/download/v${version}/defguard-service-linux-x86_64-v${version}.tar.gz`}
+              >
+                Binary
+              </a>
             </p>
           </>
         )}
-        {(platformType === PlatformType.MACOSINTEL || platformType === PlatformType.MACOSARM) && (
+        {(platformType === PlatformType.MACOSINTEL ||
+          platformType === PlatformType.MACOSARM) && (
           <>
             <p>Requires version 10.5 or later</p>
           </>

@@ -10,7 +10,7 @@ type DownloadButtonConfig = {
   platformType: PlatformType;
 };
 
-const OWNER = "Defguard";
+const OWNER = "DefGuard";
 const REPO = "client";
 
 export const DownloadButtonList = () => {
@@ -24,60 +24,60 @@ export const DownloadButtonList = () => {
       platformType: PlatformType.LINUX,
     },
     {
-      platformType: PlatformType.MACOSINTEL,
+      platformType: PlatformType.MACOSARM,
     },
   ]);
 
-    const $clientVersion = useStore(clientVersion);
+  const $clientVersion = useStore(clientVersion);
 
   useEffect(() => {
-    detectOperatingSystem().then(val => {
-        switch (val) {
-            case "ARM": {
-              setButtonList([
-                {
-                  platformType: PlatformType.MACOSARM,
-                },
-                {
-                  platformType: PlatformType.LINUX,
-                },
-                {
-                  platformType: PlatformType.WINDOWS,
-                },
-              ]);
-              break;
-            }
-            case "Intel": {
-                setButtonList([
-                    {
-                      platformType: PlatformType.MACOSINTEL,
-                    },
-                    {
-                      platformType: PlatformType.LINUX,
-                    },
-                    {
-                      platformType: PlatformType.WINDOWS,
-                    },
-                  ]);
-                  break;
-            }
-            case "Linux": {
-              setButtonList([
-                {
-                  platformType: PlatformType.LINUX,
-                },
-                {
-                  platformType: PlatformType.WINDOWS,
-                },
-                {
-                  platformType: PlatformType.MACOSINTEL,
-                },
-              ]);
-              break;
-            }
-          }
-          setIsLoading(false);
-    })
+    detectOperatingSystem().then((val) => {
+      switch (val) {
+        case "ARM": {
+          setButtonList([
+            {
+              platformType: PlatformType.MACOSARM,
+            },
+            {
+              platformType: PlatformType.LINUX,
+            },
+            {
+              platformType: PlatformType.WINDOWS,
+            },
+          ]);
+          break;
+        }
+        case "Intel": {
+          setButtonList([
+            {
+              platformType: PlatformType.MACOSINTEL,
+            },
+            {
+              platformType: PlatformType.LINUX,
+            },
+            {
+              platformType: PlatformType.WINDOWS,
+            },
+          ]);
+          break;
+        }
+        case "Linux": {
+          setButtonList([
+            {
+              platformType: PlatformType.LINUX,
+            },
+            {
+              platformType: PlatformType.WINDOWS,
+            },
+            {
+              platformType: PlatformType.MACOSARM,
+            },
+          ]);
+          break;
+        }
+      }
+      setIsLoading(false);
+    });
   }, []);
 
   if (isLoading) return null;

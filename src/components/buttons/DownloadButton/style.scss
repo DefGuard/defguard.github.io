@@ -24,6 +24,37 @@
         display: flex;
         align-items: center;
         gap: 5px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .download-menu {
+        position: absolute;
+        border-radius: 0px 25px 25px 0px;
+        border: 1px solid var(--colors-surface-main-primary, #222);
+        background: var(--colors-surface-frame-bg, #f9f9f9);
+        text-align: center;
+
+        ul {
+          padding: 0 40px;
+          line-height: 25px;
+          list-style-type: none;
+        }
+
+        a {
+          color: #222;
+          text-decoration: none;
+        }
+      }
+
+      .closed {
+        display: none;
+      }
+
+      .open {
+        display: flex;
       }
     }
 
@@ -40,6 +71,10 @@
 
       .btn-download {
         all: unset;
+      }
+
+      .copy:hover {
+        cursor: pointer;
       }
 
       h3 {

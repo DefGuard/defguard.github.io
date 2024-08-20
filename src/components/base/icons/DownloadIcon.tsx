@@ -1,4 +1,5 @@
-import type { PlatformType } from "../types/platform";
+import { useEffect, useState } from "preact/hooks";
+import { PlatformType } from "../types/platform";
 
 interface DownloadProps {
   platformType: PlatformType;
@@ -8,9 +9,28 @@ interface DownloadProps {
 }
 
 export const DownloadIcon = ({ platformType, owner, repo, version }: DownloadProps) => {
+  const [downloadName, setDownloadName] = useState("");
+
+  useEffect(() => {
+    switch (platformType) {
+      case PlatformType.WINDOWS: {
+        setDownloadName(`defguard-client_${version}_x64_en-US.exe`);
+        break;
+      }
+      case PlatformType.MACOSARM: {
+        setDownloadName(`defguard-aarch64-apple-darwin-${version}.pkg`);
+        break;
+      }
+      case PlatformType.MACOSINTEL: {
+        setDownloadName(`defguard-x86_64-apple-darwin-${version}.pkg`);
+        break;
+      }
+    }
+  }, []);
+
   return (
     <a
-      href={`https://github.com/${owner}/${repo}/releases/download/v${version}/defguard-${repo}_${version}_x64_en-US.exe`}
+      href={`https://github.com/${owner}/${repo}/releases/download/v${version}/${downloadName}`}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

@@ -4,7 +4,11 @@ interface CopyProps {
 
 export const CopyIcon = ({ textToCopy }: CopyProps) => {
   return (
-    <div onClick={() => navigator.clipboard.writeText(textToCopy)}>
+    <div
+      onClick={() => {
+        navigator.clipboard.writeText(textToCopy);
+      }}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
