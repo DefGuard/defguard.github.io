@@ -14,6 +14,8 @@ interface DownloadProps {
   version: string;
 }
 
+const COMMAND = "curl -f https://defguard.net/install.sh | sh";
+
 export const DownloadButton = ({
   platformType,
   owner,
@@ -65,7 +67,7 @@ export const DownloadButton = ({
           )}
           {platformType === PlatformType.LINUX && (
             <>
-              <p>curl -f https://defguard.net/install.sh | sh</p>
+              <p>{COMMAND}</p>
             </>
           )}
           {platformType === PlatformType.MACOSINTEL && (
@@ -87,7 +89,7 @@ export const DownloadButton = ({
         ) && (
             <DownloadIcon platformType={platformType} owner={owner} repo={repo} version={version} />
           )}
-        {platformType === PlatformType.LINUX && <CopyIcon />}
+        {platformType === PlatformType.LINUX && <CopyIcon textToCopy={COMMAND} />}
       </div>
       <div class="download-footer">
         {platformType === PlatformType.LINUX && (
