@@ -16,13 +16,15 @@ interface DownloadProps {
   version: string;
 }
 
-const COMMAND = "curl -f https://defguard.net/install.sh | sh";
-
 export const DownloadButton = ({ platformType, owner, repo, version }: DownloadProps) => {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [isLinuxMenuClicked, setIsLinuxMenuClicked] = useState(false);
   const [isAppleMenuClicked, setIsAppleMenuClicked] = useState(false);
-  console.log(owner);
+
+  const DEB_COMMAND = `sudo pkg -i https://github.com/${owner}/${repo}/releases/download/v${version}/defguard-client_${version}_amd64.deb`;
+  const LINUX_COMMAND = `curl -L https://github.com/${owner}/${repo}/releases/download/v${version}/defguard-client-linux-x86_64-v${version}.tar.gz`;
+  const [currentCommand, setCurrentCommand] = useState(LINUX_COMMAND);
+  console.log(currentCommand);
 
   const handleClick = () => {
     setIsButtonClicked(true);
@@ -68,10 +70,24 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
                   >
                     <ul>
                       <li>
-                        <a>DEB</a>
+                        <a
+                          onClick={() => {
+                            setCurrentCommand(DEB_COMMAND);
+                            setIsLinuxMenuClicked(false);
+                          }}
+                        >
+                          DEB
+                        </a>
                       </li>
                       <li>
-                        <a>RPM</a>
+                        <a
+                          onClick={() => {
+                            setCurrentCommand(LINUX_COMMAND);
+                            setIsLinuxMenuClicked(false);
+                          }}
+                        >
+                          Linux
+                        </a>
                       </li>
                     </ul>
                   </div>
@@ -106,6 +122,7 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
                     <ul>
                       <li>
                         <a
+                          onClick={() => setIsAppleMenuClicked(false)}
                           href={`https://github.com/${owner}/${repo}/releases/download/v${version}/defguard-x86_64-apple-darwin-${version}.pkg`}
                         >
                           Intel
@@ -113,6 +130,7 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
                       </li>
                       <li>
                         <a
+                          onClick={() => setIsAppleMenuClicked(false)}
                           href={`https://github.com/${owner}/${repo}/releases/download/v${version}/defguard-aarch64-apple-darwin-${version}.pkg`}
                         >
                           ARM
@@ -141,7 +159,7 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
           )}
           {platformType === PlatformType.LINUX && (
             <>
-              <p>{COMMAND}</p>
+              <p>{currentCommand}</p>
             </>
           )}
           {platformType === PlatformType.MACOSINTEL && (
@@ -175,7 +193,9 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
             </>
           )}
           {platformType === PlatformType.LINUX && (
-            <>{isButtonClicked ? <CheckIcon /> : <CopyIcon textToCopy={COMMAND} />}</>
+            <>
+              {isButtonClicked ? <CheckIcon /> : <CopyIcon textToCopy={currentCommand} />}
+            </>
           )}
         </div>
       </div>
