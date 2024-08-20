@@ -6,6 +6,8 @@ import { DownloadIcon } from "../../base/icons/DownloadIcon";
 import { CopyIcon } from "../../base/icons/CopyIcon";
 import { VectorIcon } from "../../base/icons/VectorIcon";
 import { PlatformType } from "../../base/types/platform";
+import { useStore } from "@nanostores/preact";
+import { clientVersion } from "../../download/DownloadInfo/versionStore";
 
 interface Platform {
   type: PlatformType;
@@ -15,6 +17,8 @@ export const DownloadButton = ({ type }: Platform) => {
   const handleClick = () => {
     console.log('download');
   };
+  const $clientVersion = useStore(clientVersion);
+
 
   return (
     <div class="download-button">
@@ -71,9 +75,12 @@ export const DownloadButton = ({ type }: Platform) => {
             </>
           )}
         </div>
-        {(type === PlatformType.WINDOWS || type === PlatformType.MACOS) && (
-          <DownloadIcon />
+        {type === PlatformType.WINDOWS && (
+          <DownloadIcon owner="Defguard" repo="client" version={$clientVersion} platform="windows" />
         )}
+        {type === PlatformType.MACOS && 
+          <DownloadIcon owner="Defguard" repo="client" version={$clientVersion} platform="macos" />
+        }
         {type === PlatformType.LINUX && <CopyIcon />}
       </div>
       <div class="download-footer">

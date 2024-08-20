@@ -1,5 +1,7 @@
 import { useEffect, useState } from "preact/hooks";
 import "./style.scss";
+import { useStore } from "@nanostores/preact";
+import { clientVersion } from "./versionStore";
 
 type GithubProps = {
   owner: string;
@@ -8,8 +10,8 @@ type GithubProps = {
 
 const DownloadInfo = function ({ owner, repo }: GithubProps) {
   const [isLoading, setIsLoading] = useState(true);
-  const [latestVersion, setLatestVersion] = useState("");
   const [published, setPublished] = useState("");
+  const $clientVersion = useStore(clientVersion);
 
   useEffect(() => {
     fetch(`https://api.github.com/repos/${owner}/${repo}/releases`)
@@ -17,7 +19,7 @@ const DownloadInfo = function ({ owner, repo }: GithubProps) {
         res.json().then((val) => {
           if (val.length) {
             const data = val[0];
-            setLatestVersion(data.name ? data.name.slice(1) : "");
+            clientVersion.set(data.name ? data.name.slice(1) : "");
 
             // 2024-07-08T12:58:59Z -> 08.07.2024
             setPublished(
@@ -39,11 +41,11 @@ const DownloadInfo = function ({ owner, repo }: GithubProps) {
     <div class="download-version-info">
       <div class="download-version-current">
         {isLoading && <p>Fetching version...</p>}
-        {latestVersion == "" && !isLoading && <p>Unable to fetch version</p>}
-        {latestVersion != "" && (
+        {$clientVersion == "" && !isLoading && <p>Unable to fetch version</p>}
+        {$clientVersion != "" && (
           <>
             <p>Current version:</p>
-            <p>{latestVersion}</p>
+            <p>{$clientVersion}</p>
           </>
         )}
       </div>
