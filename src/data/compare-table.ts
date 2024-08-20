@@ -1,31 +1,8 @@
 import type { FeatureTableData } from "../components/FeaturesTable/types";
 
 export const featuresTableData: FeatureTableData = {
-    others: ["firezone", "pritunl", "netbird"],
+    others: ["openvpn", "firezone", "pritunl", "netbird"],
     groups: [
-      {
-        rows: [
-          {
-            description: "Truly Open Source & self-hosted and commercial use",
-            features: [
-              {
-                status: "yes",
-              },
-              {
-                status: "no",
-                link: "https://github.com/firezone/firezone/blob/main/elixir/LICENSE",
-              },
-              {
-                status: "no",
-                link: "https://github.com/pritunl/pritunl/blob/master/LICENSE",
-              },
-              {
-                status: "yes",
-              },
-            ],
-          },
-        ],
-      },
       {
         title: "Authentication and User Management",
         rows: [
@@ -35,6 +12,10 @@ export const featuresTableData: FeatureTableData = {
               {
                 status: "yes",
                 hover: "Fully integrated, simplifying operations",
+              },
+              {
+                status: "no",
+                hover: "Requires 3rd party integration",
               },
               {
                 status: "no",
@@ -59,6 +40,7 @@ export const featuresTableData: FeatureTableData = {
               { status: "no" },
               { status: "no" },
               { status: "no" },
+              { status: "no" },
             ],
           },
           {
@@ -68,15 +50,10 @@ export const featuresTableData: FeatureTableData = {
                 status: "yes",
                 link: "https://defguard.gitbook.io/defguard/help/remote-user-enrollment/user-onboarding-after-enrollment",
               },
-              {
-                status: "no",
-              },
-              {
-                status: "no",
-              },
-              {
-                status: "no",
-              },
+              { status: "no" },
+              { status: "no" },
+              { status: "no" },
+              { status: "no" },
             ],
           },
           {
@@ -84,8 +61,9 @@ export const featuresTableData: FeatureTableData = {
             features: [
               {
                 status: "in-progress",
-                hover: "Full groups in OpenID Connect - feb 2024",
+                hover: "Groups released 0.10.0, ACLs comming to v1.1.0",
               },
+              { status: "no" },
               {
                 status: "no",
                 hover: "Only VPN ACLs",
@@ -107,6 +85,7 @@ export const featuresTableData: FeatureTableData = {
                 status: "yes",
                 link: "https://defguard.gitbook.io/defguard/features/ldap-synchronization-setup"
               },
+              { status: "no" },
               {
                 status: "no",
               },
@@ -125,6 +104,7 @@ export const featuresTableData: FeatureTableData = {
                 status: "yes",
                 link: "https://defguard.gitbook.io/defguard/features/forward-auth"
               },
+              { status: "no" },
               {
                 status: "no",
               },
@@ -144,6 +124,7 @@ export const featuresTableData: FeatureTableData = {
           {
             description: "WireGuard VPN Configuration",
             features: [
+              { status: "no" },
               {
                 status: "yes",
               },
@@ -165,6 +146,7 @@ export const featuresTableData: FeatureTableData = {
                 status: "yes",
                 hover: "With TOTP/Email + WireGuard Pre-Shared session keys (PSK)",
               },
+              { status: "yes" },
               {
                 status: "no",
                 hover: "Only 2FA during application authorization",
@@ -180,10 +162,140 @@ export const featuresTableData: FeatureTableData = {
             ],
           },
           {
+            description: "VPN access based on groups",
+            features: [
+              {
+                status: "yes",
+              },
+              {
+                status: "in-progress",
+                hover: "Requires OpenVPN AS",
+              },
+              {
+                status: "yes",
+              },
+              {
+                status: "yes",
+              },
+              {
+                status: "yes",
+              },
+            ],
+          },
+          {
+            description: "ACL (firewall) network control for VPN",
+            features: [
+              {
+                status: "in-progress",
+                hover: "Planned for release 1.2",
+              },
+              {
+                status: "in-progress",
+                hover: "Requires OpenVPN AS",
+              },
+              {
+                status: "yes",
+              },
+              {
+                status: "yes",
+              },
+              {
+                status: "yes",
+              },
+            ],
+           },
+           {
+            description: "Dashboard with statistics for each user & device",
+            features: [
+              {
+                status: "yes",
+              },
+              {
+                status: "no",
+              },
+              {
+                status: "no",
+              },
+              {
+                status: "no",
+              },
+              {
+                status: "no",
+              },
+            ],
+          },
+          {
+            description: "Desktop Clients",
+            features: [
+              {
+                status: "yes",
+                link: "/client/",
+              },
+              {
+                status: "yes",
+              },
+              {
+                status: "yes",
+              },
+              {
+                status: "yes",
+              },
+              {
+                status: "yes",
+              },
+            ],
+          },
+          {
+            description: "Desktop Client support for multiple selfhosted instances",
+            features: [
+              {
+                status: "yes",
+                link: "/client/",
+              },
+              {
+                status: "no",
+              },
+              {
+                status: "no",
+              },
+              {
+                status: "no",
+              },
+              {
+                status: "no",
+              },
+            ],
+          },
+          {
+            description: "Desktop Client support for any WireGuard server",
+            features: [
+              {
+                status: "yes",
+                link: "/client/",
+              },
+              {
+                status: "no",
+              },
+              {
+                status: "no",
+              },
+              {
+                status: "no",
+              },
+              {
+                status: "no",
+              },
+            ],
+          },
+            {
             description: "Multiple VPN Locations (networks/sites)",
             features: [
               {
                 status: "yes",
+              },
+              {
+                status: "in-progress",
+                hover: "Requires multiple VPN instance deployments",
               },
               {
                 status: "in-progress",
@@ -205,6 +317,10 @@ export const featuresTableData: FeatureTableData = {
                 status: "yes",
               },
               {
+                status: "in-progress",
+                hover: "Requires OpenVPN AS",
+              },
+              {
                 status: "no",
               },
               {
@@ -220,7 +336,11 @@ export const featuresTableData: FeatureTableData = {
             features: [
               {
                 status: "in-progress",
-                hover: "In development - est. Feb 2024",
+                hover: "Manual or requires OpenVPN AS",
+              },
+              {
+                status: "in-progress",
+                hover: "Planned for release 1.1",
               },
               {
                 status: "in-progress",
@@ -250,6 +370,9 @@ export const featuresTableData: FeatureTableData = {
               {
                 status: "no",
               },
+              {
+                status: "no",
+              },
             ],
           },
           {
@@ -257,7 +380,10 @@ export const featuresTableData: FeatureTableData = {
             features: [
               {
                 status: "in-progress",
-                hover: "In development: est. Q1 2024",
+                hover: "Planned for release 1.2",
+              },
+              {
+                status: "no",
               },
               {
                 status: "yes",
@@ -275,7 +401,10 @@ export const featuresTableData: FeatureTableData = {
             features: [
               {
                 status: "in-progress",
-                hover: "In development: est. Q1 2024",
+                hover: "Planned for release 1.2",
+              },
+              {
+                status: "no",
               },
               {
                 status: "yes",
@@ -285,95 +414,6 @@ export const featuresTableData: FeatureTableData = {
               },
               {
                 status: "yes",
-              },
-            ],
-          },
-          {
-            description: "VPN Access based on ACLs & Groups",
-            features: [
-              {
-                status: "in-progress",
-                hover: "In development - est. Feb 2024",
-              },
-              {
-                status: "yes",
-              },
-              {
-                status: "yes",
-              },
-              {
-                status: "yes",
-              },
-            ],
-          },
-          {
-            description: "Dashboard with statistics for each user & device",
-            features: [
-              {
-                status: "yes",
-              },
-              {
-                status: "no",
-              },
-              {
-                status: "no",
-              },
-              {
-                status: "no",
-              },
-            ],
-          },
-          {
-            description: "Desktop Clients",
-            features: [
-              {
-                status: "yes",
-                link: "/client/",
-              },
-              {
-                status: "no",
-              },
-              {
-                status: "yes",
-              },
-              {
-                status: "yes",
-              },
-            ],
-          },
-          {
-            description: "Desktop Client support for multiple selfhosted instances",
-            features: [
-              {
-                status: "yes",
-                link: "/client/",
-              },
-              {
-                status: "no",
-              },
-              {
-                status: "no",
-              },
-              {
-                status: "no",
-              },
-            ],
-          },
-          {
-            description: "Desktop Client support for any WireGuard server",
-            features: [
-              {
-                status: "yes",
-                link: "/client/",
-              },
-              {
-                status: "no",
-              },
-              {
-                status: "no",
-              },
-              {
-                status: "no",
               },
             ],
           },
@@ -398,6 +438,9 @@ export const featuresTableData: FeatureTableData = {
               {
                 status: "no",
               },
+              {
+                status: "no",
+              },
             ],
           },
           {
@@ -406,6 +449,9 @@ export const featuresTableData: FeatureTableData = {
               {
                 status: "yes",
                 link: "https://defguard.gitbook.io/defguard/features/setting-up-your-instance/kubernetes",
+              },
+              {
+                status: "no",
               },
               { status: "no" },
               { status: "no" },
@@ -418,6 +464,9 @@ export const featuresTableData: FeatureTableData = {
               {
                 status: "yes",
                 link: "https://defguard.gitbook.io/defguard/features/yubikey-provisioning",
+              },
+              {
+                status: "no",
               },
               {
                 status: "no",
@@ -445,6 +494,7 @@ export const featuresTableData: FeatureTableData = {
               { status: "no" },
               { status: "no" },
               { status: "no" },
+              { status: "no" },
             ],
           },
           {
@@ -452,6 +502,9 @@ export const featuresTableData: FeatureTableData = {
             features: [
               {
                 status: "yes",
+              },
+              {
+                status: "no",
               },
               {
                 status: "no",
@@ -480,6 +533,9 @@ export const featuresTableData: FeatureTableData = {
               {
                 status: "no",
               },
+              {
+                status: "no",
+              },
             ],
           },
           {
@@ -488,6 +544,9 @@ export const featuresTableData: FeatureTableData = {
               {
                 status: "yes",
                 link: "https://defguard.gitbook.io/defguard/help/sending-support-info",
+              },
+              {
+                status: "no",
               },
               {
                 status: "no",
@@ -510,6 +569,7 @@ export const featuresTableData: FeatureTableData = {
               { status: "no" },
               { status: "no" },
               { status: "no" },
+              { status: "no" },
             ],
           },
           {
@@ -519,6 +579,7 @@ export const featuresTableData: FeatureTableData = {
                 status: "yes",
                 link: "https://defguard.gitbook.io/defguard/features/ssh-authentication",
               },
+              { status: "no" },
               {
                 status: "no",
               },
@@ -538,24 +599,7 @@ export const featuresTableData: FeatureTableData = {
                 status: "yes",
                 link: "https://defguard.gitbook.io/defguard/features/ldap-synchronization-setup",
               },
-              {
-                status: "no",
-              },
-              {
-                status: "no",
-              },
-              {
-                status: "no",
-              },
-            ],
-          },
-          {
-            description: "Web3 Wallet Verification",
-            features: [
-              {
-                status: "yes",
-                hover: "Supports cryptocurrency wallet verification in user profile",
-              },
+              { status: "yes" },
               {
                 status: "no",
               },
