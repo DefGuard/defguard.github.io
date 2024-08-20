@@ -22,7 +22,7 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
   const [isAppleMenuClicked, setIsAppleMenuClicked] = useState(false);
 
   const DEB_COMMAND = `sudo pkg -i https://github.com/${owner}/${repo}/releases/download/v${version}/defguard-client_${version}_amd64.deb`;
-  const LINUX_COMMAND = `curl -L https://github.com/${owner}/${repo}/releases/download/v${version}/defguard-client-linux-x86_64-v${version}.tar.gz`;
+  const LINUX_COMMAND = `curl -L https://github.com/${owner}/${repo}/releases/download/v${version}/defguard-client-linux-x86_64-v${version}.tar.gz | sh`;
   const [currentCommand, setCurrentCommand] = useState(LINUX_COMMAND);
   console.log(currentCommand);
 
