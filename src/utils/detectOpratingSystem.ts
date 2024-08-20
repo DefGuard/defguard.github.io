@@ -20,7 +20,7 @@ export async function detectOperatingSystem(): Promise<string> {
   }
 }
 
-async function getArchitecture(): Promise<"Intel" | "ARM" | "Unknown OS"> {
+async function getArchitecture(): Promise<"Intel" | "ARM"> {
   if (navigator.userAgentData) {
     const uaData = await navigator.userAgentData.getHighEntropyValues([
       "platform",
