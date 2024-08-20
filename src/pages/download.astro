@@ -1,7 +1,7 @@
 ---
 import Navigation from "../components/base/Navigation.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import DownloadPlatform from "../components/download/DownloadPlatform.astro";
+import { DownloadButtonList } from "../components/download/DownloadButtonList/DownloadButtonList";
 import DownloadVersion from "../components/download/DownloadVersion.astro";
 ---
 
@@ -12,7 +12,7 @@ import DownloadVersion from "../components/download/DownloadVersion.astro";
       <h1>Download defguard Desktop Client</h1>
     </header>
     <section class="download-section">
-      <DownloadPlatform />
+      <DownloadButtonList client:only />
       <DownloadVersion />
     </section>
     <hr />

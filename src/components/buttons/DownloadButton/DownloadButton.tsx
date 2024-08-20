@@ -6,24 +6,28 @@ import { DownloadIcon } from "../../base/icons/DownloadIcon";
 import { CopyIcon } from "../../base/icons/CopyIcon";
 import { VectorIcon } from "../../base/icons/VectorIcon";
 import { PlatformType } from "../../base/types/platform";
-import { useStore } from "@nanostores/preact";
-import { clientVersion } from "../../download/DownloadInfo/versionStore";
 
-interface Platform {
-  type: PlatformType;
+interface DownloadProps {
+  platformType: PlatformType;
+  owner: string;
+  repo: string;
+  version?: string;
+  platform?: string;
+  architecture?: string;
 }
 
-export const DownloadButton = ({ type }: Platform) => {
-  const handleClick = () => {
-    console.log('download');
-  };
-  const $clientVersion = useStore(clientVersion);
-
-
+export const DownloadButton = ({
+  platformType,
+  owner,
+  repo,
+  version,
+  platform,
+  architecture,
+}: DownloadProps) => {
   return (
     <div class="download-button">
       <div class="download-header">
-        {type === PlatformType.WINDOWS && (
+        {platformType === PlatformType.WINDOWS && (
           <>
             <div class="download-icon">
               <WindowsIcon />
@@ -31,7 +35,7 @@ export const DownloadButton = ({ type }: Platform) => {
             </div>
           </>
         )}
-        {type === PlatformType.LINUX && (
+        {platformType === PlatformType.LINUX && (
           <>
             <div class="download-icon">
               <LinuxIcon />
@@ -43,7 +47,7 @@ export const DownloadButton = ({ type }: Platform) => {
             </div>
           </>
         )}
-        {type === PlatformType.MACOS && (
+        {platformType === PlatformType.MACOS && (
           <>
             <div class="download-icon">
               <MacOsIcon />
@@ -56,35 +60,45 @@ export const DownloadButton = ({ type }: Platform) => {
           </>
         )}
       </div>
-      <div class="download-main" onClick={() => handleClick()}>
+      <div class="download-main">
         <div class="download-text">
-          {type === PlatformType.WINDOWS && (
+          {platformType === PlatformType.WINDOWS && (
             <>
               <h3>Download now</h3>
             </>
           )}
-          {type === PlatformType.LINUX && (
+          {platformType === PlatformType.LINUX && (
             <>
               <p>curl -f https://defguard.net/install.sh | sh</p>
             </>
           )}
-          {type === PlatformType.MACOS && (
+          {platformType === PlatformType.MACOS && (
             <>
               <h3>Download now</h3>
               <p>Apple Silicon</p>
             </>
           )}
         </div>
-        {type === PlatformType.WINDOWS && (
-          <DownloadIcon owner="Defguard" repo="client" version={$clientVersion} platform="windows" />
+        {platformType === PlatformType.WINDOWS && (
+          <DownloadIcon
+            owner={owner}
+            repo={repo}
+            version={version}
+            platform={platform}
+          />
         )}
-        {type === PlatformType.MACOS && 
-          <DownloadIcon owner="Defguard" repo="client" version={$clientVersion} platform="macos" />
-        }
-        {type === PlatformType.LINUX && <CopyIcon />}
+        {platformType === PlatformType.MACOS && (
+          <DownloadIcon
+            owner={owner}
+            repo={repo}
+            version={version}
+            platform={platform}
+          />
+        )}
+        {platformType === PlatformType.LINUX && <CopyIcon />}
       </div>
       <div class="download-footer">
-        {type === PlatformType.LINUX && (
+        {platformType === PlatformType.LINUX && (
           <>
             {/* TODO(cpprian): add links to AppImage and Binary */}
             <p>
@@ -93,7 +107,7 @@ export const DownloadButton = ({ type }: Platform) => {
             </p>
           </>
         )}
-        {type === PlatformType.MACOS && (
+        {platformType === PlatformType.MACOS && (
           <>
             <p>Requires version 10.5 or later</p>
           </>

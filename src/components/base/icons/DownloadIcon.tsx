@@ -5,9 +5,11 @@ interface DownloadProps {
   platform: string;
 }
 
-export const DownloadIcon = ({owner, repo, version, platform}: DownloadProps) => {
+export const DownloadIcon = ({ owner, repo, version, platform }: DownloadProps) => {
   return (
-    <a href={`https://github.com/${owner}/${repo}/releases/download/v${version}/defguard-${repo}_${version}_x64_en-US.exe`}>
+    <a
+      href={`https://github.com/${owner}/${repo}/releases/download/v${version}/defguard-${repo}_${version}_x64_en-US.exe`}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"

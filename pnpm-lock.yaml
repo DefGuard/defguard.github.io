@@ -98,6 +98,9 @@ importers:
       prettier-plugin-astro:
         specifier: ^0.12.3
         version: 0.12.3
+      user-agent-data-types:
+        specifier: ^0.4.2
+        version: 0.4.2
 
 packages:
   "@aashutoshrathi/word-wrap@1.2.6":
@@ -5710,6 +5713,12 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
 
+  user-agent-data-types@0.4.2:
+    resolution:
+      {
+        integrity: sha512-jXep3kO/dGNmDOkbDa8ccp4QArgxR4I76m3QVcJ1aOF0B9toc+YtSXtX5gLdDTZXyWlpQYQrABr6L1L2GZOghw==,
+      }
+
   utif@2.0.1:
     resolution:
       {
@@ -9961,6 +9970,8 @@ snapshots:
   use-sync-external-store@1.2.0(react@18.2.0):
     dependencies:
       react: 18.2.0
+
+  user-agent-data-types@0.4.2: {}
 
   utif@2.0.1:
     dependencies:
