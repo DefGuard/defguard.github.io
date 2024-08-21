@@ -13,11 +13,17 @@ const isProd = import.meta.env.PROD;
 <html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Enterprise Open Source SSO & VPN (with Multi-Factor Authentication)" />
+    <meta
+      name="description"
+      content="Enterprise Open Source SSO & VPN (with Multi-Factor Authentication)"
+    />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>defguard</title>
-    <meta name="description" content="Enterprise Open Source SSO & VPN (with Multi-Factor Authentication)">
+    <meta
+      name="description"
+      content="Enterprise Open Source SSO & VPN (with Multi-Factor Authentication)"
+    />
     <!-- FIXME: USE LOCAL -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -26,7 +32,16 @@ const isProd = import.meta.env.PROD;
       rel="stylesheet"
     />
     <!-- Favicons -->
-    {favSizes.map((size) => (<link rel="icon" type="image/png" sizes={`${size}x${size}`} href={`/favicon/favicon-${size}x${size}.png`} />) )}
+    {
+      favSizes.map((size) => (
+        <link
+          rel="icon"
+          type="image/png"
+          sizes={`${size}x${size}`}
+          href={`/favicon/favicon-${size}x${size}.png`}
+        />
+      ))
+    }
     <link rel="icon" type="image/ico" href="/favicon/favicon.ico" />
     {isProd && (
       <GoogleAnalytics id="G-Z2X2PB0P4E" />

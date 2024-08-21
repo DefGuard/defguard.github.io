@@ -1,0 +1,28 @@
+#download-page {
+  .download-version {
+    .download-version-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 8px;
+      align-self: stretch;
+
+      .download-version-current,
+      .download-changelog {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        align-self: stretch;
+      }
+
+      .download-version-current {
+        @include typography(pricebox-price);
+      }
+
+      .download-changelog {
+        @include typography(pricebox-list);
+      }
+    }
+  }
+}

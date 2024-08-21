@@ -1,7 +1,7 @@
 // Respect preferred browser theme
 
 if (document.documentElement) {
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   if (prefersDark) {
     // when setting dark we need to flip inverted sections from dark to light and vice versa
     document.documentElement.dataset.theme = "dark";

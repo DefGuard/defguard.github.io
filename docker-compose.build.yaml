@@ -1,5 +1,4 @@
 services:
-
   site-build:
     build:
       context: .

@@ -8,7 +8,14 @@ interface Props {
   skipMax?: boolean;
 }
 
-const { dark = false, padding = "large", className, id, bordered = false, skipMax = false } = Astro.props;
+const {
+  dark = false,
+  padding = "large",
+  className,
+  id,
+  bordered = false,
+  skipMax = false,
+} = Astro.props;
 
 const theme = dark ? "dark" : "light";
 ---
@@ -21,7 +28,7 @@ const theme = dark ? "dark" : "light";
     className,
     {
       bordered,
-      'skip-max': skipMax
+      "skip-max": skipMax,
     },
   ]}
   data-theme={theme}

@@ -1,6 +1,4 @@
 {
-    "cSpell.words": [
-        "pricebox"
-    ],
-    "typescript.tsdk": "node_modules\\typescript\\lib"
+  "cSpell.words": ["pricebox"],
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }
