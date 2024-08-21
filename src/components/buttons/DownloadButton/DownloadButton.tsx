@@ -7,7 +7,6 @@ import { VectorIcon } from "../../base/icons/VectorIcon";
 import { PlatformType } from "../../base/types/platform";
 import { CheckIcon } from "../../base/icons/CheckIcon";
 import { useState } from "preact/hooks";
-import { CopyIcon } from "../../base/icons/CopyIcon";
 
 interface DownloadProps {
   platformType: PlatformType;
@@ -56,19 +55,18 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
         )}
         {(
           platform === PlatformType.DEBIAN ||
-          platform === PlatformType.ARCHIVE ||
           platform === PlatformType.ARCHLINUX
         ) && (
           <>
             <div class="download-icon">
               <LinuxIcon />
-              Linux
+              Distribution
             </div>
             <div>
               {isLinuxMenuClicked && (
                 <>
                   <div class="download-choice" onClick={handleToggleLinuxMenu}>
-                    Linux
+                    Distribution
                     <VectorIcon />
                   </div>
                   <div
@@ -88,16 +86,6 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
                       <li>
                         <a
                           onClick={() => {
-                            swapPlatform(PlatformType.ARCHIVE);
-                            setIsLinuxMenuClicked(false);
-                          }}
-                        >
-                          Archive
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          onClick={() => {
                             swapPlatform(PlatformType.ARCHLINUX);
                             setIsLinuxMenuClicked(false);
                           }}
@@ -111,7 +99,7 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
               )}
               {!isLinuxMenuClicked && (
                 <div class="download-choice" onClick={handleToggleLinuxMenu}>
-                  Linux
+                  Distribution
                   <VectorIcon />
                 </div>
               )}
@@ -129,7 +117,7 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
               {isAppleMenuClicked && (
                 <>
                   <div class="download-choice" onClick={handleToggleAppleMenu}>
-                    Apple Chip
+                    Apple Hardware
                     <VectorIcon />
                   </div>
                   <div
@@ -162,7 +150,7 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
               )}
               {!isAppleMenuClicked && (
                 <div class="download-choice" onClick={handleToggleAppleMenu}>
-                  Apple Chip
+                  Apple Hardware
                   <VectorIcon />
                 </div>
               )}
@@ -174,7 +162,6 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
         <div class="download-text">
           {(
             platform === PlatformType.DEBIAN ||
-            platform === PlatformType.ARCHIVE ||
             platform === PlatformType.MACOSINTEL ||
             platform === PlatformType.MACOSARM ||
             platform === PlatformType.WINDOWS
@@ -182,9 +169,8 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
           {platform === PlatformType.ARCHLINUX && <h3>AUR package</h3>}
           {platform === PlatformType.ARCHLINUX && <>{ARCHLINK}</>}
           {platform === PlatformType.DEBIAN && <p>Debian package</p>}
-          {platform === PlatformType.ARCHIVE && <p>Get tar.gz file</p>}
           {platform === PlatformType.MACOSINTEL && <p>Apple Intel</p>}
-          {platform === PlatformType.MACOSARM && <p>Apple Silicon</p>}
+          {platform === PlatformType.MACOSARM && <p>Apple ARM</p>}
         </div>
         <div class="btn" onClick={handleClick}>
           {isButtonClicked ? (
@@ -203,7 +189,6 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
       <div class="download-footer">
         {(
           platform === PlatformType.DEBIAN ||
-          platform === PlatformType.ARCHIVE ||
           platform === PlatformType.ARCHLINUX
         ) && (
           <>
@@ -216,7 +201,7 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
               </a>{" "}
               |{" "}
               <a
-                href={`https://github.com/${owner}/${repo}/releases/download/v${version}/defguard-service-linux-x86_64-v${version}.tar.gz`}
+                href={`https://github.com/${owner}/${repo}/releases/download/v${version}/defguard-client-linux-x86_64-v${version}.tar.gz`}
               >
                 Binary
               </a>

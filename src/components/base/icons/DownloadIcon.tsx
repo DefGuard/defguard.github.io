@@ -31,10 +31,6 @@ export const DownloadIcon = ({ platformType, owner, repo, version }: DownloadPro
         setDownloadName(`defguard-client_${version}_amd64.deb`);
         break;
       }
-      case PlatformType.ARCHIVE: {
-        setDownloadName(`defguard-client-linux-x86_64-v${version}.tar.gz`);
-        break;
-      }
     }
   }, [platformType]);
 
