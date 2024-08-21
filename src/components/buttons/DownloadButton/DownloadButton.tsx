@@ -3,11 +3,11 @@ import { WindowsIcon } from "../../base/icons/WindowsIcon";
 import { MacOsIcon } from "../../base/icons/MacOsIcon";
 import { LinuxIcon } from "../../base/icons/LinuxIcon";
 import { DownloadIcon } from "../../base/icons/DownloadIcon";
-import { CopyIcon } from "../../base/icons/CopyIcon";
 import { VectorIcon } from "../../base/icons/VectorIcon";
 import { PlatformType } from "../../base/types/platform";
 import { CheckIcon } from "../../base/icons/CheckIcon";
 import { useState } from "preact/hooks";
+import { CopyIcon } from "../../base/icons/CopyIcon";
 
 interface DownloadProps {
   platformType: PlatformType;
@@ -16,14 +16,13 @@ interface DownloadProps {
   version: string;
 }
 
+const ARCHLINK = "https://aur.archlinux.org/packages/defguard-client";
+
 export const DownloadButton = ({ platformType, owner, repo, version }: DownloadProps) => {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [isLinuxMenuClicked, setIsLinuxMenuClicked] = useState(false);
   const [isAppleMenuClicked, setIsAppleMenuClicked] = useState(false);
-
-  const DEB_COMMAND = `wget https://github.com/${owner}/${repo}/releases/download/v${version}/defguard-client_${version}_amd64.deb && sudo dpkg -i defguard-client_${version}_amd64.deb`;
-  const LINUX_COMMAND = `wget -c https://github.com/${owner}/${repo}/releases/download/v${version}/defguard-client-linux-x86_64-v${version}.tar.gz -O - | tar -xz`;
-  const [currentCommand, setCurrentCommand] = useState(LINUX_COMMAND);
+  const [platform, setPlatform] = useState(platformType);
 
   const handleClick = () => {
     setIsButtonClicked(true);
@@ -40,10 +39,14 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
     setIsLinuxMenuClicked(!isLinuxMenuClicked);
   };
 
+  const swapPlatform = (_platform: PlatformType) => {
+    setPlatform(_platform);
+  }
+
   return (
     <div class="download-button">
       <div class="download-header">
-        {platformType === PlatformType.WINDOWS && (
+        {platform === PlatformType.WINDOWS && (
           <>
             <div class="download-icon">
               <WindowsIcon />
@@ -51,7 +54,11 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
             </div>
           </>
         )}
-        {platformType === PlatformType.LINUX && (
+        {(
+          platform === PlatformType.DEBIAN ||
+          platform === PlatformType.ARCHIVE ||
+          platform === PlatformType.ARCHLINUX
+        ) && (
           <>
             <div class="download-icon">
               <LinuxIcon />
@@ -61,7 +68,7 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
               {isLinuxMenuClicked && (
                 <>
                   <div class="download-choice" onClick={handleToggleLinuxMenu}>
-                    Stable
+                    Linux
                     <VectorIcon />
                   </div>
                   <div
@@ -71,21 +78,31 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
                       <li>
                         <a
                           onClick={() => {
-                            setCurrentCommand(DEB_COMMAND);
+                            swapPlatform(PlatformType.DEBIAN);
                             setIsLinuxMenuClicked(false);
                           }}
                         >
-                          DEB
+                          Debian
                         </a>
                       </li>
                       <li>
                         <a
                           onClick={() => {
-                            setCurrentCommand(LINUX_COMMAND);
+                            swapPlatform(PlatformType.ARCHIVE);
                             setIsLinuxMenuClicked(false);
                           }}
                         >
-                          Linux
+                          Archive
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          onClick={() => {
+                            swapPlatform(PlatformType.ARCHLINUX);
+                            setIsLinuxMenuClicked(false);
+                          }}
+                        >
+                          ArchLinux
                         </a>
                       </li>
                     </ul>
@@ -94,15 +111,15 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
               )}
               {!isLinuxMenuClicked && (
                 <div class="download-choice" onClick={handleToggleLinuxMenu}>
-                  Stable
+                  Linux
                   <VectorIcon />
                 </div>
               )}
             </div>
           </>
         )}
-        {(platformType === PlatformType.MACOSARM ||
-          platformType === PlatformType.MACOSINTEL) && (
+        {(platform === PlatformType.MACOSARM ||
+          platform === PlatformType.MACOSINTEL) && (
           <>
             <div class="download-icon">
               <MacOsIcon />
@@ -121,16 +138,20 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
                     <ul>
                       <li>
                         <a
-                          onClick={() => setIsAppleMenuClicked(false)}
-                          href={`https://github.com/${owner}/${repo}/releases/download/v${version}/defguard-x86_64-apple-darwin-${version}.pkg`}
+                          onClick={() => {
+                            swapPlatform(PlatformType.MACOSINTEL);
+                            setIsAppleMenuClicked(false);
+                          }}
                         >
                           Intel
                         </a>
                       </li>
                       <li>
                         <a
-                          onClick={() => setIsAppleMenuClicked(false)}
-                          href={`https://github.com/${owner}/${repo}/releases/download/v${version}/defguard-aarch64-apple-darwin-${version}.pkg`}
+                          onClick={() => {
+                            swapPlatform(PlatformType.MACOSARM);
+                            setIsAppleMenuClicked(false);
+                          }}
                         >
                           ARM
                         </a>
@@ -151,55 +172,40 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
       </div>
       <div class="download-main">
         <div class="download-text">
-          {platformType === PlatformType.WINDOWS && (
-            <>
-              <h3>Download now</h3>
-            </>
-          )}
-          {platformType === PlatformType.LINUX && (
-            <>
-              <p>{currentCommand}</p>
-            </>
-          )}
-          {platformType === PlatformType.MACOSINTEL && (
-            <>
-              <h3>Download now</h3>
-              <p>Apple Intel</p>
-            </>
-          )}
-          {platformType === PlatformType.MACOSARM && (
-            <>
-              <h3>Download now</h3>
-              <p>Apple Silicon</p>
-            </>
-          )}
+          {(
+            platform === PlatformType.DEBIAN ||
+            platform === PlatformType.ARCHIVE ||
+            platform === PlatformType.MACOSINTEL ||
+            platform === PlatformType.MACOSARM ||
+            platform === PlatformType.WINDOWS
+          ) && <h3>Download now</h3>}
+          {platform === PlatformType.ARCHLINUX && <h3>AUR package</h3>}
+          {platform === PlatformType.ARCHLINUX && <>{ARCHLINK}</>}
+          {platform === PlatformType.DEBIAN && <p>Debian package</p>}
+          {platform === PlatformType.ARCHIVE && <p>Get tar.gz file</p>}
+          {platform === PlatformType.MACOSINTEL && <p>Apple Intel</p>}
+          {platform === PlatformType.MACOSARM && <p>Apple Silicon</p>}
         </div>
-        <div class="copy" onClick={handleClick}>
-          {(platformType === PlatformType.WINDOWS ||
-            platformType === PlatformType.MACOSINTEL ||
-            platformType === PlatformType.MACOSARM) && (
-            <>
-              {isButtonClicked ? (
-                <CheckIcon />
-              ) : (
-                <DownloadIcon
-                  platformType={platformType}
-                  owner={owner}
-                  repo={repo}
-                  version={version}
-                />
-              )}
-            </>
-          )}
-          {platformType === PlatformType.LINUX && (
-            <>
-              {isButtonClicked ? <CheckIcon /> : <CopyIcon textToCopy={currentCommand} />}
-            </>
+        <div class="btn" onClick={handleClick}>
+          {isButtonClicked ? (
+            <CheckIcon />
+          ) : (platform !== PlatformType.ARCHLINUX ?
+            <DownloadIcon
+              platformType={platform}
+              owner={owner}
+              repo={repo}
+              version={version}
+            /> :
+            <CopyIcon textToCopy={ARCHLINK} />
           )}
         </div>
       </div>
       <div class="download-footer">
-        {platformType === PlatformType.LINUX && (
+        {(
+          platform === PlatformType.DEBIAN ||
+          platform === PlatformType.ARCHIVE ||
+          platform === PlatformType.ARCHLINUX
+        ) && (
           <>
             <p>
               Other ways to install defguard on linux →{" "}
@@ -217,8 +223,8 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
             </p>
           </>
         )}
-        {(platformType === PlatformType.MACOSINTEL ||
-          platformType === PlatformType.MACOSARM) && (
+        {(platform === PlatformType.MACOSINTEL ||
+          platform === PlatformType.MACOSARM) && (
           <>
             <p>Requires version 10.5 or later</p>
           </>

@@ -21,7 +21,7 @@ export const DownloadButtonList = () => {
       platformType: PlatformType.WINDOWS,
     },
     {
-      platformType: PlatformType.LINUX,
+      platformType: PlatformType.DEBIAN,
     },
     {
       platformType: PlatformType.MACOSARM,
@@ -39,7 +39,7 @@ export const DownloadButtonList = () => {
               platformType: PlatformType.MACOSARM,
             },
             {
-              platformType: PlatformType.LINUX,
+              platformType: PlatformType.DEBIAN,
             },
             {
               platformType: PlatformType.WINDOWS,
@@ -53,7 +53,7 @@ export const DownloadButtonList = () => {
               platformType: PlatformType.MACOSINTEL,
             },
             {
-              platformType: PlatformType.LINUX,
+              platformType: PlatformType.DEBIAN,
             },
             {
               platformType: PlatformType.WINDOWS,
@@ -64,7 +64,7 @@ export const DownloadButtonList = () => {
         case "Linux": {
           setButtonList([
             {
-              platformType: PlatformType.LINUX,
+              platformType: PlatformType.DEBIAN,
             },
             {
               platformType: PlatformType.WINDOWS,

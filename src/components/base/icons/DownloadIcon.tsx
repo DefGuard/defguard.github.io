@@ -10,8 +10,10 @@ interface DownloadProps {
 
 export const DownloadIcon = ({ platformType, owner, repo, version }: DownloadProps) => {
   const [downloadName, setDownloadName] = useState("");
+  console.log(platformType);
 
   useEffect(() => {
+    console.log(platformType + "switch");
     switch (platformType) {
       case PlatformType.WINDOWS: {
         setDownloadName(`defguard-client_${version}_x64_en-US.exe`);
@@ -25,8 +27,16 @@ export const DownloadIcon = ({ platformType, owner, repo, version }: DownloadPro
         setDownloadName(`defguard-x86_64-apple-darwin-${version}.pkg`);
         break;
       }
+      case PlatformType.DEBIAN: {
+        setDownloadName(`defguard-client_${version}_amd64.deb`);
+        break;
+      }
+      case PlatformType.ARCHIVE: {
+        setDownloadName(`defguard-client-linux-x86_64-v${version}.tar.gz`);
+        break;
+      }
     }
-  }, []);
+  }, [platformType]);
 
   return (
     <a
