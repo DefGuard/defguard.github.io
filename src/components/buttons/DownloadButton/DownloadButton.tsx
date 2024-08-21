@@ -196,7 +196,7 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
               repo={repo}
               version={version}
             /> :
-            <CopyIcon textToCopy={ARCHLINK} />
+            <h3><a href={ARCHLINK}>→</a></h3>
           )}
         </div>
       </div>
