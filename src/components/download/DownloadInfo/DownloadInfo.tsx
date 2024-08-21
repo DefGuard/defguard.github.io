@@ -14,7 +14,7 @@ const DownloadInfo = function ({ owner, repo }: GithubProps) {
   const $clientVersion = useStore(clientVersion);
 
   useEffect(() => {
-    fetch(`https://api.github.com/repos/${owner}/${repo}/releases/${$clientVersion}`)
+    fetch(`https://api.github.com/repos/${owner}/${repo}/releases`)
       .then((res) =>
         res.json().then((val) => {
           if (val.length) {
@@ -50,7 +50,7 @@ const DownloadInfo = function ({ owner, repo }: GithubProps) {
         )}
       </div>
       <div class="download-changelog">
-        <a href="https://github.com/DefGuard/client/releases">View changelog →</a>
+        <a href={`https://github.com/DefGuard/client/releases/v${$clientVersion}`}>View changelog →</a>
         <p>{published}</p>
       </div>
     </div>
