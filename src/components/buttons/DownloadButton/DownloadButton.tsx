@@ -60,7 +60,7 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
           <>
             <div class="download-icon">
               <LinuxIcon />
-              Distribution
+              Linux
             </div>
             <div>
               {isLinuxMenuClicked && (

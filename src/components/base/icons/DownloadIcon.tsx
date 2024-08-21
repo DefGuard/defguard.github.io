@@ -30,7 +30,7 @@ export const DownloadIcon = ({ platformType, owner, repo, version }: DownloadPro
         break;
       }
     }
-  }, [platformType]);
+  }, [platformType, version]);
 
   return (
     <a
