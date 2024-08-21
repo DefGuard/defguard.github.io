@@ -14,7 +14,7 @@ const DownloadInfo = function ({ owner, repo }: GithubProps) {
   const $clientVersion = useStore(clientVersion);
 
   useEffect(() => {
-    fetch(`https://api.github.com/repos/${owner}/${repo}/releases/${$clientVersion}`)
+    fetch(`https://api.github.com/repos/${owner}/${repo}/releases`)
       .then((res) =>
         res.json().then((val) => {
           if (val.length) {
