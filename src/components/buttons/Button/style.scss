@@ -31,10 +31,16 @@
   }
 
   &.size-large {
-    min-height: 84px;
-    font-size: 24px;
-    padding-left: 64px;
-    padding-right: 64px;
+      min-height: 64px;
+      font-size: 24px;
+      padding-left: 16px;
+      padding-right: 16px;
+
+      @include break-up(lg) {
+          min-height: 84px;
+          padding-left: 64px;
+          padding-right: 64px;
+      }
   }
 
   &:hover {
