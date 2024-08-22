@@ -123,7 +123,7 @@ export const featuresTableData: FeatureTableData = {
       title: "VPN Network Management",
       rows: [
         {
-          description: "WireGuard VPN Configuration",
+          description: "WireGuard® VPN Configuration",
           features: [
             { status: "no" },
             {
@@ -141,11 +141,11 @@ export const featuresTableData: FeatureTableData = {
           ],
         },
         {
-          description: "MFA/2FA for WireGuard",
+          description: "MFA/2FA for WireGuard®",
           features: [
             {
               status: "yes",
-              hover: "With TOTP/Email + WireGuard Pre-Shared session keys (PSK)",
+              hover: "With TOTP/Email + WireGuard® Pre-Shared session keys (PSK)",
             },
             {
               status: "yes",
@@ -271,7 +271,7 @@ export const featuresTableData: FeatureTableData = {
           ],
         },
         {
-          description: "Desktop Client support for any WireGuard server",
+          description: "Desktop Client support for any WireGuard® server",
           features: [
             {
               status: "yes",
@@ -336,7 +336,7 @@ export const featuresTableData: FeatureTableData = {
           ],
         },
         {
-          description: "Site-to-Site WireGuard VPN",
+          description: "Site-to-Site WireGuard® VPN",
           features: [
             {
               status: "in-progress",
@@ -360,7 +360,7 @@ export const featuresTableData: FeatureTableData = {
           ],
         },
         {
-          description: "WireGuard Server Configuration Import",
+          description: "WireGuard® Server Configuration Import",
           features: [
             {
               status: "yes",

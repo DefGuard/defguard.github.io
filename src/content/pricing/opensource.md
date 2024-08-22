@@ -15,7 +15,7 @@ All functionalities:
 - Secure Remote Enrollment
 - User onboarding
 - OpenLDAP synchronization
-- Enterprise Wireguard VPN
+- Enterprise Wireguard® VPN
 - Desktop Clients with MFA/2FA
 - Multiple Instances
 - Multiple Locations

@@ -1,0 +1,111 @@
+---
+import ProductSection from "../../layouts/ProductSection.astro";
+import { Button } from "../buttons/Button/Button";
+---
+
+<ProductSection padding="none">
+  <form method="post" class="book">
+    <h3>Book a Demo</h3>
+    <div class="double-inputs">
+      <label>
+        First name
+        <input type="text" />
+      </label>
+      <label>
+        Last name
+        <input type="text" />
+      </label>
+    </div>
+    <div class="double-inputs">
+      <label>
+        Email*
+        <input type="text" />
+      </label>
+      <label>
+        Company website URL
+        <input type="text" />
+      </label>
+    </div>
+    <label class="single-input">
+      Anything else you wish to tell us?
+      <textarea rows="7"></textarea>
+    </label>
+    <div class="button">
+      <Button text="Submit" client:load />
+    </div>
+  </form>
+</ProductSection>
+
+<style lang="scss" is:global>
+  .book {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    row-gap: 30px;
+
+    & > h3 {
+      @include typography(pricebox-section);
+    }
+
+    input {
+      height: 38px;
+      align-self: stretch;
+      border: 1px solid var(--text-body-primary, #222);
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 8px;
+      flex: 1 0 0;
+
+      @include typography(paragraph);
+    }
+
+    textarea {
+      width: 100%;
+      border: 1px solid var(--text-body-primary, #222);
+    }
+
+    .double-inputs {
+      display: flex;
+      align-items: flex-start;
+      gap: 40px;
+      align-self: stretch;
+    }
+
+    @include break-down(md) {
+      .double-inputs {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 40px;
+        align-self: stretch;
+      }
+
+      label {
+        width: 100%;
+      }
+    }
+
+    .button {
+      display: flex;
+      padding: 5px 0px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      align-self: stretch;
+
+      span {
+        @include typography(menu);
+      }
+
+      button {
+        padding: 16px 32px;
+      }
+    }
+  }
+</style>

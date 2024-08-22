@@ -50,7 +50,9 @@ const DownloadInfo = function ({ owner, repo }: GithubProps) {
         )}
       </div>
       <div class="download-changelog">
-        <a href={`https://github.com/DefGuard/client/releases/v${$clientVersion}`}>View changelog →</a>
+        <a href={`https://github.com/DefGuard/client/releases/v${$clientVersion}`}>
+          View changelog →
+        </a>
         <p>{published}</p>
       </div>
     </div>
