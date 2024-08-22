@@ -1,11 +1,22 @@
 ---
 import Navigation from "../components/base/Navigation.astro";
-import BaseLayout from "../layouts/BaseLayout.astro";
+import ProductLayout from "../layouts/ProductLayout.astro";
+import ProductSection from "../layouts/ProductSection.astro";
 ---
 
-<BaseLayout>
+<ProductLayout>
   <Navigation activeSlug="/openvpn" />
-  <main id="download-page">
-    <h1>Hello world</h1>
+  <main id="product-content" class="product-main">
+    <ProductSection padding="small">
+        <header id="main-header">
+            <h1>Migrate<br/>from OpenVPN</h1>
+            <p>defguard is an enterprise and open-source, easy to deploy and manage WireGuard based VPN solution with real 2FA/Multi-Factor Authentication & SSO.</p>
+        </header>
+    </ProductSection>
   </main>
-</BaseLayout>
+</ProductLayout>
+
+<style lang="scss" is:global>
+#openvpn-page {
+}
+</style>
