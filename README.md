@@ -1,4 +1,4 @@
-# Defguard website
+# defguard website
 
 ## Editing content
 
