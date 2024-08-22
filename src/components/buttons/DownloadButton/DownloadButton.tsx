@@ -40,7 +40,7 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
 
   const swapPlatform = (_platform: PlatformType) => {
     setPlatform(_platform);
-  }
+  };
 
   return (
     <div class="download-button">
@@ -53,10 +53,7 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
             </div>
           </>
         )}
-        {(
-          platform === PlatformType.DEBIAN ||
-          platform === PlatformType.ARCHLINUX
-        ) && (
+        {(platform === PlatformType.DEBIAN || platform === PlatformType.ARCHLINUX) && (
           <>
             <div class="download-icon">
               <LinuxIcon />
@@ -106,8 +103,7 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
             </div>
           </>
         )}
-        {(platform === PlatformType.MACOSARM ||
-          platform === PlatformType.MACOSINTEL) && (
+        {(platform === PlatformType.MACOSARM || platform === PlatformType.MACOSINTEL) && (
           <>
             <div class="download-icon">
               <MacOsIcon />
@@ -160,12 +156,10 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
       </div>
       <div class="download-main">
         <div class="download-text">
-          {(
-            platform === PlatformType.DEBIAN ||
+          {(platform === PlatformType.DEBIAN ||
             platform === PlatformType.MACOSINTEL ||
             platform === PlatformType.MACOSARM ||
-            platform === PlatformType.WINDOWS
-          ) && <h3>Download now</h3>}
+            platform === PlatformType.WINDOWS) && <h3>Download now</h3>}
           {platform === PlatformType.ARCHLINUX && <h3>AUR package</h3>}
           {platform === PlatformType.ARCHLINUX && <>{ARCHLINK}</>}
           {platform === PlatformType.DEBIAN && <p>Debian package</p>}
@@ -175,22 +169,22 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
         <div class="btn" onClick={handleClick}>
           {isButtonClicked ? (
             <CheckIcon />
-          ) : (platform !== PlatformType.ARCHLINUX ?
+          ) : platform !== PlatformType.ARCHLINUX ? (
             <DownloadIcon
               platformType={platform}
               owner={owner}
               repo={repo}
               version={version}
-            /> :
-            <h3><a href={ARCHLINK}>→</a></h3>
+            />
+          ) : (
+            <h3>
+              <a href={ARCHLINK}>→</a>
+            </h3>
           )}
         </div>
       </div>
       <div class="download-footer">
-        {(
-          platform === PlatformType.DEBIAN ||
-          platform === PlatformType.ARCHLINUX
-        ) && (
+        {(platform === PlatformType.DEBIAN || platform === PlatformType.ARCHLINUX) && (
           <>
             <p>
               Other ways to install defguard on linux →{" "}
@@ -208,8 +202,7 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
             </p>
           </>
         )}
-        {(platform === PlatformType.MACOSINTEL ||
-          platform === PlatformType.MACOSARM) && (
+        {(platform === PlatformType.MACOSINTEL || platform === PlatformType.MACOSARM) && (
           <>
             <p>Requires version 10.5 or later</p>
           </>

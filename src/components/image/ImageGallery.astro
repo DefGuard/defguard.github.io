@@ -3,62 +3,72 @@ import ProductSection from "../../layouts/ProductSection.astro";
 import { ImageModal } from "./ImageModal/ImageModal";
 ---
 
-<ProductSection padding="small">
-    <div class="product-solution">
-        <h3>Complete Solution</h3>
-        <div class="product-images">
-            <ImageModal imageSrc="/images/product/core/hero-image.png" altText="core main image" description="server interface" client:only/>
-            <ImageModal imageSrc="/images/product/client/main-screen.png" altText="client main image" description="desktop client" client:only/>
-        </div>
+<ProductSection padding="mid">
+  <div class="product-solution">
+    <h3>Complete Solution</h3>
+    <div class="product-images">
+      <ImageModal
+        imageSrc="/images/product/core/hero-image.png"
+        altText="core main image"
+        description="server interface"
+        client:only
+      />
+      <ImageModal
+        imageSrc="/images/product/client/main-screen.png"
+        altText="client main image"
+        description="desktop client"
+        client:only
+      />
     </div>
+  </div>
 </ProductSection>
 
 <style lang="scss" is:global>
-    .product-solution {
-        width: 100%;
+  .product-solution {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    & > h3 {
+      @include typography(pricebox-section);
+    }
+
+    .product-images {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      @include typography(footer);
+
+      .image {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+
+        img {
+          border-radius: 8px;
+          box-shadow: 0px 12px 24px 0px rgba(0, 0, 0, 0.08);
+        }
+
+        .small {
+          max-height: 305px;
+          cursor: zoom-in;
+        }
+
+        .large {
+          max-height: 750px;
+          cursor: zoom-out;
+        }
+      }
+    }
+
+    @include break-down(xl) {
+      .product-images {
         display: flex;
         flex-direction: column;
         gap: 20px;
-
-        & > h3 {
-            @include typography(pricebox-section)
-        }
-
-        .product-images {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            @include typography(footer);
-
-            .image {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 8px;
-
-                img {
-                    border-radius: 8px;
-                    box-shadow: 0px 12px 24px 0px rgba(0, 0, 0, 0.08);
-                }
-
-                .small {
-                    max-height: 305px;
-                    cursor:zoom-in;
-                }
-
-                .large {
-                    max-height: 750px;
-                    cursor: zoom-out;
-                }
-            }
-        }
-
-        @include break-down(xl) {
-                .product-images {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 20px;
-                }
-            }
+      }
     }
+  }
 </style>

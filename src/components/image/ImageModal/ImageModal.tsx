@@ -1,10 +1,10 @@
-import { useRef, useState } from 'preact/hooks';
-import './style.scss';
+import { useRef, useState } from "preact/hooks";
+import "./style.scss";
 
 interface Props {
-    imageSrc: string;
-    altText: string;
-    description: string;
+  imageSrc: string;
+  altText: string;
+  description: string;
 }
 
 export const ImageModal = ({ imageSrc, altText, description }: Props) => {
@@ -24,8 +24,8 @@ export const ImageModal = ({ imageSrc, altText, description }: Props) => {
       {description}
       {isModalOpen && (
         <div className="modal">
-          <div class="box"> 
-            <img src={imageSrc} alt={altText} class="large" onClick={handleCloseModal}/>
+          <div class="box">
+            <img src={imageSrc} alt={altText} class="large" onClick={handleCloseModal} />
             {description}
           </div>
         </div>
