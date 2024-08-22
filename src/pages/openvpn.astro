@@ -6,9 +6,9 @@ import ProductSection from "../layouts/ProductSection.astro";
 import { ProductFeature } from "../components/product/ProductFeature/ProductFeature";
 import ProductBuiltBy from "../components/product/ProductBuiltBy.astro";
 import MatrixSection from "../components/MatrixSection.astro";
-import ProductImage from "../components/product/ProductImage.astro";
 import ImageGallery from "../components/image/ImageGallery.astro";
 import BookDemoForm from "../components/form/BookDemoForm.astro";
+import MigrateIllustration from "/public/svg/migrate-illustration.svg?raw";
 
 const openvpnFeatures = (await getCollection("openvpn-features")).sort(
   (f1, f2) => f1.data.order - f2.data.order,
@@ -26,6 +26,9 @@ const openvpnFeatures = (await getCollection("openvpn-features")).sort(
           based VPN solution with real 2FA/Multi-Factor Authentication & SSO.
         </p>
       </header>
+    </ProductSection>
+    <ProductSection padding="small">
+      <Fragment set:html={MigrateIllustration} />
     </ProductSection>
     <ProductSection padding="mid">
       <div class="product-features">
