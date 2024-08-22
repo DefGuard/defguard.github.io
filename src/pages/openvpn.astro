@@ -1,7 +1,17 @@
 ---
+import { getCollection } from "astro:content";
 import Navigation from "../components/base/Navigation.astro";
 import ProductLayout from "../layouts/ProductLayout.astro";
 import ProductSection from "../layouts/ProductSection.astro";
+import { ProductFeature } from "../components/product/ProductFeature/ProductFeature";
+import ProductBuiltBy from "../components/product/ProductBuiltBy.astro";
+import MatrixSection from "../components/MatrixSection.astro";
+import ProductImage from "../components/product/ProductImage.astro";
+import ImageGallery from "../components/image/ImageGallery.astro";
+
+const openvpnFeatures = (await getCollection("openvpn-features")).sort(
+    (f1, f2) => f1.data.order - f2.data.order,
+);
 ---
 
 <ProductLayout>
@@ -13,10 +23,41 @@ import ProductSection from "../layouts/ProductSection.astro";
             <p>defguard is an enterprise and open-source, easy to deploy and manage WireGuard based VPN solution with real 2FA/Multi-Factor Authentication & SSO.</p>
         </header>
     </ProductSection>
+    <ProductSection padding="mid">
+        <div class="product-features">
+            <h3>Why migrate from OpenVPN to defguard:</h3>
+            {
+            openvpnFeatures.map(async (f, index) => {
+                const { Content } = await f.render();
+                return (
+                <ProductFeature
+                    title={f.data.title}
+                    id={index}
+                    context="core"
+                    client:only="preact"
+                >
+                    <Content />
+                </ProductFeature>
+                );
+            })
+            }
+        </div>
+    </ProductSection>
+    <ImageGallery />
+    <ProductSection padding="small">
+        
+    </ProductSection>
+    <ProductBuiltBy />
+    <MatrixSection />
   </main>
 </ProductLayout>
 
 <style lang="scss" is:global>
-#openvpn-page {
+#product-content {
+    .product-features {
+        & > h3 {
+            @include typography(h3);
+        }
+    }
 }
 </style>
