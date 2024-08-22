@@ -3,7 +3,7 @@ import ProductSection from "../../layouts/ProductSection.astro";
 import { ImageModal } from "./ImageModal/ImageModal";
 ---
 
-<ProductSection padding="small">
+<ProductSection padding="mid">
   <div class="product-solution">
     <h3>Complete Solution</h3>
     <div class="product-images">
@@ -51,11 +51,13 @@ import { ImageModal } from "./ImageModal/ImageModal";
         }
 
         .small {
+          width: 100%;
           max-height: 305px;
           cursor: zoom-in;
         }
 
         .large {
+          width: 100%;
           max-height: 750px;
           cursor: zoom-out;
         }

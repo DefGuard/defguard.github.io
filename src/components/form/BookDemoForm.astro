@@ -3,7 +3,7 @@ import ProductSection from "../../layouts/ProductSection.astro";
 import { Button } from "../buttons/Button/Button";
 ---
 
-<ProductSection padding="mid">
+<ProductSection padding="none">
   <form method="post" class="book">
     <h3>Book a Demo</h3>
     <div class="double-inputs">
@@ -28,7 +28,7 @@ import { Button } from "../buttons/Button/Button";
     </div>
     <label class="single-input">
       Anything else you wish to tell us?
-      <textarea rows="7" cols="135"></textarea>
+      <textarea rows="7"></textarea>
     </label>
     <div class="button">
       <Button text="Submit" client:load />
@@ -50,7 +50,7 @@ import { Button } from "../buttons/Button/Button";
     input {
       height: 38px;
       align-self: stretch;
-      border: 1px solid var(--colors-text-body-primary, #222);
+      border: 1px solid var(--text-body-primary, #222);
     }
 
     label {
@@ -60,13 +60,13 @@ import { Button } from "../buttons/Button/Button";
       align-items: flex-start;
       gap: 8px;
       flex: 1 0 0;
+
+      @include typography(paragraph);
     }
 
-    .single-input {
-      input {
-        height: 76px;
-        align-self: stretch;
-      }
+    textarea {
+      width: 100%;
+      border: 1px solid var(--text-body-primary, #222);
     }
 
     .double-inputs {
@@ -74,6 +74,20 @@ import { Button } from "../buttons/Button/Button";
       align-items: flex-start;
       gap: 40px;
       align-self: stretch;
+    }
+
+    @include break-down(md) {
+      .double-inputs {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 40px;
+        align-self: stretch;
+      }
+
+      label {
+        width: 100%;
+      }
     }
 
     .button {

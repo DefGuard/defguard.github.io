@@ -27,10 +27,10 @@ const openvpnFeatures = (await getCollection("openvpn-features")).sort(
         </p>
       </header>
     </ProductSection>
-    <ProductSection padding="small">
+    <ProductSection padding="none">
       <Fragment set:html={MigrateIllustration} />
     </ProductSection>
-    <ProductSection padding="mid">
+    <ProductSection padding="small">
       <div class="product-features">
         <h3>Why migrate from OpenVPN to defguard:</h3>
         {
@@ -58,8 +58,9 @@ const openvpnFeatures = (await getCollection("openvpn-features")).sort(
 </ProductLayout>
 
 <style lang="scss" is:global>
-  #product-content {
+  .product-main {
     .product-features {
+      padding-top: 100px;
       & > h3 {
         @include typography(h3);
       }
