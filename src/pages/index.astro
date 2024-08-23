@@ -14,14 +14,6 @@ import MatrixSection from "../components/MatrixSection.astro";
 const coreFeatures = (await getCollection("core-features")).sort(
   (f1, f2) => f1.data.order - f2.data.order,
 );
-
-const uid = new ShortUniqueId({ length: 12 });
-
-const svgId = (): string => {
-  return `svg-${uid.rnd()}`;
-};
-
-const matrixIconId = svgId();
 ---
 
 <ProductLayout>
