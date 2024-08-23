@@ -6,7 +6,7 @@ export async function detectOperatingSystem(): Promise<string> {
   } else if (/Mac OS X/.test(userAgent)) {
     return await getArchitecture()
       .then((val) => val)
-      .catch((error) => "Unknown OS");
+      .catch(() => "Unknown OS");
   } else if (/CrOS/.test(userAgent)) {
     return "Chrome OS";
   } else if (/Linux/.test(userAgent)) {

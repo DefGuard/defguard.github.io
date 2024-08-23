@@ -31,7 +31,7 @@ const BookDemoForm = () => {
   const handleInputChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    const { name, value } = event.target;
+    const { name, value } = event.target as HTMLInputElement | HTMLTextAreaElement;
     console.log(name, value);
     setValues({ ...values, [name]: value });
   };

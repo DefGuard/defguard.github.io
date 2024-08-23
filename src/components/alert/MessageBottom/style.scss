@@ -13,6 +13,7 @@
   width: 100%;
   border-top: 1px solid var(--text-body-primary);
   overflow: hidden;
+  z-index: 999;
 
   & > p,
   a {
