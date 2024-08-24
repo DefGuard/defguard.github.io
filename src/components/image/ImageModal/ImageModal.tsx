@@ -1,4 +1,4 @@
-import { useRef, useState } from "preact/hooks";
+import { useState } from "preact/hooks";
 import "./style.scss";
 
 interface Props {

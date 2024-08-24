@@ -31,14 +31,12 @@ const BookDemoForm = () => {
   const handleInputChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    const { name, value } = event.target;
-    console.log(name, value);
+    const { name, value } = event.target as HTMLInputElement | HTMLTextAreaElement;
     setValues({ ...values, [name]: value });
   };
 
   const onSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(values);
 
     const data = new FormData();
     data.append("first_name", values.first_name);
