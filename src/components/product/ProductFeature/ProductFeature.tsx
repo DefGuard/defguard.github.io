@@ -15,12 +15,11 @@ export const ProductFeature = ({ title, children, id, context }: Props) => {
   const isActive = useFeaturesStore((s) => s.activeFeatures[context] === id);
   const setOpen = useFeaturesStore((s) => s.setOpen);
 
-
   return (
     <div class="product-feature">
       <header
         onClick={() => {
-          if(isActive) {
+          if (isActive) {
             setOpen(undefined, context);
           } else {
             setOpen(id, context);

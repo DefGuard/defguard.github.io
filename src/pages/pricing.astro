@@ -11,7 +11,7 @@ const pricing = (await getCollection("pricing")).sort(
 ---
 
 <BaseLayout>
-  <Navigation activeSlug="/pricing"/>
+  <Navigation activeSlug="/pricing" />
   <main id="pricing-page">
     <ProductSection padding="large" id="pricing-tiers">
       <header><h1>Support & Pricing</h1></header>
@@ -41,9 +41,7 @@ const pricing = (await getCollection("pricing")).sort(
         }
       </div>
       <div>
-        <p>
-          Didn't find what you were looking for? Have special requests?
-        </p>
+        <p>Didn't find what you were looking for? Have special requests?</p>
       </div>
       <div class="contact">
         <a href="mailto:sales@defguard.net">

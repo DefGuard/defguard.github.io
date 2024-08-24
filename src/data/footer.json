@@ -22,7 +22,6 @@
         "external": true,
         "link": "mailto:sales@defguard.net"
       }
-
     ]
   },
   {
@@ -32,6 +31,11 @@
         "text": "GitHub",
         "external": true,
         "link": "https://github.com/DefGuard"
+      },
+      {
+        "text": "YouTube",
+        "external": true,
+        "link": "https://www.youtube.com/@defguard"
       },
       {
         "text": "Blog",

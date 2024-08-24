@@ -1,5 +1,7 @@
 ---
 import ProductSection from "../layouts/ProductSection.astro";
+// import Checkbox from "./Checkbox/Checkbox";
+// import { SubscribeButton } from "../components/buttons/SubscribeButton/SubscribeButton";
 import { Button } from "./buttons/Button/Button";
 ---
 
@@ -19,9 +21,18 @@ import { Button } from "./buttons/Button/Button";
         <input id="bd-email" name="email" type="email" placeholder="" />
       </div>
       <div class="terms">
-        <div class="form-row"></div>
-        <p></p>
+        <div class="form-row">
+          <!-- <div class="form-row field checkbox">
+            <Checkbox client:only="preact" />
+            <p>I agree to receive information about defguard’s products and services.</p>
+          </div>
+          <p>
+            By submitting this form, I confirm that I have read and agree to defguard’s
+            Privacy Notice and Privacy Policy.
+          </p> -->
+        </div>
       </div>
+      <!-- <SubscribeButton client:only="preact" /> -->
       <Button type="submit" text="Subscribe Now" size="normal" />
     </form>
   </section>
@@ -86,6 +97,10 @@ import { Button } from "./buttons/Button/Button";
           @include break-up(lg) {
             display: grid;
             grid-template-columns: max-content 1fr;
+          }
+
+          &.checkbox {
+            padding: 0px;
           }
         }
       }
