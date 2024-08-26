@@ -13,9 +13,12 @@ import MatrixSection from "../components/MatrixSection.astro";
 const clientFeatures = (await getCollection("client-features")).sort(
   (f1, f2) => f1.data.order - f2.data.order,
 );
+const title = "Best Desktop WireGuard Client";
+const description = "defguard enterprise open-source SSO&VPN with 2FA/MFA";
+const featuredImage = "https://github.com/DefGuard/defguard.github.io/blob/main/public/images/product/client/main-screen.png";
 ---
 
-<ProductLayout>
+<ProductLayout title={title} description={description} featuredImage={featuredImage}>
   <Navigation activeSlug="/client" />
   <main id="product-content" class="product-main">
     <ProductSection padding="small">
