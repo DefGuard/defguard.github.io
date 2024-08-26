@@ -13,9 +13,13 @@ import MatrixSection from "../components/MatrixSection.astro";
 const coreFeatures = (await getCollection("core-features")).sort(
   (f1, f2) => f1.data.order - f2.data.order,
 );
+
+const title = "";
+const description = "defguard enterprise open-source SSO&VPN with 2FA/MFA";
+const featuredImage = "/images/product/core/hero-image.png";
 ---
 
-<ProductLayout>
+<ProductLayout title={title} description={description} featuredImage={featuredImage}>
   <Navigation activeSlug="/" />
   <main class="product-main" id="core-page">
     <ProductSection padding="small">
