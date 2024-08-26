@@ -1,14 +1,53 @@
 ---
 import { getCollection } from "astro:content";
 import { TestmonialCard } from "./TestmonialCard/TestmonialCard";
+import ProductSection from "../../layouts/ProductSection.astro";
+import { useCarousel } from "../../utils/useCarousel";
 
 const testmonials = (await getCollection("testmonials")).sort(
   (f1, f2) => f1.data.order - f2.data.order,
 );
 ---
 
-
+<ProductSection padding="large">
+  <div class="testmonial-page">
+    <h3>Testmonials</h3>
+    <div class="testmonial-card">
+      {
+        testmonials.map(async (f, index) => {
+          const { Content } = await f.render();
+          return (
+            <TestmonialCard
+              name={f.data.name}
+              about={f.data.about}
+              profile={f.data.profile}
+              logo={f.data.logo}
+            >
+              <Content />
+            </TestmonialCard>
+          );
+        })
+      }
+    </div>
+  </div>
+</ProductSection>
 
 <style lang="scss" is:global>
-    
+  .testmonial-page {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    row-gap: 8px;
+    justify-content: center;
+    align-items: flex-start;
+
+    h3 {
+      @include typography(h3);
+    }
+
+    .testmonial-card {
+      display: flex;
+      gap: 8px;
+    }
+  }
 </style>
