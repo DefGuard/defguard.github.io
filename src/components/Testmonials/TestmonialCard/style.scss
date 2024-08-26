@@ -1,7 +1,7 @@
 #testmonial-card {
     display: flex;
-    width: 538px;
-    height: 420px;
+    max-width: 538px;
+    max-height: 420px;
     padding: 20px;
     align-items: flex-start;
     gap: 25px;
@@ -13,6 +13,10 @@
         justify-content: space-between;
         align-items: flex-start;
         align-self: stretch;
+
+        img {
+            padding: 0;
+        }
     }
 
     .testmonial-text {
