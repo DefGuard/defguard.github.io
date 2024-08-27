@@ -6,9 +6,9 @@
     "jsxImportSource": "preact",
     "plugins": [
       {
-        "name": "@astrojs/ts-plugin",
-      },
+        "name": "@astrojs/ts-plugin"
+      }
     ],
-    "types": ["./node_modules/user-agent-data-types"],
-  },
+    "types": ["./node_modules/user-agent-data-types"]
+  }
 }
