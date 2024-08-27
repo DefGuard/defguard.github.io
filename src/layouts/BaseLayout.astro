@@ -20,6 +20,7 @@ const { title, description, featuredImage, imageWidth, imageHeight} = Astro.prop
 const titlePrefix = "defguard enterprise open-source SSO&VPN with 2FA/MFA";
 
 const mainTitle = title.trim() == "" ? titlePrefix : titlePrefix + ": " + title;
+const _imageType = imageType ? imageType : "image/png";
 ---
 
 <!doctype html>
