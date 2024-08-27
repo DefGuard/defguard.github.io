@@ -5,12 +5,20 @@ interface Props {
   title: string;
   description: string;
   featuredImage: string;
+  imageWidth: string;
+  imageHeight: string;
 }
 
-const { title, description, featuredImage } = Astro.props;
+const { title, description, featuredImage, imageWidth, imageHeight } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} featuredImage={featuredImage}>
+<BaseLayout
+  title={title}
+  description={description}
+  featuredImage={featuredImage}
+  imageWidth={imageWidth}
+  imageHeight={imageHeight}
+>
   <slot />
 </BaseLayout>
 
