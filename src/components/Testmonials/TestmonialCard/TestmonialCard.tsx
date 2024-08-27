@@ -16,19 +16,21 @@ export const TestmonialCard = ({
   children,
 }: TestmonialProps) => {
   return (
-    <div className="card">
-      <div className="image">
-        <img src={`/images/testmonial/${profile}.png`} alt={name} />
-        <img src={logo} alt={logo} />
-      </div>
-      <div className="text">
-        <div className="text-wrapper">
-          <div className="title">
-            <h2>{name}</h2>
-            <p>{about}</p>
+    <div class="swiper-slide">
+      <div class="card">
+        <div className="image">
+          <img src={`/images/testmonial/${profile}.png`} alt={name} />
+          <img src={logo} alt={logo} />
+        </div>
+        <div className="text">
+          <div className="text-wrapper">
+            <div className="title">
+              <h2>{name}</h2>
+              <p>{about}</p>
+            </div>
+            <hr />
+            <div class="description">{children}</div>
           </div>
-          <hr />
-          <div class="description">{children}</div>
         </div>
       </div>
     </div>
