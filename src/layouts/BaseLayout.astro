@@ -14,10 +14,9 @@ interface Props {
   featuredImage: string;
   imageWidth: string;
   imageHeight: string;
-  imageType?: string;
 }
 
-const { title, description, featuredImage, imageWidth, imageHeight, imageType} = Astro.props;
+const { title, description, featuredImage, imageWidth, imageHeight} = Astro.props;
 const titlePrefix = "defguard enterprise open-source SSO&VPN with 2FA/MFA";
 
 const mainTitle = title.trim() == "" ? titlePrefix : titlePrefix + ": " + title;
@@ -34,7 +33,6 @@ const _imageType = imageType ? imageType : "image/png";
     <meta property="og:title" content={mainTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={featuredImage} />
-    <meta property="og:image:type" content={_imageType} /> 
     <meta property="og:image:width" content={imageWidth} /> 
     <meta property="og:image:height" content={imageHeight} />
     <!-- FIXME: USE LOCAL -->
