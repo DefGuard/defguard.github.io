@@ -10,14 +10,14 @@ const isProd = import.meta.env.PROD;
 
 interface Props {
   title: string;
-  description: string;
   featuredImage: string;
   imageWidth: string;
   imageHeight: string;
 }
 
-const { title, description, featuredImage, imageWidth, imageHeight} = Astro.props;
+const { title, featuredImage, imageWidth, imageHeight} = Astro.props;
 const titlePrefix = "defguard enterprise open-source SSO&VPN with 2FA/MFA";
+const description = "defguard - enterprise open-source SSO&VPN - the only open-source solution with real WireGuard MFA/2FA & integrated OpenID Connect SSO";
 
 const mainTitle = title.trim() == "" ? titlePrefix : titlePrefix + ": " + title;
 ---

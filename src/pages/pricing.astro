@@ -9,7 +9,6 @@ const pricing = (await getCollection("pricing")).sort(
   (p1, p2) => p1.data.order - p2.data.order,
 );
 const title = "Pricing & Support";
-const description = "defguard - enterprise open-source SSO&VPN";
 const featuredImage = "github.com/DefGuard/defguard/raw/main/docs/header.png";
 const imageWidth = "1080";
 const imageHeight = "256";
@@ -17,7 +16,6 @@ const imageHeight = "256";
 
 <BaseLayout
   title={title}
-  description={description}
   featuredImage={featuredImage}
   imageWidth={imageWidth}
   imageHeight={imageHeight}

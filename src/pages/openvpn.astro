@@ -14,7 +14,6 @@ const openvpnFeatures = (await getCollection("openvpn-features")).sort(
   (f1, f2) => f1.data.order - f2.data.order,
 );
 const title = "Migrate from OpenVPN to WireGuard";
-const description = "defguard - enterprise open-source SSO&VPN";
 const featuredImage = "github.com/DefGuard/defguard/raw/main/docs/header.png";
 const imageWidth = "1080";
 const imageHeight = "256";
@@ -22,7 +21,6 @@ const imageHeight = "256";
 
 <ProductLayout
   title={title}
-  description={description}
   featuredImage={featuredImage}
   imageWidth={imageWidth}
   imageHeight={imageHeight}
