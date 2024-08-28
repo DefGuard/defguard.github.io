@@ -4,6 +4,7 @@ import Navigation from "../components/base/Navigation.astro";
 import { Button } from "../components/buttons/Button/Button";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProductSection from "../layouts/ProductSection.astro";
+import OrganizationJSONLD from "../scripts/OrganizationJSONLD.astro";
 
 const pricing = (await getCollection("pricing")).sort(
   (p1, p2) => p1.data.order - p2.data.order,
@@ -12,14 +13,19 @@ const title = "Pricing & Support";
 const featuredImage = "github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png";
 const imageWidth = "1080";
 const imageHeight = "540";
+const description = "defguard - enterprise open-source SSO&VPN - the only open-source solution with real WireGuard MFA/2FA & integrated OpenID Connect SSO";
+const url = "https://defguard.net/pricing/";
+const tags = ["defguard", "wireguard", "free", "open source", "premium", "enterprise", "openid", "ldap", "openldap", "mfa/2fa", "yubikey", "site-to-site", "vpn", "support", "call support", "sso", "security"];
 ---
 
 <BaseLayout
   title={title}
+  description={description}
   featuredImage={featuredImage}
   imageWidth={imageWidth}
   imageHeight={imageHeight}
 >
+  <OrganizationJSONLD title={title} description={description} url={url} tags={tags} />
   <Navigation activeSlug="/pricing" />
   <main id="pricing-page">
     <ProductSection padding="large" id="pricing-tiers">
