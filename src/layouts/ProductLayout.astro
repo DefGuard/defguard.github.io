@@ -1,4 +1,5 @@
 ---
+import OrganizationJSONLD from "../scripts/OrganizationJSONLD.astro";
 import BaseLayout from "./BaseLayout.astro";
 
 interface Props {
@@ -6,17 +7,22 @@ interface Props {
   featuredImage: string;
   imageWidth: string;
   imageHeight: string;
+  url: string;
+  tags: string[];
 }
 
-const { title, featuredImage, imageWidth, imageHeight } = Astro.props;
+const { title, featuredImage, imageWidth, imageHeight, url, tags} = Astro.props;
+const description = "defguard - enterprise open-source SSO&VPN - the only open-source solution with real WireGuard MFA/2FA & integrated OpenID Connect SSO";
 ---
 
 <BaseLayout
   title={title}
+  description={description}
   featuredImage={featuredImage}
   imageWidth={imageWidth}
   imageHeight={imageHeight}
 >
+  <OrganizationJSONLD title={title} description={description} url={url} tags={tags} />
   <slot />
 </BaseLayout>
 
