@@ -60,6 +60,11 @@ const { title, featuredImage, imageWidth, imageHeight } = Astro.props;
       display: flex;
       flex-flow: column;
       row-gap: 20px;
+
+      & > h2 {
+        @include typography(h2);
+        padding-bottom: 20px;
+      }
     }
     #matrix {
       width: 100%;
