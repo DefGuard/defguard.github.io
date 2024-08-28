@@ -1,35 +1,35 @@
 ---
 interface Props {
-  title: string;
-  description: string;
-  url: string;
-  tags: string[];
+    title: string;
+    description: string;
+    url: string;
+    tags: string[];
 }
-const { title, description, url, tags } = Astro.props;
+const { title, description, url, tags} = Astro.props;
 
 const schema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  headline: title,
-  description: description,
-  url: url,
-  keywords: tags,
-  author: {
-    "@type": "Person",
-    name: "Robert Olejnik",
-  },
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Cyfrowa 6",
-    city: "Szczecin",
-    postalCode: "71-441",
-    country: "Poland",
-  },
-  contantPoint: {
-    "@type": "ContactPoint",
-    email: "sales@defguard.net",
-  },
-  operatingSystem: "Windows, macOS, Linux",
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "headline": title,
+    "description": description,
+    "url": url,
+    "keywords": tags,
+    "author": {
+        "@type": "Person",
+        "name": "Robert Olejnik",
+    },
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Cyfrowa 6",
+        "city": "Szczecin",
+        "postalCode": "71-441",
+        "country": "Poland"
+    },
+    "contantPoint": {
+        "@type": "ContactPoint",
+        "email": "sales@defguard.net",
+    },
+    "operatingSystem": "Windows, macOS, Linux",
 };
 ---
 
