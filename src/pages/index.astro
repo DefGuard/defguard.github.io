@@ -15,7 +15,6 @@ const coreFeatures = (await getCollection("core-features")).sort(
 );
 
 const title = "";
-const description = "defguard - enterprise open-source SSO&VPN";
 const featuredImage = "github.com/DefGuard/defguard.github.io/raw/main/public/images/product/core/hero-image.png";
 const imageWidth = "1920";
 const imageHeight = "1080";
@@ -23,7 +22,6 @@ const imageHeight = "1080";
 
 <ProductLayout
   title={title}
-  description={description}
   featuredImage={featuredImage}
   imageWidth={imageWidth}
   imageHeight={imageHeight}
@@ -56,6 +54,7 @@ const imageHeight = "1080";
     </ProductImage>
     <ProductSection padding="large">
       <div class="product-features">
+        <h2>What will you get with Open Source WireGuard® MFA/2FA</h2>
         {
           coreFeatures.map(async (f, index) => {
             const { Content } = await f.render();

@@ -3,18 +3,16 @@ import BaseLayout from "./BaseLayout.astro";
 
 interface Props {
   title: string;
-  description: string;
   featuredImage: string;
   imageWidth: string;
   imageHeight: string;
 }
 
-const { title, description, featuredImage, imageWidth, imageHeight } = Astro.props;
+const { title, featuredImage, imageWidth, imageHeight } = Astro.props;
 ---
 
 <BaseLayout
   title={title}
-  description={description}
   featuredImage={featuredImage}
   imageWidth={imageWidth}
   imageHeight={imageHeight}
@@ -62,6 +60,11 @@ const { title, description, featuredImage, imageWidth, imageHeight } = Astro.pro
       display: flex;
       flex-flow: column;
       row-gap: 20px;
+
+      & > h2 {
+        @include typography(h2);
+        padding-bottom: 20px;
+      }
     }
     #matrix {
       width: 100%;

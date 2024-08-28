@@ -9,15 +9,13 @@ const pricing = (await getCollection("pricing")).sort(
   (p1, p2) => p1.data.order - p2.data.order,
 );
 const title = "Pricing & Support";
-const description = "defguard - enterprise open-source SSO&VPN";
-const featuredImage = "github.com/DefGuard/defguard/raw/main/docs/header.png";
+const featuredImage = "github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png";
 const imageWidth = "1080";
-const imageHeight = "256";
+const imageHeight = "540";
 ---
 
 <BaseLayout
   title={title}
-  description={description}
   featuredImage={featuredImage}
   imageWidth={imageWidth}
   imageHeight={imageHeight}
@@ -25,7 +23,10 @@ const imageHeight = "256";
   <Navigation activeSlug="/pricing" />
   <main id="pricing-page">
     <ProductSection padding="large" id="pricing-tiers">
-      <header><h1>Support & Pricing</h1></header>
+      <header>
+        <h1>Support & Pricing</h1>
+        <h2>Comparison of free and paid packages for Wireguard solution.</h2>
+      </header>
       <div class="tiers">
         {
           pricing.map(async (p) => {
@@ -84,14 +85,17 @@ const imageHeight = "256";
 
     header {
       display: flex;
-      flex-flow: row;
-      align-items: center;
+      flex-flow: column;
       justify-content: flex-start;
       width: 100%;
       padding-bottom: 50px;
 
       h1 {
         text-align: left;
+      }
+
+      h2 {
+        @include typography(h2);
       }
     }
 
