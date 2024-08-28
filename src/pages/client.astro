@@ -13,12 +13,24 @@ import MatrixSection from "../components/MatrixSection.astro";
 const clientFeatures = (await getCollection("client-features")).sort(
   (f1, f2) => f1.data.order - f2.data.order,
 );
-const title = "Best Desktop WireGuard Client";
-const featuredImage = "github.com/DefGuard/defguard.github.io/raw/main/public/images/product/client/main-screen.png";
+const title = "defguard enterprise open-source SSO&VPN with 2FA/MFA: Best Desktop WireGuard Client";
+const featuredImage =
+  "github.com/DefGuard/defguard.github.io/raw/main/public/images/product/client/main-screen.png";
 const imageWidth = "1920";
 const imageHeight = "1080";
 const url = "https://defguard.net/client/";
-const tags = ["defguard", "open source", "wireguard", "mfa", "2fa", "mfa/2fa", "totp", "free", "rust", "tauri"];
+const tags = [
+  "defguard",
+  "open source",
+  "wireguard",
+  "mfa",
+  "2fa",
+  "mfa/2fa",
+  "totp",
+  "free",
+  "rust",
+  "tauri",
+];
 ---
 
 <ProductLayout

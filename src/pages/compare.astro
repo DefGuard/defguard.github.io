@@ -7,13 +7,39 @@ import { featuresTableData } from "../data/compare-table";
 import { Button } from "../components/buttons/Button/Button";
 import OrganizationJSONLD from "../scripts/OrganizationJSONLD.astro";
 
-const title = "Comparison of WireGuard VPN solutions";
-const featuredImage = "github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png";
+const title = "defguard enterprise open-source SSO&VPN with 2FA/MFA: Comparison of WireGuard VPN solutions";
+const featuredImage =
+  "github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png";
 const imageWidth = "1080";
 const imageHeight = "540";
-const description = "defguard - enterprise open-source SSO&VPN - the only open-source solution with real WireGuard MFA/2FA & integrated OpenID Connect SSO";
+const description =
+  "defguard - enterprise open-source SSO&VPN - the only open-source solution with real WireGuard MFA/2FA & integrated OpenID Connect SSO";
 const url = "https://defguard.net/compare/";
-const tags = ["defgaurd", "compare", "wireguard", "2fa", "mfa", "mfa/2fa", "openid", "secure", "ldap", "acl", "vpn", "sso", "firewall", "desktop client", "mesh", "mesh vpn", "nat", "yubikey", "email", "email notifications", "gateway", "auth", "ssh"];
+const tags = [
+  "defgaurd",
+  "compare",
+  "wireguard",
+  "2fa",
+  "mfa",
+  "mfa/2fa",
+  "openid",
+  "secure",
+  "ldap",
+  "acl",
+  "vpn",
+  "sso",
+  "firewall",
+  "desktop client",
+  "mesh",
+  "mesh vpn",
+  "nat",
+  "yubikey",
+  "email",
+  "email notifications",
+  "gateway",
+  "auth",
+  "ssh",
+];
 ---
 
 <BaseLayout
@@ -23,12 +49,18 @@ const tags = ["defgaurd", "compare", "wireguard", "2fa", "mfa", "mfa/2fa", "open
   imageWidth={imageWidth}
   imageHeight={imageHeight}
 >
-  <OrganizationJSONLD title={title} description={description} url={url} tags={tags} />
+  <OrganizationJSONLD
+    slot="schema"
+    title={title}
+    description={description}
+    url={url}
+    tags={tags}
+  />
   <Navigation activeSlug="/compare" />
   <main id="compare-page">
     <ProductSection>
       <header id="compare-header">
-        <h1>Compare of WireGuard® Solution<br/>(on date: 2024.08)</h1>
+        <h1>Compare of WireGuard® Solution<br />(on date: 2024.08)</h1>
       </header>
       <div id="features-table">
         <FeaturesTable data={featuresTableData} client:only="preact" />

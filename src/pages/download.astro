@@ -4,11 +4,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { DownloadButtonList } from "../components/download/DownloadButtonList/DownloadButtonList";
 import DownloadVersion from "../components/download/DownloadVersion.astro";
 
-const title = "";
-const featuredImage = "github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png";
+const title = "defguard enterprise open-source SSO&VPN with 2FA/MFA: Download";
+const featuredImage =
+  "github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png";
 const imageWidth = "1080";
 const imageHeight = "540";
-const description = "defguard - enterprise open-source SSO&VPN - the only open-source solution with real WireGuard MFA/2FA & integrated OpenID Connect SSO";
+const description =
+  "defguard - enterprise open-source SSO&VPN - the only open-source solution with real WireGuard MFA/2FA & integrated OpenID Connect SSO";
 ---
 
 <BaseLayout
@@ -21,10 +23,10 @@ const description = "defguard - enterprise open-source SSO&VPN - the only open-s
   <Navigation activeSlug="/newsletter" />
   <main id="download-page">
     <header>
-        <h1>Download defguard desktop client with WireGuard 2FA/MFA</h1>
+      <h1>Download defguard desktop client with WireGuard 2FA/MFA</h1>
     </header>
     <section class="download-section">
-      <DownloadButtonList client:only="preact"/>
+      <DownloadButtonList client:only="preact" />
       <DownloadVersion />
     </section>
     <hr />
