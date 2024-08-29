@@ -9,6 +9,9 @@ import ProductImage from "../components/product/ProductImage.astro";
 import ProductLayout from "../layouts/ProductLayout.astro";
 import ProductSection from "../layouts/ProductSection.astro";
 import MatrixSection from "../components/MatrixSection.astro";
+import { Image } from 'astro:assets';
+import ClientImage from "/public/images/product/client/main-screen.png";
+import OverviewImage from "/public/images/product/client/overview.png";
 
 const clientFeatures = (await getCollection("client-features")).sort(
   (f1, f2) => f1.data.order - f2.data.order,
@@ -59,8 +62,7 @@ const tags = [
       </header>
     </ProductSection>
     <ProductImage>
-      <!-- <Image src={headImage} alt="product image" /> -->
-      <img src="/images/product/client/main-screen.png" alt="client main image" />
+      <Image src={ClientImage} alt="product image" densities={[0.5, 0.75, 1]} />
     </ProductImage>
     <ProductSection padding="large">
       <div class="product-features">
@@ -100,8 +102,7 @@ const tags = [
             </div>
           </div>
           <div class="image-container">
-            <!-- <Image src={overviewImage} alt="overview image" /> -->
-            <img src="/images/product/client/overview.png" alt="overview image" />
+            <Image src={OverviewImage} alt="overview image" densities={[0.5, 0.75, 1]} />
           </div>
         </div>
       </section>

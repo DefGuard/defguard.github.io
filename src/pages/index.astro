@@ -9,6 +9,8 @@ import ProductImage from "../components/product/ProductImage.astro";
 import ProductLayout from "../layouts/ProductLayout.astro";
 import ProductSection from "../layouts/ProductSection.astro";
 import MatrixSection from "../components/MatrixSection.astro";
+import { Image } from 'astro:assets';
+import CoreImage from '/public/images/product/core/hero-image.png';
 
 const coreFeatures = (await getCollection("core-features")).sort(
   (f1, f2) => f1.data.order - f2.data.order,
@@ -81,8 +83,7 @@ const tags = [
       </header>
     </ProductSection>
     <ProductImage>
-      <!-- <Image src={coreImage} alt="defguard vpn overview image" /> -->
-      <img src="/images/product/core/hero-image.png" alt="main image" />
+      <Image src={CoreImage} alt="defguard vpn overview image" densities={[0.5, 0.75, 1]} />
     </ProductImage>
     <ProductSection padding="large">
       <div class="product-features">
