@@ -1,0 +1,64 @@
+---
+import ProductSection from "../../layouts/ProductSection.astro";
+import TestimonialSlider from "./TestimonialSlider.astro";
+import LogotypeSlider from "./LogotypeSlider.astro";
+---
+
+<ProductSection padding="small">
+  <div class="testmonial-page">
+    <h3>Testmonials</h3>
+    <div class="cards">
+      <TestimonialSlider />
+    </div>
+    <h3>Trusted by</h3>
+    <LogotypeSlider />
+  </div>
+</ProductSection>
+
+<style lang="scss" is:global>
+  .testmonial-page {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    row-gap: 8px;
+    justify-content: center;
+    align-items: flex-start;
+
+    h3 {
+      @include typography(h3);
+    }
+
+    .cards {
+      display: flex;
+      gap: 8px;
+      padding-bottom: 200px;
+    }
+  }
+
+  .swiper {
+    max-width: 100%;
+    max-height: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    overflow: visible;
+  }
+
+  .swiper-container {
+    max-height: 100%;
+    max-width: 68vw;
+    overflow: hidden;
+  }
+
+  .swiper-slide {
+    flex-shrink: 0;
+    display: block;
+    align-items: center;
+    width: fit-content;
+  }
+
+  .swiper-wrapper {
+    max-height: 100%;
+    display: flex;
+    padding-bottom: 50px;
+  }
+</style>

@@ -1,0 +1,69 @@
+---
+import { Image } from "astro:assets";
+import Esa from "/public/svg/companies/esa.svg";
+import Brightpool from "/public/svg/companies/brightpool.svg";
+import Tmobile from "/public/svg/companies/tmobile.svg";
+import Qvistorp from "/public/svg/companies/qvistorp.svg";
+import Widestreet from "/public/svg/companies/widestreet.svg";
+import DeepImage from "/public/svg/companies/deepimage.svg";
+---
+
+<div class="swiper LogoSwiper swiper-container">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <Image src={Esa} alt="esa" />
+    </div>
+    <div class="swiper-slide">
+      <Image src={Brightpool} alt="esa" />
+    </div>
+    <div class="swiper-slide">
+      <Image src={Tmobile} alt="esa" />
+    </div>
+    <div class="swiper-slide">
+      <Image src={Qvistorp} alt="esa" />
+    </div>
+    <div class="swiper-slide">
+      <Image src={Widestreet} alt="esa" />
+    </div>
+    <div class="swiper-slide">
+      <Image src={DeepImage} alt="esa" />
+    </div>
+  </div>
+</div>
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+/>
+<script is:inline src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"
+></script>
+<script is:inline>
+  new Swiper(".LogoSwiper", {
+    slidesPerView: 2,
+    spaceBetween: 10,
+    breakpoints: {
+      800: {
+        slidesPerView: 3,
+      },
+      1000: {
+        slidesPerView: 4,
+      },
+      1400: {
+        slidesPerView: 5,
+      },
+      1600: {
+        slidesPerView: 6,
+      },
+    },
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false,
+    },
+  });
+</script>
+
+<style lang="scss" is:global>
+  .swiper-wrapper {
+    padding-top: 25px;
+  }
+</style>
