@@ -35,6 +35,7 @@ const GithubStars = function ({ owner, repo }: Props) {
         href={`https://github.com/${owner}/${repo}`}
         target="_blank"
         rel="nofollow noopener noreferrer"
+        aria-label={`${owner} ${repo}`}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

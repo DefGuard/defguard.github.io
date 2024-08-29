@@ -159,8 +159,8 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
           {(platform === PlatformType.DEBIAN ||
             platform === PlatformType.MACOSINTEL ||
             platform === PlatformType.MACOSARM ||
-            platform === PlatformType.WINDOWS) && <h3>Download now</h3>}
-          {platform === PlatformType.ARCHLINUX && <h3>AUR package</h3>}
+            platform === PlatformType.WINDOWS) && <>Download now</>}
+          {platform === PlatformType.ARCHLINUX && <>AUR package</>}
           {platform === PlatformType.ARCHLINUX && <>{ARCHLINK}</>}
           {platform === PlatformType.DEBIAN && <p>Debian package</p>}
           {platform === PlatformType.MACOSINTEL && <p>Apple Intel</p>}
