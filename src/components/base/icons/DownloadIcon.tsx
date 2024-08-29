@@ -35,6 +35,7 @@ export const DownloadIcon = ({ platformType, owner, repo, version }: DownloadPro
   return (
     <a
       href={`https://github.com/${owner}/${repo}/releases/download/v${version}/${downloadName}`}
+      aria-label="download-icon"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

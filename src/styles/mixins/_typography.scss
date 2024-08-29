@@ -20,6 +20,10 @@
     font-weight: 400;
     line-height: 92%;
     @include font-scalable(96px);
+
+    @include break-down(md) {
+      @include font-scalable(65px);
+    }
   }
 
   @if $key == "section" {
