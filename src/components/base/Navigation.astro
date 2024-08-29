@@ -11,7 +11,7 @@ const { activeSlug } = Astro.props;
 
 <Fragment>
   <nav id="desktop-nav">
-    <a href="/" class="nav-logo" data-astro-prefetch>
+    <a href="/" class="nav-logo" aria-label="defguard" data-astro-prefetch>
       <Fragment set:html={logoSVG} />
     </a>
     <ul class="nav-items">
@@ -62,10 +62,10 @@ const { activeSlug } = Astro.props;
     </ul>
   </nav>
   <section id="mobile-nav-bar">
-    <a href="/" class="nav-logo">
+    <a href="/" class="nav-logo" aria-label="defguard">
       <Fragment set:html={logoSVG} />
     </a>
-    <button id="mobile-nav-menu-burger">
+    <button id="mobile-nav-menu-burger" aria-label="mobile-nav-menu-burger">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="32"

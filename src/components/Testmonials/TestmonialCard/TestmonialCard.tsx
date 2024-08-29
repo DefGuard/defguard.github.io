@@ -19,7 +19,7 @@ export const TestmonialCard = ({
     <div class="swiper-slide">
       <div class="card">
         <div className="image">
-          <img src={`/images/testmonial/${profile}.png`} alt={name} />
+          <img src={profile} alt={name} />
           <img src={logo} alt={logo} />
         </div>
         <div className="text">

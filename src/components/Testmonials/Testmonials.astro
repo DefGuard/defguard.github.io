@@ -1,16 +1,16 @@
 ---
-import { getCollection } from "astro:content";
-import { TestmonialCard } from "./TestmonialCard/TestmonialCard";
 import ProductSection from "../../layouts/ProductSection.astro";
-import { useCarousel } from "../../utils/useCarousel";
 import Swiper from "./Swiper.astro";
 ---
 
 <ProductSection padding="large">
   <div class="testmonial-page">
     <h3>Testmonials</h3>
-    <div class="testmonial-card">
+    <div class="cards">
       <Swiper />
+    </div>
+    <div class="logotypes">
+      <h3>Trusted by</h3>
     </div>
   </div>
 </ProductSection>
@@ -28,9 +28,10 @@ import Swiper from "./Swiper.astro";
       @include typography(h3);
     }
 
-    .testmonial-card {
+    .cards {
       display: flex;
       gap: 8px;
+      padding-bottom: 200px;
     }
   }
 </style>

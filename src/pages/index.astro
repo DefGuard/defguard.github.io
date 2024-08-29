@@ -10,13 +10,57 @@ import ProductLayout from "../layouts/ProductLayout.astro";
 import ProductSection from "../layouts/ProductSection.astro";
 import Testmonials from "../components/Testmonials/Testmonials.astro";
 import MatrixSection from "../components/MatrixSection.astro";
+import { Image } from 'astro:assets';
+import CoreImage from '/public/images/product/core/hero-image.png';
 
 const coreFeatures = (await getCollection("core-features")).sort(
   (f1, f2) => f1.data.order - f2.data.order,
 );
+
+const title = "defguard enterprise open-source SSO&VPN with 2FA/MFA";
+const featuredImage =
+  "github.com/DefGuard/defguard.github.io/raw/main/public/images/product/core/hero-image.png";
+const imageWidth = "1920";
+const imageHeight = "1080";
+const url = "https://defguard.net";
+const tags = [
+  "defguard",
+  "open source",
+  "sso & vpn",
+  "vpn",
+  "mfa",
+  "2fa",
+  "mfa/2fa",
+  "wireguard",
+  "ldap",
+  "openldap",
+  "postgresql",
+  "postgres",
+  "openid",
+  "totp",
+  "webauthn",
+  "opensense",
+  "freebsd",
+  "rust",
+  "secure",
+  "desktop client",
+  "desktop",
+  "yubikey",
+  "teonite",
+  "docker",
+  "kubernetes",
+  "k8s",
+];
 ---
 
-<ProductLayout>
+<ProductLayout
+  title={title}
+  featuredImage={featuredImage}
+  imageWidth={imageWidth}
+  imageHeight={imageHeight}
+  url={url}
+  tags={tags}
+>
   <Navigation activeSlug="/" />
   <main class="product-main" id="core-page">
     <ProductSection padding="small">
@@ -40,11 +84,11 @@ const coreFeatures = (await getCollection("core-features")).sort(
       </header>
     </ProductSection>
     <ProductImage>
-      <!-- <Image src={coreImage} alt="defguard vpn overview image" /> -->
-      <img src="/images/product/core/hero-image.png" alt="main image" />
+      <Image src={CoreImage} alt="defguard vpn overview image" densities={[0.5, 0.75, 1]} />
     </ProductImage>
     <ProductSection padding="large">
       <div class="product-features">
+        <h2>What will you get with Open Source WireGuard® MFA/2FA</h2>
         {
           coreFeatures.map(async (f, index) => {
             const { Content } = await f.render();

@@ -9,13 +9,41 @@ import ProductImage from "../components/product/ProductImage.astro";
 import ProductLayout from "../layouts/ProductLayout.astro";
 import ProductSection from "../layouts/ProductSection.astro";
 import MatrixSection from "../components/MatrixSection.astro";
+import { Image } from 'astro:assets';
+import ClientImage from "/public/images/product/client/main-screen.png";
+import OverviewImage from "/public/images/product/client/overview.png";
 
 const clientFeatures = (await getCollection("client-features")).sort(
   (f1, f2) => f1.data.order - f2.data.order,
 );
+const title = "defguard enterprise open-source SSO&VPN with 2FA/MFA: Best Desktop WireGuard Client";
+const featuredImage =
+  "github.com/DefGuard/defguard.github.io/raw/main/public/images/product/client/main-screen.png";
+const imageWidth = "1920";
+const imageHeight = "1080";
+const url = "https://defguard.net/client/";
+const tags = [
+  "defguard",
+  "open source",
+  "wireguard",
+  "mfa",
+  "2fa",
+  "mfa/2fa",
+  "totp",
+  "free",
+  "rust",
+  "tauri",
+];
 ---
 
-<ProductLayout>
+<ProductLayout
+  title={title}
+  featuredImage={featuredImage}
+  imageWidth={imageWidth}
+  imageHeight={imageHeight}
+  url={url}
+  tags={tags}
+>
   <Navigation activeSlug="/client" />
   <main id="product-content" class="product-main">
     <ProductSection padding="small">
@@ -34,11 +62,11 @@ const clientFeatures = (await getCollection("client-features")).sort(
       </header>
     </ProductSection>
     <ProductImage>
-      <!-- <Image src={headImage} alt="product image" /> -->
-      <img src="/images/product/client/main-screen.png" alt="client main image" />
+      <Image src={ClientImage} alt="product image" densities={[0.5, 0.75, 1]} width={imageWidth} height={imageHeight} />
     </ProductImage>
     <ProductSection padding="large">
       <div class="product-features">
+        <h2>Why defguard provides the best WireGuard® client</h2>
         {
           clientFeatures.map(async (f, index) => {
             const { Content } = await f.render();
@@ -74,8 +102,7 @@ const clientFeatures = (await getCollection("client-features")).sort(
             </div>
           </div>
           <div class="image-container">
-            <!-- <Image src={overviewImage} alt="overview image" /> -->
-            <img src="/images/product/client/overview.png" alt="overview image" />
+            <Image src={OverviewImage} alt="overview image" densities={[0.5, 0.75, 1]} />
           </div>
         </div>
       </section>

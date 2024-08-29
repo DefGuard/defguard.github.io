@@ -74,11 +74,16 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
+
+        @include typography(paragraph);
+
+        p {
+          @include typography(footer);
+        }
       }
 
       & > .btn {
         all: unset;
-        padding: 20px;
 
         &:hover {
           cursor: pointer;
@@ -86,11 +91,8 @@
 
         a {
           text-decoration: none;
+          padding: 20px;
         }
-      }
-
-      h3 {
-        @include typography(paragraph);
       }
 
       svg {

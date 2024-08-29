@@ -3,9 +3,23 @@ import NewsletterSection from "../components/NewsletterSection.astro";
 import ProductSection from "../layouts/ProductSection.astro";
 import Navigation from "../components/base/Navigation.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "defguard enterprise open-source SSO&VPN with 2FA/MFA";
+const featuredImage =
+  "github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png";
+const imageWidth = "1080";
+const imageHeight = "540";
+const description =
+  "defguard - enterprise open-source SSO&VPN - the only open-source solution with real WireGuard MFA/2FA & integrated OpenID Connect SSO";
 ---
 
-<BaseLayout>
+<BaseLayout
+  title={title}
+  description={description}
+  featuredImage={featuredImage}
+  imageWidth={imageWidth}
+  imageHeight={imageHeight}
+>
   <Navigation activeSlug="/newsletter" />
   <main id="newsletter-page">
     <ProductSection padding="none" id="thanks">

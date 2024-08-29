@@ -1,8 +1,35 @@
 ---
+import OrganizationJSONLD from "../scripts/OrganizationJSONLD.astro";
 import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  title: string;
+  featuredImage: string;
+  imageWidth: string;
+  imageHeight: string;
+  url: string;
+  tags: string[];
+}
+
+const { title, featuredImage, imageWidth, imageHeight, url, tags } = Astro.props;
+const description =
+  "defguard - enterprise open-source SSO&VPN - the only open-source solution with real WireGuard MFA/2FA & integrated OpenID Connect SSO";
 ---
 
-<BaseLayout>
+<BaseLayout
+  title={title}
+  description={description}
+  featuredImage={featuredImage}
+  imageWidth={imageWidth}
+  imageHeight={imageHeight}
+>
+  <OrganizationJSONLD
+    slot="schema"
+    title={title}
+    description={description}
+    url={url}
+    tags={tags}
+  />
   <slot />
 </BaseLayout>
 
@@ -46,6 +73,11 @@ import BaseLayout from "./BaseLayout.astro";
       display: flex;
       flex-flow: column;
       row-gap: 20px;
+
+      & > h2 {
+        @include typography(h2);
+        padding-bottom: 20px;
+      }
     }
     #matrix {
       width: 100%;

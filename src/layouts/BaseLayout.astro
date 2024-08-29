@@ -7,30 +7,35 @@ import { CookieBar } from "../components/base/CookieBar/CookieBar";
 
 const favSizes = [16,32,57,60,70,72,76,96,114,120,128,144,150,152,180,192,310,384,512];
 const isProd = import.meta.env.PROD;
+
+interface Props {
+  title: string;
+  description: string;
+  featuredImage: string;
+  imageWidth: string;
+  imageHeight: string;
+}
+
+const { title, description, featuredImage, imageWidth, imageHeight} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="description"
-      content="Enterprise Open Source SSO & VPN (with Multi-Factor Authentication)"
-    />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>defguard</title>
-    <meta
-      name="description"
-      content="Enterprise Open Source SSO & VPN (with Multi-Factor Authentication)"
-    />
-    <!-- FIXME: USE LOCAL -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-      rel="stylesheet"
-    />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta name="description" content={description} />
+    <meta property="og:image" content={"http://" + featuredImage} />
+    <meta property="og:image:secure_url" content={"https://" + featuredImage} />
+    <meta property="og:image:type" content="image/png" /> 
+    <meta property="og:image:width" content={imageWidth} /> 
+    <meta property="og:image:height" content={imageHeight} />
+    <!-- schema.org -->
+    <slot name="schema" />
     <!-- Favicons -->
     {
       favSizes.map((size) => (
