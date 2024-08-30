@@ -1,0 +1,76 @@
+---
+import { getCollection } from "astro:content";
+import { TestmonialCard } from "./TestmonialCard/TestmonialCard";
+import "swiper/scss/autoplay";
+
+const testmonials = (await getCollection("testmonials")).sort(
+  (f1, f2) => f1.data.order - f2.data.order,
+);
+---
+
+<div class="swiper MySwiper swiper-container">
+  <div class="swiper-wrapper">
+    {
+      testmonials.map(async (f, index) => {
+        const { Content } = await f.render();
+        return (
+          <TestmonialCard
+            name={f.data.name}
+            about={f.data.about}
+            profile={f.data.profile}
+            logo={f.data.logo}
+          >
+            <Content />
+          </TestmonialCard>
+        );
+      })
+    }
+  </div>
+  <div class="swiper-pagination"></div>
+</div>
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+/>
+<script is:inline src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"
+></script>
+<script is:inline>
+  new Swiper(".MySwiper", {
+    slidesPerView: 1,
+    centeredSlides: true,
+    spaceBetween: 10,
+    breakpoints: {
+      1200: {
+        slidesPerView: 2,
+        centeredSlides: false,
+      },
+    },
+    mousewheel: {
+      forceToAxis: true,
+    },
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+  });
+</script>
+
+<style lang="scss" is:global>
+  .swiper-container-horizontal > .swiper-pagination-bullets,
+  .swiper-pagination-custom,
+  .swiper-pagination-fraction {
+    bottom: 0px !important;
+  }
+
+  .swiper-pagination-bullet {
+    --swiper-pagination-bullet-width: 12px;
+    --swiper-pagination-bullet-height: 12px;
+    --swiper-pagination-bullet-inactive-color: var(--text-body-primary);
+    --swiper-pagination-color: var(--text-body-primary);
+  }
+</style>

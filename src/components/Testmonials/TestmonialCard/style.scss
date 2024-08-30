@@ -1,0 +1,52 @@
+.cards {
+  .card {
+    display: flex;
+    width: 100%;
+    max-width: 30vw;
+    max-height: 75vh;
+    padding: 20px;
+    gap: 25px;
+    border: 1px solid var(--text-body-primary, #222);
+
+    @include break-down(xl) {
+      max-width: 55vw;
+    }
+
+    .image {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+
+      img {
+        border-radius: 8px;
+        box-shadow: 0px 12px 24px 0px rgba(0, 0, 0, 0.08);
+
+        @include break-down(xl) {
+          width: 50px;
+        }
+      }
+    }
+
+    .text {
+      padding-bottom: 32px;
+
+      .title {
+        @include typography(footer);
+
+        h2 {
+          @include typography(h2);
+        }
+      }
+
+      .description {
+        @include typography(paragraph);
+      }
+
+      hr {
+        @include typography(h2);
+      }
+    }
+  }
+}
