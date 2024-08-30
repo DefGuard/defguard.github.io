@@ -33,6 +33,16 @@ import LogotypeSlider from "./LogotypeSlider.astro";
       gap: 8px;
       padding-bottom: 200px;
     }
+
+    @include break-down(xl) {
+      .cards {
+        align-self: center;
+      }
+
+      h3 {
+        @include typography(h2);
+      }
+    }
   }
 
   .swiper {
