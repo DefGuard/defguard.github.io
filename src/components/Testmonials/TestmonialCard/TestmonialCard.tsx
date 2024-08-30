@@ -19,8 +19,8 @@ export const TestmonialCard = ({
     <div class="swiper-slide">
       <div class="card">
         <div className="image">
-          <img src={profile} alt={name} />
-          <img src={logo} alt={logo} />
+          <img src={profile} alt="profile image" />
+          <img src={logo} alt="company logo" />
         </div>
         <div className="text">
           <div className="text-wrapper">
