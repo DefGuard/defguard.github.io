@@ -45,7 +45,7 @@ const BookDemoForm = () => {
     data.append("website_url", values.website_url);
     data.append("tell_us_more", values.tell_us_more);
 
-    fetch("https://update-service-dev.teonite.net/api/customer/signup", {
+    fetch("https://update-service-dev.defguard.net/api/customer/signup", {
       mode: "no-cors",
       method: "POST",
       body: data,
