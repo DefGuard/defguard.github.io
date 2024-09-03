@@ -12,7 +12,12 @@ type BookDemoType = {
   tell_us_more: string;
 };
 
-const BookDemoForm = () => {
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const BookDemoForm = ({ title, description }: Props) => {
   const [okMessage, setOkMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
   const [values, setValues] = useState<BookDemoType>({
@@ -61,7 +66,8 @@ const BookDemoForm = () => {
   return (
     <>
       <form class="book" autocomplete="off" onSubmit={onSubmit}>
-        <h3>Book a Demo</h3>
+        <h3>{title}</h3>
+        <span>{description}</span>
         <div class="double-inputs">
           <label for="first_name">
             First name

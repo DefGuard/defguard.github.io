@@ -39,6 +39,8 @@ const tags = [
   "secure",
   "rust",
 ];
+
+const form_title = "Book a demo";
 ---
 
 <ProductLayout
@@ -86,20 +88,10 @@ const tags = [
     <ImageGallery />
     <ProductSection padding="none">
       <div class="product-features">
-        <BookDemoForm client:only="preact" />
+        <BookDemoForm client:only="preact" title={form_title} />
       </div>
     </ProductSection>
     <ProductBuiltBy />
     <MatrixSection />
   </main>
 </ProductLayout>
-
-<style lang="scss" is:global>
-  .product-main {
-    .product-features {
-      & > h3 {
-        @include typography(h3);
-      }
-    }
-  }
-</style>
