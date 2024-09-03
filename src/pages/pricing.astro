@@ -39,7 +39,8 @@ const tags = [
 ];
 
 const form_title = "Book a demo";
-const form_description = "We provide consulting or custome deployment and security services. You can order custome features for the server and/or the client. Just fill out the form below:";
+const form_description =
+  "We provide consulting or custome deployment and security services. You can order custome features for the server and/or the client. Just fill out the form below:";
 ---
 
 <BaseLayout
@@ -97,7 +98,11 @@ const form_description = "We provide consulting or custome deployment and securi
         </a>
       </div>
       <div class="product-features">
-        <BookDemoForm client:only="preact" title={form_title} description={form_description} />
+        <BookDemoForm
+          client:only="preact"
+          title={form_title}
+          description={form_description}
+        />
       </div>
     </ProductSection>
   </main>

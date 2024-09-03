@@ -18,15 +18,20 @@ const DownloadInfo = function ({ owner, repo }: GithubProps) {
       .then((res) =>
         res.json().then((val) => {
           if (val.length) {
-            const data = val[0];
-            clientVersion.set(data.name ? data.name.slice(1) : "");
+            for (let data of val) {
+              if (!data.prerelease) {
+                const data = val[0];
+                clientVersion.set(data.name ? data.name.slice(1) : "");
 
-            // 2024-07-08T12:58:59Z -> 08.07.2024
-            setPublished(
-              data.published_at
-                ? data.published_at.split("T")[0].split("-").reverse().join(".")
-                : "",
-            );
+                // 2024-07-08T12:58:59Z -> 08.07.2024
+                setPublished(
+                  data.published_at
+                    ? data.published_at.split("T")[0].split("-").reverse().join(".")
+                    : "",
+                );
+                break;
+              }
+            }
           }
           setIsLoading(false);
         }),
