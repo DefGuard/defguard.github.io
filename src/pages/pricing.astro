@@ -5,6 +5,7 @@ import { Button } from "../components/buttons/Button/Button";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProductSection from "../layouts/ProductSection.astro";
 import OrganizationJSONLD from "../scripts/OrganizationJSONLD.astro";
+import BookDemoForm from "../components/form/BookDemoForm/BookDemoForm";
 
 const pricing = (await getCollection("pricing")).sort(
   (p1, p2) => p1.data.order - p2.data.order,
@@ -36,6 +37,9 @@ const tags = [
   "sso",
   "security",
 ];
+
+const form_title = "Book a demo";
+const form_description = "We provide consulting or custome deployment and security services. You can order custome features for the server and/or the client. Just fill out the form below:";
 ---
 
 <BaseLayout
@@ -85,12 +89,15 @@ const tags = [
         }
       </div>
       <div>
-        <p>Didn't find what you were looking for? Have special requests?</p>
+        <p>Looking for custome deployment or features?</p>
       </div>
       <div class="contact">
         <a href="mailto:sales@defguard.net">
           <Button size="large" text="Contact sales" client:load />
         </a>
+      </div>
+      <div class="product-features">
+        <BookDemoForm client:only="preact" title={form_title} description={form_description} />
       </div>
     </ProductSection>
   </main>
@@ -267,6 +274,10 @@ const tags = [
           }
         }
       }
+    }
+
+    .product-features {
+      padding-top: 100px;
     }
   }
 </style>
