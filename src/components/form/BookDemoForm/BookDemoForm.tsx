@@ -97,7 +97,7 @@ const BookDemoForm = ({ title, description }: Props) => {
         </div>
       </form>
       {okMessage && (
-        <MessageBottom message="Send form with success!" handleButton={handleAlert} />
+        <MessageBottom message="Form sent successfully" handleButton={handleAlert} />
       )}
       {errorMessage && (
         <MessageBottom message="Something went wrong" handleButton={handleAlert} />
