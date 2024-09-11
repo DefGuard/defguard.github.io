@@ -37,7 +37,7 @@
     "preact": "^10.19.3",
     "rehype-external-links": "^3.0.0",
     "sass": "^1.69.7",
-    "sharp": "^0.33.5",
+    "sharp": "0.33.1",
     "short-unique-id": "^5.0.3",
     "typescript": "^5.3.3",
     "typescript-cookie": "^1.0.6",
@@ -54,7 +54,13 @@
   },
   "overrides": {
     "react": "npm:@preact/compat@latest",
-    "react-dom": "npm:@preact/compat@latest"
+    "react-dom": "npm:@preact/compat@latest",
+    "astro-compress": {
+      "sharp": "0.33.1"
+    },
+    "astro": {
+      "sharp": "0.33.1"
+    }
   },
   "volta": {
     "node": "21.6.1"
