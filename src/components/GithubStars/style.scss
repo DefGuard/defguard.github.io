@@ -15,3 +15,8 @@
     font-size: 14px;
   }
 }
+
+// To reduce layout shift
+.github-stars-wrapper {
+  min-height: 21px;
+}

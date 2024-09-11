@@ -13,7 +13,7 @@ import { Image } from "astro:assets";
 import CoreImage from "/public/images/product/core/hero-image.png";
 
 const coreFeatures = (await getCollection("core-features")).sort(
-  (f1, f2) => f1.data.order - f2.data.order,
+  (f1, f2) => f1.data.order - f2.data.order
 );
 
 const title = "defguard enterprise open-source SSO&VPN with 2FA/MFA";
@@ -70,7 +70,9 @@ const tags = [
             >real WireGuard® MFA/2FA & integrated OpenID Connect SSO</strong
           >.
         </p>
-        <GithubStars owner="defguard" repo="defguard" client:only="preact" />
+        <div class="github-stars-wrapper">
+          <GithubStars owner="defguard" repo="defguard" client:only="preact" />
+        </div>
         <div class="product-download">
           <a
             href="https://github.com/DefGuard/defguard/releases"
