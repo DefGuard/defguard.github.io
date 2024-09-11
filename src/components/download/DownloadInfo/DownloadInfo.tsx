@@ -8,6 +8,12 @@ type GithubProps = {
   repo: string;
 };
 
+type ReleaseData = {
+  name: string;
+  published_at: string;
+  prerelease: boolean;
+};
+
 const DownloadInfo = function ({ owner, repo }: GithubProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [published, setPublished] = useState("");
@@ -16,22 +22,16 @@ const DownloadInfo = function ({ owner, repo }: GithubProps) {
   useEffect(() => {
     fetch(`https://api.github.com/repos/${owner}/${repo}/releases`)
       .then((res) =>
-        res.json().then((val) => {
+        res.json().then((val: ReleaseData[]) => {
           if (val.length) {
-            for (let data of val) {
-              if (!data.prerelease) {
-                const data = val[0];
-                clientVersion.set(data.name ? data.name.slice(1) : "");
-
-                // 2024-07-08T12:58:59Z -> 08.07.2024
-                setPublished(
-                  data.published_at
-                    ? data.published_at.split("T")[0].split("-").reverse().join(".")
-                    : "",
-                );
-                break;
-              }
-            }
+            // find latest version that is not a prerelease, the api should list them in order of newest to oldest
+            const latestVersion = val.find((data) => data.prerelease === false);
+            clientVersion.set(latestVersion?.name ? latestVersion.name.slice(1) : "");
+            setPublished(
+              latestVersion?.published_at
+                ? latestVersion.published_at.split("T")[0].split("-").reverse().join(".")
+                : "",
+            );
           }
           setIsLoading(false);
         }),
