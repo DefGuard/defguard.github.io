@@ -23,11 +23,11 @@
     "@astrolib/analytics": "^0.5.0",
     "@floating-ui/react": "^0.26.6",
     "@nanostores/preact": "^0.5.2",
+    "@playform/compress": "^0.1.1",
     "@preact/signals": "^1.2.2",
     "@tuplo/numberfmt": "^1.11.0",
     "@types/lodash-es": "^4.17.12",
     "astro": "^4.1.0",
-    "astro-compress": "2.2.7",
     "astro-font": "^0.0.67",
     "astro-imagetools": "^0.9.0",
     "clsx": "^2.1.0",
@@ -54,13 +54,7 @@
   },
   "overrides": {
     "react": "npm:@preact/compat@latest",
-    "react-dom": "npm:@preact/compat@latest",
-    "astro-compress": {
-      "sharp": "0.33.1"
-    },
-    "astro": {
-      "sharp": "0.33.1"
-    }
+    "react-dom": "npm:@preact/compat@latest"
   },
   "volta": {
     "node": "21.6.1"
