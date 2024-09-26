@@ -16,8 +16,8 @@
     "external": true
   },
   {
-    "display": "GitHub",
-    "url": "https://github.com/DefGuard",
+    "display": "Migrate OpenVPN",
+    "url": "/openvpn",
     "prefetch": false,
     "external": true
   }
