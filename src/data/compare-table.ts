@@ -36,7 +36,7 @@ export const featuresTableData: FeatureTableData = {
           features: [
             {
               status: "yes",
-              link: "https://defguard.gitbook.io/defguard/help/remote-user-enrollment",
+              link: "https://docs.defguard.net/help/remote-user-enrollment",
             },
             { status: "no" },
             { status: "no" },
@@ -49,7 +49,7 @@ export const featuresTableData: FeatureTableData = {
           features: [
             {
               status: "yes",
-              link: "https://defguard.gitbook.io/defguard/help/remote-user-enrollment/user-onboarding-after-enrollment",
+              link: "https://docs.defguard.net/help/remote-user-enrollment/user-onboarding-after-enrollment",
             },
             { status: "no" },
             { status: "no" },
@@ -84,7 +84,7 @@ export const featuresTableData: FeatureTableData = {
           features: [
             {
               status: "yes",
-              link: "https://defguard.gitbook.io/defguard/features/ldap-synchronization-setup",
+              link: "https://docs.defguard.net/features/ldap-synchronization-setup",
             },
             { status: "no" },
             {
@@ -103,7 +103,7 @@ export const featuresTableData: FeatureTableData = {
           features: [
             {
               status: "yes",
-              link: "https://defguard.gitbook.io/defguard/features/forward-auth",
+              link: "https://docs.defguard.net/features/forward-auth",
             },
             { status: "no" },
             {
@@ -431,7 +431,7 @@ export const featuresTableData: FeatureTableData = {
           features: [
             {
               status: "yes",
-              link: "https://defguard.gitbook.io/defguard/#what-is-defguard",
+              link: "https://docs.defguard.net/#what-is-defguard",
             },
             {
               status: "no",
@@ -452,7 +452,7 @@ export const featuresTableData: FeatureTableData = {
           features: [
             {
               status: "yes",
-              link: "https://defguard.gitbook.io/defguard/features/setting-up-your-instance/kubernetes",
+              link: "https://docs.defguard.net/features/setting-up-your-instance/kubernetes",
             },
             {
               status: "no",
@@ -467,7 +467,7 @@ export const featuresTableData: FeatureTableData = {
           features: [
             {
               status: "yes",
-              link: "https://defguard.gitbook.io/defguard/features/yubikey-provisioning",
+              link: "https://docs.defguard.net/features/yubikey-provisioning",
             },
             {
               status: "no",
@@ -493,7 +493,7 @@ export const featuresTableData: FeatureTableData = {
           features: [
             {
               status: "yes",
-              link: "https://defguard.gitbook.io/defguard/help/setting-up-smtp-for-email-notifications",
+              link: "https://docs.defguard.net/help/setting-up-smtp-for-email-notifications",
             },
             { status: "no" },
             { status: "no" },
@@ -526,7 +526,7 @@ export const featuresTableData: FeatureTableData = {
           features: [
             {
               status: "yes",
-              link: "https://defguard.gitbook.io/defguard/features/webhooks",
+              link: "https://docs.defguard.net/features/webhooks",
             },
             {
               status: "no",
@@ -547,7 +547,7 @@ export const featuresTableData: FeatureTableData = {
           features: [
             {
               status: "yes",
-              link: "https://defguard.gitbook.io/defguard/help/sending-support-info",
+              link: "https://docs.defguard.net/help/sending-support-info",
             },
             {
               status: "no",
@@ -568,7 +568,7 @@ export const featuresTableData: FeatureTableData = {
           features: [
             {
               status: "yes",
-              link: "https://defguard.gitbook.io/defguard/features/forward-auth",
+              link: "https://docs.defguard.net/features/forward-auth",
             },
             { status: "no" },
             { status: "no" },
@@ -581,7 +581,7 @@ export const featuresTableData: FeatureTableData = {
           features: [
             {
               status: "yes",
-              link: "https://defguard.gitbook.io/defguard/features/ssh-authentication",
+              link: "https://docs.defguard.net/features/ssh-authentication",
             },
             { status: "no" },
             {
@@ -601,7 +601,7 @@ export const featuresTableData: FeatureTableData = {
           features: [
             {
               status: "yes",
-              link: "https://defguard.gitbook.io/defguard/features/ldap-synchronization-setup",
+              link: "https://docs.defguard.net/features/ldap-synchronization-setup",
             },
             { status: "yes" },
             {
