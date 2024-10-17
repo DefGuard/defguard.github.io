@@ -24,4 +24,3 @@ All functionalities:
 - Yubikey Hardware keys provisioning
 - Webhooks
 - API
-- Web3 Wallets Validation
