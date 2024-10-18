@@ -1,8 +1,8 @@
 ---
-title: Multi-Factor Authentication with WireGuard® PSK
-order: 2
+title: 2FA/Multi-Factor Authentication with WireGuard® PSK
+order: 1
 ---
 
-Since WireGuard® protocol doesn't support 2FA, most (if not all) available WireGuard® clients use 2FA authorization to the "application" itself (not Wireguard tunnel).
+Since WireGuard® protocol doesn't support 2FA, most (if not all) available WireGuard® clients use 2FA authorization to the "application" itself (not Wireguard tunnel - just enforece 2FA using Google/Microsoft before opening the client application).
 When using this client with the <a href="https://github.com/defguard/defguard" target="_blank">defguard VPN & SSO server</a> (which is <strong>free & open source</strong>)
 you will get <strong>real Multi-Factor Authentication using TOTP/Email codes + WireGuard® Pre-shared session keys</strong>.
