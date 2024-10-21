@@ -5,9 +5,9 @@
     "prefetch": true
   },
   {
-    "display": "Pricing",
-    "url": "/pricing",
-    "prefetch": true
+    "display": "Enterprise",
+    "url": "https://docs.defguard.net/enterprise",
+    "prefetch": false
   },
   {
     "display": "Documentation",

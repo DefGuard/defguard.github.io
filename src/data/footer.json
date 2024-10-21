@@ -5,17 +5,22 @@
       {
         "text": "About Us",
         "external": false,
-        "link": "https://teonite.com/about"
+        "link": "https://teonite.com"
       },
       {
-        "text": "Support",
-        "external": false,
-        "link": "/pricing"
+        "text": "Enterprise",
+        "external": true,
+        "link": "https://docs.defguard.net/enterprise"
       },
       {
         "text": "Documentation",
         "external": true,
         "link": "https://docs.defguard.net"
+      },
+      {
+        "text": "Migrate OpenVPN to WireGuard 2FA/MFA",
+        "external": false,
+        "link": "/openvpn"
       },
       {
         "text": "Contact Us",
