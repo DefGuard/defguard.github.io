@@ -16,8 +16,8 @@
     "external": true
   },
   {
-    "display": "Migrate OpenVPN",
-    "url": "/openvpn",
+    "display": "FAQ",
+    "url": "/faq",
     "prefetch": false,
     "external": true
   }
