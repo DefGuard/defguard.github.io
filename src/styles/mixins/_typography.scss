@@ -70,11 +70,6 @@
     @include font-scalable(24px);
   }
 
-  @if $key =="pricebox-section" {
-    font-weight: 500;
-    @include font-scalable(24px);
-  }
-
   @if $key =="footer-section" {
     font-weight: 700;
     @include font-scalable(18px);
