@@ -76,6 +76,24 @@ const form_description =
       <ProductSection padding="small" id="pricing-tiers">
         <header>
           <h1>Enterprise Pricing and Support</h1>
+          <section class="license-section">
+            <div class="license-about">
+              As much as we would like defguard to be absolutely free and completely open
+              source for everyone, to have the possibility to work and create defguard we
+              have an open core & paid license for some business features.
+            </div>
+            <hr />
+            <div class="license-points">
+              But there are exceptions to that, if you are a:
+              <ul>
+                <li>student</li>
+                <li>non profit organisation</li>
+                <li>open source project</li>
+                <li>startup</li>
+              </ul>
+              Please contact us <a href="#">for a free license</a>.
+            </div>
+          </section>
         </header>
         <div class="tiers">
           {
@@ -138,6 +156,7 @@ const form_description =
         justify-content: flex-start;
         width: 100%;
         padding-bottom: 50px;
+        gap: 20px;
 
         h1 {
           text-align: left;
@@ -145,6 +164,49 @@ const form_description =
 
         h2 {
           @include typography(h2);
+        }
+
+        section.license-section {
+          display: flex;
+          @include typography(paragraph);
+
+          .license-about {
+            width: 100%;
+            max-width: 55ch;
+            padding-right: 30px;
+          }
+
+          hr {
+            padding: 0;
+            margin: 0 20px 0 20px;
+          }
+
+          .license-points {
+            & > a {
+              text-decoration: underline;
+            }
+            @include font-scalable(16px);
+          }
+        }
+
+        @include break-down(lg) {
+          section.license-section {
+            display: flex;
+            flex-flow: column;
+
+            .license-about {
+              max-width: 100%;
+            }
+
+            hr {
+              margin: 20px 0 20px 0;
+            }
+
+            .license-points {
+              justify-content: flex-start;
+              @include typography(paragraph);
+            }
+          }
         }
       }
 
