@@ -4,286 +4,353 @@ import Navigation from "../components/base/Navigation.astro";
 import { Button } from "../components/buttons/Button/Button";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProductSection from "../layouts/ProductSection.astro";
+import OrganizationJSONLD from "../scripts/OrganizationJSONLD.astro";
+import BookDemoForm from "../components/form/BookDemoForm/BookDemoForm";
 
 const pricing = (await getCollection("pricing")).sort(
-  (p1, p2) => p1.data.order - p2.data.order
+  (p1, p2) => p1.data.order - p2.data.order,
 );
+const title =
+  "defguard enterprise open-source SSO&VPN with 2FA/MFA: Pricing for Enterprise";
+const featuredImage =
+  "github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png";
+const imageWidth = "1080";
+const imageHeight = "540";
+const description =
+  "defguard - enterprise open-source SSO&VPN - the only open-source solution with real WireGuard MFA/2FA & integrated OpenID Connect SSO";
+const url = "https://defguard.net/pricing/";
+const tags = [
+  "defguard",
+  "wireguard",
+  "free",
+  "open source",
+  "premium",
+  "enterprise",
+  "openid",
+  "ldap",
+  "openldap",
+  "mfa/2fa",
+  "yubikey",
+  "site-to-site",
+  "vpn",
+  "support",
+  "call support",
+  "sso",
+  "security",
+];
+
+const form_title = "Looking for custom deployment or features?";
+const form_description =
+  "We provide consulting or custom deployment and security services. You also can commision us to deliver custom features or integrations (for the server and/or the client). Just fill out the form below:";
 ---
 
-<BaseLayout>
+<BaseLayout
+  title={title}
+  description={description}
+  featuredImage={featuredImage}
+  imageWidth={imageWidth}
+  imageHeight={imageHeight}
+>
+  <OrganizationJSONLD
+    slot="schema"
+    title={title}
+    description={description}
+    url={url}
+    tags={tags}
+  />
   <Navigation activeSlug="/pricing" />
   <main id="pricing-page">
-    <ProductSection padding="large" id="pricing-tiers">
-      <header>
-        <h1>Support & Pricing</h1>
-        <section class="license-section">
-          <div class="license-about">
-            As much as we would like defguard to be absolutely free and completely open
-            source for everyone, to have the possibility to work and create defguard we
-            have an open core & paid license for some business features.
-          </div>
-          <hr />
-          <div class="license-points">
-            But there are exceptions to that, if you are a: 
-            <ul>
-              <li>student</li>
-              <li>non profit organisation</li>
-              <li>open source project</li>
-              <li>startup</li>
-            </ul> 
-            Please contact us <a href="#">for a free license</a>.
-          </div>
-        </section>
+    <ProductSection padding="small">
+      <header id="main-header">
+        <h2>Open Source</h2>
+        <p>
+          defguard is open source and most of the features are free to use and deploy.
+          There are <a
+            href="https://docs.defguard.net/enterprise/all-enteprise-features"
+            target="_blank"
+          >
+            enterprise features that require a license, which can be obtained here.
+          </a>
+        </p>
       </header>
-      <div class="tiers">
-        {
-          pricing.map(async (p) => {
-            const { link, name, price, buttonText, linkTarget } = p.data;
-            const { Content } = await p.render();
+      <ProductSection padding="small" id="pricing-tiers">
+        <header>
+          <h1>Enterprise Pricing and Support</h1>
+          <section class="license-section">
+            <div class="license-about">
+              As much as we would like defguard to be absolutely free and completely open
+              source for everyone, to have the possibility to work and create defguard we
+              have an open core & paid license for some business features.
+            </div>
+            <hr />
+            <div class="license-points">
+              But there are exceptions to that, if you are a:
+              <ul>
+                <li>student</li>
+                <li>non profit organisation</li>
+                <li>open source project</li>
+                <li>startup</li>
+              </ul>
+              Please contact us <a href="#">for a free license</a>.
+            </div>
+          </section>
+        </header>
+        <div class="tiers">
+          {
+            pricing.map(async (p) => {
+              const { link, name, price, buttonText, linkTarget } = p.data;
+              const { Content } = await p.render();
 
-            return (
-              <div class="tier">
-                <header>
-                  <h2>{name}</h2>
-                  <h3>{price}</h3>
-                </header>
-                <div class="content">
-                  <Content />
+              return (
+                <div class="tier">
+                  <header>
+                    <h2>{name}</h2>
+                    <h3>{price}</h3>
+                  </header>
+                  <div class="content">
+                    <Content />
+                  </div>
+                  <div class="footer">
+                    <a href={link} target={linkTarget ?? "_self"}>
+                      <Button text={buttonText ?? "Buy"} size="normal" />
+                    </a>
+                  </div>
                 </div>
-                <div class="footer">
-                  <a href={link} target={linkTarget ?? "_self"}>
-                    <Button text={buttonText ?? "Buy"} size="normal" />
-                  </a>
-                </div>
-              </div>
-            );
-          })
-        }
-      </div>
-      <div>
-        <p>Didn't find what you were looking for? Have special requests?</p>
-      </div>
-      <div class="contact">
-        <a href="mailto:sales@defguard.net">
-          <Button size="large" text="Contact sales" client:load />
-        </a>
-      </div>
+              );
+            })
+          }
+        </div>
+        <div class="product-features">
+          <BookDemoForm
+            client:only="preact"
+            title={form_title}
+            description={form_description}
+          />
+        </div>
+      </ProductSection>
     </ProductSection>
   </main>
-</BaseLayout>
 
-<style lang="scss" is:global>
-  #pricing-tiers {
-    padding-top: calc(200px - var(--nav-height));
-    h1 {
-      @include typography(section);
-    }
-
-    h2 {
-      @include typography(pricebox-title);
-    }
-
-    h3 {
-      @include typography(pricebox-price);
-    }
-
-    h4 {
-      @include typography(pricebox-section);
-    }
-
-    header {
-      display: flex;
-      flex-flow: column;
-      justify-content: flex-start;
-      width: 100%;
-      gap: 20px;
-      padding-bottom: 50px;
-
+  <style lang="scss" is:global>
+    #pricing-tiers {
+      padding-top: calc(200px - var(--nav-height));
       h1 {
-        text-align: left;
+        @include typography(section);
       }
 
-      section.license-section {
-        display: flex;
-        @include typography(paragraph);
-
-        .license-about {
-          width: 100%;
-          max-width: 55ch;
-          padding-right: 30px;
-        }
-
-        hr {
-          padding: 0;
-          margin: 0 20px 0 20px;
-        }
-
-        .license-points {
-          & > a {
-            text-decoration: underline;
-          }
-          @include font-scalable(16px);
-        }
+      h2 {
+        @include typography(pricebox-title);
       }
 
-      @include break-down(lg) {
-        section.license-section {
-          display: flex;
-          flex-flow: column;
-
-
-        .license-about {
-          max-width: 100%;
-        }
-
-        hr {
-          margin: 20px 0 20px 0;
-        }
-
-        .license-points {
-          justify-content: flex-start;
-          @include typography(paragraph);
-        }
-        }
-      }
-    }
-
-    .contact {
-      border-top: 1px solid var(--border-separator);
-      display: flex;
-      flex-flow: row;
-      align-items: center;
-      justify-content: center;
-      box-sizing: border-box;
-      padding: 30px 10px 10px;
-
-      a {
-        text-decoration: none;
-      }
-    }
-
-    & > * {
-      width: 100%;
-    }
-
-    .tiers {
-      --tiers-col-gap: 25px;
-      --tiers-row-gap: 20px;
-
-      display: grid;
-      column-gap: var(--tiers-col-gap);
-      row-gap: var(--tiers-row-gap);
-      padding-bottom: 50px;
-
-      grid-template-columns: 1fr;
-
-      @include break-up(md) {
-        grid-template-columns: 1fr 1fr;
+      h3 {
+        @include typography(pricebox-price);
       }
 
-      @include break-up(lg) {
-        grid-template-columns: repeat(3, 1fr);
+      h4 {
+        @include typography(pricebox-section);
       }
 
-      .tier {
-        width: 100%;
-        border: 1px solid var(--text-body-primary);
-        box-sizing: border-box;
+      header {
         display: flex;
         flex-flow: column;
+        justify-content: flex-start;
+        width: 100%;
+        padding-bottom: 50px;
+        gap: 20px;
 
-        & > header {
-          width: 100%;
+        h1 {
+          text-align: left;
+        }
+
+        h2 {
+          @include typography(h2);
+        }
+
+        section.license-section {
           display: flex;
-          flex-flow: column;
-          align-items: center;
-          justify-content: center;
-          padding-bottom: 20px;
+          @include typography(paragraph);
 
-          & > * {
-            display: block;
+          .license-about {
+            width: 100%;
+            max-width: 55ch;
+            padding-right: 30px;
           }
 
-          h2 {
-            width: 100%;
-            padding: 20px 10px;
-            border-bottom: 1px solid var(--text-body-primary);
-            box-sizing: border-box;
-            text-align: center;
+          hr {
+            padding: 0;
+            margin: 0 20px 0 20px;
           }
 
-          h3 {
-            width: 100%;
-            padding: 10px;
-            border-bottom: 1px solid var(--text-body-primary);
-            box-sizing: border-box;
-            text-align: center;
+          .license-points {
+            & > a {
+              text-decoration: underline;
+            }
+            @include font-scalable(16px);
           }
         }
 
-        .content {
-          display: flex;
-          flex-flow: column;
-          align-items: flex-start;
-          justify-content: flex-start;
-          row-gap: 20px;
-          box-sizing: border-box;
-          padding: 20px;
-
-          & > p {
-            @include typography(pricebox-section);
-          }
-
-          ul {
-            margin: 0;
-            padding: 0;
-            list-style: none;
+        @include break-down(lg) {
+          section.license-section {
             display: flex;
             flex-flow: column;
-            row-gap: 8px;
-            @include typography(pricebox-list);
 
-            li {
-              margin: 0;
+            .license-about {
+              max-width: 100%;
+            }
+
+            hr {
+              margin: 20px 0 20px 0;
+            }
+
+            .license-points {
+              justify-content: flex-start;
+              @include typography(paragraph);
+            }
+          }
+        }
+      }
+
+      .contact {
+        border-top: 1px solid var(--border-separator);
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        padding: 30px 10px 10px;
+
+        a {
+          text-decoration: none;
+        }
+      }
+
+      & > * {
+        width: 100%;
+      }
+
+      .tiers {
+        --tiers-col-gap: 25px;
+        --tiers-row-gap: 20px;
+
+        display: grid;
+        column-gap: var(--tiers-col-gap);
+        row-gap: var(--tiers-row-gap);
+        padding-bottom: 50px;
+
+        grid-template-columns: 1fr;
+
+        @include break-up(md) {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        @include break-up(lg) {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        .tier {
+          width: 100%;
+          border: 1px solid var(--text-body-primary);
+          box-sizing: border-box;
+          display: flex;
+          flex-flow: column;
+
+          & > header {
+            width: 100%;
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 20px;
+
+            & > * {
+              display: block;
+            }
+
+            h2 {
+              width: 100%;
+              padding: 20px 10px;
+              border-bottom: 1px solid var(--text-body-primary);
               box-sizing: border-box;
-              padding: 0 0 0 20px;
-              position: relative;
+              text-align: center;
+            }
 
-              &::before {
-                display: block;
-                position: absolute;
-                top: 1.3ch;
-                left: 0.5ch;
-                content: "\2022";
-                user-select: none;
-                transform: translateY(-50%);
-                color: var(--text-body-primary);
-                @include font-scalable(18px);
+            h3 {
+              width: 100%;
+              padding: 10px;
+              border-bottom: 1px solid var(--text-body-primary);
+              box-sizing: border-box;
+              text-align: center;
+            }
+          }
+
+          .content {
+            display: flex;
+            flex-flow: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            row-gap: 20px;
+            box-sizing: border-box;
+            padding: 20px;
+
+            & > p {
+              @include typography(pricebox-section);
+            }
+
+            ul {
+              margin: 0;
+              padding: 0;
+              list-style: none;
+              display: flex;
+              flex-flow: column;
+              row-gap: 8px;
+              @include typography(pricebox-list);
+
+              li {
+                margin: 0;
+                box-sizing: border-box;
+                padding: 0 0 0 20px;
+                position: relative;
+
+                &::before {
+                  display: block;
+                  position: absolute;
+                  top: 1.3ch;
+                  left: 0.5ch;
+                  content: "\2022";
+                  user-select: none;
+                  transform: translateY(-50%);
+                  color: var(--text-body-primary);
+                  @include font-scalable(18px);
+                }
               }
             }
           }
-        }
 
-        .footer {
-          margin-top: auto;
-          padding: 48px 0 32px 0;
-          .btn {
-            width: 150px;
-            span {
-              @include typography(h3);
-              font-size: 18px;
+          .footer {
+            margin-top: auto;
+            padding: 48px 0 32px 0;
+            .btn {
+              width: 150px;
+              span {
+                @include typography(h3);
+                font-size: 18px;
+              }
             }
-          }
 
-          a {
-            display: flex;
-            width: 100%;
-            text-decoration: none;
-            align-items: center;
-            justify-content: center;
+            a {
+              display: flex;
+              width: 100%;
+              text-decoration: none;
+              align-items: center;
+              justify-content: center;
+            }
           }
         }
       }
+
+      .product-features {
+        padding-top: 100px;
+      }
     }
-  }
-</style>
+  </style>
+</BaseLayout>

@@ -5,19 +5,19 @@
     "prefetch": true
   },
   {
-    "display": "Pricing",
-    "url": "/pricing",
-    "prefetch": true
+    "display": "Enterprise",
+    "url": "https://docs.defguard.net/enterprise",
+    "prefetch": false
   },
   {
     "display": "Documentation",
-    "url": "https://defguard.gitbook.io/defguard/",
+    "url": "https://docs.defguard.net/",
     "prefetch": false,
     "external": true
   },
   {
-    "display": "GitHub",
-    "url": "https://github.com/DefGuard",
+    "display": "FAQ",
+    "url": "/faq",
     "prefetch": false,
     "external": true
   }

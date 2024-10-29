@@ -3,10 +3,24 @@ import Navigation from "../components/base/Navigation.astro";
 import { Button } from "../components/buttons/Button/Button";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProductSection from "../layouts/ProductSection.astro";
+
+const title = "defguard enterprise open-source SSO&VPN with 2FA/MFA";
+const featuredImage =
+  "github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png";
+const imageWidth = "1080";
+const imageHeight = "540";
+const description =
+  "defguard - enterprise open-source SSO&VPN - the only open-source solution with real WireGuard MFA/2FA & integrated OpenID Connect SSO";
 ---
 
-<BaseLayout>
-  <Navigation activeSlug="/purchase-confirm"/>
+<BaseLayout
+  title={title}
+  description={description}
+  featuredImage={featuredImage}
+  imageWidth={imageWidth}
+  imageHeight={imageHeight}
+>
+  <Navigation activeSlug="/purchase-confirm" />
   <main id="purchase-confirm">
     <ProductSection padding="mid">
       <section id="thanks-section">

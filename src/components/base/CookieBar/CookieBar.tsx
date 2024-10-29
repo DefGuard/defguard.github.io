@@ -25,7 +25,7 @@ export const CookieBar = () => {
     }
   }, []);
 
-  if(!visible.value) return null;
+  if (!visible.value) return null;
 
   return (
     <div id="cookie-bar">

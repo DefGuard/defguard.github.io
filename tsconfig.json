@@ -8,6 +8,7 @@
       {
         "name": "@astrojs/ts-plugin"
       }
-    ]
+    ],
+    "types": ["./node_modules/user-agent-data-types"]
   }
 }

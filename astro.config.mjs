@@ -5,7 +5,8 @@ import rehypeExternalLinks from "rehype-external-links";
 import { fileURLToPath } from "url";
 
 import mdx from "@astrojs/mdx";
-import compress from "astro-compress";
+
+import playformCompress from "@playform/compress";
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -15,7 +16,11 @@ const __dirname = path.dirname(__filename);
 export default defineConfig({
   site: "https://web.defguard.net",
   prefetch: true,
-  integrations: [mdx(), compress(), preact({ compat: true })],
+  integrations: [
+    mdx(),
+    preact({ compat: true }),
+    playformCompress(),
+  ],
   markdown: {
     rehypePlugins: [
       [

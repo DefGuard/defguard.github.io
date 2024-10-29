@@ -1,0 +1,18 @@
+label {
+  input {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    opacity: 0;
+  }
+}
+
+svg {
+  path {
+    stroke: var(--text-body-primary);
+  }
+
+  rect {
+    stroke: var(--text-body-primary);
+  }
+}

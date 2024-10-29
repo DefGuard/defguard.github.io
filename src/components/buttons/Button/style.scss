@@ -1,43 +1,49 @@
 .btn {
-    width: max-content;
-    display: flex;
-    flex-grow: 0;
-    flex-shrink: 1;
-    flex-flow: row;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    border-radius: 50px;
-    background-color: transparent;
-    border: 1px solid var(--text-body-primary);
-    cursor: pointer;
+  width: max-content;
+  display: flex;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-radius: 50px;
+  background-color: transparent;
+  border: 1px solid var(--text-body-primary);
+  cursor: pointer;
 
-    @include typography(h2);
+  @include typography(h2);
 
-    &.size-small {
-        min-height: 37px;
-        font-size: 14px;
-        padding-left: 16px;
-        padding-right: 16px;
+  &.size-small {
+    min-height: 37px;
+    font-size: 14px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  &.size-normal {
+    min-height: 53px;
+    font-size: 14px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  &.size-large {
+    min-height: 64px;
+    font-size: 24px;
+    padding-left: 16px;
+    padding-right: 16px;
+
+    @include break-up(lg) {
+      min-height: 84px;
+      padding-left: 64px;
+      padding-right: 64px;
     }
+  }
 
-    &.size-normal {
-        min-height: 53px;
-        font-size: 14px;
-        padding-left: 16px;
-        padding-right: 16px;
-    }
-
-    &.size-large {
-        min-height: 84px;
-        font-size: 24px;
-        padding-left: 64px;
-        padding-right: 64px;
-    }
-
-    &:hover {
-        border-color: var(--surface-main-primary);
-    }
+  &:hover {
+    border-color: var(--surface-main-primary);
+  }
 }

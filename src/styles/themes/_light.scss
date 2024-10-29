@@ -1,21 +1,21 @@
-@use './primitives' as *;
+@use "./primitives" as *;
 
 [data-theme="light"] {
-    --text-body-primary: #{$grayscale-90};
-    --text-body-secondary: #{$grayscale-60};
-    --text-body-tertiary: #{$grayscale-50};
-    --text-button-primary: #{$grayscale-70};
-    --text-button-tertiary: #{$brand-default-main};
-    --text-button-secondary: #{$grayscale-0};
+  --text-body-primary: #{$grayscale-90};
+  --text-body-secondary: #{$grayscale-60};
+  --text-body-tertiary: #{$grayscale-50};
+  --text-button-primary: #{$grayscale-70};
+  --text-button-tertiary: #{$brand-default-main};
+  --text-button-secondary: #{$grayscale-0};
 
-    --surface-main-primary: #{$brand-default-main};
-    --surface-main-secondary: #{$brand-hover-main-secondary};
-    --surface-frame-bg: #{$grayscale-10};
-    --surface-scroll-inactive: #{$grayscale-30};
-    --surface-scroll-active: #{$grayscale-50};
+  --surface-main-primary: #{$brand-default-main};
+  --surface-main-secondary: #{$brand-hover-main-secondary};
+  --surface-frame-bg: #{$grayscale-10};
+  --surface-scroll-inactive: #{$grayscale-30};
+  --surface-scroll-active: #{$grayscale-50};
 
-    --border-primary: #{$grayscale-20};
-    --border-alert: #{$brand-default-error};
-    --border-separator: #{$grayscale-40};
-    --border-secondary: #{$grayscale-20};
+  --border-primary: #{$grayscale-20};
+  --border-alert: #{$brand-default-error};
+  --border-separator: #{$grayscale-40};
+  --border-secondary: #{$grayscale-20};
 }

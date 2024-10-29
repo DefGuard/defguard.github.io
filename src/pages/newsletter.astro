@@ -2,15 +2,25 @@
 import NewsletterSection from "../components/NewsletterSection.astro";
 import Navigation from "../components/base/Navigation.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "defguard enterprise open-source SSO&VPN with 2FA/MFA: Newsletter";
+const featuredImage =
+  "github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png";
+const imageWidth = "1080";
+const imageHeight = "540";
+const description =
+  "defguard - enterprise open-source SSO&VPN - the only open-source solution with real WireGuard MFA/2FA & integrated OpenID Connect SSO";
 ---
 
-<BaseLayout>
+<BaseLayout
+  title={title}
+  description={description}
+  featuredImage={featuredImage}
+  imageWidth={imageWidth}
+  imageHeight={imageHeight}
+>
   <Navigation activeSlug="/newsletter" />
   <main id="newsletter-page">
-    <!-- <ProductSection padding="none" id="thanks">
-      <h2>Thank you for downloading defguard</h2>
-      <p>Your download should start automatically. If it doesn't, download now.</p>
-    </ProductSection> -->
     <NewsletterSection />
   </main>
 </BaseLayout>
@@ -18,26 +28,5 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 <style lang="scss" is:global>
   #newsletter-page {
     padding: calc(var(--nav-height) + 100px) 0 100px;
-  }
-
-  #thanks {
-    padding-bottom: 40px;
-    & > * {
-      width: 100%;
-    }
-
-    h2,
-    p {
-      text-align: left;
-    }
-
-    h2 {
-      @include typography(section);
-    }
-
-    p {
-      @include typography(paragraph);
-      padding: 20px 0;
-    }
   }
 </style>
