@@ -65,7 +65,7 @@ const BookDemoForm = ({ title, description }: Props) => {
 
   return (
     <>
-      <form class="book" autocomplete="off" onSubmit={onSubmit}>
+      <form id="book-form" class="book" autocomplete="off" onSubmit={onSubmit}>
         <h3>{title}</h3>
         <span>{description}</span>
         <div class="double-inputs">
