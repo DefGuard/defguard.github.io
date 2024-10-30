@@ -7,7 +7,7 @@ linkTarget: _blank
 link: https://buy.stripe.com/14kdSZct6gaT0eI28a
 ---
 
-Just the <a href="https://docs.defguard.net/enterprise" target="_blank">Enteprise License</a> to activate the <a href="http://docs.defguard.net/enterprise/all-enteprise-features" target="_blank"> enterprise features</a>:
+<a href="https://docs.defguard.net/enterprise" target="_blank">Enteprise License</a> for <a href="http://docs.defguard.net/enterprise/all-enteprise-features" target="_blank"> enterprise features</a> with community support:
 
 - <strong>no user and location limit!</strong>
 - external OIDC (Google/Microsoft/Custom)
@@ -21,4 +21,4 @@ Comming soon:
 - mobile clients
 - full VPN client data encryption
 
-No premium support - just GitHub isses and Matrix community support.
+Community support is done using <a href="https://docs.defguard.net/contact-us/support#found-a-bug-need-a-feature" target="_blank">GitHub issues</a> and <a href="https://docs.defguard.net/contact-us/support#community-support" target="_blank">Matrix chat</a>.
