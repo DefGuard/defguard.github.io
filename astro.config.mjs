@@ -14,7 +14,7 @@ const __dirname = path.dirname(__filename);
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://web.defguard.net",
+  site: "https://defguard.net",
   prefetch: true,
   integrations: [
     mdx(),
