@@ -5,7 +5,7 @@ price: €390/month
 link: https://buy.stripe.com/3csdSZ1Os5wfgdGeUY
 ---
 
-<a href="https://docs.defguard.net/enterprise" target="_blank">Enteprise License</a> with <a href="http://docs.defguard.net/enterprise/all-enteprise-features" target="_blank"> enterprise features</a> with additional premium support from our team!
+<a href="https://docs.defguard.net/enterprise" target="_blank">Enteprise License</a> with <a href="http://docs.defguard.net/enterprise/all-enteprise-features" target="_blank"> all enterprise features</a> with additional premium support from our team!
 
 <strong>No users and VPN locations limit</strong>.
 
