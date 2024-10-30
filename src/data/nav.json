@@ -7,7 +7,13 @@
   {
     "display": "Enterprise",
     "url": "https://docs.defguard.net/enterprise",
-    "prefetch": false
+    "prefetch": false,
+    "external": true
+  },
+  {
+    "display": "Pricing",
+    "url": "https://defguard.net/pricing",
+    "prefetch": true
   },
   {
     "display": "Documentation",
@@ -18,7 +24,6 @@
   {
     "display": "FAQ",
     "url": "/faq",
-    "prefetch": false,
-    "external": true
+    "prefetch": false
   }
 ]
