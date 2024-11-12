@@ -10,6 +10,7 @@ link: https://buy.stripe.com/14kdSZct6gaT0eI28a
 <a href="https://docs.defguard.net/enterprise" target="_blank">Enteprise License</a> for <a href="http://docs.defguard.net/enterprise/all-enteprise-features" target="_blank"> enterprise features</a> with community support:
 
 - <strong>no user and location limit!</strong>
+- no gateway limits (for failover/HA)
 - external OIDC (Google/Microsoft/Custom)
 - automaticic & real time desktop client reconfiguration
 - disable for users to manage their devices

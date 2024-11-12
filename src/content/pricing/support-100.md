@@ -7,7 +7,7 @@ link: https://buy.stripe.com/eVaeX39gUe2L9PifZ1
 
 <a href="https://docs.defguard.net/enterprise" target="_blank">Enteprise License</a> with <a href="http://docs.defguard.net/enterprise/all-enteprise-features" target="_blank"> all enterprise features</a> with additional premium support from our team!
 
-Vaild for up to <strong>100 users</strong> and <strong>3 VPN locations</strong> limit.
+Vaild for up to <strong>100 users</strong> and <strong>3 VPN locations</strong> limit (each location can have HA/multiple gateways).
 
 - Support via online support ticket system
 - Three monthly support tickets
