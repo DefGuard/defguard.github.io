@@ -8,16 +8,23 @@ const productFeatures = defineCollection({
   }),
 });
 
+const pricingSchema = z.object({
+  name: z.string(),
+  order: z.number(),
+  price: z.number(),
+  annualPrice: z.number().optional(),
+  link: z.string(),
+  discount: z.number().optional(),
+  disabled: z.boolean().optional().default(false),
+  linkTarget: z.string().optional(),
+  buttonText: z.string().optional(),
+});
+
+export type PricingSchema = z.infer<typeof pricingSchema>;
+
 const pricing = defineCollection({
   type: "content",
-  schema: z.object({
-    name: z.string(),
-    order: z.number(),
-    price: z.string(),
-    link: z.string(),
-    linkTarget: z.string().optional(),
-    buttonText: z.string().optional(),
-  }),
+  schema: pricingSchema,
 });
 
 export const collections = {

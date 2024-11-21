@@ -1,15 +1,21 @@
 ---
 import { getCollection } from "astro:content";
 import Navigation from "../components/base/Navigation.astro";
-import { Button } from "../components/buttons/Button/Button";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProductSection from "../layouts/ProductSection.astro";
 import OrganizationJSONLD from "../scripts/OrganizationJSONLD.astro";
 import BookDemoForm from "../components/form/BookDemoForm/BookDemoForm";
+import PricingHeaderContent from "../data/pricing/page-header.mdx";
+import { PricingCards } from "../components/pricing/Pricing";
+import ContentLimiter from "../components/ContentLimiter.astro";
 
-const pricing = (await getCollection("pricing")).sort(
-  (p1, p2) => p1.data.order - p2.data.order,
-);
+const pricingCollection = await getCollection("pricing");
+// sort and map to prop type
+const pricingData = pricingCollection
+  .filter((p) => !p.data.disabled)
+  .sort((p1, p2) => p1.data.order - p2.data.order)
+  .map((p) => ({ ...p.data, content: p.body, id: p.id }));
+
 const title =
   "defguard enterprise open-source SSO&VPN with 2FA/MFA: Pricing for Enterprise";
 const featuredImage =
@@ -38,10 +44,6 @@ const tags = [
   "sso",
   "security",
 ];
-
-const form_title = "Looking for custom deployment or features?";
-const form_description =
-  "We provide consulting or custom deployment and security services. You also can commision us to deliver custom features or integrations (for the server and/or the client). Just fill out the form below:";
 ---
 
 <BaseLayout
@@ -60,60 +62,26 @@ const form_description =
   />
   <Navigation activeSlug="/pricing" />
   <main id="pricing-page">
-    <ProductSection padding="small">
-      <ProductSection padding="small" id="pricing-tiers">
-        <header>
-          <h1>Enterprise Pricing and Support</h1>
-          <section class="license-section">
-            <div class="license-about">
-            Enterprise (all features) <strong>is free and requires no license up to certain limits</strong>, more details <a target="_blank" href="https://docs.defguard.net/enterprise/license#enterprise-is-free-up-to-certain-limits">here.</a>
-            </div>
-            <hr />
-            <div class="license-points">
-              If you are a:
-              <ul>
-                <li>non profit organisation</li>
-                <li>open source project</li>
-              </ul>
-              Please contact us by <a href="#book-form">filling out the form below</a> for
-              Enterprise license.
-            </div>
-          </section>
-        </header>
-        <div class="tiers">
-          {
-            pricing.map(async (p) => {
-              const { link, name, price, buttonText, linkTarget } = p.data;
-              const { Content } = await p.render();
-
-              return (
-                <div class="tier">
-                  <header>
-                    <h2>{name}</h2>
-                    <h3>{price}</h3>
-                  </header>
-                  <div class="content">
-                    <Content />
-                  </div>
-                  <div class="footer">
-                    <a href={link} target={linkTarget ?? "_self"}>
-                      <Button text={buttonText ?? "Buy"} size="normal" />
-                    </a>
-                  </div>
-                </div>
-              );
-            })
-          }
+    <ContentLimiter contentId="pricing-tiers" maxWidth={1100}>
+      <header>
+        <h1>Pricing</h1>
+        <PricingHeaderContent />
+      </header>
+      <PricingCards client:load data={pricingData} />
+      <div class="product-features">
+        <div class="form-description">
+          <h3>Looking for custom deployment or features?</h3>
+          <p>
+            We provide consulting or custom deployment and security services.  You also can commission us to deliver custom features or integrations  (for the server and/or the client). Just fill out the form below.
+          </p>
+          <h3>You need an enterprise features for free?</h3>
+          <p>
+            If you are a: <strong>non profit organization</strong> or <strong>open source project</strong>, please contact us by filling out the form below for Enterprise license.
+          </p>
         </div>
-        <div class="product-features">
-          <BookDemoForm
-            client:only="preact"
-            title={form_title}
-            description={form_description}
-          />
-        </div>
-      </ProductSection>
-    </ProductSection>
+        <BookDemoForm client:only="preact" />
+      </div>
+    </ContentLimiter>
   </main>
 
   <style lang="scss" is:global>
@@ -213,128 +181,28 @@ const form_description =
         width: 100%;
       }
 
-      .tiers {
-        --tiers-col-gap: 25px;
-        --tiers-row-gap: 20px;
-
-        display: grid;
-        column-gap: var(--tiers-col-gap);
-        row-gap: var(--tiers-row-gap);
-        padding-bottom: 50px;
-
-        grid-template-columns: 1fr;
-
-        @include break-up(md) {
-          grid-template-columns: 1fr 1fr;
-        }
-
-        @include break-up(lg) {
-          grid-template-columns: repeat(3, 1fr);
-        }
-
-        .tier {
-          width: 100%;
-          border: 1px solid var(--text-body-primary);
-          box-sizing: border-box;
-          display: flex;
-          flex-flow: column;
-
-          & > header {
-            width: 100%;
-            display: flex;
-            flex-flow: column;
-            align-items: center;
-            justify-content: center;
-            padding-bottom: 20px;
-
-            & > * {
-              display: block;
-            }
-
-            h2 {
-              width: 100%;
-              padding: 20px 10px;
-              border-bottom: 1px solid var(--text-body-primary);
-              box-sizing: border-box;
-              text-align: center;
-            }
-
-            h3 {
-              width: 100%;
-              padding: 10px;
-              border-bottom: 1px solid var(--text-body-primary);
-              box-sizing: border-box;
-              text-align: center;
-            }
-          }
-
-          .content {
-            display: flex;
-            flex-flow: column;
-            align-items: flex-start;
-            justify-content: flex-start;
-            row-gap: 20px;
-            box-sizing: border-box;
-            padding: 20px;
-
-            & > p {
-              @include typography(pricebox-section);
-            }
-
-            ul {
-              margin: 0;
-              padding: 0;
-              list-style: none;
-              display: flex;
-              flex-flow: column;
-              row-gap: 8px;
-              @include typography(pricebox-list);
-
-              li {
-                margin: 0;
-                box-sizing: border-box;
-                padding: 0 0 0 20px;
-                position: relative;
-
-                &::before {
-                  display: block;
-                  position: absolute;
-                  top: 1.3ch;
-                  left: 0.5ch;
-                  content: "\2022";
-                  user-select: none;
-                  transform: translateY(-50%);
-                  color: var(--text-body-primary);
-                  @include font-scalable(18px);
-                }
-              }
-            }
-          }
-
-          .footer {
-            margin-top: auto;
-            padding: 48px 0 32px 0;
-            .btn {
-              width: 150px;
-              span {
-                @include typography(h3);
-                font-size: 18px;
-              }
-            }
-
-            a {
-              display: flex;
-              width: 100%;
-              text-decoration: none;
-              align-items: center;
-              justify-content: center;
-            }
-          }
-        }
-      }
-
       .product-features {
         padding-top: 100px;
+        .form-description {
+          width: 100%;
+          display: flex;
+          flex-flow: column;
+          row-gap: 30px;
+          padding-bottom: 30px;
+
+          h3 {
+            @include typography(pricebox-section);
+            font-weight: 600;
+          }
+
+          p {
+            @include typography(paragraph);
+
+            strong {
+              font-weight: 600;
+            }
+          }
+        }
       }
     }
   </style>

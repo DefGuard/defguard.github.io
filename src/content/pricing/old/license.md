@@ -1,10 +1,11 @@
 ---
 name: Enterprise License
 order: 1
-price: €69/month
+price: 69
 buttonText: Buy
 linkTarget: _blank
 link: https://buy.stripe.com/14kdSZct6gaT0eI28a
+disabled: true
 ---
 
 <a href="https://docs.defguard.net/enterprise" target="_blank">Enteprise License</a> for <a href="http://docs.defguard.net/enterprise/all-enteprise-features" target="_blank"> enterprise features</a> with community support:
@@ -18,6 +19,7 @@ link: https://buy.stripe.com/14kdSZct6gaT0eI28a
 - disable "All traffic" in the desktop client
 
 Comming soon:
+
 - 2FA/MFA with hardware keys in desktop client
 - mobile clients
 - full VPN client data encryption

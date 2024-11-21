@@ -6,7 +6,8 @@ import "../styles/global.scss";
 import { CookieBar } from "../components/base/CookieBar/CookieBar";
 
 const favSizes = [16,32,57,60,70,72,76,96,114,120,128,144,150,152,180,192,310,384,512];
-const isProd = import.meta.env.PROD;
+//@ts-ignore
+const isProd = import.meta.env.PROD as boolean;
 
 interface Props {
   title: string;
@@ -56,7 +57,6 @@ const { title, description, featuredImage, imageWidth, imageHeight} = Astro.prop
     <slot />
     <Footer />
     <FloatingLinks />
-    <script src="../scripts/theme.ts"></script>
     <CookieBar client:only="preact" />
     {isProd && (
       <script type="text/javascript" is:inline>

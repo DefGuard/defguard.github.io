@@ -1,0 +1,41 @@
+---
+import clsx from "clsx";
+
+interface Props {
+  maxWidth?: number;
+  id?: string;
+  className?: string;
+  contentClass?: string;
+  contentId?: string;
+}
+
+const { maxWidth, className, id, contentClass, contentId } = Astro.props;
+
+const limitedStyle: astroHTML.JSX.CSSProperties = {
+  maxWidth: `${maxWidth !== undefined ? maxWidth : 1100}px`,
+};
+---
+
+<div class={clsx("content-limiter", className)} id={id}>
+  <div class={clsx("limited-content", contentClass)} style={limitedStyle} id={contentId}>
+    <slot />
+  </div>
+</div>
+
+<style lang="scss">
+  .content-limiter {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    justify-content: center;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 20px;
+
+    .limited-content {
+      width: 100%;
+    }
+  }
+</style>

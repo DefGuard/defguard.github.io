@@ -166,14 +166,6 @@ const { activeSlug } = Astro.props;
 
   #mobile-nav {
     display: none;
-    &.open {
-      display: block;
-    }
-
-    @include break-up(lg) {
-      display: none !important;
-    }
-
     width: 100%;
     padding-top: var(--nav-height);
     box-sizing: border-box;
@@ -181,6 +173,14 @@ const { activeSlug } = Astro.props;
     position: fixed;
     inset: 0;
     z-index: 3;
+
+    &.open {
+      display: block;
+    }
+
+    @include break-up(lg) {
+      display: none !important;
+    }
 
     ul {
       list-style: none;
@@ -256,18 +256,7 @@ const { activeSlug } = Astro.props;
     // vars
     --main-padding: 12px 32px;
     --items-gap: 12px;
-
     display: none;
-
-    @include break-up(lg) {
-      display: flex;
-    }
-
-    @include break-up(xl) {
-      --main-padding: 12px 64px;
-      --items-gap: 32px;
-    }
-
     background-color: var(--surface-frame-bg);
     z-index: 4;
     top: 0;
@@ -282,6 +271,15 @@ const { activeSlug } = Astro.props;
     align-items: center;
     justify-content: flex-start;
     column-gap: 10px;
+
+    @include break-up(lg) {
+      display: flex;
+    }
+
+    @include break-up(xl) {
+      --main-padding: 12px 64px;
+      --items-gap: 32px;
+    }
 
     .nav-logo {
       svg {
