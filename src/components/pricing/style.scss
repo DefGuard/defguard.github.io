@@ -35,10 +35,30 @@
     &>.plans {
         width: 100%;
         display: grid;
-        grid-template-columns: repeat(auto-fit, 255px);
-        justify-content: space-between;
-        column-gap: 25px;
-        row-gap: 25px;
+
+        @include break-down(sm) {
+            grid-auto-flow: row;
+            row-gap: 40px;
+            justify-content: center;
+
+            .pricing-card {
+                max-width: 255px;
+            }
+        }
+
+        @include break-up(sm) {
+            grid-template-columns: repeat(auto-fit, 255px);
+            column-gap: 25px;
+            row-gap: 25px;
+            justify-content: flex-start;
+        }
+
+        @include break-up(xl) {
+            grid-template-columns: repeat(auto-fit, 255px);
+            justify-content: space-between;
+            column-gap: 25px;
+            row-gap: 25px;
+        }
 
         .pricing-card {
             box-sizing: border-box;
