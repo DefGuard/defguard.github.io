@@ -23,10 +23,6 @@ export const PricingCards = ({ data }: PricingProps) => {
   );
   const [plan, setPlan] = useState(PricingPlan.ANNUAL);
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
   return (
     <div id="pricing-container">
       {annualEnabled && <PricingToggle onChange={(v) => setPlan(v)} state={plan} />}
