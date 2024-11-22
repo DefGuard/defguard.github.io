@@ -35,9 +35,7 @@ const BookDemoForm = () => {
     setValues({ ...values, [name]: value });
   };
 
-  const onSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
+  const onSubmit = () => {
     const data = new FormData();
     data.append("first_name", values.first_name);
     data.append("last_name", values.last_name);
@@ -60,7 +58,15 @@ const BookDemoForm = () => {
 
   return (
     <>
-      <form id="book-form" class="book" autocomplete="off" onSubmit={onSubmit}>
+      <form
+        id="book-form"
+        class="book"
+        autocomplete="off"
+        onSubmit={(e) => {
+          e.preventDefault();
+          onSubmit();
+        }}
+      >
         <div class="double-inputs">
           <label for="first_name">
             First name
