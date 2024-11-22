@@ -13,6 +13,7 @@ import {
   useRole,
   useInteractions,
 } from "@floating-ui/react";
+import type { CSSProperties } from "preact/compat";
 
 const FeaturesTableCell = ({ status, hover, link }: FeatureTableCell) => {
   const getExtraIcon = useMemo(() => {
@@ -97,7 +98,7 @@ const FeaturesTableCell = ({ status, hover, link }: FeatureTableCell) => {
         <div
           class="floating-cell-tooltip"
           ref={refs.setFloating}
-          style={floatingStyles}
+          style={floatingStyles as CSSProperties}
           {...getFloatingProps()}
         >
           <p>{hover}</p>

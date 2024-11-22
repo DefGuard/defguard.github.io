@@ -16,11 +16,7 @@ const __dirname = path.dirname(__filename);
 export default defineConfig({
   site: "https://defguard.net",
   prefetch: true,
-  integrations: [
-    mdx(),
-    preact({ compat: true }),
-    playformCompress(),
-  ],
+  integrations: [mdx(), preact({ compat: true }), playformCompress()],
   markdown: {
     rehypePlugins: [
       [
@@ -41,6 +37,7 @@ export default defineConfig({
     css: {
       preprocessorOptions: {
         scss: {
+          api: "modern",
           additionalData: `@use "@/styles/mixins" as *;`,
         },
       },

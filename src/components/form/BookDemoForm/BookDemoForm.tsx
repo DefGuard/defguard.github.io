@@ -12,12 +12,7 @@ type BookDemoType = {
   tell_us_more: string;
 };
 
-interface Props {
-  title: string;
-  description?: string;
-}
-
-const BookDemoForm = ({ title, description }: Props) => {
+const BookDemoForm = () => {
   const [okMessage, setOkMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
   const [values, setValues] = useState<BookDemoType>({
@@ -40,9 +35,7 @@ const BookDemoForm = ({ title, description }: Props) => {
     setValues({ ...values, [name]: value });
   };
 
-  const onSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
+  const onSubmit = () => {
     const data = new FormData();
     data.append("first_name", values.first_name);
     data.append("last_name", values.last_name);
@@ -65,9 +58,15 @@ const BookDemoForm = ({ title, description }: Props) => {
 
   return (
     <>
-      <form id="book-form" class="book" autocomplete="off" onSubmit={onSubmit}>
-        <h3>{title}</h3>
-        <span>{description}</span>
+      <form
+        id="book-form"
+        class="book"
+        autocomplete="off"
+        onSubmit={(e) => {
+          e.preventDefault();
+          onSubmit();
+        }}
+      >
         <div class="double-inputs">
           <label for="first_name">
             First name

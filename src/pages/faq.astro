@@ -6,7 +6,6 @@ import ProductSection from "../layouts/ProductSection.astro";
 import { ProductFeature } from "../components/product/ProductFeature/ProductFeature";
 import ProductBuiltBy from "../components/product/ProductBuiltBy.astro";
 import MatrixSection from "../components/MatrixSection.astro";
-import ImageGallery from "../components/image/ImageGallery.astro";
 import BookDemoForm from "../components/form/BookDemoForm/BookDemoForm";
 
 const faqFeatures = (await getCollection("faq")).sort(
@@ -39,8 +38,6 @@ const tags = [
   "secure",
   "rust",
 ];
-
-const form_title = "Book a demo";
 ---
 
 <ProductLayout
@@ -83,7 +80,7 @@ const form_title = "Book a demo";
     </ProductSection>
     <ProductSection padding="none">
       <div class="product-features">
-        <BookDemoForm client:only="preact" title={form_title} />
+        <BookDemoForm client:idle />
       </div>
     </ProductSection>
     <ProductBuiltBy />
