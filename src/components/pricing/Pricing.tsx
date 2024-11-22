@@ -121,7 +121,11 @@ const PricingCard = ({ data, activePlan }: CardProps) => {
           </p>
         )}
         <div class="action-container">
-          <a class="action" target={data.linkTarget ?? "_blank"} href={data.link}>
+          <a
+            class="action"
+            target={data.linkTarget ?? "_blank"}
+            href={isAnnual ? data.annualPriceLink : data.priceLink}
+          >
             <span>{data.buttonText}</span>
           </a>
         </div>
