@@ -1,4 +1,7 @@
 {
-  "cSpell.words": ["pricebox"],
+  "cSpell.words": [
+    "dirreferent",
+    "pricebox"
+  ],
   "typescript.tsdk": "node_modules\\typescript\\lib"
 }
