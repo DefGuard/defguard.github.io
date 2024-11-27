@@ -6,6 +6,7 @@ import ProductLayout from "../layouts/ProductLayout.astro";
 import Testimonials from "./_home/components/client-side/Testimonials/Testimonials";
 import FlexibleIdentitySection from "./_home/components/FlexibleIdentity/FlexibleIdentitySection.astro";
 import HomeHeader from "./_home/components/HomeHeader.astro";
+import Roadmap from "./_home/components/Roadmap/Roadmap.astro";
 import HomeScrollSection1 from "./_home/scroll-sections/section-1/HomeScrollSection1";
 import HomeScrollSection2 from "./_home/scroll-sections/section-2/HomeScrollSection2";
 import HomeScrollSection3 from "./_home/scroll-sections/section-3/HomeScrollSection3";
@@ -76,6 +77,7 @@ const tags = [
     <HomeSection id="testimonials">
       <Testimonials client:visible />
     </HomeSection>
+    <Roadmap />
     <BuiltBy />
   </main>
 </ProductLayout>
@@ -108,6 +110,11 @@ const tags = [
         ul {
           margin: 0;
           padding-left: 20px;
+        }
+
+        a {
+          white-space: normal;
+          word-wrap: break-word;
         }
       }
     }

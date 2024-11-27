@@ -7,7 +7,9 @@ const defaults: StoreValues = {
 export const useAppStore = createWithEqualityFn<Store>(
   (set) => ({
     ...defaults,
-    setState: (vals) => { set(vals); },
+    setState: (vals) => {
+      set(vals);
+    },
   }),
   Object.is,
 );
