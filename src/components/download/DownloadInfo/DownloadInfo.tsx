@@ -1,8 +1,9 @@
-import { shallow } from "zustand/shallow";
-import { useAppStore } from "../../clientStores/appStore";
 import "./style.scss";
 
 import { useEffect, useState } from "react";
+import { shallow } from "zustand/shallow";
+
+import { useAppStore } from "../../clientStores/appStore";
 
 type GithubProps = {
   owner: string;

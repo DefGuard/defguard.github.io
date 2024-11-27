@@ -1,31 +1,31 @@
 .scroll-slide-card {
-    width: 100%;
-    background-color: var(--surface-nav-bg);
-    border-radius: 10px;
-    box-shadow: 0px 12px 24px 0px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-    position: relative;
-    min-height: 535px;
+  width: 100%;
+  background-color: var(--surface-nav-bg);
+  border-radius: 10px;
+  box-shadow: 0px 12px 24px 0px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  position: relative;
+  min-height: 535px;
 
-    h2 {
-        padding: 22px 18px 0 25px;
-    }
+  h2 {
+    padding: 22px 18px 0 25px;
+  }
 
+  .graphic-track {
+    position: absolute;
+  }
+
+  &.lines {
     .graphic-track {
-        position: absolute;
+      bottom: 40px;
+      left: 0px;
     }
+  }
 
-    &.lines {
-        .graphic-track {
-            bottom: 40px;
-            left: 0px;
-        }
+  &.circles {
+    .graphic-track {
+      bottom: 0;
+      left: 39px;
     }
-
-    &.circles {
-        .graphic-track {
-            bottom: 0;
-            left: 39px;
-        }
-    }
+  }
 }

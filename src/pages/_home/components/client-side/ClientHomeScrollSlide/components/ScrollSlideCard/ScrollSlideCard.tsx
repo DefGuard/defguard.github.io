@@ -1,7 +1,9 @@
-import clsx from "clsx";
 import "./style.scss";
-import { ClientScrollCardVariant } from "../../type";
+
+import clsx from "clsx";
 import { useId } from "react";
+
+import { ClientScrollCardVariant } from "../../type";
 
 type Props = {
   title: string;

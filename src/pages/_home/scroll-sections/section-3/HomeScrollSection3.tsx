@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import { useBreakpoints } from "../../../../components/hooks/useBreakpoints";
 import ClientHomeScrollSlide from "../../components/client-side/ClientHomeScrollSlide/ClientHomeScrollSlide";
 import {
   ClientScrollCardVariant,
@@ -8,11 +9,11 @@ import {
 import image1 from "./assets/slide-1.png?url";
 import image2 from "./assets/slide-2.png?url";
 import image3 from "./assets/slide-3.png?url";
-import { useBreakpoints } from "../../../../components/hooks/useBreakpoints";
 
 type SlidesData = {
   image: string;
   content: ReactNode;
+  title: string;
 };
 
 const title = "Easy management with beautiful UI";
@@ -35,8 +36,10 @@ const slides: SlidesData[] = [
       </ul>
     ),
     image: image1,
+    title: "Easy management with beautiful UI",
   },
   {
+    title: "Easy management with beautiful UI",
     content: (
       <p>
         Looking for transparent and verifiable security solutions and not promises? As an
@@ -48,6 +51,7 @@ const slides: SlidesData[] = [
     image: image2,
   },
   {
+    title: "Easy management with beautiful UI",
     content: (
       <p>
         We&apos;ve implemented defguard in Rust for code portability, security, and speed.

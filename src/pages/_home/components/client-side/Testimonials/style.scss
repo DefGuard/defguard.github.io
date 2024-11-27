@@ -1,10 +1,10 @@
 .testimonials-content {
-  &>p {
+  & > p {
     @include typography(h3);
     padding-bottom: 8px;
   }
 
-  &>.track {
+  & > .track {
     padding-bottom: 32px;
 
     .testimonial {
@@ -34,14 +34,14 @@
         }
       }
 
-      &>.right {
+      & > .right {
         grid-column: 2 / 3;
         display: flex;
         flex-flow: column;
         row-gap: 10px;
       }
 
-      &>.left {
+      & > .left {
         grid-column: 1 / 2;
         width: 100%;
         max-width: 100%;

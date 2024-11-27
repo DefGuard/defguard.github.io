@@ -1,7 +1,7 @@
 import "./style.scss";
 
 import { isUndefined } from "lodash-es";
-import { type CSSProperties,Fragment } from "react";
+import { type CSSProperties, Fragment } from "react";
 
 import FeaturesTableCell from "./components/FeaturesTableCell/FeaturesTableCell";
 import { FeaturesTableDefguardLogo } from "./components/FeaturesTableDefguardLogo/FeaturesTableDefguardLogo";
