@@ -1,0 +1,7 @@
+---
+import clarityScript from "./clarity?url";
+/* eslint-disable prettier/prettier */
+const isProd = import.meta.env.PROD as boolean;
+---
+
+{!isProd && <script type="text/javascript" src={clarityScript} is:inline />}

@@ -1,0 +1,64 @@
+---
+import ContentLimiter from "./ContentLimiter.astro";
+import HomeSection from "./home/HomeSection.astro";
+import teoniteSvgRaw from "/public/svg/built-by.svg?raw";
+---
+
+<HomeSection variant="gray">
+  <ContentLimiter contentId="built-by">
+    <div class="top">
+      <div class="divider"></div>
+      <p>Designed and developed by</p>
+      <div class="divider"></div>
+    </div>
+    <a href="https://teonite.com/services/rust/" aria-label="Built by teonite">
+      <Fragment set:html={teoniteSvgRaw} />
+    </a>
+  </ContentLimiter>
+</HomeSection>
+
+<style lang="scss" is:global>
+  #built-by {
+    box-sizing: border-box;
+    padding-top: page-spacing(200px);
+    padding-bottom: page-spacing(200px);
+    display: flex;
+    flex-flow: column;
+    row-gap: 50px;
+    align-items: center;
+    justify-content: flex-start;
+
+    .top {
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: 55px;
+      grid-template-columns: 1fr max-content 1fr;
+      align-items: center;
+      justify-content: center;
+      column-gap: 8px;
+
+      p {
+        text-align: center;
+        @include typography(pricebox-title);
+      }
+    }
+
+    .divider {
+      display: block;
+      content: " ";
+      width: 100%;
+      height: 1px;
+      background-color: var(--text-body-primary);
+    }
+
+    svg {
+      width: 100%;
+      height: auto;
+      path {
+        fill: var(--text-body-primary);
+      }
+    }
+  }
+</style>

@@ -5,6 +5,9 @@ export default {
   semi: true,
   printWidth: 90,
   plugins: ["prettier-plugin-astro"],
+  trailingComma: "all",
+  endOfLine: "lf",
+  jsxSingleQuote: false,
   overrides: [
     {
       files: "*.astro",

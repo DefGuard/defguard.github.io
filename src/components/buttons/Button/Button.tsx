@@ -1,6 +1,7 @@
+import "./style.scss";
+
 import clsx from "clsx";
 import type { ComponentChildren } from "preact";
-import "./style.scss";
 
 type Props = {
   text: string;
@@ -22,7 +23,7 @@ export const Button = ({
   return (
     <button
       type={type}
-      class={clsx("btn", `size-${size}`)}
+      className={clsx("btn", `size-${size}`)}
       onClick={onClick}
       disabled={disabled}
     >

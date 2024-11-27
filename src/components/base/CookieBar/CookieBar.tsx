@@ -1,7 +1,8 @@
 import "./style.scss";
-import { useSignal } from "@preact/signals";
-import { useEffect } from "preact/hooks";
+
+import { useEffect, useState } from "react";
 import { getCookie, setCookie } from "typescript-cookie";
+
 import { Button } from "../../buttons/Button/Button";
 
 const cookieName = "cookies-accepted";
@@ -11,21 +12,21 @@ type CookieStore = {
 };
 
 export const CookieBar = () => {
-  const visible = useSignal(false);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const cookie = getCookie(cookieName);
     if (cookie) {
       const { accepted } = JSON.parse(cookie) as CookieStore;
       if (!accepted) {
-        visible.value = true;
+        setVisible(true);
       }
     } else {
-      visible.value = true;
+      setVisible(true);
     }
   }, []);
 
-  if (!visible.value) return null;
+  if (!visible) return null;
 
   return (
     <div id="cookie-bar">
@@ -36,7 +37,7 @@ export const CookieBar = () => {
         onClick={() => {
           const cookie: CookieStore = { accepted: true };
           setCookie(cookieName, JSON.stringify(cookie));
-          visible.value = false;
+          setVisible(false);
         }}
       />
     </div>

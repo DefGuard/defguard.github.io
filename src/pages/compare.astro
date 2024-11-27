@@ -7,14 +7,12 @@ import { featuresTableData } from "../data/compare-table";
 import { Button } from "../components/buttons/Button/Button";
 import OrganizationJSONLD from "../scripts/OrganizationJSONLD.astro";
 
-const title =
-  "defguard enterprise open-source SSO&VPN with 2FA/MFA: Comparison of WireGuard VPN solutions";
+const title = "Zero-Trust WireGuard® 2FA/MFA VPN: Comparison of WireGuard VPN solutions";
 const featuredImage =
   "github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png";
 const imageWidth = "1080";
 const imageHeight = "540";
-const description =
-  "defguard - enterprise open-source SSO&VPN - the only open-source solution with real WireGuard MFA/2FA & integrated OpenID Connect SSO";
+const description = "defguard - Zero-Trust WireGuard® 2FA/MFA VPN";
 const url = "https://defguard.net/compare/";
 const tags = [
   "defgaurd",
@@ -64,7 +62,7 @@ const tags = [
         <h1>Compare of WireGuard® Solutions<br />(on date: 2024.08)</h1>
       </header>
       <div id="features-table">
-        <FeaturesTable data={featuresTableData} client:only="preact" />
+        <FeaturesTable data={featuresTableData} client:load />
       </div>
       <div class="contact">
         <a href="/pricing">

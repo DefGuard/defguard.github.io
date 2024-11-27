@@ -65,12 +65,7 @@ const tags = [
           faqFeatures.map(async (f, index) => {
             const { Content } = await f.render();
             return (
-              <ProductFeature
-                title={f.data.title}
-                id={index}
-                context="core"
-                client:only="preact"
-              >
+              <ProductFeature title={f.data.title} id={index} context="core" client:load>
                 <Content />
               </ProductFeature>
             );

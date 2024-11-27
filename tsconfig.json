@@ -1,14 +1,26 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
+    "target": "ES2022",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ESNext",
     "strictNullChecks": true,
     "jsx": "react-jsx",
-    "jsxImportSource": "preact",
     "plugins": [
       {
         "name": "@astrojs/ts-plugin"
       }
     ],
-    "types": ["./node_modules/user-agent-data-types"]
-  }
+    "types": [
+      "./node_modules/user-agent-data-types"
+    ],
+    "jsxImportSource": "react",
+  },
+  "include": [
+    "src"
+  ]
 }

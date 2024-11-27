@@ -1,0 +1,113 @@
+---
+import { Image } from "astro:assets";
+import GithubStars from "../../../components/GithubStars/GithubStars";
+import ElevatedCard from "../../../components/home/ElevatedCard.astro";
+import HomeSection from "../../../components/home/HomeSection.astro";
+import headerImage from "./assets/header_card_image.png";
+import AstroButton from "../../../components/AstroButton.astro";
+import TrustedBy from "./TrustedBy.astro";
+---
+
+<HomeSection variant="gray" contentId="home-header">
+  <h1>Upgrade to the only true WireGuard® with MFA</h1>
+  <p>Comprehensive on-premise remote and internal access solution</p>
+  <div class="github-track">
+    <GithubStars owner="defguard" repo="defguard" client:load />
+  </div>
+  <div class="link-track">
+    <AstroButton
+      link={{
+        href: "/pricing",
+        target: "_self",
+        preload: true,
+      }}
+      text="Pricing"
+    />
+  </div>
+  <ElevatedCard className="header-card">
+    <p>
+      EVERY CONNECTION TO VPN <strong>REQUIRES MFA</strong>, which <strong
+        >guarantees Zero-TRUST</strong
+      >
+    </p>
+    <Image src={headerImage} alt="header diagram image" />
+  </ElevatedCard>
+  <TrustedBy />
+</HomeSection>
+
+<style lang="scss" is:global>
+  #home-header {
+    padding-bottom: page-spacing(100px);
+    padding-top: 50px;
+
+    & > p {
+      @include typography(paragraph);
+      padding-bottom: 8px;
+    }
+
+    h1 {
+      color: var(--text-body-primary);
+      padding-bottom: 40px;
+      max-width: 996px;
+      text-align: left;
+      text-wrap: balance;
+      @include typography(title);
+    }
+
+    .github-track {
+      width: 100%;
+      padding-bottom: page-spacing(40px);
+    }
+
+    .link-track {
+      width: 100%;
+      display: flex;
+      flex-flow: row;
+      align-items: center;
+      justify-content: center;
+      padding-bottom: 50px;
+    }
+
+    .header-card {
+      padding-bottom: page-spacing(88px);
+      & > div {
+        background-color: var(--surface-nav-bg);
+        box-sizing: border-box;
+
+        padding: 40px 45px 40px 45px;
+        @include break-up(lg) {
+          padding: 40px 45px 90px 45px;
+        }
+        p {
+          font-family: "Poppins";
+          font-size: 18px;
+          font-weight: 400;
+          line-height: normal;
+          text-transform: uppercase;
+          padding-bottom: 53px;
+          text-wrap: balance;
+          text-align: center;
+          width: 100%;
+
+          @include break-up(md) {
+            font-size: 32px;
+          }
+
+          @include break-up(xl) {
+            font-size: 36px;
+          }
+
+          strong {
+            font-weight: 700;
+          }
+        }
+        img {
+          width: 100%;
+          max-width: 100%;
+          aspect-ratio: unset;
+          height: auto;
+        }
+      }
+    }
+  }
+</style>

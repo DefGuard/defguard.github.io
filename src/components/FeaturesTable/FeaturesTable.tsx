@@ -1,10 +1,11 @@
-import type { FeatureTableData } from "./types";
 import "./style.scss";
+
 import { isUndefined } from "lodash-es";
+import { type CSSProperties,Fragment } from "react";
+
 import FeaturesTableCell from "./components/FeaturesTableCell/FeaturesTableCell";
-import { Fragment } from "preact/jsx-runtime";
-import type { CSSProperties } from "preact/compat";
 import { FeaturesTableDefguardLogo } from "./components/FeaturesTableDefguardLogo/FeaturesTableDefguardLogo";
+import type { FeatureTableData } from "./types";
 
 type TableProps = {
   data: FeatureTableData;
@@ -18,39 +19,39 @@ const FeaturesTable = ({ data }: TableProps) => {
   } as CSSProperties;
 
   return (
-    <div class="features-table-scroll-wrapper">
-      <section class="features-table" style={gridConfig}>
+    <div className="features-table-scroll-wrapper">
+      <section className="features-table" style={gridConfig}>
         <header>
-          <div class="col-header left">
+          <div className="col-header left">
             <p>Feature</p>
           </div>
-          <div class="col-header">
+          <div className="col-header">
             <FeaturesTableDefguardLogo />
           </div>
           {data.others.map((o) => (
-            <div class="col-header">
+            <div className="col-header">
               <p>{o}</p>
             </div>
           ))}
         </header>
-        <div class="table-rows">
+        <div className="table-rows">
           {data.groups.map((g, groupIndex) => (
             <Fragment key={groupIndex}>
               {!isUndefined(g.title) && g.title.length > 0 && (
-                <div class="group-title-container">
-                  <p class="group-title">{g.title}</p>
+                <div className="group-title-container">
+                  <p className="group-title">{g.title}</p>
                 </div>
               )}
               {g.rows.map((row) => (
                 <div
-                  class="row"
+                  className="row"
                   key={row.description.toLowerCase().trim().replace(" ", "")}
                 >
-                  <div class="row-description">
+                  <div className="row-description">
                     <p>{row.description}</p>
                   </div>
                   <div
-                    class="status-container"
+                    className="status-container"
                     style={{
                       gridRow: 1,
                       gridColumn: `2 / ${featuresColCount + 2}`,

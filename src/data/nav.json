@@ -1,5 +1,17 @@
 [
   {
+    "display": "Home",
+    "url": "/",
+    "prefetch": true,
+    "external": false
+  },
+  {
+    "display": "Client",
+    "url": "/client",
+    "prefetch": true,
+    "external": false
+  },
+  {
     "display": "Compare",
     "url": "/compare",
     "prefetch": true

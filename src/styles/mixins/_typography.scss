@@ -17,8 +17,8 @@
 
   @if $key =="title" {
     font-weight: 400;
-    line-height: 92%;
-    @include font-scalable(96px);
+    line-height: 105%;
+    @include font-scalable(80px);
 
     @include break-down(md) {
       @include font-scalable(65px);

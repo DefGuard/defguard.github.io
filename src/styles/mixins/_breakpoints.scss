@@ -9,9 +9,11 @@ $grid-breakpoints: (
   xxl: 1400px,
 );
 
-@function break-next($name,
+@function break-next(
+  $name,
   $breakpoints: $grid-breakpoints,
-  $breakpoint-names: map.keys($breakpoints)) {
+  $breakpoint-names: map.keys($breakpoints)
+) {
   $n: index($breakpoint-names, $name);
 
   @if not $n {
@@ -52,7 +54,7 @@ $grid-breakpoints: (
 //    >> breakpoint-infix(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px))
 //    "-sm"
 @function breakpoint-infix($name, $breakpoints: $grid-breakpoints) {
-  @return if(break-min($name, $breakpoints)==null, "", "-#{$name}");
+  @return if(break-min($name, $breakpoints) ==null, "", "-#{$name}");
 }
 
 // Media of at least the minimum breakpoint width. No query for the smallest breakpoint.
@@ -64,9 +66,7 @@ $grid-breakpoints: (
     @media (min-width: $min) {
       @content;
     }
-  }
-
-  @else {
+  } @else {
     @content;
   }
 }
@@ -80,9 +80,7 @@ $grid-breakpoints: (
     @media (max-width: $max) {
       @content;
     }
-  }
-
-  @else {
+  } @else {
     @content;
   }
 }
@@ -97,15 +95,11 @@ $grid-breakpoints: (
     @media (min-width: $min) and (max-width: $max) {
       @content;
     }
-  }
-
-  @else if $max ==null {
+  } @else if $max ==null {
     @include break-up($lower, $breakpoints) {
       @content;
     }
-  }
-
-  @else if $min ==null {
+  } @else if $min ==null {
     @include break-down($upper, $breakpoints) {
       @content;
     }
@@ -124,15 +118,11 @@ $grid-breakpoints: (
     @media (min-width: $min) and (max-width: $max) {
       @content;
     }
-  }
-
-  @else if $max ==null {
+  } @else if $max ==null {
     @include break-up($name, $breakpoints) {
       @content;
     }
-  }
-
-  @else if $min ==null {
+  } @else if $min ==null {
     @include break-down($next, $breakpoints) {
       @content;
     }

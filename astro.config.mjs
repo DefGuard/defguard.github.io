@@ -1,4 +1,3 @@
-import preact from "@astrojs/preact";
 import { defineConfig } from "astro/config";
 import path from "path";
 import rehypeExternalLinks from "rehype-external-links";
@@ -8,6 +7,8 @@ import mdx from "@astrojs/mdx";
 
 import playformCompress from "@playform/compress";
 
+import react from "@astrojs/react";
+
 const __filename = fileURLToPath(import.meta.url);
 
 const __dirname = path.dirname(__filename);
@@ -16,7 +17,7 @@ const __dirname = path.dirname(__filename);
 export default defineConfig({
   site: "https://defguard.net",
   prefetch: true,
-  integrations: [mdx(), preact({ compat: true }), playformCompress()],
+  integrations: [mdx(), playformCompress(), react()],
   markdown: {
     rehypePlugins: [
       [

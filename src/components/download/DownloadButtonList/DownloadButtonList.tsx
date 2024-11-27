@@ -1,10 +1,12 @@
 import "./style.scss";
-import { DownloadButton } from "../../buttons/DownloadButton/DownloadButton";
-import { PlatformType } from "../../base/types/platform";
-import { useEffect, useState } from "preact/hooks";
+
 import { useStore } from "@nanostores/preact";
-import { clientVersion } from "../../store/versionStore";
+import { useEffect, useState } from "react";
+
 import { detectOperatingSystem } from "../../../utils/detectOpratingSystem.ts";
+import { PlatformType } from "../../base/types/platform";
+import { DownloadButton } from "../../buttons/DownloadButton/DownloadButton";
+import { clientVersion } from "../../store/versionStore";
 
 type DownloadButtonConfig = {
   platformType: PlatformType;
@@ -83,14 +85,14 @@ export const DownloadButtonList = () => {
   if (isLoading) return null;
 
   return (
-    <section class="download-platform">
+    <section className="download-platform">
       <DownloadButton
         platformType={buttonList[0].platformType}
         owner={OWNER}
         repo={REPO}
         version={$clientVersion}
       />
-      <div class="download-separator">
+      <div className="download-separator">
         <hr />
         <p>other variants</p>
         <hr />
