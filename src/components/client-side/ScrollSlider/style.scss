@@ -3,7 +3,7 @@
   position: relative;
   overflow: visible;
 
-  & > .triggers {
+  &>.triggers {
     .trigger {
       content: " ";
       display: block;
@@ -12,7 +12,7 @@
     }
   }
 
-  & > .floating {
+  &>.floating {
     place-content: center space-around;
     display: flex;
     flex-flow: column;
@@ -42,6 +42,18 @@
           display: grid;
           grid-template-columns: 1fr;
           grid-template-rows: 1fr;
+          position: relative;
+
+          .track-click {
+            top: -2.5px;
+            left: -15px;
+            height: 47px;
+            width: 40px;
+            position: absolute;
+            border: 0;
+            background-color: transparent;
+            cursor: pointer;
+          }
 
           .track-indicator {
             grid-row: 1;
@@ -70,6 +82,7 @@
             border: 1px solid var(--text-body-primary);
             height: 100%;
             box-sizing: border-box;
+            z-index: 2;
           }
         }
       }

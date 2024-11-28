@@ -60,13 +60,13 @@ const ScrollSlider = ({ components, className, id }: Props) => {
           <div className="controls">
             <div className="controls-track">
               {triggers.map((t, i) => (
-                <div
-                  className="control"
-                  key={t}
-                  onClick={() => {
-                    handleControlClick(i);
-                  }}
-                >
+                <div className="control" key={t}>
+                  <button
+                    className="track-click"
+                    onClick={() => {
+                      handleControlClick(i);
+                    }}
+                  ></button>
                   <div className="track-indicator">
                     <div className="line"></div>
                   </div>
