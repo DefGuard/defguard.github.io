@@ -1,6 +1,8 @@
-import type { ReactNode } from "react";
+import { type ReactNode, useMemo } from "react";
+import useBreakpoint from "use-breakpoint";
 
-import { useBreakpoints } from "../../../../components/hooks/useBreakpoints";
+import ScrollSlider from "../../../../components/client-side/ScrollSlider/ScrollSlider";
+import type { ScrollSliderSlide } from "../../../../components/client-side/ScrollSlider/types";
 import ClientHomeScrollSlide from "../../components/client-side/ClientHomeScrollSlide/ClientHomeScrollSlide";
 import {
   ClientScrollCardVariant,
@@ -66,19 +68,45 @@ const slides: SlidesData[] = [
 ];
 
 const MainContainer = () => {
-  const { breakpoint } = useBreakpoints();
-  return (
-    <div className="scroll-sections">
-      {slides.map((data, i) => (
+  const { breakpoint } = useBreakpoint({
+    mobile: 0,
+    desktop: 1200,
+  });
+
+  const scrollSlides = useMemo(() => {
+    const res: ScrollSliderSlide[] = slides.map((data, i) => ({
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      id: `section-3-slide-${i + 1}`,
+      component: (
         <ClientHomeScrollSlide
           {...data}
           title={title}
           variant={ClientScrollVariant.SIMPLE}
           cardVariant={variant}
           key={i}
-          mobile={breakpoint !== "desktop"}
+          mobile={false}
         />
-      ))}
+      ),
+    }));
+    return res;
+  }, []);
+
+  return (
+    <div className="scroll-sections">
+      {breakpoint === "mobile" &&
+        slides.map((data, i) => (
+          <ClientHomeScrollSlide
+            {...data}
+            title={title}
+            variant={ClientScrollVariant.SIMPLE}
+            cardVariant={variant}
+            key={i}
+            mobile={true}
+          />
+        ))}
+      {breakpoint === "desktop" && (
+        <ScrollSlider id="section-3-slider" components={scrollSlides} />
+      )}
     </div>
   );
 };
