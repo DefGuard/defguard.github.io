@@ -153,7 +153,7 @@ import Image from "astro/components/Image.astro";
           width: 100%;
           display: grid;
           grid-template-columns: 1fr 1fr;
-          grid-row: auto auto;
+          grid-template-rows: auto auto;
           gap: 30px;
           justify-content: center;
 
@@ -163,7 +163,7 @@ import Image from "astro/components/Image.astro";
 
           @include break-up(md) {
             grid-template-columns: 133px 163px;
-            grid-row: auto auto;
+            grid-template-rows: auto auto;
             column-gap: 86px;
             row-gap: 86px;
           }
