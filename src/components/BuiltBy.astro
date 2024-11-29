@@ -2,9 +2,15 @@
 import ContentLimiter from "./ContentLimiter.astro";
 import HomeSection from "./home/HomeSection.astro";
 import teoniteSvgRaw from "/public/svg/built-by.svg?raw";
+
+interface Props {
+  variant: "gray" | "white";
+}
+
+const { variant } = Astro.props;
 ---
 
-<HomeSection variant="gray">
+<HomeSection variant={variant}>
   <ContentLimiter contentId="built-by">
     <div class="top">
       <div class="divider"></div>

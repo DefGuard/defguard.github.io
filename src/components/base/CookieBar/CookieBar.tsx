@@ -14,6 +14,12 @@ export const CookieBar = () => {
   return (
     <div id="cookie-bar">
       <p>We use cookies to improve this website.</p>
+      <p>
+        More details in our{" "}
+        <a href="/privacy/" target="_self" data-astro-preload="hover">
+          Privacy Policy
+        </a>
+      </p>
       <Button
         size="small"
         text="I agree"
