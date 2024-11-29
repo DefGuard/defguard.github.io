@@ -1,13 +1,14 @@
-import clsx from "clsx";
-import type { ComponentChildren } from "preact";
 import "./style.scss";
+
+import clsx from "clsx";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 type Props = {
   text: string;
-  children?: ComponentChildren;
+  children?: ReactNode;
   onClick?: () => void;
   size?: "small" | "normal" | "large";
-  type?: string;
+  type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
   disabled?: boolean;
 };
 
@@ -22,7 +23,7 @@ export const Button = ({
   return (
     <button
       type={type}
-      class={clsx("btn", `size-${size}`)}
+      className={clsx("btn", `size-${size}`)}
       onClick={onClick}
       disabled={disabled}
     >

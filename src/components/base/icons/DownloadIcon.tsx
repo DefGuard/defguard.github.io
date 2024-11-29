@@ -1,4 +1,5 @@
-import { useEffect, useState } from "preact/hooks";
+import { useEffect, useState } from "react";
+
 import { PlatformType } from "../types/platform";
 
 interface DownloadProps {
@@ -26,6 +27,10 @@ export const DownloadIcon = ({ platformType, owner, repo, version }: DownloadPro
         break;
       }
       case PlatformType.DEBIAN: {
+        setDownloadName(`defguard-client_${version}_amd64.deb`);
+        break;
+      }
+      case PlatformType.ARCHLINUX: {
         setDownloadName(`defguard-client_${version}_amd64.deb`);
         break;
       }

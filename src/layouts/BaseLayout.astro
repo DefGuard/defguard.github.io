@@ -4,8 +4,11 @@ import Footer from "../components/base/Footer.astro";
 import { GoogleAnalytics } from "@astrolib/analytics";
 import "../styles/global.scss";
 import { CookieBar } from "../components/base/CookieBar/CookieBar";
+import Clarity from "../components/analytics/Clarity.astro";
 
-const favSizes = [16,32,57,60,70,72,76,96,114,120,128,144,150,152,180,192,310,384,512];
+const favSizes = [
+  16, 32, 57, 60, 70, 72, 76, 96, 114, 120, 128, 144, 150, 152, 180, 192, 310, 384, 512,
+];
 //@ts-ignore
 const isProd = import.meta.env.PROD as boolean;
 
@@ -15,9 +18,10 @@ interface Props {
   featuredImage: string;
   imageWidth: string;
   imageHeight: string;
+  url: string;
 }
 
-const { title, description, featuredImage, imageWidth, imageHeight} = Astro.props;
+const { url, title, description, featuredImage, imageWidth, imageHeight } = Astro.props;
 ---
 
 <!doctype html>
@@ -35,6 +39,7 @@ const { title, description, featuredImage, imageWidth, imageHeight} = Astro.prop
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content={imageWidth} />
     <meta property="og:image:height" content={imageHeight} />
+    <meta property="og:url" content={url} />
     <!-- schema.org -->
     <slot name="schema" />
     <!-- Favicons -->
@@ -49,23 +54,23 @@ const { title, description, featuredImage, imageWidth, imageHeight} = Astro.prop
       ))
     }
     <link rel="icon" type="image/ico" href="/favicon/favicon.ico" />
-    {isProd && (
-      <GoogleAnalytics id="G-Z2X2PB0P4E" />
-    )}
+    {isProd && <GoogleAnalytics id="G-Z2X2PB0P4E" />}
+    <link rel="sitemap" href="/sitemap-index.xml" />
   </head>
   <body>
     <slot />
     <Footer />
     <FloatingLinks />
-    <CookieBar client:only="preact" />
-    {isProd && (
-      <script type="text/javascript" is:inline>
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "kxm8xat3sg");
-      </script>
-    )}
+    <CookieBar client:only="react" />
+    <Clarity />
   </body>
 </html>
+
+<style lang="scss" is:global>
+  main {
+    --page-spacing-factor: 0.5;
+    @include break-up(lg) {
+      --page-spacing-factor: 1;
+    }
+  }
+</style>

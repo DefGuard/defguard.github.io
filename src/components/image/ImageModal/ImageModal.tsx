@@ -1,5 +1,6 @@
-import { useState } from "preact/hooks";
 import "./style.scss";
+
+import { useState } from "react";
 
 interface Props {
   imageSrc: string;
@@ -19,13 +20,18 @@ export const ImageModal = ({ imageSrc, altText, description }: Props) => {
   };
 
   return (
-    <div class="image">
-      <img src={imageSrc} alt={altText} onClick={handleImageClick} class="small" />
+    <div className="image">
+      <img src={imageSrc} alt={altText} onClick={handleImageClick} className="small" />
       {description}
       {isModalOpen && (
         <div className="modal">
-          <div class="box">
-            <img src={imageSrc} alt={altText} class="large" onClick={handleCloseModal} />
+          <div className="box">
+            <img
+              src={imageSrc}
+              alt={altText}
+              className="large"
+              onClick={handleCloseModal}
+            />
             {description}
           </div>
         </div>

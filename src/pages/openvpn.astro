@@ -11,87 +11,81 @@ import BookDemoForm from "../components/form/BookDemoForm/BookDemoForm";
 import MigrateIllustration from "/public/svg/migrate-illustration.svg?raw";
 
 const openvpnFeatures = (await getCollection("openvpn-features")).sort(
-    (f1, f2) => f1.data.order - f2.data.order,
+  (f1, f2) => f1.data.order - f2.data.order,
 );
 const title =
-    "defguard Zero-Trust WireGuard® 2FA/MFA VPN: Migrate from OpenVPN to WireGuard";
+  "defguard Zero-Trust WireGuard® 2FA/MFA VPN: Migrate from OpenVPN to WireGuard";
 const featuredImage =
-    "github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png";
+  "github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png";
 const imageWidth = "1080";
 const imageHeight = "540";
 const url = "https://defguard.net/openvpn/";
 const tags = [
-    "defguard",
-    "migrate",
-    "migration",
-    "opevpn",
-    "wireguard",
-    "vpn",
-    "2fa/mfa",
-    "mfa",
-    "2fa",
-    "enterprise",
-    "opensense",
-    "docker",
-    "kubernetes",
-    "k8s",
-    "open source",
-    "sso",
-    "secure",
-    "rust",
+  "defguard",
+  "migrate",
+  "migration",
+  "opevpn",
+  "wireguard",
+  "vpn",
+  "2fa/mfa",
+  "mfa",
+  "2fa",
+  "enterprise",
+  "opensense",
+  "docker",
+  "kubernetes",
+  "k8s",
+  "open source",
+  "sso",
+  "secure",
+  "rust",
 ];
 ---
 
 <ProductLayout
-    title={title}
-    featuredImage={featuredImage}
-    imageWidth={imageWidth}
-    imageHeight={imageHeight}
-    url={url}
-    tags={tags}
+  title={title}
+  featuredImage={featuredImage}
+  imageWidth={imageWidth}
+  imageHeight={imageHeight}
+  url={url}
+  tags={tags}
 >
-    <Navigation activeSlug="/openvpn" />
-    <main id="product-content" class="product-main">
-        <ProductSection padding="small">
-            <header id="main-header">
-                <h1>Migrate<br />from OpenVPN</h1>
-                <p>
-                    defguard is an enterprise and open-source, easy to deploy and manage
-                    WireGuard® based VPN solution with real 2FA/Multi-Factor
-                    Authentication & SSO.
-                </p>
-            </header>
-        </ProductSection>
-        <ProductSection padding="none">
-            <Fragment set:html={MigrateIllustration} />
-        </ProductSection>
-        <ProductSection padding="small">
-            <div class="product-features">
-                <h3>Why migrate from OpenVPN to defguard:</h3>
-                {
-                    openvpnFeatures.map(async (f, index) => {
-                        const { Content } = await f.render();
-                        return (
-                            <ProductFeature
-                                title={f.data.title}
-                                id={index}
-                                context="core"
-                                client:only="preact"
-                            >
-                                <Content />
-                            </ProductFeature>
-                        );
-                    })
-                }
-            </div>
-        </ProductSection>
-        <ImageGallery />
-        <ProductSection padding="none">
-            <div class="product-features">
-                <BookDemoForm client:only="preact" />
-            </div>
-        </ProductSection>
-        <ProductBuiltBy />
-        <MatrixSection />
-    </main>
+  <Navigation activeSlug="/openvpn/" />
+  <main id="product-content" class="product-main">
+    <ProductSection padding="small">
+      <header id="main-header">
+        <h1>Migrate<br />from OpenVPN</h1>
+        <p>
+          defguard is an enterprise and open-source, easy to deploy and manage WireGuard®
+          based VPN solution with real 2FA/Multi-Factor Authentication & SSO.
+        </p>
+      </header>
+    </ProductSection>
+    <ProductSection padding="none">
+      <Fragment set:html={MigrateIllustration} />
+    </ProductSection>
+    <ProductSection padding="small">
+      <div class="product-features">
+        <h3>Why migrate from OpenVPN to defguard:</h3>
+        {
+          openvpnFeatures.map(async (f, index) => {
+            const { Content } = await f.render();
+            return (
+              <ProductFeature title={f.data.title} id={index} context="core" client:load>
+                <Content />
+              </ProductFeature>
+            );
+          })
+        }
+      </div>
+    </ProductSection>
+    <ImageGallery />
+    <ProductSection padding="none">
+      <div class="product-features">
+        <BookDemoForm client:load />
+      </div>
+    </ProductSection>
+    <ProductBuiltBy />
+    <MatrixSection />
+  </main>
 </ProductLayout>

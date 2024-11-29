@@ -10,66 +10,66 @@
   font-family: "Poppins";
   line-height: normal;
 
-  @if $key =="paragraph" {
+  @if $key == "paragraph" {
     font-weight: 300;
     @include font-scalable(20px);
   }
 
-  @if $key =="title" {
+  @if $key == "title" {
     font-weight: 400;
-    line-height: 92%;
-    @include font-scalable(96px);
+    line-height: 105%;
+    @include font-scalable(80px);
 
     @include break-down(md) {
       @include font-scalable(65px);
     }
   }
 
-  @if $key =="section" {
+  @if $key == "section" {
     font-weight: 400;
     @include font-scalable(48px);
   }
 
-  @if $key =="menu" {
+  @if $key == "menu" {
     font-weight: 300;
     @include font-scalable(18px);
   }
 
-  @if $key =="h2" {
+  @if $key == "h2" {
     font-weight: 300;
     @include font-scalable(24px);
   }
 
-  @if $key =="h3" {
+  @if $key == "h3" {
     font-weight: 300;
     @include font-scalable(18px);
   }
 
-  @if $key =="footer" {
+  @if $key == "footer" {
     @include font-scalable(12px);
   }
 
-  @if $key =="pricebox-title" {
+  @if $key == "pricebox-title" {
     font-weight: 400;
     @include font-scalable(36px);
   }
 
-  @if $key =="pricebox-price" {
+  @if $key == "pricebox-price" {
     font-weight: 500;
     @include font-scalable(32px);
   }
 
-  @if $key =="pricebox-list" {
+  @if $key == "pricebox-list" {
     font-weight: 400;
     @include font-scalable(18px);
   }
 
-  @if $key =="pricebox-section" {
+  @if $key == "pricebox-section" {
     font-weight: 500;
     @include font-scalable(24px);
   }
 
-  @if $key =="footer-section" {
+  @if $key == "footer-section" {
     font-weight: 700;
     @include font-scalable(18px);
   }

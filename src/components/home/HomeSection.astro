@@ -1,0 +1,36 @@
+---
+import clsx from "clsx";
+import ContentLimiter from "../ContentLimiter.astro";
+
+interface Props {
+  variant?: "white" | "gray";
+  limit?: number;
+  id?: string;
+  contentId?: string;
+  contentClassName?: string;
+  className?: string;
+}
+
+const { variant, limit, id, contentId, className, contentClassName } = Astro.props;
+---
+
+<ContentLimiter
+  className={clsx("home-section", `variant-${variant ?? "white"}`, className)}
+  maxWidth={limit ?? 1096}
+  id={id}
+  contentId={contentId}
+  contentClass={contentClassName}
+>
+  <slot />
+</ContentLimiter>
+
+<style lang="scss" is:global>
+  .home-section {
+    &.variant-white {
+      background-color: #fff;
+    }
+    &.variant-gray {
+      background-color: var(--surface-frame-bg);
+    }
+  }
+</style>

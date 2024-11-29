@@ -1,5 +1,6 @@
-import { Button } from "../../buttons/Button/Button";
 import "./style.scss";
+
+import { Button } from "../../buttons/Button/Button";
 
 interface MessageProps {
   message: string;

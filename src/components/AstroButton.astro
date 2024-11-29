@@ -1,0 +1,68 @@
+---
+import clsx from "clsx";
+
+interface Props {
+  text: string;
+  id?: string;
+  className?: string;
+  link?: {
+    href: string;
+    target: string;
+    preload?: boolean;
+  };
+}
+const { text, link, className, id } = Astro.props;
+
+const prefetch: astroHTML.JSX.AnchorHTMLAttributes = {};
+
+if (link?.preload) {
+  prefetch["data-astro-prefetch"] = "hover";
+}
+---
+
+{
+  link !== undefined && (
+    <a class={clsx("astro-btn-link", className)} id={id} href={link.href} {...prefetch}>
+      <button class={clsx("astro-btn", className)} id={id}>
+        <span>{text}</span>
+      </button>
+    </a>
+  )
+}
+{
+  link === undefined && (
+    <button class={clsx("astro-btn", className)} id={id}>
+      <span>{text}</span>
+    </button>
+  )
+}
+
+<style lang="scss">
+  .astro-btn-link {
+    text-decoration: none;
+  }
+  .astro-btn {
+    background-color: transparent;
+    box-sizing: border-box;
+    padding: 24px 64px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid var(--text-body-primary);
+    border-radius: 50px;
+    @include animate();
+    transition-property: border-color;
+
+    span {
+      @include typography(h2);
+      color: var(--text-body-primary);
+      user-select: none;
+    }
+
+    &:hover {
+      border-color: var(--surface-main-primary);
+    }
+  }
+</style>

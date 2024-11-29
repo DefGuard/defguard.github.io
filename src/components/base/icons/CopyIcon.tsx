@@ -6,7 +6,7 @@ export const CopyIcon = ({ textToCopy }: CopyProps) => {
   return (
     <div
       onClick={() => {
-        navigator.clipboard.writeText(textToCopy);
+        void navigator.clipboard.writeText(textToCopy);
       }}
     >
       <svg

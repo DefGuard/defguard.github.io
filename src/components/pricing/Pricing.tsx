@@ -1,9 +1,11 @@
-import { useEffect, useMemo, useState } from "preact/hooks";
-import type { PricingSchema } from "../../content/config";
+import "./style.scss";
+
 import clsx from "clsx";
+import { useMemo, useState } from "react";
 import Markdown from "react-markdown";
 import rehypeR from "rehype-raw";
-import "./style.scss";
+
+import type { PricingSchema } from "../../content/config";
 
 type PricingData = PricingSchema & { content: string; id: string | number };
 
@@ -25,8 +27,15 @@ export const PricingCards = ({ data }: PricingProps) => {
 
   return (
     <div id="pricing-container">
-      {annualEnabled && <PricingToggle onChange={(v) => setPlan(v)} state={plan} />}
-      <div class="plans">
+      {annualEnabled && (
+        <PricingToggle
+          onChange={(v) => {
+            setPlan(v);
+          }}
+          state={plan}
+        />
+      )}
+      <div className="plans">
         {data.map((pricingData) => (
           <PricingCard data={pricingData} key={pricingData.id} activePlan={plan} />
         ))}
@@ -44,18 +53,22 @@ const PricingToggle = ({ onChange, state }: ToggleProps) => {
   return (
     <div id="pricing-toggle">
       <button
-        class={clsx({
+        className={clsx({
           active: state === PricingPlan.MONTHLY,
         })}
-        onClick={() => onChange(PricingPlan.MONTHLY)}
+        onClick={() => {
+          onChange(PricingPlan.MONTHLY);
+        }}
       >
         Monthly
       </button>
       <button
-        class={clsx({
+        className={clsx({
           active: state === PricingPlan.ANNUAL,
         })}
-        onClick={() => onChange(PricingPlan.ANNUAL)}
+        onClick={() => {
+          onChange(PricingPlan.ANNUAL);
+        }}
       >
         Annual
       </button>
@@ -73,33 +86,33 @@ const PricingCard = ({ data, activePlan }: CardProps) => {
   const hasDiscount = data.discount !== undefined;
 
   return (
-    <div class="pricing-card">
-      <div class="header">
-        <p class="name">{data.name}</p>
+    <div className="pricing-card">
+      <div className="header">
+        <p className="name">{data.name}</p>
       </div>
       {isAnnual && hasDiscount && (
-        <div class="divider annual">
-          <div class="line"></div>
-          <div class="discount-badge">
+        <div className="divider annual">
+          <div className="line"></div>
+          <div className="discount-badge">
             <p>{data.discount}% discount</p>
           </div>
         </div>
       )}
       {(!isAnnual || (isAnnual && !hasDiscount)) && (
-        <div class="divider">
-          <div class="line"></div>
+        <div className="divider">
+          <div className="line"></div>
         </div>
       )}
-      <div class="pricing-container">
+      <div className="pricing-container">
         <div
-          class={clsx("price", {
+          className={clsx("price", {
             free: data.price === 0,
             spaced: data.price === 0 || !isAnnual,
           })}
         >
           {data.price > 0 && (
             <p
-              class={clsx("monthly", {
+              className={clsx("monthly", {
                 discount: hasDiscount && isAnnual,
                 annual: isAnnual,
               })}
@@ -107,18 +120,18 @@ const PricingCard = ({ data, activePlan }: CardProps) => {
               €{data.price}
             </p>
           )}
-          {!isAnnual && data.price > 0 && <p class="suffix">per month</p>}
-          {data.price === 0 && <p class="free">Free</p>}
-          {isAnnual && <p class="annually">€{data.annualPrice}</p>}
+          {!isAnnual && data.price > 0 && <p className="suffix">per month</p>}
+          {data.price === 0 && <p className="free">Free</p>}
+          {isAnnual && <p className="annually">€{data.annualPrice}</p>}
         </div>
         {isAnnual && data.annualPrice !== undefined && (
-          <p class="annual-message">
+          <p className="annual-message">
             per month, billed annually you will be charged €{data.annualPrice * 12}
           </p>
         )}
-        <div class="action-container">
+        <div className="action-container">
           <a
-            class="action"
+            className="action"
             target={data.linkTarget ?? "_blank"}
             href={isAnnual ? data.annualPriceLink : data.priceLink}
           >
@@ -126,10 +139,10 @@ const PricingCard = ({ data, activePlan }: CardProps) => {
           </a>
         </div>
       </div>
-      <div class="divider">
-        <div class="line" />
+      <div className="divider">
+        <div className="line" />
       </div>
-      <div class="content-container">
+      <div className="content-container">
         <Markdown rehypePlugins={[rehypeR]}>{data.content}</Markdown>
       </div>
     </div>

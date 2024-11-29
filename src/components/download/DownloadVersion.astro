@@ -5,9 +5,9 @@ import DefguardInfo from "../download/DownloadInfo/DownloadInfo";
 
 <section class="download-version">
   <div class="download-logo">
-    <DefguardIcon client:only="preact" />
+    <DefguardIcon client:only="react" />
   </div>
-  <DefguardInfo owner="Defguard" repo="client" client:only="preact" />
+  <DefguardInfo owner="Defguard" repo="client" client:only="react" />
 </section>
 
 <style lang="scss" is:global>
@@ -19,7 +19,6 @@ import DefguardInfo from "../download/DownloadInfo/DownloadInfo";
       flex-direction: column;
       justify-content: space-between;
       align-items: flex-start;
-      align-self: stretch;
 
       .download-logo {
         display: flex;
@@ -38,7 +37,6 @@ import DefguardInfo from "../download/DownloadInfo/DownloadInfo";
         flex-direction: column;
         align-items: center;
         gap: 40px;
-        align-self: stretch;
 
         .download-logo {
           background: none;

@@ -1,4 +1,4 @@
-import { useId } from "preact/compat";
+import { useId } from "react";
 
 export const FeaturesTableDefguardLogo = () => {
   const svgId = useId();
@@ -10,7 +10,7 @@ export const FeaturesTableDefguardLogo = () => {
       viewBox="0 0 109 28"
       fill="none"
     >
-      <g clip-path={`url(#${svgId})`}>
+      <g clipPath={`url(#${svgId})`}>
         <path
           d="M106.87 4.53564V11.1556H106.72C106.05 9.88564 104.72 9.00564 103.19 9.00564H101.71C99.5 9.00564 97.71 10.7956 97.71 13.0056V17.0156C97.71 19.2256 99.5 21.0156 101.71 21.0156H103.19C104.7 21.0156 106.01 20.1656 106.69 18.9256H106.8L106.88 20.7956H108.32V4.53564H106.88H106.87ZM103.71 19.5156H102.23C100.57 19.5156 99.23 18.1756 99.23 16.5156V13.5156C99.23 11.8556 100.57 10.5156 102.23 10.5156H103.71C105.37 10.5156 106.71 11.8556 106.71 13.5156V16.5156C106.71 18.1756 105.37 19.5156 103.71 19.5156Z"
           style={{ fill: "var(--text-body-primary)" }}

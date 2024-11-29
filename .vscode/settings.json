@@ -1,7 +1,12 @@
 {
   "cSpell.words": [
     "dirreferent",
-    "pricebox"
+    "frontmatter",
+    "pricebox",
+    "Roadwarrior"
   ],
-  "typescript.tsdk": "node_modules\\typescript\\lib"
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false
 }

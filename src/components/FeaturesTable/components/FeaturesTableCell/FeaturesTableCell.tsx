@@ -1,19 +1,20 @@
 import "./style.scss";
-import type { FeatureTableCell } from "../../types";
-import { useMemo, useState } from "preact/hooks";
-import clsx from "clsx";
-import { isUndefined } from "lodash-es";
+
 import {
   autoUpdate,
-  offset,
-  useFloating,
   flip,
+  offset,
   shift,
+  useFloating,
   useHover,
-  useRole,
   useInteractions,
+  useRole,
 } from "@floating-ui/react";
-import type { CSSProperties } from "preact/compat";
+import clsx from "clsx";
+import { isUndefined } from "lodash-es";
+import { useMemo, useState } from "react";
+
+import type { FeatureTableCell } from "../../types";
 
 const FeaturesTableCell = ({ status, hover, link }: FeatureTableCell) => {
   const getExtraIcon = useMemo(() => {
@@ -68,37 +69,38 @@ const FeaturesTableCell = ({ status, hover, link }: FeatureTableCell) => {
   return (
     <>
       <div
-        class={clsx("feature-cell", {
+        className={clsx("feature-cell", {
           pointer: !isUndefined(link),
         })}
       >
         {link && link.length ? (
           <a
-            class="icon-wrapper"
+            className="icon-wrapper"
             href={link}
             target="_blank"
             {...getReferenceProps()}
             ref={refs.setReference}
+            rel="noreferrer noopener"
           >
             {getMainIcon}
             {((hover && hover.length) || (link && link.length)) && (
-              <div class="extra-icon">{getExtraIcon}</div>
+              <div className="extra-icon">{getExtraIcon}</div>
             )}
           </a>
         ) : (
-          <div class="icon-wrapper" {...getReferenceProps()} ref={refs.setReference}>
+          <div className="icon-wrapper" {...getReferenceProps()} ref={refs.setReference}>
             {getMainIcon}
             {((hover && hover.length) || (link && link.length)) && (
-              <div class="extra-icon">{getExtraIcon}</div>
+              <div className="extra-icon">{getExtraIcon}</div>
             )}
           </div>
         )}
       </div>
       {isOpen && (
         <div
-          class="floating-cell-tooltip"
+          className="floating-cell-tooltip"
           ref={refs.setFloating}
-          style={floatingStyles as CSSProperties}
+          style={floatingStyles}
           {...getFloatingProps()}
         >
           <p>{hover}</p>
@@ -167,8 +169,8 @@ const ExternalIcon = () => {
       fill="none"
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M0 0H4V1.33333H1.33333V10.6667H10.6667V8H12V12H0V0ZM9.72386 1.33333H7.77778V0H12V4.22222H10.6667V2.27614L6.4714 6.4714L5.5286 5.5286L9.72386 1.33333Z"
         style={{ fill: "var(--text-body-tertiary)" }}
       />

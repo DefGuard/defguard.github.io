@@ -1,0 +1,95 @@
+.scroll-slider {
+  width: 100%;
+  position: relative;
+  overflow: visible;
+
+  & > .triggers {
+    .trigger {
+      content: " ";
+      display: block;
+      width: 100%;
+      height: 100dvh;
+    }
+
+    & > :nth-child(1) {
+      height: 75vh;
+    }
+  }
+
+  & > .floating {
+    place-content: center space-around;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    top: calc(var(--nav-height) + 150px);
+    position: sticky;
+
+    .controls {
+      position: absolute;
+      top: calc(var(--nav-height) + 50px + 150px);
+      transform: translateY(-50%);
+      right: -40px;
+      min-height: 1px;
+
+      .controls-track {
+        display: flex;
+        flex-flow: column;
+        row-gap: 5px;
+        align-items: center;
+        justify-content: flex-start;
+
+        .control {
+          display: block;
+          height: 42px;
+          display: grid;
+          grid-template-columns: 1fr;
+          grid-template-rows: 1fr;
+          position: relative;
+
+          .track-click {
+            top: -2.5px;
+            left: -15px;
+            height: 47px;
+            width: 40px;
+            position: absolute;
+            border: 0;
+            background-color: transparent;
+            cursor: pointer;
+          }
+
+          .track-indicator {
+            grid-row: 1;
+            grid-column: 1;
+            height: 100%;
+            width: 5px;
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+            justify-content: center;
+
+            .line {
+              display: block;
+              content: " ";
+              width: 1px;
+              height: 100%;
+              background-color: #000;
+            }
+          }
+
+          .active-indicator {
+            width: 5px;
+            grid-row: 1;
+            grid-column: 1;
+            background-color: #fff;
+            border: 1px solid var(--text-body-primary);
+            height: 100%;
+            box-sizing: border-box;
+            z-index: 2;
+          }
+        }
+      }
+    }
+  }
+}

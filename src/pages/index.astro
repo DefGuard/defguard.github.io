@@ -1,125 +1,128 @@
 ---
-import { getCollection } from "astro:content";
-import GithubStars from "../components/GithubStars/GithubStars";
 import Navigation from "../components/base/Navigation.astro";
-import { Button } from "../components/buttons/Button/Button";
-import ProductBuiltBy from "../components/product/ProductBuiltBy.astro";
-import { ProductFeature } from "../components/product/ProductFeature/ProductFeature";
-import ProductImage from "../components/product/ProductImage.astro";
+import BuiltBy from "../components/BuiltBy.astro";
+import HomeSection from "../components/home/HomeSection.astro";
 import ProductLayout from "../layouts/ProductLayout.astro";
-import ProductSection from "../layouts/ProductSection.astro";
-import MatrixSection from "../components/MatrixSection.astro";
-import { Image } from "astro:assets";
-import CoreImage from "/public/images/product/core/hero-image.png";
-
-const coreFeatures = (await getCollection("core-features")).sort(
-    (f1, f2) => f1.data.order - f2.data.order,
-);
+import Testimonials from "./_home/components/client-side/Testimonials/Testimonials";
+import FlexibleIdentitySection from "./_home/components/FlexibleIdentity/FlexibleIdentitySection.astro";
+import HomeHeader from "./_home/components/HomeHeader.astro";
+import Roadmap from "./_home/components/Roadmap/Roadmap.astro";
+import HomeScrollSection1 from "./_home/scroll-sections/section-1/HomeScrollSection1";
+import HomeScrollSection2 from "./_home/scroll-sections/section-2/HomeScrollSection2";
+import HomeScrollSection3 from "./_home/scroll-sections/section-3/HomeScrollSection3";
 
 const title = "defguard - Zero-Trust WireGuard® 2FA/MFA VPN";
 const featuredImage =
-    "github.com/DefGuard/defguard.github.io/raw/main/public/images/product/core/hero-image.png";
+  "github.com/DefGuard/defguard.github.io/raw/main/public/images/product/core/hero-image.png";
 const imageWidth = "1920";
 const imageHeight = "1080";
-const url = "https://defguard.net";
+const url = "https://defguard.net/";
 const tags = [
-    "defguard",
-    "open source",
-    "sso & vpn",
-    "vpn",
-    "mfa",
-    "2fa",
-    "mfa/2fa",
-    "wireguard",
-    "ldap",
-    "openldap",
-    "postgresql",
-    "postgres",
-    "openid",
-    "totp",
-    "webauthn",
-    "opensense",
-    "freebsd",
-    "rust",
-    "secure",
-    "desktop client",
-    "desktop",
-    "yubikey",
-    "teonite",
-    "docker",
-    "kubernetes",
-    "k8s",
+  "defguard",
+  "open source",
+  "sso & vpn",
+  "vpn",
+  "mfa",
+  "2fa",
+  "mfa/2fa",
+  "wireguard",
+  "ldap",
+  "openldap",
+  "postgresql",
+  "postgres",
+  "openid",
+  "totp",
+  "webauthn",
+  "opensense",
+  "freebsd",
+  "rust",
+  "secure",
+  "desktop client",
+  "desktop",
+  "yubikey",
+  "teonite",
+  "docker",
+  "kubernetes",
+  "k8s",
 ];
 ---
 
 <ProductLayout
-    title={title}
-    featuredImage={featuredImage}
-    imageWidth={imageWidth}
-    imageHeight={imageHeight}
-    url={url}
-    tags={tags}
+  title={title}
+  featuredImage={featuredImage}
+  imageWidth={imageWidth}
+  imageHeight={imageHeight}
+  url={url}
+  tags={tags}
 >
-    <Navigation activeSlug="/" />
-    <main class="product-main" id="core-page">
-        <ProductSection padding="small">
-            <header id="main-header">
-                <h1>True Zero-Trust VPN</h1>
-                <p>
-                    Secure Remote Access Management (WireGuard® 2FA/MFA), Account
-                    Lifecycle (Onboarding), Identity and Access Management (OpenID Connect
-                    SSO), Open Source & On-Premise
-                </p>
-                <div class="github-stars-wrapper">
-                    <GithubStars owner="defguard" repo="defguard" client:only="preact" />
-                </div>
-                <div class="product-download">
-                    <a
-                        href="https://github.com/DefGuard/defguard/releases"
-                        rel="nofollow noopener noreferrer"
-                        data-astro-prefetch
-                    >
-                        <Button text="Download" size="large" />
-                    </a>
-                </div>
-            </header>
-        </ProductSection>
-        <ProductImage>
-            <Image
-                src={CoreImage}
-                alt="defguard vpn overview image"
-                densities={[0.5, 0.75, 1]}
-                loading={"eager"}
-            />
-        </ProductImage>
-        <ProductSection padding="large">
-            <div class="product-features">
-                <h2>Unique set of features combined in a secure architecture:</h2>
-                {
-                    coreFeatures.map(async (f, index) => {
-                        const { Content } = await f.render();
-                        return (
-                            <ProductFeature
-                                title={f.data.title}
-                                id={index}
-                                context="core"
-                                client:only="preact"
-                            >
-                                <Content />
-                            </ProductFeature>
-                        );
-                    })
-                }
-            </div>
-        </ProductSection>
-        <ProductBuiltBy />
-        <MatrixSection />
-    </main>
+  <Navigation activeSlug="/" />
+  <main id="home-page">
+    <HomeHeader />
+    <HomeSection className="scroll-section" variant="white">
+      <Fragment>
+        <HomeScrollSection1 client:load />
+      </Fragment>
+    </HomeSection>
+    <FlexibleIdentitySection />
+    <HomeSection className="scroll-section" variant="white">
+      <Fragment>
+        <HomeScrollSection2 client:idle />
+      </Fragment>
+    </HomeSection>
+    <HomeSection className="scroll-section" variant="gray">
+      <Fragment>
+        <HomeScrollSection3 client:idle />
+      </Fragment>
+    </HomeSection>
+    <HomeSection id="testimonials">
+      <Testimonials client:visible />
+    </HomeSection>
+    <Roadmap />
+    <BuiltBy />
+  </main>
 </ProductLayout>
 
 <style lang="scss" is:global>
-    .button-link {
-        display: block;
-        padding-top: 20px;
+  #home-page {
+    --page-spacing-factor: 0.5;
+    @include break-up(lg) {
+      --page-spacing-factor: 1;
     }
+
+    #testimonials {
+      padding-top: page-spacing(100px);
+      padding-bottom: page-spacing(100px);
+    }
+
+    .scroll-section {
+      padding-top: page-spacing(200px);
+      padding-bottom: page-spacing(200px);
+    }
+
+    .scroll-sections {
+      & > .static-slides {
+        display: flex;
+        flex-flow: column;
+        row-gap: 64px;
+
+        @media screen and (min-width: 1200px) {
+          display: none;
+        }
+      }
+    }
+
+    .content {
+      &.pre-styled {
+        ul {
+          margin: 0;
+          padding-left: 20px;
+        }
+
+        a {
+          white-space: normal;
+          word-wrap: break-word;
+        }
+      }
+    }
+  }
 </style>

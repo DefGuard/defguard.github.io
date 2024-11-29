@@ -11,6 +11,7 @@ const imageWidth = "1080";
 const imageHeight = "540";
 const description =
   "defguard - enterprise open-source SSO&VPN - the only open-source solution with real WireGuard MFA/2FA & integrated OpenID Connect SSO";
+const url = "https://defguard.net/download-confirm/";
 ---
 
 <BaseLayout
@@ -19,14 +20,15 @@ const description =
   featuredImage={featuredImage}
   imageWidth={imageWidth}
   imageHeight={imageHeight}
+  url={url}
 >
-  <Navigation activeSlug="/newsletter" />
+  <Navigation activeSlug="/download-confirm/" />
   <main id="newsletter-page">
     <ProductSection padding="none" id="thanks">
       <h2>Thank you for downloading defguard</h2>
       <p>Your download should start automatically. If it doesn't, download now.</p>
     </ProductSection>
-    <NewsletterSection />
+    <NewsletterSection headerLevel="2" />
   </main>
 </BaseLayout>
 

@@ -1,8 +1,10 @@
-import { useState } from "preact/hooks";
-import { Button } from "../../buttons/Button/Button";
 import "./style.scss";
-import type { ChangeEvent } from "preact/compat";
+
+import type { ChangeEvent } from "react";
+import { useState } from "react";
+
 import MessageBottom from "../../alert/MessageBottom/MessageBottom";
+import { Button } from "../../buttons/Button/Button";
 
 type BookDemoType = {
   first_name: string;
@@ -60,38 +62,38 @@ const BookDemoForm = () => {
     <>
       <form
         id="book-form"
-        class="book"
-        autocomplete="off"
+        className="book"
+        autoComplete="off"
         onSubmit={(e) => {
           e.preventDefault();
           onSubmit();
         }}
       >
-        <div class="double-inputs">
-          <label for="first_name">
+        <div className="double-inputs">
+          <label htmlFor="first_name">
             First name
             <input type="text" required name="first_name" onChange={handleInputChange} />
           </label>
-          <label for="last_name">
+          <label htmlFor="last_name">
             Last name
             <input type="text" required name="last_name" onChange={handleInputChange} />
           </label>
         </div>
-        <div class="double-inputs">
-          <label for="email">
+        <div className="double-inputs">
+          <label htmlFor="email">
             Email
             <input type="email" required name="email" onChange={handleInputChange} />
           </label>
-          <label for="website_url">
+          <label htmlFor="website_url">
             Company website URL
             <input type="text" required name="website_url" onChange={handleInputChange} />
           </label>
         </div>
-        <label class="single-input" for="tell_us_more">
+        <label className="single-input" htmlFor="tell_us_more">
           Anything else you wish to tell us?
           <textarea rows={7} name="tell_us_more" onChange={handleInputChange}></textarea>
         </label>
-        <div class="button">
+        <div className="button">
           <Button text="Submit" type="submit" />
         </div>
       </form>

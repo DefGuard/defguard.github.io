@@ -15,32 +15,6 @@ const { activeSlug } = Astro.props;
       <Fragment set:html={logoSVG} />
     </a>
     <ul class="nav-items">
-      <li class="nav-item">
-        <a
-          href="/"
-          data-astro-prefetch
-          class:list={[
-            {
-              active: activeSlug === "/",
-            },
-          ]}
-        >
-          <span>Server</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a
-          href="/client"
-          data-astro-prefetch
-          class:list={[
-            {
-              active: activeSlug === "/client",
-            },
-          ]}
-        >
-          <span>Client</span>
-        </a>
-      </li>
       {
         navItems.map((item) => (
           <li class="nav-item">
@@ -109,11 +83,11 @@ const { activeSlug } = Astro.props;
       </li>
       <li class="nav-item">
         <a
-          href="/client"
+          href="/client/"
           data-astro-prefetch
           class:list={[
             {
-              active: activeSlug === "/client",
+              active: activeSlug === "/client/",
             },
           ]}
         >

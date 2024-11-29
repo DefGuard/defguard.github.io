@@ -1,0 +1,93 @@
+---
+import Navigation from "../components/base/Navigation.astro";
+import ContentLimiter from "../components/ContentLimiter.astro";
+import PrivacyContent, { frontmatter as privacyFrontmatter } from "../data/privacy.mdx";
+import ProductLayout from "../layouts/ProductLayout.astro";
+
+const title = "defguard - Zero-Trust WireGuard® 2FA/MFA VPN";
+const featuredImage =
+  "github.com/DefGuard/defguard.github.io/raw/main/public/images/product/core/hero-image.png";
+const imageWidth = "1920";
+const imageHeight = "1080";
+const url = "https://defguard.net/privacy/";
+const tags = [
+  "defguard",
+  "open source",
+  "sso & vpn",
+  "vpn",
+  "mfa",
+  "2fa",
+  "mfa/2fa",
+  "wireguard",
+  "ldap",
+  "openldap",
+  "postgresql",
+  "postgres",
+  "openid",
+  "totp",
+  "webauthn",
+  "opensense",
+  "freebsd",
+  "rust",
+  "secure",
+  "desktop client",
+  "desktop",
+  "yubikey",
+  "teonite",
+  "docker",
+  "kubernetes",
+  "k8s",
+];
+---
+
+<ProductLayout
+  title={title}
+  featuredImage={featuredImage}
+  imageWidth={imageWidth}
+  imageHeight={imageHeight}
+  url={url}
+  tags={tags}
+>
+  <Navigation activeSlug="/privacy/" />
+  <main>
+    <ContentLimiter id="privacy-page">
+      <h1>{privacyFrontmatter.title}</h1>
+      <PrivacyContent />
+    </ContentLimiter>
+  </main>
+</ProductLayout>
+
+<style lang="scss" is:global>
+  main {
+    padding-bottom: page-spacing(200px);
+  }
+  #privacy-page {
+    padding-top: page-spacing(100px);
+    .limited-content {
+      display: flex;
+      flex-flow: column;
+      row-gap: 20px;
+      width: 100%;
+
+      h1 {
+        padding-bottom: 20px;
+        @include typography(title);
+      }
+
+      p,
+      span,
+      a,
+      li {
+        @include typography(paragraph);
+      }
+
+      ul {
+        margin: 0;
+      }
+
+      a {
+        text-decoration: underline;
+      }
+    }
+  }
+</style>

@@ -1,0 +1,3 @@
+@function page-spacing($value) {
+  @return calc(#{$value} * var(--page-spacing-factor));
+}

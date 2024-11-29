@@ -1,0 +1,49 @@
+---
+import { Image } from "astro:assets";
+import wideStreet from "./assets/trustedBy/widestreet.png";
+import vki from "./assets/trustedBy/vki.png";
+import deepImage from "./assets/trustedBy/deep-image.png";
+import prusa from "./assets/trustedBy/prusa.png";
+// import penske from "./assets/trustedBy/team-penske.png";
+import acquinox from "./assets/trustedBy/acquinox.png";
+import truevo from "./assets/trustedBy/truevo.png";
+---
+
+<div id="trusted-by">
+  <p>Trusted by</p>
+  <div class="track">
+    <Image src={prusa} alt="prusa logo image" />
+    <!-- <Image src={penske} alt="team penske logo image" /> -->
+    <Image src={wideStreet} alt="widestreet logo image" />
+    <Image src={acquinox} alt="acquinox logo image" />
+    <Image src={vki} alt="vki logo image" />
+    <Image src={truevo} alt="truevo logo image" />
+    <Image src={deepImage} alt="deepimage logo image" />
+  </div>
+</div>
+
+<style lang="scss">
+  #trusted-by {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    p {
+      @include typography(h3);
+      color: var(--text-body-primary);
+    }
+
+    .track {
+      width: 100%;
+      display: flex;
+      flex-flow: row wrap;
+      align-items: center;
+      justify-content: space-between;
+      row-gap: 8px;
+      column-gap: 10px;
+    }
+  }
+</style>

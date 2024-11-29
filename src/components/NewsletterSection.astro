@@ -1,13 +1,22 @@
 ---
 import ProductSection from "../layouts/ProductSection.astro";
-// import Checkbox from "./Checkbox/Checkbox";
-// import { SubscribeButton } from "../components/buttons/SubscribeButton/SubscribeButton";
 import { Button } from "./buttons/Button/Button";
+import HeaderTag from "./HeaderTag.astro";
+
+interface Props {
+  headerLevel: "1" | "2";
+}
+
+const { headerLevel } = Astro.props;
+
+const title = "Sign up for our newsletter";
 ---
 
 <ProductSection padding="newsletter" bordered>
   <section id="newsletter">
-    <h2>Sign up for our newsletter</h2>
+    <HeaderTag level={headerLevel}>
+      {title}
+    </HeaderTag>
     <p>Get the latest defguard news and updates in your inbox.</p>
     <form
       id="newsletter-form"
@@ -23,7 +32,7 @@ import { Button } from "./buttons/Button/Button";
       <div class="terms">
         <div class="form-row">
           <!-- <div class="form-row field checkbox">
-            <Checkbox client:only="preact" />
+            <Checkbox client:load />
             <p>I agree to receive information about defguard’s products and services.</p>
           </div>
           <p>
@@ -32,7 +41,7 @@ import { Button } from "./buttons/Button/Button";
           </p> -->
         </div>
       </div>
-      <!-- <SubscribeButton client:only="preact" /> -->
+      <!-- <SubscribeButton client:load /> -->
       <Button type="submit" text="Subscribe Now" size="normal" />
     </form>
   </section>
@@ -41,6 +50,7 @@ import { Button } from "./buttons/Button/Button";
 <style lang="scss">
   #newsletter {
     width: 100%;
+    & > h1,
     & > h2 {
       padding-bottom: 20px;
       @include typography(section);

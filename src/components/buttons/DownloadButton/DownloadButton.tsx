@@ -1,12 +1,14 @@
 import "./style.scss";
-import { WindowsIcon } from "../../base/icons/WindowsIcon";
-import { MacOsIcon } from "../../base/icons/MacOsIcon";
-import { LinuxIcon } from "../../base/icons/LinuxIcon";
-import { DownloadIcon } from "../../base/icons/DownloadIcon";
-import { VectorIcon } from "../../base/icons/VectorIcon";
-import { PlatformType } from "../../base/types/platform";
+
+import { useEffect, useState } from "react";
+
 import { CheckIcon } from "../../base/icons/CheckIcon";
-import { useState } from "preact/hooks";
+import { DownloadIcon } from "../../base/icons/DownloadIcon";
+import { LinuxIcon } from "../../base/icons/LinuxIcon";
+import { MacOsIcon } from "../../base/icons/MacOsIcon";
+import { VectorIcon } from "../../base/icons/VectorIcon";
+import { WindowsIcon } from "../../base/icons/WindowsIcon";
+import { PlatformType } from "../../base/types/platform";
 
 interface DownloadProps {
   platformType: PlatformType;
@@ -42,12 +44,16 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
     setPlatform(_platform);
   };
 
+  useEffect(() => {
+    console.log(platformType);
+  }, [platformType]);
+
   return (
-    <div class="download-button">
-      <div class="download-header">
+    <div className="download-button">
+      <div className="download-header">
         {platform === PlatformType.WINDOWS && (
           <>
-            <div class="download-icon">
+            <div className="download-icon">
               <WindowsIcon />
               Windows
             </div>
@@ -55,14 +61,14 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
         )}
         {(platform === PlatformType.DEBIAN || platform === PlatformType.ARCHLINUX) && (
           <>
-            <div class="download-icon">
+            <div className="download-icon">
               <LinuxIcon />
               Linux
             </div>
             <div>
               {isLinuxMenuClicked && (
                 <>
-                  <div class="download-choice" onClick={handleToggleLinuxMenu}>
+                  <div className="download-choice" onClick={handleToggleLinuxMenu}>
                     Distribution
                     <VectorIcon />
                   </div>
@@ -95,7 +101,7 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
                 </>
               )}
               {!isLinuxMenuClicked && (
-                <div class="download-choice" onClick={handleToggleLinuxMenu}>
+                <div className="download-choice" onClick={handleToggleLinuxMenu}>
                   Distribution
                   <VectorIcon />
                 </div>
@@ -105,14 +111,14 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
         )}
         {(platform === PlatformType.MACOSARM || platform === PlatformType.MACOSINTEL) && (
           <>
-            <div class="download-icon">
+            <div className="download-icon">
               <MacOsIcon />
               macOS
             </div>
             <div>
               {isAppleMenuClicked && (
                 <>
-                  <div class="download-choice" onClick={handleToggleAppleMenu}>
+                  <div className="download-choice" onClick={handleToggleAppleMenu}>
                     Apple Hardware
                     <VectorIcon />
                   </div>
@@ -145,7 +151,7 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
                 </>
               )}
               {!isAppleMenuClicked && (
-                <div class="download-choice" onClick={handleToggleAppleMenu}>
+                <div className="download-choice" onClick={handleToggleAppleMenu}>
                   Apple Hardware
                   <VectorIcon />
                 </div>
@@ -154,19 +160,18 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
           </>
         )}
       </div>
-      <div class="download-main">
-        <div class="download-text">
+      <div className="download-main">
+        <div className="download-text">
           {(platform === PlatformType.DEBIAN ||
             platform === PlatformType.MACOSINTEL ||
             platform === PlatformType.MACOSARM ||
             platform === PlatformType.WINDOWS) && <>Download now</>}
           {platform === PlatformType.ARCHLINUX && <>AUR package</>}
-          {platform === PlatformType.ARCHLINUX && <>{ARCHLINK}</>}
           {platform === PlatformType.DEBIAN && <p>Debian package</p>}
           {platform === PlatformType.MACOSINTEL && <p>Apple Intel</p>}
           {platform === PlatformType.MACOSARM && <p>Apple ARM</p>}
         </div>
-        <div class="btn" onClick={handleClick}>
+        <div className="btn" onClick={handleClick}>
           {isButtonClicked ? (
             <CheckIcon />
           ) : platform !== PlatformType.ARCHLINUX ? (
@@ -183,7 +188,7 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
           )}
         </div>
       </div>
-      <div class="download-footer">
+      <div className="download-footer">
         {(platform === PlatformType.DEBIAN || platform === PlatformType.ARCHLINUX) && (
           <>
             <p>

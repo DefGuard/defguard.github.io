@@ -1,7 +1,19 @@
 [
   {
+    "display": "Home",
+    "url": "/",
+    "prefetch": true,
+    "external": false
+  },
+  {
+    "display": "Client",
+    "url": "/client/",
+    "prefetch": true,
+    "external": false
+  },
+  {
     "display": "Compare",
-    "url": "/compare",
+    "url": "/compare/",
     "prefetch": true
   },
   {
@@ -12,7 +24,7 @@
   },
   {
     "display": "Pricing",
-    "url": "/pricing",
+    "url": "/pricing/",
     "prefetch": true
   },
   {
@@ -23,7 +35,7 @@
   },
   {
     "display": "FAQ",
-    "url": "/faq",
+    "url": "/faq/",
     "prefetch": false
   }
 ]

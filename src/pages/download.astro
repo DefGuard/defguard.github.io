@@ -6,79 +6,85 @@ import DownloadVersion from "../components/download/DownloadVersion.astro";
 
 const title = "defguard - Zero-Trust WireGuard® 2FA/MFA VPN: Download";
 const featuredImage =
-    "github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png";
+  "github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png";
 const imageWidth = "1080";
 const imageHeight = "540";
 const description =
-    "defguard - enterprise open-source SSO&VPN - the only open-source solution with real WireGuard MFA/2FA & integrated OpenID Connect SSO";
+  "defguard - enterprise open-source SSO&VPN - the only open-source solution with real WireGuard MFA/2FA & integrated OpenID Connect SSO";
+const url = "https://defguard.net/download/";
 ---
 
 <BaseLayout
-    title={title}
-    description={description}
-    featuredImage={featuredImage}
-    imageWidth={imageWidth}
-    imageHeight={imageHeight}
+  title={title}
+  description={description}
+  featuredImage={featuredImage}
+  imageWidth={imageWidth}
+  imageHeight={imageHeight}
+  url={url}
 >
-    <Navigation activeSlug="/newsletter" />
-    <main id="download-page">
-        <header>
-            <h1>Download defguard desktop client with WireGuard 2FA/MFA</h1>
-        </header>
-        <section class="download-section">
-            <DownloadButtonList client:only="preact" />
-            <DownloadVersion />
-        </section>
-        <hr />
-        <!-- <h3>
+  <Navigation activeSlug="/download/" />
+  <main id="download-page">
+    <header>
+      <h1>Download defguard desktop client with WireGuard 2FA/MFA</h1>
+    </header>
+    <section class="download-section">
+      <DownloadButtonList client:only="react" />
+      <DownloadVersion />
+    </section>
+    <hr />
+    <!-- <h3>
       By downloading and using defguard, you agree to its <a href="#" target="_self"
         >terms and conditions</a
       >.
     </h3> -->
-    </main>
+  </main>
 </BaseLayout>
 
 <style lang="scss" is:global>
-    #download-page {
-        display: flex;
-        padding: 100px 240px;
-        flex-direction: column;
-        gap: 40px;
+  #download-page {
+    display: flex;
+    padding: 100px 240px;
+    flex-direction: column;
+    gap: 40px;
 
-        h1 {
-            @include typography(section);
-        }
-
-        h3 {
-            font-size: 18px;
-            font-weight: 400;
-            text-align: center;
-            a {
-                text-decoration-line: underline;
-            }
-        }
-
-        hr {
-            width: 100%;
-        }
-
-        .download-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            align-self: stretch;
-
-            max-width: 1500px;
-        }
-
-        @include break-down(sm) {
-            padding: 100px 20px;
-            gap: 50px;
-
-            .download-section {
-                flex-direction: column;
-                gap: 30px;
-            }
-        }
+    h1 {
+      @include typography(section);
     }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 400;
+      text-align: center;
+      a {
+        text-decoration-line: underline;
+      }
+    }
+
+    hr {
+      width: 100%;
+    }
+
+    .download-section {
+      display: flex;
+      width: 100%;
+      max-width: 1500px;
+      align-items: center;
+      justify-content: flex-start;
+
+      @include break-up(lg) {
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+    }
+
+    @include break-down(sm) {
+      padding: 100px 20px;
+      gap: 50px;
+
+      .download-section {
+        flex-direction: column;
+        gap: 30px;
+      }
+    }
+  }
 </style>

@@ -14,117 +14,109 @@ import ClientImage from "/public/images/product/client/main-screen.png";
 import OverviewImage from "/public/images/product/client/overview.png";
 
 const clientFeatures = (await getCollection("client-features")).sort(
-    (f1, f2) => f1.data.order - f2.data.order,
+  (f1, f2) => f1.data.order - f2.data.order,
 );
 const title = "Zero-Trust WireGuard® 2FA/MFA VPN: Best Desktop WireGuard Client";
 const featuredImage =
-    "github.com/DefGuard/defguard.github.io/raw/main/public/images/product/client/main-screen.png";
+  "github.com/DefGuard/defguard.github.io/raw/main/public/images/product/client/main-screen.png";
 const imageWidth = "1920";
 const imageHeight = "1080";
 const url = "https://defguard.net/client/";
 const tags = [
-    "defguard",
-    "open source",
-    "wireguard",
-    "mfa",
-    "2fa",
-    "mfa/2fa",
-    "totp",
-    "free",
-    "rust",
-    "tauri",
+  "defguard",
+  "open source",
+  "wireguard",
+  "mfa",
+  "2fa",
+  "mfa/2fa",
+  "totp",
+  "free",
+  "rust",
+  "tauri",
 ];
 ---
 
 <ProductLayout
-    title={title}
-    featuredImage={featuredImage}
-    imageWidth={imageWidth}
-    imageHeight={imageHeight}
-    url={url}
-    tags={tags}
+  title={title}
+  featuredImage={featuredImage}
+  imageWidth={imageWidth}
+  imageHeight={imageHeight}
+  url={url}
+  tags={tags}
 >
-    <Navigation activeSlug="/client" />
-    <main id="product-content" class="product-main">
-        <ProductSection padding="small">
-            <header id="main-header">
-                <h1>The Best WireGuard® desktop client</h1>
-                <p>
-                    Beautiful open-source, cross-platform client, with real
-                    <strong>WireGuard® 2FA/Multi-Factor Authentication</strong>.
-                </p>
-                <div class={"github-stars-wrapper"}>
-                    <GithubStars owner="Defguard" repo="client" client:only="preact" />
-                </div>
-                <div class="product-download">
-                    <a
-                        href="/download"
-                        rel="nofollow noopener noreferrer"
-                        data-astro-prefetch
-                    >
-                        <Button text="Download" size="large" />
-                    </a>
-                </div>
-            </header>
-        </ProductSection>
-        <ProductImage>
-            <Image
-                src={ClientImage}
-                alt="product image"
-                densities={[0.5, 0.75, 1]}
-                width={imageWidth}
-                height={imageHeight}
-                loading={"eager"}
-            />
-        </ProductImage>
-        <ProductSection padding="large">
-            <div class="product-features">
-                <h2>Why defguard provides the best WireGuard® client</h2>
-                {
-                    clientFeatures.map(async (f, index) => {
-                        const { Content } = await f.render();
-                        return (
-                            <ProductFeature
-                                title={f.data.title}
-                                id={index}
-                                context="client"
-                                client:only="preact"
-                            >
-                                <Content />
-                            </ProductFeature>
-                        );
-                    })
-                }
+  <Navigation activeSlug="/client/" />
+  <main id="product-content" class="product-main">
+    <ProductSection padding="small">
+      <header id="main-header">
+        <h1>The Best WireGuard® desktop client</h1>
+        <p>
+          Beautiful open-source, cross-platform client, with real
+          <strong>WireGuard® 2FA/Multi-Factor Authentication</strong>.
+        </p>
+        <div class={"github-stars-wrapper"}>
+          <GithubStars owner="Defguard" repo="client" client:only="react" />
+        </div>
+        <div class="product-download">
+          <a href="/download/" rel="nofollow noopener noreferrer" data-astro-prefetch>
+            <Button text="Download" size="large" />
+          </a>
+        </div>
+      </header>
+    </ProductSection>
+    <ProductImage>
+      <Image
+        src={ClientImage}
+        alt="product image"
+        densities={[0.5, 0.75, 1]}
+        width={imageWidth}
+        height={imageHeight}
+        loading={"eager"}
+      />
+    </ProductImage>
+    <ProductSection padding="large">
+      <div class="product-features">
+        <h2>Why defguard provides the best WireGuard® client</h2>
+        {
+          clientFeatures.map(async (f, index) => {
+            const { Content } = await f.render();
+            return (
+              <ProductFeature
+                title={f.data.title}
+                id={index}
+                context="client"
+                client:load
+              >
+                <Content />
+              </ProductFeature>
+            );
+          })
+        }
+      </div>
+    </ProductSection>
+    <ProductSection padding="large" dark>
+      <section id="vpn">
+        <div class="top">
+          <h2>Enterprise VPN & SSO</h2>
+          <p>
+            Get most features out of your WireGuard® VPN with <a href="/"
+              >defguard VPN & SSO</a
+            > - <a href="/compare/" target="_self">see a detailed comparison</a> with other
+            Open Source VPN management solutions to understand all the benefits!
+          </p>
+        </div>
+        <div class="image-with-title">
+          <div class="description">
+            <div class="title">
+              <p>Site-to-Site & Roadwarrior</p>
             </div>
-        </ProductSection>
-        <ProductSection padding="large" dark>
-            <section id="vpn">
-                <div class="top">
-                    <h2>Enterprise VPN & SSO</h2>
-                    <p>
-                        Get most features out of your WireGuard® VPN with <a href="/"
-                            >defguard VPN & SSO</a
-                        > - <a href="/compare">see a detailed comparison</a> with other Open
-                        Source VPN management solutions to understand all the benefits!
-                    </p>
-                </div>
-                <div class="image-with-title">
-                    <div class="description">
-                        <div class="title">
-                            <p>Site-to-Site & Roadwarrior</p>
-                        </div>
-                    </div>
-                    <div class="image-container">
-                        <Image
-                            src={OverviewImage}
-                            alt="overview image"
-                            densities={[0.5, 0.75, 1]}
-                        />
-                    </div>
-                </div>
-            </section>
-        </ProductSection>
-        <ProductBuiltBy />
-        <MatrixSection />
-    </main>
+          </div>
+          <div class="image-container">
+            <Image src={OverviewImage} alt="overview image" densities={[0.5, 0.75, 1]} />
+          </div>
+        </div>
+      </section>
+    </ProductSection>
+    <ProductBuiltBy />
+    <MatrixSection />
+  </main>
 </ProductLayout>
