@@ -50,7 +50,7 @@ const ScrollSlider = ({ components, className, id }: Props) => {
                 opacity: 0,
               }}
               transition={{
-                duration: 0.7,
+                duration: 0.49,
               }}
               className="floating-content"
             >
