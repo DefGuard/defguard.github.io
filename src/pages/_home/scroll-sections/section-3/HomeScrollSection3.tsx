@@ -1,13 +1,10 @@
-import { type ReactNode, useMemo } from "react";
-import useBreakpoint from "use-breakpoint";
+import { type ReactNode } from "react";
 
-import ScrollSlider from "../../../../components/client-side/ScrollSlider/ScrollSlider";
-import type { ScrollSliderSlide } from "../../../../components/client-side/ScrollSlider/types";
-import ClientHomeScrollSlide from "../../components/client-side/ClientHomeScrollSlide/ClientHomeScrollSlide";
 import {
   ClientScrollCardVariant,
   ClientScrollVariant,
 } from "../../components/client-side/ClientHomeScrollSlide/type";
+import HomeScrollSection from "../HomeScrollSection";
 import image1 from "./assets/slide-1.png?url";
 import image2 from "./assets/slide-2.png?url";
 import image3 from "./assets/slide-3.png?url";
@@ -17,9 +14,6 @@ type SlidesData = {
   content: ReactNode;
   title: string;
 };
-
-const title = "Easy management with beautiful UI";
-const variant = ClientScrollCardVariant.CIRCLES;
 
 const slides: SlidesData[] = [
   {
@@ -68,45 +62,13 @@ const slides: SlidesData[] = [
 ];
 
 const MainContainer = () => {
-  const { breakpoint } = useBreakpoint({
-    mobile: 0,
-    desktop: 1200,
-  });
-
-  const scrollSlides = useMemo(() => {
-    const res: ScrollSliderSlide[] = slides.map((data, i) => ({
-      id: `section-3-slide-${i + 1}`,
-      component: (
-        <ClientHomeScrollSlide
-          {...data}
-          title={title}
-          variant={ClientScrollVariant.SIMPLE}
-          cardVariant={variant}
-          key={i}
-          mobile={false}
-        />
-      ),
-    }));
-    return res;
-  }, []);
-
   return (
-    <div className="scroll-sections">
-      {breakpoint === "mobile" &&
-        slides.map((data, i) => (
-          <ClientHomeScrollSlide
-            {...data}
-            title={title}
-            variant={ClientScrollVariant.SIMPLE}
-            cardVariant={variant}
-            key={i}
-            mobile={true}
-          />
-        ))}
-      {breakpoint === "desktop" && (
-        <ScrollSlider id="section-3-slider" components={scrollSlides} />
-      )}
-    </div>
+    <HomeScrollSection
+      cardVariant={ClientScrollCardVariant.CIRCLES}
+      variant={ClientScrollVariant.SIMPLE}
+      data={slides}
+      scrollerId="section-3-slides"
+    />
   );
 };
 

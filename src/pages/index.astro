@@ -100,9 +100,15 @@ const tags = [
     }
 
     .scroll-sections {
-      display: flex;
-      flex-flow: column;
-      row-gap: 64px;
+      & > .static-slides {
+        display: flex;
+        flex-flow: column;
+        row-gap: 64px;
+
+        @media screen and (min-width: 1200px) {
+          display: none;
+        }
+      }
     }
 
     .content {
