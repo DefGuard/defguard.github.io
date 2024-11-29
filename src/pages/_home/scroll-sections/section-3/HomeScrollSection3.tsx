@@ -32,10 +32,10 @@ const slides: SlidesData[] = [
       </ul>
     ),
     image: image1,
-    title: "Easy management with beautiful UI",
+    title: "Integrations",
   },
   {
-    title: "Easy management with beautiful UI",
+    title: "Open Source for trust and transparency",
     content: (
       <p>
         Looking for transparent and verifiable security solutions and not promises? As an
@@ -47,7 +47,7 @@ const slides: SlidesData[] = [
     image: image2,
   },
   {
-    title: "Easy management with beautiful UI",
+    title: "Portability & speed",
     content: (
       <p>
         We&apos;ve implemented defguard in Rust for code portability, security, and speed.

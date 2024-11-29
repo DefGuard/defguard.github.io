@@ -32,14 +32,14 @@ const Component = ({ data, variant, scrollerId, cardVariant }: Props) => {
       component: (
         <ClientHomeScrollSlide
           {...s}
-          variant={ClientScrollVariant.CARD}
+          variant={variant}
           cardVariant={cardVariant}
           mobile={false}
         />
       ),
     }));
     return res;
-  }, [cardVariant, data, scrollerId]);
+  }, [cardVariant, data, scrollerId, variant]);
 
   return (
     <div className="scroll-sections">

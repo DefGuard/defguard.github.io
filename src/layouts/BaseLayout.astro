@@ -18,9 +18,10 @@ interface Props {
   featuredImage: string;
   imageWidth: string;
   imageHeight: string;
+  url: string;
 }
 
-const { title, description, featuredImage, imageWidth, imageHeight } = Astro.props;
+const { url, title, description, featuredImage, imageWidth, imageHeight } = Astro.props;
 ---
 
 <!doctype html>
@@ -38,6 +39,7 @@ const { title, description, featuredImage, imageWidth, imageHeight } = Astro.pro
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content={imageWidth} />
     <meta property="og:image:height" content={imageHeight} />
+    <meta property="og:url" content={url} />
     <!-- schema.org -->
     <slot name="schema" />
     <!-- Favicons -->
@@ -63,3 +65,12 @@ const { title, description, featuredImage, imageWidth, imageHeight } = Astro.pro
     <Clarity />
   </body>
 </html>
+
+<style lang="scss" is:global>
+  main {
+    --page-spacing-factor: 0.5;
+    @include break-up(lg) {
+      --page-spacing-factor: 1;
+    }
+  }
+</style>
