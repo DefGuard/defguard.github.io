@@ -1,21 +1,35 @@
+import { pickBy } from "lodash-es";
+import { createJSONStorage, persist } from "zustand/middleware";
 import { createWithEqualityFn } from "zustand/traditional";
 
 const defaults: StoreValues = {
   version: "",
+  cookiesAccepted: false,
 };
 
-export const useAppStore = createWithEqualityFn<Store>(
-  (set) => ({
-    ...defaults,
-    setState: (vals) => {
-      set(vals);
+const persistedKeys: Array<keyof StoreValues> = ["cookiesAccepted"];
+
+export const useAppStore = createWithEqualityFn<Store>()(
+  persist(
+    (set) => ({
+      ...defaults,
+      setState: (vals) => {
+        set(vals);
+      },
+    }),
+    {
+      name: "app-store",
+      version: 1,
+      storage: createJSONStorage(() => localStorage),
+      partialize: (store) => pickBy(store, persistedKeys),
     },
-  }),
+  ),
   Object.is,
 );
 
 type StoreValues = {
   version: string;
+  cookiesAccepted: boolean;
 };
 
 type StoreMethods = {

@@ -59,7 +59,7 @@ const { title, description, featuredImage, imageWidth, imageHeight } = Astro.pro
     <slot />
     <Footer />
     <FloatingLinks />
-    <CookieBar client:load />
+    <CookieBar client:only="react" />
     <Clarity />
   </body>
 </html>

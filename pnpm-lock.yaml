@@ -77,9 +77,6 @@ importers:
       typescript:
         specifier: ^5.6.3
         version: 5.6.3
-      typescript-cookie:
-        specifier: ^1.0.6
-        version: 1.0.6
       use-breakpoint:
         specifier: ^4.0.5
         version: 4.0.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3565,10 +3562,6 @@ packages:
 
   typescript-auto-import-cache@0.3.5:
     resolution: {integrity: sha512-fAIveQKsoYj55CozUiBoj4b/7WpN0i4o74wiGY5JVUEoD0XiqDk1tJqTEjgzL2/AizKQrXxyRosSebyDzBZKjw==}
-
-  typescript-cookie@1.0.6:
-    resolution: {integrity: sha512-s+BZr7/9BUG6Kg7jGGcOY/4XJcP+iZRFdF3q4FPTfRSP83ivLWF94OcH8PrzGmnS8Ab9qP7ENu/ikLwNFsIafA==}
-    engines: {node: '>=14'}
 
   typescript-eslint@8.15.0:
     resolution: {integrity: sha512-wY4FRGl0ZI+ZU4Jo/yjdBu0lVTSML58pu6PgGtJmCufvzfV565pUF6iACQt092uFOd49iLOTX/sEVmHtbSrS+w==}
@@ -8287,8 +8280,6 @@ snapshots:
   typescript-auto-import-cache@0.3.5:
     dependencies:
       semver: 7.6.3
-
-  typescript-cookie@1.0.6: {}
 
   typescript-eslint@8.15.0(eslint@9.15.0)(typescript@5.6.3):
     dependencies:
