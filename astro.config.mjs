@@ -9,6 +9,8 @@ import playformCompress from "@playform/compress";
 
 import react from "@astrojs/react";
 
+import sitemap from "@astrojs/sitemap";
+
 const __filename = fileURLToPath(import.meta.url);
 
 const __dirname = path.dirname(__filename);
@@ -17,7 +19,19 @@ const __dirname = path.dirname(__filename);
 export default defineConfig({
   site: "https://defguard.net",
   prefetch: true,
-  integrations: [mdx(), playformCompress(), react()],
+  integrations: [
+    mdx(),
+    playformCompress(),
+    react(),
+    sitemap({
+      i18n: {
+        defaultLocale: "en",
+        locales: {
+          en: "en-US",
+        },
+      },
+    }),
+  ],
   markdown: {
     rehypePlugins: [
       [
