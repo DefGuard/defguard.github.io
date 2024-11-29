@@ -22,7 +22,7 @@ if (link?.preload) {
 
 {
   link !== undefined && (
-    <a class={clsx("astro-btn-link", className)} id={id} {...prefetch}>
+    <a class={clsx("astro-btn-link", className)} id={id} href={link.href} {...prefetch}>
       <button class={clsx("astro-btn", className)} id={id}>
         <span>{text}</span>
       </button>

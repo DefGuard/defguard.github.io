@@ -20,7 +20,7 @@ const description =
   imageWidth={imageWidth}
   imageHeight={imageHeight}
 >
-  <Navigation activeSlug="/newsletter" />
+  <Navigation activeSlug="/download/" />
   <main id="download-page">
     <header>
       <h1>Download defguard desktop client with WireGuard 2FA/MFA</h1>
@@ -64,11 +64,15 @@ const description =
 
     .download-section {
       display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      align-self: stretch;
-
+      width: 100%;
       max-width: 1500px;
+      align-items: center;
+      justify-content: flex-start;
+
+      @include break-up(lg) {
+        justify-content: space-between;
+        align-items: flex-start;
+      }
     }
 
     @include break-down(sm) {

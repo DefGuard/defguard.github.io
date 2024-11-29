@@ -30,6 +30,10 @@ export const DownloadIcon = ({ platformType, owner, repo, version }: DownloadPro
         setDownloadName(`defguard-client_${version}_amd64.deb`);
         break;
       }
+      case PlatformType.ARCHLINUX: {
+        setDownloadName(`defguard-client_${version}_amd64.deb`);
+        break;
+      }
     }
   }, [platformType, version]);
 

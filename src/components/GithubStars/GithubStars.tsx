@@ -1,21 +1,23 @@
 import "./style.scss";
 
 import nf from "@tuplo/numberfmt";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 type Props = {
   owner: string;
   repo: string;
 };
 
-const GithubStars = function ({ owner, repo }: Props) {
+export default function GithubStars({ owner, repo }: Props) {
   const [starCount, setStarCount] = useState<number | undefined>();
 
   const iconId = `${owner}-${repo}-icon`;
 
-  const displayCount = useCallback((stars: number): string => {
-    return nf(stars, "0,0a");
-  }, []);
+  const displayCount = useMemo(() => {
+    if (starCount === undefined) return "0";
+
+    return nf(starCount, "0,0a");
+  }, [starCount]);
 
   useEffect(() => {
     fetch(`https://api.github.com/repos/${owner}/${repo}`)
@@ -72,9 +74,7 @@ const GithubStars = function ({ owner, repo }: Props) {
           </defs>
         </svg>
       </a>
-      <p>☆ {displayCount(starCount ?? 0)}</p>
+      <p>☆ {displayCount}</p>
     </div>
   );
-};
-
-export default GithubStars;
+}

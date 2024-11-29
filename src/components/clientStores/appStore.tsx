@@ -1,5 +1,5 @@
-import { pickBy } from "lodash-es";
-import { createJSONStorage, persist } from "zustand/middleware";
+import { pick } from "lodash-es";
+import { persist } from "zustand/middleware";
 import { createWithEqualityFn } from "zustand/traditional";
 
 const defaults: StoreValues = {
@@ -20,8 +20,7 @@ export const useAppStore = createWithEqualityFn<Store>()(
     {
       name: "app-store",
       version: 1,
-      storage: createJSONStorage(() => localStorage),
-      partialize: (store) => pickBy(store, persistedKeys),
+      partialize: (s) => pick(s, persistedKeys),
     },
   ),
   Object.is,

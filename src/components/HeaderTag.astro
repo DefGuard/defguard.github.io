@@ -1,0 +1,36 @@
+---
+interface Props {
+  level?: "1" | "2" | "3" | "4";
+}
+
+const { level } = Astro.props;
+---
+
+{
+  level === "1" && (
+    <h1>
+      <slot />
+    </h1>
+  )
+}
+{
+  level === "2" && (
+    <h2>
+      <slot />
+    </h2>
+  )
+}
+{
+  level === "3" && (
+    <h3>
+      <slot />
+    </h3>
+  )
+}
+{
+  level === "4" && (
+    <h4>
+      <slot />
+    </h4>
+  )
+}

@@ -1,6 +1,6 @@
 import "./style.scss";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { CheckIcon } from "../../base/icons/CheckIcon";
 import { DownloadIcon } from "../../base/icons/DownloadIcon";
@@ -43,6 +43,10 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
   const swapPlatform = (_platform: PlatformType) => {
     setPlatform(_platform);
   };
+
+  useEffect(() => {
+    console.log(platformType);
+  }, [platformType]);
 
   return (
     <div className="download-button">
@@ -163,7 +167,6 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
             platform === PlatformType.MACOSARM ||
             platform === PlatformType.WINDOWS) && <>Download now</>}
           {platform === PlatformType.ARCHLINUX && <>AUR package</>}
-          {platform === PlatformType.ARCHLINUX && <>{ARCHLINK}</>}
           {platform === PlatformType.DEBIAN && <p>Debian package</p>}
           {platform === PlatformType.MACOSINTEL && <p>Apple Intel</p>}
           {platform === PlatformType.MACOSARM && <p>Apple ARM</p>}

@@ -18,11 +18,12 @@ const __dirname = path.dirname(__filename);
 // https://astro.build/config
 export default defineConfig({
   site: "https://defguard.net",
+  trailingSlash: "ignore",
   prefetch: true,
   integrations: [
+    react(),
     mdx(),
     playformCompress(),
-    react(),
     sitemap({
       i18n: {
         defaultLocale: "en",

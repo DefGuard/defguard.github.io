@@ -44,7 +44,7 @@ const tags = [
   url={url}
   tags={tags}
 >
-  <Navigation activeSlug="/client" />
+  <Navigation activeSlug="/client/" />
   <main id="product-content" class="product-main">
     <ProductSection padding="small">
       <header id="main-header">
@@ -54,10 +54,10 @@ const tags = [
           <strong>WireGuard® 2FA/Multi-Factor Authentication</strong>.
         </p>
         <div class={"github-stars-wrapper"}>
-          <GithubStars owner="Defguard" repo="client" client:load />
+          <GithubStars owner="Defguard" repo="client" client:only="react" />
         </div>
         <div class="product-download">
-          <a href="/download" rel="nofollow noopener noreferrer" data-astro-prefetch>
+          <a href="/download/" rel="nofollow noopener noreferrer" data-astro-prefetch>
             <Button text="Download" size="large" />
           </a>
         </div>
@@ -100,8 +100,8 @@ const tags = [
           <p>
             Get most features out of your WireGuard® VPN with <a href="/"
               >defguard VPN & SSO</a
-            > - <a href="/compare">see a detailed comparison</a> with other Open Source VPN
-            management solutions to understand all the benefits!
+            > - <a href="/compare/" target="_self">see a detailed comparison</a> with other
+            Open Source VPN management solutions to understand all the benefits!
           </p>
         </div>
         <div class="image-with-title">
