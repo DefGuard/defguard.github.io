@@ -143,15 +143,30 @@ import Image from "astro/components/Image.astro";
       }
       .elevated-card {
         border-radius: 10px;
-        padding: 65px 86px 65px 65px;
+        padding: 40px;
+
+        @include break-up(md) {
+          padding: 65px 86px 65px 65px;
+        }
 
         & > div {
           width: 100%;
           display: grid;
-          grid-template-columns: 133px 163px;
+          grid-template-columns: 1fr 1fr;
           grid-row: auto auto;
-          column-gap: 86px;
-          row-gap: 86px;
+          gap: 30px;
+          justify-content: center;
+
+          @include break-down(md) {
+            align-items: center;
+          }
+
+          @include break-up(md) {
+            grid-template-columns: 133px 163px;
+            grid-row: auto auto;
+            column-gap: 86px;
+            row-gap: 86px;
+          }
 
           img {
             max-width: 100%;
