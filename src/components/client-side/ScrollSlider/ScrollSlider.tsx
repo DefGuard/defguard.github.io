@@ -13,6 +13,8 @@ type Props = {
 };
 /**Scroll based slides made with motion for react */
 const ScrollSlider = ({ components, className, id }: Props) => {
+  const mainRef = useRef<HTMLDivElement | null>(null);
+  const inView = useInView(mainRef);
   const [activeIndex, setActive] = useState(0);
 
   const triggers = useMemo(() => components.map((c) => `trigger-${c.id}`), [components]);
@@ -33,8 +35,21 @@ const ScrollSlider = ({ components, className, id }: Props) => {
     [activeIndex, triggers],
   );
 
+  useEffect(() => {
+    if (!inView && mainRef.current) {
+      const rect = mainRef.current.getBoundingClientRect();
+      if (rect.top + rect.height < window.scrollY) {
+        setActive(components.length - 1);
+      }
+      if (rect.top > window.scrollY && activeIndex !== 0) {
+        setActive(0);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView]);
+
   return (
-    <div className={clsx("scroll-slider", className)} id={id}>
+    <div className={clsx("scroll-slider", className)} id={id} ref={mainRef}>
       <div className="floating">
         <div className="floating-island">
           <AnimatePresence mode="wait">

@@ -17,6 +17,18 @@ type SlidesData = {
 
 const slides: SlidesData[] = [
   {
+    title: "Open Source for trust and transparency",
+    content: (
+      <p>
+        Looking for transparent and verifiable security solutions and not promises? As an
+        open-source platform, Defguard offers full transparency, enabling organizations to
+        verify security protocols and the actual code, ensuring trust through visible,
+        verifiable security practices and not promises.
+      </p>
+    ),
+    image: image2,
+  },
+  {
     content: (
       <ul>
         <li>
@@ -33,18 +45,6 @@ const slides: SlidesData[] = [
     ),
     image: image1,
     title: "Integrations",
-  },
-  {
-    title: "Open Source for trust and transparency",
-    content: (
-      <p>
-        Looking for transparent and verifiable security solutions and not promises? As an
-        open-source platform, Defguard offers full transparency, enabling organizations to
-        verify security protocols and the actual code, ensuring trust through visible,
-        verifiable security practices and not promises.
-      </p>
-    ),
-    image: image2,
   },
   {
     title: "Portability & speed",

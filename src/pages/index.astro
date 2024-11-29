@@ -60,18 +60,18 @@ const tags = [
     <HomeHeader />
     <HomeSection className="scroll-section" variant="white">
       <Fragment>
-        <HomeScrollSection1 client:visible />
+        <HomeScrollSection1 client:load />
       </Fragment>
     </HomeSection>
     <FlexibleIdentitySection />
     <HomeSection className="scroll-section" variant="white">
       <Fragment>
-        <HomeScrollSection2 client:visible />
+        <HomeScrollSection2 client:idle />
       </Fragment>
     </HomeSection>
     <HomeSection className="scroll-section" variant="gray">
       <Fragment>
-        <HomeScrollSection3 client:visible />
+        <HomeScrollSection3 client:idle />
       </Fragment>
     </HomeSection>
     <HomeSection id="testimonials">
