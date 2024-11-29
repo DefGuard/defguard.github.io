@@ -1,14 +1,14 @@
 import "./style.scss";
 
 import clsx from "clsx";
-import type { ComponentChildren } from "preact";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 type Props = {
   text: string;
-  children?: ComponentChildren;
+  children?: ReactNode;
   onClick?: () => void;
   size?: "small" | "normal" | "large";
-  type?: string;
+  type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
   disabled?: boolean;
 };
 

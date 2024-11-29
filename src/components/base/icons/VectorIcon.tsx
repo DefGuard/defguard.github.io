@@ -9,7 +9,7 @@ export const VectorIcon = () => {
     >
       <path
         d="M0.514648 0.878906L4.75729 5.12155L8.99993 0.878906"
-        style="stroke: var(--text-body-primary);"
+        style={{ stroke: "var(--text-body-primary)" }}
       />
     </svg>
   );

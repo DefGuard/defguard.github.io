@@ -63,7 +63,6 @@ const CardVariant = ({
     );
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (!mobile)
     return (
       <div className="client-scroll-slide card">

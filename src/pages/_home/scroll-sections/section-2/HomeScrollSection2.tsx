@@ -53,7 +53,6 @@ const MainContainer = () => {
   });
   const scrollSlides = useMemo(() => {
     const res: ScrollSliderSlide[] = slides.map((s, i) => ({
-      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       id: `section-2-slide-${i}`,
       component: (
         <ClientHomeScrollSlide

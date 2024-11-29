@@ -1,7 +1,7 @@
 import "./style.scss";
 
 import clsx from "clsx";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Markdown from "react-markdown";
 import rehypeR from "rehype-raw";
 

@@ -3,7 +3,7 @@
   position: relative;
   overflow: visible;
 
-  &>.triggers {
+  & > .triggers {
     .trigger {
       content: " ";
       display: block;
@@ -12,7 +12,7 @@
     }
   }
 
-  &>.floating {
+  & > .floating {
     place-content: center space-around;
     display: flex;
     flex-flow: column;

@@ -28,8 +28,8 @@ const FeaturesTable = ({ data }: TableProps) => {
           <div className="col-header">
             <FeaturesTableDefguardLogo />
           </div>
-          {data.others.map((o) => (
-            <div className="col-header">
+          {data.others.map((o, i) => (
+            <div className="col-header" key={i}>
               <p>{o}</p>
             </div>
           ))}

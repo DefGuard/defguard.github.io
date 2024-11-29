@@ -40,10 +40,11 @@ const DownloadInfo = function ({ owner, repo }: GithubProps) {
           setIsLoading(false);
         }),
       )
-      .catch((error) => {
-        console.log("Error: " + error);
+      .catch((error: unknown) => {
+        console.error(error);
         setIsLoading(false);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

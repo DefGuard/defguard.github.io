@@ -38,6 +38,15 @@ export default tseslint.config(
       ...reactHooks.configs.recommended.rules,
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
+      "@typescript-eslint/restrict-template-expressions": [
+        "error",
+        {
+          allowNumber: true,
+          allowBoolean: true,
+          allowRegExp: true,
+        },
+      ],
+      "@typescript-eslint/no-unnecessary-condition": "off",
     },
   },
   eslintConfigPrettier,

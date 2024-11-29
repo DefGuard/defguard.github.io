@@ -1,12 +1,11 @@
 import "./style.scss";
 
-import { useStore } from "@nanostores/preact";
 import { useEffect, useState } from "react";
 
 import { detectOperatingSystem } from "../../../utils/detectOpratingSystem.ts";
 import { PlatformType } from "../../base/types/platform";
 import { DownloadButton } from "../../buttons/DownloadButton/DownloadButton";
-import { clientVersion } from "../../store/versionStore";
+import { useAppStore } from "../../clientStores/appStore.tsx";
 
 type DownloadButtonConfig = {
   platformType: PlatformType;
@@ -29,57 +28,62 @@ export const DownloadButtonList = () => {
       platformType: PlatformType.MACOSARM,
     },
   ]);
-
-  const $clientVersion = useStore(clientVersion);
+  const clientVersion = useAppStore((s) => s.version);
 
   useEffect(() => {
-    detectOperatingSystem().then((val) => {
-      switch (val) {
-        case "ARM": {
-          setButtonList([
-            {
-              platformType: PlatformType.MACOSARM,
-            },
-            {
-              platformType: PlatformType.DEBIAN,
-            },
-            {
-              platformType: PlatformType.WINDOWS,
-            },
-          ]);
-          break;
+    detectOperatingSystem()
+      .then((val) => {
+        switch (val) {
+          case "ARM": {
+            setButtonList([
+              {
+                platformType: PlatformType.MACOSARM,
+              },
+              {
+                platformType: PlatformType.DEBIAN,
+              },
+              {
+                platformType: PlatformType.WINDOWS,
+              },
+            ]);
+            break;
+          }
+          case "Intel": {
+            setButtonList([
+              {
+                platformType: PlatformType.MACOSINTEL,
+              },
+              {
+                platformType: PlatformType.DEBIAN,
+              },
+              {
+                platformType: PlatformType.WINDOWS,
+              },
+            ]);
+            break;
+          }
+          case "Linux": {
+            setButtonList([
+              {
+                platformType: PlatformType.DEBIAN,
+              },
+              {
+                platformType: PlatformType.WINDOWS,
+              },
+              {
+                platformType: PlatformType.MACOSARM,
+              },
+            ]);
+            break;
+          }
         }
-        case "Intel": {
-          setButtonList([
-            {
-              platformType: PlatformType.MACOSINTEL,
-            },
-            {
-              platformType: PlatformType.DEBIAN,
-            },
-            {
-              platformType: PlatformType.WINDOWS,
-            },
-          ]);
-          break;
-        }
-        case "Linux": {
-          setButtonList([
-            {
-              platformType: PlatformType.DEBIAN,
-            },
-            {
-              platformType: PlatformType.WINDOWS,
-            },
-            {
-              platformType: PlatformType.MACOSARM,
-            },
-          ]);
-          break;
-        }
-      }
-      setIsLoading(false);
-    });
+      })
+      .catch((e: unknown) => {
+        console.error(e);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
 
   if (isLoading) return null;
@@ -90,7 +94,7 @@ export const DownloadButtonList = () => {
         platformType={buttonList[0].platformType}
         owner={OWNER}
         repo={REPO}
-        version={$clientVersion}
+        version={clientVersion}
       />
       <div className="download-separator">
         <hr />
@@ -101,13 +105,13 @@ export const DownloadButtonList = () => {
         platformType={buttonList[1].platformType}
         owner={OWNER}
         repo={REPO}
-        version={$clientVersion}
+        version={clientVersion}
       />
       <DownloadButton
         platformType={buttonList[2].platformType}
         owner={OWNER}
         repo={REPO}
-        version={$clientVersion}
+        version={clientVersion}
       />
     </section>
   );

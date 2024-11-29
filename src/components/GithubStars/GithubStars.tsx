@@ -18,16 +18,29 @@ const GithubStars = function ({ owner, repo }: Props) {
   }, []);
 
   useEffect(() => {
-    fetch(`https://api.github.com/repos/${owner}/${repo}`).then((res) =>
-      res.json().then((val) => {
-        if (val["stargazers_count"] !== undefined) {
-          setStarCount(val["stargazers_count"]);
-        }
-      }),
-    );
+    fetch(`https://api.github.com/repos/${owner}/${repo}`)
+      .then((res) =>
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        res.json().then((val: any) => {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+          const count = val["stargazers_count"];
+          if (count !== undefined) {
+            if (typeof count === "number") {
+              setStarCount(count);
+            }
+            if (typeof count === "string") {
+              setStarCount(Number(count));
+            }
+          }
+        }),
+      )
+      .catch((e: unknown) => {
+        console.error(e);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (!starCount === undefined) return null;
+  if (starCount === undefined) return null;
 
   return (
     <div className="github-stars">

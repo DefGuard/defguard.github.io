@@ -12,7 +12,6 @@ import {
 } from "@floating-ui/react";
 import clsx from "clsx";
 import { isUndefined } from "lodash-es";
-import type { CSSProperties } from "react";
 import { useMemo, useState } from "react";
 
 import type { FeatureTableCell } from "../../types";
@@ -81,6 +80,7 @@ const FeaturesTableCell = ({ status, hover, link }: FeatureTableCell) => {
             target="_blank"
             {...getReferenceProps()}
             ref={refs.setReference}
+            rel="noreferrer noopener"
           >
             {getMainIcon}
             {((hover && hover.length) || (link && link.length)) && (
