@@ -35,8 +35,8 @@ const ScrollSlider = ({ components, className, id }: Props) => {
     [activeIndex, triggers],
   );
 
-  useEffect(() => {
-    if (!inView && mainRef.current) {
+  const checkPosition = useCallback(() => {
+    if (mainRef.current) {
       const rect = mainRef.current.getBoundingClientRect();
       if (rect.top + rect.height < window.scrollY) {
         setActive(components.length - 1);
@@ -45,8 +45,19 @@ const ScrollSlider = ({ components, className, id }: Props) => {
         setActive(0);
       }
     }
+  }, [activeIndex, components.length]);
+
+  useEffect(() => {
+    if (!inView && mainRef.current) {
+      checkPosition();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView]);
+
+  useEffect(() => {
+    checkPosition();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className={clsx("scroll-slider", className)} id={id} ref={mainRef}>
