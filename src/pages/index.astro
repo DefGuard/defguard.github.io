@@ -4,12 +4,22 @@ import BuiltBy from "../components/BuiltBy.astro";
 import HomeSection from "../components/home/HomeSection.astro";
 import ProductLayout from "../layouts/ProductLayout.astro";
 import Testimonials from "./_home/components/client-side/Testimonials/Testimonials";
+import type { TestimonialData } from "./_home/components/client-side/Testimonials/type";
+import { testimonialSchema } from "./_home/components/client-side/Testimonials/type";
 import FlexibleIdentitySection from "./_home/components/FlexibleIdentity/FlexibleIdentitySection.astro";
 import HomeHeader from "./_home/components/HomeHeader.astro";
 import Roadmap from "./_home/components/Roadmap/Roadmap.astro";
 import HomeScrollSection1 from "./_home/scroll-sections/section-1/HomeScrollSection1";
 import HomeScrollSection2 from "./_home/scroll-sections/section-2/HomeScrollSection2";
 import HomeScrollSection3 from "./_home/scroll-sections/section-3/HomeScrollSection3";
+
+const testimonialsImportData = await Astro.glob("../data/home/testimonials/**/*.md");
+
+const testimonialsData: Array<TestimonialData> = testimonialsImportData.map((val) => {
+  const toValidate = { ...val.frontmatter, markdownRaw: val.rawContent() };
+  const res = testimonialSchema.parse(toValidate);
+  return res;
+});
 
 const title = "defguard - Zero-Trust WireGuard® 2FA/MFA VPN";
 const featuredImage =
@@ -75,7 +85,7 @@ const tags = [
       </Fragment>
     </HomeSection>
     <HomeSection id="testimonials">
-      <Testimonials client:visible />
+      <Testimonials data={testimonialsData} client:only="react" />
     </HomeSection>
     <Roadmap />
     <BuiltBy variant="white" />

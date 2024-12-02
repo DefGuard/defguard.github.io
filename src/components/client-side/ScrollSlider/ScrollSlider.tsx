@@ -81,6 +81,7 @@ const ScrollSlider = ({ components, className, id }: Props) => {
                     onClick={() => {
                       handleControlClick(i);
                     }}
+                    aria-label={`show slide ${i + 1} button`}
                   ></button>
                   <div className="track-indicator">
                     <div className="line"></div>

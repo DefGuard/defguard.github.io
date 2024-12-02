@@ -7,16 +7,21 @@
   & > .track {
     padding-bottom: 32px;
 
+    .testimonial-container {
+      box-sizing: border-box;
+      width: 100%;
+    }
+
     .testimonial {
       box-sizing: border-box;
       padding: 20px;
       background-color: #fff;
       border-radius: 10px;
       border-radius: 10px;
-      box-shadow: 0px 12px 24px 0px rgba(0, 0, 0, 0.08);
       display: flex;
       flex-flow: column;
       row-gap: 25px;
+      border: 1px solid var(--border-separator);
 
       @include break-up(lg) {
         display: grid;
@@ -92,5 +97,28 @@
         }
       }
     }
+  }
+}
+
+.react-multi-carousel-list {
+  padding-bottom: 40px;
+}
+
+.carousel-dots {
+  display: flex;
+  flex-flow: row nowrap;
+  column-gap: 20px;
+
+  .react-multi-carousel-dot button {
+    border-radius: 50px;
+    height: 12px;
+    width: 12px;
+    box-sizing: border-box;
+    border: 1px solid var(--text-body-primary);
+    background-color: transparent;
+  }
+
+  .react-multi-carousel-dot--active button {
+    background-color: var(--text-body-primary);
   }
 }
