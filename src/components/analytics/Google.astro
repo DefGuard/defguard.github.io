@@ -1,0 +1,18 @@
+---
+import google from "./google?url";
+//@ts-ignore
+const isProd = import.meta.env.PROD as boolean;
+---
+
+{
+  isProd && (
+    <>
+      <script
+        is:inline
+        type="text/partytown"
+        src={`https://www.googletagmanager.com/gtag/js?id=G-Z2X2PB0P4E`}
+      />
+      <script is:inline type="text/partytown" src={google} />
+    </>
+  )
+}
