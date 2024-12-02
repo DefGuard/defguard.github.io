@@ -57,7 +57,7 @@ const CardVariant = ({
         </div>
         <div className="content">{renderContent(content)}</div>
         <div className="image">
-          <img src={image} alt="slide image" />
+          <img src={image} alt="slide image" loading="lazy" decoding="async" />
         </div>
       </div>
     );
