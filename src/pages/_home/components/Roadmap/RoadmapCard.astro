@@ -1,0 +1,55 @@
+---
+import type { Roadmap } from "../../../../content/config";
+
+interface Props {
+  data: Roadmap;
+  lineDirection: "left" | "right";
+  style?: astroHTML.JSX.CSSProperties;
+}
+
+const { data, lineDirection, style } = Astro.props;
+---
+
+<div class="version" style={style}>
+  {
+    lineDirection === "right" && (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="32"
+        height="18"
+        viewBox="0 0 32 18"
+        fill="none"
+        class="right"
+      >
+        <path
+          d="M0.499999 16.3662L-6.77527e-07 16.3662L-7.21238e-07 17.3662L0.499999 17.3662L0.499999 16.3662ZM15.5 16.8662L15.5 16.3662L15.5 16.8662ZM15.5 16.3662L0.499999 16.3662L0.499999 17.3662L15.5 17.3662L15.5 16.3662ZM31 0.866211C31 9.42663 24.0604 16.3662 15.5 16.3662L15.5 17.3662C24.6127 17.3662 32 9.97891 32 0.866211L31 0.866211Z"
+          fill="#222222"
+        />
+      </svg>
+    )
+  }
+  {
+    lineDirection === "left" && (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="32"
+        height="18"
+        viewBox="0 0 32 18"
+        fill="none"
+        class="left"
+      >
+        <path
+          d="M31.5 16.3662L32 16.3662L32 17.3662L31.5 17.3662L31.5 16.3662ZM16.5 16.8662L16.5 16.3662L16.5 16.8662ZM16.5 16.3662L31.5 16.3662L31.5 17.3662L16.5 17.3662L16.5 16.3662ZM1 0.866211C1 9.42663 7.93959 16.3662 16.5 16.3662L16.5 17.3662C7.3873 17.3662 3.98329e-07 9.97891 0 0.866211L1 0.866211Z"
+          fill="#222222"
+        />
+      </svg>
+    )
+  }
+  <div class="header">
+    <h3>{data.title}</h3>
+    <span>v{" "}{data.version}</span>
+  </div>
+  <div class="content">
+    <slot />
+  </div>
+</div>

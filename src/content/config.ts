@@ -21,6 +21,18 @@ const pricingSchema = z.object({
   buttonText: z.string().optional(),
 });
 
+const roadmapSchema = z.object({
+  title: z.string(),
+  version: z.number(),
+});
+
+export type Roadmap = z.infer<typeof roadmapSchema>;
+
+const roadmap = defineCollection({
+  type: "content",
+  schema: roadmapSchema,
+});
+
 export type PricingSchema = z.infer<typeof pricingSchema>;
 
 const pricing = defineCollection({
@@ -32,4 +44,5 @@ export const collections = {
   "client-features": productFeatures,
   "core-features": productFeatures,
   pricing: pricing,
+  roadmap,
 };
