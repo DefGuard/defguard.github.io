@@ -38,7 +38,13 @@ import teoniteSvgRaw from "/public/svg/built-by.svg?raw";
 
       p {
         text-align: center;
-        @include typography(pricebox-title);
+        @include break-down(md) {
+          font-size: 16px;
+        }
+
+        & {
+          @include typography(pricebox-title);
+        }
       }
     }
 

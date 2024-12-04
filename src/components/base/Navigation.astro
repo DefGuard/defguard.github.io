@@ -68,32 +68,6 @@ const { activeSlug } = Astro.props;
   </section>
   <nav id="mobile-nav">
     <ul>
-      <li class="nav-item">
-        <a
-          href="/"
-          data-astro-prefetch
-          class:list={[
-            {
-              active: activeSlug === "/",
-            },
-          ]}
-        >
-          <span>Server</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a
-          href="/client/"
-          data-astro-prefetch
-          class:list={[
-            {
-              active: activeSlug === "/client/",
-            },
-          ]}
-        >
-          <span>Client</span>
-        </a>
-      </li>
       {
         navItems.map((item) => (
           <li class="nav-item">

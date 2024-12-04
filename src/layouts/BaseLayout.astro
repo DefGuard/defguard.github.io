@@ -3,7 +3,6 @@ import FloatingLinks from "../components/FloatingLinks.astro";
 import Footer from "../components/base/Footer.astro";
 import "../styles/global.scss";
 import { CookieBar } from "../components/base/CookieBar/CookieBar";
-import Clarity from "../components/analytics/Clarity.astro";
 import Google from "../components/analytics/Google.astro";
 
 const favSizes = [
@@ -60,7 +59,7 @@ const { url, title, description, featuredImage, imageWidth, imageHeight } = Astr
     <Footer />
     <FloatingLinks />
     <CookieBar client:only="react" />
-    <Clarity />
+    <!-- <Clarity /> -->
   </body>
 </html>
 
