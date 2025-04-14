@@ -48,15 +48,23 @@ const theme = dark ? "dark" : "light";
 
     box-sizing: border-box;
     width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
     display: flex;
     flex-flow: column;
     align-items: center;
     justify-content: flex-start;
     background-color: var(--surface-frame-bg);
 
+    @include break-down(sm) {
+      --product-section-edge-padding: 10px;
+    }
+
     &:not(.skip-max) {
       & > * {
+        width: 100%;
         max-width: var(--max-section-width);
+        box-sizing: border-box;
       }
     }
 
