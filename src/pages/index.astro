@@ -73,8 +73,11 @@ const tags = [
   tags={tags}
 >
   <Navigation activeSlug="/" />
+  
   <main id="home-page">
+    
     <HomeHeader />
+
     <FlexibleSection
       title="Upgrade to native MFA for WireGuard for Safer Remote Access"
       id="security-features"
@@ -121,15 +124,17 @@ const tags = [
       </div>
     </FlexibleSection>
     <FlexibleSection
-    title="defguard Identity Provider (OIDC)"
+    title="Simplify your stack with defguard Identity Provider"
     id="oidc"  
     variant="gray"
     theme="light"
   >
     <div slot="left">
-      <p>Alternatively, you can leverage defguard's built-in OIDC (OpenID Connect) provider, giving you full control over user management within the defguard platform.
-
+      <p>Leverage defguard's built-in OpenID Connect (OIDC) provider, giving you full control over user management within the defguard platform.
+        </p>
+        <p>
         This comprehensive approach to identity integration empowers you to centralize user authentication and authorization, streamlining remote access management and strengthening your overall security posture.</p>
+        
     </div>
     
     <div slot="right">
@@ -137,19 +142,21 @@ const tags = [
     </div>
   </FlexibleSection>
   <FlexibleSection
-  title="Leverage Cloud Identity Provider and LDAP/AD sync"
+  title="Sync with external Identity Providers"
   id="ldap"  
   variant="white"
   theme="light"
 >
   <div slot="left">
-    <p>Have your own IdP? defguard integrates easily with major providers.</p>
-    <strong>Cloud provider</strong>
-    <p>defguard seamlessly integrates with a wide range of identity providers, allowing you to easily connect to existing ecosystem of your organization. Whether you rely on on-premise solutions like LDAP or Active Directory, or cloud-based identity providers like Google, Microsoft, Okta, JumpCloud, Zitadel, or Authentik, defguard has you covered.</p>
+    <strong>Google, Microsoft, Okta and other cloud providers</strong>
+    <p>
+      defguard seamlessly integrates with a wide range of identity providers, allowing you to easily connect to existing ecosystem of your organization. </p>
+    <p>
+       Ccloud-based identity providers support includes: Google, Microsoft, Okta, JumpCloud, Zitadel, or Authentik.</p>
   </div>
   
   <div slot="right">
-    <strong>LDAP/Active Directory sync</strong>
+    <strong>LDAP & Active Directory </strong>
     <p>With its robust identity provider integration capabilities, defguard enables two-way synchronization with Active Directory, ensuring your user accounts, groups and permissions are always up-to-date. 
     </p>
     <a href="#">learn more about LDAP sync</a>
@@ -168,6 +175,7 @@ const tags = [
   
   <div slot="right">
     <p>Defguard makes it easy for users to get set up and connected - without hassle or confusion. The built-in identity provider integration allows users to securely configure their account and VPN access directly from the <u>defguard desktop client.</u></p>
+    <p><strong>Real time sync for client configurations! First WireGuard client to support this feature!</strong></p>
   </div>
   </FlexibleSection>
   <FlexibleSection
@@ -180,18 +188,10 @@ const tags = [
     <p>
       defguard simplifies your enterprise security with a single solution that unifies enterprise VPN, identity (IAM), and permissions in one place—potentially saving you 20–40% on your security budget.
     </p>
-    <p>
-      <em>
-        "Looks interesting, currently I'd need to combine at least two commercial products to get lower (but good enough) level of security", Security at Spacelift
-      </em>
-    </p>
   </div>
   
   <div slot="right">
-    <strong>Benefits:</strong>
     <ul>
-      <li>
-        <strong>Cost Savings</strong>: Consolidating multiple tools (VPN, IAM, etc.) into a single solution can potentially save 20-40% on your overall security budget, depending on the number of users.</li>
       <li>
         <strong>Unified Permissions Governance</strong>: Define and enforce granular permissions policies across your entire organization from a single system.
       </li>
@@ -208,7 +208,7 @@ const tags = [
   theme="light"
 >
   <div slot="left">
-    <p>Deploy defguard anywhere . Choose from Docker, Kubernetes, or traditional package installers. You’re in control of your hardware and infrastructure choices. Perfect for on-premise infrastructure and Private Cloud.
+    <p>Choose from Docker, Kubernetes, or traditional package installers. You’re in control of your hardware and infrastructure choices. Perfect for on-premise infrastructure and Private Cloud.
 
     Private-cloud - how to secure your private cloud with defguard</p>
   </div>
@@ -310,7 +310,7 @@ const tags = [
       <Testimonials data={testimonialsData} client:only="react" />
     </HomeSection>
     <Roadmap />
-    <BuiltBy variant="white" />
+    <!-- <BuiltBy variant="white" /> -->
   </main>
 </ProductLayout>
 

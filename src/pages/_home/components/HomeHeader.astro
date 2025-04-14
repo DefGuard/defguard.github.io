@@ -9,32 +9,42 @@ import TrustedBy from "./TrustedBy.astro";
 ---
 
 <HomeSection variant="gray" contentId="home-header">
-  <h1>True Zero-Trust VPN</h1>
+  <h1>Zero-Trust Enterprise VPN</h1>
   <p>
-    Secure Remote Access Management (WireGuard® 2FA/MFA), Account Lifecycle (Onboarding),
-    Identity and Access Management (OpenID Connect SSO), Open Source & On-Premise
+    Defguard is an Open Source, zero-trust enterprise VPN that integrates advanced security features such as Multi-Factor Authentication (MFA) directly into the WireGuard protocol. 
   </p>
   <div class="github-track">
     <GithubStars owner="defguard" repo="defguard" client:only="react" />
   </div>
   <div class="link-track">
+    
+    <AstroButton
+      link={{
+        href: "/download",
+        target: "_self",
+        preload: true,
+      }}
+      text="Download"
+    />
+
     <AstroButton
       link={{
         href: "/pricing",
         target: "_self",
         preload: true,
       }}
-      text="Pricing"
+      text="Buy Enterprise"
     />
+    
   </div>
-  <ElevatedCard className="header-card">
+  <!-- <ElevatedCard className="header-card">
     <p>
       EVERY CONNECTION TO VPN <strong>REQUIRES MFA</strong>, which <strong
         >guarantees Zero-TRUST</strong
       >
     </p>
     <Image src={headerImage} alt="header diagram image" loading={"eager"} />
-  </ElevatedCard>
+  </ElevatedCard> -->
   <TrustedBy />
 </HomeSection>
 
