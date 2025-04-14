@@ -85,7 +85,7 @@ const tags = [
       theme="light"
     >
       <div slot="left">
-        <p>By integrating Multi-Factor Authentication (MFA) directly into the WireGuard® protocol, defguard raises the bar for VPN access controls and safeguards your organization from unauthorized remote access.</p>
+        <p>By integrating Multi-Factor Authentication (MFA) directly into the WireGuard® protocol, defguard raises the bar for VPN two factor authentication and safeguards your organization from unauthorized remote access.</p>
         <div class="learn-more">
           <a href="/docs/mfa-architecture" class="learn-more-link">Learn more about defguard MFA architecture</a>
         </div>
@@ -107,11 +107,14 @@ const tags = [
       theme="light"
     >
       <div slot="left">
-        <p>Defguard’s Access Control Lists grant each user precisely the access they need—no more, no less—while staying in sync with your identity provider. 
-
+        <p>
+          Defguard’s Access Control Lists grant each user precisely the access they need—no more, no less—while staying in sync with your identity provider. 
+        </p>
+        <p>
           By leveraging native firewall integrations with Linux, FreeBSD, and OPNsense, defguard enforces Zero Trust architecture with seamless network segmentation.
-          
-          → Read More (link to documentation)</p>
+        </p>
+        <a href="//docs.defguard.net/enterprise/all-enteprise-features/access-control-list">
+          How to enable Access Control List functionality</a>
       </div>
       
       <div slot="right">
@@ -208,9 +211,10 @@ const tags = [
   theme="light"
 >
   <div slot="left">
-    <p>Choose from Docker, Kubernetes, or traditional package installers. You’re in control of your hardware and infrastructure choices. Perfect for on-premise infrastructure and Private Cloud.
-
-    Private-cloud - how to secure your private cloud with defguard</p>
+    <p>
+      Choose from Docker, Kubernetes, or traditional package installers. You’re in control of your hardware and infrastructure choices. Perfect for on-premise infrastructure and Private Cloud.
+    </p>
+    <a href="https://docs.defguard.net/admin-and-features/setting-up-your-instance">Deploy your instance with one-line install script</a>
   </div>
   
   <div slot="right">
@@ -238,7 +242,7 @@ const tags = [
     <p>Use our comprehensive API and webhooks to automate processes, track changes, or integrate with existing systems.
     </p>
     <div class="learn-more">
-      <a href="/docs/mfa-architecture" class="learn-more-link">Explore API documentation</a>
+      <a href="https://docs.defguard.net/enterprise/all-enteprise-features/api-tokens" class="learn-more-link">Explore API documentation</a>
     </div>
   </div>
   </FlexibleSection>
