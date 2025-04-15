@@ -13,7 +13,7 @@ import HomeScrollSection1 from "./_home/scroll-sections/section-1/HomeScrollSect
 import HomeScrollSection2 from "./_home/scroll-sections/section-2/HomeScrollSection2";
 import HomeScrollSection3 from "./_home/scroll-sections/section-3/HomeScrollSection3";
 import FlexibleSection from "../components/FlexibleSection.astro";
-import oidc from "/public/images/data/oidc-logos.png";
+import signinwith from "/public/images/data/signinwith.png";
 import enrollment from "/public/images/data/enrollment-screen.png";
 import api from "/public/images/data/api.png";
 import Image from "astro/components/Image.astro";
@@ -148,7 +148,7 @@ const tags = [
     </div>
     
     <div slot="right">
-      <Image src={oidc} alt="logo image" />
+      <Image src={signinwith} alt="sign in with defguard" />
     </div>
   </FlexibleSection>
   <FlexibleSection
@@ -341,33 +341,32 @@ const tags = [
     </HomeSection>
 
     <Roadmap variant="white"/>
-    
-    <ProductSection padding="small" variant="gray">
-      <div class="testimonials-content">
-        <p>How It Works</p>
-        <div class="product-features">
-          <ProductFeature title="1. Deploy Quickly" id={0} context="how-it-works" client:load>
-            <p>Spin up defguard in minutes via Docker, Kubernetes, or your preferred package installer.</p>
-          </ProductFeature>
-          
-          <ProductFeature title="2. Connect Your Identity Providers" id={1} context="how-it-works" client:load>
-            <p>Effortlessly sync users, groups, and credentials with LDAP, Active Directory, and popular cloud IdPs.</p>
-          </ProductFeature>
-          
-          <ProductFeature title="3. Enable True Multi-Factor Authentication" id={2} context="how-it-works" client:load>
-            <p>Protect your remote access with the world's first WireGuard MFA, either through built-in or external identity providers.</p>
-          </ProductFeature>
-          
-          <ProductFeature title="4. Onboard Users Instantly" id={3} context="how-it-works" client:load>
-            <p>Provide a simple, secure enrollment link. Users set up their credentials in the desktop client and gain immediate access to critical resources.</p>
-          </ProductFeature>
-          
-          <ProductFeature title="5. Manage & Control via ACL" id={4} context="how-it-works" client:load>
-            <p>Grant granular permissions and monitor user activities through defguard's intuitive dashboard.</p>
-          </ProductFeature>
-        </div>
+    <!-- <ProductSection padding="small" variant="gray">
+      <div class="flexible-content">
+        <h2 class="section-title">How It Works</h2>
       </div>
-    </ProductSection>
+      <div class="product-features">
+        <ProductFeature title="1. Deploy Quickly" id={0} context="how-it-works" client:load>
+          <p>Spin up defguard in minutes via Docker, Kubernetes, or your preferred package installer.</p>
+        </ProductFeature>
+        
+        <ProductFeature title="2. Connect Your Identity Providers" id={1} context="how-it-works" client:load>
+          <p>Effortlessly sync users, groups, and credentials with LDAP, Active Directory, and popular cloud IdPs.</p>
+        </ProductFeature>
+        
+        <ProductFeature title="3. Enable True Multi-Factor Authentication" id={2} context="how-it-works" client:load>
+          <p>Protect your remote access with the world's first WireGuard MFA, either through built-in or external identity providers.</p>
+        </ProductFeature>
+        
+        <ProductFeature title="4. Onboard Users Instantly" id={3} context="how-it-works" client:load>
+          <p>Provide a simple, secure enrollment link. Users set up their credentials in the desktop client and gain immediate access to critical resources.</p>
+        </ProductFeature>
+        
+        <ProductFeature title="5. Manage & Control via ACL" id={4} context="how-it-works" client:load>
+          <p>Grant granular permissions and monitor user activities through defguard's intuitive dashboard.</p>
+        </ProductFeature>
+      </div>
+    </ProductSection> -->
     
     <!-- <BuiltBy variant="white" /> -->
   </main>
@@ -385,9 +384,10 @@ const tags = [
       padding-bottom: page-spacing(80px);
       
       .section-title {
-        @include typography(section);
+        @include typography(section);  // Change back to section typography for main sections
         border-bottom: 1px solid var(--text-body-primary);
         padding-bottom: 1rem;
+        margin-bottom: 2rem;
       }
       
       h3 {
@@ -466,16 +466,15 @@ const tags = [
       }
     }
 
-    .content {
-      &.pre-styled {
-        ul {
-          margin: 0;
-          padding-left: 20px;
-        }
-
-        a {
-          white-space: normal;
-          word-wrap: break-word;
+    .product-features {
+      padding-top: 2rem;  // Add some space after the section title
+      
+      .product-feature {
+        header {
+          h2 {
+            @include typography(h3);  // Change to h3 for better size
+            font-weight: 400;  // Keep it light
+          }
         }
       }
     }
