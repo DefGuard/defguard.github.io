@@ -269,16 +269,16 @@ const tags = [
 >
   <div slot="left">
     <p>
-      On-prem or private-cloud deployments meet strict <em>Data Sovereignty</em> demands in finance, healthcare, government and other critical sector.
+      On-prem or private-cloud deployments meet strict Data Sovereignty demands in finance, healthcare, government and other critical sector.
     </p>
   </div>
   
   <div slot="right">
-    <p>open code, on-prem architecture, integrated IdP and SSO makes defguard perfect solution for organisations seeking true sover
+    <p>open code, on-prem architecture, integrated IdP and SSO makes defguard perfect solution for organisations seeking true Sovereignity.
     </p>
-    <p>
+    <!-- <p>
       <a href="#">read more → how defguard guaranties Data Sovereignity</a>
-    </p>
+    </p> -->
   </div>
   </FlexibleSection>
 
@@ -341,32 +341,33 @@ const tags = [
     </HomeSection>
 
     <Roadmap variant="white"/>
-    <!-- <ProductSection padding="small" variant="gray">
-      <div class="flexible-content">
-        <h2 class="section-title">How It Works</h2>
+    
+    <ProductSection padding="small" variant="gray">
+      <div class="testimonials-content">
+        <p>How It Works</p>
+        <div class="product-features">
+          <ProductFeature title="1. Deploy Quickly" id={0} context="how-it-works" client:load>
+            <p>Spin up Defguard in minutes via Docker, Kubernetes, or your preferred package installer.</p>
+          </ProductFeature>
+          
+          <ProductFeature title="2. Connect Your Identity Providers" id={1} context="how-it-works" client:load>
+            <p>Effortlessly sync users, groups, and credentials with LDAP, Active Directory, and popular cloud IdPs.</p>
+          </ProductFeature>
+          
+          <ProductFeature title="3. Enable True Multi-Factor Authentication" id={2} context="how-it-works" client:load>
+            <p>Protect your remote access with the world's first WireGuard MFA, either through built-in or external identity providers.</p>
+          </ProductFeature>
+          
+          <ProductFeature title="4. Onboard Users Instantly" id={3} context="how-it-works" client:load>
+            <p>Provide a simple, secure enrollment link. Users set up their credentials in the desktop client and gain immediate access to critical resources.</p>
+          </ProductFeature>
+          
+          <ProductFeature title="5. Manage & Control via ACL" id={4} context="how-it-works" client:load>
+            <p>Grant granular permissions and monitor user activities through Defguard's intuitive dashboard.</p>
+          </ProductFeature>
+        </div>
       </div>
-      <div class="product-features">
-        <ProductFeature title="1. Deploy Quickly" id={0} context="how-it-works" client:load>
-          <p>Spin up defguard in minutes via Docker, Kubernetes, or your preferred package installer.</p>
-        </ProductFeature>
-        
-        <ProductFeature title="2. Connect Your Identity Providers" id={1} context="how-it-works" client:load>
-          <p>Effortlessly sync users, groups, and credentials with LDAP, Active Directory, and popular cloud IdPs.</p>
-        </ProductFeature>
-        
-        <ProductFeature title="3. Enable True Multi-Factor Authentication" id={2} context="how-it-works" client:load>
-          <p>Protect your remote access with the world's first WireGuard MFA, either through built-in or external identity providers.</p>
-        </ProductFeature>
-        
-        <ProductFeature title="4. Onboard Users Instantly" id={3} context="how-it-works" client:load>
-          <p>Provide a simple, secure enrollment link. Users set up their credentials in the desktop client and gain immediate access to critical resources.</p>
-        </ProductFeature>
-        
-        <ProductFeature title="5. Manage & Control via ACL" id={4} context="how-it-works" client:load>
-          <p>Grant granular permissions and monitor user activities through defguard's intuitive dashboard.</p>
-        </ProductFeature>
-      </div>
-    </ProductSection> -->
+    </ProductSection>
     
     <!-- <BuiltBy variant="white" /> -->
   </main>
