@@ -3,38 +3,43 @@ import { Image } from "astro:assets";
 import GithubStars from "../../../components/GithubStars/GithubStars";
 import ElevatedCard from "../../../components/home/ElevatedCard.astro";
 import HomeSection from "../../../components/home/HomeSection.astro";
-import headerImage from "./assets/header_card_image.png";
+import headerImage from "/public/images/product/core/hero-image.png";
 import AstroButton from "../../../components/AstroButton.astro";
 import TrustedBy from "./TrustedBy.astro";
 ---
 
 <HomeSection variant="gray" contentId="home-header">
-  <h1>True Zero-Trust VPN</h1>
+  <h1>Zero-Trust Enterprise VPN</h1>
   <p>
-    Secure Remote Access Management (WireGuard® 2FA/MFA), Account Lifecycle (Onboarding),
-    Identity and Access Management (OpenID Connect SSO), Open Source & On-Premise
+    Defguard is an Open Source, zero-trust enterprise VPN that integrates advanced security features such as Multi-Factor Authentication (MFA) directly into the WireGuard® protocol. 
   </p>
   <div class="github-track">
     <GithubStars owner="defguard" repo="defguard" client:only="react" />
   </div>
   <div class="link-track">
+    
+    <AstroButton
+      link={{
+        href: "/download-confirm",
+        target: "_self",
+        preload: true,
+      }}
+      text="Download"
+    />
+
     <AstroButton
       link={{
         href: "/pricing",
         target: "_self",
         preload: true,
       }}
-      text="Pricing"
+      text="Buy Enterprise"
     />
+    
   </div>
-  <ElevatedCard className="header-card">
-    <p>
-      EVERY CONNECTION TO VPN <strong>REQUIRES MFA</strong>, which <strong
-        >guarantees Zero-TRUST</strong
-      >
-    </p>
-    <Image src={headerImage} alt="header diagram image" loading={"eager"} />
-  </ElevatedCard>
+  <!-- <div class="hero-image-container">
+    <Image src={headerImage} alt="Defguard Zero-Trust VPN diagram" loading={"eager"} />
+  </div> -->
   <TrustedBy />
 </HomeSection>
 
@@ -68,7 +73,34 @@ import TrustedBy from "./TrustedBy.astro";
       flex-flow: row;
       align-items: center;
       justify-content: center;
-      padding-bottom: 50px;
+      gap: 16px;
+      padding: 100px 0px;
+
+      @include break-down(sm) {
+        flex-flow: column;
+        align-items: center;
+      }
+    }
+
+    .hero-image-container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 0 60px 0;
+      display: flex;
+      justify-content: center;
+      
+      img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+      
+      @include break-down(md) {
+        padding: 10px 0 40px 0;
+      }
     }
 
     .header-card {

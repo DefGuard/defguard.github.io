@@ -12,19 +12,42 @@ import hostinger from "./assets/trustedBy/hostinger.webp";
 
 <div id="trusted-by">
   <p>Trusted by</p>
-  <div class="track">
-    <Image src={prusa} alt="prusa logo image" />
-    <!-- <Image src={penske} alt="team penske logo image" /> -->
-    <Image src={wideStreet} alt="widestreet logo image" />
-    <Image src={acquinox} alt="acquinox logo image" />
-    <Image src={hostinger} alt="hostinger logo image" />
-    <Image src={vki} alt="vki logo image" />
-    <Image src={truevo} alt="truevo logo image" />
-    <Image src={deepImage} alt="deepimage logo image" />
+  <div class="track-container">
+    <div class="track">
+      <Image src={prusa} alt="prusa logo image" />
+      <!-- <Image src={penske} alt="team penske logo image" /> -->
+      <Image src={wideStreet} alt="widestreet logo image" />
+      <Image src={acquinox} alt="acquinox logo image" />
+      <Image src={hostinger} alt="hostinger logo image" />
+      <Image src={vki} alt="vki logo image" />
+      <Image src={truevo} alt="truevo logo image" />
+      <Image src={deepImage} alt="deepimage logo image" />
+      
+      <!-- Duplicate logos for seamless scrolling -->
+      <div class="scroll-duplicate">
+        <Image src={prusa} alt="prusa logo image" />
+        <!-- <Image src={penske} alt="team penske logo image" /> -->
+        <Image src={wideStreet} alt="widestreet logo image" />
+        <Image src={acquinox} alt="acquinox logo image" />
+        <Image src={hostinger} alt="hostinger logo image" />
+        <Image src={vki} alt="vki logo image" />
+        <Image src={truevo} alt="truevo logo image" />
+        <Image src={deepImage} alt="deepimage logo image" />
+      </div>
+    </div>
   </div>
 </div>
 
 <style lang="scss">
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
   #trusted-by {
     width: 100%;
     display: flex;
@@ -38,14 +61,48 @@ import hostinger from "./assets/trustedBy/hostinger.webp";
       color: var(--text-body-primary);
     }
 
+    .track-container {
+      width: 100%;
+      overflow: hidden;
+
+      @include break-up(lg) {
+        overflow: visible;
+      }
+    }
+
     .track {
       width: 100%;
       display: flex;
-      flex-flow: row wrap;
       align-items: center;
-      justify-content: space-between;
-      row-gap: 8px;
-      column-gap: 10px;
+      column-gap: 30px;
+      
+      @include break-up(lg) {
+        flex-flow: row wrap;
+        justify-content: space-between;
+        row-gap: 8px;
+        column-gap: 10px;
+      }
+      
+      @include break-down(lg) {
+        animation: scroll 10s linear infinite;
+        width: max-content;
+        padding: 15px 0;
+        
+        img {
+          max-height: 40px;
+          width: auto;
+        }
+      }
+      
+      .scroll-duplicate {
+        display: flex;
+        align-items: center;
+        column-gap: 30px;
+        
+        @include break-up(lg) {
+          display: none;
+        }
+      }
     }
   }
 </style>

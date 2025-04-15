@@ -48,37 +48,62 @@ const theme = dark ? "dark" : "light";
 
     box-sizing: border-box;
     width: 100%;
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    justify-content: flex-start;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 
+      [full-start] minmax(var(--product-section-edge-padding), 1fr)
+      [main-start] minmax(0, 1100px)
+      [main-end] minmax(var(--product-section-edge-padding), 1fr)
+      [full-end];
     background-color: var(--surface-frame-bg);
-
-    &:not(.skip-max) {
-      & > * {
-        max-width: var(--max-section-width);
+    
+    /* Content container with grid-based layout */
+    &:not(.skip-max) > * {
+      grid-column: main-start / main-end;
+      width: 100%;
+      box-sizing: border-box;
+      
+      @media (max-width: 1199px) {
+        max-width: 950px;
+        margin: 0 auto;
       }
     }
+    
+    /* Responsive adjustments */
+    @media (max-width: 991px) {
+      --product-section-padding-large: 100px;
+      --product-section-padding-mid: 80px;
+    }
 
+    @media (max-width: 576px) {
+      --product-section-padding-large: 60px;
+      --product-section-padding-mid: 40px;
+    }
+
+    /* Vertical padding variants */
     &.padding-large {
-      padding: var(--product-section-padding-large) var(--product-section-edge-padding);
+      padding-top: var(--product-section-padding-large);
+      padding-bottom: var(--product-section-padding-large);
     }
 
     &.padding-mid {
-      padding: var(--product-section-padding-mid) var(--product-section-edge-padding);
+      padding-top: var(--product-section-padding-mid);
+      padding-bottom: var(--product-section-padding-mid);
     }
 
     &.padding-small {
-      padding: var(--product-section-padding-small) var(--product-section-edge-padding);
+      padding-top: var(--product-section-padding-small);
+      padding-bottom: var(--product-section-padding-small);
     }
 
     &.padding-none {
-      padding: 0 var(--product-section-edge-padding);
+      padding-top: 0;
+      padding-bottom: 0;
     }
 
     &.padding-newsletter {
-      padding: var(--product-section-padding-newsletter)
-        var(--product-section-edge-padding);
+      padding-top: var(--product-section-padding-newsletter);
+      padding-bottom: var(--product-section-padding-newsletter);
     }
 
     &.bordered {

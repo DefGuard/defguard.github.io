@@ -18,7 +18,7 @@ export default function Component({ data }: Props) {
   );
   return (
     <div className="testimonials-content">
-      <p>Testimonials</p>
+      {/* <p>Testimonials</p> */}
       <div className="track">
         {slides.length <= 1 && <Fragment>{slides}</Fragment>}
         {slides.length > 1 && (
