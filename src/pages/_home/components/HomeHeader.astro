@@ -78,7 +78,13 @@ import TrustedBy from "./TrustedBy.astro";
       flex-flow: row;
       align-items: center;
       justify-content: center;
+      gap: 16px;
       padding-bottom: 50px;
+
+      @include break-down(sm) {
+        flex-flow: column;
+        align-items: center;
+      }
     }
 
     .header-card {
