@@ -43,7 +43,7 @@ const tags = [
   "mfa",
   "2fa",
   "mfa/2fa",
-  "wireguard",
+  "WireGuard®",
   "ldap",
   "openldap",
   "postgresql",
@@ -80,7 +80,7 @@ const tags = [
     <HomeHeader />
 
     <FlexibleSection
-      title="Upgrade to native MFA for WireGuard for Safer Remote Access"
+      title="Upgrade to native MFA for WireGuard® for Safer Remote Access"
       id="security-features"
       variant="gray"
       theme="light"
@@ -89,7 +89,7 @@ const tags = [
         <p>By integrating Multi-Factor Authentication (MFA) directly into the WireGuard® protocol, defguard raises the bar for VPN two factor authentication and safeguards your organization from unauthorized remote access.</p>
         <div class="learn-more">
           <a 
-          href="https://docs.defguard.net/admin-and-features/features-and-configuration/wireguard/multi-factor-authentication-mfa-2fa" 
+          href="https://docs.defguard.net/admin-and-features/features-and-configuration/WireGuard®/multi-factor-authentication-mfa-2fa" 
           class="learn-more-link">
 
             Learn more about defguard MFA architecture
@@ -170,7 +170,7 @@ const tags = [
     <p>With its robust identity provider integration capabilities, defguard enables two-way synchronization with Active Directory, ensuring your user accounts, groups and permissions are always up-to-date. 
     </p>
     <a href="https://docs.defguard.net/enterprise/all-enteprise-features/ldap-and-active-directory-integration/two-way-ldap-and-active-directory-synchronization">
-      Read more : Two-way LDAP and Active Directory syn
+      Read more : Two-way LDAP and Active Directory sync
     </a>
   </div>
   </FlexibleSection>
@@ -191,7 +191,7 @@ const tags = [
     </p>
     <p>
       The built-in identity provider integration allows users to securely configure their account and VPN access directly from the 
-    <a href="/client">our wireguard desktop client.</a>
+    <a href="/client">our WireGuard® desktop client.</a>
     </p>
     <p><strong>Defguard desktop client supports real time sync for client configurations.</strong></p>
   </div>
@@ -300,7 +300,7 @@ const tags = [
   <div slot="right">
     <ul>
       <li><strong>NIS2 Compliant</strong><br />
-      Built-in WireGuard MFA aligns with mandatory cybersecurity requirements.</li>
+      Built-in WireGuard® MFA aligns with mandatory cybersecurity requirements.</li>
       <li><strong>FIPS 140-2 Ready</strong><br />  
       Coming soon for organizations that need advanced cryptographic compliance.</li>   
       <li><strong>Open Source</strong><br />
@@ -327,7 +327,7 @@ const tags = [
     </HomeSection> -->
     
     <CTASection
-      title="Ready to Experience the Most Secure, Flexible, and Compliant WireGuard VPN?"
+      title="Ready to Experience the Most Secure, Flexible, and Compliant WireGuard® VPN?"
       description="Deploy our open-source VPN in minutes and secure your remote workforce with enterprise-level features."
       buttonText="Get Started"
       buttonLink="/download"
@@ -341,6 +341,7 @@ const tags = [
     </HomeSection>
 
     <Roadmap variant="white"/>
+<<<<<<< HEAD
     
     <ProductSection padding="small" variant="gray">
       <div class="testimonials-content">
@@ -366,6 +367,32 @@ const tags = [
             <p>Grant granular permissions and monitor user activities through Defguard's intuitive dashboard.</p>
           </ProductFeature>
         </div>
+=======
+    <!-- <ProductSection padding="small" variant="gray">
+      <div class="flexible-content">
+        <h2 class="section-title">How It Works</h2>
+      </div>
+      <div class="product-features">
+        <ProductFeature title="1. Deploy Quickly" id={0} context="how-it-works" client:load>
+          <p>Spin up defguard in minutes via Docker, Kubernetes, or your preferred package installer.</p>
+        </ProductFeature>
+        
+        <ProductFeature title="2. Connect Your Identity Providers" id={1} context="how-it-works" client:load>
+          <p>Effortlessly sync users, groups, and credentials with LDAP, Active Directory, and popular cloud IdPs.</p>
+        </ProductFeature>
+        
+        <ProductFeature title="3. Enable True Multi-Factor Authentication" id={2} context="how-it-works" client:load>
+          <p>Protect your remote access with the world's first WireGuard® MFA, either through built-in or external identity providers.</p>
+        </ProductFeature>
+        
+        <ProductFeature title="4. Onboard Users Instantly" id={3} context="how-it-works" client:load>
+          <p>Provide a simple, secure enrollment link. Users set up their credentials in the desktop client and gain immediate access to critical resources.</p>
+        </ProductFeature>
+        
+        <ProductFeature title="5. Manage & Control via ACL" id={4} context="how-it-works" client:load>
+          <p>Grant granular permissions and monitor user activities through defguard's intuitive dashboard.</p>
+        </ProductFeature>
+>>>>>>> 2662f6d... minor fixes, typos mostly
       </div>
     </ProductSection>
     

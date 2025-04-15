@@ -11,7 +11,7 @@ import TrustedBy from "./TrustedBy.astro";
 <HomeSection variant="gray" contentId="home-header">
   <h1>Zero-Trust Enterprise VPN</h1>
   <p>
-    Defguard is an Open Source, zero-trust enterprise VPN that integrates advanced security features such as Multi-Factor Authentication (MFA) directly into the WireGuard protocol. 
+    Defguard is an Open Source, zero-trust enterprise VPN that integrates advanced security features such as Multi-Factor Authentication (MFA) directly into the WireGuard® protocol. 
   </p>
   <div class="github-track">
     <GithubStars owner="defguard" repo="defguard" client:only="react" />
@@ -37,9 +37,9 @@ import TrustedBy from "./TrustedBy.astro";
     />
     
   </div>
-  <div class="hero-image-container">
+  <!-- <div class="hero-image-container">
     <Image src={headerImage} alt="Defguard Zero-Trust VPN diagram" loading={"eager"} />
-  </div>
+  </div> -->
   <TrustedBy />
 </HomeSection>
 
@@ -74,7 +74,7 @@ import TrustedBy from "./TrustedBy.astro";
       align-items: center;
       justify-content: center;
       gap: 16px;
-      padding-bottom: 50px;
+      padding: 100px 0px;
 
       @include break-down(sm) {
         flex-flow: column;
