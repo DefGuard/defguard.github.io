@@ -18,8 +18,9 @@ import enrollment from "/public/images/data/enrollment-screen.png";
 import api from "/public/images/data/api.png";
 import Image from "astro/components/Image.astro";
 import YouTubeVideo from "../components/video/YouTubeVideo.astro";
-
-
+import CTASection from "../components/CTASection.astro";
+import ProductSection from "../layouts/ProductSection.astro";
+import { ProductFeature } from "../components/product/ProductFeature/ProductFeature";
 const testimonialsImportData = await Astro.glob("../data/home/testimonials/**/*.md");
 
 const testimonialsData: Array<TestimonialData> = testimonialsImportData.map((val) => {
@@ -310,10 +311,50 @@ const tags = [
         <HomeScrollSection3 client:idle />
       </Fragment>
     </HomeSection> -->
-    <HomeSection id="testimonials">
+    
+    <CTASection
+      title="Ready to Experience the Most Secure, Flexible, and Compliant WireGuard VPN?"
+      description="Deploy our open-source VPN in minutes and secure your remote workforce with enterprise-level features."
+      buttonText="Get Started"
+      buttonLink="/download"
+      id="cta-download"
+      variant="white"
+    />
+
+    
+    <HomeSection id="testimonials" variant="gray">
       <Testimonials data={testimonialsData} client:only="react" />
     </HomeSection>
-    <Roadmap />
+
+    <Roadmap variant="white"/>
+    
+    <ProductSection padding="small" variant="gray">
+      <div class="testimonials-content">
+        <p>How It Works</p>
+        <div class="product-features">
+          <ProductFeature title="1. Deploy Quickly" id={0} context="how-it-works" client:load>
+            <p>Spin up defguard in minutes via Docker, Kubernetes, or your preferred package installer.</p>
+          </ProductFeature>
+          
+          <ProductFeature title="2. Connect Your Identity Providers" id={1} context="how-it-works" client:load>
+            <p>Effortlessly sync users, groups, and credentials with LDAP, Active Directory, and popular cloud IdPs.</p>
+          </ProductFeature>
+          
+          <ProductFeature title="3. Enable True Multi-Factor Authentication" id={2} context="how-it-works" client:load>
+            <p>Protect your remote access with the world's first WireGuard MFA, either through built-in or external identity providers.</p>
+          </ProductFeature>
+          
+          <ProductFeature title="4. Onboard Users Instantly" id={3} context="how-it-works" client:load>
+            <p>Provide a simple, secure enrollment link. Users set up their credentials in the desktop client and gain immediate access to critical resources.</p>
+          </ProductFeature>
+          
+          <ProductFeature title="5. Manage & Control via ACL" id={4} context="how-it-works" client:load>
+            <p>Grant granular permissions and monitor user activities through defguard's intuitive dashboard.</p>
+          </ProductFeature>
+        </div>
+      </div>
+    </ProductSection>
+    
     <!-- <BuiltBy variant="white" /> -->
   </main>
 </ProductLayout>

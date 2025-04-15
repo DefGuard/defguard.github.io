@@ -3,10 +3,15 @@ import HomeSection from "../../../../components/home/HomeSection.astro";
 import { getCollection } from "astro:content";
 import RoadmapCard from "./RoadmapCard.astro";
 
+interface Props {
+  variant?: "white" | "gray";
+}
+
+const { variant = "gray" } = Astro.props;
 const collection = await getCollection("roadmap");
 ---
 
-<HomeSection id="roadmap" variant="gray">
+<HomeSection id="roadmap" variant={variant}>
   <h2>Roadmap of what's to come</h2>
   <div class="content pre-styled">
     <ul>
@@ -68,19 +73,38 @@ const collection = await getCollection("roadmap");
   </div>
 
   <style lang="scss" is:global>
-    #roadmap {
+    .home-section#roadmap {
       padding-top: page-spacing(50px);
       padding-bottom: page-spacing(150px);
+      
+      /* Variant handling - moved to top level for clarity */
+      &.variant-white {
+        --variant-gray: var(--surface-frame-bg);
+        
+        .version {
+          background-color: var(--variant-gray);
+          box-shadow: 0px 12px 24px 0px rgba(0, 0, 0, 0.04);  // Lighter shadow for white variant
+        }
+      }
+      
+      &.variant-gray {
+        --variant-gray: #fff;
+        
+        .version {
+          background-color: var(--variant-gray);
+          box-shadow: 0px 12px 24px 0px rgba(0, 0, 0, 0.08);  // Default shadow
+        }
+      }
+      
       h2 {
         @include typography(section);
+        border-bottom: 1px solid var(--text-body-primary);
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
       }
-      .limited-content {
-        & > h2 {
-          padding-bottom: 50px;
-        }
-        & > .content {
-          padding-bottom: 50px;
-        }
+      
+      .content {
+        padding-bottom: 50px;
       }
 
       .roadmap {
@@ -121,10 +145,8 @@ const collection = await getCollection("roadmap");
         .version {
           width: 100%;
           max-width: 100%;
-          background-color: #fff;
+          max-width: 100%;
           border-radius: 10px;
-          border-radius: 10px;
-          box-shadow: 0px 12px 24px 0px rgba(0, 0, 0, 0.08);
           box-sizing: border-box;
           padding: 20px;
           position: relative;

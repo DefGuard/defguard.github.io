@@ -1,0 +1,120 @@
+---
+import clsx from "clsx";
+import ContentLimiter from "./ContentLimiter.astro";
+import AstroButton from "./AstroButton.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  buttonText: string;
+  buttonLink: string;
+  buttonTarget?: string;
+  className?: string;
+  id?: string;
+  maxWidth?: number;
+  variant?: 'white' | 'gray';
+  theme?: 'light' | 'dark';
+}
+
+const {
+  title,
+  description,
+  buttonText,
+  buttonLink,
+  buttonTarget = "_self",
+  className,
+  id,
+  maxWidth = 900,
+  variant = 'gray',
+  theme = 'light',
+} = Astro.props;
+---
+
+<section 
+  class={clsx(
+    "cta-section", 
+    `variant-${variant}`, 
+    `theme-${theme}`, 
+    className
+  )} 
+  id={id}
+  aria-labelledby={id ? `${id}-title` : undefined}
+>
+  <ContentLimiter maxWidth={maxWidth}>
+    <div class="cta-content">
+      <h2 class="cta-title" id={id ? `${id}-title` : undefined}>{title}</h2>
+      <div class="cta-button-container">
+        <AstroButton
+          text={buttonText}
+          link={{
+            href: buttonLink,
+            target: buttonTarget,
+            preload: true,
+          }}
+        />
+      </div>
+      <p class="cta-description">{description}</p>
+    </div>
+  </ContentLimiter>
+</section>
+
+<style lang="scss">
+  @use "../styles/mixins" as *;
+
+  .cta-section {
+    width: 100%;
+    padding: 5rem 0;
+    
+    &.variant-white {
+      background-color: var(--background-primary, white);
+    }
+    
+    &.variant-gray {
+      background-color: var(--background-secondary, #f5f5f5);
+    }
+    
+    &.theme-light {
+      color: var(--text-body-primary, #333);
+      
+      .cta-title {
+        color: var(--text-heading-primary, #111);
+      }
+    }
+    
+    &.theme-dark {
+      color: var(--text-body-light, #f5f5f5);
+      background-color: var(--background-dark, #222);
+      
+      .cta-title {
+        color: var(--text-heading-light, white);
+      }
+    }
+    
+    .cta-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+      
+      .cta-title {
+        @include typography(h2);
+        margin-bottom: 1.5rem;
+        max-width: 800px;
+      }
+      
+      .cta-description {
+        @include typography(paragraph);
+        margin-top: 1.5rem;
+        margin-bottom: 0;
+        max-width: 700px;
+      }
+      
+      .cta-button-container {
+        margin-bottom: 0;
+      }
+    }
+  }
+</style>
+

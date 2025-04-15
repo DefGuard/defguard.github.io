@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import GithubStars from "../../../components/GithubStars/GithubStars";
 import ElevatedCard from "../../../components/home/ElevatedCard.astro";
 import HomeSection from "../../../components/home/HomeSection.astro";
-import headerImage from "./assets/header_card_image.png";
+import headerImage from "/public/images/product/core/hero-image.png";
 import AstroButton from "../../../components/AstroButton.astro";
 import TrustedBy from "./TrustedBy.astro";
 ---
@@ -37,14 +37,9 @@ import TrustedBy from "./TrustedBy.astro";
     />
     
   </div>
-  <!-- <ElevatedCard className="header-card">
-    <p>
-      EVERY CONNECTION TO VPN <strong>REQUIRES MFA</strong>, which <strong
-        >guarantees Zero-TRUST</strong
-      >
-    </p>
-    <Image src={headerImage} alt="header diagram image" loading={"eager"} />
-  </ElevatedCard> -->
+  <div class="hero-image-container">
+    <Image src={headerImage} alt="Defguard Zero-Trust VPN diagram" loading={"eager"} />
+  </div>
   <TrustedBy />
 </HomeSection>
 
@@ -84,6 +79,27 @@ import TrustedBy from "./TrustedBy.astro";
       @include break-down(sm) {
         flex-flow: column;
         align-items: center;
+      }
+    }
+
+    .hero-image-container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 0 60px 0;
+      display: flex;
+      justify-content: center;
+      
+      img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+      
+      @include break-down(md) {
+        padding: 10px 0 40px 0;
       }
     }
 
