@@ -1,0 +1,213 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  images: string[];
+  interval?: number;
+  initialIndex?: number;
+  className?: string;
+  width?: string;
+  height?: string;
+  aspectRatio?: string;
+  showIndicators?: boolean;
+  pauseOnHover?: boolean;
+}
+
+const {
+  images,
+  interval = 5000,
+  initialIndex = 0,
+  className = '',
+  width = '100%',
+  height,
+  aspectRatio = '16/9',
+  showIndicators = true,
+  pauseOnHover = true
+} = Astro.props;
+
+const uniqueId = `carousel-${Math.random().toString(36).substring(2, 11)}`;
+---
+
+<div 
+  id={uniqueId}
+  class={`inside-carousel ${className}`}
+  style={`width: ${width};`}
+  data-interval={interval}
+  data-initial-index={initialIndex}
+  data-pause-on-hover={pauseOnHover}
+>
+  <div 
+    class="inside-carousel__track"
+    style={`${height ? `height: ${height};` : `aspect-ratio: ${aspectRatio};`}`}
+  >
+    {images.map((image, index) => (
+      <div 
+        class={`inside-carousel__slide ${index === initialIndex ? 'active' : ''}`} 
+        data-index={index}
+      >
+        <img 
+          src={image} 
+          alt={`Slide ${index + 1}`} 
+          class="inside-carousel__image"
+          loading={index === initialIndex ? 'eager' : 'lazy'}
+        />
+      </div>
+    ))}
+  </div>
+  
+  {showIndicators && images.length > 1 && (
+    <div class="inside-carousel__indicators">
+      {images.map((_, index) => (
+        <button 
+          class={`inside-carousel__indicator ${index === initialIndex ? 'active' : ''}`}
+          data-index={index}
+          aria-label={`Go to slide ${index + 1}`}
+        ></button>
+      ))}
+    </div>
+  )}
+</div>
+
+<script define:vars={{ uniqueId, pauseOnHover }}>
+document.addEventListener('DOMContentLoaded', () => {
+  const carousel = document.getElementById(uniqueId);
+  if (!carousel) return;
+  
+  const slides = carousel.querySelectorAll('.inside-carousel__slide');
+  const indicators = carousel.querySelectorAll('.inside-carousel__indicator');
+  const interval = parseInt(carousel.dataset.interval || '5000', 10);
+  let currentIndex = parseInt(carousel.dataset.initialIndex || '0', 10);
+  let timer;
+
+  // Function to show a specific slide
+  const showSlide = (index) => {
+    // Handle out of bounds
+    if (index >= slides.length) index = 0;
+    if (index < 0) index = slides.length - 1;
+    
+    // Update current index
+    currentIndex = index;
+    
+    // Update slides
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === currentIndex);
+    });
+    
+    // Update indicators
+    indicators.forEach((indicator, i) => {
+      indicator.classList.toggle('active', i === currentIndex);
+    });
+  };
+
+  // Function to advance to the next slide
+  const nextSlide = () => {
+    showSlide(currentIndex + 1);
+  };
+
+  // Start the timer
+  const startTimer = () => {
+    clearInterval(timer);
+    timer = setInterval(nextSlide, interval);
+  };
+
+  // Add click event listeners to indicators
+  indicators.forEach((indicator, index) => {
+    indicator.addEventListener('click', () => {
+      showSlide(index);
+      startTimer(); // Reset timer on manual navigation
+    });
+  });
+
+  // Add hover pause functionality if enabled
+  if (pauseOnHover) {
+    carousel.addEventListener('mouseenter', () => {
+      clearInterval(timer);
+    });
+    
+    carousel.addEventListener('mouseleave', () => {
+      startTimer();
+    });
+  }
+
+  // Initialize
+  showSlide(currentIndex);
+  startTimer();
+});
+</script>
+
+<style lang="scss">
+.inside-carousel {
+  position: relative;
+  overflow: visible;
+  
+  // Custom properties for theming
+  --carousel-indicator-color: #CBD3D8;
+  --carousel-indicator-active-color: #0C8CE0;
+  --carousel-indicator-size: 10px;
+  --carousel-transition-duration: 0.5s;
+  
+  &__track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+  }
+  
+  &__slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity var(--carousel-transition-duration) ease;
+    
+    &.active {
+      opacity: 1;
+      z-index: 1;
+    }
+  }
+  
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  &__indicators {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  
+  &__indicator {
+    width: var(--carousel-indicator-size);
+    height: var(--carousel-indicator-size);
+    border-radius: 50%;
+    background-color: var(--carousel-indicator-color);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    
+    &.active {
+      background-color: var(--carousel-indicator-active-color);
+    }
+    
+    &:hover {
+      background-color: var(--carousel-indicator-active-color);
+    }
+  }
+  
+  // Responsive adjustments
+  @media (max-width: 768px) {
+    --carousel-indicator-size: 8px;
+    
+    &__indicators {
+      margin-top: 15px;
+    }
+  }
+}
+</style>

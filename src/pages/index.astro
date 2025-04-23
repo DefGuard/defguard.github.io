@@ -16,11 +16,13 @@ import FlexibleSection from "../components/FlexibleSection.astro";
 import signinwith from "/public/images/data/signinwith.png";
 import enrollment from "/public/images/data/enrollment-screen.png";
 import api from "/public/images/data/api.png";
+import oidcLogos from "/public/images/data/oidc-logos.png";
 import Image from "astro/components/Image.astro";
 import YouTubeVideo from "../components/video/YouTubeVideo.astro";
 import CTASection from "../components/CTASection.astro";
 import ProductSection from "../layouts/ProductSection.astro";
 import { ProductFeature } from "../components/product/ProductFeature/ProductFeature";
+import InsideCarousel from "../components/carousel/InsideCarousel.astro";
 const testimonialsImportData = await Astro.glob("../data/home/testimonials/**/*.md");
 
 const testimonialsData: Array<TestimonialData> = testimonialsImportData.map((val) => {
@@ -185,7 +187,17 @@ const tags = [
   theme="light"
 >
   <div slot="left">
-    <Image src={enrollment} alt="enrollment screen" />
+    <!-- <Image src={enrollment} alt="enrollment screen" /> -->
+    <InsideCarousel
+    images={[
+      // oidcLogos.src,
+      enrollment.src,
+      // "/public/images/data/create-password.png",
+      "/public/images/data/MFA-setup.png",
+      "/public/images/data/add-device.png",
+      "/public/images/product/client/main-screen.png"
+    ]}
+  ></InsideCarousel>
   </div>
   
   <div slot="right">
