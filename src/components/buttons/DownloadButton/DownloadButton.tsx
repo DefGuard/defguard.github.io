@@ -194,12 +194,6 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
             <p>
               Other ways to install defguard on linux →{" "}
               <a
-                href={`https://github.com/${owner}/${repo}/releases/download/v${version}/defguard-client_${version}_amd64.AppImage`}
-              >
-                AppImage
-              </a>{" "}
-              |{" "}
-              <a
                 href={`https://github.com/${owner}/${repo}/releases/download/v${version}/defguard-client-linux-x86_64-v${version}.tar.gz`}
               >
                 Binary
