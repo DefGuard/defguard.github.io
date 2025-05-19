@@ -61,8 +61,9 @@ export const featuresTableData: FeatureTableData = {
           description: "Groups & ACLs",
           features: [
             {
-              status: "in-progress",
-              hover: "Groups released 0.10.0, ACLs comming to v1.1.0",
+              status: "yes",
+              hover: "Groups released 0.10.0, ACL released 1.3.0",
+              // link: "https://docs.defguard.net/enterprise/all-enteprise-features/access-control-list",
             },
             { status: "no" },
             {
@@ -190,8 +191,8 @@ export const featuresTableData: FeatureTableData = {
           description: "ACL (firewall) network control for VPN",
           features: [
             {
-              status: "in-progress",
-              hover: "Planned for release 1.1",
+              status: "yes",
+              link: "https://docs.defguard.net/enterprise/all-enteprise-features/access-control-list",
             },
             {
               status: "in-progress",
