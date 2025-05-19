@@ -1,0 +1,231 @@
+---
+import Navigation from "../components/base/Navigation.astro";
+import ProductLayout from "../layouts/ProductLayout.astro";
+import Roadmap from "./_home/components/Roadmap/Roadmap.astro";
+import FlexibleSection from "../components/FlexibleSection.astro";
+import ourstory from "/public/images/data/story.png";
+import ourvision from "/public/images/data/vision.png";
+import api from "/public/images/data/api.png";
+import Image from "astro/components/Image.astro";
+import YouTubeVideo from "../components/video/YouTubeVideo.astro";
+import CTASection from "../components/CTASection.astro";
+import ProductSection from "../layouts/ProductSection.astro";
+const title = "defguard - About  Us";
+const featuredImage =
+  "github.com/DefGuard/defguard.github.io/raw/main/public/images/product/core/hero-image.png";
+const imageWidth = "1920";
+const imageHeight = "1080";
+const url = "https://defguard.net/about/";
+const tags = [
+  "defguard",
+  "open source",
+  "sso & vpn",
+  "vpn",
+  "mfa",
+  "2fa",
+  "mfa/2fa",
+  "WireGuard®",
+  "ldap",
+  "openldap",
+  "postgresql",
+  "postgres",
+  "openid",
+  "totp",
+  "webauthn",
+  "opensense",
+  "freebsd",
+  "rust",
+  "secure",
+  "desktop client",
+  "desktop",
+  "yubikey",
+  "teonite",
+  "docker",
+  "kubernetes",
+  "k8s",
+];
+---
+
+<ProductLayout
+  title={title}
+  featuredImage={featuredImage}
+  imageWidth={imageWidth}
+  imageHeight={imageHeight}
+  url={url}
+  tags={tags}
+>
+  <Navigation activeSlug="/about" />
+  
+  <main id="home-page">
+    
+    
+
+    <FlexibleSection
+      title="About Us"
+      id="about-us"
+      variant="white"
+      theme="light"
+    >
+      <div slot="left">
+        <p>Defguard is built by a team passionate about privacy, security, and open technologies — created to meet a growing need for a modern, all-in-one solution to manage access to internal systems without relying on cloud services or third parties.</p>
+        <p>We believe that security should be private by design, simple to deploy, and transparent in operation.
+        </p>
+      </div>
+      
+      <div slot="right">
+        <h3>That’s why Defguard is:</h3>
+        <ul>
+          <li>Fully self-hosted – No external dependencies. Your data stays with you.</li>
+          <li>Built for teams – Manage users, groups, and devices with role-based access control.</li>
+          <li>Zero-trust ready – Define exactly who can access what, from where, with fine-grained ACLs.</li>
+          <li>Integrated – Works seamlessly with WireGuard®, LDAP/Active Directory, and your existing tools.</li>
+        </ul>
+      </div>
+    </FlexibleSection>
+    <FlexibleSection
+      title="Our Story"
+      id="our-story"  
+      variant="gray"
+      theme="light"
+    >
+      <div slot="left">
+        <Image src={ourstory} alt="ourstory illustration" />
+      </div>
+      
+      <div slot="right">
+        <p>
+          Defguard is the result of over 15 years of deep-tech software development — built by a team with a proven track record in delivering secure, high-performance systems for some of the most demanding environments.
+        </p>
+        <p>
+          Security and reliability have always been at the core of what we do. Our background includes projects like secure infrastructure platforms, enterprise multi-factor authentication (such as for home.pl), and mission-critical backend systems — all built to perform under pressure.
+        </p>
+      </div>
+    </FlexibleSection>
+   
+
+  <FlexibleSection
+  title="Our Vision"
+  id="our-vision"  
+  variant="white"
+  theme="light"
+>
+  <div slot="left">
+    <p>
+      Become the go-to privacy and security platform that enables any organization to implement fundamental security and privacy measures.
+    </p>
+    <p>
+      Just as GitLab became an on-premises and open-source alternative to GitHub, we aim for Defguard to become an alternative to cloud-based SSO and VPN solutions, as well as closed-source Microsoft and Cisco deployments.
+    </p>
+  </div>
+  
+  <div slot="right">
+    <Image src={ourvision} alt="enrollment screen" />
+  </div>
+  </FlexibleSection>
+        
+  </main>
+</ProductLayout>
+
+<style lang="scss" is:global>
+  #home-page {
+    --page-spacing-factor: 0.5;
+    @include break-up(lg) {
+      --page-spacing-factor: 1;
+    }
+
+    .flexible-content {
+      padding-top: page-spacing(80px);
+      padding-bottom: page-spacing(80px);
+      
+      .section-title {
+        @include typography(section);  // Change back to section typography for main sections
+        border-bottom: 1px solid var(--text-body-primary);
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+      }
+      
+      h3 {
+        @include typography(h3);
+        margin-top: 0;
+        margin-bottom: 1rem;
+      }
+      
+      p {
+        @include typography(paragraph);
+        margin-bottom: 1.5rem;
+      }
+      
+      .learn-more {
+        margin-bottom: 1.5rem;
+      }
+
+      .learn-more-link {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background-color: var(--primary-button-bg, #0C8CE0);
+        color: var(--primary-button-text, white);
+        border-radius: 6px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background-color 0.2s ease-in-out;
+        
+        &:hover {
+          background-color: var(--primary-button-hover, #0A7BC5);
+        }
+      }
+      
+      ul {
+        margin: 0 0 1.5rem 0;
+        padding-left: 20px;
+        
+        li {
+          @include typography(paragraph);
+          margin-bottom: 0.5rem;
+        }
+      }
+      
+      em {
+        font-size: 0.9em;
+        opacity: 0.8;
+      }
+      
+      .column {
+        @media (max-width: 768px) {
+          &.right-column {
+            margin-top: 1rem;
+          }
+        }
+      }
+    }
+
+        
+
+    .scroll-sections {
+      & > .static-slides {
+        display: flex;
+        flex-flow: column;
+        row-gap: 64px;
+
+        @media screen and (min-width: 1200px) {
+          display: none;
+        }
+      }
+    }
+
+    .product-features {
+      padding-top: 2rem;  // Add some space after the section title
+      
+      .product-feature {
+        header {
+          h2 {
+            @include typography(h3);  // Change to h3 for better size
+            font-weight: 400;  // Keep it light
+          }
+        }
+      }
+    }
+  }
+</style>
+
+
+
