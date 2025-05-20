@@ -23,6 +23,11 @@
         "link": "https://docs.defguard.net"
       },
       {
+        "text": "Press",
+        "external": false,
+        "link": "/press/"
+      },
+      {
         "text": "Contact Us",
         "external": true,
         "link": "mailto:sales@defguard.net"

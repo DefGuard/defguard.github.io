@@ -1,0 +1,275 @@
+---
+import Navigation from "../components/base/Navigation.astro";
+import ProductLayout from "../layouts/ProductLayout.astro";
+import FlexibleSection from "../components/FlexibleSection.astro";
+import HomeSection from "../components/home/HomeSection.astro";
+import AstroButton from "../components/AstroButton.astro";
+import { Image } from "astro:assets";
+import brandAssets from "/public/images/data/key-visual-AW.png";
+import contactImage from "/public/images/data/key-visual-BD.png";
+const title = "defguard - Press Kit";
+const featuredImage =
+  "github.com/DefGuard/defguard.github.io/raw/main/public/images/product/core/hero-image.png";
+const imageWidth = "1920";
+const imageHeight = "1080";
+const url = "https://defguard.net/press/";
+const tags = [
+  "defguard",
+  "open source",
+  "sso & vpn",
+  "vpn",
+  "mfa",
+  "2fa",
+  "mfa/2fa",
+  "WireGuard®",
+  "ldap",
+  "openldap",
+  "postgresql",
+  "postgres",
+  "openid",
+  "totp",
+  "webauthn",
+  "opensense",
+  "freebsd",
+  "rust",
+  "secure",
+  "desktop client",
+  "desktop",
+  "yubikey",
+  "teonite",
+  "docker",
+  "kubernetes",
+  "k8s",
+  "press",
+  "media",
+  "press kit",
+  "brand assets",
+  "company information",
+  "press release",
+  "media contact",
+];
+---
+
+<ProductLayout
+  title={title}
+  featuredImage={featuredImage}
+  imageWidth={imageWidth}
+  imageHeight={imageHeight}
+  url={url}
+  tags={tags}
+>
+  <Navigation activeSlug="/press" />
+  
+  <main id="home-page">
+    
+    <HomeSection variant="white" contentId="press-header">
+      <h1>defguard Press Kit</h1>
+      <p>
+        Welcome to the defguard press resource center. Find everything you need to accurately report on our open-source zero-trust enterprise VPN solution.
+      </p>
+      <div class="link-track">
+        <AstroButton
+          link={{
+            href: "/images/press/defguard-presskit.zip",
+            target: "_self",
+          }}
+          text="Download Press Kit"
+        />
+        <!-- <AstroButton
+          link={{
+            href: "mailto:press@defguard.net",
+            target: "_self",
+          }}
+          text="Contact Press Team"
+        /> -->
+      </div>
+    </HomeSection>
+
+    <FlexibleSection
+      title="Brand Assets"
+      id="brand-assets"  
+      variant="gray"
+      theme="light"
+    >
+      <div slot="left">
+        <Image src={brandAssets} alt="defguard brand assets" />
+      </div>
+      
+      <div slot="right">
+        <p>
+          Download official defguard logos, screenshots, and brand assets for use in your publications. All assets are available in high-resolution formats suitable for both print and digital media.
+        </p>
+        <p>
+          <strong>Usage Guidelines:</strong> When using our brand assets, please maintain the integrity of the design. Do not modify, distort, or alter the colors of our logo. Ensure adequate spacing around the logo and maintain its proportions when resizing.
+        </p>
+        <div class="learn-more">
+          <a href="/images/press/defguard-presskit.zip" class="learn-more-link">Download Press Kit</a>
+        </div>
+      </div>
+    </FlexibleSection>
+
+    <FlexibleSection
+      title="Company Information"
+      id="company-information"  
+      variant="white"
+      theme="light"
+    >
+      <div slot="left">
+        <p>
+          defguard is developed by <a href="https://teonite.com">teonite</a>, a deep-tech software development company with over 15 years of experience building secure, high-performance systems for demanding environments.
+        </p>
+        <p>
+          <strong>Our Mission:</strong> To provide organizations with a comprehensive, self-hosted solution for secure remote access that prioritizes privacy, security, and control.
+        </p>
+      </div>
+      
+      <div slot="right">
+        <h3>Key Facts</h3>
+        <ul>
+          <li><strong>Founded:</strong> 2023 (defguard), 2007 (teonite)</li>
+          <li><strong>Headquarters:</strong> Szczecin, Poland</li>
+          <li><strong>Product Type:</strong> Open-source identity and access management platform</li>
+          <li><strong>Core Technology:</strong> WireGuard® with native MFA integration</li>
+          <li><strong>Leadership:</strong> Founded by a team of security and infrastructure experts</li>
+        </ul>
+        <p>
+          defguard is designed for organizations that require enterprise-grade security while maintaining complete control over their data and infrastructure.
+        </p>
+      </div>
+    </FlexibleSection>
+
+    <FlexibleSection
+      title="Press Contact"
+      id="press-contact"  
+      variant="gray"
+      theme="light"
+  >
+    <div slot="left">
+      <p>
+        For media inquiries, interview requests, or additional information about defguard, please contact our press team:
+      </p>
+      <div class="learn-more">
+        <a href="mailto:office@defguard.net" class="learn-more-link">Contact Us</a>
+      </div>
+    </div>
+    
+    <div slot="right">
+      <Image src={contactImage} alt="contact information" />
+    </div>
+  </FlexibleSection>
+
+  </main>
+</ProductLayout>
+
+<style lang="scss" is:global>
+  #press-header {
+    padding-bottom: page-spacing(100px);
+    padding-top: 50px;
+
+    & > p {
+      @include typography(paragraph);
+      padding-bottom: 8px;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    h1 {
+      color: var(--text-body-primary);
+      padding-bottom: 40px;
+      max-width: 996px;
+      text-align: center;
+      text-wrap: balance;
+      @include typography(title);
+    }
+
+    .link-track {
+      width: 100%;
+      display: flex;
+      flex-flow: row;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 40px 0px;
+
+      @include break-down(sm) {
+        flex-flow: column;
+        align-items: center;
+      }
+    }
+
+  }
+
+  #home-page {
+    --page-spacing-factor: 0.5;
+    @include break-up(lg) {
+      --page-spacing-factor: 1;
+    }
+
+    .flexible-content {
+      padding-top: page-spacing(80px);
+      padding-bottom: page-spacing(80px);
+      
+      .section-title {
+        @include typography(section);  // Change back to section typography for main sections
+        border-bottom: 1px solid var(--text-body-primary);
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+      }
+      
+      h3 {
+        @include typography(h3);
+        margin-top: 0;
+        margin-bottom: 1rem;
+      }
+      
+      p {
+        @include typography(paragraph);
+        margin-bottom: 1.5rem;
+      }
+      
+      .learn-more {
+        margin-bottom: 1.5rem;
+      }
+
+      .learn-more-link {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background-color: var(--primary-button-bg, #0C8CE0);
+        color: var(--primary-button-text, white);
+        border-radius: 6px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background-color 0.2s ease-in-out;
+        
+        &:hover {
+          background-color: var(--primary-button-hover, #0A7BC5);
+        }
+      }
+      
+      ul {
+        margin: 0 0 1.5rem 0;
+        padding-left: 20px;
+        
+        li {
+          @include typography(paragraph);
+          margin-bottom: 0.5rem;
+        }
+      }
+      
+      em {
+        font-size: 0.9em;
+        opacity: 0.8;
+      }
+      
+      .column {
+        @media (max-width: 768px) {
+          &.right-column {
+            margin-top: 1rem;
+          }
+        }
+      }
+    }
+
+  }
+</style>
