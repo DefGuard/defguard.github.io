@@ -34,6 +34,12 @@
     "external": true
   },
   {
+    "display": "Press",
+    "url": "/press/",
+    "prefetch": true,
+    "external": false
+  },
+  {
     "display": "FAQ",
     "url": "/faq/",
     "prefetch": false

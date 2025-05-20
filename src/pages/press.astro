@@ -128,11 +128,50 @@ const tags = [
     </FlexibleSection>
 
     <FlexibleSection
-      title="Press Contact"
-      id="press-contact"  
+      title="Media Coverage"
+      id="press-coverage"  
       variant="gray"
       theme="light"
-  >
+    >
+      <div class="full-width">
+        <p class="coverage-intro">
+          defguard has been featured in various technology and security publications. Here are some recent articles and mentions:
+        </p>
+        <div class="articles-grid">
+          <a href="https://mambiznes.pl/news/75-mln-zl-dla-trzech-startupow-fundusz-hard2beat-inwestuje-w-ramach-pfr-starter/" target="_blank" class="article-card">
+            <span class="publication">Mam Biznes</span>
+            <h3 class="article-title">
+              Hard2beat Fund Invests PLN 7.5 Million in Three Startups Through PFR Starter (in Polish)
+            </h3>
+            <span class="article-date">May 20, 2025</span>
+          </a>
+          
+          <a href="https://mamstartup.pl/trzy-premierowe-transakcje-o-wartosci-75-mln-pln-hard2beat-vc-inwestuje-w-neuromedical-defguard-i-defendeye/" target="_blank" class="article-card">
+            <span class="publication">Mam Startup</span>
+            <h3 class="article-title">
+              Three first-round deals: Hard2beat VC backs Neuromedical, DefGuard, and DefendEye (in Polish)
+            </h3>
+            <span class="article-date">May 20, 2025</span>
+          </a>
+          
+          <a href="https://stacjainnowacja.tvp.pl/84183493/odc-150-stacja-innowacja" target="_blank" class="article-card">
+            <span class="publication">Stacja Innowacja</span>
+            <h3 class="article-title">
+              Polish TV program on TVP Polonia that showcases innovative technologies from Poland. Defguard was featured in one of the episodes. (in Polish)
+            </h3>
+            <span class="article-date">December 23, 2024</span>
+          </a>
+          
+        </div>
+      </div>
+    </FlexibleSection>
+
+    <FlexibleSection
+      title="Press Contact"
+      id="press-contact"  
+      variant="white"
+      theme="light"
+    >
     <div slot="left">
       <p>
         For media inquiries, interview requests, or additional information about defguard, please contact our press team:
@@ -232,7 +271,7 @@ const tags = [
         transition: background-color 0.2s ease-in-out;
         
         &:hover {
-          background-color: var(--primary-button-hover, #0A7BC5);
+          background-color: var(--primary-button-hover, #0C8CE0);
         }
       }
       
@@ -260,5 +299,82 @@ const tags = [
       }
     }
 
+    #press-coverage {
+      .full-width {
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        box-sizing: border-box;
+      }
+      
+      .coverage-intro {
+        @include typography(paragraph);
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 60px auto;
+        width: 100%;
+      }
+      
+      .articles-grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 25px;
+        width: 100%;
+        box-sizing: border-box;
+        
+        @include break-up(sm) {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 30px;
+        }
+        
+        @include break-up(lg) {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 40px;
+        }
+      }
+      
+      .article-card {
+        display: block;  // Since it's now an anchor
+        text-decoration: none;  // Remove default link styling
+        color: inherit;  // Keep text color
+        padding: 20px;
+        border-width: 0 0 2px 0;
+        border-style: solid;
+        border-color: #f5f5f5;
+        border-radius: 0px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        transform: translateY(-0px);  // Reduced from -3px
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);  // Reduced size and opacity further
+        
+        &:hover {
+          transform: translateY(-5px);  // Match the default state
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);  // Match the default state
+          border-color: var(--primary-button-bg, #0C8CE0);
+        }
+        
+        .publication {
+          display: block;
+          color: var(--text-body-secondary);
+          font-size: 14px;
+          margin-bottom: 8px;
+          font-weight: 500;
+        }
+        
+        .article-title {
+          @include typography(h4);
+          margin: 0 0 15px 0;
+          color: var(--text-body-primary);
+        }
+        
+        .article-date {
+          display: block;
+          color: var(--text-body-secondary);
+          font-size: 14px;
+          margin-top: auto;
+        }
+      }
+    }
   }
 </style>
