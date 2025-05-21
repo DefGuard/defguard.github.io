@@ -1,10 +1,7 @@
 ---
-import { getCollection, getEntry } from "astro:content";
+import { getCollection } from "astro:content";
 import Navigation from "../../components/base/Navigation.astro";
 import ProductLayout from "../../layouts/ProductLayout.astro";
-import FlexibleSection from "../../components/FlexibleSection.astro";
-import { Image } from 'astro:assets';
-import path from 'path';
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog');
@@ -20,28 +17,6 @@ const { entry } = Astro.props;
 // Get the rendered content
 const { Content, headings, remarkPluginFrontmatter } = await entry.render();
 
-// Function to convert Markdown image paths to Astro image component
-const processImagePath = (imagePath) => {
-  if (imagePath.startsWith('/')) {
-    // For public directory images
-    return path.join(import.meta.env.BASE_URL || '', imagePath.slice(1));
-  }
-  return imagePath;
-};
-
-// Extract any image paths from the markdown content for preloading
-const extractImagePaths = (content) => {
-  const regex = /!\[.*?\]\((.*?)\)/g;
-  const matches = content.match(regex) || [];
-  return matches.map(match => {
-    const pathRegex = /!\[.*?\]\((.*?)\)/;
-    const result = pathRegex.exec(match);
-    return result ? result[1] : null;
-  }).filter(Boolean);
-};
-
-// Get image paths from content for preloading
-const imagePaths = extractImagePaths(entry.body);
 
 // Format the publication date
 const formatDate = (date) => {
@@ -53,25 +28,14 @@ const formatDate = (date) => {
 };
 
 const title = `${entry.data.title} | defguard Blog`;
-const featuredImage = "github.com/DefGuard/defguard.github.io/raw/main/public/images/product/core/hero-image.png";
-const imageWidth = "1920";
-const imageHeight = "1080";
 const url = `https://defguard.net/blog/${entry.slug}`;
 ---
 
 <ProductLayout
   title={title}
-  featuredImage={featuredImage}
-  imageWidth={imageWidth}
-  imageHeight={imageHeight}
   url={url}
 >
   <Navigation activeSlug="/blog" />
-  
-  <!-- Preload critical images -->
-  {imagePaths.map(imagePath => (
-    <link rel="preload" href={processImagePath(imagePath)} as="image" />
-  ))}
 
   <main id="blog-post-page">
     <article class="blog-post">
@@ -87,78 +51,9 @@ const url = `https://defguard.net/blog/${entry.slug}`;
         </header>
         
         <div class="post-content">
-          <style is:global>
-            strong, b {
-              font-weight: 400;
-            }
-            
-            /* Fix for images in Markdown */
-            img {
-              max-width: 100%;
-              height: auto;
-              display: block;
-              margin: 2rem auto;
-              border-radius: 8px;
-              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            }
-
-            /* Styles for Astro Image component */
-            :global(img.featured-image) {
-              max-width: 100%;
-              height: auto;
-              margin: 2rem auto;
-              border-radius: 8px;
-              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-              display: block;
-            }
-            
-            /* Set proper alt text styling */
-            /* Error handling for images */
-            img:not([src]), img[src=""] {
-              position: relative;
-              min-height: 200px;
-              background-color: #f5f5f5;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              font-style: italic;
-              color: #666;
-              border-radius: 8px;
-            }
-            
-            img:not([src])::before, img[src=""]::before {
-              content: "Image not found";
-              position: absolute;
-              top: 50%;
-              left: 50%;
-              transform: translate(-50%, -50%);
-            }
-            /* Fix for image dimensions */
-            .post-content img {
-              width: auto;
-              max-width: 100%;
-              height: auto;
-              margin: 2rem auto;
-            }
-          </style>
-          
-          {/* Render featured image for specific blog posts using Astro Image */}
-          {entry.slug === 'defguard-release' && (
-            <div class="blog-post-image">
-              <Image 
-                src="/images/blog/defguard-main-screen.png" 
-                alt="defguard — desktop client" 
-                width={800} 
-                height={450}
-                quality={90}
-                loading="eager"
-                class="featured-image"
-              />
-            </div>
-          )}
-          
           <Content />
         </div>
+        
         <footer class="post-footer">
           <div class="post-navigation">
             <a href="/blog" class="back-to-blog">← Back to Blog</a>
@@ -213,17 +108,6 @@ const url = `https://defguard.net/blog/${entry.slug}`;
         }
       }
       
-      .blog-post-image {
-        margin: 2rem 0;
-
-        .featured-image {
-          border-radius: 8px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-          width: 100%;
-          height: auto;
-          display: block;
-        }
-      }
 
       .post-content {
         margin-bottom: 3rem;
@@ -312,7 +196,15 @@ const url = `https://defguard.net/blog/${entry.slug}`;
           border-radius: 3px;
         }
         
-        /* Styles moved to global scope for better image handling */
+        /* Markdown image styling */
+        :global(img) {
+          max-width: 100%;
+          height: auto;
+          display: block;
+          margin: 2.5rem auto;  // Slightly increase margin for better spacing
+          border-radius: 4px;   // Match other radius values
+          box-shadow: var(--box-shadow, 0 4px 8px rgba(0, 0, 0, 0.08));  // Use CSS variable for shadow
+        }
       }
       
       .post-footer {

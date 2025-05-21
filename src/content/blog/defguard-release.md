@@ -2,7 +2,6 @@
 title: "True Zero-Trust WireGuard® VPN with 2FA/MFA - defguard security paltform released by teonite"
 publishDate: 2023-05-12
 description: "Defguard offers a unique combination of security-related functionalities from identity management (OpenID/OAuth2/LDAP) to VPN (Wireguard) to other features (Multi-Factor Authentication, Yubikey provisioning, Web3, Webhooks, etc.)."
-tags: ["announcement", "defguard", "welcome"]
 author: "Robert Olejnik"
 ---
 
