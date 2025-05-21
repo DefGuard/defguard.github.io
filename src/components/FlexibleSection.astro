@@ -97,18 +97,16 @@ const {
         padding-bottom: 2rem;
         
         .section-title {
+          @include typography(section);
+          font-weight: 400;
           margin-bottom: 1rem;
-          font-size: 2rem;
-          font-weight: 700;
-          line-height: 1.2;
           
           @media (min-width: 768px) {
-            font-size: 2.5rem;
             margin-bottom: 1.5rem;
           }
         }
       }
-      
+
       .columns-container {
         display: flex;
         flex-direction: column;

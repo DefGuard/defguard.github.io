@@ -1,7 +1,7 @@
 import { defineConfig } from "astro/config";
 import path from "path";
-import rehypeExternalLinks from "rehype-external-links";
 import { fileURLToPath } from "url";
+// Remove direct import and let Astro handle plugin loading
 
 import mdx from "@astrojs/mdx";
 
@@ -22,6 +22,13 @@ export default defineConfig({
   site: "https://defguard.net",
   trailingSlash: "ignore",
   prefetch: true,
+  build: {
+    assets: 'assets',
+  },
+  // Keep configuration simple to avoid conflicts
+  mdx: {
+    // Will inherit from markdown config
+  },
   integrations: [
     react(),
     mdx(),
@@ -42,14 +49,16 @@ export default defineConfig({
   ],
   markdown: {
     rehypePlugins: [
-      [
-        rehypeExternalLinks,
-        {
-          target: "_blank",
-          rel: ["nofollow", "noopener", "noreferrer"],
-        },
-      ],
+      // Keep string-based configuration which works with both versions
+      ['rehype-external-links', {
+        target: "_blank",
+        rel: ["nofollow", "noopener", "noreferrer"],
+      }],
     ],
+    shikiConfig: {
+      theme: 'github-dark',
+      wrap: true
+    },
   },
   vite: {
     resolve: {

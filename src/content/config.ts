@@ -1,4 +1,14 @@
+// Simple content collections config with no rehype plugins
 import { defineCollection, z } from "astro:content";
+
+// Schema definitions
+const blogSchema = z.object({
+  title: z.string(),
+  publishDate: z.date(),
+  description: z.string(),
+  draft: z.boolean().optional().default(false),
+  author: z.string().optional(),
+});
 
 const productFeatures = defineCollection({
   type: "content",
@@ -26,23 +36,32 @@ const roadmapSchema = z.object({
   version: z.number(),
 });
 
+// Export types
 export type Roadmap = z.infer<typeof roadmapSchema>;
+export type Blog = z.infer<typeof blogSchema>;
+export type PricingSchema = z.infer<typeof pricingSchema>;
 
+// Collection definitions
 const roadmap = defineCollection({
   type: "content",
   schema: roadmapSchema,
 });
-
-export type PricingSchema = z.infer<typeof pricingSchema>;
 
 const pricing = defineCollection({
   type: "content",
   schema: pricingSchema,
 });
 
+const blog = defineCollection({
+  type: "content",
+  schema: blogSchema,
+});
+
+// Export collections
 export const collections = {
   "client-features": productFeatures,
   "core-features": productFeatures,
-  pricing: pricing,
+  pricing,
   roadmap,
+  blog,
 };

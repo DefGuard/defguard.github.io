@@ -1,0 +1,338 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import Navigation from "../../components/base/Navigation.astro";
+import ProductLayout from "../../layouts/ProductLayout.astro";
+import FlexibleSection from "../../components/FlexibleSection.astro";
+import { Image } from 'astro:assets';
+import path from 'path';
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blog');
+  return blogEntries.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+// Get the blog entry from the props
+const { entry } = Astro.props;
+
+// Get the rendered content
+const { Content, headings, remarkPluginFrontmatter } = await entry.render();
+
+// Function to convert Markdown image paths to Astro image component
+const processImagePath = (imagePath) => {
+  if (imagePath.startsWith('/')) {
+    // For public directory images
+    return path.join(import.meta.env.BASE_URL || '', imagePath.slice(1));
+  }
+  return imagePath;
+};
+
+// Extract any image paths from the markdown content for preloading
+const extractImagePaths = (content) => {
+  const regex = /!\[.*?\]\((.*?)\)/g;
+  const matches = content.match(regex) || [];
+  return matches.map(match => {
+    const pathRegex = /!\[.*?\]\((.*?)\)/;
+    const result = pathRegex.exec(match);
+    return result ? result[1] : null;
+  }).filter(Boolean);
+};
+
+// Get image paths from content for preloading
+const imagePaths = extractImagePaths(entry.body);
+
+// Format the publication date
+const formatDate = (date) => {
+  return new Date(date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+};
+
+const title = `${entry.data.title} | defguard Blog`;
+const featuredImage = "github.com/DefGuard/defguard.github.io/raw/main/public/images/product/core/hero-image.png";
+const imageWidth = "1920";
+const imageHeight = "1080";
+const url = `https://defguard.net/blog/${entry.slug}`;
+---
+
+<ProductLayout
+  title={title}
+  featuredImage={featuredImage}
+  imageWidth={imageWidth}
+  imageHeight={imageHeight}
+  url={url}
+>
+  <Navigation activeSlug="/blog" />
+  
+  <!-- Preload critical images -->
+  {imagePaths.map(imagePath => (
+    <link rel="preload" href={processImagePath(imagePath)} as="image" />
+  ))}
+
+  <main id="blog-post-page">
+    <article class="blog-post">
+      <div class="container">
+        <header class="post-header">
+          <h1>{entry.data.title}</h1>
+          <div class="post-meta">
+            <time datetime={entry.data.publishDate.toISOString()}>
+              {formatDate(entry.data.publishDate)}
+            </time>
+            {entry.data.author && <span class="post-author">by {entry.data.author}</span>}
+          </div>
+        </header>
+        
+        <div class="post-content">
+          <style is:global>
+            strong, b {
+              font-weight: 400;
+            }
+            
+            /* Fix for images in Markdown */
+            img {
+              max-width: 100%;
+              height: auto;
+              display: block;
+              margin: 2rem auto;
+              border-radius: 8px;
+              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            /* Styles for Astro Image component */
+            :global(img.featured-image) {
+              max-width: 100%;
+              height: auto;
+              margin: 2rem auto;
+              border-radius: 8px;
+              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+              display: block;
+            }
+            
+            /* Set proper alt text styling */
+            /* Error handling for images */
+            img:not([src]), img[src=""] {
+              position: relative;
+              min-height: 200px;
+              background-color: #f5f5f5;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-style: italic;
+              color: #666;
+              border-radius: 8px;
+            }
+            
+            img:not([src])::before, img[src=""]::before {
+              content: "Image not found";
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+            }
+            /* Fix for image dimensions */
+            .post-content img {
+              width: auto;
+              max-width: 100%;
+              height: auto;
+              margin: 2rem auto;
+            }
+          </style>
+          
+          {/* Render featured image for specific blog posts using Astro Image */}
+          {entry.slug === 'defguard-release' && (
+            <div class="blog-post-image">
+              <Image 
+                src="/images/blog/defguard-main-screen.png" 
+                alt="defguard — desktop client" 
+                width={800} 
+                height={450}
+                quality={90}
+                loading="eager"
+                class="featured-image"
+              />
+            </div>
+          )}
+          
+          <Content />
+        </div>
+        <footer class="post-footer">
+          <div class="post-navigation">
+            <a href="/blog" class="back-to-blog">← Back to Blog</a>
+          </div>
+        </footer>
+      </div>
+    </article>
+  </main>
+</ProductLayout>
+
+<style lang="scss">
+  #blog-post-page {
+    padding-top: var(--nav-height);
+    background-color: var(--surface-frame-bg);
+    
+    .blog-post {
+      padding: 2rem 0 4rem;
+      
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+      
+      .post-header {
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border-color, #eaeaea);
+        
+        h1 {
+          margin-top: 0;
+          margin-bottom: 1rem;
+          font-size: calc(2.5rem * var(--font-scale-factor));
+          line-height: 1.2;
+          font-weight: 400;
+          color: var(--text-body-primary);
+        }
+      }
+      
+      .post-meta {
+        display: flex;
+        flex-wrap: wrap;
+        color: var(--text-body-secondary, var(--text-body-primary));
+        margin-bottom: 1rem;
+        
+        time {
+          margin-right: 0.5rem;
+        }
+        
+        .post-author {
+          margin-left: 0.5rem;
+        }
+      }
+      
+      .blog-post-image {
+        margin: 2rem 0;
+
+        .featured-image {
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          width: 100%;
+          height: auto;
+          display: block;
+        }
+      }
+
+      .post-content {
+        margin-bottom: 3rem;
+        
+        :global(h1) {
+          font-size: calc(2.25rem * var(--font-scale-factor));
+          margin: 2rem 0 1rem;
+          font-weight: 400;
+          color: var(--text-body-primary);
+        }
+        
+        :global(h2) {
+          font-size: calc(1.75rem * var(--font-scale-factor));
+          margin: 1.75rem 0 1rem;
+          font-weight: 400;
+          color: var(--text-body-primary);
+        }
+        
+        :global(h3) {
+          font-size: calc(1.5rem * var(--font-scale-factor));
+          margin: 1.5rem 0 1rem;
+          font-weight: 400;
+          color: var(--text-body-primary);
+        }
+        
+        :global(h4) {
+          font-size: calc(1.25rem * var(--font-scale-factor));
+          margin: 1.25rem 0 0.75rem;
+          font-weight: 400;
+          color: var(--text-body-primary);
+        }
+        
+        :global(p) {
+          margin: 1rem 0;
+          line-height: 1.6;
+          font-weight: 300;
+          color: var(--text-body-primary);
+          font-size: calc(1rem * var(--font-scale-factor));
+        }
+        
+        :global(ul), :global(ol) {
+          margin: 1rem 0;
+          padding-left: 1.5rem;
+          
+          :global(li) {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+            font-weight: 300;
+            color: var(--text-body-primary);
+            font-size: calc(1rem * var(--font-scale-factor));
+          }
+        }
+        
+        :global(blockquote) {
+          border-left: 4px solid var(--primary-color, #0C8CE0);
+          padding-left: 1rem;
+          margin: 1.5rem 0;
+          font-weight: 300;
+          color: var(--text-body-secondary, var(--text-body-primary));
+        }
+        
+        :global(a) {
+          color: var(--primary-color, #0C8CE0);
+          text-decoration: none;
+          font-weight: inherit;
+          
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        
+        :global(pre) {
+          background: var(--code-bg, #f6f8fa);
+          padding: 1rem;
+          border-radius: 4px;
+          overflow-x: auto;
+          margin: 1.5rem 0;
+        }
+        
+        :global(code) {
+          font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+          font-size: 0.9em;
+          font-weight: 300;
+          background: var(--code-bg, #f6f8fa);
+          padding: 0.2em 0.4em;
+          border-radius: 3px;
+        }
+        
+        /* Styles moved to global scope for better image handling */
+      }
+      
+      .post-footer {
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border-color, #eaeaea);
+        
+        .post-navigation {
+          display: flex;
+          justify-content: space-between;
+          
+          .back-to-blog {
+            color: var(--primary-color, #0C8CE0);
+            font-weight: 400;           
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+</style>
+
