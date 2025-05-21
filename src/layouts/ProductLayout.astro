@@ -1,7 +1,6 @@
 ---
 import OrganizationJSONLD from "../scripts/OrganizationJSONLD.astro";
 import BaseLayout from "./BaseLayout.astro";
-import { Image } from 'astro:assets';
 
 interface Props {
   title: string;
@@ -9,10 +8,10 @@ interface Props {
   imageWidth: string;
   imageHeight: string;
   url: string;
-  tags: string[];
+  tags?: string[];
 }
 
-const { title, featuredImage, imageWidth, imageHeight, url, tags } = Astro.props;
+const { title, featuredImage, imageWidth, imageHeight, url, tags = [] } = Astro.props;
 const description =
   "defguard - enterprise open-source SSO&VPN - the only open-source solution with real WireGuard® MFA/2FA & integrated OpenID Connect SSO";
 ---

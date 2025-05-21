@@ -51,6 +51,7 @@
     "short-unique-id": "^5.2.0",
     "slick-carousel": "^1.8.1",
     "typescript": "^5.6.3",
+    "unified": "^11.0.5",
     "use-breakpoint": "^4.0.5",
     "use-sync-external-store": "^1.2.2",
     "user-agent-data-types": "^0.4.2",

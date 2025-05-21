@@ -1,6 +1,5 @@
 ---
 import Navigation from "../components/base/Navigation.astro";
-import BuiltBy from "../components/BuiltBy.astro";
 import HomeSection from "../components/home/HomeSection.astro";
 import ProductLayout from "../layouts/ProductLayout.astro";
 import Testimonials from "./_home/components/client-side/Testimonials/Testimonials";
@@ -9,9 +8,6 @@ import { testimonialSchema } from "./_home/components/client-side/Testimonials/t
 import FlexibleIdentitySection from "./_home/components/FlexibleIdentity/FlexibleIdentitySection.astro";
 import HomeHeader from "./_home/components/HomeHeader.astro";
 import Roadmap from "./_home/components/Roadmap/Roadmap.astro";
-import HomeScrollSection1 from "./_home/scroll-sections/section-1/HomeScrollSection1";
-import HomeScrollSection2 from "./_home/scroll-sections/section-2/HomeScrollSection2";
-import HomeScrollSection3 from "./_home/scroll-sections/section-3/HomeScrollSection3";
 import FlexibleSection from "../components/FlexibleSection.astro";
 import signinwith from "/public/images/data/signinwith.png";
 import enrollment from "/public/images/data/enrollment-screen.png";
@@ -19,8 +15,6 @@ import api from "/public/images/data/api.png";
 import Image from "astro/components/Image.astro";
 import YouTubeVideo from "../components/video/YouTubeVideo.astro";
 import CTASection from "../components/CTASection.astro";
-import ProductSection from "../layouts/ProductSection.astro";
-import { ProductFeature } from "../components/product/ProductFeature/ProductFeature";
 const testimonialsImportData = await Astro.glob("../data/home/testimonials/**/*.md");
 
 const testimonialsData: Array<TestimonialData> = testimonialsImportData.map((val) => {

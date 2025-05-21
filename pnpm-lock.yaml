@@ -89,6 +89,9 @@ dependencies:
   typescript:
     specifier: ^5.6.3
     version: 5.8.3
+  unified:
+    specifier: ^11.0.5
+    version: 11.0.5
   use-breakpoint:
     specifier: ^4.0.5
     version: 4.0.6(react-dom@18.3.1)(react@18.3.1)
