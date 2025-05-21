@@ -49,8 +49,8 @@
       },
       {
         "text": "Blog",
-        "external": true,
-        "link": "https://teonite.com/blog/"
+        "external": false,
+        "link": "/blog/"
       },
       {
         "text": "Mastodon",

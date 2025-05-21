@@ -5,8 +5,6 @@ description: "Defguard offers a unique combination of security-related functiona
 author: "Robert Olejnik"
 ---
 
-# True Zero-Trust WireGuard® VPN with 2FA/MFA - defguard security paltform released by teonite
-
 ### TL;DR
 
 "Today is my 42nd birthday and my present for everyone is our open-source security army knife platform", Robert Olejnik - defguard founder
