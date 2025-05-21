@@ -99,5 +99,5 @@ But Defguard is so close to my heart that I need to put it on the map of the ope
 
 Or you can talk to me directly:
 
-- by email: robert _A _T_ teonite.com
+- by email: robert@defguard.net
 - Matrix: [@robert:teonite.com](https://teonite.com/blog/defguard/@robert:teonite.com)

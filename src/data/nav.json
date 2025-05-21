@@ -34,8 +34,8 @@
     "external": true
   },
   {
-    "display": "Press",
-    "url": "/press/",
+    "display": "Blog",
+    "url": "/blog/",
     "prefetch": true,
     "external": false
   },
