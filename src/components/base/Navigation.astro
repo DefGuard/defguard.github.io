@@ -25,10 +25,27 @@ const { activeSlug } = Astro.props;
               class:list={[
                 {
                   active: activeSlug === item.url,
+                  external: item.external,
                 },
               ]}
             >
               <span>{item.display}</span>
+              {item.external && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="9"
+                  height="9"
+                  viewBox="0 0 12 13"
+                  fill="none"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M0 0.5H4V1.83333H1.33333V11.1667H10.6667V8.5H12V12.5H0V0.5ZM9.72386 1.83333H7.77778V0.5H12V4.72222H10.6667V2.77614L6.4714 6.9714L5.5286 6.0286L9.72386 1.83333Z"
+                    style={{ fill: "var(--text-body-primary)" }}
+                  />
+                </svg>
+              )}
             </a>
           </li>
         ))
@@ -78,10 +95,27 @@ const { activeSlug } = Astro.props;
               class:list={[
                 {
                   active: activeSlug === item.url,
+                  external: item.external,
                 },
               ]}
             >
               <span>{item.display}</span>
+              {item.external && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="9"
+                  height="9"
+                  viewBox="0 0 12 13"
+                  fill="none"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M0 0.5H4V1.83333H1.33333V11.1667H10.6667V8.5H12V12.5H0V0.5ZM9.72386 1.83333H7.77778V0.5H12V4.72222H10.6667V2.77614L6.4714 6.9714L5.5286 6.0286L9.72386 1.83333Z"
+                    style={{ fill: "var(--text-body-primary)" }}
+                  />
+                </svg>
+              )}
             </a>
           </li>
         ))
@@ -149,10 +183,22 @@ const { activeSlug } = Astro.props;
           font-size: 18px;
           border-left: 1px solid transparent;
           box-sizing: border-box;
-          padding: 5px 20px;
+          padding: 5px 10px;
 
           &.active {
             border-left-color: var(--text-body-primary);
+          }
+
+          &.external {
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+            justify-content: flex-start;
+            column-gap: 5px;
+
+            svg {
+              user-select: none;
+            }
           }
         }
       }
@@ -203,7 +249,7 @@ const { activeSlug } = Astro.props;
   #desktop-nav {
     // vars
     --main-padding: 12px 32px;
-    --items-gap: 0px;
+    --items-gap: 10px;
     display: none;
     background-color: var(--surface-frame-bg);
     z-index: 4;
@@ -226,7 +272,7 @@ const { activeSlug } = Astro.props;
 
     @include break-up(xl) {
       --main-padding: 12px 64px;
-      //--items-gap: 32px;
+      --items-gap: 32px;
     }
 
     .nav-logo {
@@ -257,7 +303,7 @@ const { activeSlug } = Astro.props;
           align-items: center;
           justify-content: center;
           text-decoration: none;
-          padding: 5px 20px;
+          padding: 5px 10px;
           height: 31px;
           border-top: 1px solid transparent;
           border-bottom: 1px solid transparent;
@@ -275,6 +321,18 @@ const { activeSlug } = Astro.props;
 
           &.active {
             border-top-color: var(--text-body-primary);
+          }
+
+          &.external {
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+            justify-content: center;
+            column-gap: 5px;
+
+            svg {
+              user-select: none;
+            }
           }
         }
       }
