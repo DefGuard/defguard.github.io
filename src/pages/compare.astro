@@ -58,9 +58,10 @@ const tags = [
   />
   <Navigation activeSlug="/compare/" />
   <main id="compare-page">
-    <ProductSection>
+    <ProductSection padding="none">
       <header id="compare-header">
-        <h1>Compare of WireGuard® Solutions<br />(on date: 2024.08)</h1>
+        <h1>Compare of WireGuard® Solutions<br /></h1>
+        <p class="compare-date">(on date: 2025.05)</p>
       </header>
       <div id="features-table">
         <FeaturesTable data={featuresTableData} client:load />
@@ -76,6 +77,11 @@ const tags = [
 
 <style lang="scss" is:global>
   #compare-page {
+    .product-section {
+      padding-top: 4rem !important; /* Match the 4rem padding from FlexibleSection */
+      padding-bottom: 4rem !important;
+    }
+
     .contact {
       width: 100%;
       border-top: 1px solid var(--border-separator);
@@ -101,7 +107,15 @@ const tags = [
     h1 {
       @include typography(section);
       text-align: left;
-      padding-bottom: 50px;
+      padding-bottom: 0.5rem; // reduced padding to accommodate date text
+    }
+
+    .compare-date {
+      font-size: 0.875rem;
+      color: var(--text-secondary, #666);
+      text-align: left;
+      margin-top: 0.25rem;
+      margin-bottom: 2rem;
     }
   }
 </style>

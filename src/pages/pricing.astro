@@ -7,6 +7,7 @@ import BookDemoForm from "../components/form/BookDemoForm/BookDemoForm";
 import PricingHeaderContent from "../data/pricing/page-header.mdx";
 import { PricingCards } from "../components/pricing/Pricing";
 import ContentLimiter from "../components/ContentLimiter.astro";
+import FlexibleSection from "../components/FlexibleSection.astro";
 
 const pricingCollection = await getCollection("pricing");
 // sort and map to prop type
@@ -64,7 +65,13 @@ const tags = [
   <main id="pricing-page">
     <ContentLimiter contentId="pricing-tiers" maxWidth={1100}>
       <header>
-        <h1>Pricing</h1>
+        <FlexibleSection
+        title="Pricing"
+        titleTag="h1"
+        id="blog-header"
+        variant="white"
+        theme="light"
+      >
         <PricingHeaderContent />
       </header>
       <PricingCards client:load data={pricingData} />
@@ -141,11 +148,11 @@ const tags = [
     }
 
     #pricing-tiers {
-      padding-top: calc(100px - var(--nav-height));
+      // padding-top: calc(100px - var(--nav-height));
       padding-bottom: calc(100px - var(--nav-height));
 
       @include break-up(md) {
-        padding-top: calc(200px - var(--nav-height));
+        // padding-top: calc(200px - var(--nav-height));
         padding-bottom: calc(200px - var(--nav-height));
       }
 

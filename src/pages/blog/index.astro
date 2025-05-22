@@ -87,22 +87,12 @@ const url = "https://defguard.net/blog";
   @use "../../styles/mixins/breakpoints" as *;
 
   #blog-page {
-    padding-top: var(--nav-height);
     background-color: var(--surface-frame-bg);
-  }
-
-  #blog-header {
-    .section-title {
-      @include typography(section);
-    }
-    p {
-      @include typography(paragraph);
-      margin-bottom: 1.5rem;
-    }
   }
 
   .blog-posts-listing {
     padding: 2rem 0 4rem;
+    background-color: #f5f5f5;
     
     .container {
       max-width: 1200px;
@@ -131,6 +121,7 @@ const url = "https://defguard.net/blog";
       text-decoration: none;
       color: inherit;
       padding: 20px;
+      background-color: #f9f9f9;
       border-width: 0 0 2px 0;
       border-style: solid;
       border-color: #f5f5f5;

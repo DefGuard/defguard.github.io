@@ -10,6 +10,7 @@ interface Props {
   maxWidth?: number;
   variant?: 'white' | 'gray';
   theme?: 'light' | 'dark';
+  bottomBorder?: boolean;
 }
 
 const {
@@ -20,6 +21,7 @@ const {
   maxWidth = 1100,
   variant = 'white',
   theme = 'light',
+  bottomBorder = true,
 } = Astro.props;
 ---
 
@@ -35,7 +37,7 @@ const {
 >
   <ContentLimiter maxWidth={maxWidth}>
     <div class="flexible-content">
-      <div class="header">
+      <div class={clsx("header", { "with-bottom-border": bottomBorder })}>
         <TitleTag class="section-title" id={id ? `${id}-title` : undefined} set:html={title}></TitleTag>
       </div>
       
@@ -91,10 +93,16 @@ const {
       flex-direction: column;
       width: 100%;
       
-      .header {
+        .header {
         width: 100%;
         box-sizing: border-box;
         padding-bottom: 2rem;
+
+        &.with-bottom-border .section-title {
+          border-bottom: 1px solid var(--text-body-primary);
+          margin-bottom: 2rem;
+          padding-bottom: 1rem;
+        }
         
         .section-title {
           @include typography(section);
