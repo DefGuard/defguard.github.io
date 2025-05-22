@@ -203,7 +203,7 @@ const { activeSlug } = Astro.props;
   #desktop-nav {
     // vars
     --main-padding: 12px 32px;
-    --items-gap: 12px;
+    --items-gap: 0px;
     display: none;
     background-color: var(--surface-frame-bg);
     z-index: 4;
@@ -226,7 +226,7 @@ const { activeSlug } = Astro.props;
 
     @include break-up(xl) {
       --main-padding: 12px 64px;
-      --items-gap: 32px;
+      //--items-gap: 32px;
     }
 
     .nav-logo {
