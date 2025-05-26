@@ -7,6 +7,8 @@ import AstroButton from "../components/AstroButton.astro";
 import { Image } from "astro:assets";
 import brandAssets from "/public/images/data/brandassets.png";
 import contactImage from "/public/images/data/key-visual-BD.png";
+import SlideIn from '../components/SlideIn.astro';
+// Make sure SlideIn is rendered outside of ProductLayout's container
 const title = "defguard - Press Kit";
 const featuredImage = "public/images/product/core/hero-image.png";
 const imageWidth = "1920";
@@ -57,9 +59,8 @@ const tags = [
   tags={tags}
 >
   <Navigation activeSlug="/press/" />
-  
   <main id="home-page">
-    
+
     <HomeSection variant="white" contentId="press-header">
       <h1>defguard Press Kit</h1>
       <p>
@@ -210,6 +211,7 @@ const tags = [
   </FlexibleSection>
 
   </main>
+  
 </ProductLayout>
 
 <style lang="scss" is:global>
@@ -321,7 +323,7 @@ const tags = [
         }
       }
     }
-
+    
     #press-coverage {
       .full-width {
         width: 100%;
@@ -402,3 +404,10 @@ const tags = [
     }
   }
 </style>
+
+<!-- Newsletter slide-in component -->
+<SlideIn 
+  successMessage="Thanks for subscribing to defguard updates!"
+  errorMessage="Oops! Something went wrong. Please try again."
+  debug={import.meta.env.DEV}
+/>
