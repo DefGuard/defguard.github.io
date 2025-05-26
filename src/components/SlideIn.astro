@@ -124,24 +124,28 @@ const {
   // Initialize visibility handling
   function initSlideIn() {
     const slideIn = document.querySelector('.slide-in-container');
-    if (!slideIn) return;
+    if (!slideIn || slideIn.classList.contains('debug-visible')) return;
 
-    // Add initial-hidden class on start
+    // Initial state
     slideIn.classList.add('initial-hidden');
+    let isFirstScroll = true;
 
-    const showSlideInAt = window.innerHeight * 0.5; // Show at 50% of viewport height
-    let hasScrolled = false;
+    const minScrollThreshold = 100; // Minimum scroll before showing
+    const showSlideInAt = window.innerHeight * 0.3; // Show at 30% of viewport height
 
     function checkSlide() {
       const scrolled = window.scrollY;
-      
-      // Remove initial-hidden class on first scroll
-      if (!hasScrolled && scrolled > 0) {
-        hasScrolled = true;
-        slideIn.classList.remove('initial-hidden');
-      }
 
-      if (scrolled > showSlideInAt) {
+      // Remove initial hidden state only after minimum scroll
+      if (isFirstScroll && scrolled > minScrollThreshold) {
+        isFirstScroll = false;
+        setTimeout(() => {
+          slideIn.classList.remove('initial-hidden');
+        }, 500); // Longer delay for smoother appearance
+      }
+      
+      // Show/hide based on scroll position
+      if (!isFirstScroll && scrolled > showSlideInAt) {
         slideIn.classList.add('active');
       } else {
         slideIn.classList.remove('active');
@@ -184,7 +188,7 @@ const {
 </script>
 
 <div
-  class:list={["slide-in-container", { "debug-visible": debug, "initial-hidden": !debug }]}
+  class:list={["slide-in-container", { "debug-visible": debug }]}
   data-testid="newsletter-slide-in"
   client:visible
 >
@@ -218,7 +222,7 @@ const {
     right: 2rem;
     background: white;
     padding: 1.5rem;
-    border-radius: 8px;
+    border-radius: 0px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease-in-out;
     z-index: 99999;
@@ -240,7 +244,7 @@ const {
     transform: translateY(-2rem) !important;
     opacity: 1 !important;
     visibility: visible !important;
-    border: 2px solid white;
+    border-top: 2px solid white;
     border-color: var(--primary-color, #0C8CE0);
   }
 
