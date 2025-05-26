@@ -11,14 +11,15 @@ const allPosts = await getCollection("blog", ({ data }) => {
 
 // Sort posts by date in descending order (newest first)
 const sortedPosts = allPosts.sort(
-  (a, b) => new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf()
+  (a, b) =>
+    new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf(),
 );
 
 const formatDate = (date: Date) => {
-  return new Date(date).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+  return new Date(date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   });
 };
 
@@ -45,152 +46,167 @@ const url = "https://defguard.net/blog";
       theme="light"
     >
       <div slot="left">
-        <p>Stay updated with the latest news, tutorials, and insights about defguard - our open-source identity provider and access management platform.</p>
+        <p>
+          Stay updated with the latest news, tutorials, and insights about defguard - our
+          open-source identity provider and access management platform.
+        </p>
       </div>
-      
+
       <div slot="right">
-        <p>Here you'll find articles about security best practices, new feature announcements, user guides, and community updates.</p>
+        <p>
+          Here you'll find articles about security best practices, new feature
+          announcements, user guides, and community updates.
+        </p>
       </div>
     </FlexibleSection>
 
     <section class="blog-posts-listing">
       <div class="container">
-        {sortedPosts.length === 0 ? (
-          <div class="no-posts">
-            <p>No blog posts found. Check back soon for updates!</p>
-          </div>
-        ) : (
-          <div class="posts-grid">
-            {sortedPosts.map((post) => (
-              <article class="post-card">
-                <h2 class="post-title">
-                  <a href={`/blog/${post.slug}`}>{post.data.title}</a>
-                </h2>
-                <div class="post-meta">
-                  <time datetime={post.data.publishDate.toISOString()}>
-                    {formatDate(post.data.publishDate)}
-                  </time>
-                  {post.data.author && <span class="post-author">by {post.data.author}</span>}
-                </div>
-                <p class="post-description">{post.data.description}</p>
-                <a href={`/blog/${post.slug}`} class="read-more">Read more →</a>
-              </article>
-            ))}
-          </div>
-        )}
+        {
+          sortedPosts.length === 0 ? (
+            <div class="no-posts">
+              <p>No blog posts found. Check back soon for updates!</p>
+            </div>
+          ) : (
+            <div class="posts-grid">
+              {sortedPosts.map((post) => (
+                <article class="post-card">
+                  <h2 class="post-title">
+                    <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+                  </h2>
+                  <div class="post-meta">
+                    <time datetime={post.data.publishDate.toISOString()}>
+                      {formatDate(post.data.publishDate)}
+                    </time>
+                    {post.data.author && (
+                      <span class="post-author">by {post.data.author}</span>
+                    )}
+                  </div>
+                  <p class="post-description">{post.data.description}</p>
+                  <a href={`/blog/${post.slug}`} class="read-more">
+                    Read more →
+                  </a>
+                </article>
+              ))}
+            </div>
+          )
+        }
       </div>
     </section>
-</ProductLayout>
+  </main>
 
-<style lang="scss">
-  @use "../../styles/mixins/typography" as *;
-  @use "../../styles/mixins/breakpoints" as *;
+  <style lang="scss">
+    @use "../../styles/mixins/typography" as *;
+    @use "../../styles/mixins/breakpoints" as *;
 
-  #blog-page {
-    background-color: var(--surface-frame-bg);
-  }
-
-  .blog-posts-listing {
-    padding: 2rem 0 4rem;
-    background-color: #f5f5f5;
-    
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1rem;
+    #blog-page {
+      background-color: var(--surface-frame-bg);
     }
-    
-    .posts-grid {
-      display: grid;
-      grid-template-columns: repeat(1, 1fr);
-      gap: 25px;
-      
-      @include break-up(sm) {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
+
+    .blog-posts-listing {
+      padding: 2rem 0 4rem;
+      background-color: #f5f5f5;
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
       }
-      
-      @include break-up(lg) {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 40px;
+
+      .posts-grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 25px;
+
+        @include break-up(sm) {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 30px;
+        }
+
+        @include break-up(lg) {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 40px;
+        }
       }
-    }
-    
-    .post-card {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-      padding: 20px;
-      background-color: #f9f9f9;
-      border-width: 0 0 2px 0;
-      border-style: solid;
-      border-color: #f5f5f5;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-      transform: translateY(0);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
-      
-      &:hover {
-        transform: translateY(-5px);
-        border-color: var(--primary-button-bg, #0C8CE0);
-      }
-      
-      .post-title {
-        margin: 0 0 15px 0;
-        @include typography(h2);
-        font-weight: 400;
-        
-        a {
-          color: var(--text-body-primary);
+
+      .post-card {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-width: 0 0 2px 0;
+        border-style: solid;
+        border-color: #f5f5f5;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          border-color 0.2s ease;
+        transform: translateY(0);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+
+        &:hover {
+          transform: translateY(-5px);
+          border-color: var(--primary-button-bg, #0c8ce0);
+        }
+
+        .post-title {
+          margin: 0 0 15px 0;
+          @include typography(h2);
+          font-weight: 400;
+
+          a {
+            color: var(--text-body-primary);
+            text-decoration: none;
+            &:hover {
+              color: var(--primary-button-bg, #0c8ce0);
+            }
+          }
+        }
+
+        .post-meta {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          color: var(--text-body-secondary);
+          margin-bottom: 8px;
+          font-size: 14px;
+          font-weight: 300;
+
+          .post-author {
+            &::before {
+              content: "•";
+              margin-right: 0.5rem;
+            }
+          }
+        }
+
+        .post-description {
+          @include typography(paragraph);
+          margin-bottom: 1rem;
+        }
+
+        .read-more {
+          display: inline-block;
+          color: var(--primary-text-color);
+          font-size: 14px;
+          font-weight: 300;
           text-decoration: none;
           &:hover {
-            color: var(--primary-button-bg, #0C8CE0);
+            text-decoration: underline;
           }
         }
       }
 
-      .post-meta {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        color: var(--text-body-secondary);
-        margin-bottom: 8px;
-        font-size: 14px;
-        font-weight: 300;
-        
-        .post-author {
-          &::before {
-            content: "•";
-            margin-right: 0.5rem;
-          }
-        }
-      }
-      
-      .post-description {
-        @include typography(paragraph);
-        margin-bottom: 1rem;
-      }
-      
-      .read-more {
-        display: inline-block;
-        color: var(--primary-text-color);
-        font-size: 14px;
-        font-weight: 300;
-        text-decoration: none;
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    }
-    
-    .no-posts {
-      text-align: center;
-      padding: 3rem 0;
-      
-      p {
-        @include typography(paragraph);
-        color: var(--text-body-secondary);
-      }
-    }
-  }
-</style>
+      .no-posts {
+        text-align: center;
+        padding: 3rem 0;
 
+        p {
+          @include typography(paragraph);
+          color: var(--text-body-secondary);
+        }
+      }
+    }
+  </style>
+</ProductLayout>

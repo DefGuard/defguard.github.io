@@ -50,25 +50,25 @@ const theme = dark ? "dark" : "light";
     width: 100%;
     margin: 0;
     display: grid;
-    grid-template-columns: 
+    grid-template-columns:
       [full-start] minmax(var(--product-section-edge-padding), 1fr)
       [main-start] minmax(0, 1100px)
       [main-end] minmax(var(--product-section-edge-padding), 1fr)
       [full-end];
     background-color: var(--surface-frame-bg);
-    
+
     /* Content container with grid-based layout */
     &:not(.skip-max) > * {
       grid-column: main-start / main-end;
       width: 100%;
       box-sizing: border-box;
-      
+
       @media (max-width: 1199px) {
         max-width: 950px;
         margin: 0 auto;
       }
     }
-    
+
     /* Responsive adjustments */
     @media (max-width: 991px) {
       --product-section-padding-large: 100px;

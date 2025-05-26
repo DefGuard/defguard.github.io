@@ -52,7 +52,8 @@ const {
 
 // Function to detect if URL is YouTube
 function isYouTubeUrl(url: string): boolean {
-  const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|youtube-nocookie\.com)/;
+  const youtubeRegex =
+    /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|youtube-nocookie\.com)/;
   return youtubeRegex.test(url);
 }
 
@@ -61,8 +62,8 @@ function extractYouTubeId(url: string): string | null {
   // Match YouTube URL patterns
   const regExp = /^.*(youtu.be\/|v\/|e\/|u\/\w+\/|embed\/|v=)([^#\&\?]*).*/;
   const match = url.match(regExp);
-  
-  return (match && match[2].length === 11) ? match[2] : null;
+
+  return match && match[2].length === 11 ? match[2] : null;
 }
 
 // Check if this is a YouTube URL
@@ -70,66 +71,77 @@ const isYouTube = isYouTubeUrl(src);
 const youtubeId = isYouTube ? extractYouTubeId(src) : null;
 
 // For regular videos: determine if the source is a local file or external URL
-const isExternal = !isYouTube && (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('//'));
+const isExternal =
+  !isYouTube &&
+  (src.startsWith("http://") || src.startsWith("https://") || src.startsWith("//"));
 
 // For regular videos: determine video type if not provided
-const videoType = type ? type : src.endsWith('.mp4') 
-  ? 'video/mp4' 
-  : src.endsWith('.webm') 
-    ? 'video/webm' 
-    : src.endsWith('.ogg') 
-      ? 'video/ogg' 
-      : 'video/mp4';
+const videoType = type
+  ? type
+  : src.endsWith(".mp4")
+    ? "video/mp4"
+    : src.endsWith(".webm")
+      ? "video/webm"
+      : src.endsWith(".ogg")
+        ? "video/ogg"
+        : "video/mp4";
 
 // Set responsive styles for regular videos
 const videoStyles = {
-  width: width ? (typeof width === 'number' ? `${width}px` : width) : '100%',
-  height: height ? (typeof height === 'number' ? `${height}px` : height) : 'auto',
+  width: width ? (typeof width === "number" ? `${width}px` : width) : "100%",
+  height: height ? (typeof height === "number" ? `${height}px` : height) : "auto",
 };
 ---
 
 <div class={clsx("video-container", className)}>
-  {isYouTube && youtubeId ? (
-    <YouTubeVideo
-      videoId={youtubeId}
-      title={alt}
-      autoplay={autoplay}
-      startAt={startAt}
-      showControls={showControls}
-      showInfo={showInfo}
-      allowFullscreen={allowFullscreen}
-      muted={muted}
-      rel={rel}
-      width={width}
-      height={height}
-    />
-  ) : (
-    <video
-      class="video-element"
-      style={videoStyles}
-      {controls}
-      {autoplay}
-      {loop}
-      {muted}
-      playsinline={playsInline}
-      {preload}
-      {poster}
-      aria-label={alt}
-    >
-      {isExternal ? (
-        <source src={src} type={videoType} />
-      ) : (
-        <source src={src.startsWith('/') ? src : `/${src}`} type={videoType} />
-      )}
-      <p>Your browser doesn't support HTML video. Here is a <a href={src}>link to the video</a> instead.</p>
-    </video>
-  )}
-  
-  {caption && (
-    <div class={clsx("video-caption", captionClass)}>
-      <p>{caption}</p>
-    </div>
-  )}
+  {
+    isYouTube && youtubeId ? (
+      <YouTubeVideo
+        videoId={youtubeId}
+        title={alt}
+        autoplay={autoplay}
+        startAt={startAt}
+        showControls={showControls}
+        showInfo={showInfo}
+        allowFullscreen={allowFullscreen}
+        muted={muted}
+        rel={rel}
+        width={width}
+        height={height}
+      />
+    ) : (
+      <video
+        class="video-element"
+        style={videoStyles}
+        {controls}
+        {autoplay}
+        {loop}
+        {muted}
+        playsinline={playsInline}
+        {preload}
+        {poster}
+        aria-label={alt}
+      >
+        {isExternal ? (
+          <source src={src} type={videoType} />
+        ) : (
+          <source src={src.startsWith("/") ? src : `/${src}`} type={videoType} />
+        )}
+        <p>
+          Your browser doesn't support HTML video. Here is a{" "}
+          <a href={src}>link to the video</a> instead.
+        </p>
+      </video>
+    )
+  }
+
+  {
+    caption && (
+      <div class={clsx("video-caption", captionClass)}>
+        <p>{caption}</p>
+      </div>
+    )
+  }
 </div>
 
 <style lang="scss">
@@ -143,20 +155,20 @@ const videoStyles = {
     border-radius: 6px;
     background-color: var(--background-secondary, #f5f5f5);
     box-shadow: var(--shadow-sm, 0 2px 8px rgba(0, 0, 0, 0.1));
-    
+
     .video-element {
       display: block;
       max-width: 100%;
       box-sizing: border-box;
       border-radius: 6px;
     }
-    
+
     .video-caption {
       padding: 0.75rem;
       background-color: var(--background-secondary, #f5f5f5);
       border-bottom-left-radius: 6px;
       border-bottom-right-radius: 6px;
-      
+
       p {
         @include typography(caption);
         margin: 0;
@@ -164,10 +176,9 @@ const videoStyles = {
         color: var(--text-body-secondary, #666);
       }
     }
-    
+
     @media (max-width: 768px) {
       margin: 1rem 0;
     }
   }
 </style>
-

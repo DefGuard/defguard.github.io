@@ -68,9 +68,8 @@ const tags = [
   tags={tags}
 >
   <Navigation activeSlug="/" />
-  
+
   <main id="home-page">
-    
     <HomeHeader />
 
     <FlexibleSection
@@ -80,234 +79,293 @@ const tags = [
       theme="light"
     >
       <div slot="left">
-        <p>By integrating Multi-Factor Authentication (MFA) directly into the WireGuard® protocol, defguard raises the bar for VPN two factor authentication and safeguards your organization from unauthorized remote access.</p>
+        <p>
+          By integrating Multi-Factor Authentication (MFA) directly into the WireGuard®
+          protocol, defguard raises the bar for VPN two factor authentication and
+          safeguards your organization from unauthorized remote access.
+        </p>
         <div class="learn-more">
-          <a 
-          href="https://docs.defguard.net/admin-and-features/features-and-configuration/WireGuard®/multi-factor-authentication-mfa-2fa" 
-          class="learn-more-link">
-
+          <a
+            href="https://docs.defguard.net/admin-and-features/features-and-configuration/WireGuard®/multi-factor-authentication-mfa-2fa"
+            class="learn-more-link"
+          >
             Learn more about defguard MFA architecture
-
           </a>
         </div>
       </div>
-      
+
       <div slot="right">
         <h3>Benefits</h3>
         <ul>
-          <li>Meets the robust security standards of the NIS2 directive for enterprise VPNs</li>
+          <li>
+            Meets the robust security standards of the NIS2 directive for enterprise VPNs
+          </li>
           <li>Enhances remote access security with native multi-factor authentication</li>
-          <li>Streamlines security by consolidating VPN and Access Control in one platform</li>
+          <li>
+            Streamlines security by consolidating VPN and Access Control in one platform
+          </li>
         </ul>
       </div>
     </FlexibleSection>
     <FlexibleSection
       title="Fine-tune permissions with <strong>Enterprise Level Access Control (ACL)</strong>"
-      id="acl"  
+      id="acl"
       variant="white"
       theme="light"
     >
       <div slot="left">
         <p>
-          Defguard’s Access Control Lists grant each user precisely the access they need—no more, no less—while staying in sync with your identity provider. 
+          Defguard’s Access Control Lists grant each user precisely the access they
+          need—no more, no less—while staying in sync with your identity provider.
         </p>
         <p>
-          By leveraging native firewall integrations with Linux, FreeBSD, and OPNsense, defguard enforces Zero Trust architecture with seamless network segmentation.
+          By leveraging native firewall integrations with Linux, FreeBSD, and OPNsense,
+          defguard enforces Zero Trust architecture with seamless network segmentation.
         </p>
-        <a href="//docs.defguard.net/enterprise/all-enteprise-features/access-control-list">
-          How to enable Access Control List functionality</a>
+        <a
+          href="//docs.defguard.net/enterprise/all-enteprise-features/access-control-list"
+        >
+          How to enable Access Control List functionality</a
+        >
       </div>
-      
+
       <div slot="right">
         <YouTubeVideo
-        videoId="F61_5mR2UpM"
-        title="Your video title"
-        showControls={true}
-        showInfo={true}
-        allowFullscreen={true}
-        rel={false}
-      />
+          videoId="F61_5mR2UpM"
+          title="Your video title"
+          showControls={true}
+          showInfo={true}
+          allowFullscreen={true}
+          rel={false}
+        />
       </div>
     </FlexibleSection>
     <FlexibleSection
-    title="Simplify your stack with defguard Identity Provider"
-    id="oidc"  
-    variant="gray"
-    theme="light"
-  >
-    <div slot="left">
-      <p>Leverage defguard's built-in OpenID Connect (OIDC) provider, giving you full control over user management within the defguard platform.
+      title="Simplify your stack with defguard Identity Provider"
+      id="oidc"
+      variant="gray"
+      theme="light"
+    >
+      <div slot="left">
+        <p>
+          Leverage defguard's built-in OpenID Connect (OIDC) provider, giving you full
+          control over user management within the defguard platform.
         </p>
         <p>
-        This comprehensive approach to identity integration empowers you to centralize user authentication and authorization, streamlining remote access management and strengthening your overall security posture.</p>
-        
-    </div>
-    
-    <div slot="right">
-      <Image src={signinwith} alt="sign in with defguard" />
-    </div>
-  </FlexibleSection>
-  <FlexibleSection
-  title="Sync with external SSO"
-  id="ldap"  
-  variant="white"
-  theme="light"
->
-  <div slot="left">
-    <strong>Cloud SSO</strong>
-    <p>
-      defguard seamlessly integrates with a wide range of identity providers, allowing you to easily connect to existing ecosystem of your organization. </p>
-    <p>
-       Cloud-based identity providers support includes: Google,
-       Microsoft, Zitadel, Keycloak, Okta, JumpCloud, Authentik, Authelia.
-    </p>
-    <a href="https://docs.defguard.net/enterprise/all-enteprise-features/external-openid-providers">Explore External OpenID providers documentation</a>
-  </div>
-  
-  <div slot="right">
-    <strong>LDAP & Active Directory </strong>
-    <p>With its robust identity provider integration capabilities, defguard enables two-way synchronization with Active Directory, ensuring your user accounts, groups and permissions are always up-to-date. 
-    </p>
-    <a href="https://docs.defguard.net/enterprise/all-enteprise-features/ldap-and-active-directory-integration/two-way-ldap-and-active-directory-synchronization">
-      Read more : Two-way LDAP and Active Directory sync
-    </a>
-  </div>
-  </FlexibleSection>
+          This comprehensive approach to identity integration empowers you to centralize
+          user authentication and authorization, streamlining remote access management and
+          strengthening your overall security posture.
+        </p>
+      </div>
 
-  <FlexibleSection
-  title="Enroll users remotely & enable VPN self-configuration"
-  id="enroll"  
-  variant="gray"
-  theme="light"
->
-  <div slot="left">
-    <Image src={enrollment} alt="enrollment screen" />
-  </div>
-  
-  <div slot="right">
-    <p>
-      Defguard makes it easy for users to get set up and connected - without hassle or confusion. 
-    </p>
-    <p>
-      The built-in identity provider integration allows users to securely configure their account and VPN access directly from the 
-    <a href="/client">our WireGuard® desktop client.</a>
-    </p>
-    <p><strong>Defguard desktop client supports real time sync for client configurations.</strong></p>
-  </div>
-  </FlexibleSection>
-  <FlexibleSection
-  title="Consolidate Remote Access, User Management, and Permissions"
-  id="remote"  
-  variant="white"
-  theme="light"
->
-  <div slot="left">
-    <p>
-      defguard simplifies your enterprise security with a single solution that unifies enterprise VPN, identity (IAM), and permissions in one place—potentially saving you 20–40% on your security budget.
-    </p>
-  </div>
-  
-  <div slot="right">
-    <ul>
-      <li>
-        <strong>Unified Permissions Governance</strong>: Define and enforce granular permissions policies across your entire organization from a single system.
-      </li>
-      <li>
-        <strong>Reduced Administrative Overhead</strong>: Eliminate the time and resources required to manage disparate security tools, streamlining operations.
-      </li>
-    </ul>
-  </div>
-  </FlexibleSection>
-  <FlexibleSection
-  title="Deploy anywhere, Your way"
-  id="deploy"  
-  variant="gray"
-  theme="light"
->
-  <div slot="left">
-    <p>
-      Choose from Docker, Kubernetes, or traditional package installers. You’re in control of your hardware and infrastructure choices. Perfect for on-premise infrastructure and Private Cloud.
-    </p>
-    <a href="https://docs.defguard.net/admin-and-features/setting-up-your-instance">Deploy your instance with one-line install script</a>
-  </div>
-  
-  <div slot="right">
-    <YouTubeVideo
-    videoId="MqlE6ZTn0bg"
-    title="Your video title"
-    showControls={true}
-    showInfo={true}
-    allowFullscreen={true}
-    rel={false}
-  />
-  </div>
-  </FlexibleSection>
-  <FlexibleSection
-  title="Automate and integrate with defguard API"
-  id="api"  
-  variant="white"
-  theme="light"
->
-  <div slot="left">
-    <Image src={api} alt="logo image" />
-  </div>
-  
-  <div slot="right">
-    <p>Use our comprehensive API and webhooks to automate processes, track changes, or integrate with existing systems.
-    </p>
-    <div class="learn-more">
-      <a href="https://docs.defguard.net/enterprise/all-enteprise-features/api-tokens" class="learn-more-link">Explore API documentation</a>
-    </div>
-  </div>
-  </FlexibleSection>
-  <FlexibleSection
-  title="Retain Complete Ownership of Your Data"
-  id="yourdata"  
-  variant="gray"
-  theme="light"
->
-  <div slot="left">
-    <p>
-      On-prem or private-cloud deployments meet strict Data Sovereignty demands in finance, healthcare, government and other critical sector.
-    </p>
-  </div>
-  
-  <div slot="right">
-    <p>open code, on-prem architecture, integrated IdP and SSO makes defguard perfect solution for organisations seeking true Sovereignity.
-    </p>
-    <!-- <p>
+      <div slot="right">
+        <Image src={signinwith} alt="sign in with defguard" />
+      </div>
+    </FlexibleSection>
+    <FlexibleSection
+      title="Sync with external SSO"
+      id="ldap"
+      variant="white"
+      theme="light"
+    >
+      <div slot="left">
+        <strong>Cloud SSO</strong>
+        <p>
+          defguard seamlessly integrates with a wide range of identity providers, allowing
+          you to easily connect to existing ecosystem of your organization.
+        </p>
+        <p>
+          Cloud-based identity providers support includes: Google, Microsoft, Zitadel,
+          Keycloak, Okta, JumpCloud, Authentik, Authelia.
+        </p>
+        <a
+          href="https://docs.defguard.net/enterprise/all-enteprise-features/external-openid-providers"
+          >Explore External OpenID providers documentation</a
+        >
+      </div>
+
+      <div slot="right">
+        <strong>LDAP & Active Directory </strong>
+        <p>
+          With its robust identity provider integration capabilities, defguard enables
+          two-way synchronization with Active Directory, ensuring your user accounts,
+          groups and permissions are always up-to-date.
+        </p>
+        <a
+          href="https://docs.defguard.net/enterprise/all-enteprise-features/ldap-and-active-directory-integration/two-way-ldap-and-active-directory-synchronization"
+        >
+          Read more : Two-way LDAP and Active Directory sync
+        </a>
+      </div>
+    </FlexibleSection>
+
+    <FlexibleSection
+      title="Enroll users remotely & enable VPN self-configuration"
+      id="enroll"
+      variant="gray"
+      theme="light"
+    >
+      <div slot="left">
+        <Image src={enrollment} alt="enrollment screen" />
+      </div>
+
+      <div slot="right">
+        <p>
+          Defguard makes it easy for users to get set up and connected - without hassle or
+          confusion.
+        </p>
+        <p>
+          The built-in identity provider integration allows users to securely configure
+          their account and VPN access directly from the
+          <a href="/client">our WireGuard® desktop client.</a>
+        </p>
+        <p>
+          <strong
+            >Defguard desktop client supports real time sync for client configurations.</strong>
+        </p>
+      </div>
+    </FlexibleSection>
+    <FlexibleSection
+      title="Consolidate Remote Access, User Management, and Permissions"
+      id="remote"
+      variant="white"
+      theme="light"
+    >
+      <div slot="left">
+        <p>
+          defguard simplifies your enterprise security with a single solution that unifies
+          enterprise VPN, identity (IAM), and permissions in one place—potentially saving
+          you 20–40% on your security budget.
+        </p>
+      </div>
+
+      <div slot="right">
+        <ul>
+          <li>
+            <strong>Unified Permissions Governance</strong>: Define and enforce granular
+            permissions policies across your entire organization from a single system.
+          </li>
+          <li>
+            <strong>Reduced Administrative Overhead</strong>: Eliminate the time and
+            resources required to manage disparate security tools, streamlining
+            operations.
+          </li>
+        </ul>
+      </div>
+    </FlexibleSection>
+    <FlexibleSection
+      title="Deploy anywhere, Your way"
+      id="deploy"
+      variant="gray"
+      theme="light"
+    >
+      <div slot="left">
+        <p>
+          Choose from Docker, Kubernetes, or traditional package installers. You’re in
+          control of your hardware and infrastructure choices. Perfect for on-premise
+          infrastructure and Private Cloud.
+        </p>
+        <a href="https://docs.defguard.net/admin-and-features/setting-up-your-instance"
+          >Deploy your instance with one-line install script</a
+        >
+      </div>
+
+      <div slot="right">
+        <YouTubeVideo
+          videoId="MqlE6ZTn0bg"
+          title="Your video title"
+          showControls={true}
+          showInfo={true}
+          allowFullscreen={true}
+          rel={false}
+        />
+      </div>
+    </FlexibleSection>
+    <FlexibleSection
+      title="Automate and integrate with defguard API"
+      id="api"
+      variant="white"
+      theme="light"
+    >
+      <div slot="left">
+        <Image src={api} alt="logo image" />
+      </div>
+
+      <div slot="right">
+        <p>
+          Use our comprehensive API and webhooks to automate processes, track changes, or
+          integrate with existing systems.
+        </p>
+        <div class="learn-more">
+          <a
+            href="https://docs.defguard.net/enterprise/all-enteprise-features/api-tokens"
+            class="learn-more-link">Explore API documentation</a
+          >
+        </div>
+      </div>
+    </FlexibleSection>
+    <FlexibleSection
+      title="Retain Complete Ownership of Your Data"
+      id="yourdata"
+      variant="gray"
+      theme="light"
+    >
+      <div slot="left">
+        <p>
+          On-prem or private-cloud deployments meet strict Data Sovereignty demands in
+          finance, healthcare, government and other critical sector.
+        </p>
+      </div>
+
+      <div slot="right">
+        <p>
+          open code, on-prem architecture, integrated IdP and SSO makes defguard perfect
+          solution for organisations seeking true Sovereignity.
+        </p>
+        <!-- <p>
       <a href="#">read more → how defguard guaranties Data Sovereignity</a>
     </p> -->
-  </div>
-  </FlexibleSection>
+      </div>
+    </FlexibleSection>
 
-  <FlexibleSection
-  title="Meet compliance (SOC 2 and HIPAA) requirements"
-  id="compliance"  
-  variant="white"
-  theme="light"
->
-  <div slot="left">
-    <p>
-      With Extended logging and local data storage defguard simplifies addressing compliance teams through and gives you the ability to demonstrate <em>behind-firewall auditing.</em>
-    </p>
-    <p>
-      <a href="https://docs.defguard.net/in-depth/architecture">in depth defguard architecture</a>
-    </p>
-  </div>
-  
-  <div slot="right">
-    <ul>
-      <li><strong>NIS2 Compliant</strong><br />
-      Built-in WireGuard® MFA aligns with mandatory cybersecurity requirements.</li>
-      <li><strong>FIPS 140-2 Ready</strong><br />  
-      Coming soon for organizations that need advanced cryptographic compliance.</li>   
-      <li><strong>Open Source</strong><br />
-      Full transparency for security audits, custom development, and trust in your VPN.</li>
-    </ul>
-  </div>
-  </FlexibleSection>
-  <FlexibleIdentitySection />
+    <FlexibleSection
+      title="Meet compliance (SOC 2 and HIPAA) requirements"
+      id="compliance"
+      variant="white"
+      theme="light"
+    >
+      <div slot="left">
+        <p>
+          With Extended logging and local data storage defguard simplifies addressing
+          compliance teams through and gives you the ability to demonstrate <em
+            >behind-firewall auditing.</em
+          >
+        </p>
+        <p>
+          <a href="https://docs.defguard.net/in-depth/architecture"
+            >in depth defguard architecture</a
+          >
+        </p>
+      </div>
+
+      <div slot="right">
+        <ul>
+          <li>
+            <strong>NIS2 Compliant</strong><br />
+            Built-in WireGuard® MFA aligns with mandatory cybersecurity requirements.
+          </li>
+          <li>
+            <strong>FIPS 140-2 Ready</strong><br />
+            Coming soon for organizations that need advanced cryptographic compliance.
+          </li>
+          <li>
+            <strong>Open Source</strong><br />
+            Full transparency for security audits, custom development, and trust in your VPN.
+          </li>
+        </ul>
+      </div>
+    </FlexibleSection>
+    <FlexibleIdentitySection />
     <!-- <HomeSection className="scroll-section" variant="white">
       <Fragment>
         <HomeScrollSection1 client:idle />
@@ -324,7 +382,7 @@ const tags = [
         <HomeScrollSection3 client:idle />
       </Fragment>
     </HomeSection> -->
-    
+
     <CTASection
       title="Ready to Experience the Most Secure, Flexible, and Compliant WireGuard® VPN?"
       description="Deploy our open-source VPN in minutes and secure your remote workforce with enterprise-level features."
@@ -334,13 +392,12 @@ const tags = [
       variant="white"
     />
 
-    
     <HomeSection id="testimonials" variant="gray">
       <Testimonials data={testimonialsData} client:only="react" />
     </HomeSection>
 
-    <Roadmap variant="white"/>
-    
+    <Roadmap variant="white" />
+
     <!-- <ProductSection padding="small" variant="gray">
       <div class="flexible-content">
         <h2 class="section-title">How It Works</h2>
@@ -367,7 +424,7 @@ const tags = [
         </ProductFeature>
       </div>
     </ProductSection> -->
-    
+
     <!-- <BuiltBy variant="white" /> -->
   </main>
 </ProductLayout>
@@ -382,24 +439,26 @@ const tags = [
     .flexible-content {
       padding-top: page-spacing(80px);
       padding-bottom: page-spacing(80px);
-      
+
       .section-title {
-        @include typography(section);  // Change back to section typography for main sections
+        @include typography(
+          section
+        ); // Change back to section typography for main sections
         padding-bottom: 1rem;
         margin-bottom: 2rem;
       }
-      
+
       h3 {
         @include typography(h3);
         margin-top: 0;
         margin-bottom: 1rem;
       }
-      
+
       p {
         @include typography(paragraph);
         margin-bottom: 1.5rem;
       }
-      
+
       .learn-more {
         margin-bottom: 1.5rem;
       }
@@ -407,33 +466,33 @@ const tags = [
       .learn-more-link {
         display: inline-block;
         padding: 0.75rem 1.5rem;
-        background-color: var(--primary-button-bg, #0C8CE0);
+        background-color: var(--primary-button-bg, #0c8ce0);
         color: var(--primary-button-text, white);
         border-radius: 6px;
         font-weight: 600;
         text-decoration: none;
         transition: background-color 0.2s ease-in-out;
-        
+
         &:hover {
-          background-color: var(--primary-button-hover, #0A7BC5);
+          background-color: var(--primary-button-hover, #0a7bc5);
         }
       }
-      
+
       ul {
         margin: 0 0 1.5rem 0;
         padding-left: 20px;
-        
+
         li {
           @include typography(paragraph);
           margin-bottom: 0.5rem;
         }
       }
-      
+
       em {
         font-size: 0.9em;
         opacity: 0.8;
       }
-      
+
       .column {
         @media (max-width: 768px) {
           &.right-column {
@@ -466,13 +525,13 @@ const tags = [
     }
 
     .product-features {
-      padding-top: 2rem;  // Add some space after the section title
-      
+      padding-top: 2rem; // Add some space after the section title
+
       .product-feature {
         header {
           h2 {
-            @include typography(h3);  // Change to h3 for better size
-            font-weight: 400;  // Keep it light
+            @include typography(h3); // Change to h3 for better size
+            font-weight: 400; // Keep it light
           }
         }
       }

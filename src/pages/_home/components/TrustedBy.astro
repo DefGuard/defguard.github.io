@@ -22,7 +22,7 @@ import hostinger from "./assets/trustedBy/hostinger.webp";
       <Image src={vki} alt="vki logo image" />
       <Image src={truevo} alt="truevo logo image" />
       <Image src={deepImage} alt="deepimage logo image" />
-      
+
       <!-- Duplicate logos for seamless scrolling -->
       <div class="scroll-duplicate">
         <Image src={prusa} alt="prusa logo image" />
@@ -75,30 +75,30 @@ import hostinger from "./assets/trustedBy/hostinger.webp";
       display: flex;
       align-items: center;
       column-gap: 30px;
-      
+
       @include break-up(lg) {
         flex-flow: row wrap;
         justify-content: space-between;
         row-gap: 8px;
         column-gap: 10px;
       }
-      
+
       @include break-down(lg) {
         animation: scroll 10s linear infinite;
         width: max-content;
         padding: 15px 0;
-        
+
         img {
           max-height: 40px;
           width: auto;
         }
       }
-      
+
       .scroll-duplicate {
         display: flex;
         align-items: center;
         column-gap: 30px;
-        
+
         @include break-up(lg) {
           display: none;
         }

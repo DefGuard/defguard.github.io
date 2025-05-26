@@ -1,0 +1,55 @@
+#newsletter-popup {
+  position: fixed;
+  z-index: 5;
+  right: 20px;
+  bottom: 0px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: var(--surface-frame-bg);
+  border-top: 2px solid var(--surface-main-primary);
+  padding: 15px 20px;
+
+  & > p {
+    padding-bottom: 15px;
+    width: 100%;
+    text-align: center;
+  }
+
+  form {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 2fr 1fr;
+    column-gap: 10px;
+
+    & > * {
+      min-height: 32px;
+    }
+
+    input {
+      box-sizing: border-box;
+      padding: 0 10px;
+    }
+
+    button {
+      box-sizing: border-box;
+      padding: 5px 15px;
+      border: none;
+      background-color: var(--surface-main-primary);
+      transition-property: background-color;
+
+      @include animate(standard);
+
+      &:hover {
+        background-color: var(--surface-main-secondary);
+        cursor: pointer;
+      }
+
+      @include typography(menu);
+      color: var(--text-button-secondary);
+
+      span,
+      p {
+        color: inherit;
+      }
+    }
+  }
+}

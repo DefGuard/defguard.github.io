@@ -30,6 +30,7 @@
     "@astrojs/sitemap": "^3.2.1",
     "@astrolib/analytics": "^0.6.1",
     "@floating-ui/react": "^0.26.28",
+    "@hookform/resolvers": "^5.0.1",
     "@playform/compress": "^0.1.6",
     "@tuplo/numberfmt": "^1.11.0",
     "astro": "^4.16.16",
@@ -41,6 +42,7 @@
     "motion": "^11.12.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-hook-form": "^7.56.4",
     "react-markdown": "^9.0.1",
     "react-multi-carousel": "^2.8.5",
     "react-slick": "^0.30.2",
@@ -55,6 +57,7 @@
     "use-breakpoint": "^4.0.5",
     "use-sync-external-store": "^1.2.2",
     "user-agent-data-types": "^0.4.2",
+    "wait-for-the-element": "^4.0.2",
     "zod": "^3.23.8",
     "zustand": "^5.0.1"
   },
