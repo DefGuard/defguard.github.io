@@ -1,289 +1,114 @@
 ---
+import FeaturesTable from "../components/FeaturesTable/FeaturesTable";
 import Navigation from "../components/base/Navigation.astro";
-import ProductLayout from "../layouts/ProductLayout.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProductSection from "../layouts/ProductSection.astro";
 import FlexibleSection from "../components/FlexibleSection.astro";
-import HomeSection from "../components/home/HomeSection.astro";
-import AstroButton from "../components/AstroButton.astro";
-import { Image } from "astro:assets";
-import brandAssets from "/public/images/data/brandassets.png";
-import contactImage from "/public/images/data/key-visual-BD.png";
 import BookDemoForm from "../components/form/BookDemoForm/BookDemoForm";
-const title = "defguard - Book a Demo";
-const featuredImage = "public/images/product/core/hero-image.png";
-const imageWidth = "1920";
-const imageHeight = "1080";
+import { featuresTableData } from "../data/compare-table";
+import { Button } from "../components/buttons/Button/Button";
+import OrganizationJSONLD from "../scripts/OrganizationJSONLD.astro";
+
+const title =
+  "Zero-Trust WireGuard® 2FA/MFA VPN: Book a Demo";
+const featuredImage =
+  "github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png";
+const imageWidth = "1080";
+const imageHeight = "540";
+const description = "defguard - Zero-Trust WireGuard® 2FA/MFA VPN - Book a Demo";
 const url = "https://defguard.net/book-a-demo/";
 const tags = [
-  "defguard",
-  "open source",
-  "sso & vpn",
-  "vpn",
-  "mfa",
-  "2fa",
-  "mfa/2fa",
+  "defgaurd",
+  "compare",
   "WireGuard®",
-  "ldap",
-  "openldap",
-  "postgresql",
-  "postgres",
+  "2fa",
+  "mfa",
+  "mfa/2fa",
   "openid",
-  "totp",
-  "webauthn",
-  "opensense",
-  "freebsd",
-  "rust",
   "secure",
+  "ldap",
+  "acl",
+  "vpn",
+  "sso",
+  "firewall",
   "desktop client",
-  "desktop",
+  "mesh",
+  "mesh vpn",
+  "nat",
   "yubikey",
-  "docker",
-  "kubernetes",
-  "k8s",
-  "press",
-  "media",
-  "press kit",
-  "brand assets",
-  "company information",
-  "press release",
-  "media contact",
+  "email",
+  "email notifications",
+  "gateway",
+  "auth",
+  "ssh",
 ];
 ---
 
-<ProductLayout
+<BaseLayout
   title={title}
+  description={description}
   featuredImage={featuredImage}
   imageWidth={imageWidth}
   imageHeight={imageHeight}
   url={url}
-  tags={tags}
 >
-  <Navigation activeSlug="/press/" />
-
-  <main id="demo-request-page">
-    <HomeSection variant="white" contentId="press-header">
-      <h1>Book a Demo</h1>
-      <p>
-        Take control of your team's security and access. See what defguard can do for you.
-      </p>
-    </HomeSection>
-
-    <FlexibleSection title="Demo Request" id="press-contact" variant="gray" theme="light">
-      <div slot="left">
-        <p>What you can expect?</p>
-        <p>
-          <ul>
-            <li>
-              A walkthrough of defguard’s core features, including secure identity
-              management, access policies, and user enrollment
-            </li>
-            <li>
-              Insights into how defguard can enhance your security and streamline
-              operations
-            </li>
-            <li>
-              A discussion on how defguard can integrate with your existing infrastructure
-            </li>
-          </ul>
-        </p>
-        <p>Our demo takes around 20-30 min.</p>
-      </div>
-      <div slot="right">
-        <BookDemoForm client:load />
-      </div>
-    </FlexibleSection>
+  <OrganizationJSONLD
+    slot="schema"
+    title={title}
+    description={description}
+    url={url}
+    tags={tags}
+  />
+  <Navigation activeSlug="/book-a-demo/" />
+  <main id="book-a-demo">
+    <ProductSection padding="none">
+      <FlexibleSection title="Book a Demo" id="press-contact" variant="white" theme="light">
+        <div slot="left">
+          <p>What you can expect?</p>
+          <p>
+            <ul>
+              <li>
+                A walkthrough of defguard’s core features, including secure identity
+                management, access policies, and user enrollment
+              </li>
+              <li>
+                Insights into how defguard can enhance your security and streamline
+                operations
+              </li>
+              <li>
+                A discussion on how defguard can integrate with your existing infrastructure
+              </li>
+            </ul>
+          </p>
+          <p>Our demo takes around 20-30 min.</p>
+        </div>
+        <div slot="right">
+          <BookDemoForm client:load />
+        </div>
+      </FlexibleSection>
+    </ProductSection>
   </main>
-</ProductLayout>
+</BaseLayout>
 
 <style lang="scss" is:global>
-  #press-header {
-    padding-bottom: page-spacing(100px);
-    padding-top: 50px;
-
-    & > p {
-      @include typography(paragraph);
-      padding-bottom: 8px;
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: center;
+  #book-a-demo {
+    .product-section {
+      padding-top: 0 !important; /* Match the 4rem padding from FlexibleSection */
+      padding-bottom: 4rem !important;
     }
 
-    h1 {
-      color: var(--text-body-primary);
-      padding-bottom: 40px;
-      max-width: 996px;
-      text-align: center;
-      text-wrap: balance;
-      @include typography(title);
-    }
-
-    .link-track {
+    .contact {
       width: 100%;
+      border-top: 1px solid var(--border-separator);
       display: flex;
       flex-flow: row;
       align-items: center;
       justify-content: center;
-      gap: 16px;
-      padding: 40px 0px;
+      box-sizing: border-box;
+      padding: 100px 10px 0px 10px;
 
-      @include break-down(sm) {
-        flex-flow: column;
-        align-items: center;
-      }
-    }
-  }
-
-  #home-page {
-    --page-spacing-factor: 0.5;
-    @include break-up(lg) {
-      --page-spacing-factor: 1;
-    }
-
-    .flexible-content {
-      padding-top: page-spacing(80px);
-      padding-bottom: page-spacing(80px);
-
-      .section-title {
-        @include typography(
-          section
-        ); // Change back to section typography for main sections
-        border-bottom: 1px solid var(--text-body-primary);
-        padding-bottom: 1rem;
-        margin-bottom: 2rem;
-      }
-
-      h3 {
-        @include typography(h3);
-        margin-top: 0;
-        margin-bottom: 1rem;
-      }
-
-      p {
-        @include typography(paragraph);
-        margin-bottom: 1.5rem;
-      }
-
-      .learn-more {
-        margin-bottom: 1.5rem;
-      }
-
-      .learn-more-link {
-        display: inline-block;
-        padding: 0.75rem 1.5rem;
-        background-color: var(--primary-button-bg, #0c8ce0);
-        color: var(--primary-button-text, white);
-        border-radius: 6px;
-        font-weight: 600;
+      a {
         text-decoration: none;
-        transition: background-color 0.2s ease-in-out;
-
-        &:hover {
-          background-color: var(--primary-button-hover, #0c8ce0);
-        }
-      }
-
-      ul {
-        margin: 0 0 1.5rem 0;
-        padding-left: 20px;
-
-        li {
-          @include typography(paragraph);
-          margin-bottom: 0.5rem;
-        }
-      }
-
-      em {
-        font-size: 0.9em;
-        opacity: 0.8;
-      }
-
-      .column {
-        @media (max-width: 768px) {
-          &.right-column {
-            margin-top: 1rem;
-          }
-        }
-      }
-    }
-
-    #press-coverage {
-      .full-width {
-        width: 100%;
-        max-width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        box-sizing: border-box;
-      }
-
-      .coverage-intro {
-        @include typography(paragraph);
-        text-align: center;
-        max-width: 800px;
-        margin: 0 auto 60px auto;
-        width: 100%;
-      }
-
-      .articles-grid {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        gap: 25px;
-        width: 100%;
-        box-sizing: border-box;
-
-        @include break-up(sm) {
-          grid-template-columns: repeat(2, 1fr);
-          gap: 30px;
-        }
-
-        @include break-up(lg) {
-          grid-template-columns: repeat(3, 1fr);
-          gap: 40px;
-        }
-      }
-
-      .article-card {
-        display: block; // Since it's now an anchor
-        text-decoration: none; // Remove default link styling
-        color: inherit; // Keep text color
-        padding: 20px;
-        background-color: #f9f9f9;
-        border-width: 0 0 2px 0;
-        border-style: solid;
-        border-color: #f5f5f5;
-        border-radius: 0px;
-        transition:
-          transform 0.2s ease,
-          box-shadow 0.2s ease,
-          border-color 0.2s ease;
-        transform: translateY(-0px); // Reduced from -3px
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03); // Reduced size and opacity further
-
-        &:hover {
-          transform: translateY(-5px); // Match the default state
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03); // Match the default state
-          border-color: var(--primary-button-bg, #0c8ce0);
-        }
-
-        .publication {
-          display: block;
-          color: var(--text-body-secondary);
-          font-size: 14px;
-          margin-bottom: 8px;
-          font-weight: 500;
-        }
-
-        .article-title {
-          @include typography(h4);
-          margin: 0 0 15px 0;
-          color: var(--text-body-primary);
-        }
-
-        .article-date {
-          display: block;
-          color: var(--text-body-secondary);
-          font-size: 14px;
-          margin-top: auto;
-        }
       }
     }
   }
