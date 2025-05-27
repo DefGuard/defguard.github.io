@@ -25,7 +25,10 @@ const { url, title, description, featuredImage, imageWidth, imageHeight } = Astr
 <html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <meta name="generator" content={Astro.generator} />
     <title>defguard - Zero-Trust WireGuard® 2FA/MFA VPN</title>
     <meta property="og:title" content={title} />
@@ -88,18 +91,26 @@ const { url, title, description, featuredImage, imageWidth, imageHeight } = Astr
     /* Fix for mobile width issues */
     @media screen and (max-width: 991px) {
       width: 100vw;
-      min-width: 100%; 
+      min-width: 100%;
       max-width: 100vw;
     }
   }
 
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
     max-width: 100%;
   }
 
   /* Set defaults for all containers */
-  div, section, article, aside, nav, header, footer {
+  div,
+  section,
+  article,
+  aside,
+  nav,
+  header,
+  footer {
     max-width: 100%;
     box-sizing: border-box;
   }
@@ -110,13 +121,13 @@ const { url, title, description, featuredImage, imageWidth, imageHeight } = Astr
     max-width: 100%;
     overflow-x: hidden;
     position: relative;
-    
+
     /* Ensure proper mobile rendering */
     @media screen and (max-width: 991px) {
       width: 100vw;
       max-width: 100vw;
     }
-    
+
     @include break-up(lg) {
       --page-spacing-factor: 1;
     }

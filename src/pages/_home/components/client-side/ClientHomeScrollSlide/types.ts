@@ -1,11 +1,11 @@
 export enum ClientScrollVariant {
-  CARD = 'card',
-  SIMPLE = 'simple',
+  CARD = "card",
+  SIMPLE = "simple",
 }
 
 export enum ClientScrollCardVariant {
-  LINES = 'lines',
-  CIRCLES = 'circles',
+  LINES = "lines",
+  CIRCLES = "circles",
 }
 
 export interface ClientScrollSlideProps {
@@ -15,4 +15,4 @@ export interface ClientScrollSlideProps {
   variant?: ClientScrollVariant;
   cardVariant?: ClientScrollCardVariant;
   mobile?: boolean;
-} 
+}

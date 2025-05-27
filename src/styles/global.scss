@@ -2,7 +2,9 @@
 @use "./fonts/font" as *;
 
 // Global box-sizing and image proportion rules
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -60,10 +62,10 @@ main {
 
 // main vars
 html {
-  --font-scale-factor: 0.70;
+  --font-scale-factor: 0.7;
   --nav-height: 75px;
   --box-shadow: 0px 12px 24px 0px rgba(0, 0, 0, 0.08);
-  
+
   @include break-up(lg) {
     --font-scale-factor: 0.9;
   }

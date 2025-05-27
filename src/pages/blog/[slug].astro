@@ -4,8 +4,8 @@ import Navigation from "../../components/base/Navigation.astro";
 import ProductLayout from "../../layouts/ProductLayout.astro";
 
 export async function getStaticPaths() {
-  const blogEntries = await getCollection('blog');
-  return blogEntries.map(entry => ({
+  const blogEntries = await getCollection("blog");
+  return blogEntries.map((entry) => ({
     params: { slug: entry.slug },
     props: { entry },
   }));
@@ -17,13 +17,12 @@ const { entry } = Astro.props;
 // Get the rendered content
 const { Content } = await entry.render();
 
-
 // Format the publication date
 const formatDate = (date: Date) => {
-  return new Date(date).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+  return new Date(date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   });
 };
 
@@ -53,11 +52,11 @@ const url = `https://defguard.net/blog/${entry.slug}`;
             {entry.data.author && <span class="post-author">by {entry.data.author}</span>}
           </div>
         </header>
-        
+
         <div class="post-content">
           <Content />
         </div>
-        
+
         <footer class="post-footer">
           <div class="post-navigation">
             <a href="/blog" class="back-to-blog">← Back to Blog</a>
@@ -72,21 +71,21 @@ const url = `https://defguard.net/blog/${entry.slug}`;
   #blog-post-page {
     padding-top: var(--nav-height);
     background-color: var(--surface-frame-bg);
-    
+
     .blog-post {
       padding: 2rem 0 4rem;
-      
+
       .container {
         max-width: 800px;
         margin: 0 auto;
         padding: 0 1rem;
       }
-      
+
       .post-header {
         margin-bottom: 2rem;
         padding-bottom: 1.5rem;
         border-bottom: 1px solid var(--border-color, #eaeaea);
-        
+
         h1 {
           margin-top: 0;
           margin-bottom: 1rem;
@@ -96,54 +95,53 @@ const url = `https://defguard.net/blog/${entry.slug}`;
           color: var(--text-body-primary);
         }
       }
-      
+
       .post-meta {
         display: flex;
         flex-wrap: wrap;
         color: var(--text-body-secondary, var(--text-body-primary));
         margin-bottom: 1rem;
-        
+
         time {
           margin-right: 0.5rem;
         }
-        
+
         .post-author {
           margin-left: 0.5rem;
         }
       }
-      
 
       .post-content {
         margin-bottom: 3rem;
-        
+
         :global(h1) {
           font-size: calc(2.25rem * var(--font-scale-factor));
           margin: 2rem 0 1rem;
           font-weight: 400;
           color: var(--text-body-primary);
         }
-        
+
         :global(h2) {
           font-size: calc(1.75rem * var(--font-scale-factor));
           margin: 1.75rem 0 1rem;
           font-weight: 400;
           color: var(--text-body-primary);
         }
-        
+
         :global(h3) {
           font-size: calc(1.5rem * var(--font-scale-factor));
           margin: 1.5rem 0 1rem;
           font-weight: 400;
           color: var(--text-body-primary);
         }
-        
+
         :global(h4) {
           font-size: calc(1.25rem * var(--font-scale-factor));
           margin: 1.25rem 0 0.75rem;
           font-weight: 400;
           color: var(--text-body-primary);
         }
-        
+
         :global(p) {
           margin: 1rem 0;
           line-height: 1.6;
@@ -151,11 +149,12 @@ const url = `https://defguard.net/blog/${entry.slug}`;
           color: var(--text-body-primary);
           font-size: calc(1rem * var(--font-scale-factor));
         }
-        
-        :global(ul), :global(ol) {
+
+        :global(ul),
+        :global(ol) {
           margin: 1rem 0;
           padding-left: 1.5rem;
-          
+
           :global(li) {
             margin-bottom: 0.5rem;
             line-height: 1.6;
@@ -164,25 +163,25 @@ const url = `https://defguard.net/blog/${entry.slug}`;
             font-size: calc(1rem * var(--font-scale-factor));
           }
         }
-        
+
         :global(blockquote) {
-          border-left: 4px solid var(--primary-color, #0C8CE0);
+          border-left: 4px solid var(--primary-color, #0c8ce0);
           padding-left: 1rem;
           margin: 1.5rem 0;
           font-weight: 300;
           color: var(--text-body-secondary, var(--text-body-primary));
         }
-        
+
         :global(a) {
-          color: var(--primary-color, #0C8CE0);
+          color: var(--primary-color, #0c8ce0);
           text-decoration: none;
           font-weight: inherit;
-          
+
           &:hover {
             text-decoration: underline;
           }
         }
-        
+
         :global(pre) {
           background: var(--code-bg, #fff);
           padding: 1rem;
@@ -190,7 +189,7 @@ const url = `https://defguard.net/blog/${entry.slug}`;
           overflow-x: auto;
           margin: 1.5rem 0;
         }
-        
+
         :global(code) {
           font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
           font-size: 0.666em;
@@ -199,30 +198,33 @@ const url = `https://defguard.net/blog/${entry.slug}`;
           padding: 0.2em 0.4em;
           border-radius: 3px;
         }
-        
+
         /* Markdown image styling */
         :global(img) {
           max-width: 100%;
           height: auto;
           display: block;
-          margin: 2.5rem auto;  // Slightly increase margin for better spacing
-          border-radius: 4px;   // Match other radius values
-          box-shadow: var(--box-shadow, 0 4px 8px rgba(0, 0, 0, 0.08));  // Use CSS variable for shadow
+          margin: 2.5rem auto; // Slightly increase margin for better spacing
+          border-radius: 4px; // Match other radius values
+          box-shadow: var(
+            --box-shadow,
+            0 4px 8px rgba(0, 0, 0, 0.08)
+          ); // Use CSS variable for shadow
         }
       }
-      
+
       .post-footer {
         padding-top: 1.5rem;
         border-top: 1px solid var(--border-color, #eaeaea);
-        
+
         .post-navigation {
           display: flex;
           justify-content: space-between;
-          
+
           .back-to-blog {
             color: var(--primary-text-color);
             font-weight: 400;
-            text-decoration: none;        
+            text-decoration: none;
             &:hover {
               text-decoration: underline;
             }
@@ -232,4 +234,3 @@ const url = `https://defguard.net/blog/${entry.slug}`;
     }
   }
 </style>
-

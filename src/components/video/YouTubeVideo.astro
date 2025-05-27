@@ -30,21 +30,24 @@ const {
 // Build YouTube embed URL with parameters
 let embedUrl = `https://www.youtube.com/embed/${videoId}?`;
 const params = [
-  autoplay ? 'autoplay=1' : '',
-  muted ? 'mute=1' : '',
-  startAt > 0 ? `start=${startAt}` : '',
-  !showControls ? 'controls=0' : '',
-  !showInfo ? 'showinfo=0' : '',
-  !rel ? 'rel=0' : '',
-  'origin=' + encodeURIComponent(typeof window !== 'undefined' ? window.location.origin : 'https://defguard.net'),
-  'enablejsapi=1',
+  autoplay ? "autoplay=1" : "",
+  muted ? "mute=1" : "",
+  startAt > 0 ? `start=${startAt}` : "",
+  !showControls ? "controls=0" : "",
+  !showInfo ? "showinfo=0" : "",
+  !rel ? "rel=0" : "",
+  "origin=" +
+    encodeURIComponent(
+      typeof window !== "undefined" ? window.location.origin : "https://defguard.net",
+    ),
+  "enablejsapi=1",
 ];
 
 // Filter out empty params and join with &
-embedUrl += params.filter(param => param !== '').join('&');
+embedUrl += params.filter((param) => param !== "").join("&");
 
 // Calculate aspect ratio for responsive container (16:9 is YouTube default)
-const aspectRatio = '56.25%'; // 9/16 * 100%
+const aspectRatio = "56.25%"; // 9/16 * 100%
 ---
 
 <div class="youtube-container" style={`padding-bottom: ${aspectRatio};`}>
@@ -55,8 +58,7 @@ const aspectRatio = '56.25%'; // 9/16 * 100%
     allowfullscreen={allowFullscreen}
     class="youtube-iframe"
     loading="lazy"
-    referrerpolicy="strict-origin-when-cross-origin"
-  ></iframe>
+    referrerpolicy="strict-origin-when-cross-origin"></iframe>
 </div>
 
 <style>
@@ -78,4 +80,3 @@ const aspectRatio = '56.25%'; // 9/16 * 100%
     border-radius: 6px;
   }
 </style>
-
