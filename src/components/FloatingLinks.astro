@@ -4,6 +4,11 @@
 
 <ul id="floating-links">
   <li>
+    <a href="/book-a-demo/" class="highlight" data-astro-prefetch>
+      <span>Book a Demo</span>
+    </a>
+  </li>
+  <li>
     <a href="/newsletter/" data-astro-prefetch><span>Newsletter</span></a>
   </li>
   <li>
@@ -47,6 +52,8 @@
 </script>
 
 <style lang="scss">
+
+
   #floating-links {
     position: fixed;
     z-index: 2;
@@ -76,17 +83,29 @@
         display: flex;
         flex-flow: row;
         align-items: center;
+        padding-left: 10px;
         justify-content: flex-start;
         box-sizing: border-box;
         border-bottom: 1px solid var(--text-body-primary);
         text-decoration: none;
-        transition-property: border-bottom-color;
+        transition-property: border-bottom-color border-bottom-width;
 
         @include animate();
 
         &:hover {
           border-bottom-color: var(--surface-main-primary);
+          border-bottom-width: 4px;
         }
+      }
+      .highlight{
+        background-color: var(--surface-main-primary);
+        span {
+          color: white;
+        }
+      
+      &:hover {
+        border-bottom-color: var(--text-body-primary);
+      }
       }
     }
   }
