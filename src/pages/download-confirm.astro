@@ -1,17 +1,48 @@
 ---
-import NewsletterSection from "../components/NewsletterSection.astro";
-import ProductSection from "../layouts/ProductSection.astro";
+import FeaturesTable from "../components/FeaturesTable/FeaturesTable";
 import Navigation from "../components/base/Navigation.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ProductSection from "../layouts/ProductSection.astro";
+import FlexibleSection from "../components/FlexibleSection.astro";
+import NewsletterSection from "../components/NewsletterSection.astro";
+import YouTubeVideo from "../components/video/YouTubeVideo.astro";
+import { featuresTableData } from "../data/compare-table";
+import { Button } from "../components/buttons/Button/Button";
+import OrganizationJSONLD from "../scripts/OrganizationJSONLD.astro";
 
-const title = "defguard enterprise open-source SSO&VPN with 2FA/MFA";
+const title =
+  "Zero-Trust WireGuard® 2FA/MFA VPN: Book a Demo";
 const featuredImage =
   "github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png";
 const imageWidth = "1080";
 const imageHeight = "540";
-const description =
-  "defguard - enterprise open-source SSO&VPN - the only open-source solution with real WireGuard® MFA/2FA & integrated OpenID Connect SSO";
-const url = "https://defguard.net/download-confirm/";
+const description = "defguard - Zero-Trust WireGuard® 2FA/MFA VPN - Book a Demo";
+const url = "https://defguard.net/book-a-demo/";
+const tags = [
+  "defgaurd",
+  "compare",
+  "WireGuard®",
+  "2fa",
+  "mfa",
+  "mfa/2fa",
+  "openid",
+  "secure",
+  "ldap",
+  "acl",
+  "vpn",
+  "sso",
+  "firewall",
+  "desktop client",
+  "mesh",
+  "mesh vpn",
+  "nat",
+  "yubikey",
+  "email",
+  "email notifications",
+  "gateway",
+  "auth",
+  "ssh",
+];
 ---
 
 <BaseLayout
@@ -22,63 +53,144 @@ const url = "https://defguard.net/download-confirm/";
   imageHeight={imageHeight}
   url={url}
 >
+  <OrganizationJSONLD
+    slot="schema"
+    title={title}
+    description={description}
+    url={url}
+    tags={tags}
+  />
   <Navigation activeSlug="/download-confirm/" />
-  <main id="newsletter-page">
-    <ProductSection padding="none" id="thanks">
-      <h2>Download defguard server</h2>
-      <h3>Latest release</h3>
-      <p>
-        Version : 1.3.0
-        <br />
-        Release date: 14.05.2025
-      </p>
-      <p>
-        In order to download lates version of the server please visit GitHub releases
-        page:
-      </p>
-      <p>
-        <a href="https://github.com/DefGuard/defguard/releases/tag/v1.3.0">
-          https://github.com/DefGuard/defguard/releases/tag/v1.3.0
-        </a>
-      </p>
-      <h3>New features</h3>
-      <p>
+  <main id="download-confirm">
+    <ProductSection padding="none">
+      <FlexibleSection title="Download defguard Server" id="release-info" variant="white" theme="light">
+        <div slot="left">
+          <p><strong>Latest release</strong></p>
+          <ul>
+            <li>
+              Version : 1.3.0
+            </li>
+            <li>
+              Release date: 14.05.2025
+            </li>
+          </ul>
+          <p>
+            In order to download lates version of the server please visit GitHub releases page.
+          </p>
+          <div class="learn-more">
+            <a
+              href="https://github.com/DefGuard/defguard/releases/tag/v1.3.0"
+              class="learn-more-link"
+            >
+              Download from GitHub
+            </a>
+          </div>
+        </div>
+        <div slot="right">
+          <NewsletterSection
+            headerLevel="1"
+            title="Stay Updated on New Releases"
+            description="Release notes and occasional news — no spam, just one email per month max."
+          />
+        </div>
+      </FlexibleSection>
+      <FlexibleSection title="What's new?" id="new-features" variant="white" theme="light">
+        <div slot="left">
         <ul>
           <li>
-            <b>Access Control / Firewall management</b> - ACLs are for now only available for
-            Linux based Defguard Gateway - FreeBSD/OPNSense will come in 1.3.1 stable release.
+            Access Control / Firewall management - ACLs are for now only available for Linux based Defguard Gateway - FreeBSD/OPNSense will come in 1.3.1 stable release.
           </li>
-          <li><b>LDAP & Active Directory</b> two-way synchronization</li>
+          <li>
+            LDAP & Active Directory two-way synchronization
+          </li>
         </ul>
-      </p>
+      </div>
+      <div slot="right">
+        <YouTubeVideo
+        videoId="Om28IuV5AcM"
+        title="Your video title"
+        showControls={true}
+        showInfo={true}
+        allowFullscreen={true}
+        rel={false}
+      />
+      </div>
+      </FlexibleSection>
     </ProductSection>
-    <NewsletterSection headerLevel="2" />
   </main>
 </BaseLayout>
 
 <style lang="scss" is:global>
-  #newsletter-page {
-    padding: calc(var(--nav-height) + 100px) 0 100px;
+
+  .btn.size-normal{
+    margin: 0 0 0 auto;
+    min-height: unset;
+    height:38px;
+    border-radius: unset;
+    width: 100%;  
+  
+    @include break-down(lg) {
+      margin: 0 auto;
+    }
+  }
+  .btn{
+    border-color: var(--text-button-tertiary);
+
+    &:hover{
+      border: unset;
+      background-color: var(--text-button-tertiary);
+    
+      span {
+       color: white;
+      }
+    }
   }
 
-  #thanks {
-    padding-bottom: 40px;
-    & > * {
+  #download-confirm {
+    .product-section {
+      padding-top: 0 !important; /* Match the 4rem padding from FlexibleSection */
+      padding-bottom: 0rem !important;
+      border:none;
+      display: unset;
+      h1 {
+        @include break-down(md) {
+          padding-top:20px;
+          border-top: 1px solid black;
+        }
+      }
+    }
+    .learn-more {
+        margin-top: 1.5rem;
+    }
+      
+    .learn-more-link {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background-color: var(--primary-button-bg, #0c8ce0);
+        color: var(--primary-button-text, white);
+        border-radius: 6px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background-color 0.2s ease-in-out;
+
+        &:hover {
+          background-color: var(--primary-button-hover, #0a7bc5);
+        }
+    }
+
+    .contact {
       width: 100%;
-    }
+      border-top: 1px solid var(--border-separator);
+      display: flex;
+      flex-flow: row;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      padding: 100px 10px 0px 10px;
 
-    h2,
-    p {
-      text-align: left;
-    }
-
-    h2 {
-      @include typography(section);
-    }
-
-    p {
-      @include typography(paragraph);
-      padding: 20px 0;
+      a {
+        text-decoration: none;
+      }
     }
   }
 </style>

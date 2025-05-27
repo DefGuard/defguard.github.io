@@ -5,11 +5,15 @@ import HeaderTag from "./HeaderTag.astro";
 
 interface Props {
   headerLevel: "1" | "2";
+  title?: string;
+  description?: string;
 }
 
-const { headerLevel } = Astro.props;
+const { headerLevel,
+  title = "Get informed about new releases",
+  description = "Get the latest defguard news and updates in your inbox."
+} = Astro.props;
 
-const title = "Get informed about new releases";
 ---
 
 <ProductSection padding="newsletter" bordered>
@@ -17,7 +21,7 @@ const title = "Get informed about new releases";
     <HeaderTag level={headerLevel}>
       {title}
     </HeaderTag>
-    <p>Get the latest defguard news and updates in your inbox.</p>
+    <p>{description}</p>
     <form
       id="newsletter-form"
       action="https://buttondown.email/api/emails/embed-subscribe/defguard"
@@ -26,28 +30,30 @@ const title = "Get informed about new releases";
       onsubmit={`window.open('https://buttondown.email/defguard', 'popupwindow')`}
     >
       <div class="form-row field-email field">
-        <label for="bd-email">Email:</label>
-        <input id="bd-email" name="email" type="email" placeholder="" />
+        <input id="bd-email" placeholder="E-mail" name="email" type="email" placeholder="" />
+        <Button type="submit" text="Subscribe" size="normal" />
       </div>
-      <div class="terms">
+      <!--<div class="terms">
         <div class="form-row">
-          <!-- <div class="form-row field checkbox">
+           <div class="form-row field checkbox">
             <Checkbox client:load />
             <p>I agree to receive information about defguard’s products and services.</p>
           </div>
           <p>
             By submitting this form, I confirm that I have read and agree to defguard’s
             Privacy Notice and Privacy Policy.
-          </p> -->
+          </p>
         </div>
-      </div>
+      </div>-->
       <!-- <SubscribeButton client:load /> -->
-      <Button type="submit" text="Subscribe Now" size="normal" />
+
     </form>
   </section>
 </ProductSection>
 
 <style lang="scss">
+  
+
   #newsletter {
     width: 100%;
     & > h1,
@@ -64,13 +70,18 @@ const title = "Get informed about new releases";
       @include typography(paragraph);
     }
 
+    input{
+      font-size: calc(1rem * var(--font-scale-factor));
+      padding-left: 20px;
+    }
+
     a {
       text-decoration: underline;
       text-decoration-color: var(--text-body-primary);
     }
 
     & > p {
-      padding-bottom: 8px;
+      padding-bottom: 50px;
     }
 
     form {
@@ -89,7 +100,7 @@ const title = "Get informed about new releases";
       }
 
       .field-email {
-        padding: 20px 0;
+        padding: 0;
       }
 
       .form-row {
@@ -102,8 +113,7 @@ const title = "Get informed about new releases";
         row-gap: 8px;
 
         &.field {
-          max-width: 580px;
-          padding: 40px 0;
+          max-width: 720px;
           @include break-up(lg) {
             display: grid;
             grid-template-columns: max-content 1fr;

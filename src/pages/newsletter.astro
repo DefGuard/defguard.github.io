@@ -23,11 +23,43 @@ const url = "https://defguard.net/newsletter/";
 >
   <Navigation activeSlug="/newsletter/" />
   <main id="newsletter-page">
-    <NewsletterSection headerLevel="1" />
+    <NewsletterSection
+      headerLevel="1"
+      title="Stay Updated on New Releases"
+      description="Release notes and occasional news — no spam, just one email per month max."
+    />
   </main>
 </BaseLayout>
 
 <style lang="scss" is:global>
+  
+  .btn.size-normal{
+    margin: 0 0 0 auto;
+    min-height: unset;
+    height:38px;
+    border-radius: unset;
+    width: 100%;  
+
+    @include break-down(lg) {
+      margin: 0 auto;
+    }
+  }
+  .btn{
+    border-color: var(--text-button-tertiary);
+
+    &:hover{
+      border: unset;
+      background-color: var(--text-button-tertiary);
+    
+      span {
+       color: white;
+      }
+    }
+  }
+
+  #newsletter form{
+    flex-flow: unset;
+  }
   #newsletter-page {
     padding: calc(var(--nav-height) + 100px) 0 100px;
   }
