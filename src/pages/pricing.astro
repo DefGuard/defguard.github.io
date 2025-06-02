@@ -121,6 +121,15 @@ const tags = [
       </div>
     </div>
 
+    <div class="nonprofit-wrapper">
+      <div id="nonprofit-section">
+        <p>Request a license for your non-profit organisation.</p>
+        <button type="submit" class="btn size-normal" onclick="window.location.href='mailto:sales@defguard.net'">
+          <span>Contact Sales</span>
+        </button>
+      </div>
+    </div>
+
     <style lang="scss" is:global>
       #pricing-container {
         padding-bottom: 40px;
@@ -333,6 +342,29 @@ const tags = [
           margin: 0 auto;
           padding: 0 20px;
           box-sizing: border-box;
+        }
+      }
+
+      .nonprofit-wrapper {
+        width: 100%;
+        background-color: var(--surface-frame-bg);
+        padding: 120px 0;
+      }
+
+      #nonprofit-section {
+        width: 100%;
+        max-width: 1100px;
+        margin: 0 auto;
+        text-align: center;
+        padding: 0 20px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        p {
+          @include typography(pricebox-section);
+          margin-bottom: 30px;
         }
       }
     </style>
