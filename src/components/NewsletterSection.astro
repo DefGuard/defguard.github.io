@@ -37,10 +37,10 @@ const { headerLevel,
         <div class="form-row">
            <div class="form-row field checkbox">
             <Checkbox client:load />
-            <p>I agree to receive information about defguard’s products and services.</p>
+            <p>I agree to receive information about defguard's products and services.</p>
           </div>
           <p>
-            By submitting this form, I confirm that I have read and agree to defguard’s
+            By submitting this form, I confirm that I have read and agree to defguard's
             Privacy Notice and Privacy Policy.
           </p>
         </div>
@@ -89,6 +89,24 @@ const { headerLevel,
       flex-flow: column;
       row-gap: 8px;
 
+      .form-row {
+        width: 100%;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 8px;
+
+        &.field {
+          max-width: 720px;
+        }
+      }
+
+      .field-email {
+        padding: 0;
+        width: 100%;
+      }
+
       input {
         width: 100%;
         height: 38px;
@@ -96,32 +114,6 @@ const { headerLevel,
         background-color: transparent;
         &:focus-visible {
           outline: none;
-        }
-      }
-
-      .field-email {
-        padding: 0;
-      }
-
-      .form-row {
-        width: 100%;
-        display: flex;
-        flex-flow: row wrap;
-        align-items: center;
-        justify-content: flex-start;
-        column-gap: 8px;
-        row-gap: 8px;
-
-        &.field {
-          max-width: 720px;
-          @include break-up(lg) {
-            display: grid;
-            grid-template-columns: max-content 1fr;
-          }
-
-          &.checkbox {
-            padding: 0px;
-          }
         }
       }
 
