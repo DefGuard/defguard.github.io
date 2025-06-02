@@ -8,6 +8,9 @@ import PricingHeaderContent from "../data/pricing/page-header.mdx";
 import { PricingCards } from "../components/pricing/Pricing";
 import ContentLimiter from "../components/ContentLimiter.astro";
 import FlexibleSection from "../components/FlexibleSection.astro";
+import ProductSection from "../layouts/ProductSection.astro";
+import AstroButton from "../components/AstroButton.astro";
+import CTASection from "../components/CTASection.astro";
 
 const pricingCollection = await getCollection("pricing");
 // sort and map to prop type
@@ -118,33 +121,55 @@ const tags = [
                 If you require tailored support, <strong>defguard Enterprise SLA</strong> offers
                 enhanced service with benefits customized to your organization’s specific needs.
               </p>
-              <div class="bottom">
-                <a href="mailto:sales@defguard.net">Contact Sales</a>
-              </div>
+
             </div>
           </div>
         </div>
-        <div class="product-features">
-          <div class="form-description">
-            <h3>Looking for custom deployment or features?</h3>
-            <p>
-              We provide consulting or custom deployment and security services. You also
-              can commission us to deliver custom features or integrations (for the server
-              and/or the client). Just fill out the form below.
-            </p>
-            <h3>You need an enterprise features for free?</h3>
-            <p>
-              If you are a: <strong>non profit organization</strong> or <strong
-                >open source project</strong
-              >, please contact us by filling out the form below for Enterprise license.
-            </p>
-          </div>
-          <BookDemoForm client:load />
-        </div>
       </header>
+
+      <ProductSection padding="none">
+        <FlexibleSection title="Explore Custom Solutions for Your Organization" id="press-contact" variant="white" theme="light">
+          <div slot="left">
+          <ul>
+            <li>
+              We offer <strong>trial licenses</strong> for evaluation or proof-of-concept purposes—so you can explore DefGuard’s capabilities risk-free.
+            </li>
+            <li>
+              Need something more tailored? Our <strong>Enterprise SLA</strong> includes enhanced support and services customized to your specific requirements.
+            </li>
+          </ul>
+          <p>
+            Please <strong>fill out the form</strong> to get started—we’ll be in touch shortly.
+          </p>
+          </div>
+          <div slot="right">
+            <BookDemoForm client:load />
+          </div>
+        </FlexibleSection>
+      </ProductSection>
+      <CTASection
+        title="Need Enterprise Features for Free?"
+        description="If you're a non-profit organization or an open-source project, we’d love to support you. Click the button to email us with a short explanation of your mission and why you're requesting free access."
+        buttonText="Contact Sales"
+        buttonLink="mailto:sales@defguard.net"
+        id="cta-download"
+        variant="white"
+      />
     </ContentLimiter>
 
     <style lang="scss" is:global>
+      .cta-content {
+        padding-top: 1rem;
+        border-top: 1px solid var(--text-body-primary);
+      }
+
+      #cta-download {
+        padding-bottom: 0;
+      }
+
+      .flexible-section {
+        padding:0 !important;
+      }
       #pricing-container {
         padding-bottom: 40px;
       }
@@ -179,7 +204,7 @@ const tags = [
           flex-flow: column;
           justify-content: flex-start;
           width: 100%;
-          padding-bottom: 50px;
+          padding-bottom: 0;
           gap: 20px;
 
           h1 {
