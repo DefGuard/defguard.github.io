@@ -8,9 +8,6 @@ import PricingHeaderContent from "../data/pricing/page-header.mdx";
 import { PricingCards } from "../components/pricing/Pricing";
 import ContentLimiter from "../components/ContentLimiter.astro";
 import FlexibleSection from "../components/FlexibleSection.astro";
-import ProductSection from "../layouts/ProductSection.astro";
-import AstroButton from "../components/AstroButton.astro";
-import CTASection from "../components/CTASection.astro";
 
 const pricingCollection = await getCollection("pricing");
 // sort and map to prop type
@@ -78,10 +75,15 @@ const tags = [
           <PricingHeaderContent />
         </FlexibleSection>
         <PricingCards client:load data={pricingData} />
-        <div id="sla-support">
+      </header>
+    </ContentLimiter>
+
+    <div class="sla-support-wrapper">
+      <div id="sla-support">
+        <ContentLimiter contentId="sla-support-content" maxWidth={1100}>
           <div id="sla-card">
             <div class="left">
-              <p>Get Enterprise<br /><span>Evaluation License</span></p>
+              <p>Get 30-days Enterprise <span>License Evaluation Key</span></p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="705"
@@ -111,75 +113,23 @@ const tags = [
                   stroke-linecap="round"></path>
               </svg>
             </div>
-            <div class="right">
-              <h3>Custom Solution</h3>
-              <p>
-                For <strong>evaluations</strong> or proof-of-concept testing, we’re happy to
-                provide a trial license.
-              </p>
-              <p>
-                If you require tailored support, <strong>defguard Enterprise SLA</strong> offers
-                enhanced service with benefits customized to your organization’s specific needs.
-              </p>
-
-            </div>
           </div>
-        </div>
-      </header>
-
-      <ProductSection padding="none">
-        <FlexibleSection title="Explore Custom Solutions for Your Organization" id="press-contact" variant="white" theme="light">
-          <div slot="left">
-          <ul>
-            <li>
-              We offer <strong>trial licenses</strong> for evaluation or proof-of-concept purposes—so you can explore DefGuard’s capabilities risk-free.
-            </li>
-            <li>
-              Need something more tailored? Our <strong>Enterprise SLA</strong> includes enhanced support and services customized to your specific requirements.
-            </li>
-          </ul>
-          <p>
-            Please <strong>fill out the form</strong> to get started—we’ll be in touch shortly.
-          </p>
-          </div>
-          <div slot="right">
+          <div class="product-features">
             <BookDemoForm client:load />
           </div>
-        </FlexibleSection>
-      </ProductSection>
-      <CTASection
-        title="Need Enterprise Features for Free?"
-        description="If you're a non-profit organization or an open-source project, we’d love to support you. Click the button to email us with a short explanation of your mission and why you're requesting free access."
-        buttonText="Contact Sales"
-        buttonLink="mailto:sales@defguard.net"
-        id="cta-download"
-        variant="white"
-      />
-    </ContentLimiter>
+        </ContentLimiter>
+      </div>
+    </div>
 
     <style lang="scss" is:global>
-      .cta-content {
-        padding-top: 1rem;
-        border-top: 1px solid var(--text-body-primary);
-      }
-
-      #cta-download {
-        padding-bottom: 0;
-      }
-
-      .flexible-section {
-        padding:0 !important;
-      }
       #pricing-container {
         padding-bottom: 40px;
       }
 
       #pricing-tiers {
-        // padding-top: calc(100px - var(--nav-height));
         padding-bottom: calc(100px - var(--nav-height));
 
         @include break-up(md) {
-          // padding-top: calc(200px - var(--nav-height));
           padding-bottom: calc(200px - var(--nav-height));
         }
 
@@ -204,7 +154,7 @@ const tags = [
           flex-flow: column;
           justify-content: flex-start;
           width: 100%;
-          padding-bottom: 0;
+          padding-bottom: 50px;
           gap: 20px;
 
           h1 {
@@ -278,6 +228,7 @@ const tags = [
         }
 
         .product-features {
+          padding-top: 2rem;
           .form-description {
             width: 100%;
             display: flex;
@@ -301,18 +252,26 @@ const tags = [
         }
       }
 
+      .sla-support-wrapper {
+        width: 100%;
+        background-color: var(--background-secondary, #f5f5f5);
+        padding: 60px 0;
+      }
+
       #sla-support {
-        padding-bottom: 60px;
+        width: 100%;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 20px;
+        box-sizing: border-box;
 
         #sla-card {
           display: grid;
-          background-color: var(--surface-nav-bg);
-          box-shadow: 0px 12px 24px 0px rgba(0, 0, 0, 0.08);
           grid-template-columns: 1fr;
           grid-template-rows: 1fr auto;
 
           @include break-up(lg) {
-            grid-template-columns: 1fr 390px;
+            grid-template-columns: 1fr;
             grid-template-rows: 1fr;
           }
 
