@@ -14,7 +14,11 @@ type BookDemoType = {
   tell_us_more: string;
 };
 
-const BookDemoForm = () => {
+interface BookDemoFormProps {
+  submit_text?: string;
+}
+
+const BookDemoForm = ({ submit_text = "Submit" }: BookDemoFormProps) => {
   const [okMessage, setOkMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
   const [values, setValues] = useState<BookDemoType>({
@@ -94,7 +98,7 @@ const BookDemoForm = () => {
           <textarea rows={7} name="tell_us_more" onChange={handleInputChange}></textarea>
         </label>
         <div className="button">
-          <Button text="Submit" type="submit" />
+          <Button text={submit_text} type="submit" />
         </div>
       </form>
       {okMessage && (
