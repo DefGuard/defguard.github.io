@@ -24,6 +24,32 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
   const [isLinuxMenuClicked, setIsLinuxMenuClicked] = useState(false);
   const [isAppleMenuClicked, setIsAppleMenuClicked] = useState(false);
   const [platform, setPlatform] = useState(platformType);
+  const [downloadName, setDownloadName] = useState("");
+
+  useEffect(() => {
+    switch (platform) {
+      case PlatformType.WINDOWS: {
+        setDownloadName(`defguard-client_${version}_x64_en-US.exe`);
+        break;
+      }
+      case PlatformType.MACOSARM: {
+        setDownloadName(`defguard-aarch64-apple-darwin-${version}.pkg`);
+        break;
+      }
+      case PlatformType.MACOSINTEL: {
+        setDownloadName(`defguard-x86_64-apple-darwin-${version}.pkg`);
+        break;
+      }
+      case PlatformType.DEBIAN: {
+        setDownloadName(`defguard-client_${version}_amd64.deb`);
+        break;
+      }
+      case PlatformType.ARCHLINUX: {
+        setDownloadName(`defguard-client_${version}_amd64.deb`);
+        break;
+      }
+    }
+  }, [platform, version]);
 
   const handleClick = () => {
     setIsButtonClicked(true);
@@ -160,7 +186,11 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
           </>
         )}
       </div>
-      <div className="download-main">
+      <a 
+        href={platform === PlatformType.ARCHLINUX ? ARCHLINK : `https://github.com/${owner}/${repo}/releases/download/v${version}/${downloadName}`}
+        className="download-main"
+        onClick={handleClick}
+      >
         <div className="download-text">
           {(platform === PlatformType.DEBIAN ||
             platform === PlatformType.MACOSINTEL ||
@@ -171,7 +201,7 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
           {platform === PlatformType.MACOSINTEL && <p>Apple Intel</p>}
           {platform === PlatformType.MACOSARM && <p>Apple ARM</p>}
         </div>
-        <div className="btn" onClick={handleClick}>
+        <div className="btn">
           {isButtonClicked ? (
             <CheckIcon />
           ) : platform !== PlatformType.ARCHLINUX ? (
@@ -182,12 +212,10 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
               version={version}
             />
           ) : (
-            <h3>
-              <a href={ARCHLINK}>→</a>
-            </h3>
+            <h3>→</h3>
           )}
         </div>
-      </div>
+      </a>
       <div className="download-footer">
         {(platform === PlatformType.DEBIAN || platform === PlatformType.ARCHLINUX) && (
           <>
