@@ -1,28 +1,34 @@
-#download-page {
-  .download-version {
-    .download-version-info {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 8px;
-      align-self: stretch;
+.download-version-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
 
-      .download-version-current,
-      .download-changelog {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        align-self: stretch;
-      }
+  .download-version-current {
+    margin-bottom: 20px;
+    @include typography(pricebox-list);
+    p {
+      margin: 0;
+      line-height: 1.2;
+      font-size: 16px;
+    }
+  }
 
-      .download-version-current {
-        @include typography(pricebox-price);
-      }
-
-      .download-changelog {
-        @include typography(pricebox-list);
-      }
+  .download-changelog {
+    @include typography(pricebox-list);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    
+    a {
+      text-decoration: none;
+      color: inherit;
+      white-space: nowrap;
+    }
+    
+    p {
+      margin: 0;
+      color: var(--text-body-secondary);
     }
   }
 }
