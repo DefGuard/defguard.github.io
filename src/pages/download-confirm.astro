@@ -9,6 +9,7 @@ import YouTubeVideo from "../components/video/YouTubeVideo.astro";
 import { featuresTableData } from "../data/compare-table";
 import { Button } from "../components/buttons/Button/Button";
 import OrganizationJSONLD from "../scripts/OrganizationJSONLD.astro";
+import GithubReleases from "../components/GithubReleases/GithubReleases.astro";
 
 const title =
   "Zero-Trust WireGuard® 2FA/MFA VPN: Book a Demo";
@@ -74,17 +75,7 @@ const tags = [
               Release date: 14.05.2025
             </li>
           </ul>
-          <p>
-            In order to download lates version of the server please visit GitHub releases page.
-          </p>
-          <div class="learn-more">
-            <a
-              href="https://github.com/DefGuard/defguard/releases/tag/v1.3.1"
-              class="learn-more-link"
-            >
-              Download from GitHub
-            </a>
-          </div>
+          <GithubReleases repoUrl="https://github.com/DefGuard/defguard" count={5} />
         </div>
         <div slot="right">
           <NewsletterSection
