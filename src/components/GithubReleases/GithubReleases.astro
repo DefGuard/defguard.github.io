@@ -107,6 +107,11 @@ function getPlatformType(assetName: string): PlatformType {
               ]).flat();
             })()}
           </ul>
+          <div class="release-note">
+            For pre-release archives, visit the
+            <a href={`https://github.com/${owner}/${repo}/releases`} target="_blank" rel="noopener noreferrer">GitHub Releases page</a>
+            to access all assets, including source code.
+          </div>
         </div>
       )}
     </div>
@@ -264,6 +269,21 @@ function getPlatformType(assetName: string): PlatformType {
     }
     .download-separator p {
       width: 30%;
+    }
+  }
+
+  .release-note {
+    margin-top: 2rem;
+    text-align: center;
+    @include typography(footer);
+    color: var(--theme-text-light);
+    a {
+      color: #0c8ce0;
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+    a:hover {
+      color: #005fa3;
     }
   }
 </style> 
