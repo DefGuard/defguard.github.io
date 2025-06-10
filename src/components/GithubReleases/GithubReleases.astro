@@ -175,7 +175,7 @@ function getPlatformType(assetName: string): PlatformType {
 
   .download-button-wrapper {
     display: flex;
-    height: 78px;
+    height: 64px;
     padding: 0px 20px;
     justify-content: space-between;
     align-items: center;
@@ -186,9 +186,18 @@ function getPlatformType(assetName: string): PlatformType {
     cursor: pointer;
     transition: all 0.2s ease;
 
+    // Default state for SVG
+    svg {
+      path {
+        stroke: currentColor;
+        transition: stroke 0.2s ease;
+      }
+    }
+
     &:hover {
       background-color: var(--surface-frame-bg);
       border-color: #0c8ce0;
+      color: #0c8ce0; // Set color on the wrapper itself
 
       .download-text-wrapper {
         .download-filename {
@@ -198,14 +207,14 @@ function getPlatformType(assetName: string): PlatformType {
           color: var(--theme-text);
         }
       }
-
+      
       svg {
         path {
-          stroke: #0c8ce0 !important;
+          stroke: currentColor; // Use currentColor to inherit from parent
         }
       }
     }
-  }
+   }
 
   .download-text-wrapper {
     display: flex;
@@ -216,6 +225,7 @@ function getPlatformType(assetName: string): PlatformType {
 
     .download-filename {
       @include typography(paragraph);
+      font-size: calc(18px * var(--font-scale-factor));
       color: var(--theme-text);
     }
 
