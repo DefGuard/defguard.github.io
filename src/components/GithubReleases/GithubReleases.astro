@@ -76,23 +76,36 @@ function getPlatformType(assetName: string): PlatformType {
       {latestRelease.assets && latestRelease.assets.length > 0 && (
         <div class="assets-container">
           <ul class="assets-list">
-            {latestRelease.assets.map((asset: any) => (
-              <li class="asset-item">
-                <a 
-                  href={asset.browser_download_url} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  class="download-button-wrapper"
-                  title={`Size: ${(asset.size / 1024 / 1024).toFixed(2)} MB`}
-                >
-                  <div class="download-text-wrapper">
-                    <span class="download-filename">Download now</span>
-                    {getAssetDescription(asset.name) && <p>{getAssetDescription(asset.name)}</p>}
-                  </div>
-                  <DownloadIcon />
-                </a>
-              </li>
-            ))}
+            {(() => {
+              const assets = latestRelease.assets;
+              const tarGzIndex = assets.findIndex((a: any) => a.name.includes('.tar.gz'));
+              return assets.map((asset: any, idx: number) => [
+                (idx === tarGzIndex && tarGzIndex !== 0) ? (
+                  <li class="asset-separator">
+                    <div class="download-separator">
+                      <hr />
+                      <p>compressed archives</p>
+                      <hr />
+                    </div>
+                  </li>
+                ) : null,
+                <li class="asset-item">
+                  <a 
+                    href={asset.browser_download_url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="download-button-wrapper"
+                    title={`Size: ${(asset.size / 1024 / 1024).toFixed(2)} MB`}
+                  >
+                    <div class="download-text-wrapper">
+                      <span class="download-filename">Download now</span>
+                      {getAssetDescription(asset.name) && <p>{getAssetDescription(asset.name)}</p>}
+                    </div>
+                    <DownloadIcon />
+                  </a>
+                </li>
+              ]).flat();
+            })()}
           </ul>
         </div>
       )}
@@ -114,9 +127,6 @@ function getPlatformType(assetName: string): PlatformType {
     text-align: center;
   }
 
-  .release-container {
-    padding-top: 1rem;
-  }
 
   .release-header {
     margin-bottom: 0.5rem;
@@ -224,10 +234,36 @@ function getPlatformType(assetName: string): PlatformType {
     }
   }
 
+  .download-separator {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    align-self: stretch;
+    text-align: center;
+    @include typography(footer);
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+
+    hr {
+      flex: 1;
+      height: 1px;
+      background-color: var(--border-separator);
+      border: none;
+      margin: 0;
+    }
+
+    p {
+      width: 30%;
+    }
+  }
+
   @include break-down(sm) {
     P {
       font-size: 12px;
       font-weight: 300;
+    }
+    .download-separator p {
+      width: 30%;
     }
   }
 </style> 
