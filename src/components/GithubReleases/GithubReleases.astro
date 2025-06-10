@@ -63,16 +63,15 @@ function getPlatformType(assetName: string): PlatformType {
 ---
 
 <div class="github-releases">
-  <h3>Latest Stable Release</h3>
   {latestRelease && (
     <div class="release-container">
       <div class="release-header">
-        <a href={latestRelease.html_url} target="_blank" rel="noopener noreferrer" class="version-link">
-          <span class="version">{latestRelease.tag_name}</span>
-          <span class="date">
+        <div class="release-version-info">
+          Latest stable release: {latestRelease.tag_name.replace(/^v/, "")} | View changelog →
+          <a href={latestRelease.html_url} target="_blank" rel="noopener noreferrer">
             {new Date(latestRelease.published_at).toLocaleDateString()}
-          </span>
-        </a>
+          </a>
+        </div>
       </div>
       {latestRelease.assets && latestRelease.assets.length > 0 && (
         <div class="assets-container">
@@ -123,22 +122,21 @@ function getPlatformType(assetName: string): PlatformType {
     margin-bottom: 0.5rem;
   }
 
-  .version-link {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-decoration: none;
-    color: var(--theme-text);
-  }
+  .release-version-info {
+    @include typography(pricebox-list);
+    margin-bottom: 20px;
+    line-height: 1.2;
+    font-size: 16px;
 
-  .version {
-    font-weight: bold;
-    color: var(--theme-primary);
-  }
-
-  .date {
-    font-size: 0.9em;
-    color: var(--theme-text-light);
+    a {
+      text-decoration: underline;
+      color: inherit;
+      white-space: nowrap;
+      transition: color 0.2s;
+    }
+    a:hover {
+      color: #0c8ce0;
+    }
   }
 
   .assets-container {
