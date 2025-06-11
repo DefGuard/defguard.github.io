@@ -1,0 +1,408 @@
+---
+import Navigation from "../components/base/Navigation.astro";
+import HomeSection from "../components/home/HomeSection.astro";
+import ProductLayout from "../layouts/ProductLayout.astro";
+import Testimonials from "./_home/components/client-side/Testimonials/Testimonials";
+import type { TestimonialData } from "./_home/components/client-side/Testimonials/type";
+import { testimonialSchema } from "./_home/components/client-side/Testimonials/type";
+import FlexibleIdentitySection from "./_home/components/FlexibleIdentity/FlexibleIdentitySection.astro";
+import HomeHeader from "./_home/components/HomeHeader.astro";
+import Roadmap from "./_home/components/Roadmap/Roadmap.astro";
+import FlexibleSection from "../components/FlexibleSection.astro";
+import signinwith from "/public/images/data/signinwith.png";
+import enrollment from "/public/images/data/enrollment-screen.png";
+import api from "/public/images/data/api.png";
+import Image from "astro/components/Image.astro";
+import YouTubeVideo from "../components/video/YouTubeVideo.astro";
+import CTASection from "../components/CTASection.astro";
+const testimonialsImportData = await Astro.glob("../data/home/testimonials/**/*.md");
+
+const testimonialsData: Array<TestimonialData> = testimonialsImportData.map((val) => {
+  const toValidate = { ...val.frontmatter, markdownRaw: val.rawContent() };
+  const res = testimonialSchema.parse(toValidate);
+  return res;
+});
+
+const title = "Zero-Trust WireGuard® 2FA/MFA VPN Server";
+const featuredImage =
+  "github.com/DefGuard/defguard.github.io/raw/main/public/images/product/core/hero-image.png";
+const imageWidth = "1920";
+const imageHeight = "1080";
+const url = "https://defguard.net/server";
+const tags = [
+  "defguard",
+  "server",
+  "wireguard",
+  "vpn",
+  "mfa",
+  "2fa",
+  "WireGuard®",
+  "ldap",
+  "openldap",
+  "postgresql",
+  "postgres",
+  "openid",
+  "totp",
+  "webauthn",
+  "opensense",
+  "freebsd",
+  "rust",
+  "secure",
+  "docker",
+  "kubernetes",
+  "k8s",
+];
+---
+
+<ProductLayout
+  title={title}
+  featuredImage={featuredImage}
+  imageWidth={imageWidth}
+  imageHeight={imageHeight}
+  url={url}
+  tags={tags}
+>
+  <Navigation activeSlug="/server/" />
+
+  <main id="server-page">
+    <HomeHeader />
+
+    <FlexibleSection
+      title="Core Architecture: Native WireGuard® MFA Integration"
+      id="core-architecture"
+      variant="gray"
+      theme="light"
+    >
+      <div slot="left">
+        <p>
+          defguard implements Multi-Factor Authentication directly within the WireGuard® protocol,
+          providing a secure and efficient authentication layer without compromising performance.
+        </p>
+        <div class="learn-more">
+          <a
+            href="https://docs.defguard.net/in-depth/architecture"
+            class="learn-more-link"
+          >
+            Technical documentation: Architecture
+          </a>
+        </div>
+      </div>
+
+      <div slot="right">
+        <h3>Technical Benefits</h3>
+        <ul>
+          <li>
+            <strong>Protocol-Level Security</strong>: MFA integrated directly into WireGuard® protocol
+          </li>
+          <li>
+            <strong>Performance Optimized</strong>: Minimal latency impact on VPN connections
+          </li>
+          <li>
+            <strong>Standards Compliant</strong>: Implements NIS2 directive requirements for enterprise VPNs
+          </li>
+        </ul>
+      </div>
+    </FlexibleSection>
+
+    <FlexibleSection
+      title="Identity Management & Authentication"
+      id="identity-management"
+      variant="white"
+      theme="light"
+    >
+      <div slot="left">
+        <p>
+          Built-in OpenID Connect (OIDC) provider with comprehensive user management capabilities.
+          Supports multiple authentication methods and flexible user provisioning.
+        </p>
+        <p>
+          <strong>Authentication Methods:</strong>
+        </p>
+        <ul>
+          <li>TOTP (Time-based One-Time Password)</li>
+          <li>WebAuthn/FIDO2</li>
+          <li>YubiKey support</li>
+          <li>Custom authentication flows</li>
+        </ul>
+      </div>
+
+      <div slot="right">
+        <Image src={signinwith} alt="defguard authentication flow" />
+        <div class="learn-more">
+          <a
+            href="https://docs.defguard.net/admin-and-features/features-and-configuration/authentication"
+            class="learn-more-link"
+          >
+            Authentication configuration guide
+          </a>
+        </div>
+      </div>
+    </FlexibleSection>
+
+    <FlexibleSection
+      title="SSO & Directory Integration"
+      id="sso-integration"
+      variant="gray"
+      theme="light"
+    >
+      <div slot="left">
+        <strong>Identity Provider Integration</strong>
+        <p>
+          Seamless integration with enterprise identity providers and directory services.
+          Supports two-way synchronization for user accounts, groups, and permissions.
+        </p>
+        <p>
+          <strong>Supported Providers:</strong>
+        </p>
+        <ul>
+          <li>Active Directory / LDAP</li>
+          <li>Google Workspace</li>
+          <li>Microsoft Entra ID</li>
+          <li>Keycloak / Zitadel</li>
+          <li>Okta / JumpCloud</li>
+          <li>Authentik / Authelia</li>
+        </ul>
+      </div>
+
+      <div slot="right">
+        <strong>Technical Implementation</strong>
+        <p>
+          Real-time synchronization with configurable mapping rules and conflict resolution.
+          Supports custom attribute mapping and group-based access control.
+        </p>
+        <a
+          href="https://docs.defguard.net/enterprise/all-enteprise-features/ldap-and-active-directory-integration"
+        >
+          Directory integration documentation
+        </a>
+      </div>
+    </FlexibleSection>
+
+    <FlexibleSection
+      title="Access Control & Network Security"
+      id="access-control"
+      variant="white"
+      theme="light"
+    >
+      <div slot="left">
+        <p>
+          Granular access control with native firewall integrations. Implement Zero Trust
+          architecture with precise network segmentation and policy enforcement.
+        </p>
+        <p>
+          <strong>Supported Platforms:</strong>
+        </p>
+        <ul>
+          <li>Linux (iptables/nftables)</li>
+          <li>FreeBSD (pf)</li>
+          <li>OPNsense</li>
+          <li>Custom firewall rules</li>
+        </ul>
+      </div>
+
+      <div slot="right">
+        <YouTubeVideo
+          videoId="F61_5mR2UpM"
+          title="Access Control Implementation"
+          showControls={true}
+          showInfo={true}
+          allowFullscreen={true}
+          rel={false}
+        />
+      </div>
+    </FlexibleSection>
+
+    <FlexibleSection
+      title="Deployment & Infrastructure"
+      id="deployment"
+      variant="gray"
+      theme="light"
+    >
+      <div slot="left">
+        <p>
+          Flexible deployment options with support for containerized and traditional installations.
+          Designed for high availability and scalability.
+        </p>
+        <p>
+          <strong>Deployment Methods:</strong>
+        </p>
+        <ul>
+          <li>Docker / Docker Compose</li>
+          <li>Kubernetes (Helm charts available)</li>
+          <li>Traditional package installation</li>
+          <li>Custom deployment options</li>
+        </ul>
+      </div>
+
+      <div slot="right">
+        <YouTubeVideo
+          videoId="MqlE6ZTn0bg"
+          title="Deployment Guide"
+          showControls={true}
+          showInfo={true}
+          allowFullscreen={true}
+          rel={false}
+        />
+      </div>
+    </FlexibleSection>
+
+    <FlexibleSection
+      title="API & Automation"
+      id="api"
+      variant="white"
+      theme="light"
+    >
+      <div slot="left">
+        <Image src={api} alt="defguard API architecture" />
+      </div>
+
+      <div slot="right">
+        <p>
+          Comprehensive REST API with webhook support for automation and integration.
+          Full control over user management, access control, and system configuration.
+        </p>
+        <div class="learn-more">
+          <a
+            href="https://docs.defguard.net/enterprise/all-enteprise-features/api-tokens"
+            class="learn-more-link"
+          >
+            API documentation and examples
+          </a>
+        </div>
+      </div>
+    </FlexibleSection>
+
+    <FlexibleSection
+      title="Data Management & Compliance"
+      id="compliance"
+      variant="gray"
+      theme="light"
+    >
+      <div slot="left">
+        <p>
+          Complete control over data storage and logging. Supports compliance requirements
+          with comprehensive audit trails and data sovereignty options.
+        </p>
+        <p>
+          <strong>Compliance Features:</strong>
+        </p>
+        <ul>
+          <li>Detailed audit logging</li>
+          <li>Data encryption at rest</li>
+          <li>Compliance reporting</li>
+          <li>Custom retention policies</li>
+        </ul>
+      </div>
+
+      <div slot="right">
+        <p>
+          <strong>Technical Requirements:</strong>
+        </p>
+        <ul>
+          <li>PostgreSQL database</li>
+          <li>Configurable backup options</li>
+          <li>High availability support</li>
+          <li>Custom storage backends</li>
+        </ul>
+      </div>
+    </FlexibleSection>
+
+    <CTASection
+      title="Ready to Implement Enterprise-Grade WireGuard® VPN?"
+      description="Get started with our comprehensive documentation and technical resources."
+      buttonText="View Documentation"
+      buttonLink="https://docs.defguard.net"
+      id="cta-documentation"
+      variant="white"
+    />
+
+    <HomeSection id="testimonials" variant="gray">
+      <Testimonials data={testimonialsData} client:only="react" />
+    </HomeSection>
+
+    <Roadmap variant="white" />
+  </main>
+</ProductLayout>
+
+<style lang="scss" is:global>
+  #server-page {
+    --page-spacing-factor: 0.5;
+    @include break-up(lg) {
+      --page-spacing-factor: 1;
+    }
+
+    .flexible-content {
+      padding-top: page-spacing(80px);
+      padding-bottom: page-spacing(80px);
+
+      .section-title {
+        @include typography(section);
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      h3 {
+        @include typography(h3);
+        margin-top: 0;
+        margin-bottom: 1rem;
+      }
+
+      p {
+        @include typography(paragraph);
+        margin-bottom: 1.5rem;
+      }
+
+      .learn-more {
+        margin-bottom: 1.5rem;
+      }
+
+      .learn-more-link {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background-color: var(--primary-button-bg, #0c8ce0);
+        color: var(--primary-button-text, white);
+        border-radius: 6px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background-color 0.2s ease-in-out;
+
+        &:hover {
+          background-color: var(--primary-button-hover, #0a7bc5);
+        }
+      }
+
+      ul {
+        margin: 0 0 1.5rem 0;
+        padding-left: 20px;
+
+        li {
+          @include typography(paragraph);
+          margin-bottom: 0.5rem;
+        }
+      }
+
+      em {
+        font-size: 0.9em;
+        opacity: 0.8;
+      }
+
+      .column {
+        @media (max-width: 768px) {
+          &.right-column {
+            margin-top: 1rem;
+          }
+        }
+      }
+    }
+
+    #testimonials {
+      padding-top: page-spacing(100px);
+      padding-bottom: page-spacing(100px);
+    }
+
+    .scroll-section {
+      padding-top: page-spacing(200px);
+      padding-bottom: page-spacing(200px);
+    }
+  }
+</style> 

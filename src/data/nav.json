@@ -6,6 +6,12 @@
     "external": false
   },
   {
+    "display": "Server",
+    "url": "/server/",
+    "prefetch": true,
+    "external": false
+  },
+  {
     "display": "Client",
     "url": "/client/",
     "prefetch": true,
