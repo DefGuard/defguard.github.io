@@ -3,17 +3,18 @@ import { getCollection } from "astro:content";
 import Navigation from "../../components/base/Navigation.astro";
 import ProductLayout from "../../layouts/ProductLayout.astro";
 import ShareButtons from "../../components/ShareButtons.astro";
+import MoreStories from "../../components/MoreStories.astro";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blog");
   return blogEntries.map((entry) => ({
     params: { slug: entry.slug },
-    props: { entry },
+    props: { entry, allPosts: blogEntries },
   }));
 }
 
 // Get the blog entry from the props
-const { entry } = Astro.props;
+const { entry, allPosts } = Astro.props;
 
 // Get the rendered content
 const { Content } = await entry.render();
@@ -118,6 +119,8 @@ const hasCaseStudy = entry.data.companyName && entry.data.companyDescription && 
       </div>
     </article>
   </main>
+
+  <MoreStories currentSlug={entry.slug} posts={allPosts} />
 </ProductLayout>
 
 <style lang="scss">

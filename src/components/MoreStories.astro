@@ -1,0 +1,181 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  currentSlug: string;
+  posts: CollectionEntry<"blog">[];
+}
+
+const { currentSlug, posts } = Astro.props;
+
+// Format date function
+const formatDate = (date: Date) => {
+  return new Date(date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+};
+
+// Filter out current post and get 3 random posts
+const otherPosts = posts.filter((post) => post.slug !== currentSlug);
+const selectedPosts = otherPosts
+  .sort(() => Math.random() - 0.5)
+  .slice(0, 3);
+---
+
+<section class="more-stories">
+  <div class="container">
+    <h2 class="section-title">More Stories</h2>
+    <div class="posts-grid">
+      {
+        selectedPosts.map((post) => (
+          <article class="post-card">
+            <h3 class="post-title">
+              <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+            </h3>
+            <div class="post-meta">
+              <time datetime={post.data.publishDate.toISOString()}>
+                {formatDate(post.data.publishDate)}
+              </time>
+              {post.data.author && (
+                <span class="post-author">by {post.data.author}</span>
+              )}
+            </div>
+            {post.data.companyName && (
+              <p>
+                <span class="case-study-label">Case Study</span>
+              </p>
+            )}
+            <p class="post-description">{post.data.description}</p>
+            <a href={`/blog/${post.slug}`} class="read-more">
+              Read more →
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  .more-stories {
+    padding: 4rem 0;
+    background-color: #f5f5f5;
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .section-title {
+      margin: 0 0 2rem;
+      font-size: calc(2rem * var(--font-scale-factor));
+      font-weight: 400;
+      color: var(--text-body-primary);
+      text-align: center;
+    }
+
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 25px;
+
+      @media (min-width: 640px) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+      }
+
+      @media (min-width: 1024px) {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+      }
+    }
+
+    .post-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-width: 0 0 2px 0;
+      border-style: solid;
+      border-color: #f5f5f5;
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+      transform: translateY(0);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+
+      &:hover {
+        transform: translateY(-5px);
+        border-color: var(--primary-button-bg, #0c8ce0);
+      }
+
+      .post-title {
+        margin: 0 0 15px 0;
+        font-size: calc(1.5rem * var(--font-scale-factor));
+        font-weight: 400;
+
+        a {
+          color: var(--text-body-primary);
+          text-decoration: none;
+          &:hover {
+            color: var(--primary-button-bg, #0c8ce0);
+          }
+        }
+      }
+
+      .post-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        color: var(--text-body-secondary);
+        margin-bottom: 8px;
+        font-size: 14px;
+        font-weight: 300;
+
+        .post-author {
+          &::before {
+            content: "•";
+            margin-right: 0.5rem;
+          }
+        }
+      }
+
+      .post-description {
+        margin: 1rem 0;
+        line-height: 1.6;
+        font-weight: 300;
+        color: var(--text-body-primary);
+        font-size: calc(1rem * var(--font-scale-factor));
+      }
+
+      .case-study-label {
+        display: inline-block;
+        color: var(--surface-main-primary);
+        font-size: 10px;
+        font-weight: 400;
+        padding: 5px 10px;
+        margin-bottom: 0.5rem;
+        border-radius: 50px;
+        background-color: #f5f5f5;
+        border: 1px solid var(--surface-main-primary);
+      }
+
+      .read-more {
+        display: inline-block;
+        color: var(--primary-text-color);
+        font-size: 14px;
+        font-weight: 300;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+</style>
+
