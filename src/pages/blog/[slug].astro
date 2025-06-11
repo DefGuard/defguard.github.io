@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import Navigation from "../../components/base/Navigation.astro";
 import ProductLayout from "../../layouts/ProductLayout.astro";
+import ShareButtons from "../../components/ShareButtons.astro";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blog");
@@ -28,6 +29,9 @@ const formatDate = (date: Date) => {
 
 const title = `${entry.data.title} | defguard Blog`;
 const url = `https://defguard.net/blog/${entry.slug}`;
+
+// Check if case study metadata exists
+const hasCaseStudy = entry.data.companyName && entry.data.companyDescription && entry.data.companyWebsite;
 ---
 
 <ProductLayout
@@ -43,31 +47,66 @@ const url = `https://defguard.net/blog/${entry.slug}`;
   <main id="blog-post-page">
     <article class="blog-post">
       <div class="container">
-        <header class="post-header">
-          <h1>{entry.data.title}</h1>
-          <div class="post-meta">
-            <time datetime={entry.data.publishDate.toISOString()}>
-              {formatDate(entry.data.publishDate)}
-            </time>
-            {entry.data.author && <span class="post-author">by {entry.data.author}</span>}
+        <div class="content-wrapper">
+          <div class="share-column">
+            {hasCaseStudy && (
+              <div class="case-study-info">
+                <p class="label">Company</p>
+                <h3>{entry.data.companyName}</h3>
+                <p>{entry.data.companyDescription}</p>
+                <a href={entry.data.companyWebsite} target="_blank" rel="noopener noreferrer" class="company-website">
+                  {entry.data.companyWebsite}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="9"
+                    height="9"
+                    viewBox="0 0 12 13"
+                    fill="none"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M0 0.5H4V1.83333H1.33333V11.1667H10.6667V8.5H12V12.5H0V0.5ZM9.72386 1.83333H7.77778V0.5H12V4.72222H10.6667V2.77614L6.4714 6.9714L5.5286 6.0286L9.72386 1.83333Z"
+                      style={{ fill: "var(--text-body-primary)" }}
+                    />
+                  </svg>
+                </a>
+              </div>
+            )}
+            <ShareButtons url={url} title={entry.data.title} />
           </div>
-        </header>
+          
+          <div class="main-content">
+            <header class="post-header">
+              <h1>{entry.data.title}</h1>
+              <div class="post-meta">
+                <time datetime={entry.data.publishDate.toISOString()}>
+                  {formatDate(entry.data.publishDate)}
+                </time>
+                {entry.data.author && <span class="post-author">by {entry.data.author}</span>}
+              </div>
+            </header>
 
-        <div class="post-content">
-          <Content />
+            <div class="post-content">
+              <Content />
+            </div>
+
+            <footer class="post-footer">
+              <div class="post-navigation">
+                <a href="/blog" class="back-to-blog">← Back to Blog</a>
+              </div>
+            </footer>
+          </div>
         </div>
-
-        <footer class="post-footer">
-          <div class="post-navigation">
-            <a href="/blog" class="back-to-blog">← Back to Blog</a>
-          </div>
-        </footer>
       </div>
     </article>
   </main>
 </ProductLayout>
 
 <style lang="scss">
+  .label {
+    margin: unset !important;
+  }
   #blog-post-page {
     padding-top: var(--nav-height);
     background-color: var(--surface-frame-bg);
@@ -76,9 +115,63 @@ const url = `https://defguard.net/blog/${entry.slug}`;
       padding: 2rem 0 4rem;
 
       .container {
-        max-width: 800px;
+        max-width: 1200px;
         margin: 0 auto;
         padding: 0 1rem;
+      }
+
+      .content-wrapper {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .share-column {
+        width: 200px;
+        flex-shrink: 0;
+        padding-top: 210px;
+      }
+
+      .case-study-info {
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid var(--border-color, #eaeaea);
+
+        h3 {
+          font-size: calc(1rem * var(--font-scale-factor));
+          font-weight: 500;
+          color: var(--text-body-primary);
+          margin: 0 0 0.5rem;
+        }
+
+        p {
+          font-size: calc(0.9rem * var(--font-scale-factor));
+          line-height: 1.5;
+          color: var(--text-body-primary);
+          margin: 0 0 1rem;
+        }
+
+        .company-website {
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          color: var(--primary-color);
+          text-decoration: none;
+          font-size: calc(0.9rem * var(--font-scale-factor));
+
+          &:hover {
+            text-decoration: underline;
+          }
+
+          svg {
+            width: 9px;
+            height: 9px;
+          }
+        }
+      }
+
+      .main-content {
+        flex: 1;
+        max-width: 800px;
       }
 
       .post-header {
@@ -113,6 +206,11 @@ const url = `https://defguard.net/blog/${entry.slug}`;
 
       .post-content {
         margin-bottom: 3rem;
+
+        :global(hr) {
+          border: 1px solid var(--border-color, #eaeaea);
+          margin: 2rem 0;
+        }
 
         :global(h1) {
           font-size: calc(2.25rem * var(--font-scale-factor));
@@ -204,12 +302,9 @@ const url = `https://defguard.net/blog/${entry.slug}`;
           max-width: 100%;
           height: auto;
           display: block;
-          margin: 2.5rem auto; // Slightly increase margin for better spacing
-          border-radius: 4px; // Match other radius values
-          box-shadow: var(
-            --box-shadow,
-            0 4px 8px rgba(0, 0, 0, 0.08)
-          ); // Use CSS variable for shadow
+          margin: 2.5rem auto;
+          border-radius: 4px;
+          box-shadow: var(--box-shadow, 0 4px 8px rgba(0, 0, 0, 0.08));
         }
       }
 
@@ -229,6 +324,29 @@ const url = `https://defguard.net/blog/${entry.slug}`;
               text-decoration: underline;
             }
           }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    #blog-post-page {
+      .blog-post {
+        .content-wrapper {
+          flex-direction: column;
+        }
+
+        .share-column {
+          width: 100%;
+          order: 1;
+          margin-bottom: 2rem;
+          padding-top: 0;
+        }
+
+        .case-study-info {
+          text-align: left;
+          margin-bottom: 1rem;
+          padding-bottom: 1rem;
         }
       }
     }
