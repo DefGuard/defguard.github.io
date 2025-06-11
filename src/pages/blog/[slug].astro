@@ -28,7 +28,17 @@ const formatDate = (date: Date) => {
 };
 
 const title = `${entry.data.title} | defguard Blog`;
+const description = entry.data.description;
 const url = `https://defguard.net/blog/${entry.slug}`;
+
+// Get image from frontmatter or extract from content
+const content = entry.body;
+const imageMatch = content.match(/!\[.*?\]\((.*?)\)/);
+const imageUrl = entry.data.image 
+  ? `https://defguard.net${entry.data.image}`
+  : imageMatch 
+    ? `https://defguard.net${imageMatch[1]}` 
+    : "https://defguard.net/images/png/defguard.png";
 
 // Check if case study metadata exists
 const hasCaseStudy = entry.data.companyName && entry.data.companyDescription && entry.data.companyWebsite;
@@ -36,10 +46,11 @@ const hasCaseStudy = entry.data.companyName && entry.data.companyDescription && 
 
 <ProductLayout
   title={title}
+  description={description}
   url={url}
-  featuredImage="github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png"
-  imageWidth="1080"
-  imageHeight="540"
+  featuredImage={imageUrl}
+  imageWidth="1200"
+  imageHeight="630"
   tags={[]}
 >
   <Navigation activeSlug="/blog/" />
