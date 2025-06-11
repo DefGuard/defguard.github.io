@@ -65,6 +65,12 @@ const hasCaseStudy = entry.data.companyName && entry.data.companyDescription && 
                 <p class="label">Company</p>
                 <h3>{entry.data.companyName}</h3>
                 <p>{entry.data.companyDescription}</p>
+                {entry.data.companySegment && (
+                  <div class="company-segment">
+                    <p class="label">Segment</p>
+                    <p>{entry.data.companySegment}</p>
+                  </div>
+                )}
                 <a href={entry.data.companyWebsite} target="_blank" rel="noopener noreferrer" class="company-website">
                   {entry.data.companyWebsite}
                   <svg
@@ -117,7 +123,10 @@ const hasCaseStudy = entry.data.companyName && entry.data.companyDescription && 
 <style lang="scss">
   .label {
     margin: unset !important;
+    font-size: calc(0.8rem * var(--font-scale-factor)) !important;
+    color: var(--text-body-secondary) !important;
   }
+  
   #blog-post-page {
     padding-top: var(--nav-height);
     background-color: var(--surface-frame-bg);
@@ -159,6 +168,14 @@ const hasCaseStudy = entry.data.companyName && entry.data.companyDescription && 
           color: var(--text-body-primary);
           margin: 0 0 1rem;
           text-align: justify;
+        }
+
+        .company-segment {
+          margin-bottom: 1rem;
+
+          p {
+            margin: 0;
+          }
         }
 
         .company-website {

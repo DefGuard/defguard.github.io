@@ -11,6 +11,7 @@ const blogSchema = z.object({
   companyName: z.string().optional(),
   companyDescription: z.string().optional(),
   companyWebsite: z.string().optional(),
+  companySegment: z.string().optional(),
   image: z.string().optional(),
 });
 
