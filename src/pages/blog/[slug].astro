@@ -113,6 +113,11 @@ const hasCaseStudy = entry.data.companyName && entry.data.companyDescription && 
               <div class="post-navigation">
                 <a href="/blog" class="back-to-blog">← Back to Blog</a>
               </div>
+              <div class="post-cta"><p>Ready to explore Defguard?</p></div>
+              <div class="post-cta-buttons">
+                <a href="/pricing#get-evaluation-license" class="book-demo-button">Get Evaluation License</a>
+                <a href="/book-a-demo" class="book-demo-button">Book a Demo</a>
+              </div>
             </footer>
           </div>
         </div>
@@ -343,9 +348,10 @@ const hasCaseStudy = entry.data.companyName && entry.data.companyDescription && 
         padding-top: 1.5rem;
         border-top: 1px solid var(--border-color, #eaeaea);
 
-        .post-navigation {
+        .post-navigation, .post-cta-buttons {
           display: flex;
           justify-content: space-between;
+          align-items: center;
 
           .back-to-blog {
             color: var(--primary-text-color);
@@ -355,12 +361,54 @@ const hasCaseStudy = entry.data.companyName && entry.data.companyDescription && 
               text-decoration: underline;
             }
           }
+
+          .book-demo-button {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            color: var(--text-body-primary);
+            text-decoration: none;
+            border-radius: 100px;
+            font-weight: 300;
+            transition: border 0.2s ease;
+            border: 1px solid var(--text-body-primary);
+            margin: 0.5rem 0;
+            font-size: calc(1.5rem * var(--font-scale-factor)); 
+
+
+            &:hover {
+              border: 1px solid var(--primary-button-bg, #0c8ce0);
+              text-decoration: none;
+            }
+          }
+        }
+
+        .post-cta {
+          border-top: 1px solid var(--primary-button-bg, #0c8ce0);
+          padding-top: 2rem;
+          p {
+            text-align: center;
+          }
+        }
+        .post-cta-buttons {
+          padding: 2rem 0 1rem 0;
+          justify-content: center; //or space-between?
+          gap: 40px;
+          @include break-down(md) {
+            display: block;
+            text-align: center;
+            .book-demo-button {
+              font-size: calc(1.2rem * var(--font-scale-factor)); 
+            }
+          }
+        }
+        .post-navigation{
+          padding-bottom: 2rem;
         }
       }
     }
   }
 
-  @media (max-width: 768px) {
+  @include break-down(sm) {
     #blog-post-page {
       .blog-post {
         .content-wrapper {
