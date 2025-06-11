@@ -26,7 +26,7 @@ const selectedPosts = otherPosts
 
 <section class="more-stories">
   <div class="container">
-    <h2 class="section-title">More Stories</h2>
+    <p class="section-title">More Stories</h2>
     <div class="posts-grid">
       {
         selectedPosts.map((post) => (
@@ -71,10 +71,11 @@ const selectedPosts = otherPosts
 
     .section-title {
       margin: 0 0 2rem;
-      font-size: calc(2rem * var(--font-scale-factor));
+      font-size: calc(1rem * var(--font-scale-factor));
       font-weight: 400;
       color: var(--text-body-primary);
-      text-align: center;
+      text-align: left;
+      padding-left: 20px;
     }
 
     .posts-grid {
