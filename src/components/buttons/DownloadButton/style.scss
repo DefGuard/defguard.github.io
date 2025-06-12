@@ -65,7 +65,7 @@
 
     .download-main {
       display: flex;
-      height: 78px;
+      height: 64px;
       padding: 0px 20px;
       justify-content: space-between;
       align-items: center;
@@ -98,6 +98,7 @@
         justify-content: flex-start;
         align-items: flex-start;
         @include typography(paragraph);
+        font-size: calc(18px * var(--font-scale-factor));
         transition: color 0.2s ease;
 
         p {
