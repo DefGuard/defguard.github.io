@@ -16,7 +16,9 @@ export const useBreakpoint = (config: BreakpointConfig) => {
 
     handleResize();
     window.addEventListener("resize", handleResize);
-    return () => { window.removeEventListener("resize", handleResize); };
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, [config.desktop]);
 
   return { breakpoint };

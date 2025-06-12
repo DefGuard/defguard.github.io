@@ -19,14 +19,12 @@ const formatDate = (date: Date) => {
 
 // Filter out current post and get 3 random posts
 const otherPosts = posts.filter((post) => post.slug !== currentSlug);
-const selectedPosts = otherPosts
-  .sort(() => Math.random() - 0.5)
-  .slice(0, 3);
+const selectedPosts = otherPosts.sort(() => Math.random() - 0.5).slice(0, 3);
 ---
 
 <section class="more-stories">
   <div class="container">
-    <p class="section-title">More Stories</h2>
+    <p class="section-title">More Stories</p>
     <div class="posts-grid">
       {
         selectedPosts.map((post) => (
@@ -38,9 +36,7 @@ const selectedPosts = otherPosts
               <time datetime={post.data.publishDate.toISOString()}>
                 {formatDate(post.data.publishDate)}
               </time>
-              {post.data.author && (
-                <span class="post-author">by {post.data.author}</span>
-              )}
+              {post.data.author && <span class="post-author">by {post.data.author}</span>}
             </div>
             {post.data.companyName && (
               <p>
@@ -179,4 +175,3 @@ const selectedPosts = otherPosts
     }
   }
 </style>
-

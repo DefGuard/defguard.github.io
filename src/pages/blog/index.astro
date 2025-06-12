@@ -83,7 +83,9 @@ const url = "https://defguard.net/blog";
                     )}
                   </div>
                   {post.data.companyName && (
-                    <p><span class="case-study-label">Case Study</span></p>
+                    <p>
+                      <span class="case-study-label">Case Study</span>
+                    </p>
                   )}
                   <p class="post-description">{post.data.description}</p>
                   <a href={`/blog/${post.slug}`} class="read-more">

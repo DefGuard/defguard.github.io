@@ -12,7 +12,15 @@ interface Props {
   description?: string;
 }
 
-const { title, featuredImage, imageWidth, imageHeight, url, tags = [], description } = Astro.props;
+const {
+  title,
+  featuredImage,
+  imageWidth,
+  imageHeight,
+  url,
+  tags = [],
+  description,
+} = Astro.props;
 const defaultDescription =
   "defguard - enterprise open-source SSO&VPN - the only open-source solution with real WireGuard® MFA/2FA & integrated OpenID Connect SSO";
 ---

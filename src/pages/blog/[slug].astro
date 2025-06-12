@@ -35,14 +35,15 @@ const url = `https://defguard.net/blog/${entry.slug}`;
 // Get image from frontmatter or extract from content
 const content = entry.body;
 const imageMatch = content.match(/!\[.*?\]\((.*?)\)/);
-const imageUrl = entry.data.image 
+const imageUrl = entry.data.image
   ? `https://defguard.net${entry.data.image}`
-  : imageMatch 
-    ? `https://defguard.net${imageMatch[1]}` 
+  : imageMatch
+    ? `https://defguard.net${imageMatch[1]}`
     : "https://defguard.net/images/png/defguard.png";
 
 // Check if case study metadata exists
-const hasCaseStudy = entry.data.companyName && entry.data.companyDescription && entry.data.companyWebsite;
+const hasCaseStudy =
+  entry.data.companyName && entry.data.companyDescription && entry.data.companyWebsite;
 ---
 
 <ProductLayout
@@ -61,39 +62,46 @@ const hasCaseStudy = entry.data.companyName && entry.data.companyDescription && 
       <div class="container">
         <div class="content-wrapper">
           <div class="share-column">
-            {hasCaseStudy && (
-              <div class="case-study-info">
-                <p class="label">Company</p>
-                <h3>{entry.data.companyName}</h3>
-                <p>{entry.data.companyDescription}</p>
-                {entry.data.companySegment && (
-                  <div class="company-segment">
-                    <p class="label">Segment</p>
-                    <p>{entry.data.companySegment}</p>
-                  </div>
-                )}
-                <a href={entry.data.companyWebsite} target="_blank" rel="noopener noreferrer" class="company-website">
-                  {entry.data.companyWebsite}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="9"
-                    height="9"
-                    viewBox="0 0 12 13"
-                    fill="none"
+            {
+              hasCaseStudy && (
+                <div class="case-study-info">
+                  <p class="label">Company</p>
+                  <h3>{entry.data.companyName}</h3>
+                  <p>{entry.data.companyDescription}</p>
+                  {entry.data.companySegment && (
+                    <div class="company-segment">
+                      <p class="label">Segment</p>
+                      <p>{entry.data.companySegment}</p>
+                    </div>
+                  )}
+                  <a
+                    href={entry.data.companyWebsite}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="company-website"
                   >
-                    <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
-                      d="M0 0.5H4V1.83333H1.33333V11.1667H10.6667V8.5H12V12.5H0V0.5ZM9.72386 1.83333H7.77778V0.5H12V4.72222H10.6667V2.77614L6.4714 6.9714L5.5286 6.0286L9.72386 1.83333Z"
-                      style={{ fill: "var(--text-body-primary)" }}
-                    />
-                  </svg>
-                </a>
-              </div>
-            )}
+                    {entry.data.companyWebsite}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="9"
+                      height="9"
+                      viewBox="0 0 12 13"
+                      fill="none"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M0 0.5H4V1.83333H1.33333V11.1667H10.6667V8.5H12V12.5H0V0.5ZM9.72386 1.83333H7.77778V0.5H12V4.72222H10.6667V2.77614L6.4714 6.9714L5.5286 6.0286L9.72386 1.83333Z"
+                        style={{ fill: "var(--text-body-primary)" }}
+                      />
+                    </svg>
+                  </a>
+                </div>
+              )
+            }
             <ShareButtons url={url} title={entry.data.title} />
           </div>
-          
+
           <div class="main-content">
             <header class="post-header">
               <h1>{entry.data.title}</h1>
@@ -101,7 +109,11 @@ const hasCaseStudy = entry.data.companyName && entry.data.companyDescription && 
                 <time datetime={entry.data.publishDate.toISOString()}>
                   {formatDate(entry.data.publishDate)}
                 </time>
-                {entry.data.author && <span class="post-author">by {entry.data.author}</span>}
+                {
+                  entry.data.author && (
+                    <span class="post-author">by {entry.data.author}</span>
+                  )
+                }
               </div>
             </header>
 
@@ -115,8 +127,14 @@ const hasCaseStudy = entry.data.companyName && entry.data.companyDescription && 
               </div>
               <div class="post-cta"><p>Ready to explore Defguard?</p></div>
               <div class="post-cta-buttons">
-                <a href={`/pricing?utm_source=blog&utm_medium=post&utm_campaign=${entry.slug}#get-evaluation-license`} class="book-demo-button">Get Evaluation License</a>
-                <a href={`/book-a-demo?utm_source=blog&utm_medium=post&utm_campaign=${entry.slug}`} class="book-demo-button">Book a Demo</a>
+                <a
+                  href={`/pricing?utm_source=blog&utm_medium=post&utm_campaign=${entry.slug}#get-evaluation-license`}
+                  class="book-demo-button">Get Evaluation License</a
+                >
+                <a
+                  href={`/book-a-demo?utm_source=blog&utm_medium=post&utm_campaign=${entry.slug}`}
+                  class="book-demo-button">Book a Demo</a
+                >
               </div>
             </footer>
           </div>
@@ -129,34 +147,57 @@ const hasCaseStudy = entry.data.companyName && entry.data.companyDescription && 
 </ProductLayout>
 
 <style lang="scss">
+  // Global overrides for proper scroll behavior
+  :global(html),
+  :global(body) {
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+  }
+
   .label {
     margin: unset !important;
     font-size: calc(0.8rem * var(--font-scale-factor)) !important;
     color: var(--text-body-secondary) !important;
   }
-  
+
   #blog-post-page {
     padding-top: var(--nav-height);
     background-color: var(--surface-frame-bg);
+    position: relative;
+    min-height: 100vh;
+    overflow: unset;
 
     .blog-post {
       padding: 2rem 0 4rem;
+      position: relative;
 
       .container {
         max-width: 1200px;
         margin: 0 auto;
         padding: 0 1rem;
+        position: relative;
+        overflow: unset;
       }
 
       .content-wrapper {
         display: flex;
         gap: 2rem;
+        align-items: flex-start;
+        position: relative;
+        overflow: unset;
       }
 
       .share-column {
         width: 200px;
         flex-shrink: 0;
-        padding-top: 210px;
+        position: -webkit-sticky;
+        position: sticky;
+        top: calc(var(--nav-height) + 2rem);
+        margin-top: 2rem;
+        height: fit-content;
+        z-index: 2;
+        transform: translate3d(0, 0, 0);
+        padding-top: 180px;
       }
 
       .case-study-info {
@@ -208,6 +249,7 @@ const hasCaseStudy = entry.data.companyName && entry.data.companyDescription && 
       .main-content {
         flex: 1;
         max-width: 800px;
+        position: relative;
       }
 
       .post-header {
@@ -348,7 +390,8 @@ const hasCaseStudy = entry.data.companyName && entry.data.companyDescription && 
         padding-top: 1.5rem;
         border-top: 1px solid var(--border-color, #eaeaea);
 
-        .post-navigation, .post-cta-buttons {
+        .post-navigation,
+        .post-cta-buttons {
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -372,8 +415,7 @@ const hasCaseStudy = entry.data.companyName && entry.data.companyDescription && 
             transition: border 0.2s ease;
             border: 1px solid var(--text-body-primary);
             margin: 0.5rem 0;
-            font-size: calc(1.5rem * var(--font-scale-factor)); 
-
+            font-size: calc(1.5rem * var(--font-scale-factor));
 
             &:hover {
               border: 1px solid var(--primary-button-bg, #0c8ce0);
@@ -397,11 +439,11 @@ const hasCaseStudy = entry.data.companyName && entry.data.companyDescription && 
             display: block;
             text-align: center;
             .book-demo-button {
-              font-size: calc(1.2rem * var(--font-scale-factor)); 
+              font-size: calc(1.2rem * var(--font-scale-factor));
             }
           }
         }
-        .post-navigation{
+        .post-navigation {
           padding-bottom: 2rem;
         }
       }
@@ -416,6 +458,7 @@ const hasCaseStudy = entry.data.companyName && entry.data.companyDescription && 
         }
 
         .share-column {
+          position: static;
           width: 100%;
           order: 1;
           margin-bottom: 2rem;
