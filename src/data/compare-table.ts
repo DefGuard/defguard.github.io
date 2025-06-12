@@ -428,7 +428,7 @@ export const featuresTableData: FeatureTableData = {
       title: "Security Architecture and Deployment",
       rows: [
         {
-          description: "Secure rchitecture based on network segments (DMZ/Intranet/...)",
+          description: "Secure architecture based on network segments (DMZ/Intranet/...)",
           features: [
             {
               status: "yes",
