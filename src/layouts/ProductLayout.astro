@@ -45,6 +45,27 @@ const defaultDescription =
 
 <style lang="scss" is:global>
   .product-main {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    
+    @media (max-width: 991px) {
+      padding: 0;
+      
+      #main-header,
+      .product-features,
+      #matrix,
+      #instances,
+      #vpn {
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+    }
+    
     #main-header {
       display: flex;
       flex-flow: column;
@@ -91,6 +112,8 @@ const defaultDescription =
     }
     #matrix {
       width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
 
       h2 {
         @include typography(section);
@@ -105,6 +128,22 @@ const defaultDescription =
         column-gap: 20px;
         align-items: center;
         justify-content: flex-start;
+        
+        @media (max-width: 991px) {
+          flex-flow: column;
+          align-items: flex-start;
+          row-gap: 20px;
+          width: 100%;
+          max-width: 100%;
+          overflow: hidden;
+          
+          img {
+            max-width: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+          }
+        }
 
         p {
           @include typography(paragraph);
@@ -156,13 +195,37 @@ const defaultDescription =
       justify-content: center;
       column-gap: 25px;
       row-gap: 50px;
-      overflow-x: clip;
-
+      overflow: hidden;
+      
       grid-template-columns: 1fr;
-
+      
       /* Ensure grid stays within container on all screen sizes */
       @media (min-width: 768px) and (max-width: 991px) {
         column-gap: 15px;
+        max-width: 100%;
+        overflow: hidden;
+      }
+      
+      /* Additional breakpoint handling */
+      @media (max-width: 991px) {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+        
+        .image-container {
+          margin: 0;
+          width: 100%;
+          max-width: 100%;
+          
+          img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+          }
+        }
       }
 
       @include break-up(lg) {

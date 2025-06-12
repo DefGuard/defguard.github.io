@@ -170,6 +170,9 @@ const hasCaseStudy =
     .blog-post {
       padding: 2rem 0 4rem;
       position: relative;
+      @include break-down(md) {
+          padding: 1rem 0 1rem;
+      }
 
       .container {
         max-width: 1200px;
@@ -197,6 +200,9 @@ const hasCaseStudy =
         height: fit-content;
         z-index: 2;
         transform: translate3d(0, 0, 0);
+        @include break-down(md) {
+          margin: 20px;
+        }
       }
 
       .case-study-info {
@@ -449,7 +455,7 @@ const hasCaseStudy =
     }
   }
 
-  @include break-down(sm) {
+  @include break-down(md) {
     #blog-post-page {
       .blog-post {
         .content-wrapper {
@@ -459,9 +465,12 @@ const hasCaseStudy =
         .share-column {
           position: static;
           width: 100%;
+          //max-width: 640px;
           order: 1;
           margin-bottom: 2rem;
-          padding-top: 0;
+          padding: 0;
+          margin-left: unset;
+
         }
 
         .case-study-info {

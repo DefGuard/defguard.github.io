@@ -50,7 +50,7 @@
       grid-template-columns: repeat(auto-fit, 255px);
       column-gap: 25px;
       row-gap: 25px;
-      justify-content: flex-start;
+      justify-content: center;
     }
 
     @include break-up(xl) {

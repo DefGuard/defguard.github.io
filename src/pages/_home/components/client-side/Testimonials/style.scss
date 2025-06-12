@@ -1,12 +1,16 @@
 .testimonials-content {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  
   & > p {
     @include typography(h3);
     padding-bottom: 8px;
   }
-
+  
   & > .track {
     padding-bottom: 32px;
-
+    
     .testimonial-container {
       box-sizing: border-box;
       width: 100%;
@@ -61,7 +65,12 @@
         align-items: flex-end;
         justify-content: flex-start;
         column-gap: 8px;
-
+        
+        @include break-down(lg) {
+          flex-wrap: wrap;
+          max-width: 100%;
+        }
+        
         @include break-up(lg) {
           grid-column: 1 / 2;
           display: flex;
