@@ -12,7 +12,7 @@ type DownloadButtonConfig = {
 };
 
 const OWNER = "DefGuard";
-const REPO = "defguard";
+const REPO = "client";
 
 export const DownloadButtonList = () => {
   const [isLoading, setIsLoading] = useState(true);
