@@ -59,9 +59,9 @@ const { sections } = Astro.props;
           padding: 0.5rem 1rem;
           text-decoration: none;
           color: var(--text-body-primary);
-          border-radius: 4px;
           transition: all 0.2s ease;
           @include typography(menu);
+          font-size: calc(1rem * var(--font-scale-factor));
 
           &:hover {
             background: var(--surface-main-primary);
@@ -69,8 +69,7 @@ const { sections } = Astro.props;
           }
 
           &.active {
-            background: var(--surface-main-primary);
-            color: white;
+            border-right: 4px solid var(--surface-main-primary);
           }
         }
       }
