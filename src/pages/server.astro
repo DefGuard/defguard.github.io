@@ -329,17 +329,13 @@ const sections = [
         <CTASection
           title="Ready to Implement Enterprise-Grade WireGuard® VPN?"
           description="Get started with our comprehensive documentation and technical resources."
-          buttonText="View Documentation"
-          buttonLink="https://docs.defguard.net"
+          buttonText="Book a Demo"
+          buttonLink="/book-a-demo?utm_source=server"
           id="cta-documentation"
           variant="white"
         />
 
-        <HomeSection id="testimonials" variant="gray">
-          <Testimonials data={testimonialsData} client:only="react" />
-        </HomeSection>
-
-        <Roadmap variant="white" />
+        <!-- <Roadmap variant="white" /> -->
       </div>
     </div>
   </main>
@@ -386,9 +382,14 @@ const sections = [
     .main-content {
       .flexible-section{
         scroll-margin-top: 75px;
-        padding: 25px 0;
+        padding: 20px 0;
+        margin-bottom: 90px;
+        //border: 1px solid var(--border-separator);
+        background-color: var(--surface-nav-bg);
+        border-radius: 10px;
+        box-shadow: var(--box-shadow);
       }
-      
+
       .flexible-content {
         .section-title {
           @include typography(section);
@@ -412,14 +413,17 @@ const sections = [
         }
 
         .learn-more-link {
+          @include typography(paragraph);
           display: inline-block;
           padding: 0.75rem 1.5rem;
           background-color: var(--primary-button-bg, #0c8ce0);
           color: var(--primary-button-text, white);
           border-radius: 6px;
-          font-weight: 600;
+          font-weight: 300;
+          font-size: calc(1rem * var(--font-scale-factor));
           text-decoration: none;
           transition: background-color 0.2s ease-in-out;
+
 
           &:hover {
             background-color: var(--primary-button-hover, #0a7bc5);
