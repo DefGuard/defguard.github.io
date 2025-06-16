@@ -384,10 +384,12 @@ const sections = [
     }
 
     .main-content {
+      .flexible-section{
+        scroll-margin-top: 75px;
+        padding: 25px 0;
+      }
+      
       .flexible-content {
-        padding-top: page-spacing(80px);
-        padding-bottom: page-spacing(80px);
-
         .section-title {
           @include typography(section);
           padding-bottom: 1rem;
