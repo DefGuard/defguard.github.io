@@ -78,8 +78,9 @@ const sections = [
 
   <main id="server-page">
     <HomeHeader />
-
-    <div class="content-wrapper">
+    
+    <!-- New content wrapper that appears after header -->
+    <div class="page-content-wrapper">
       <aside class="sidebar-container">
         <ServerSidebar sections={sections} />
       </aside>
@@ -352,35 +353,31 @@ const sections = [
       --page-spacing-factor: 1;
     }
 
-    .content-wrapper {
+    .page-content-wrapper {
       display: block;
-      max-width: var(--content-width);
-      margin: 0 auto;
-      padding: 0 1rem;
+      width: 100%;
       position: relative;
-
+      
       @include break-up(lg) {
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
         padding: 0 2rem;
-        // Add left margin to account for fixed sidebar
-        margin-left: calc(250px + 4rem); // sidebar width + padding
-        max-width: calc(var(--content-width) - 250px - 4rem);
+        align-items: start;
       }
     }
 
     .sidebar-container {
       display: none;
-      height: 100%;
-
+      
       @include break-up(lg) {
         display: block;
-        position: fixed;
-        left: 2rem;
+        position: sticky;
         top: calc(var(--nav-height, 75px) + 2rem);
-        width: 250px;
         height: fit-content;
-        // Ensure z-index to stay above content
         z-index: 10;
-        // Account for viewport height constraints
         max-height: calc(100vh - var(--nav-height, 75px) - 4rem);
         overflow-y: auto;
       }
