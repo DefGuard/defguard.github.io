@@ -4,12 +4,14 @@ interface Props {
     id: string;
     title: string;
   }>;
+  title?: string;
 }
 
-const { sections } = Astro.props;
+const { sections, title = "Main Features" } = Astro.props;
 ---
 
 <nav class="server-sidebar">
+  <p>{title}</p>
   <ul>
     {sections.map((section) => (
       <li>
@@ -40,6 +42,13 @@ const { sections } = Astro.props;
     &::-webkit-scrollbar-thumb {
       background: var(--text-body-secondary);
       border-radius: 2px;
+    }
+    
+    p{
+      //margin-left: 1rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--text-body-secondary);
+      @include typography(paragraph)
     }
 
     ul {

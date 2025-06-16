@@ -77,12 +77,16 @@ const sections = [
   <Navigation activeSlug="/server/" />
 
   <main id="server-page">
-    <HomeHeader />
+    <HomeHeader
+      trustedBy={false}
+      title="Zero-Trust VPN Server with MFA"
+      description="Deploy and manage your own WireGuard®-based VPN server with Defguard. Built for zero-trust environments, Defguard integrates directly with your infrastructure, providing native support for Multi-Factor Authentication (MFA), fine-grained access control, and secure identity management—without relying on third-party cloud services."
+    />
     
     <!-- New content wrapper that appears after header -->
     <div class="page-content-wrapper">
       <aside class="sidebar-container">
-        <ServerSidebar sections={sections} />
+        <ServerSidebar sections={sections} title="Main features"/>
       </aside>
 
       <div class="main-content">
