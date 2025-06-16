@@ -1,0 +1,122 @@
+---
+interface Props {
+  sections: Array<{
+    id: string;
+    title: string;
+  }>;
+}
+
+const { sections } = Astro.props;
+---
+
+<nav class="server-sidebar">
+  <ul>
+    {sections.map((section) => (
+      <li>
+        <a href={`#${section.id}`} data-section={section.id}>
+          {section.title}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style lang="scss">
+  .server-sidebar {
+    height: fit-content;
+    padding: 1rem;
+    background: var(--surface-frame-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--text-body-secondary);
+      border-radius: 2px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      li {
+        margin: 0;
+        padding: 0;
+
+        a {
+          display: block;
+          padding: 0.5rem 1rem;
+          text-decoration: none;
+          color: var(--text-body-primary);
+          border-radius: 4px;
+          transition: all 0.2s ease;
+          @include typography(menu);
+
+          &:hover {
+            background: var(--surface-main-primary);
+            color: white;
+          }
+
+          &.active {
+            background: var(--surface-main-primary);
+            color: white;
+          }
+        }
+      }
+    }
+  }
+</style>
+
+<script>
+  // Intersection Observer to highlight active section
+  const observerOptions = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.5,
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const id = entry.target.getAttribute("id");
+      const link = document.querySelector(`[data-section="${id}"]`);
+      
+      if (entry.isIntersecting) {
+        link?.classList.add("active");
+      } else {
+        link?.classList.remove("active");
+      }
+    });
+  }, observerOptions);
+
+  // Observe all sections
+  document.querySelectorAll("section[id]").forEach((section) => {
+    observer.observe(section);
+  });
+
+  // Smooth scroll for navigation
+  document.querySelectorAll(".server-sidebar a").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute("href")?.substring(1);
+      const targetElement = document.getElementById(targetId!);
+      
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    });
+  });
+</script> 
