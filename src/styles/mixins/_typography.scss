@@ -24,32 +24,32 @@
 
   @if $key == "paragraph" {
     font-weight: 300;
-    @include font-scalable(20px);
+    @include font-scalable(18px);
   }
 
   @if $key == "title" {
     font-weight: 400;
     line-height: 105%;
-    @include font-scalable(80px);
+    @include font-scalable(72px);
 
     @include break-down(md) {
-      @include font-scalable(65px);
+      @include font-scalable(56px);
     }
   }
 
   @if $key == "section" {
     font-weight: 400;
-    @include font-scalable(48px);
+    @include font-scalable(32px);
   }
 
   @if $key == "menu" {
     font-weight: 300;
-    @include font-scalable(18px);
+    @include font-scalable(16px);
   }
 
   @if $key == "h2" {
     font-weight: 300;
-    @include font-scalable(24px);
+    @include font-scalable(22px);
   }
 
   @if $key == "h3" {

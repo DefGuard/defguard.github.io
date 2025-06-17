@@ -16,6 +16,10 @@
 
     @include typography(paragraph);
     color: #222;
+    &:focus {
+      outline: 2px solid var(--surface-main-primary);
+      border-color: var(--surface-main-primary);
+    }
   }
 
   label {
@@ -33,6 +37,10 @@
     width: 100%;
     border: 1px solid var(--text-body-primary, #222);
     max-width: 100%;
+    &:focus {
+      outline: 2px solid var(--surface-main-primary);
+      border-color: var(--surface-main-primary);
+    }
   }
 
   .double-inputs {
