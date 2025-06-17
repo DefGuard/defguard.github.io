@@ -46,7 +46,7 @@ const { trustedBy = true, title, description } = Astro.props;
   <!-- <div class="hero-image-container">
     <Image src={headerImage} alt="Defguard Zero-Trust VPN diagram" loading={"eager"} />
   </div> -->
-  {trustedBy && <TrustedBy />}
+  {trustedBy && <TrustedBy forceScroll={true} />}
 </HomeSection>
 
 <style lang="scss" is:global>

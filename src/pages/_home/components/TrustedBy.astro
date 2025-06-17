@@ -8,9 +8,15 @@ import prusa from "./assets/trustedBy/prusa.png";
 import acquinox from "./assets/trustedBy/acquinox.png";
 import truevo from "./assets/trustedBy/truevo.png";
 import hostinger from "./assets/trustedBy/hostinger.webp";
+
+interface Props {
+  forceScroll?: boolean;
+}
+
+const { forceScroll = false } = Astro.props;
 ---
 
-<div id="trusted-by">
+<div id="trusted-by" class:list={[{ "force-scroll": forceScroll }]}>
   <p>Trusted by</p>
   <div class="track-container">
     <div class="track">
@@ -23,7 +29,6 @@ import hostinger from "./assets/trustedBy/hostinger.webp";
       <Image src={truevo} alt="truevo logo image" />
       <Image src={deepImage} alt="deepimage logo image" />
 
-      <!-- Duplicate logos for seamless scrolling -->
       <div class="scroll-duplicate">
         <Image src={prusa} alt="prusa logo image" />
         <!-- <Image src={penske} alt="team penske logo image" /> -->
@@ -74,13 +79,13 @@ import hostinger from "./assets/trustedBy/hostinger.webp";
       width: 100%;
       display: flex;
       align-items: center;
-      column-gap: 30px;
+      column-gap: 50px;
 
       @include break-up(lg) {
         flex-flow: row wrap;
         justify-content: space-between;
         row-gap: 8px;
-        column-gap: 10px;
+        column-gap: 50px;
       }
 
       @include break-down(lg) {
@@ -97,10 +102,54 @@ import hostinger from "./assets/trustedBy/hostinger.webp";
       .scroll-duplicate {
         display: flex;
         align-items: center;
-        column-gap: 30px;
+        column-gap: 50px;
 
         @include break-up(lg) {
           display: none;
+        }
+      }
+    }
+
+    &.force-scroll {
+      .track-container {
+        overflow: hidden;
+      }
+
+      .track {
+        animation: scroll 20s linear infinite;
+        width: max-content;
+        padding: 15px 0;
+        flex-flow: row nowrap;
+        justify-content: flex-start;
+
+        img {
+          max-height: 50px;
+          width: auto;
+        }
+
+        .scroll-duplicate {
+          display: flex;
+          align-items: center;
+          column-gap: 50px;
+        }
+      }
+
+      @include break-up(lg) {
+        .track-container {
+          overflow: hidden;
+        }
+
+        .track {
+          animation: scroll 25s linear infinite;
+          width: max-content;
+          flex-flow: row nowrap;
+          justify-content: flex-start;
+
+          .scroll-duplicate {
+            display: flex;
+            align-items: center;
+            column-gap: 30px;
+          }
         }
       }
     }

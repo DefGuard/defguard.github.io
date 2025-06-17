@@ -90,8 +90,8 @@ const { sections, title = "Main Features" } = Astro.props;
   // Intersection Observer to highlight active section
   const observerOptions = {
     root: null,
-    rootMargin: "0px",
-    threshold: 0.8,
+    rootMargin: "-20px",
+    threshold: 1,
   };
 
   const observer = new IntersectionObserver((entries) => {
