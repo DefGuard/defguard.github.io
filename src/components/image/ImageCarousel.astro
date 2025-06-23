@@ -1,0 +1,295 @@
+---
+interface Props {
+  src: string; // Comma-separated image URLs
+  alt?: string;
+  interval?: number; // Time between slides in seconds, default 2
+  autoplay?: boolean; // Whether to auto-advance slides, default true
+  className?: string;
+}
+
+const {
+  src,
+  alt = "Carousel image",
+  interval = 2,
+  autoplay = true,
+  className = "",
+} = Astro.props;
+
+// Parse comma-separated URLs
+const imageUrls = src.split(',').map(url => url.trim()).filter(url => url.length > 0);
+
+// Generate unique ID for this carousel instance
+const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+{imageUrls.length === 1 ? (
+  <!-- Single image fallback -->
+  <div class={`image-carousel single-image ${className}`}>
+    <img src={imageUrls[0]} alt={alt} />
+  </div>
+) : (
+  <!-- Multiple images carousel -->
+  <div 
+    class={`image-carousel ${className}`}
+    id={carouselId}
+    data-interval={interval}
+    data-autoplay={autoplay}
+  >
+    <div class="carousel-container">
+      <!-- Images -->
+      <div class="carousel-track">
+        {imageUrls.map((url, index) => (
+          <div class={`carousel-slide ${index === 0 ? 'active' : ''}`}>
+            <img src={url} alt={`${alt} ${index + 1}`} />
+          </div>
+        ))}
+      </div>
+
+    </div>
+
+    <!-- Dots indicator -->
+    <div class="carousel-dots">
+      {imageUrls.map((_, index) => (
+        <button 
+          class={`dot ${index === 0 ? 'active' : ''}`}
+          data-index={index}
+          aria-label={`Go to image ${index + 1}`}
+        ></button>
+      ))}
+    </div>
+  </div>
+)}
+
+<script>
+  class ImageCarousel {
+    constructor(element) {
+      this.element = element;
+      this.currentIndex = 0;
+      this.interval = parseInt(element.dataset.interval) * 1000 || 2000;
+      this.autoplay = element.dataset.autoplay !== 'false'; // Default to true unless explicitly false
+      this.isPlaying = false;
+      this.timer = null;
+
+      this.slides = element.querySelectorAll('.carousel-slide');
+      this.dots = element.querySelectorAll('.dot');
+
+      console.log('ImageCarousel initialized:', {
+        slides: this.slides.length,
+        interval: this.interval,
+        autoplay: this.autoplay
+      });
+
+      this.init();
+    }
+
+    init() {
+      // Add event listeners for dots
+      this.dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => this.goToSlide(index));
+      });
+
+      // Pause/resume on hover
+      this.element.addEventListener('mouseenter', () => this.pause());
+      this.element.addEventListener('mouseleave', () => this.resume());
+
+      // Start autoplay if enabled
+      if (this.autoplay && this.slides.length > 1) {
+        // Add a small delay to ensure everything is ready
+        setTimeout(() => {
+          this.play();
+        }, 100);
+      }
+    }
+
+    goToSlide(index) {
+      // Remove active class from current slide and dot
+      this.slides[this.currentIndex]?.classList.remove('active');
+      this.dots[this.currentIndex]?.classList.remove('active');
+
+      // Update current index
+      this.currentIndex = index;
+
+      // Add active class to new slide and dot
+      this.slides[this.currentIndex]?.classList.add('active');
+      this.dots[this.currentIndex]?.classList.add('active');
+    }
+
+    goToNext() {
+      const nextIndex = this.currentIndex === this.slides.length - 1 ? 0 : this.currentIndex + 1;
+      this.goToSlide(nextIndex);
+    }
+
+    goToPrevious() {
+      const prevIndex = this.currentIndex === 0 ? this.slides.length - 1 : this.currentIndex - 1;
+      this.goToSlide(prevIndex);
+    }
+
+    play() {
+      if (this.slides.length <= 1) return;
+      
+      // Clear any existing timer
+      this.pause();
+      
+      console.log('Starting autoplay with interval:', this.interval);
+      this.timer = setInterval(() => {
+        console.log('Auto-advancing slide');
+        this.goToNext();
+      }, this.interval);
+      this.isPlaying = true;
+    }
+
+    pause() {
+      if (this.timer) {
+        clearInterval(this.timer);
+        this.timer = null;
+      }
+      this.isPlaying = false;
+    }
+
+    resume() {
+      if (this.autoplay && !this.isPlaying) {
+        this.play();
+      }
+    }
+  }
+
+  // Initialize carousels function
+  function initializeCarousels() {
+    const carousels = document.querySelectorAll('.image-carousel:not(.single-image):not([data-initialized])');
+    console.log('Found carousels to initialize:', carousels.length);
+    
+    carousels.forEach(carousel => {
+      carousel.setAttribute('data-initialized', 'true');
+      new ImageCarousel(carousel);
+    });
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeCarousels);
+  } else {
+    initializeCarousels();
+  }
+
+  // Also try to initialize after a short delay (for Astro hydration)
+  setTimeout(initializeCarousels, 500);
+</script>
+
+<style lang="scss">
+  @use "../../styles/mixins" as *;
+
+  .image-carousel {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+
+    // Single image display
+    &.single-image {
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 8px;
+        box-shadow: 0px 12px 24px 0px rgba(0, 0, 0, 0.08);
+      }
+    }
+
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+
+    .carousel-track {
+      position: relative;
+      width: 100%;
+      height: auto;
+    }
+
+    .carousel-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+
+      &.active {
+        opacity: 1;
+        position: relative;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 8px;
+        box-shadow: 0px 12px 24px 0px rgba(0, 0, 0, 0.08);
+      }
+    }
+
+
+    // Dots indicator
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+      padding: 8px 0;
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.5);
+          transform: scale(1.1);
+        }
+
+        &.active {
+          background: var(--primary-button-bg, #0c8ce0);
+          transform: scale(1.2);
+        }
+      }
+    }
+
+    // Responsive adjustments
+    @include break-down(md) {
+      .carousel-dots {
+        margin-top: 10px;
+        gap: 6px;
+
+        .dot {
+          width: 8px;
+          height: 8px;
+        }
+      }
+    }
+
+    // Dark theme support
+    .theme-dark & {
+      .carousel-dots .dot {
+        background: rgba(255, 255, 255, 0.3);
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.5);
+        }
+
+        &.active {
+          background: var(--primary-button-bg, #0c8ce0);
+        }
+      }
+    }
+  }
+</style>
+

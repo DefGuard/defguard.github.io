@@ -16,6 +16,7 @@ import api from "/public/images/data/api.png";
 import Image from "astro/components/Image.astro";
 import YouTubeVideo from "../components/video/YouTubeVideo.astro";
 import CTASection from "../components/CTASection.astro";
+import ImageCarousel from "../components/image/ImageCarousel.astro";
 
 const testimonialsImportData = await Astro.glob("../data/home/testimonials/**/*.md");
 
@@ -117,9 +118,7 @@ const sections = [
           </div>
 
           <div slot="right">
-            <Image src={enrollment} alt="Enrollment with Google login" />
-            <Image src={enrollment} alt="Enrollment with Google login" />
-            <Image src={enrollment} alt="Enrollment with Google login" />
+            <ImageCarousel src="/images/data/api.png,/images/data/enrollment-screen.png,/images/data/vision.png" alt="VPN locations dashboard and user details" interval={3} autoplay={true} />
           </div>
         </FlexibleSection>
 
@@ -284,7 +283,7 @@ const sections = [
           </div>
 
           <div slot="right">
-            <p>Defguard offers a Yubico YubiKey provisioner — a component that initiates and populates user data on YubiKeys by generating SSH keys as well as GPG/OpenPGP keys. It also stores detailed information about each user’s key, including the serial number and date of provisioning.</p>
+            <p>Defguard offers a Yubico YubiKey provisioner — a component that initiates and populates user data on YubiKeys by generating SSH keys as well as GPG/OpenPGP keys. It also stores detailed information about each user's key, including the serial number and date of provisioning.</p>
           </div>
         </FlexibleSection>
 
