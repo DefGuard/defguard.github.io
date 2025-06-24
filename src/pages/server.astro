@@ -17,6 +17,7 @@ import Image from "astro/components/Image.astro";
 import YouTubeVideo from "../components/video/YouTubeVideo.astro";
 import CTASection from "../components/CTASection.astro";
 import ImageCarousel from "../components/image/ImageCarousel.astro";
+import ImageURL from "../components/image/ImageURL.astro"
 
 const testimonialsImportData = await Astro.glob("../data/home/testimonials/**/*.md");
 
@@ -118,7 +119,11 @@ const sections = [
           </div>
 
           <div slot="right">
-            <ImageCarousel src="/images/data/api.png,/images/data/enrollment-screen.png,/images/data/vision.png" alt="VPN locations dashboard and user details" interval={3} autoplay={true} />
+            <ImageCarousel
+              src="/images/features/Manage multiple VPN1.png,/images/features/Manage multiple VPN2.png" alt="VPN locations dashboard and user details"
+              interval={3}
+              autoplay={true}
+            />
           </div>
         </FlexibleSection>
 
@@ -129,7 +134,7 @@ const sections = [
           theme="light"
         >
           <div slot="left">
-            <Image src={enrollment} alt="Enrollment with Google login" />
+            <ImageURL src="/images/features/Multiple instances - desktop.png" alt="Enrollment with Google login" />
           </div>
 
           <div slot="right">
