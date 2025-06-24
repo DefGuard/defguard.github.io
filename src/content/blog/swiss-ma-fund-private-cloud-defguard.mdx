@@ -1,12 +1,12 @@
 ---
-title: "How a Swiss M&A fund built a private cloud with Defguard"
+title: "How a Swiss Private Equity fund built a private cloud with Defguard"
 publishDate: 2025-06-11
-description: "A global investment firm focused on data sovereignty implemented a self-hosted, private cloud infrastructure to secure internal operations and protect sensitive financial data — with Defguard as a core fundament."
+description: "A global investment firm focused on data sovereignty implemented a self-hosted, private cloud infrastructure to secure internal operations and protect sensitive financial data with Defguard as a core fundament."
 author: "Michał Gryczka"
 
 companyName: "Acquinox"
-companyDescription: "A Swiss-based private equity investment platform that connects your capital to exclusive, pre‑vetted high‑growth opportunities—leveraging tech-enabled due diligence, global dealflow, and active portfolio support—to maximize returns in emerging and innovation‑driven sectors."
-companySegment: "investment, innovation"
+companyDescription: "Growth-focused Private Equity firm, based in Luxembourg, specializing in transformative technologies."
+companySegment: "Private Equity"
 companyWebsite: "https://acquinox.capital"
 
 image: "/images/blog/acquinox.png"
@@ -14,56 +14,57 @@ image: "/images/blog/acquinox.png"
 
 ![](/images/blog/acquinox.png)
 
-A global investment firm focused on data sovereignty implemented a self-hosted, private cloud infrastructure to secure internal operations and protect sensitive financial data — with Defguard as a core fundament.
+A global investment firm focused on data sovereignty implemented a self-hosted, private cloud infrastructure to secure internal operations and protect sensitive financial data with Defguard as a core fundament.
 
-The solution enabled secure, role-based access (through enterprise VPN) across international teams, Defguard as a Single Sign-On (SSO) to authorize access to business applications (file sharing, chat, …), and centralized user onboarding and enrollment — all while maintaining full control over infrastructure.
+The solution enabled secure, role-based access (through enterprise VPN) across international teams, Defguard as a Single Sign-On (SSO) to authorize access to business applications (file sharing, chat, …), and centralized [user onboarding and enrollment](https://docs.defguard.net/help/enrollment) — all while maintaining full control over infrastructure. By leveraging open-source technologies, the organization built a scalable, cost-effective alternative to traditional cloud-based systems, tailored to the needs of modern financial institutions.
 
-By leveraging open-source technologies, the organization built a scalable, cost-effective alternative to traditional cloud-based systems, tailored to the needs of modern financial institutions.
 
 ---
 
 ## About the Client — Acquinox Capital
 
-**Acquinox Capital** is a growth-focused investment firm based in Switzerland, specializing in transformative technologies across Next-Gen Industries. With a presence in Europe and North America, the firm applies a rigorous, research-driven approach to identifying high-conviction opportunities.
+**Acquinox Capital** is a growth-focused Private Equity firm, based in Luxembourg, specializing in transformative technologies across Next-Gen Industries. With a presence in Europe and North America, the firm applies a rigorous, research-driven approach to identifying high-conviction opportunities.  
 
-Acquinox backs visionary companies operating at the forefront of innovation. Their portfolio includes high-growth ventures like **Epic Games**, **SpaceX**, **Bolt**, and **Global Ledger**, alongside gaming studios, immersive platforms, and deep tech startups — reflecting its focus on future-shaping technologies across industries.
+Acquinox invests in high-growth ventures like **Epic Games, Bolt, Global Ledger**, and **Fabbler.ai**, alongside gaming studios, immersive platforms, and deep tech startups—reflecting its focus on future-shaping technologies across industries.
 
 ---
 
 ## Uncompromising Security for Private Cloud Environment
 
-As an investment firm operating in high-stakes sectors, Acquinox Capital manages extremely sensitive data across its operations — from internal communications and investor documentation to proprietary deal flow intelligence.
+As an investment firm operating in high-stakes sectors, Acquinox Capital manages **extremely sensitive data** across its operations—from internal communications and investor documentation to proprietary deal flow intelligence.
 
-When **Kacper**, a senior Director of IT and Security, joined Acquinox, he knew that ensuring airtight security was non-negotiable. At the same time, the company founder had a strong strategic mandate to operate in a fully on-premise and largely open-source environment.
+When Kacper, Venture Partner and Security lead joined Acquinox, he knew right away that ensuring airtight security is non-negotiable. At the same time, the company founder maintained a strong strategic mandate to operate in a **fully on-premise and largely open source environment**.
 
-This applied across the board: document storage, communication infrastructure, internal systems, and access control. Balancing modern usability with enterprise-grade security in a self-hosted setup presented a unique set of technical and operational challenges.
+This applied across the board, including document storage, communication infrastructure, internal systems, and access control. Balancing modern usability with enterprise-grade security in a self-hosted setup presented a unique set of technical and operational challenges.
 
-> “Trying to solve the remote access problem, I've looked into popular solutions like Tailscale, Netbird or Firezone offering VPN management with Wireguard, but their focus lies in the cloud/SaaS and does not fit our scenario perfectly. Then I discovered Defguard, which is designed with private cloud use cases in mind and offers built-in identity and SSO. With Defguard documentation and support, the evaluation was fast and easy.”  
-> — _Kacper Wiśniewski_
 
-Acquinox quickly evaluated the solution — with help from the Defguard team — and confirmed that it fit perfectly into their private cloud strategy.
+> “Trying to solve the remote access problem, I’ve looked into popular solutions like Tailscale, Netbird or Firezone offering VPN management with Wireguard, but their focus lies in the cloud/SaaS and does not fit our scenario perfectly. Then I’ve discovered defguard which is designed with private cloud use cases in mind and offers built in identity and SSO. With defguard documentation and support the evaluation was fast and easy.”  
+> — *says Kacper Wiśniewski*
 
----
-
-## Defguard Provides the Fundamental Security Layer
-
-To meet internal security and operational requirements, the investment firm deployed a fully self-hosted (private cloud) infrastructure using a trusted stack of open-source tools for file sharing, chat, and more.
-
-Acquinox leveraged **Defguard's full-stack identity, SSO, and VPN** — one login to all services. This approach minimized maintenance burden and deployment costs, solving integration issues and reducing external dependencies.
-
-The risk of vendor lock-in was also mitigated: Defguard supports third-party identity and SSO providers, giving Acquinox the flexibility to switch solutions when necessary.
+Acqinox did a quick evaluation, with defguard support, and confirmed that the solution fits perfectly into their private cloud strategy.
 
 ---
 
-## Defguard is Purpose-Built for Private Cloud
+## Defguard provides the fundamental security layer for Acquinox
 
-Other decision factors in choosing Defguard included its **built-in multi-factor authentication (MFA)** at the **WireGuard protocol level**. Because this is handled entirely by the on-prem Defguard instance, **no data ever leaves Acquinox infrastructure** — unlike with cloud-first VPN solutions.
+To meet internal security and operational requirements, the investment firm deployed a fully self-hosted (private cloud) infrastructure, using a trusted stack of open-source tools.
 
-MFA is increasingly becoming mandatory under regulatory frameworks like **NIS2** and **DORA**, especially for financial institutions.
+> “Defguard as a management tool with all of its features combined with selfhosted services such as element and matrix for secure encrypted communications, jisty (alternative to google meet), docs, vault (for credentials) provides a secured environment for remote work and team management.”  
+> — *says Kacper*
 
-> “With Defguard in place it's super easy to manage user access on multiple levels — marketing and analysts have access to documentation systems, CRM, and analytics, while our engineers can manage infrastructure and services that we develop — e.g. our custom AI valuation tool.”
+Acquinox leveraged Defguard VPN enterprise features including full stack identity and SSO. This approach minimized the maintenance burden and deployment costs. It solved a lot of integration issues and external tools dependencies.
 
-The design and architecture proposed by Defguard enabled the firm to use it as the **backbone of its entire private cloud infrastructure**.
+The aspect of vendor lock-in was not overlooked - because of the fact that defguard supports third party identity and SSO providers, Acquniox can switch easily to other options whenever there is a need.
+
+Other decision factors in choosing Defguard were its support for **built-in** multi-factor authentication (MFA) that operates on WireGuard protocol level. The fact that it’s handled by defguard on-prem instance means, that unlike other VPN solutions, no data ever leave Acquinox infrastructure. Multifactor authentication soon will be mandatory and required from many (especially financial) organisations by **NIS2 and DORA regulations**.
+
+
+---
+
+## The Result
+
+That design and architecture proposed by defguard allowed Acquinox to use it as a backbone of the entire private cloud infrastructure. Now Acquinox can securely connect to multiple online environments with the most secure VPN solution while maintaining full privacy.
+
 
 ---
 
