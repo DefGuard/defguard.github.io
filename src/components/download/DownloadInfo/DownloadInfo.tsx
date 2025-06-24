@@ -53,7 +53,12 @@ const DownloadInfo = function ({ owner, repo }: GithubProps) {
         {isLoading && <p>Fetching version...</p>}
         {clientVersion == "" && !isLoading && <p>Unable to fetch version</p>}
         {clientVersion != "" && (
-          <p>Current version: {clientVersion} | View changelog → <a href={`https://github.com/DefGuard/client/releases/v${clientVersion}`}>{published}</a></p>
+          <p>
+            Current version: {clientVersion} | View changelog →{" "}
+            <a href={`https://github.com/DefGuard/client/releases/v${clientVersion}`}>
+              {published}
+            </a>
+          </p>
         )}
       </div>
     </div>

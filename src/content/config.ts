@@ -8,6 +8,11 @@ const blogSchema = z.object({
   description: z.string(),
   draft: z.boolean().optional().default(false),
   author: z.string().optional(),
+  companyName: z.string().optional(),
+  companyDescription: z.string().optional(),
+  companyWebsite: z.string().optional(),
+  companySegment: z.string().optional(),
+  image: z.string().optional(),
 });
 
 const productFeatures = defineCollection({

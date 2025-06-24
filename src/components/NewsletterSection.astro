@@ -9,11 +9,11 @@ interface Props {
   description?: string;
 }
 
-const { headerLevel,
+const {
+  headerLevel,
   title = "Get informed about new releases",
-  description = "Get the latest defguard news and updates in your inbox."
+  description = "Get the latest defguard news and updates in your inbox.",
 } = Astro.props;
-
 ---
 
 <ProductSection padding="newsletter" bordered>
@@ -30,7 +30,13 @@ const { headerLevel,
       onsubmit={`window.open('https://buttondown.email/defguard', 'popupwindow')`}
     >
       <div class="form-row field-email field">
-        <input id="bd-email" placeholder="E-mail" name="email" type="email" placeholder="" />
+        <input
+          id="bd-email"
+          placeholder="E-mail"
+          name="email"
+          type="email"
+          placeholder=""
+        />
         <Button type="submit" text="Subscribe" size="normal" />
       </div>
       <!--<div class="terms">
@@ -46,14 +52,11 @@ const { headerLevel,
         </div>
       </div>-->
       <!-- <SubscribeButton client:load /> -->
-
     </form>
   </section>
 </ProductSection>
 
 <style lang="scss">
-  
-
   #newsletter {
     width: 100%;
     & > h1,
@@ -70,7 +73,7 @@ const { headerLevel,
       @include typography(paragraph);
     }
 
-    input{
+    input {
       font-size: calc(1rem * var(--font-scale-factor));
       padding-left: 20px;
     }

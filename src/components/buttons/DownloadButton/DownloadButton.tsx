@@ -186,8 +186,12 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
           </>
         )}
       </div>
-      <a 
-        href={platform === PlatformType.ARCHLINUX ? ARCHLINK : `https://github.com/${owner}/${repo}/releases/download/v${version}/${downloadName}`}
+      <a
+        href={
+          platform === PlatformType.ARCHLINUX
+            ? ARCHLINK
+            : `https://github.com/${owner}/${repo}/releases/download/v${version}/${downloadName}`
+        }
         className="download-main"
         onClick={handleClick}
       >

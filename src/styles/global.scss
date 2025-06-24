@@ -1,6 +1,17 @@
 @use "./themes/" as *;
 @use "./fonts/font" as *;
-
+/* Add page container class for consistent content wrapping */
+.page-container {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  
+  @include break-down(lg) {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
 // Global box-sizing and image proportion rules
 *,
 *::before,

@@ -1,9 +1,15 @@
 .features-table-scroll-wrapper {
   width: 100%;
-  max-width: 100%;
+  max-width: 100vw;
   overflow-x: auto;
   overflow-y: hidden;
-
+  -webkit-overflow-scrolling: touch; /* Better scrolling on iOS */
+  
+  @include break-down(lg) {
+    margin: 0 -16px; /* Compensate for container padding */
+    padding: 0 16px;
+  }
+  
   @include break-up(xl) {
     overflow: visible;
   }
@@ -30,6 +36,10 @@
     overflow: hidden;
     min-width: max-content;
     width: 100%;
+    
+    @include break-down(lg) {
+      width: 100%;
+    }
 
     @include break-up(xl) {
       position: sticky;

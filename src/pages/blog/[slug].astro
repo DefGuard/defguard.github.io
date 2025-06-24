@@ -2,17 +2,19 @@
 import { getCollection } from "astro:content";
 import Navigation from "../../components/base/Navigation.astro";
 import ProductLayout from "../../layouts/ProductLayout.astro";
+import ShareButtons from "../../components/ShareButtons.astro";
+import MoreStories from "../../components/MoreStories.astro";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blog");
   return blogEntries.map((entry) => ({
     params: { slug: entry.slug },
-    props: { entry },
+    props: { entry, allPosts: blogEntries },
   }));
 }
 
 // Get the blog entry from the props
-const { entry } = Astro.props;
+const { entry, allPosts } = Astro.props;
 
 // Get the rendered content
 const { Content } = await entry.render();
@@ -27,15 +29,30 @@ const formatDate = (date: Date) => {
 };
 
 const title = `${entry.data.title} | defguard Blog`;
+const description = entry.data.description;
 const url = `https://defguard.net/blog/${entry.slug}`;
+
+// Get image from frontmatter or extract from content
+const content = entry.body;
+const imageMatch = content.match(/!\[.*?\]\((.*?)\)/);
+const imageUrl = entry.data.image
+  ? `https://defguard.net${entry.data.image}`
+  : imageMatch
+    ? `https://defguard.net${imageMatch[1]}`
+    : "https://defguard.net/images/png/defguard.png";
+
+// Check if case study metadata exists
+const hasCaseStudy =
+  entry.data.companyName && entry.data.companyDescription && entry.data.companyWebsite;
 ---
 
 <ProductLayout
   title={title}
+  description={description}
   url={url}
-  featuredImage="github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png"
-  imageWidth="1080"
-  imageHeight="540"
+  featuredImage={imageUrl}
+  imageWidth="1200"
+  imageHeight="630"
   tags={[]}
 >
   <Navigation activeSlug="/blog/" />
@@ -43,42 +60,201 @@ const url = `https://defguard.net/blog/${entry.slug}`;
   <main id="blog-post-page">
     <article class="blog-post">
       <div class="container">
-        <header class="post-header">
-          <h1>{entry.data.title}</h1>
-          <div class="post-meta">
-            <time datetime={entry.data.publishDate.toISOString()}>
-              {formatDate(entry.data.publishDate)}
-            </time>
-            {entry.data.author && <span class="post-author">by {entry.data.author}</span>}
+        <div class="content-wrapper">
+          <div class="share-column">
+            {
+              hasCaseStudy && (
+                <div class="case-study-info">
+                  <p class="label">Company</p>
+                  <h3>{entry.data.companyName}</h3>
+                  <p>{entry.data.companyDescription}</p>
+                  {entry.data.companySegment && (
+                    <div class="company-segment">
+                      <p class="label">Industry</p>
+                      <p>{entry.data.companySegment}</p>
+                    </div>
+                  )}
+                  <a
+                    href={entry.data.companyWebsite}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="company-website"
+                  >
+                    {entry.data.companyWebsite}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="9"
+                      height="9"
+                      viewBox="0 0 12 13"
+                      fill="none"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M0 0.5H4V1.83333H1.33333V11.1667H10.6667V8.5H12V12.5H0V0.5ZM9.72386 1.83333H7.77778V0.5H12V4.72222H10.6667V2.77614L6.4714 6.9714L5.5286 6.0286L9.72386 1.83333Z"
+                        style={{ fill: "var(--text-body-primary)" }}
+                      />
+                    </svg>
+                  </a>
+                </div>
+              )
+            }
+            <ShareButtons url={url} title={entry.data.title} />
           </div>
-        </header>
 
-        <div class="post-content">
-          <Content />
+          <div class="main-content">
+            <header class="post-header">
+              <h1>{entry.data.title}</h1>
+              <div class="post-meta">
+                <time datetime={entry.data.publishDate.toISOString()}>
+                  {formatDate(entry.data.publishDate)}
+                </time>
+                {
+                  entry.data.author && (
+                    <span class="post-author">by {entry.data.author}</span>
+                  )
+                }
+              </div>
+            </header>
+
+            <div class="post-content">
+              <Content />
+            </div>
+
+            <footer class="post-footer">
+              <div class="post-navigation">
+                <a href="/blog" class="back-to-blog">← Back to Blog</a>
+              </div>
+              <div class="post-cta"><p>Ready to secure your private cloud?</p></div>
+              <div class="post-cta-buttons">
+                <a
+                  href={`/pricing?utm_source=blog&utm_medium=post&utm_campaign=${entry.slug}#get-evaluation-license`}
+                  class="book-demo-button">Get Evaluation License</a
+                >
+                <a
+                  href={`/book-a-demo?utm_source=blog&utm_medium=post&utm_campaign=${entry.slug}`}
+                  class="book-demo-button">Book a Demo</a
+                >
+              </div>
+            </footer>
+          </div>
         </div>
-
-        <footer class="post-footer">
-          <div class="post-navigation">
-            <a href="/blog" class="back-to-blog">← Back to Blog</a>
-          </div>
-        </footer>
       </div>
     </article>
   </main>
+
+  <MoreStories currentSlug={entry.slug} posts={allPosts} />
 </ProductLayout>
 
 <style lang="scss">
+  // Global overrides for proper scroll behavior
+  :global(html),
+  :global(body) {
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+  }
+
+  .label {
+    margin: unset !important;
+    font-size: calc(0.8rem * var(--font-scale-factor)) !important;
+    color: var(--text-body-secondary) !important;
+  }
+
   #blog-post-page {
     padding-top: var(--nav-height);
     background-color: var(--surface-frame-bg);
+    position: relative;
+    min-height: 100vh;
+    overflow: unset;
 
     .blog-post {
       padding: 2rem 0 4rem;
+      position: relative;
+      @include break-down(md) {
+          padding: 1rem 0 1rem;
+      }
 
       .container {
-        max-width: 800px;
+        max-width: 1200px;
         margin: 0 auto;
         padding: 0 1rem;
+        position: relative;
+        overflow: unset;
+      }
+
+      .content-wrapper {
+        display: flex;
+        gap: 2rem;
+        align-items: flex-start;
+        position: relative;
+        overflow: unset;
+      }
+
+      .share-column {
+        width: 200px;
+        flex-shrink: 0;
+        position: -webkit-sticky;
+        position: sticky;
+        top: calc(var(--nav-height) + 2rem);
+        margin-top: 210px;
+        height: fit-content;
+        z-index: 2;
+        transform: translate3d(0, 0, 0);
+        @include break-down(md) {
+          margin: 20px;
+        }
+      }
+
+      .case-study-info {
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+
+        h3 {
+          font-size: calc(1rem * var(--font-scale-factor));
+          font-weight: 500;
+          color: var(--text-body-primary);
+          margin: 0 0 0.5rem;
+        }
+
+        p {
+          font-size: calc(0.9rem * var(--font-scale-factor));
+          line-height: 1.5;
+          color: var(--text-body-primary);
+          margin: 0 0 1rem;
+          text-align: justify;
+        }
+
+        .company-segment {
+          margin-bottom: 1rem;
+
+          p {
+            margin: 0;
+          }
+        }
+
+        .company-website {
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          color: var(--primary-color);
+          text-decoration: none;
+          font-size: calc(0.9rem * var(--font-scale-factor));
+
+          &:hover {
+            text-decoration: underline;
+          }
+
+          svg {
+            width: 9px;
+            height: 9px;
+          }
+        }
+      }
+
+      .main-content {
+        flex: 1;
+        max-width: 800px;
+        position: relative;
       }
 
       .post-header {
@@ -113,6 +289,11 @@ const url = `https://defguard.net/blog/${entry.slug}`;
 
       .post-content {
         margin-bottom: 3rem;
+
+        :global(hr) {
+          border: 1px solid var(--border-color, #eaeaea);
+          margin: 2rem 0;
+        }
 
         :global(h1) {
           font-size: calc(2.25rem * var(--font-scale-factor));
@@ -204,12 +385,9 @@ const url = `https://defguard.net/blog/${entry.slug}`;
           max-width: 100%;
           height: auto;
           display: block;
-          margin: 2.5rem auto; // Slightly increase margin for better spacing
-          border-radius: 4px; // Match other radius values
-          box-shadow: var(
-            --box-shadow,
-            0 4px 8px rgba(0, 0, 0, 0.08)
-          ); // Use CSS variable for shadow
+          margin: 2.5rem auto;
+          border-radius: 4px;
+          box-shadow: var(--box-shadow, 0 4px 8px rgba(0, 0, 0, 0.08));
         }
       }
 
@@ -217,9 +395,11 @@ const url = `https://defguard.net/blog/${entry.slug}`;
         padding-top: 1.5rem;
         border-top: 1px solid var(--border-color, #eaeaea);
 
-        .post-navigation {
+        .post-navigation,
+        .post-cta-buttons {
           display: flex;
           justify-content: space-between;
+          align-items: center;
 
           .back-to-blog {
             color: var(--primary-text-color);
@@ -229,6 +409,74 @@ const url = `https://defguard.net/blog/${entry.slug}`;
               text-decoration: underline;
             }
           }
+
+          .book-demo-button {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            color: var(--text-body-primary);
+            text-decoration: none;
+            border-radius: 100px;
+            font-weight: 300;
+            transition: border 0.2s ease;
+            border: 1px solid var(--text-body-primary);
+            margin: 0.5rem 0;
+            font-size: calc(1.5rem * var(--font-scale-factor));
+
+            &:hover {
+              border: 1px solid var(--primary-button-bg, #0c8ce0);
+              text-decoration: none;
+            }
+          }
+        }
+
+        .post-cta {
+          border-top: 1px solid var(--primary-button-bg, #0c8ce0);
+          padding-top: 2rem;
+          p {
+            text-align: center;
+          }
+        }
+        .post-cta-buttons {
+          padding: 2rem 0 1rem 0;
+          justify-content: center; //or space-between?
+          gap: 40px;
+          @include break-down(md) {
+            display: block;
+            text-align: center;
+            .book-demo-button {
+              font-size: calc(1.2rem * var(--font-scale-factor));
+            }
+          }
+        }
+        .post-navigation {
+          padding-bottom: 2rem;
+        }
+      }
+    }
+  }
+
+  @include break-down(md) {
+    #blog-post-page {
+      .blog-post {
+        .content-wrapper {
+          flex-direction: column;
+        }
+
+        .share-column {
+          position: static;
+          width: 100%;
+          //max-width: 640px;
+          order: 1;
+          margin-bottom: 2rem;
+          padding: 0;
+          margin-left: unset;
+
+        }
+
+        .case-study-info {
+          text-align: left;
+          margin-bottom: 1rem;
+          padding-bottom: 1rem;
         }
       }
     }

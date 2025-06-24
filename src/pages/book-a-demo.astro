@@ -9,8 +9,7 @@ import { featuresTableData } from "../data/compare-table";
 import { Button } from "../components/buttons/Button/Button";
 import OrganizationJSONLD from "../scripts/OrganizationJSONLD.astro";
 
-const title =
-  "Zero-Trust WireGuard® 2FA/MFA VPN: Book a Demo";
+const title = "Zero-Trust WireGuard® 2FA/MFA VPN: Book a Demo";
 const featuredImage =
   "github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png";
 const imageWidth = "1080";
@@ -62,7 +61,12 @@ const tags = [
   <Navigation activeSlug="/book-a-demo/" />
   <main id="book-a-demo">
     <ProductSection padding="none">
-      <FlexibleSection title="Book a Demo" id="press-contact" variant="white" theme="light">
+      <FlexibleSection
+        title="Book a Demo"
+        id="press-contact"
+        variant="white"
+        theme="light"
+      >
         <div slot="left">
           <p>What you can expect?</p>
           <p>
@@ -76,7 +80,8 @@ const tags = [
                 operations
               </li>
               <li>
-                A discussion on how defguard can integrate with your existing infrastructure
+                A discussion on how defguard can integrate with your existing
+                infrastructure
               </li>
             </ul>
           </p>

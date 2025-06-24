@@ -28,8 +28,13 @@ const url = "https://defguard.net/download/";
 >
   <Navigation activeSlug="/download/" />
   <main id="download-page">
-      <ProductSection padding="none">
-      <FlexibleSection title="Download defguard desktop client with WireGuard® 2FA/MFA" id="download-section" variant="white" theme="light">
+    <ProductSection padding="none">
+      <FlexibleSection
+        title="Download defguard desktop client with WireGuard® 2FA/MFA"
+        id="download-section"
+        variant="white"
+        theme="light"
+      >
         <div slot="left">
           <DefguardInfo owner="Defguard" repo="client" client:only="react" />
           <DownloadButtonList client:only="react" />
@@ -47,26 +52,26 @@ const url = "https://defguard.net/download/";
 </BaseLayout>
 
 <style lang="scss" is:global>
-  .btn.size-normal{
+  .btn.size-normal {
     margin: 0 0 0 auto;
     min-height: unset !important;
-    height:38px;
+    height: 38px;
     border-radius: unset;
-    width: 100%;  
-  
+    width: 100%;
+
     @include break-down(lg) {
       margin: 0 auto;
     }
   }
-  .btn{
+  .btn {
     border-color: var(--text-button-tertiary);
 
-    &:hover{
+    &:hover {
       border: unset;
       background-color: var(--text-button-tertiary);
-    
+
       span {
-       color: white;
+        color: white;
       }
     }
   }

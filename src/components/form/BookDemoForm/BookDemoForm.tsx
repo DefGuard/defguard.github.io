@@ -47,7 +47,10 @@ const BookDemoForm = ({ submit_text = "Submit" }: BookDemoFormProps) => {
     data.append("last_name", values.last_name);
     data.append("email", values.email);
     data.append("website_url", values.website_url);
-    data.append("tell_us_more", `${values.tell_us_more} \n\nform_source:${window.location.pathname}`);
+    data.append(
+      "tell_us_more",
+      `${values.tell_us_more} \n\nform_source:${window.location.pathname + window.location.search + window.location.hash}`,
+    );
 
     fetch("https://pkgs.defguard.net/api/customer/signup", {
       mode: "no-cors",
