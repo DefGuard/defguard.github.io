@@ -209,12 +209,7 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
           {isButtonClicked ? (
             <CheckIcon />
           ) : platform !== PlatformType.ARCHLINUX ? (
-            <DownloadIcon
-              platformType={platform}
-              owner={owner}
-              repo={repo}
-              version={version}
-            />
+            <DownloadIcon />
           ) : (
             <h3>→</h3>
           )}

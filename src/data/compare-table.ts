@@ -85,7 +85,7 @@ export const featuresTableData: FeatureTableData = {
           features: [
             {
               status: "yes",
-              link: "https://docs.defguard.net/features/ldap-synchronization-setup",
+              link: "https://docs.defguard.net/enterprise/all-enteprise-features/ldap-and-active-directory-integration/two-way-ldap-and-active-directory-synchronization",
             },
             { status: "no" },
             {
@@ -428,11 +428,11 @@ export const featuresTableData: FeatureTableData = {
       title: "Security Architecture and Deployment",
       rows: [
         {
-          description: "Secure rchitecture based on network segments (DMZ/Intranet/...)",
+          description: "Secure architecture based on network segments (DMZ/Intranet/...)",
           features: [
             {
               status: "yes",
-              link: "https://docs.defguard.net/#what-is-defguard",
+              link: "https://docs.defguard.net/about/about-defguard#what-is-defguard",
             },
             {
               status: "no",
@@ -602,7 +602,7 @@ export const featuresTableData: FeatureTableData = {
           features: [
             {
               status: "yes",
-              link: "https://docs.defguard.net/features/ldap-synchronization-setup",
+              link: "https://docs.defguard.net/enterprise/all-enteprise-features/ldap-and-active-directory-integration/two-way-ldap-and-active-directory-synchronization",
             },
             { status: "yes" },
             {

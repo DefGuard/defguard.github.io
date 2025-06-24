@@ -9,8 +9,10 @@ import YouTubeVideo from "../components/video/YouTubeVideo.astro";
 import { featuresTableData } from "../data/compare-table";
 import { Button } from "../components/buttons/Button/Button";
 import OrganizationJSONLD from "../scripts/OrganizationJSONLD.astro";
+import GithubReleases from "../components/GithubReleases/GithubReleases.astro";
 
-const title = "Zero-Trust WireGuard® 2FA/MFA VPN: Book a Demo";
+const title =
+  "Zero-Trust WireGuard® 2FA/MFA VPN: Book a Demo";
 const featuredImage =
   "github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png";
 const imageWidth = "1080";
@@ -62,30 +64,9 @@ const tags = [
   <Navigation activeSlug="/download-confirm/" />
   <main id="download-confirm">
     <ProductSection padding="none">
-      <FlexibleSection
-        title="Download defguard Server"
-        id="release-info"
-        variant="white"
-        theme="light"
-      >
+      <FlexibleSection title="Download defguard Server" id="release-info" variant="white" theme="light">
         <div slot="left">
-          <p><strong>Latest release</strong></p>
-          <ul>
-            <li>Version : 1.3.1</li>
-            <li>Release date: 14.05.2025</li>
-          </ul>
-          <p>
-            In order to download lates version of the server please visit GitHub releases
-            page.
-          </p>
-          <div class="learn-more">
-            <a
-              href="https://github.com/DefGuard/defguard/releases/tag/v1.3.1"
-              class="learn-more-link"
-            >
-              Download from GitHub
-            </a>
-          </div>
+          <GithubReleases repoUrl="https://github.com/DefGuard/defguard" />
         </div>
         <div slot="right">
           <NewsletterSection
@@ -95,65 +76,54 @@ const tags = [
           />
         </div>
       </FlexibleSection>
-      <FlexibleSection
-        title="What's new?"
-        id="new-features"
-        variant="white"
-        theme="light"
-      >
+      <FlexibleSection title="What's new?" id="new-features" variant="white" theme="light">
         <div slot="left">
-          <ul>
-            <li>
-              <a
-                href="https://docs.defguard.net/enterprise/all-enteprise-features/access-control-list"
-                >Access Control / Firewall management</a
-              > - ACLs are for now only available for Linux based Defguard Gateway - FreeBSD/OPNSense
-              will come in 1.3.1 stable release.
-            </li>
-            <li>
-              <a
-                href="https://docs.defguard.net/enterprise/all-enteprise-features/ldap-and-active-directory-integration/two-way-ldap-and-active-directory-synchronization"
-                >LDAP & Active Directory two-way synchronization</a
-              >
-            </li>
-          </ul>
-        </div>
-        <div slot="right">
-          <YouTubeVideo
-            videoId="Om28IuV5AcM"
-            title="Your video title"
-            showControls={true}
-            showInfo={true}
-            allowFullscreen={true}
-            rel={false}
-          />
-        </div>
+        <ul>
+          <li>
+            <a href="https://docs.defguard.net/enterprise/all-enteprise-features/access-control-list">Access Control / Firewall management</a> - ACLs are now available on Linux-based Defguard Gateway, with initial support for FreeBSD and OPNsense introduced in the 1.4.0 alpha release.
+          </li>
+          <li>
+            <a href="https://docs.defguard.net/enterprise/all-enteprise-features/ldap-and-active-directory-integration/two-way-ldap-and-active-directory-synchronization">LDAP & Active Directory two-way synchronization</a>
+          </li>
+        </ul>
+      </div>
+      <div slot="right">
+        <YouTubeVideo
+        videoId="Om28IuV5AcM"
+        title="Your video title"
+        showControls={true}
+        showInfo={true}
+        allowFullscreen={true}
+        rel={false}
+      />
+      </div>
       </FlexibleSection>
     </ProductSection>
   </main>
 </BaseLayout>
 
 <style lang="scss" is:global>
-  .btn.size-normal {
+
+  .btn.size-normal{
     margin: 0 0 0 auto;
     min-height: unset !important;
-    height: 38px;
+    height:38px;
     border-radius: unset;
-    width: 100%;
-
+    width: 100%;  
+  
     @include break-down(lg) {
       margin: 0 auto;
     }
   }
-  .btn {
+  .btn{
     border-color: var(--text-button-tertiary);
 
-    &:hover {
+    &:hover{
       border: unset;
       background-color: var(--text-button-tertiary);
-
+    
       span {
-        color: white;
+       color: white;
       }
     }
   }
@@ -166,28 +136,28 @@ const tags = [
       display: unset;
       h1 {
         @include break-down(md) {
-          padding-top: 20px;
+          padding-top:20px;
           border-top: 1px solid black;
         }
       }
     }
     .learn-more {
-      margin-top: 1.5rem;
+        margin-top: 1.5rem;
     }
-
+      
     .learn-more-link {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      background-color: var(--primary-button-bg, #0c8ce0);
-      color: var(--primary-button-text, white);
-      border-radius: 6px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: background-color 0.2s ease-in-out;
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background-color: var(--primary-button-bg, #0c8ce0);
+        color: var(--primary-button-text, white);
+        border-radius: 6px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background-color 0.2s ease-in-out;
 
-      &:hover {
-        background-color: var(--primary-button-hover, #0a7bc5);
-      }
+        &:hover {
+          background-color: var(--primary-button-hover, #0a7bc5);
+        }
     }
 
     .contact {
