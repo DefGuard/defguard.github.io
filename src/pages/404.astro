@@ -1,0 +1,185 @@
+---
+import Navigation from "../components/base/Navigation.astro";
+import ProductLayout from "../layouts/ProductLayout.astro";
+import FlexibleSection from "../components/FlexibleSection.astro";
+
+const title = "Page Not Found - defguard";
+const featuredImage =
+  "github.com/DefGuard/defguard.github.io/raw/main/public/images/product/core/hero-image.png";
+const imageWidth = "1920";
+const imageHeight = "1080";
+const url = "https://defguard.net/404/";
+const tags = [
+  "defguard",
+  "404",
+  "page not found",
+  "error",
+];
+---
+
+<ProductLayout
+  title={title}
+  featuredImage={featuredImage}
+  imageWidth={imageWidth}
+  imageHeight={imageHeight}
+  url={url}
+  tags={tags}
+>
+  <Navigation />
+
+  <main id="error-page">
+    <FlexibleSection 
+      title="Page Not Found" 
+      titleTag="h1"
+      id="blog-header" 
+      variant="white" 
+      theme="light"
+    >
+      <div slot="left">
+        <div class="error-number">404</div>
+        <p>
+          Looks like you've hit a dead end. The page you're looking for might have been moved, deleted, or never existed.
+        </p>
+        <div class="error-actions">
+          <a href="/" class="learn-more-link">Go Home</a>
+          <a href="/blog" class="secondary-link">Visit Blog</a>
+        </div>
+      </div>
+
+      <div slot="right">
+        <h2>Other things you can do:</h2>
+        <ul>
+          <li>Check the URL for typos or spelling errors</li>
+          <li><a href="/download">Download defguard</a></li>
+          <li>Check out our <a href="/faq">frequently asked questions</a></li>
+        </ul>
+      </div>
+    </FlexibleSection>
+  </main>
+</ProductLayout>
+
+<style lang="scss" is:global>
+  #error-page {
+    --page-spacing-factor: 0.5;
+    @include break-up(lg) {
+      --page-spacing-factor: 1;
+    }
+
+    .flexible-content {
+      padding-top: page-spacing(80px);
+      padding-bottom: page-spacing(80px);
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+
+      .section-title {
+        @include typography(section);
+        border-bottom: 1px solid var(--text-body-primary);
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+        //color: var(--error-color, #d32f2f);
+      }
+
+      .error-number {
+        @include typography(title);
+        font-size: 8rem;
+        font-weight: 900;
+        color: var(--text-body-primary);
+        margin-bottom: 1rem;
+        line-height: 1;
+        //text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+
+        @media (max-width: 768px) {
+          font-size: 6rem;
+        }
+      }
+
+      h3 {
+        @include typography(h3);
+        margin-top: 0;
+        margin-bottom: 1rem;
+      }
+
+      p {
+        @include typography(paragraph);
+        margin-bottom: 1.5rem;
+      }
+
+      .error-actions {
+        display: flex;
+        gap: 1rem;
+        margin: 2rem 0;
+        flex-wrap: wrap;
+
+        @media (max-width: 768px) {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+
+      .learn-more-link {
+        @include typography(paragraph);
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background-color: var(--primary-button-bg, #0c8ce0);
+        color: var(--primary-button-text, white);
+        border-radius: 50px;
+        font-weight: 300;
+        font-size: calc(1rem * var(--font-scale-factor));
+        text-decoration: none;
+        transition: background-color 0.2s ease-in-out;
+
+        &:hover {
+          background-color: var(--primary-button-hover, #0a7bc5);
+        }
+      }
+
+      .secondary-link {
+        @include typography(paragraph);
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background-color: transparent;
+        color: var(--primary-button-bg, #0c8ce0);
+        border: 2px solid var(--primary-button-bg, #0c8ce0);
+        border-radius: 50px;
+        font-weight: 300;
+        font-size: calc(1rem * var(--font-scale-factor));
+        text-decoration: none;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+          background-color: var(--primary-button-bg, #0c8ce0);
+          color: var(--primary-button-text, white);
+        }
+      }
+
+      ul {
+        margin: 0 0 1.5rem 0;
+        padding-left: 20px;
+
+        li {
+          @include typography(paragraph);
+          margin-bottom: 0.5rem;
+
+          a {
+            color: var(--primary-button-bg, #0c8ce0);
+            text-decoration: none;
+            font-weight: 500;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+
+      .column {
+        @media (max-width: 768px) {
+          &.right-column {
+            margin-top: 2rem;
+          }
+        }
+      }
+    }
+  }
+</style>
