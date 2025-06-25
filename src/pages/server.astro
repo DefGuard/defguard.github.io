@@ -162,7 +162,11 @@ const sections = [
           </div>
 
           <div slot="right">
-            <ImageURL src="/images/features/True 2FA.png" alt="True 2FA/Multi-Factor authentication on WireGuard" />
+            <ImageCarousel
+              src="/images/features/True 2FA.png,/images/features/True 2FA2.png" alt="True 2FA/Multi-Factor authentication on WireGuard"
+              interval={3}
+              autoplay={true}
+            />
           </div>
         </FlexibleSection>
 
@@ -315,7 +319,7 @@ const sections = [
           </div>
 
           <div slot="right">
-            <Image src={signinwith} alt="Built-in OIDC SSO, key management, forward-auth for legacy systems" />
+            <ImageURL src="/images/features/OIDC SSO.png" alt="Built-in OIDC SSO, key management, forward-auth for legacy systems" />
           </div>
         </FlexibleSection>
 
@@ -326,7 +330,7 @@ const sections = [
           theme="light"
         >
           <div slot="left">
-            <Image src={api} alt="API key definition screen" />
+            <ImageURL src="/images/features/Rest API.png" alt="Full rest API and webhooks" />
           </div>
 
           <div slot="right">
