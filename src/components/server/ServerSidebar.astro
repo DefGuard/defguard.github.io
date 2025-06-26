@@ -88,44 +88,49 @@ const { sections, title = "Main Features" } = Astro.props;
 </style>
 
 <script>
-  // Intersection Observer to highlight active section
-  const observerOptions = {
-    root: null,
-    rootMargin: "-20px",
-    threshold: 1,
-  };
+  // Only run this script if the server sidebar exists on the page
+  const serverSidebar = document.querySelector('.server-sidebar');
+  if (serverSidebar) {
+    // Intersection Observer to highlight active section
+    const observerOptions = {
+      root: null,
+      rootMargin: "-20px",
+      threshold: 1,
+    };
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      const id = entry.target.getAttribute("id");
-      const link = document.querySelector(`[data-section="${id}"]`);
-      
-      if (entry.isIntersecting) {
-        link?.classList.add("active");
-      } else {
-        link?.classList.remove("active");
-      }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const id = entry.target.getAttribute("id");
+        const link = document.querySelector(`[data-section="${id}"]`);
+        
+        if (entry.isIntersecting) {
+          link?.classList.add("active");
+        } else {
+          link?.classList.remove("active");
+        }
+      });
+    }, observerOptions);
+
+    // Only observe sections on the server page (those with specific IDs)
+    const serverSections = document.querySelectorAll("#server-page section[id]");
+    serverSections.forEach((section) => {
+      observer.observe(section);
     });
-  }, observerOptions);
 
-  // Observe all sections
-  document.querySelectorAll("section[id]").forEach((section) => {
-    observer.observe(section);
-  });
-
-  // Smooth scroll for navigation
-  document.querySelectorAll(".server-sidebar a").forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      const targetId = link.getAttribute("href")?.substring(1);
-      const targetElement = document.getElementById(targetId!);
-      
-      if (targetElement) {
-        targetElement.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
+    // Smooth scroll for navigation
+    document.querySelectorAll(".server-sidebar a").forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute("href")?.substring(1);
+        const targetElement = document.getElementById(targetId!);
+        
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      });
     });
-  });
-</script> 
+  }
+</script>

@@ -147,12 +147,7 @@ const hasCaseStudy =
 </ProductLayout>
 
 <style lang="scss">
-  // Global overrides for proper scroll behavior
-  :global(html),
-  :global(body) {
-    overflow-x: visible !important;
-    overflow-y: visible !important;
-  }
+  // Removed global overflow overrides that were interfering with sticky positioning
 
   .label {
     margin: unset !important;
