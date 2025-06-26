@@ -35,11 +35,22 @@ const url = `https://defguard.net/blog/${entry.slug}`;
 // Get image from frontmatter or extract from content
 const content = entry.body;
 const imageMatch = content.match(/!\[.*?\]\((.*?)\)/);
+// Fix image URL construction - don't double-prefix with domain
 const imageUrl = entry.data.image
-  ? `https://defguard.net${entry.data.image}`
+  ? (entry.data.image.startsWith('http') ? entry.data.image : `https://defguard.net${entry.data.image}`)
   : imageMatch
-    ? `https://defguard.net${imageMatch[1]}`
-    : "https://defguard.net/images/png/defguard.png";
+    ? (imageMatch[1].startsWith('http') ? imageMatch[1] : `https://defguard.net${imageMatch[1]}`)
+    : "defguard.net/images/png/defguard.png";
+
+// Generate relevant tags for blog post
+const blogTags = [
+  "defguard",
+  "blog",
+  "cybersecurity",
+  "vpn",
+  "zero-trust",
+  ...(entry.data.tags || []),
+];
 
 // Check if case study metadata exists
 const hasCaseStudy =
@@ -53,8 +64,15 @@ const hasCaseStudy =
   featuredImage={imageUrl}
   imageWidth="1200"
   imageHeight="630"
-  tags={[]}
+  tags={blogTags}
 >
+  <!-- Blog-specific meta tags -->
+  <meta slot="schema" property="og:type" content="article" />
+  <meta slot="schema" property="article:published_time" content={entry.data.publishDate.toISOString()} />
+  {entry.data.author && <meta slot="schema" property="article:author" content={entry.data.author} />}
+  <meta slot="schema" property="article:section" content="Technology" />
+  {blogTags.map(tag => <meta slot="schema" property="article:tag" content={tag} />)}
+  
   <Navigation activeSlug="/blog/" />
 
   <main id="blog-post-page">
