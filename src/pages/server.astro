@@ -36,7 +36,7 @@ const url = "https://defguard.net/server";
 const tags = [
   "defguard",
   "server",
-  "wireguard",
+  "WireGuard®",
   "vpn",
   "mfa",
   "2fa",
@@ -60,7 +60,7 @@ const tags = [
 const sections = [
   { id: "multiple-vpns", title: "Manage Multiple VPNs" },
   { id: "multiple-instances", title: "Deploy Multiple Instances" },
-  { id: "true-mfa", title: "True 2FA/MFA on WireGuard" },
+  { id: "true-mfa", title: "True 2FA/MFA on WireGuard®" },
   { id: "sso-integration", title: "SSO & Directory Integration" },
   { id: "firewall-management", title: "Built-in Firewall Management" },
   { id: "instant-updates", title: "Instant Configuration Updates" },
@@ -69,6 +69,7 @@ const sections = [
   { id: "secure-architecture", title: "Secure, Isolated Architecture" },
   { id: "yubikey-management", title: "YubiKey Management" },
   { id: "oidc-sso", title: "Built-in OIDC SSO" },
+  { id: "easy-deployment", title: "Easy Deployment" },
   { id: "api-webhooks", title: "Full REST API & Webhooks" },
   { id: "rust-security", title: "Built with Rust" },
 ];
@@ -110,7 +111,7 @@ const sections = [
             </p>
             <div class="learn-more">
               <a
-                href="https://docs.defguard.net/admin-and-features/wireguard/create-your-vpn-network"
+                href="https://docs.defguard.net/admin-and-features/WireGuard®/create-your-vpn-network"
                 class="learn-more-link"
               >
                 Learn about Location Management
@@ -148,7 +149,7 @@ const sections = [
         </FlexibleSection>
 
         <FlexibleSection
-          title="True 2FA/Multi-Factor authentication on WireGuard"
+          title="True 2FA/Multi-Factor authentication on WireGuard®"
           id="true-mfa"
           variant="gray"
           theme="light"
@@ -157,13 +158,13 @@ const sections = [
             <ul>
               <li>Each connection can require 2FA/MFA—using either the built-in Defguard IdP or external SSO providers like Google, Microsoft, Okta, and others—enabling true Zero Trust security.
               </li>
-              <li>Adhering to the highest security standards — VPN peers are configured only after successful 2FA/MFA, and session-based, randomly generated WireGuard pre-shared keys are used to maximize security</li>
+              <li>Adhering to the highest security standards — VPN peers are configured only after successful 2FA/MFA, and session-based, randomly generated WireGuard® pre-shared keys are used to maximize security</li>
             </ul>
           </div>
 
           <div slot="right">
             <ImageCarousel
-              src="/images/features/True 2FA.png,/images/features/True 2FA2.png" alt="True 2FA/Multi-Factor authentication on WireGuard"
+              src="/images/features/True 2FA.png,/images/features/True 2FA2.png" alt="True 2FA/Multi-Factor authentication on WireGuard®"
               interval={3}
               autoplay={true}
             />
@@ -324,16 +325,35 @@ const sections = [
         </FlexibleSection>
 
         <FlexibleSection
+        title="Easy depoloyment"
+        id="easy-deployment"
+        variant="white"
+        theme="light"
+      >
+        <div slot="left">
+          <ImageURL src="/images/features/deploy.png" alt="Easy depoloyment" />
+        </div>
+
+        <div slot="right">
+          <p>
+            Defguard offers a variety of deployment methods such as Docker, system packages, Kubernetes, and Terraform, making it easy to integrate into your environment. It also provides a quick way to try it out via a script that automatically sets up and launches a test instance.
+          </p>
+          <a
+                href="https://docs.defguard.net/getting-started/one-line-install"
+                class="learn-more-link"
+              >
+                See the one-line deploy
+              </a>
+        </div>
+      </FlexibleSection>
+
+        <FlexibleSection
           title="Full rest API and webhooks"
           id="api-webhooks"
           variant="white"
           theme="light"
         >
           <div slot="left">
-            <ImageURL src="/images/features/Rest API.png" alt="Full rest API and webhooks" />
-          </div>
-
-          <div slot="right">
             <p>
               Defguard provides a full REST API for integration, including API key management, as well as webhook functionality for simpler integrations.
             </p>
@@ -346,6 +366,10 @@ const sections = [
               </a>
             </div>
           </div>
+
+          <div slot="right">
+            <ImageURL src="/images/features/Rest API.png" alt="Full rest API and webhooks" />
+          </div>
         </FlexibleSection>
 
         <FlexibleSection
@@ -355,13 +379,13 @@ const sections = [
           theme="light"
         >
           <div slot="left">
-            <p>
-              Rust prevents memory bugs at compile time — eliminating entire classes of vulnerabilities before they reach production.
-            </p>
+            <ImageURL src="/images/features/Rust.png" alt="All written in Rust for security!" />
           </div>
 
           <div slot="right">
-            <ImageURL src="/images/features/Rust.png" alt="All written in Rust for security!" />
+            <p>
+              Rust prevents memory bugs at compile time — eliminating entire classes of vulnerabilities before they reach production.
+            </p>
           </div>
         </FlexibleSection>
 

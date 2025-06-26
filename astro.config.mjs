@@ -74,5 +74,9 @@ export default defineConfig({
         },
       },
     },
+    server: {
+      // Allow all ngrok subdomains for development sharing (e.g., via ngrok tunnels)
+      allowedHosts: ['.ngrok-free.app'],
+    },
   },
 });

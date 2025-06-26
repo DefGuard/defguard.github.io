@@ -48,7 +48,8 @@ const { sections, title = "Main Features" } = Astro.props;
       //margin-left: 1rem;
       margin-bottom: 1rem;
       border-bottom: 1px solid var(--text-body-secondary);
-      @include typography(paragraph)
+      @include typography(paragraph);
+      font-size: calc(0.75rem * var(--font-scale-factor));
     }
 
     ul {
