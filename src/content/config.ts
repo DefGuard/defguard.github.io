@@ -13,6 +13,7 @@ const blogSchema = z.object({
   companyWebsite: z.string().optional(),
   companySegment: z.string().optional(),
   image: z.string().optional(),
+  tags: z.array(z.string()).optional(),
 });
 
 const productFeatures = defineCollection({
