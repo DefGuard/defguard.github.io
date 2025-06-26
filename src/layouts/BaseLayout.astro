@@ -30,16 +30,40 @@ const { url, title, description, featuredImage, imageWidth, imageHeight } = Astr
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
     <meta name="generator" content={Astro.generator} />
-    <title>defguard - Zero-Trust WireGuard® 2FA/MFA VPN</title>
+    <title>{title}</title>
+    
+    <!-- Basic SEO -->
+    <meta name="description" content={description} />
+    <meta name="keywords" content="defguard, zero-trust, WireGuard, VPN, 2FA, MFA, cybersecurity, enterprise security" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta name="description" content={description} />
-    <meta property="og:image" content={"http://" + featuredImage} />
-    <meta property="og:image:secure_url" content={"https://" + featuredImage} />
+    <meta property="og:image" content={featuredImage.startsWith('http') ? featuredImage : `https://${featuredImage}`} />
+    <meta property="og:image:secure_url" content={featuredImage.startsWith('http') ? featuredImage : `https://${featuredImage}`} />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content={imageWidth} />
     <meta property="og:image:height" content={imageHeight} />
-    <meta property="og:url" content={url} />
+    <meta property="og:site_name" content="defguard" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={url} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={featuredImage.startsWith('http') ? featuredImage : `https://${featuredImage}`} />
+    <meta name="twitter:site" content="@defguard_net" />
+    <meta name="twitter:creator" content="@defguard_net" />
+    
+    <!-- LinkedIn -->
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- Additional SEO -->
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="defguard team" />
+    <link rel="canonical" href={url} />
     <!-- schema.org -->
     <slot name="schema" />
     <!-- Favicons -->
