@@ -1,0 +1,168 @@
+---
+interface Props {
+  src: string; // URL string instead of imported asset
+  alt: string;
+  width?: number | string;
+  height?: number | string;
+  className?: string;
+  loading?: "lazy" | "eager";
+  decoding?: "async" | "sync" | "auto";
+  sizes?: string;
+  quality?: number;
+  format?: "avif" | "webp" | "jpeg" | "jpg" | "png" | "gif";
+  // Additional HTML img attributes
+  crossorigin?: "anonymous" | "use-credentials";
+  referrerpolicy?: 
+    | "no-referrer"
+    | "no-referrer-when-downgrade"
+    | "origin"
+    | "origin-when-cross-origin"
+    | "same-origin"
+    | "strict-origin"
+    | "strict-origin-when-cross-origin"
+    | "unsafe-url";
+  // Style props
+  objectFit?: "contain" | "cover" | "fill" | "none" | "scale-down";
+  objectPosition?: string;
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  className = "",
+  loading = "lazy",
+  decoding = "async",
+  sizes,
+  quality,
+  format,
+  crossorigin,
+  referrerpolicy,
+  objectFit,
+  objectPosition,
+} = Astro.props;
+
+// Build style object
+const imageStyles: Record<string, string> = {};
+if (width && typeof width === "number") imageStyles.width = `${width}px`;
+if (width && typeof width === "string") imageStyles.width = width;
+if (height && typeof height === "number") imageStyles.height = `${height}px`;
+if (height && typeof height === "string") imageStyles.height = height;
+if (objectFit) imageStyles.objectFit = objectFit;
+if (objectPosition) imageStyles.objectPosition = objectPosition;
+
+// Function to check if URL is external
+function isExternalUrl(url: string): boolean {
+  return url.startsWith("http://") || url.startsWith("https://") || url.startsWith("//");
+}
+
+// Function to optimize image URL based on format and quality (for external images)
+function optimizeImageUrl(url: string, format?: string, quality?: number): string {
+  // For external URLs, we can't optimize them directly
+  // But we can add query parameters if the service supports it
+  // This is a placeholder for future enhancement
+  return url;
+}
+
+// Process the source URL
+const isExternal = isExternalUrl(src);
+const processedSrc = isExternal ? optimizeImageUrl(src, format, quality) : src;
+
+// Build srcset for responsive images (basic implementation)
+function buildSrcSet(baseSrc: string): string | undefined {
+  if (!sizes || isExternal) return undefined;
+  
+  // For internal images, we could generate different sizes
+  // This is a simplified version - in a real implementation you might
+  // want to use Astro's image optimization service
+  return undefined;
+}
+
+const srcset = buildSrcSet(processedSrc);
+---
+
+<img
+  src={processedSrc}
+  alt={alt}
+  class={`image-url ${className}`}
+  style={imageStyles}
+  loading={loading}
+  decoding={decoding}
+  sizes={sizes}
+  srcset={srcset}
+  crossorigin={crossorigin}
+  referrerpolicy={referrerpolicy}
+  {...(width && typeof width === "number" && { width })}
+  {...(height && typeof height === "number" && { height })}
+/>
+
+<style lang="scss">
+  @use "../../styles/mixins" as *;
+
+  .image-url {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    
+    // Default styling similar to Astro's Image component
+    &:not([width]):not([height]) {
+      width: 100%;
+      height: auto;
+    }
+
+    // Responsive behavior
+    @include break-down(md) {
+      max-width: 100%;
+      height: auto;
+    }
+
+    // Loading states
+    &[loading="lazy"] {
+      // Add any lazy loading specific styles if needed
+    }
+
+    &[loading="eager"] {
+      // Add any eager loading specific styles if needed
+    }
+
+    // Object fit styles when specified
+    &[style*="object-fit"] {
+      object-fit: inherit; // Will be overridden by inline styles
+    }
+
+    // Error handling - show placeholder if image fails to load
+    &[alt]:after {
+      content: attr(alt);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 1rem;
+      background: var(--surface-nav-bg, #f5f5f5);
+      border: 1px solid var(--border-color, #ddd);
+      border-radius: 4px;
+      font-size: 0.875rem;
+      color: var(--text-body-secondary, #666);
+      text-align: center;
+      display: none;
+    }
+
+    &:not([src]),
+    &[src=""] {
+      &:after {
+        display: block;
+      }
+    }
+  }
+
+  // Dark theme support
+  .theme-dark .image-url {
+    &[alt]:after {
+      background: var(--surface-nav-bg-dark, #2a2a2a);
+      border-color: var(--border-color-dark, #444);
+      color: var(--text-body-secondary-dark, #ccc);
+    }
+  }
+</style>
+

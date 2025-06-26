@@ -1,0 +1,131 @@
+---
+interface Props {
+  sections: Array<{
+    id: string;
+    title: string;
+  }>;
+  title?: string;
+}
+
+const { sections, title = "Main Features" } = Astro.props;
+---
+
+<nav class="server-sidebar">
+  <p>{title}</p>
+  <ul>
+    {sections.map((section) => (
+      <li>
+        <a href={`#${section.id}`} data-section={section.id}>
+          {section.title}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style lang="scss">
+  .server-sidebar {
+    height: fit-content;
+    padding: 1rem;
+    background: var(--surface-frame-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--text-body-secondary);
+      border-radius: 2px;
+    }
+    
+    p{
+      //margin-left: 1rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--text-body-secondary);
+      @include typography(paragraph);
+      font-size: calc(0.75rem * var(--font-scale-factor));
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      li {
+        margin: 0;
+        padding: 0;
+
+        a {
+          display: block;
+          padding: 0.2rem 0.5rem;
+          text-decoration: none;
+          color: var(--text-body-primary);
+          transition: all 0.2s ease;
+          @include typography(menu);
+          font-size: calc(0.9rem * var(--font-scale-factor));
+
+          &:hover {
+            background: var(--surface-main-primary);
+            color: white;
+          }
+
+          &.active {
+            border-right: 4px solid var(--surface-main-primary);
+          }
+        }
+      }
+    }
+  }
+</style>
+
+<script>
+  // Intersection Observer to highlight active section
+  const observerOptions = {
+    root: null,
+    rootMargin: "-20px",
+    threshold: 1,
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const id = entry.target.getAttribute("id");
+      const link = document.querySelector(`[data-section="${id}"]`);
+      
+      if (entry.isIntersecting) {
+        link?.classList.add("active");
+      } else {
+        link?.classList.remove("active");
+      }
+    });
+  }, observerOptions);
+
+  // Observe all sections
+  document.querySelectorAll("section[id]").forEach((section) => {
+    observer.observe(section);
+  });
+
+  // Smooth scroll for navigation
+  document.querySelectorAll(".server-sidebar a").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute("href")?.substring(1);
+      const targetElement = document.getElementById(targetId!);
+      
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    });
+  });
+</script> 

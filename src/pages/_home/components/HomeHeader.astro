@@ -6,14 +6,20 @@ import HomeSection from "../../../components/home/HomeSection.astro";
 import headerImage from "/public/images/product/core/hero-image.png";
 import AstroButton from "../../../components/AstroButton.astro";
 import TrustedBy from "./TrustedBy.astro";
+
+interface Props {
+  trustedBy?: boolean;
+  title: string;
+  description: string;
+}
+
+const { trustedBy = true, title, description } = Astro.props;
 ---
 
 <HomeSection variant="white" contentId="home-header">
-  <h1>Zero-Trust Enterprise VPN</h1>
+  <h1>{title}</h1>
   <p>
-    Defguard is an Open Source, zero-trust enterprise VPN that integrates advanced
-    security features such as Multi-Factor Authentication (MFA) directly into the
-    WireGuard® protocol.
+    {description}
   </p>
   <div class="github-track">
     <GithubStars owner="defguard" repo="defguard" client:only="react" />
@@ -40,7 +46,7 @@ import TrustedBy from "./TrustedBy.astro";
   <!-- <div class="hero-image-container">
     <Image src={headerImage} alt="Defguard Zero-Trust VPN diagram" loading={"eager"} />
   </div> -->
-  <TrustedBy />
+  {trustedBy && <TrustedBy forceScroll={true} />}
 </HomeSection>
 
 <style lang="scss" is:global>
@@ -56,7 +62,7 @@ import TrustedBy from "./TrustedBy.astro";
     h1 {
       color: var(--text-body-primary);
       padding-bottom: 40px;
-      max-width: 996px;
+      //max-width: 996px;
       text-align: left;
       text-wrap: balance;
       @include typography(title);
@@ -74,7 +80,7 @@ import TrustedBy from "./TrustedBy.astro";
       align-items: center;
       justify-content: center;
       gap: 16px;
-      padding: 100px 0px;
+      padding: 60px 0px;
 
       @include break-down(sm) {
         flex-flow: column;

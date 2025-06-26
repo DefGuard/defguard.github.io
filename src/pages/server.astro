@@ -1,0 +1,535 @@
+---
+import Navigation from "../components/base/Navigation.astro";
+import HomeSection from "../components/home/HomeSection.astro";
+import ProductLayout from "../layouts/ProductLayout.astro";
+import Testimonials from "./_home/components/client-side/Testimonials/Testimonials";
+import type { TestimonialData } from "./_home/components/client-side/Testimonials/type";
+import { testimonialSchema } from "./_home/components/client-side/Testimonials/type";
+import FlexibleIdentitySection from "./_home/components/FlexibleIdentity/FlexibleIdentitySection.astro";
+import HomeHeader from "./_home/components/HomeHeader.astro";
+import Roadmap from "./_home/components/Roadmap/Roadmap.astro";
+import FlexibleSection from "../components/FlexibleSection.astro";
+import ServerSidebar from "../components/server/ServerSidebar.astro";
+import signinwith from "/public/images/data/signinwith.png";
+import enrollment from "/public/images/data/enrollment-screen.png";
+import api from "/public/images/data/api.png";
+import Image from "astro/components/Image.astro";
+import YouTubeVideo from "../components/video/YouTubeVideo.astro";
+import CTASection from "../components/CTASection.astro";
+import ImageCarousel from "../components/image/ImageCarousel.astro";
+import ImageURL from "../components/image/ImageURL.astro"
+
+const testimonialsImportData = await Astro.glob("../data/home/testimonials/**/*.md");
+
+const testimonialsData: Array<TestimonialData> = testimonialsImportData.map((val) => {
+  const toValidate = { ...val.frontmatter, markdownRaw: val.rawContent() };
+  const res = testimonialSchema.parse(toValidate);
+  return res;
+});
+
+const title = "Enterprise WireGuard® VPN with Native MFA & Zero-Trust Architecture";
+const featuredImage =
+  "github.com/DefGuard/defguard.github.io/raw/main/public/images/product/core/hero-image.png";
+const imageWidth = "1920";
+const imageHeight = "1080";
+const url = "https://defguard.net/server";
+const tags = [
+  "defguard",
+  "server",
+  "WireGuard®",
+  "vpn",
+  "mfa",
+  "2fa",
+  "WireGuard®",
+  "ldap",
+  "openldap",
+  "postgresql",
+  "postgres",
+  "openid",
+  "totp",
+  "webauthn",
+  "opensense",
+  "freebsd",
+  "rust",
+  "secure",
+  "docker",
+  "kubernetes",
+  "k8s",
+];
+
+const sections = [
+  { id: "multiple-vpns", title: "Manage Multiple VPNs" },
+  { id: "multiple-instances", title: "Deploy Multiple Instances" },
+  { id: "true-mfa", title: "True 2FA/MFA on WireGuard®" },
+  { id: "sso-integration", title: "SSO & Directory Integration" },
+  { id: "firewall-management", title: "Built-in Firewall Management" },
+  { id: "instant-updates", title: "Instant Configuration Updates" },
+  { id: "audit-trail", title: "Full Audit Trail & SIEM" },
+  { id: "user-enrollment", title: "Remote User Enrollment" },
+  { id: "secure-architecture", title: "Secure, Isolated Architecture" },
+  { id: "yubikey-management", title: "YubiKey Management" },
+  { id: "oidc-sso", title: "Built-in OIDC SSO" },
+  { id: "easy-deployment", title: "Easy Deployment" },
+  { id: "api-webhooks", title: "Full REST API & Webhooks" },
+  { id: "rust-security", title: "Built with Rust" },
+];
+---
+
+<ProductLayout
+  title={title}
+  featuredImage={featuredImage}
+  imageWidth={imageWidth}
+  imageHeight={imageHeight}
+  url={url}
+  tags={tags}
+>
+  <Navigation activeSlug="/server/" />
+
+  <main id="server-page">
+    <HomeHeader
+      trustedBy={false}
+      title="Zero-Trust VPN Server with MFA"
+      description="The most comprehensive open-source VPN solution for enterprises. Defguard delivers true Multi-Factor Authentication directly within the WireGuard® protocol, unified management of multiple VPN instances, built-in firewall control, and complete SSO integration—all while maintaining full data sovereignty and compliance readiness."
+    />
+    
+    <!-- New content wrapper that appears after header -->
+    <div class="page-content-wrapper">
+      <aside class="sidebar-container">
+        <ServerSidebar sections={sections} title="Main features"/>
+      </aside>
+
+      <div class="main-content">
+        <FlexibleSection
+          title="Manage multiple VPNs (locations) from a single central control plane"
+          id="multiple-vpns"
+          variant="gray"
+          theme="light"
+        >
+          <div slot="left">
+            <p>
+              View all user activity and statistics at a glance on a unified dashboard, or dive into detailed views for each location.
+            </p>
+            <div class="learn-more">
+              <a
+                href="https://docs.defguard.net/admin-and-features/WireGuard®/create-your-vpn-network"
+                class="learn-more-link"
+              >
+                Learn about Location Management
+              </a>
+            </div>
+          </div>
+
+          <div slot="right">
+            <ImageCarousel
+              src="/images/features/Manage multiple VPN1.png,/images/features/Manage multiple VPN2.png" alt="Manage multiple VPN"
+              interval={3}
+              autoplay={true}
+            />
+          </div>
+        </FlexibleSection>
+
+        <FlexibleSection
+          title="Deploy multiple Defguard instances and access them from a single client"
+          id="multiple-instances"
+          variant="white"
+          theme="light"
+        >
+          <div slot="left">
+            <ImageURL src="/images/features/Multiple instances - desktop.png" alt="Multiple instances" />
+          </div>
+
+          <div slot="right">
+            <p>
+              Defguard is uniquely designed for MSPs, cloud providers, and data centers. It allows deployment of multiple isolated Defguard instances (for different clients, sites, etc.) while maintaining unified access through a single desktop app.
+            </p>
+            <p>
+              <em>Mobile support coming in version 1.5!</em>
+            </p>
+          </div>
+        </FlexibleSection>
+
+        <FlexibleSection
+          title="True 2FA/Multi-Factor authentication on WireGuard®"
+          id="true-mfa"
+          variant="gray"
+          theme="light"
+        >
+          <div slot="left">
+            <ul>
+              <li>Each connection can require 2FA/MFA—using either the built-in Defguard IdP or external SSO providers like Google, Microsoft, Okta, and others—enabling true Zero Trust security.
+              </li>
+              <li>Adhering to the highest security standards — VPN peers are configured only after successful 2FA/MFA, and session-based, randomly generated WireGuard® pre-shared keys are used to maximize security</li>
+            </ul>
+          </div>
+
+          <div slot="right">
+            <ImageCarousel
+              src="/images/features/True 2FA.png,/images/features/True 2FA2.png" alt="True 2FA/Multi-Factor authentication on WireGuard®"
+              interval={3}
+              autoplay={true}
+            />
+          </div>
+        </FlexibleSection>
+
+        <FlexibleSection
+          title="Integration with SSO providers, Active Directory, and LDAP"
+          id="sso-integration"
+          variant="white"
+          theme="light"
+        >
+          <div slot="left">
+            <ImageURL src="/images/features/Sso active dir.png" alt="Integration with SSO providers, Active Directory, and LDAP" />
+          </div>
+
+          <div slot="right">
+            <p>
+              Defguard supports user and group synchronization with providers like Google, Microsoft, Okta, and JumpCloud, making onboarding and offboarding easy. It also uniquely enables two-way sync with Active Directory and LDAP.
+            </p>
+          </div>
+        </FlexibleSection>
+
+        <FlexibleSection
+          title="The only ACL solution with build in firewall management on Linux and FreeBSD/OPNSense"
+          id="firewall-management"
+          variant="gray"
+          theme="light"
+        >
+          <div slot="left">
+            <p>
+              Defguard, in addition to access rules for VPN based on selected users and groups, is the only solution that also offers low-level ACLs by managing the firewall (NFTables on Linux and Packet Filter on FreeBSD/OPNSense).
+            </p>
+
+          </div>
+
+          <div slot="right">
+            <YouTubeVideo
+              videoId="F61_5mR2UpM"
+              title="Firewall Rule Management"
+              showControls={true}
+              showInfo={true}
+              allowFullscreen={true}
+              rel={false}
+            />
+          </div>
+        </FlexibleSection>
+
+        <FlexibleSection
+          title="Instant VPN configuration updates and flexible client management"
+          id="instant-updates"
+          variant="white"
+          theme="light"
+        >
+          <div slot="left">
+            <ImageURL src="/images/features/Instant VPN.png" alt="Instant VPN configuration updates and flexible client management" />
+          </div>
+
+          <div slot="right">
+            <p>
+              Defguard enables real-time synchronization and configuration of client applications used by users. Any changes in VPN configuration or access management are immediately reflected on the user side. Additionally, it allows managing client behavior (e.g., enabling full traffic routing through the VPN or blocking certain features of the client).
+            </p>
+          </div>
+        </FlexibleSection>
+
+        <FlexibleSection
+          title="Comprehensive auditing and seamless SIEM integration"
+          id="audit-trail"
+          variant="gray"
+          theme="light"
+        >
+          <div slot="left">
+            <p>
+              Defguard supports full auditability and provides detailed visibility into user activity, including information such as time and date, IP addresses, and event descriptions, along with extensive search and filtering capabilities. It also enables exporting complete activity logs to external SIEM systems.
+            </p>
+          </div>
+
+          <div slot="right">
+            <ImageURL src="/images/features/SIEM integration.png" alt="Comprehensive auditing and seamless SIEM integration" />
+
+          </div>
+        </FlexibleSection>
+
+        <FlexibleSection
+          title="Easy and secure remote user Enrollment & Onboarding"
+          id="user-enrollment"
+          variant="white"
+          theme="light"
+        >
+          <div slot="left">
+            <ImageURL src="/images/features/Enrollment.png" alt="Easy and secure remote user Enrollment & Onboarding" />
+          </div>
+
+          <div slot="right">
+            <p>
+              Whether Defguard acts as an IdP or uses an external IdP/SSO, it provides a very easy and secure enrollment process and supports onboarding by displaying and sending administrator-prepared information templates to new users.</p>
+          </div>
+        </FlexibleSection>
+
+        <FlexibleSection
+          title="Secure architecture with no data exposed"
+          id="secure-architecture"
+          variant="gray"
+          theme="light"
+        >
+          <div slot="left">
+            <ul>
+              <li>Defguard features a secure and robust architecture, with components and microservices that can be seamlessly deployed in diverse network setups (e.g., utilizing network segments like Demilitarized Zones, Intranet with no external access, etc.), ensuring a secure environment.</li>
+              <li>When properly deployed with the core placed in an Intranet segment inaccessible from the Internet, no user data is exposed to the public network. The public proxy component is stateless and holds no information about users or devices.</li>
+            </ul>
+          </div>
+
+          <div slot="right">
+            <ImageURL src="/images/features/Secure architecture.png" alt="Secure architecture with no data exposed" />
+            <p>
+              <div class="learn-more">
+                <a
+                  href="https://docs.defguard.net/in-depth/architecture"
+                  class="learn-more-link"
+                >
+                  Learn about Defguard Architecture
+                </a>
+              </div>
+            </p>
+          </div>
+        </FlexibleSection>
+
+        <FlexibleSection
+          title="Yubico YubiKey Hardware security key management and provisioning"
+          id="yubikey-management"
+          variant="white"
+          theme="light"
+        >
+          <div slot="left">
+            <ImageURL src="/images/features/YubiKey.png" alt="Yubico YubiKey Hardware security key management and provisioning" />
+          </div>
+
+          <div slot="right">
+            <p>Defguard offers a Yubico YubiKey provisioner — a component that initiates and populates user data on YubiKeys by generating SSH keys as well as GPG/OpenPGP keys. It also stores detailed information about each user's key, including the serial number and date of provisioning.</p>
+          </div>
+        </FlexibleSection>
+
+        <FlexibleSection
+          title="Built-in OIDC SSO, key management, forward-auth for legacy systems"
+          id="oidc-sso"
+          variant="gray"
+          theme="light"
+        >
+          <div slot="left">
+            <p>
+              Defguard comes with a built-in Identity Provider/SSO based on the OpenID Connect standard, allowing you to replace any existing SSO solution in your organization. Additionally, it supports GPG and SSH key management, as well as forward-auth functionality for systems that do not support OIDC-based SSO.
+            </p>
+          </div>
+
+          <div slot="right">
+            <ImageURL src="/images/features/OIDC SSO.png" alt="Built-in OIDC SSO, key management, forward-auth for legacy systems" />
+          </div>
+        </FlexibleSection>
+
+        <FlexibleSection
+        title="Easy depoloyment"
+        id="easy-deployment"
+        variant="white"
+        theme="light"
+      >
+        <div slot="left">
+          <ImageURL src="/images/features/deploy.png" alt="Easy depoloyment" />
+        </div>
+
+        <div slot="right">
+          <p>
+            Defguard offers a variety of deployment methods such as Docker, system packages, Kubernetes, and Terraform, making it easy to integrate into your environment. It also provides a quick way to try it out via a script that automatically sets up and launches a test instance.
+          </p>
+          <a
+                href="https://docs.defguard.net/getting-started/one-line-install"
+                class="learn-more-link"
+              >
+                See the one-line deploy
+              </a>
+        </div>
+      </FlexibleSection>
+
+        <FlexibleSection
+          title="Full rest API and webhooks"
+          id="api-webhooks"
+          variant="white"
+          theme="light"
+        >
+          <div slot="left">
+            <p>
+              Defguard provides a full REST API for integration, including API key management, as well as webhook functionality for simpler integrations.
+            </p>
+            <div class="learn-more">
+              <a
+                href="https://docs.defguard.net/enterprise/all-enteprise-features/api-tokens"
+                class="learn-more-link"
+              >
+                API documentation and examples
+              </a>
+            </div>
+          </div>
+
+          <div slot="right">
+            <ImageURL src="/images/features/Rest API.png" alt="Full rest API and webhooks" />
+          </div>
+        </FlexibleSection>
+
+        <FlexibleSection
+          title="All written in Rust for security!"
+          id="rust-security"
+          variant="gray"
+          theme="light"
+        >
+          <div slot="left">
+            <ImageURL src="/images/features/Rust.png" alt="All written in Rust for security!" />
+          </div>
+
+          <div slot="right">
+            <p>
+              Rust prevents memory bugs at compile time — eliminating entire classes of vulnerabilities before they reach production.
+            </p>
+          </div>
+        </FlexibleSection>
+
+        <CTASection
+          title="Ready to Implement Enterprise-Grade WireGuard® VPN?"
+          description="See how Defguard fits into your zero-trust architecture and existing infrastructure."
+          buttonText="Book a Demo"
+          buttonLink="/book-a-demo?utm_source=server"
+          id="cta-documentation"
+          variant="white"
+        />
+
+        <!-- <Roadmap variant="white" /> -->
+      </div>
+    </div>
+  </main>
+</ProductLayout>
+
+<style lang="scss" is:global>
+  img {
+    border: 1px solid var(--surface-frame-bg);
+    border-radius: 8px;
+  }
+  main#server-page {
+    --page-spacing-factor: 0.5;
+    
+    @include break-up(lg) {
+      --page-spacing-factor: 1;
+    }
+
+    .page-content-wrapper {
+      display: block;
+      width: 100%;
+      position: relative;
+      
+      @include break-up(lg) {
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        align-items: start;
+      }
+    }
+
+    .sidebar-container {
+      display: none;
+      
+      @include break-up(lg) {
+        display: block;
+        position: sticky;
+        top: calc(var(--nav-height, 75px) + 2rem);
+        height: fit-content;
+        z-index: 10;
+        max-height: calc(100vh - var(--nav-height, 75px) - 4rem);
+        overflow-y: auto;
+      }
+    }
+
+    .main-content {
+      .flexible-section{
+        scroll-margin-top: 75px;
+        padding: 1.5rem 0;
+        margin-bottom: 90px;
+        //border: 1px solid var(--border-separator);
+        background-color: var(--surface-nav-bg);
+        border-radius: 10px;
+        box-shadow: var(--box-shadow);
+      }
+
+      .flexible-content {
+        .section-title {
+          @include typography(section);
+          padding-bottom: 1rem;
+          margin-bottom: 2rem;
+        }
+
+        h3 {
+          @include typography(h3);
+          margin-top: 0;
+          margin-bottom: 1rem;
+        }
+
+        p {
+          @include typography(paragraph);
+          margin-bottom: 1.5rem;
+        }
+
+        .learn-more {
+          margin-bottom: 1.5rem;
+        }
+
+        .learn-more-link {
+          @include typography(paragraph);
+          display: inline-block;
+          padding: 0.75rem 1.5rem;
+          background-color: var(--primary-button-bg, #0c8ce0);
+          color: var(--primary-button-text, white);
+          border-radius: 50px;
+          font-weight: 300;
+          font-size: calc(1rem * var(--font-scale-factor));
+          text-decoration: none;
+          transition: background-color 0.2s ease-in-out;
+
+
+          &:hover {
+            background-color: var(--primary-button-hover, #0a7bc5);
+          }
+        }
+
+        ul {
+          margin: 0 0 1.5rem 0;
+          padding-left: 20px;
+
+          li {
+            @include typography(paragraph);
+            margin-bottom: 0.5rem;
+          }
+        }
+
+        em {
+          font-size: 0.9em;
+          opacity: 0.8;
+        }
+
+        .column {
+          @media (max-width: 768px) {
+            &.right-column {
+              margin-top: 1rem;
+            }
+          }
+        }
+      }
+    }
+
+    #testimonials {
+      padding-top: page-spacing(100px);
+      padding-bottom: page-spacing(100px);
+    }
+
+    .scroll-section {
+      padding-top: page-spacing(200px);
+      padding-bottom: page-spacing(200px);
+    }
+  }
+</style> 
