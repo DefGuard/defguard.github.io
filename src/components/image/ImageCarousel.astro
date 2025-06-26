@@ -62,10 +62,19 @@ const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
 
 <script>
   class ImageCarousel {
-    constructor(element) {
+    element: HTMLElement;
+    currentIndex: number;
+    interval: number;
+    autoplay: boolean;
+    isPlaying: boolean;
+    timer: NodeJS.Timeout | null;
+    slides: NodeListOf<Element>;
+    dots: NodeListOf<Element>;
+
+    constructor(element: HTMLElement) {
       this.element = element;
       this.currentIndex = 0;
-      this.interval = parseInt(element.dataset.interval) * 1000 || 2000;
+      this.interval = parseInt(element.dataset.interval || '2') * 1000 || 2000;
       this.autoplay = element.dataset.autoplay !== 'false'; // Default to true unless explicitly false
       this.isPlaying = false;
       this.timer = null;
@@ -84,7 +93,7 @@ const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
 
     init() {
       // Add event listeners for dots
-      this.dots.forEach((dot, index) => {
+      this.dots.forEach((dot: Element, index: number) => {
         dot.addEventListener('click', () => this.goToSlide(index));
       });
 
@@ -101,7 +110,7 @@ const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
       }
     }
 
-    goToSlide(index) {
+    goToSlide(index: number) {
       // Remove active class from current slide and dot
       this.slides[this.currentIndex]?.classList.remove('active');
       this.dots[this.currentIndex]?.classList.remove('active');
@@ -158,9 +167,9 @@ const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
     const carousels = document.querySelectorAll('.image-carousel:not(.single-image):not([data-initialized])');
     console.log('Found carousels to initialize:', carousels.length);
     
-    carousels.forEach(carousel => {
+    carousels.forEach((carousel: Element) => {
       carousel.setAttribute('data-initialized', 'true');
-      new ImageCarousel(carousel);
+      new ImageCarousel(carousel as HTMLElement);
     });
   }
 
