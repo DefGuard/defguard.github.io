@@ -85,11 +85,15 @@ const sections = [
 >
   <Navigation activeSlug="/server/" />
 
-  <main id="server-page">
+  <main id="server-page" class="with-sidebar-nav">
     <HomeHeader
       trustedBy={false}
       title="Zero-Trust VPN Server with MFA"
       description="The most comprehensive open-source VPN solution for enterprises. Defguard delivers true Multi-Factor Authentication directly within the WireGuard® protocol, unified management of multiple VPN instances, built-in firewall control, and complete SSO integration—all while maintaining full data sovereignty and compliance readiness."
+      buttons={[
+        { name: "Download Server", link: "/download-confirm/" },
+        { name: "Book a Demo", link: "/book-a-demo/" }
+      ]}
     />
     
     <!-- New content wrapper that appears after header -->

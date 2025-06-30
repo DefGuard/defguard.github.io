@@ -7,13 +7,21 @@ import headerImage from "/public/images/product/core/hero-image.png";
 import AstroButton from "../../../components/AstroButton.astro";
 import TrustedBy from "./TrustedBy.astro";
 
+interface CTAButton {
+  name: string;
+  link: string;
+  target?: string;
+  preload?: boolean;
+}
+
 interface Props {
   trustedBy?: boolean;
   title: string;
   description: string;
+  buttons?: CTAButton[];
 }
 
-const { trustedBy = true, title, description } = Astro.props;
+const { trustedBy = true, title, description, buttons = [] } = Astro.props;
 ---
 
 <HomeSection variant="white" contentId="home-header">
@@ -24,25 +32,20 @@ const { trustedBy = true, title, description } = Astro.props;
   <div class="github-track">
     <GithubStars owner="defguard" repo="defguard" client:only="react" />
   </div>
-  <div class="link-track">
-    <AstroButton
-      link={{
-        href: "/download-confirm/",
-        target: "_self",
-        preload: true,
-      }}
-      text="Download"
-    />
-
-    <AstroButton
-      link={{
-        href: "/book-a-demo/",
-        target: "_self",
-        preload: true,
-      }}
-      text="Book a Demo"
-    />
-  </div>
+  {buttons.length > 0 && (
+    <div class="link-track">
+      {buttons.map((button) => (
+        <AstroButton
+          link={{
+            href: button.link,
+            target: button.target || "_self",
+            preload: button.preload ?? true,
+          }}
+          text={button.name}
+        />
+      ))}
+    </div>
+  )}
   <!-- <div class="hero-image-container">
     <Image src={headerImage} alt="Defguard Zero-Trust VPN diagram" loading={"eager"} />
   </div> -->
@@ -51,7 +54,7 @@ const { trustedBy = true, title, description } = Astro.props;
 
 <style lang="scss" is:global>
   #home-header {
-    padding-bottom: page-spacing(100px);
+    padding-bottom: page-spacing(60px);
     padding-top: 50px;
 
     & > p {

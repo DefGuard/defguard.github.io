@@ -111,8 +111,8 @@ const { sections, title = "Main Features" } = Astro.props;
       });
     }, observerOptions);
 
-    // Only observe sections on the server page (those with specific IDs)
-    const serverSections = document.querySelectorAll("#server-page section[id]");
+    // Only observe sections within pages with sidebar navigation (those with specific IDs)
+    const serverSections = document.querySelectorAll(".with-sidebar-nav section[id]");
     serverSections.forEach((section) => {
       observer.observe(section);
     });

@@ -1,4 +1,6 @@
 ---
+import ContentLimiter from "../../../components/ContentLimiter.astro";
+
 import { Image } from "astro:assets";
 import wideStreet from "./assets/trustedBy/widestreet.png";
 import vki from "./assets/trustedBy/vki.png";
@@ -16,20 +18,11 @@ interface Props {
 const { forceScroll = false } = Astro.props;
 ---
 
-<div id="trusted-by" class:list={[{ "force-scroll": forceScroll }]}>
-  <p>Trusted by</p>
-  <div class="track-container">
-    <div class="track">
-      <Image src={prusa} alt="prusa logo image" />
-      <!-- <Image src={penske} alt="team penske logo image" /> -->
-      <Image src={wideStreet} alt="widestreet logo image" />
-      <Image src={acquinox} alt="acquinox logo image" />
-      <Image src={hostinger} alt="hostinger logo image" />
-      <Image src={vki} alt="vki logo image" />
-      <Image src={truevo} alt="truevo logo image" />
-      <Image src={deepImage} alt="deepimage logo image" />
-
-      <div class="scroll-duplicate">
+<ContentLimiter>
+  <div id="trusted-by" class:list={[{ "force-scroll": forceScroll }]}>
+    <p>Trusted by:</p>
+    <div class="track-container">
+      <div class="track">
         <Image src={prusa} alt="prusa logo image" />
         <!-- <Image src={penske} alt="team penske logo image" /> -->
         <Image src={wideStreet} alt="widestreet logo image" />
@@ -38,10 +31,21 @@ const { forceScroll = false } = Astro.props;
         <Image src={vki} alt="vki logo image" />
         <Image src={truevo} alt="truevo logo image" />
         <Image src={deepImage} alt="deepimage logo image" />
+
+        <div class="scroll-duplicate">
+          <Image src={prusa} alt="prusa logo image" />
+          <!-- <Image src={penske} alt="team penske logo image" /> -->
+          <Image src={wideStreet} alt="widestreet logo image" />
+          <Image src={acquinox} alt="acquinox logo image" />
+          <Image src={hostinger} alt="hostinger logo image" />
+          <Image src={vki} alt="vki logo image" />
+          <Image src={truevo} alt="truevo logo image" />
+          <Image src={deepImage} alt="deepimage logo image" />
+        </div>
       </div>
     </div>
   </div>
-</div>
+</ContentLimiter>
 
 <style lang="scss">
   @keyframes scroll {
@@ -60,10 +64,12 @@ const { forceScroll = false } = Astro.props;
     row-gap: 8px;
     align-items: flex-start;
     justify-content: flex-start;
+    padding: 3rem 0;
 
     p {
       @include typography(h3);
       color: var(--text-body-primary);
+      font-size: calc(0.75rem * var(--font-scale-factor));
     }
 
     .track-container {
