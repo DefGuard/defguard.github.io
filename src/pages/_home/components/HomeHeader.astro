@@ -19,9 +19,10 @@ interface Props {
   title: string;
   description: string;
   buttons?: CTAButton[];
+  repo?: string;
 }
 
-const { trustedBy = true, title, description, buttons = [] } = Astro.props;
+const { trustedBy = true, title, description, buttons = [], repo = "defguard" } = Astro.props;
 ---
 
 <HomeSection variant="white" contentId="home-header">
@@ -30,7 +31,7 @@ const { trustedBy = true, title, description, buttons = [] } = Astro.props;
     {description}
   </p>
   <div class="github-track">
-    <GithubStars owner="defguard" repo="defguard" client:only="react" />
+    <GithubStars owner="defguard" repo={repo} client:only="react" />
   </div>
   {buttons.length > 0 && (
     <div class="link-track">

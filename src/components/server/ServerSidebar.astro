@@ -91,44 +91,85 @@ const { sections, title = "Main Features" } = Astro.props;
   // Only run this script if the server sidebar exists on the page
   const serverSidebar = document.querySelector('.server-sidebar');
   if (serverSidebar) {
-    // Intersection Observer to highlight active section
-    const observerOptions = {
-      root: null,
-      rootMargin: "-20px",
-      threshold: 1,
-    };
+    // Initialize sections visibility and currently active section
+    const visibilityMap: Record<string, number> = {};
+    let currentActiveSection: string | null = null;
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        const id = entry.target.getAttribute("id");
-        const link = document.querySelector(`[data-section="${id}"]`);
-        
-        if (entry.isIntersecting) {
-          link?.classList.add("active");
-        } else {
-          link?.classList.remove("active");
+    // Thresholds for visibility changes
+    const thresholdsArray = Array.from({ length: 101 }, (_, idx) => idx / 100);
+
+    // Intersection Observer logic
+    const intersectionCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry: IntersectionObserverEntry) => {
+        if (entry.target.id) {
+          visibilityMap[entry.target.id] = entry.intersectionRatio;
         }
       });
-    }, observerOptions);
 
-    // Only observe sections within pages with sidebar navigation (those with specific IDs)
-    const serverSections = document.querySelectorAll(".with-sidebar-nav section[id]");
-    serverSections.forEach((section) => {
-      observer.observe(section);
+      // Determine the most visible section
+      const visibleSections = Object.entries(visibilityMap)
+        .filter(([, ratio]: [string, number]) => ratio > 0)
+        .sort((a: [string, number], b: [string, number]) => {
+          // Primary: sections with >= 0.7 ratio first, secondary: vertical order
+          const aHighVis = a[1] >= 0.7 ? 1 : 0;
+          const bHighVis = b[1] >= 0.7 ? 1 : 0;
+          if (bHighVis !== aHighVis) {
+            return bHighVis - aHighVis;
+          }
+          
+          // Secondary sort by vertical position
+          const aElement = document.getElementById(a[0]);
+          const bElement = document.getElementById(b[0]);
+          if (aElement && bElement) {
+            return aElement.offsetTop - bElement.offsetTop;
+          }
+          return 0;
+        });
+
+      const newActiveSection = visibleSections.length ? visibleSections[0][0] : null;
+      if (newActiveSection && newActiveSection !== currentActiveSection) {
+        document.querySelectorAll('.server-sidebar a.active').forEach(el => el.classList.remove('active'));
+        document.querySelector(`.server-sidebar a[data-section="${newActiveSection}"]`)?.classList.add('active');
+        currentActiveSection = newActiveSection;
+      }
+    };
+
+    const observerConfig: IntersectionObserverInit = {
+      root: null,
+      rootMargin: "0px 0px -30% 0px",
+      threshold: thresholdsArray,
+    };
+
+    const observer = new IntersectionObserver(intersectionCallback, observerConfig);
+
+    // Observe sections
+    const sectionsToObserve = document.querySelectorAll(".with-sidebar-nav section[id]");
+    sectionsToObserve.forEach((section) => {
+      const sectionId = section.getAttribute("id");
+      if (sectionId) {
+        visibilityMap[sectionId] = 0;
+        observer.observe(section);
+      }
     });
 
-    // Smooth scroll for navigation
+    // Initial intersection calculation
+    setTimeout(() => {
+      intersectionCallback([]);
+    }, 100);
+
+    // Smooth-scroll event listener
     document.querySelectorAll(".server-sidebar a").forEach((link) => {
       link.addEventListener("click", (e) => {
         e.preventDefault();
         const targetId = link.getAttribute("href")?.substring(1);
-        const targetElement = document.getElementById(targetId!);
-        
-        if (targetElement) {
-          targetElement.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
+        if (targetId) {
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
         }
       });
     });
