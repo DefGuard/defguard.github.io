@@ -119,11 +119,11 @@ const { data } = Astro.props;
     max-height: 9rem;          /* fixed height for paragraph space */
     overflow: hidden;
     margin-bottom: 1rem;
-    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                mask-image 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+                -webkit-mask-image 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
-    /* Use gradient mask to fade out text instead of ellipsis */
-    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    /* No default mask - will be applied by JavaScript only when needed */
   }
 
   .testimonial-content.expanded {
@@ -258,8 +258,14 @@ const { data } = Astro.props;
           
           if (isOverflowing) {
             readMoreBtn.style.display = 'block';
+            // Apply gradient mask only when content overflows
+            content.style.maskImage = 'linear-gradient(to bottom, black 80%, transparent 100%)';
+            content.style.webkitMaskImage = 'linear-gradient(to bottom, black 80%, transparent 100%)';
           } else {
             readMoreBtn.style.display = 'none';
+            // Remove gradient mask when content doesn't overflow
+            content.style.maskImage = 'none';
+            content.style.webkitMaskImage = 'none';
           }
         }
       });
@@ -275,13 +281,36 @@ const { data } = Astro.props;
           const content = card.querySelector('[data-testimonial-content]');
           
           if (content.classList.contains('expanded')) {
-            // Collapse
-            content.classList.remove('expanded');
-            card.style.height = '320px';
+            // Collapse - control animation entirely through JavaScript
             this.textContent = 'Read More';
+            
+            // First set explicit max-height to current scroll height
+            content.style.maxHeight = content.scrollHeight + 'px';
+            
+            // Force reflow
+            content.offsetHeight;
+            
+            // Then animate to collapsed height
+            setTimeout(() => {
+              content.style.maxHeight = '9rem';
+              content.style.maskImage = 'linear-gradient(to bottom, black 80%, transparent 100%)';
+              content.style.webkitMaskImage = 'linear-gradient(to bottom, black 80%, transparent 100%)';
+            }, 10);
+            
+            // Remove expanded class after animation
+            setTimeout(() => {
+              content.classList.remove('expanded');
+              card.style.height = '320px';
+            }, 400);
+            
           } else {
-            // Expand
+            // Expand - remove mask and expand
+            content.style.maskImage = 'none';
+            content.style.webkitMaskImage = 'none';
             content.classList.add('expanded');
+            
+            // Set max-height to scroll height for smooth animation
+            content.style.maxHeight = content.scrollHeight + 'px';
             card.style.height = 'auto';
             this.textContent = 'Read Less';
           }
