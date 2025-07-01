@@ -10,6 +10,7 @@ import { featuresTableData } from "../data/compare-table";
 import { Button } from "../components/buttons/Button/Button";
 import OrganizationJSONLD from "../scripts/OrganizationJSONLD.astro";
 import GithubReleases from "../components/GithubReleases/GithubReleases.astro";
+import ImageURL from "../components/image/ImageURL.astro";
 
 const title =
   "Zero-Trust WireGuard® 2FA/MFA VPN: Book a Demo";
@@ -80,22 +81,23 @@ const tags = [
         <div slot="left">
         <ul>
           <li>
-            <a href="https://docs.defguard.net/enterprise/all-enteprise-features/access-control-list">Access Control / Firewall management</a> - ACLs are now available on Linux-based Defguard Gateway, with initial support for FreeBSD and OPNsense introduced in the 1.4.0 alpha release.
+            Enhanced Observability & Auditing: Includes a detailed Activity Log UI, Activity Log Streaming for enterprise-grade integrations, and a new Locations Overview for centralized visibility.
           </li>
           <li>
-            <a href="https://docs.defguard.net/enterprise/all-enteprise-features/ldap-and-active-directory-integration/two-way-ldap-and-active-directory-synchronization">LDAP & Active Directory two-way synchronization</a>
+            Improved Deployment & VPN Support: Now supports Terraform-based AWS deployment and dual-stack VPN (IPv4 & IPv6) for modern network environments.
           </li>
         </ul>
       </div>
       <div slot="right">
-        <YouTubeVideo
-        videoId="Om28IuV5AcM"
-        title="Your video title"
-        showControls={true}
-        showInfo={true}
-        allowFullscreen={true}
-        rel={false}
-      />
+        <ImageURL src="/images/releases/release-1.4.png" alt="defguard release-1.4.0" />
+        <!-- <YouTubeVideo
+          videoId="Om28IuV5AcM"
+          title="Your video title"
+          showControls={true}
+          showInfo={true}
+          allowFullscreen={true}
+          rel={false}
+        /> -->
       </div>
       </FlexibleSection>
     </ProductSection>
