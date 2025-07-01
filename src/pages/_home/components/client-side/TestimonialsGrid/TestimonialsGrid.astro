@@ -27,13 +27,16 @@ const { data } = Astro.props;
           </div>
         </div>
         <div class="content-wrapper">
-          <div class="testimonial-content">
+          <div class="testimonial-content" data-testimonial-content>
             {testimonial.markdownRaw ? (
               <ClientMarkdown data={testimonial.markdownRaw} client:load />
             ) : (
               <p>No content available</p>
             )}
           </div>
+          <button class="read-more-btn" data-read-more-btn style="display: none;">
+            Read More
+          </button>
         </div>
         <div class="testimonial-author">
           <div class="author-name">{testimonial.title}</div>
@@ -71,6 +74,7 @@ const { data } = Astro.props;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .testimonial-header {
@@ -112,12 +116,39 @@ const { data } = Astro.props;
   }
 
   .testimonial-content {
-    height: 9rem;          /* fixed height for paragraph space */
+    max-height: 9rem;          /* fixed height for paragraph space */
     overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 7;  /* increased from 4 to 7 lines */
-    -webkit-box-orient: vertical;
     margin-bottom: 1rem;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    /* Use gradient mask to fade out text instead of ellipsis */
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  }
+
+  .testimonial-content.expanded {
+    max-height: 100rem;
+    display: block;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .read-more-btn {
+    @include typography(paragraph, var(--text-body-primary));
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    text-decoration: underline;
+    align-self: flex-end;  /* position on the right */
+    & {
+      font-size: calc(0.95rem * var(--font-scale-factor));
+    }
+  }
+
+  .read-more-btn:hover {
+    opacity: 0.8;
   }
 
   .testimonial-author {
@@ -145,6 +176,7 @@ const { data } = Astro.props;
   .testimonial-content p {
     @include typography(paragraph);
     margin: 0;
+    text-align: justify;
     & {
       font-size: calc(0.95rem * var(--font-scale-factor));
     }
@@ -164,8 +196,7 @@ const { data } = Astro.props;
 
     /* Adjust text clamping for 2-column layout */
     .testimonial-content {
-      height: 10.5rem;          /* slightly more height for 2 columns */
-      -webkit-line-clamp: 8;    /* more lines for narrower columns */
+      max-height: 10.5rem;          /* slightly more height for 2 columns */
     }
   }
 
@@ -188,8 +219,7 @@ const { data } = Astro.props;
 
     /* Adjust text clamping for 1-column layout */
     .testimonial-content {
-      height: 8rem;             /* adjust height for mobile */
-      -webkit-line-clamp: 6;    /* fewer lines for mobile */
+      max-height: 8rem;             /* adjust height for mobile */
     }
   }
 
@@ -210,3 +240,60 @@ const { data } = Astro.props;
     }
   }
 </style>
+
+<script>
+  // Wait for DOM to be fully loaded
+  document.addEventListener('DOMContentLoaded', function() {
+    // Function to check if content is overflowing and show/hide read more button
+    function checkOverflow() {
+      const testimonialCards = document.querySelectorAll('.testimonials-grid li');
+      
+      testimonialCards.forEach(card => {
+        const content = card.querySelector('[data-testimonial-content]');
+        const readMoreBtn = card.querySelector('[data-read-more-btn]');
+        
+        if (content && readMoreBtn) {
+          // Check if content is taller than its container
+          const isOverflowing = content.scrollHeight > content.clientHeight;
+          
+          if (isOverflowing) {
+            readMoreBtn.style.display = 'block';
+          } else {
+            readMoreBtn.style.display = 'none';
+          }
+        }
+      });
+    }
+    
+    // Function to handle read more button clicks
+    function handleReadMore() {
+      const readMoreButtons = document.querySelectorAll('[data-read-more-btn]');
+      
+      readMoreButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const card = this.closest('li');
+          const content = card.querySelector('[data-testimonial-content]');
+          
+          if (content.classList.contains('expanded')) {
+            // Collapse
+            content.classList.remove('expanded');
+            card.style.height = '320px';
+            this.textContent = 'Read More';
+          } else {
+            // Expand
+            content.classList.add('expanded');
+            card.style.height = 'auto';
+            this.textContent = 'Read Less';
+          }
+        });
+      });
+    }
+    
+    // Initialize
+    checkOverflow();
+    handleReadMore();
+    
+    // Recheck on window resize
+    window.addEventListener('resize', checkOverflow);
+  });
+</script>
