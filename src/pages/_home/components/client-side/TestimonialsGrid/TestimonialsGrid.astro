@@ -151,15 +151,62 @@ const { data } = Astro.props;
   }
 
   /* Media queries for responsive design */
-  @media (max-width: 1024px) {
+  /* Tablet: 2 columns (below 992px) */
+  @media (max-width: 991.98px) {
     .testimonials-grid ul {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    /* Reset centering for 2-column layout */
+    .testimonials-grid li:nth-child(4):nth-last-child(1) {
+      grid-column: auto;
+    }
+
+    /* Adjust text clamping for 2-column layout */
+    .testimonial-content {
+      height: 10.5rem;          /* slightly more height for 2 columns */
+      -webkit-line-clamp: 8;    /* more lines for narrower columns */
     }
   }
 
-  @media (max-width: 640px) {
+  /* Mobile: 1 column (below 768px) */
+  @media (max-width: 767.98px) {
     .testimonials-grid ul {
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr !important;
+      gap: 1rem;
+    }
+
+    /* Reset centering for 1-column layout */
+    .testimonials-grid li:nth-child(4):nth-last-child(1) {
+      grid-column: auto;
+    }
+
+    .testimonials-grid li {
+      height: auto;
+      min-height: 280px;
+    }
+
+    /* Adjust text clamping for 1-column layout */
+    .testimonial-content {
+      height: 8rem;             /* adjust height for mobile */
+      -webkit-line-clamp: 6;    /* fewer lines for mobile */
+    }
+  }
+
+  /* Small Mobile: optimized spacing (below 576px) */
+  @media (max-width: 575.98px) {
+    .testimonials-grid ul {
+      padding: 1rem 0;
+      gap: 0.75rem;
+    }
+
+    .testimonials-grid li {
+      padding: 1rem;
+      min-height: 260px;
+    }
+
+    .quote-icon {
+      font-size: 3.5rem;
     }
   }
 </style>
