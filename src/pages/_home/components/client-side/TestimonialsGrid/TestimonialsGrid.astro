@@ -249,8 +249,8 @@ const { data } = Astro.props;
       const testimonialCards = document.querySelectorAll('.testimonials-grid li');
       
       testimonialCards.forEach(card => {
-        const content = card.querySelector('[data-testimonial-content]');
-        const readMoreBtn = card.querySelector('[data-read-more-btn]');
+        const content = card.querySelector('[data-testimonial-content]') as HTMLElement;
+        const readMoreBtn = card.querySelector('[data-read-more-btn]') as HTMLElement;
         
         if (content && readMoreBtn) {
           // Check if content is taller than its container
@@ -260,12 +260,12 @@ const { data } = Astro.props;
             readMoreBtn.style.display = 'block';
             // Apply gradient mask only when content overflows
             content.style.maskImage = 'linear-gradient(to bottom, black 80%, transparent 100%)';
-            content.style.webkitMaskImage = 'linear-gradient(to bottom, black 80%, transparent 100%)';
+            (content.style as any).webkitMaskImage = 'linear-gradient(to bottom, black 80%, transparent 100%)';
           } else {
             readMoreBtn.style.display = 'none';
             // Remove gradient mask when content doesn't overflow
             content.style.maskImage = 'none';
-            content.style.webkitMaskImage = 'none';
+            (content.style as any).webkitMaskImage = 'none';
           }
         }
       });
@@ -276,9 +276,9 @@ const { data } = Astro.props;
       const readMoreButtons = document.querySelectorAll('[data-read-more-btn]');
       
       readMoreButtons.forEach(button => {
-        button.addEventListener('click', function() {
-          const card = this.closest('li');
-          const content = card.querySelector('[data-testimonial-content]');
+        button.addEventListener('click', function(this: HTMLButtonElement) {
+          const card = this.closest('li') as HTMLElement;
+          const content = card.querySelector('[data-testimonial-content]') as HTMLElement;
           
           if (content.classList.contains('expanded')) {
             // Collapse - control animation entirely through JavaScript
@@ -294,7 +294,7 @@ const { data } = Astro.props;
             setTimeout(() => {
               content.style.maxHeight = '9rem';
               content.style.maskImage = 'linear-gradient(to bottom, black 80%, transparent 100%)';
-              content.style.webkitMaskImage = 'linear-gradient(to bottom, black 80%, transparent 100%)';
+              (content.style as any).webkitMaskImage = 'linear-gradient(to bottom, black 80%, transparent 100%)';
             }, 10);
             
             // Remove expanded class after animation
@@ -306,7 +306,7 @@ const { data } = Astro.props;
           } else {
             // Expand - remove mask and expand
             content.style.maskImage = 'none';
-            content.style.webkitMaskImage = 'none';
+            (content.style as any).webkitMaskImage = 'none';
             content.classList.add('expanded');
             
             // Set max-height to scroll height for smooth animation
