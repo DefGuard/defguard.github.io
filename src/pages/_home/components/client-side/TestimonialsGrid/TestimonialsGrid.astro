@@ -1,0 +1,165 @@
+---
+import type { TestimonialData } from "../Testimonials/type";
+import ClientMarkdown from "../../../../../components/client-side/ClientMarkdown";
+
+export interface Props {
+  data: Array<TestimonialData>;
+}
+
+const { data } = Astro.props;
+---
+
+<section class="testimonials-grid">
+  <ul>
+    {data.map((testimonial) => (
+      <li>
+        <div class="testimonial-header">
+          <div class="quote-icon">
+            “
+          </div>
+          <div class="secondary-image">
+            <img
+              src={testimonial.imageSecondary}
+              alt="logo image"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </div>
+        <div class="content-wrapper">
+          <div class="testimonial-content">
+            {testimonial.markdownRaw ? (
+              <ClientMarkdown data={testimonial.markdownRaw} client:load />
+            ) : (
+              <p>No content available</p>
+            )}
+          </div>
+        </div>
+        <div class="testimonial-author">
+          <div class="author-name">{testimonial.title}</div>
+          {testimonial.subtitle && (
+            <div class="author-position">{testimonial.subtitle}</div>
+          )}
+        </div>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style is:global>
+  .testimonials-grid ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    padding: 2rem 0;
+    list-style: none;
+    margin: 0;
+    justify-items: center;
+  }
+
+  /* Center single item in second row when there are 4 testimonials */
+  .testimonials-grid li:nth-child(4):nth-last-child(1) {
+    grid-column: 2;
+  }
+
+  .testimonials-grid li {
+    height: 320px;          /* forced height */
+    padding: 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface-nav-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .testimonial-header {
+    height: 50px;          /* fixed height for header space */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    width: 100%;
+  }
+
+  .quote-icon {
+    display: flex;
+    align-items: center;
+    font-family: "Poppins", sans-serif;
+    font-size: 5rem;  /* 2x bigger than 2.5rem */
+    font-weight: 400;
+    color: transparent;  /* hollow inside */
+    line-height: 1;
+    -webkit-text-stroke: 1px var(--text-body-secondary);
+    text-stroke: 1px var(--text-body-secondary);
+  }
+
+  .secondary-image {
+    display: flex;
+    align-items: center;
+  }
+
+  .testimonials-grid img {
+    max-height: 40px;
+    max-width: 100px;
+    object-fit: contain;
+  }
+
+  .content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .testimonial-content {
+    height: 9rem;          /* fixed height for paragraph space */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;  /* increased from 4 to 7 lines */
+    -webkit-box-orient: vertical;
+    margin-bottom: 1rem;
+  }
+
+  .testimonial-author {
+    margin-top: auto;
+    padding-bottom: 0;
+  }
+
+  .author-name {
+    @include typography(h3);
+    margin-bottom: 2px;
+    & {
+      font-size: calc(0.95rem * var(--font-scale-factor));
+    }
+  }
+
+  .author-position {
+    @include typography(menu);
+    margin: 0;
+    & {
+      font-size: calc(0.8rem * var(--font-scale-factor));
+    }
+  }
+
+  /* Style for content within testimonial-content */
+  .testimonial-content p {
+    @include typography(paragraph);
+    margin: 0;
+    & {
+      font-size: calc(0.95rem * var(--font-scale-factor));
+    }
+  }
+
+  /* Media queries for responsive design */
+  @media (max-width: 1024px) {
+    .testimonials-grid ul {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .testimonials-grid ul {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

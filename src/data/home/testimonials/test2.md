@@ -1,5 +1,5 @@
 ---
-title: Kacper Wiśniewski
+title: AKacper Wiśniewski
 subtitle: Venture Partner at Acquinox
 imagePrimary: /images/data/testimonials/acquinox-p.jpg
 imageSecondary: /images/data/testimonials/acquinox-l.png

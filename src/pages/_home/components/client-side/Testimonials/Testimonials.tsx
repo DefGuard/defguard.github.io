@@ -5,9 +5,9 @@ import { Fragment, useMemo, useState, useEffect } from "react";
 import ClientMarkdown from "../../../../../components/client-side/ClientMarkdown";
 import type { TestimonialData } from "./type";
 
-type Props = {
-  data: Array<TestimonialData>;
-};
+export interface Props {
+  data: TestimonialData[];
+}
 
 export default function Component({ data }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -18,7 +18,7 @@ export default function Component({ data }: Props) {
     
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % data.length);
-    }, 8000);
+    }, 5000);
     
     return () => clearInterval(interval);
   }, [data.length]);

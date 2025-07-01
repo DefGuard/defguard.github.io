@@ -3,6 +3,7 @@ import Navigation from "../components/base/Navigation.astro";
 import HomeSection from "../components/home/HomeSection.astro";
 import ProductLayout from "../layouts/ProductLayout.astro";
 import Testimonials from "./_home/components/client-side/Testimonials/Testimonials";
+import TestimonialsGrid from "./_home/components/client-side/TestimonialsGrid/TestimonialsGrid.astro";
 import type { TestimonialData } from "./_home/components/client-side/Testimonials/type";
 import { testimonialSchema } from "./_home/components/client-side/Testimonials/type";
 import FlexibleIdentitySection from "./_home/components/FlexibleIdentity/FlexibleIdentitySection.astro";
@@ -240,7 +241,10 @@ const tags = [
 -->
 
     <HomeSection id="testimonials" variant="gray">
-      <Testimonials data={testimonialsData} client:only="react" />
+      <!-- Usage example for TestimonialsGrid component: -->
+      <TestimonialsGrid data={testimonialsData} />
+     
+      <!-- <Testimonials data={testimonialsData} client:only="react" /> -->
     </HomeSection>
 
     <Roadmap variant="white" />
