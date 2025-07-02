@@ -1,0 +1,30 @@
+---
+import ContentLimiter from "./ContentLimiter.astro";
+interface Props {
+  text: string;
+}
+const { text } = Astro.props;
+---
+<ContentLimiter>
+  <div class="text-divider">
+    <span class="divider-text">{text}</span>
+  </div>
+</ContentLimiter>
+
+<style lang="scss">
+.text-divider {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+  border-bottom: 1px solid var(--border-separator);
+  margin: 2rem 0;
+  padding-top: 3rem;
+}
+
+.divider-text {
+  @include typography(h3);
+  white-space: nowrap;
+  color: var(--text-body-primary, #333);
+}
+</style> 

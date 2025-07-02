@@ -9,11 +9,15 @@ interface Props {
   buttonText: string;
   buttonLink: string;
   buttonTarget?: string;
+  button2Text?: string;
+  button2Link?: string;
+  button2Target?: string;
   className?: string;
   id?: string;
   maxWidth?: number;
   variant?: "white" | "gray";
   theme?: "light" | "dark";
+  showBorder?: boolean;
 }
 
 const {
@@ -22,21 +26,25 @@ const {
   buttonText,
   buttonLink,
   buttonTarget = "_self",
+  button2Text,
+  button2Link,
+  button2Target = "_self",
   className,
   id,
   maxWidth = 900,
   variant = "gray",
   theme = "light",
+  showBorder = false,
 } = Astro.props;
 ---
 
 <section
-  class={clsx("cta-section", `variant-${variant}`, `theme-${theme}`, className)}
+  class={clsx("cta-section", `variant-${variant}`, `theme-${theme}`, className, { 'with-border': showBorder })}
   id={id}
   aria-labelledby={id ? `${id}-title` : undefined}
 >
   <ContentLimiter maxWidth={maxWidth}>
-    <div class="cta-content">
+    <div class={clsx("cta-content", { 'with-border': showBorder })}>
       <h2 class="cta-title" id={id ? `${id}-title` : undefined}>{title}</h2>
       <p class="cta-description">{description}</p>
       <div class="cta-button-container">
@@ -48,6 +56,17 @@ const {
             preload: true,
           }}
         />
+        {button2Text && button2Link && (
+          <AstroButton
+            text={button2Text}
+            link={{
+              href: button2Link,
+              target: button2Target,
+              preload: true,
+            }}
+            className="secondary"
+          />
+        )}
       </div>
     </div>
   </ContentLimiter>
@@ -61,6 +80,10 @@ const {
     padding-top: 2rem;
     padding-bottom: 5rem;
 
+    &.with-border{
+      padding-top: 0rem;
+    }
+    
     &.variant-white {
       background-color: var(--background-primary, #f9f9f9);
     }
@@ -109,7 +132,14 @@ const {
 
       .cta-button-container {
         margin-bottom: 0;
+        display: flex;
+        gap: 1rem;
       }
     }
+  }
+
+  .cta-content.with-border {
+    border-top: 1px solid var(--border-separator);
+    padding-top: 2rem;
   }
 </style>

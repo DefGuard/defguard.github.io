@@ -10,6 +10,7 @@ import FlexibleIdentitySection from "./_home/components/FlexibleIdentity/Flexibl
 import HomeHeader from "./_home/components/HomeHeader.astro";
 import Roadmap from "./_home/components/Roadmap/Roadmap.astro";
 import FeatureCapsules from "./_home/components/FeatureCapsules.astro";
+import CaseCapsules from "./_home/components/CaseCapsules.astro";
 import FlexibleSection from "../components/FlexibleSection.astro";
 import signinwith from "/public/images/data/signinwith.png";
 import enrollment from "/public/images/data/enrollment-screen.png";
@@ -17,9 +18,11 @@ import api from "/public/images/data/api.png";
 import Image from "astro/components/Image.astro";
 import YouTubeVideo from "../components/video/YouTubeVideo.astro";
 import CTASection from "../components/CTASection.astro";
+import TextDivider from "../components/TextDivider.astro";
 import TrustedBy from "./_home/components/TrustedBy.astro";
 import HeaderSection from "../components/HeaderSection.astro";
 import ImageURL from "../components/image/ImageURL.astro";
+import ImageCarousel from "../components/image/ImageCarousel.astro";
 const testimonialsImportData = await Astro.glob("../data/home/testimonials/**/*.md");
 
 const testimonialsData: Array<TestimonialData> = testimonialsImportData.map((val) => {
@@ -80,7 +83,7 @@ const tags = [
       title="Enterprise VPN with full control and transparency"
       description="Defguard is best VPN management solution if you need secure remote access, complete data sovereignty, and full compliance. Built on a modern zero-trust architecture and powerful WireGuard protocl, it's fully open-source, easy to deploy on-prem or in your private cloud, and designed for teams like yours that demand control, transparency, and strong security standards."
       buttons={[
-        { name: "Book a Demo", link: "/book-a-demo/" },
+        { name: "Book a Demo", link: "/book-a-demo?utm_source=landing" },
         { name: "Quick Install Guide", link: "https://docs.defguard.net/getting-started/one-line-install" }
       ]}
     />
@@ -88,10 +91,12 @@ const tags = [
     <FeatureCapsules
       header="Why businesses choose Defguard"
       features={[
-        { title: "Build for enterprise", description: "Integrates with LDAP, Active Directory, external SSO, and more", icon: "lni-apartment" },
-        { title: "Privacy-first", description: "No third-party dependencies, full control over deployment", icon: "lni-lock" },
-        { title: "Secure and robust design", description: "Written in Rust, built around WireGuard®, and fully auditable (open code)", icon: "lni-shield" },
-        { title: "NIS2-ready", description: "VPN MFA built into the protocol layer", icon: "lni-certificate" }
+        { title: "Build for enterprise", description: "Integrates with LDAP, Active Directory, external SSO, and more.", icon: "lni-apartment" },
+        { title: "Privacy-first", description: "No third-party dependencies, full control over deployment.", icon: "lni-lock" },
+        { title: "Secure and robust design", description: "Written in Rust, built around WireGuard®, and fully auditable (open source).", icon: "lni-shield" },
+        { title: "NIS2-ready", description: "VPN MFA built into the protocol layer.", icon: "lni-certificate" },
+        { title: "Easy to deploy", description: "Run and evaluate with few command lines.", icon: "lni-rocket" },
+        { title: "European", description: "No foreign policies or legal risks.", icon: "lni-world" }
       ]}
     />
   
@@ -113,15 +118,17 @@ const tags = [
       description="WireGuard® is a game-changer in VPN technology — fast, lightweight, and secure. But it's just a protocol."
       variant="gray"
     />
-
     <FlexibleSection
-      title="What makes WireGuard best in class"
+      title="WireGuard® is Great — Defguard Makes It Enterprise-Ready"
       id="security-features"
       variant="gray"
       theme="light"
     >
       <div slot="left">
-        <!-- <h3>What makes WireGuard best in class:</h3> -->
+        <p>
+          <ImageURL src="/images/landing/wireguard.png" alt="WireGuard® logo" />
+        </p>
+        <h3>What makes WireGuard® best in class</h3>
         <ul>
           <li><strong>Fastest connections</strong> — up to 3x faster than OpenVPN</li>
           <li><strong>Lower attack surface</strong> — only ~4,000 lines of code</li>
@@ -133,23 +140,12 @@ const tags = [
       </div>
 
       <div slot="right">
-        <ImageURL src="/images/landing/wireguard.png" alt="WireGuard® logo" />
-      </div>
-    </FlexibleSection>
-
-    <FlexibleSection
-    title="What Defguard adds"
-    id="security-features"
-    variant="gray"
-    theme="light"
-  >
-      <div slot="left">
-        <ImageURL src="/images/landing/defguard.png" alt="defguard logo" />
-      </div>
-
-      <div slot="right">
+        <p>
+          <ImageURL src="/images/landing/defguard.png" alt="defguard logo" />
+        </p>
+        <h3>What Defguard adds</h3>
         <ul>
-          <li><strong>Built-in MFA</strong> — the only WireGuard VPN with protocol-level multi-factor authentication</li>
+          <li><strong>Built-in MFA</strong> — the only WireGuard® VPN with protocol-level multi-factor authentication</li>
           <li><strong>User and device management</strong> — onboarding flows, config syncs, RBAC, ACLs</li>
           <li><strong>Live config updates</strong> — update groups, routes, and policies instantly</li>
           <li><strong>Real-time visibility</strong> — audit logs and integration with your SIEM</li>
@@ -158,7 +154,14 @@ const tags = [
       </div>
     </FlexibleSection>
 
+    <!-- <HeaderSection
+      title="Modern VPN Protocol. Now Enterprise-Ready."
+      description="WireGuard gives you speed and simplicity — Defguard gives you everything else you need to run it securely at scale."
+      variant="gray"
+    /> -->
+
     <CTASection
+      showBorder={true}
       title="Ready to Implement Enterprise-Grade WireGuard® VPN?"
       description="See how Defguard fits into your zero-trust architecture and existing infrastructure."
       buttonText="See all Defguard Server Features"
@@ -184,6 +187,7 @@ const tags = [
     />
 
     <FlexibleSection
+      leftRatio={0.4}
       title="Simple Enrollment Process"
       id="security-features"
       variant="white"
@@ -191,16 +195,25 @@ const tags = [
     >
       <div slot="left">
         <p>
-          You can enroll your users in two ways with defguard - either in the browser (web based) or by using a defguard desktop client.
+          Defguard helps you to enroll and onboard your users in most secure and convenient ways.
+          <ul>
+            <li>With defguard desktop client enrollment.</li>
+            <li>With web based (in browser) secure enrollment process.</li>
+          </ul>
         </p>
       </div>
 
       <div slot="right">
-        <Image src={enrollment} alt="enrollment screen" />
+        <ImageCarousel
+          src="/images/landing/enrollment/data-verification.png,/images/landing/enrollment/create-password.png,/images/landing/enrollment/configure-mfa.png" alt="Simple Enrollment Process"
+          interval={3}
+          autoplay={true}
+        />
       </div>
     </FlexibleSection>
 
     <CTASection
+      showBorder={true}
       title="Ready to Implement Enterprise-Grade WireGuard® VPN?"
       description="See how Defguard fits into your zero-trust architecture and existing infrastructure."
       buttonText="See all Defguard Client Features"
@@ -218,16 +231,83 @@ const tags = [
 
 
 -->
+    <HeaderSection
+      title="One Platform for Private Access & Identity"
+      description="Defguard is one platform for remote access and identity that enables you to go fully private and cloud-independent. It replaces siloed tools and legacy VPN appliances with a unified solution that combines remote access, identity, and access control — ideal for teams running private or hybrid infrastructure."
+      variant="gray"
+    />
 
-    <FlexibleIdentitySection />
+    <FlexibleSection
+      leftRatio={0.4}
+      title="Built-in Identity & SSO"
+      id="security-features"
+      variant="gray"
+      theme="light"
+    >
+      <div slot="left">
+        <ul>
+          <li>Acts as your Identity Provider (IdP)</li>
+          <li>Single Sign-On across your services</li>
+          <li>Easy integration with existing apps and tools</li>
+        </ul>
+      </div>
+
+      <div slot="right">
+        <ImageURL src="/images/features/OIDC SSO.png" alt="Built-in OIDC SSO, key management, forward-auth for legacy systems" />
+      </div>
+    </FlexibleSection>
+
+    <FlexibleSection
+    leftRatio={0.6}
+    title="Private cloud–ready"
+    id="security-features"
+    variant="gray"
+    theme="light"
+  >
+    <div slot="left">
+      <ImageURL src="/images/features/YubiKey.png" alt="Yubico YubiKey Hardware security key management and provisioning" />
+    </div>
+
+    <div slot="right">
+      <ul>
+        <li>Self-host everything — including identity</li>
+        <li>No third-party auth providers required or cloud dependencies</li>
+        <li>Ideal for digital sovereignty and data-sensitive environments</li>
+      </ul>
+    </div>
+  </FlexibleSection>
+
+  <FlexibleSection
+  leftRatio={0.4}
+  title="Hybrid infrastructure support"
+  id="security-features"
+  variant="gray"
+  theme="light"
+>
+  <div slot="left">
+    <p>For organisations not ready to step down from the cloud we provide:</p>
+    <ul>
+      <li>integration with cloud Identity Providers</li>
+      <li>support for external SSO</li>
+    </ul>
+
+  </div>
+
+  <div slot="right">
+    <ImageURL src="/images/features/Sso active dir.png" alt="Integration with SSO providers, Active Directory, and LDAP" />
+  </div>
+</FlexibleSection>
+
+    <!-- <FlexibleIdentitySection /> -->
 
     <CTASection
+      showBorder={true}
       title="Ready to Experience the Most Secure, and Compliant VPN?"
       description="Deploy our open-source WireGuard® protocol VPN in minutes and secure your remote workforce with enterprise-level features."
       buttonText="Book a Demo"
       buttonLink="/book-a-demo?utm_source=landingpage"
       id="cta-download"
-      variant="white"
+      variant="gray"
     />
 
 <!-- 
@@ -239,15 +319,38 @@ const tags = [
 
 
 -->
-
-    <HomeSection id="testimonials" variant="gray">
-      <!-- Usage example for TestimonialsGrid component: -->
+    <HeaderSection
+      title="Real-world use cases"
+      description="Defguard secure architecture approach and user friendly interface makes it a unique solution in the VPN management space."
+      variant="white"
+    />
+    <TextDivider text="Case Studies" />
+    <CaseCapsules
+      cases={[
+        { title: "Build private cloud security with defguard.", link: "https://defguard.net/blog/self-hosted-vpn-private-cloud-acquinox-defguard/" },
+        { title: "Replace Fortinet or Checkpoint with a lightweight, auditable stack", link: "https://defguard.net/blog/self-hosted-vpn-private-cloud-acquinox-defguard/" },
+        { title: "Give contractors and remote workers secure, controlled access", link: "https://defguard.net/blog/self-hosted-vpn-private-cloud-acquinox-defguard/" }
+      ]}
+    />
+    <TextDivider text="Testimonials" />
+    <HomeSection id="testimonials" variant="white">
       <TestimonialsGrid data={testimonialsData} />
-     
-      <!-- <Testimonials data={testimonialsData} client:only="react" /> -->
     </HomeSection>
 
-    <Roadmap variant="white" />
+
+    <CTASection
+      title="Try Defguard Today – Secure Access Without the Complexity"
+      description="Let your team experience the difference between a modern VPN and a legacy workaround."
+      buttonText="Book a Demo"
+      buttonLink="/book-a-demo?utm_source=landing"
+      button2Text="Get Evaluation License"
+      button2Link="/pricing?utm_source=landing#get-evaluation-license"
+      id="cta-documentation"
+      variant="white"
+    />
+
+
+    <!-- <Roadmap variant="white" /> -->
   </main>
 </ProductLayout>
 
@@ -324,11 +427,6 @@ const tags = [
           }
         }
       }
-    }
-
-    #testimonials {
-      padding-top: page-spacing(100px);
-      padding-bottom: page-spacing(100px);
     }
 
     .scroll-section {
