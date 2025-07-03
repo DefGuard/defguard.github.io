@@ -14,21 +14,32 @@ const { cases } = Astro.props;
 <ContentLimiter>
   <div class="case-capsules">
     {cases.map((caseItem) => (
-      <a
-        href={caseItem.link}
-        target=""
-        rel="noopener noreferrer"
-        class="case-capsule case-capsule-link"
-        tabindex={0}
-        aria-label={caseItem.title + ' (Read more)'}
-      >
-        <div class="case-header">
-          <h2>{caseItem.title}</h2>
+      caseItem.link && caseItem.link.trim() !== "" ? (
+        <a
+          href={caseItem.link}
+          target=""
+          rel="noopener noreferrer"
+          class="case-capsule case-capsule-link"
+          tabindex={0}
+          aria-label={caseItem.title + ' (Read more)'}
+        >
+          <div class="case-header">
+            <h2>{caseItem.title}</h2>
+          </div>
+          <div class="case-link-container">
+            <span class="case-link">Read more</span>
+          </div>
+        </a>
+      ) : (
+        <div class="case-capsule case-capsule-link" tabindex={0} aria-label={caseItem.title + ' (Stay tuned)'}>
+          <div class="case-header">
+            <h2>{caseItem.title}</h2>
+          </div>
+          <div class="case-link-container">
+            <span class="case-link" style="text-decoration:unset;">Stay tuned – full story next week!</span>
+          </div>
         </div>
-        <div class="case-link-container">
-          <span class="case-link">Read more</span>
-        </div>
-      </a>
+      )
     ))}
   </div>
 </ContentLimiter>

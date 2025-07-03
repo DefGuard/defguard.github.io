@@ -2,11 +2,12 @@
 import ContentLimiter from "./ContentLimiter.astro";
 interface Props {
   text: string;
+  paddingTop?: string;
 }
-const { text } = Astro.props;
+const { text, paddingTop = '3rem' } = Astro.props;
 ---
 <ContentLimiter>
-  <div class="text-divider">
+  <div class="text-divider" style={`padding-top: ${paddingTop};`}>
     <span class="divider-text">{text}</span>
   </div>
 </ContentLimiter>
