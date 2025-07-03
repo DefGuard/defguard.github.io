@@ -106,8 +106,8 @@ const PricingCard = ({ data, activePlan }: CardProps) => {
       <div className="pricing-container">
         <div
           className={clsx("price", {
-            free: data.price === 0,
-            spaced: data.price === 0 || !isAnnual,
+            free: data.price === 0 || data.price === -1,
+            spaced: data.price === 0 || data.price === -1 || !isAnnual,
           })}
         >
           {data.price > 0 && (
@@ -117,26 +117,47 @@ const PricingCard = ({ data, activePlan }: CardProps) => {
                 annual: isAnnual,
               })}
             >
-              €{data.price}
+              &euro;{data.price}
             </p>
           )}
-          {!isAnnual && data.price > 0 && <p className="suffix">per month</p>}
           {data.price === 0 && <p className="free">Free</p>}
-          {isAnnual && <p className="annually">€{data.annualPrice}</p>}
+          {data.price === -1 && <p className="free">Contact us</p>}
+          {!isAnnual && data.price > 0 && <p className="suffix">per month</p>}
+          {isAnnual && data.annualPrice !== -1 && <p className="annually">&euro;{data.annualPrice}</p>}
         </div>
-        {isAnnual && data.annualPrice !== undefined && (
+        {isAnnual && data.annualPrice !== undefined && data.annualPrice !== -1 && (
           <p className="annual-message">
-            per month, billed annually you will be charged €{data.annualPrice * 12}
+            per month, billed annually you will be charged &euro;{data.annualPrice * 12}
           </p>
         )}
         <div className="action-container">
-          <a
-            className="action"
-            target={data.linkTarget ?? "_blank"}
-            href={isAnnual ? data.annualPriceLink : data.priceLink}
-          >
-            <span>{data.buttonText}</span>
-          </a>
+          {data.price === 0 && (
+            <a
+              className="action"
+              target={data.linkTarget ?? "_self"}
+              href={isAnnual ? data.annualPriceLink : data.priceLink}
+            >
+              <span>{data.buttonText}</span>
+            </a>
+          )}
+          {data.price === -1 && (
+            <a
+              className="action"
+              target={data.linkTarget ?? "_self"}
+              href={isAnnual ? data.annualPriceLink : data.priceLink}
+            >
+              <span>Get a quote</span>
+            </a>
+          )}
+          {data.price > 0 && (
+            <a
+              className="action"
+              target={data.linkTarget ?? "_blank"}
+              href={isAnnual ? data.annualPriceLink : data.priceLink}
+            >
+              <span>{data.buttonText}</span>
+            </a>
+          )}
         </div>
       </div>
       <div className="divider">
