@@ -146,7 +146,7 @@ const PricingCard = ({ data, activePlan }: CardProps) => {
               target={data.linkTarget ?? "_self"}
               href={isAnnual ? data.annualPriceLink : data.priceLink}
             >
-              <span>Get a quote</span>
+              <span>{data.buttonText}</span>
             </a>
           )}
           {data.price > 0 && (
