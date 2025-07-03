@@ -1,0 +1,328 @@
+---
+import type { TestimonialData } from "../Testimonials/type";
+import ClientMarkdown from "../../../../../components/client-side/ClientMarkdown";
+
+export interface Props {
+  data: Array<TestimonialData>;
+}
+
+const { data } = Astro.props;
+---
+
+<section class="testimonials-grid">
+  <ul>
+    {data.map((testimonial) => (
+      <li>
+        <div class="testimonial-header">
+          <div class="quote-icon">
+            "
+          </div>
+          <div class="secondary-image">
+            <img
+              src={testimonial.imageSecondary}
+              alt="logo image"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </div>
+        <div class="content-wrapper">
+          <div class="testimonial-content" data-testimonial-content>
+            {testimonial.markdownRaw ? (
+              <ClientMarkdown data={testimonial.markdownRaw} client:load />
+            ) : (
+              <p>No content available</p>
+            )}
+          </div>
+          <button class="read-more-btn" data-read-more-btn style="display: none;">
+            Read More
+          </button>
+        </div>
+        <div class="testimonial-author">
+          <div class="author-name">{testimonial.title}</div>
+          {testimonial.subtitle && (
+            <div class="author-position">{testimonial.subtitle}</div>
+          )}
+        </div>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style is:global>
+  .testimonials-grid ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    padding: 2rem 0;
+    list-style: none;
+    margin: 0;
+    justify-items: center;
+  }
+
+  /* Center single item in second row when there are 4 testimonials */
+  .testimonials-grid li:nth-child(4):nth-last-child(1) {
+    grid-column: 2;
+  }
+
+  .testimonials-grid li {
+    height: 320px;          /* forced height */
+    padding: 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface-nav-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .testimonial-header {
+    height: 50px;          /* fixed height for header space */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    width: 100%;
+  }
+
+  .quote-icon {
+    display: flex;
+    align-items: center;
+    font-family: "Poppins", sans-serif;
+    font-size: 5rem;  /* 2x bigger than 2.5rem */
+    font-weight: 400;
+    color: transparent;  /* hollow inside */
+    line-height: 1;
+    -webkit-text-stroke: 1px var(--text-body-secondary);
+    text-stroke: 1px var(--text-body-secondary);
+  }
+
+  .secondary-image {
+    display: flex;
+    align-items: center;
+  }
+
+  .testimonials-grid img {
+    max-height: 40px;
+    max-width: 100px;
+    object-fit: contain;
+  }
+
+  .content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .testimonial-content {
+    max-height: 9rem;          /* fixed height for paragraph space */
+    overflow: hidden;
+    margin-bottom: 1rem;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                mask-image 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+                -webkit-mask-image 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    /* No default mask - will be applied by JavaScript only when needed */
+  }
+
+  .testimonial-content.expanded {
+    max-height: 100rem;
+    display: block;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .read-more-btn {
+    @include typography(paragraph, var(--text-body-primary));
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    text-decoration: underline;
+    align-self: flex-end;  /* position on the right */
+    & {
+      font-size: calc(0.95rem * var(--font-scale-factor));
+    }
+  }
+
+  .read-more-btn:hover {
+    opacity: 0.8;
+  }
+
+  .testimonial-author {
+    margin-top: auto;
+    padding-bottom: 0;
+  }
+
+  .author-name {
+    @include typography(h3);
+    margin-bottom: 2px;
+    & {
+      font-size: calc(0.95rem * var(--font-scale-factor));
+    }
+  }
+
+  .author-position {
+    @include typography(menu);
+    margin: 0;
+    & {
+      font-size: calc(0.8rem * var(--font-scale-factor));
+    }
+  }
+
+  /* Style for content within testimonial-content */
+  .testimonial-content p {
+    @include typography(paragraph);
+    margin: 0;
+    text-align: justify;
+    & {
+      font-size: calc(0.95rem * var(--font-scale-factor));
+    }
+  }
+
+  /* Media queries for responsive design */
+  /* Tablet: 2 columns (below 992px) */
+  @media (max-width: 991.98px) {
+    .testimonials-grid ul {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    /* Reset centering for 2-column layout */
+    .testimonials-grid li:nth-child(4):nth-last-child(1) {
+      grid-column: auto;
+    }
+
+    /* Adjust text clamping for 2-column layout */
+    .testimonial-content {
+      max-height: 10.5rem;          /* slightly more height for 2 columns */
+    }
+  }
+
+  /* Mobile: 1 column (below 768px) */
+  @media (max-width: 767.98px) {
+    .testimonials-grid ul {
+      grid-template-columns: 1fr !important;
+      gap: 1rem;
+    }
+
+    /* Reset centering for 1-column layout */
+    .testimonials-grid li:nth-child(4):nth-last-child(1) {
+      grid-column: auto;
+    }
+
+    .testimonials-grid li {
+      height: auto;
+      min-height: 280px;
+    }
+
+    /* Adjust text clamping for 1-column layout */
+    .testimonial-content {
+      max-height: 8rem;             /* adjust height for mobile */
+    }
+  }
+
+  /* Small Mobile: optimized spacing (below 576px) */
+  @media (max-width: 575.98px) {
+    .testimonials-grid ul {
+      padding: 1rem 0;
+      gap: 0.75rem;
+    }
+
+    .testimonials-grid li {
+      padding: 1rem;
+      min-height: 260px;
+    }
+
+    .quote-icon {
+      font-size: 3.5rem;
+    }
+  }
+</style>
+
+<script>
+  // Wait for DOM to be fully loaded
+  document.addEventListener('DOMContentLoaded', function() {
+    // Function to check if content is overflowing and show/hide read more button
+    function checkOverflow() {
+      const testimonialCards = document.querySelectorAll('.testimonials-grid li');
+      
+      testimonialCards.forEach(card => {
+        const content = card.querySelector('[data-testimonial-content]') as HTMLElement;
+        const readMoreBtn = card.querySelector('[data-read-more-btn]') as HTMLElement;
+        
+        if (content && readMoreBtn) {
+          // Check if content is taller than its container
+          const isOverflowing = content.scrollHeight > content.clientHeight;
+          
+          if (isOverflowing) {
+            readMoreBtn.style.display = 'block';
+            // Apply gradient mask only when content overflows
+            content.style.maskImage = 'linear-gradient(to bottom, black 80%, transparent 100%)';
+            (content.style as any).webkitMaskImage = 'linear-gradient(to bottom, black 80%, transparent 100%)';
+          } else {
+            readMoreBtn.style.display = 'none';
+            // Remove gradient mask when content doesn't overflow
+            content.style.maskImage = 'none';
+            (content.style as any).webkitMaskImage = 'none';
+          }
+        }
+      });
+    }
+    
+    // Function to handle read more button clicks
+    function handleReadMore() {
+      const readMoreButtons = document.querySelectorAll('[data-read-more-btn]');
+      
+      readMoreButtons.forEach(button => {
+        button.addEventListener('click', function(this: HTMLButtonElement) {
+          const card = this.closest('li') as HTMLElement;
+          const content = card.querySelector('[data-testimonial-content]') as HTMLElement;
+          
+          if (content.classList.contains('expanded')) {
+            // Collapse - control animation entirely through JavaScript
+            this.textContent = 'Read More';
+            
+            // First set explicit max-height to current scroll height
+            content.style.maxHeight = content.scrollHeight + 'px';
+            
+            // Force reflow
+            content.offsetHeight;
+            
+            // Then animate to collapsed height
+            setTimeout(() => {
+              content.style.maxHeight = '9rem';
+              content.style.maskImage = 'linear-gradient(to bottom, black 80%, transparent 100%)';
+              (content.style as any).webkitMaskImage = 'linear-gradient(to bottom, black 80%, transparent 100%)';
+            }, 10);
+            
+            // Remove expanded class after animation
+            setTimeout(() => {
+              content.classList.remove('expanded');
+              card.style.height = '320px';
+            }, 400);
+            
+          } else {
+            // Expand - remove mask and expand
+            content.style.maskImage = 'none';
+            (content.style as any).webkitMaskImage = 'none';
+            content.classList.add('expanded');
+            
+            // Set max-height to scroll height for smooth animation
+            content.style.maxHeight = content.scrollHeight + 'px';
+            card.style.height = 'auto';
+            this.textContent = 'Read Less';
+          }
+        });
+      });
+    }
+    
+    // Initialize
+    checkOverflow();
+    handleReadMore();
+    
+    // Recheck on window resize
+    window.addEventListener('resize', checkOverflow);
+  });
+</script>

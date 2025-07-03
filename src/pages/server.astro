@@ -27,7 +27,7 @@ const testimonialsData: Array<TestimonialData> = testimonialsImportData.map((val
   return res;
 });
 
-const title = "Enterprise WireGuard® VPN with Native MFA & Zero-Trust Architecture";
+const title = "defguard - Enterprise WireGuard® VPN with Native MFA & Zero-Trust Architecture";
 const featuredImage =
   "github.com/DefGuard/defguard.github.io/raw/main/public/images/product/core/hero-image.png";
 const imageWidth = "1920";
@@ -85,11 +85,15 @@ const sections = [
 >
   <Navigation activeSlug="/server/" />
 
-  <main id="server-page">
+  <main id="server-page" class="with-sidebar-nav">
     <HomeHeader
       trustedBy={false}
       title="Zero-Trust VPN Server with MFA"
       description="The most comprehensive open-source VPN solution for enterprises. Defguard delivers true Multi-Factor Authentication directly within the WireGuard® protocol, unified management of multiple VPN instances, built-in firewall control, and complete SSO integration—all while maintaining full data sovereignty and compliance readiness."
+      buttons={[
+        { name: "Download Server", link: "/download-confirm/" },
+        { name: "Book a Demo", link: "/book-a-demo/" }
+      ]}
     />
     
     <!-- New content wrapper that appears after header -->
@@ -100,6 +104,7 @@ const sections = [
 
       <div class="main-content">
         <FlexibleSection
+          leftRatio={0.4} 
           title="Manage multiple VPNs (locations) from a single central control plane"
           id="multiple-vpns"
           variant="gray"
@@ -129,6 +134,7 @@ const sections = [
         </FlexibleSection>
 
         <FlexibleSection
+          leftRatio={0.6} 
           title="Deploy multiple Defguard instances and access them from a single client"
           id="multiple-instances"
           variant="white"
@@ -149,6 +155,7 @@ const sections = [
         </FlexibleSection>
 
         <FlexibleSection
+          leftRatio={0.4} 
           title="True 2FA/Multi-Factor authentication on WireGuard®"
           id="true-mfa"
           variant="gray"
@@ -172,6 +179,7 @@ const sections = [
         </FlexibleSection>
 
         <FlexibleSection
+          leftRatio={0.6} 
           title="Integration with SSO providers, Active Directory, and LDAP"
           id="sso-integration"
           variant="white"
@@ -189,6 +197,7 @@ const sections = [
         </FlexibleSection>
 
         <FlexibleSection
+          leftRatio={0.4} 
           title="The only ACL solution with build in firewall management on Linux and FreeBSD/OPNSense"
           id="firewall-management"
           variant="gray"
@@ -214,6 +223,7 @@ const sections = [
         </FlexibleSection>
 
         <FlexibleSection
+          leftRatio={0.6} 
           title="Instant VPN configuration updates and flexible client management"
           id="instant-updates"
           variant="white"
@@ -231,6 +241,7 @@ const sections = [
         </FlexibleSection>
 
         <FlexibleSection
+          leftRatio={0.4} 
           title="Comprehensive auditing and seamless SIEM integration"
           id="audit-trail"
           variant="gray"
@@ -249,6 +260,7 @@ const sections = [
         </FlexibleSection>
 
         <FlexibleSection
+          leftRatio={0.6} 
           title="Easy and secure remote user Enrollment & Onboarding"
           id="user-enrollment"
           variant="white"
@@ -265,6 +277,7 @@ const sections = [
         </FlexibleSection>
 
         <FlexibleSection
+          leftRatio={0.4} 
           title="Secure architecture with no data exposed"
           id="secure-architecture"
           variant="gray"
@@ -293,6 +306,7 @@ const sections = [
         </FlexibleSection>
 
         <FlexibleSection
+          leftRatio={0.6} 
           title="Yubico YubiKey Hardware security key management and provisioning"
           id="yubikey-management"
           variant="white"
@@ -308,6 +322,7 @@ const sections = [
         </FlexibleSection>
 
         <FlexibleSection
+          leftRatio={0.4} 
           title="Built-in OIDC SSO, key management, forward-auth for legacy systems"
           id="oidc-sso"
           variant="gray"
@@ -325,29 +340,31 @@ const sections = [
         </FlexibleSection>
 
         <FlexibleSection
-        title="Easy depoloyment"
-        id="easy-deployment"
-        variant="white"
-        theme="light"
-      >
-        <div slot="left">
-          <ImageURL src="/images/features/deploy.png" alt="Easy depoloyment" />
-        </div>
+          leftRatio={0.6} 
+          title="Easy depoloyment"
+          id="easy-deployment"
+          variant="white"
+          theme="light"
+        >
+          <div slot="left">
+            <ImageURL src="/images/features/deploy.png" alt="Easy depoloyment" />
+          </div>
 
-        <div slot="right">
-          <p>
-            Defguard offers a variety of deployment methods such as Docker, system packages, Kubernetes, and Terraform, making it easy to integrate into your environment. It also provides a quick way to try it out via a script that automatically sets up and launches a test instance.
-          </p>
-          <a
-                href="https://docs.defguard.net/getting-started/one-line-install"
-                class="learn-more-link"
-              >
-                See the one-line deploy
-              </a>
-        </div>
-      </FlexibleSection>
+          <div slot="right">
+            <p>
+              Defguard offers a variety of deployment methods such as Docker, system packages, Kubernetes, and Terraform, making it easy to integrate into your environment. It also provides a quick way to try it out via a script that automatically sets up and launches a test instance.
+            </p>
+            <a
+                  href="https://docs.defguard.net/getting-started/one-line-install"
+                  class="learn-more-link"
+                >
+                  See the one-line deploy
+                </a>
+          </div>
+        </FlexibleSection>
 
         <FlexibleSection
+          leftRatio={0.4} 
           title="Full rest API and webhooks"
           id="api-webhooks"
           variant="white"
@@ -373,6 +390,7 @@ const sections = [
         </FlexibleSection>
 
         <FlexibleSection
+          leftRatio={0.6} 
           title="All written in Rust for security!"
           id="rust-security"
           variant="gray"

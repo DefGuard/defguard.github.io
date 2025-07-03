@@ -259,15 +259,16 @@ const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
         background: rgba(0, 0, 0, 0.3);
         cursor: pointer;
         transition: all 0.3s ease;
+        box-sizing: border-box;
+        padding: 0;
+        aspect-ratio: 1 / 1;
 
         &:hover {
           background: rgba(0, 0, 0, 0.5);
-          transform: scale(1.1);
         }
 
         &.active {
           background: var(--primary-button-bg, #0c8ce0);
-          transform: scale(1.2);
         }
       }
     }
@@ -281,6 +282,9 @@ const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
         .dot {
           width: 8px;
           height: 8px;
+          box-sizing: border-box;
+          padding: 0;
+          aspect-ratio: 1 / 1;
         }
       }
     }

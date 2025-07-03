@@ -11,6 +11,7 @@ interface Props {
   variant?: "white" | "gray";
   theme?: "light" | "dark";
   bottomBorder?: boolean;
+  leftRatio?: number;
 }
 
 const {
@@ -22,13 +23,18 @@ const {
   variant = "white",
   theme = "light",
   bottomBorder = true,
+  leftRatio = 0.5,
 } = Astro.props;
+
+// Calculate right ratio automatically
+const rightRatio = 1 - leftRatio;
 ---
 
 <section
   class={clsx("flexible-section", `variant-${variant}`, `theme-${theme}`, className)}
   id={id}
   aria-labelledby={id ? `${id}-title` : undefined}
+  style={`--left-ratio: ${leftRatio}; --right-ratio: ${rightRatio};`}
 >
   <ContentLimiter maxWidth={maxWidth}>
     <div class="flexible-content">
@@ -131,8 +137,21 @@ const {
           flex-direction: column;
 
           @media (min-width: 768px) {
-            width: calc(50% - 1rem); // explicit width calculation
+            width: calc(50% - 1rem); // fallback for older browsers
           }
+
+          &.left-column {
+            @media (min-width: 768px) {
+              width: calc((var(--left-ratio, 0.5) * 100%) - 1rem);
+            }
+          }
+
+          &.right-column {
+            @media (min-width: 768px) {
+              width: calc((var(--right-ratio, 0.5) * 100%) - 1rem);
+            }
+          }
+
 
           &.left-column,
           &.right-column {

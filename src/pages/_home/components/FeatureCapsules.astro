@@ -1,0 +1,105 @@
+---
+import ContentLimiter from "../../../components/ContentLimiter.astro";
+interface Feature {
+  title: string;
+  description: string;
+  icon?: string; // LineIcons icon name (e.g., "lni-shield")
+}
+
+interface Props {
+  features: Feature[];
+  header?: string;
+}
+
+const { features, header } = Astro.props;
+---
+<ContentLimiter>
+  {header && (
+    <p class="feature-capsules-header">
+      {header}
+    </p>
+  )}
+  <div class="feature-capsules">
+    {features.map((feature) => (
+      <div class="feature-capsule">
+        <div class="feature-header">
+          {feature.icon && (
+            <i class={`lni ${feature.icon} feature-icon`}></i>
+          )}
+          <h2>{feature.title}</h2>
+        </div>
+        <p>
+          {feature.description}
+        </p>
+      </div>
+    ))}
+  </div>
+</ContentLimiter>
+
+<style lang="scss">
+.feature-capsules {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  // padding-bottom: 3rem;
+  width: 100%;
+  margin: 0 auto;
+
+  .feature-capsule {
+    background: var(--surface-nav-bg, #f8f9fa);
+    border: 1px solid var(--border-primary, #e9ecef);
+    padding: 2rem 3rem;
+    // border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease-in-out;
+    width: 100%;
+    box-sizing: border-box;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+
+      .feature-icon {
+        font-size: 56px;
+        color: var(--primary-button-bg, #0c8ce0);
+        flex-shrink: 0;
+      }
+
+      h2 {
+        @include typography(h2);
+        font-weight: 400;
+      }
+    }
+
+    p {
+      @include typography(paragraph);
+      margin-bottom: 1rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    
+    .feature-capsule {
+      padding: 2rem 3rem;
+      width: 100%;
+    }
+  }
+}
+
+.feature-capsules-header {
+  @include typography(section);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+</style>
+

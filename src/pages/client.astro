@@ -1,38 +1,69 @@
 ---
-import { getCollection } from "astro:content";
-import GithubStars from "../components/GithubStars/GithubStars";
 import Navigation from "../components/base/Navigation.astro";
-import { Button } from "../components/buttons/Button/Button";
-import ProductBuiltBy from "../components/product/ProductBuiltBy.astro";
-import { ProductFeature } from "../components/product/ProductFeature/ProductFeature";
-import ProductImage from "../components/product/ProductImage.astro";
+import HomeSection from "../components/home/HomeSection.astro";
 import ProductLayout from "../layouts/ProductLayout.astro";
-import ProductSection from "../layouts/ProductSection.astro";
-import MatrixSection from "../components/MatrixSection.astro";
-import { Image } from "astro:assets";
-import ClientImage from "/public/images/product/client/main-screen.png";
-import OverviewImage from "/public/images/product/client/overview.png";
+import Testimonials from "./_home/components/client-side/Testimonials/Testimonials";
+import type { TestimonialData } from "./_home/components/client-side/Testimonials/type";
+import { testimonialSchema } from "./_home/components/client-side/Testimonials/type";
+import FlexibleIdentitySection from "./_home/components/FlexibleIdentity/FlexibleIdentitySection.astro";
+import HomeHeader from "./_home/components/HomeHeader.astro";
+import Roadmap from "./_home/components/Roadmap/Roadmap.astro";
+import FlexibleSection from "../components/FlexibleSection.astro";
+import ServerSidebar from "../components/server/ServerSidebar.astro";
+import signinwith from "/public/images/data/signinwith.png";
+import enrollment from "/public/images/data/enrollment-screen.png";
+import api from "/public/images/data/api.png";
+import Image from "astro/components/Image.astro";
+import YouTubeVideo from "../components/video/YouTubeVideo.astro";
+import CTASection from "../components/CTASection.astro";
+import ImageCarousel from "../components/image/ImageCarousel.astro";
+import ImageURL from "../components/image/ImageURL.astro"
 
-const clientFeatures = (await getCollection("client-features")).sort(
-  (f1, f2) => f1.data.order - f2.data.order,
-);
-const title = "Zero-Trust WireGuard® 2FA/MFA VPN: Best Desktop WireGuard® Client";
+const testimonialsImportData = await Astro.glob("../data/home/testimonials/**/*.md");
+
+const testimonialsData: Array<TestimonialData> = testimonialsImportData.map((val) => {
+  const toValidate = { ...val.frontmatter, markdownRaw: val.rawContent() };
+  const res = testimonialSchema.parse(toValidate);
+  return res;
+});
+
+const title = "defguard - The Best WireGuard® desktop client";
 const featuredImage =
-  "github.com/DefGuard/defguard.github.io/raw/main/public/images/product/client/main-screen.png";
+  "/public/images/product/client/main-screen.png";
 const imageWidth = "1920";
 const imageHeight = "1080";
-const url = "https://defguard.net/client/";
+const url = "https://defguard.net/client";
 const tags = [
   "defguard",
-  "open source",
+  "server",
   "WireGuard®",
+  "vpn",
   "mfa",
   "2fa",
-  "mfa/2fa",
+  "WireGuard®",
+  "ldap",
+  "openldap",
+  "postgresql",
+  "postgres",
+  "openid",
   "totp",
-  "free",
+  "webauthn",
+  "opensense",
+  "freebsd",
   "rust",
-  "tauri",
+  "secure",
+  "docker",
+  "kubernetes",
+  "k8s",
+];
+
+const sections = [
+  { id: "multiple-instances-and-vpn", title: "Multiple instances and VPN" },
+  { id: "true-2fa-multi-factor", title: "True 2FA/Multi-Factor" },
+  { id: "instant-vpn-configuration-updates", title: "Instant VPN configuration updates" },
+  { id: "detailed-connection-overview", title: "Detailed connection overview" },
+  { id: "multiplatform-multi-architecture", title: "Multiplatform and Multi architecture" },
+  { id: "any-wireguard", title: "Universal WireGuard® Support" },
 ];
 ---
 
@@ -45,78 +76,314 @@ const tags = [
   tags={tags}
 >
   <Navigation activeSlug="/client/" />
-  <main id="product-content" class="product-main">
-    <ProductSection padding="small">
-      <header id="main-header">
-        <h1>The Best WireGuard® <br/>desktop client</h1>
-        <p>
-          Beautiful open-source, cross-platform client, with real
-          <strong>WireGuard® 2FA/Multi-Factor Authentication</strong>.
-        </p>
-        <div class={"github-stars-wrapper"}>
-          <GithubStars owner="Defguard" repo="client" client:only="react" />
-        </div>
-        <div class="product-download">
-          <a href="/download/" rel="nofollow noopener noreferrer" data-astro-prefetch>
-            <Button text="Download" size="large" />
+
+  <main id="client-page" class="with-sidebar-nav">
+    <HomeHeader
+      trustedBy={false}
+      repo="client"
+      title="The Best WireGuard® desktop client"
+      description="Beautiful open-source, cross-platform client, with real WireGuard® 2FA/Multi-Factor Authentication. "
+      buttons={[
+        { name: "Download Client", link: "/download/" }//,
+        //{ name: "Book a Demo", link: "/book-a-demo/" }
+      ]}
+    />
+    
+    <!-- New content wrapper that appears after header -->
+    <div class="page-content-wrapper">
+      <aside class="sidebar-container">
+        <ServerSidebar sections={sections} title="Main features"/>
+      </aside>
+
+      <div class="main-content">
+        <FlexibleSection
+          leftRatio={0.4} 
+          title="Multiple instances and VPN locations in one client"
+          id="multiple-instances-and-vpn"
+          variant="gray"
+          theme="light"
+        >
+          <div slot="left">
+            <p>
+              Defguard is uniquely designed for MSPs, cloud providers, and data centers. It allows deployment of multiple isolated Defguard instances (for different clients, sites, etc.) while maintaining unified access through a single desktop app.
+            </p>
+            <p>
+              <em>Mobile support coming in version 1.5!</em>  
+            </p>
+            <div class="learn-more">
+              <a
+                href="https://docs.defguard.net/admin-and-features/wireguard/network-overview"
+                class="learn-more-link"
+              >
+                Learn about Network Overview
           </a>
         </div>
-      </header>
-    </ProductSection>
-    <ProductImage>
-      <Image
-        src={ClientImage}
-        alt="product image"
-        densities={[0.5, 0.75, 1]}
-        width={imageWidth}
-        height={imageHeight}
-        loading={"eager"}
-      />
-    </ProductImage>
-    <ProductSection padding="large">
-      <div class="product-features">
-        <h2>Why defguard provides the best WireGuard® client</h2>
-        {
-          clientFeatures.map(async (f, index) => {
-            const { Content } = await f.render();
-            return (
-              <ProductFeature
-                title={f.data.title}
-                id={index}
-                context="client"
-                client:load
-              >
-                <Content />
-              </ProductFeature>
-            );
-          })
-        }
-      </div>
-    </ProductSection>
-    <ProductSection padding="large" dark>
-      <section id="vpn">
-        <div class="top">
-          <h2>Enterprise VPN & SSO</h2>
-          <p>
-            Get most features out of your WireGuard® VPN with <a href="/"
-              >defguard VPN & SSO</a
-            > - <a href="/compare/" target="_self">see a detailed comparison</a> with other
-            Open Source VPN management solutions to understand all the benefits!
-          </p>
+          </div>
+
+          <div slot="right">
+            <ImageURL src="/images/client/Manage multiple.png" alt="Multiple instances and VPN locations in one client" />
+          </div>
+        </FlexibleSection>
+
+        <FlexibleSection
+          leftRatio={0.6} 
+          title="True 2FA/Multi-Factor authentication on WireGuard®"
+          id="true-2fa-multi-factor"
+          variant="white"
+          theme="light"
+        >
+        <div slot="left">
+          <ImageCarousel
+            src="/images/features/True 2FA.png,/images/features/True 2FA2.png" alt="True 2FA/Multi-Factor authentication on WireGuard®"
+            interval={3}
+            autoplay={true}
+          />
         </div>
-        <div class="image-with-title">
-          <div class="description">
-            <div class="title">
-              <p>Site-to-Site & Roadwarrior</p>
+
+          <div slot="right">
+            <p>
+              Desktop clients supports both defguard internal Multi-Factor Authentication and external SSO (Google/Microsoft/Otka/others) MFA.
+            </p>
+            <p>
+              <em>Mobile support coming in version 1.5!</em>
+            </p>
+          </div>
+        </FlexibleSection>
+
+        <FlexibleSection
+          leftRatio={0.4} 
+          title="Instant VPN configuration updates and flexible client management"
+          id="instant-vpn-configuration-updates"
+          variant="gray"
+          theme="light"
+        >
+          <div slot="left">
+            <p>
+              Defguard enables real-time synchronization and configuration of client applications used by users. Any changes in VPN configuration or access management are immediately reflected on the user side. Additionally, it allows managing client behavior (e.g., enabling full traffic routing through the VPN or blocking certain features of the client).
+            </p>
+            <div class="learn-more">
+              <a
+                href="https://docs.defguard.net/enterprise/all-enteprise-features/behavior-customization"
+                class="learn-more-link"
+              >
+                Learn more about client features
+              </a>
             </div>
           </div>
-          <div class="image-container">
-            <Image src={OverviewImage} alt="overview image" densities={[0.5, 0.75, 1]} />
+
+          <div slot="right">
+            <ImageURL src="/images/features/Instant VPN.png" alt="Instant VPN configuration updates and flexible client management" />
           </div>
-        </div>
-      </section>
-    </ProductSection>
-    <ProductBuiltBy />
-    <MatrixSection />
+        </FlexibleSection>
+
+        <FlexibleSection
+          leftRatio={0.6} 
+          title="Detailed connection overview"
+          id="detailed-connection-overview"
+          variant="white"
+          theme="light"
+        >
+          <div slot="left">
+            <ImageURL src="/images/client/Detailed view.png" alt="Detailed connection overview" />
+          </div>
+
+          <div slot="right">
+            <p>
+              Each connection can be tracked with detailed statistics, logs and tunnel details (IPs, ports, DNS settings, routing tables)
+            </p>
+          </div>
+        </FlexibleSection>
+
+        <FlexibleSection
+          leftRatio={0.4} 
+          title="Multiplatform and Multi architecture"
+          id="multiplatform-multi-architecture"
+          variant="gray"
+          theme="light"
+        >
+          <div slot="left">
+            <p>
+              Available form macOS, Windows and Linux (Ubuntu/Arch/RPMs) and Intel/ARM architectures.
+            </p>
+
+          </div>
+
+          <div slot="right">
+            <ImageURL src="/images/client/Platforms.png" alt="Multiplatform and Multi architecture" />
+          </div>
+        </FlexibleSection>
+
+        <FlexibleSection
+          leftRatio={0.6} 
+          title="Any WireGuard® server is supported"
+          id="any-wireguard"
+          variant="white"
+          theme="light"
+        >
+          <div slot="left">
+            <ImageURL src="/images/client/Tunnel.png" alt="Any WireGuard® server is supported" />
+          </div>
+
+          <div slot="right">
+            <ul>
+              <li>
+                Not only defguard instances but any WireGuard® server is supported - just import (by wizard) your current configuration and use defguard client with your current setup!
+              </li>
+              <li>
+                Note: that only defguard instances (<a href="https://docs.defguard.net/admin-and-features/wireguard/multi-factor-authentication-mfa-2fa">combined with defguard server</a>) enables 2FA/Multi-Factor support.
+              </li>
+            </ul>
+          </div>
+        </FlexibleSection>
+
+
+        <CTASection
+          title="Ready to Implement Enterprise-Grade WireGuard® VPN?"
+          description="See how Defguard fits into your zero-trust architecture and existing infrastructure."
+          buttonText="Book a Demo"
+          buttonLink="/book-a-demo?utm_source=server"
+          id="cta-documentation"
+          variant="white"
+        />
+
+        <!-- <Roadmap variant="white" /> -->
+      </div>
+    </div>
   </main>
 </ProductLayout>
+
+<style lang="scss" is:global>
+  img {
+    border: 1px solid var(--surface-frame-bg);
+    border-radius: 8px;
+  }
+  main#client-page {
+    --page-spacing-factor: 0.5;
+    
+    @include break-up(lg) {
+      --page-spacing-factor: 1;
+    }
+
+    .page-content-wrapper {
+      display: block;
+      width: 100%;
+      position: relative;
+      
+      @include break-up(lg) {
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        align-items: flex-start;
+      }
+    }
+
+    .sidebar-container {
+      display: none;
+      
+      @include break-up(lg) {
+        display: block;
+        position: sticky;
+        top: calc(var(--nav-height, 75px) + 2rem);
+        height: fit-content;
+        z-index: 10;
+        max-height: calc(100vh - var(--nav-height, 75px) - 4rem);
+        overflow-y: auto;
+        align-self: start;
+        /* Remove any inherited transform or will-change */
+        transform: none;
+        will-change: auto;
+      }
+    }
+
+    .main-content {
+      flex: 1;
+      
+      .flexible-section{
+        scroll-margin-top: 75px;
+        padding: 1.5rem 0;
+        margin-bottom: 90px;
+        //border: 1px solid var(--border-separator);
+        background-color: var(--surface-nav-bg);
+        border-radius: 10px;
+        box-shadow: var(--box-shadow);
+      }
+
+      .flexible-content {
+        .section-title {
+          @include typography(section);
+          padding-bottom: 1rem;
+          margin-bottom: 2rem;
+        }
+
+        h3 {
+          @include typography(h3);
+          margin-top: 0;
+          margin-bottom: 1rem;
+        }
+
+        p {
+          @include typography(paragraph);
+          margin-bottom: 1.5rem;
+        }
+
+        .learn-more {
+          margin-bottom: 1.5rem;
+        }
+
+        .learn-more-link {
+          @include typography(paragraph);
+          display: inline-block;
+          padding: 0.75rem 1.5rem;
+          background-color: var(--primary-button-bg, #0c8ce0);
+          color: var(--primary-button-text, white);
+          border-radius: 50px;
+          font-weight: 300;
+          font-size: calc(1rem * var(--font-scale-factor));
+          text-decoration: none;
+          transition: background-color 0.2s ease-in-out;
+
+
+          &:hover {
+            background-color: var(--primary-button-hover, #0a7bc5);
+          }
+        }
+
+        ul {
+          margin: 0 0 1.5rem 0;
+          padding-left: 20px;
+
+          li {
+            @include typography(paragraph);
+            margin-bottom: 0.5rem;
+          }
+        }
+
+        em {
+          font-size: 0.9em;
+          opacity: 0.8;
+        }
+
+        .column {
+          @media (max-width: 768px) {
+            &.right-column {
+              margin-top: 1rem;
+            }
+          }
+        }
+      }
+    }
+
+    #testimonials {
+      padding-top: page-spacing(100px);
+      padding-bottom: page-spacing(100px);
+    }
+
+    .scroll-section {
+      padding-top: page-spacing(200px);
+      padding-bottom: page-spacing(200px);
+    }
+  }
+</style> 

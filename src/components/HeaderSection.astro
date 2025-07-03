@@ -1,0 +1,42 @@
+---
+import HomeSection from "./home/HomeSection.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  variant?: "white" | "gray";
+}
+
+const { title, description, variant = "white" } = Astro.props;
+---
+
+<HomeSection variant={variant} contentId="header-section">
+  <h1>{title}</h1>
+  <p>
+    {description}
+  </p>
+</HomeSection>
+
+<style lang="scss" is:global>
+  #header-section {
+    padding-bottom: page-spacing(40px);
+    padding-top: 50px;
+
+    & > p {
+      @include typography(paragraph);
+      padding-bottom: 8px;
+    }
+
+    h1 {
+      color: var(--text-body-primary);
+      padding-bottom: 10px;
+      text-align: left;
+      text-wrap: balance;
+      @include typography(title);
+
+      & {
+        font-size: calc(3.2rem * var(--font-scale-factor));
+      }
+    }
+  }
+</style>
