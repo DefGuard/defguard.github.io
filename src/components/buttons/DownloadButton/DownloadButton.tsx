@@ -219,7 +219,7 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
         {(platform === PlatformType.DEBIAN || platform === PlatformType.ARCHLINUX) && (
           <>
             <p>
-              Other ways to install defguard on linux →{" "}
+              Other ways to install Defguard on linux →{" "}
               <a
                 href={`https://github.com/${owner}/${repo}/releases/download/v${version}/defguard-client-linux-x86_64-v${version}.tar.gz`}
               >

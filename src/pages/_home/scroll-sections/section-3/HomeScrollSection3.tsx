@@ -36,7 +36,7 @@ const slides: SlidesData[] = [
           functionalities are exposed via REST API
         </li>
         <li>
-          Webhooks - outgoing webhooks are a simple way for defguard to notify your
+          Webhooks - outgoing webhooks are a simple way for Defguard to notify your
           systems of ongoing changes in identity management (user was added, deleted,
           modified) or hardware key provisioning (easily propagateGPG/PGP or SSH keys to
           your internal systems)
@@ -50,8 +50,8 @@ const slides: SlidesData[] = [
     title: "Portability & speed",
     content: (
       <p>
-        We&apos;ve implemented defguard in Rust for code portability, security, and speed.
-        You can easily run defguard on various Linux-based systems on x86, arm, and other
+        We&apos;ve implemented Defguard in Rust for code portability, security, and speed.
+        You can easily run Defguard on various Linux-based systems on x86, arm, and other
         architectures (including Raspberry PI, OpenWRT, etc.) and Unix systems FreeBSD,
         OpenBSD, and others. We&apos;ve prepared various Linux and OPNsense® (FreeBSD)
         but we are constantly working on other platforms.

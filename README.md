@@ -1,4 +1,4 @@
-# defguard website
+# Defguard website
 
 Defguard website built on [Astro](https://astro.build)!
 
