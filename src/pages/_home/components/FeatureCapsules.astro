@@ -4,6 +4,9 @@ interface Feature {
   title: string;
   description: string;
   icon?: string; // LineIcons icon name (e.g., "lni-shield")
+  linkText?: string; // Optional link text
+  linkUrl?: string;  // Optional link URL
+  linkTarget?: string; // Optional link target, defaults to '_self'
 }
 
 interface Props {
@@ -31,6 +34,18 @@ const { features, header } = Astro.props;
         <p>
           {feature.description}
         </p>
+        {feature.linkText && feature.linkUrl && (
+          <div class="feature-link-container">
+            <a
+              href={feature.linkUrl}
+              class="feature-link"
+              target={feature.linkTarget ?? '_self'}
+              rel="noopener"
+            >
+              {feature.linkText}
+            </a>
+          </div>
+        )}
       </div>
     ))}
   </div>
@@ -54,6 +69,8 @@ const { features, header } = Astro.props;
     transition: all 0.2s ease-in-out;
     width: 100%;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 
     &:hover {
       transform: translateY(-1px);
@@ -81,6 +98,14 @@ const { features, header } = Astro.props;
     p {
       @include typography(paragraph);
       margin-bottom: 1rem;
+      text-align: justify;
+      flex: 1 1 auto;
+    }
+    .feature-link-container {
+      width: 100%;
+      text-align: right;
+      margin-top: auto;
+      padding-top: 0.5rem;
     }
   }
 
@@ -100,6 +125,25 @@ const { features, header } = Astro.props;
   @include typography(section);
   margin-bottom: 2rem;
   text-align: center;
+}
+
+.feature-link-container {
+  width: 100%;
+  text-align: right;
+}
+
+.feature-link {
+  @include typography(paragraph);
+  display: inline-block;
+  margin-top: 0.5rem;
+  text-decoration: underline;
+  font-size: 1rem;
+  transition: color 0.2s;
+  // Removed text-align: right;
+
+  &:hover {
+    color: var(--primary-button);
+  }
 }
 </style>
 
