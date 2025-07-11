@@ -81,7 +81,7 @@ const tags = [
     <HomeHeader
       trustedBy={false}
       title="Enterprise VPN with full control and transparency"
-      description="Defguard is best VPN management solution if you need secure remote access, complete data sovereignty, and full compliance. Built on a modern zero-trust architecture and powerful WireGuard protocl, it's fully open-source, easy to deploy on-prem or in your private cloud, and designed for teams like yours that demand control, transparency, and strong security standards."
+      description="Defguard is the enterprise VPN solution built for IT leaders who demand security, visibility, and peace of mind. Powered by a zero-trust architecture and the WireGuard protocol, it delivers full data sovereignty and compliance — all in a self-hosted, open-source platform that you control."
       buttons={[
         { name: "Book a Demo", link: "/book-a-demo?utm_source=landing" },
         { name: "Quick Install Guide", link: "https://docs.defguard.net/getting-started/one-line-install" }
@@ -91,12 +91,38 @@ const tags = [
     <FeatureCapsules
       header="Why businesses choose Defguard"
       features={[
-        { title: "Build for enterprise", description: "Integrates with LDAP, Active Directory, external SSO, and more.", icon: "lni-apartment" },
-        { title: "Privacy-first", description: "No third-party dependencies, full control over deployment.", icon: "lni-lock" },
-        { title: "Secure and robust design", description: "Written in Rust, built around WireGuard®, and fully auditable (open source).", icon: "lni-shield" },
-        { title: "NIS2-ready", description: "VPN MFA built into the protocol layer.", icon: "lni-certificate" },
-        { title: "Easy to deploy", description: "Run and evaluate with few command lines.", icon: "lni-rocket" },
-        { title: "European", description: "No foreign policies or legal risks.", icon: "lni-world" }
+        { 
+          title: "Enterprise integrations", 
+          description: 
+          "External OpenID providers; Google, Microsoft, Zitadel, Keycloak, Okta, JumpCloud and more. Integrates with LDAP, Active Directory and Microsoft Entra ID.", 
+          icon: "lni-apartment" 
+        },
+        { 
+          title: "Privacy and Transparency", 
+          description: 
+          "No third-party dependencies required, no metadata leaves your infrastructure, full control over deployment.", 
+          icon: "lni-lock" 
+        },
+        { 
+          title: "Ultimate Security", 
+          description: "Written in Rust, built around WireGuard® and with components designed to be secure, fully auditable with open source code on GitHub",
+          icon: "lni-shield" 
+        }, 
+        { 
+          title: "Enables NIS2 compliance", 
+          description: "True VPN MFA built into the WireGuard® protocol layer, easy to use with defguad vpn desktop client.", 
+          icon: "lni-certificate" 
+        },
+        { 
+          title: "Easy to deploy", 
+          description: "Run and evaluate with few command lines.", 
+          icon: "lni-rocket" 
+        },
+        { 
+          title: "European", 
+          description: "No foreign policies or legal risks.", 
+          icon: "lni-world" 
+        }
       ]}
     />
   
