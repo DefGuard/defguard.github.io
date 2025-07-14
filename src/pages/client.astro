@@ -58,6 +58,7 @@ const tags = [
 ];
 
 const sections = [
+  { id: "mobile-version", title: "All-platforms mobile clients" },
   { id: "multiple-instances-and-vpn", title: "Multiple instances and VPN" },
   { id: "true-2fa-multi-factor", title: "True 2FA/Multi-Factor" },
   { id: "instant-vpn-configuration-updates", title: "Instant VPN configuration updates" },
@@ -80,9 +81,10 @@ const sections = [
   <main id="client-page" class="with-sidebar-nav">
     <HomeHeader
       trustedBy={false}
+      showStoreButtons={true}
       repo="client"
-      title="The Best WireGuard® desktop client"
-      description="Beautiful open-source, cross-platform client, with real WireGuard® 2FA/Multi-Factor Authentication. "
+      title="The Best WireGuard® client"
+      description="Beautiful, open-source clients for desktop (Linux, macOS, Windows) and mobile (iOS, Android) — with real WireGuard® 2FA/Multi-Factor Authentication."
       buttons={[
         { name: "Download Client", link: "/download/" }//,
         //{ name: "Book a Demo", link: "/book-a-demo/" }
@@ -96,6 +98,43 @@ const sections = [
       </aside>
 
       <div class="main-content">
+        <FlexibleSection
+          leftRatio={0.6} 
+          title="Desktop and mobile clients"
+          id="mobile-version"
+          variant="white"
+          theme="light"
+        >
+        <div slot="left">
+          <ImageCarousel
+            src="/images/client/True 2FA - w.png,/images/client/Biometrics  - w.png,/images/client/Multiple instances - w.png,/images/client/Instant VPN - w.png" alt="Mobile Client"
+            interval={3}
+            autoplay={true}
+          />
+          <div class="learn-more">
+          </div>
+        </div>
+
+          <div slot="right">
+            <p>
+              The Defguard mobile client is here — bringing secure, zero-trust networking to your phone.
+            </p>
+            <ul>
+              <li>
+                True 2FA/Multi-Factor authentication on WireGuard®
+              </li>
+              <li>
+                Multiple instances and VPN locations in one client
+              </li>
+              <li>
+                Biometrics as Multi-Factor Authenitication
+              </li>
+              <li>
+                Instant VPN configuration updates and flexible client management
+              </li>
+            </ul>
+          </div>
+        </FlexibleSection>
         <FlexibleSection
           leftRatio={0.4} 
           title="Multiple instances and VPN locations in one client"
@@ -116,8 +155,8 @@ const sections = [
                 class="learn-more-link"
               >
                 Learn about Network Overview
-          </a>
-        </div>
+              </a>
+            </div>
           </div>
 
           <div slot="right">

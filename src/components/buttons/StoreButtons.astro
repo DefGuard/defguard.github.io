@@ -1,0 +1,35 @@
+---
+// StoreButtons.astro: Displays Google Play and Apple App Store badges side by side
+const googlePlayUrl = "https://play.google.com/store/apps/details?id=your.app.id";
+const appStoreUrl = "https://apps.apple.com/app/idYOUR_APP_ID";
+---
+<div class="store-buttons">
+  <a href={googlePlayUrl} target="_blank" rel="noopener noreferrer" aria-label="Get it on Google Play">
+    <img src="/images/store/GooglePlay.svg" alt="Get it on Google Play" class="store-badge" />
+  </a>
+  <a href={appStoreUrl} target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store">
+    <img src="/images/store/AppStore.svg" alt="Download on the App Store" class="store-badge" />
+  </a>
+</div>
+
+<style lang="scss">
+  .store-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin: 1.5rem 0;
+  }
+  .store-badge {
+    height: 56px;
+    width: auto;
+    display: block;
+    transition: transform 0.1s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-radius: 8px;
+    &:hover {
+      transform: scale(1.04);
+    }
+  }
+</style> 
