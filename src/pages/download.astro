@@ -8,6 +8,8 @@ import NewsletterSection from "../components/NewsletterSection.astro";
 import ProductSection from "../layouts/ProductSection.astro";
 import FlexibleSection from "../components/FlexibleSection.astro";
 import StoreButtons from "../components/buttons/StoreButtons.astro";
+import QRCodeStoreToggle from "../components/buttons/QRCodeStoreToggle.astro";
+import ContentLimiter from "../components/ContentLimiter.astro";
 
 const title = "defguard - Zero-Trust WireGuard® 2FA/MFA VPN: Download";
 const featuredImage =
@@ -40,19 +42,45 @@ const url = "https://defguard.net/download/";
           <DefguardInfo owner="Defguard" repo="client" client:only="react" />
           <DownloadButtonList client:only="react" />
         </div>
-        <div slot="right">
+        <div slot="right" style="background-color: #fff; padding: 2rem; border-radius: 10px;">
           <h2>Get It for Your Mobile Device</h2>
           <p>
             Download the official VPN client for secure, zero trust access on iOS and Android.
           </p>
-          <StoreButtons />
+          {/* Example: QR code toggle for mobile app stores (placeholder images) */}
+          <QRCodeStoreToggle />
+          <!-- <NewsletterSection
+              headerLevel="2"
+              title="Stay Updated on New Releases"
+              description="Release notes and occasional news — no spam, just one email per month max."
+          />   -->
+        </div>
+      </FlexibleSection>
+      <!-- <FlexibleSection
+        id="newsletter"
+        variant="white"
+        theme="light"
+      >
+        <div slot="left">
           <NewsletterSection
             headerLevel="2"
             title="Stay Updated on New Releases"
             description="Release notes and occasional news — no spam, just one email per month max."
           />
         </div>
-      </FlexibleSection>
+        <div slot="right"></div>
+      </FlexibleSection> -->
+      <ContentLimiter>
+        <div style="width: 100%; display: flex; flex-direction: column; align-items: center; padding-bottom:4rem; padding-top:2rem; margin-top:2rem; border-top:1px solid #e8e8e8;">
+          <div style="width: 100%; max-width: 720px; display: flex; flex-direction: column; align-items: center;">
+            <NewsletterSection
+                headerLevel="2"
+                title="Stay Updated on New Releases"
+                description="Release notes and occasional news — no spam, just one email per month max."
+            />
+          </div>
+        </div>
+      </ContentLimiter>
     </ProductSection>
   </main>
 </BaseLayout>

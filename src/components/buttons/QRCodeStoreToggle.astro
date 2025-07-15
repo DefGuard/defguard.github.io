@@ -1,0 +1,161 @@
+---
+const googlePlayUrl = "https://play.google.com/store/apps/details?id=your.app.id";
+const appStoreUrl = "https://apps.apple.com/app/idYOUR_APP_ID";
+const androidQR = "/images/store/qr-android-placeholder.png";
+const iosQR = "/images/store/qr-ios-placeholder.png";
+const googlePlayBadge = "/images/store/GooglePlay.svg";
+const appStoreBadge = "/images/store/AppStore.svg";
+---
+
+<div class="qr-toggle-container">
+  <div class="toggle-buttons">
+    <button id="toggle-android" class="active" type="button">Android</button>
+    <button id="toggle-ios" type="button">iOS</button>
+  </div>
+  <div class="qr-section">
+    <a
+      id="qr-link"
+      href={googlePlayUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      data-android-url={googlePlayUrl}
+      data-ios-url={appStoreUrl}
+    >
+      <img
+        id="qr-img"
+        src={androidQR}
+        alt="Google Play QR code"
+        class="qr-img"
+        width="205"
+        height="205"
+        style="border-radius:12px; border:1px solid #eee;"
+        data-android-img={androidQR}
+        data-ios-img={iosQR}
+      />
+    </a>
+    <a
+      id="store-btn-link"
+      href={googlePlayUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      data-android-url={googlePlayUrl}
+      data-ios-url={appStoreUrl}
+      class="store-btn-link"
+    >
+      <img
+        id="store-btn-img"
+        src={googlePlayBadge}
+        alt="Get it on Google Play"
+        class="store-badge"
+        width="205"
+        data-android-img={googlePlayBadge}
+        data-ios-img={appStoreBadge}
+      />
+    </a>
+  </div>
+</div>
+
+<script>
+  const androidBtn = document.getElementById('toggle-android');
+  const iosBtn = document.getElementById('toggle-ios');
+  const qrImg = document.getElementById('qr-img') as HTMLImageElement | null;
+  const qrLink = document.getElementById('qr-link') as HTMLAnchorElement | null;
+  const storeBtnLink = document.getElementById('store-btn-link') as HTMLAnchorElement | null;
+  const storeBtnImg = document.getElementById('store-btn-img') as HTMLImageElement | null;
+
+  if (androidBtn && iosBtn && qrImg && qrLink && storeBtnLink && storeBtnImg) {
+    androidBtn.addEventListener('click', () => {
+      androidBtn.classList.add('active');
+      iosBtn.classList.remove('active');
+      qrImg.src = qrImg.dataset.androidImg || '';
+      qrImg.alt = 'Google Play QR code';
+      qrLink.href = qrLink.dataset.androidUrl || '';
+      storeBtnLink.href = storeBtnLink.dataset.androidUrl || '';
+      storeBtnImg.src = storeBtnImg.dataset.androidImg || '';
+      storeBtnImg.alt = 'Get it on Google Play';
+    });
+    iosBtn.addEventListener('click', () => {
+      iosBtn.classList.add('active');
+      androidBtn.classList.remove('active');
+      qrImg.src = qrImg.dataset.iosImg || '';
+      qrImg.alt = 'App Store QR code';
+      qrLink.href = qrLink.dataset.iosUrl || '';
+      storeBtnLink.href = storeBtnLink.dataset.iosUrl || '';
+      storeBtnImg.src = storeBtnImg.dataset.iosImg || '';
+      storeBtnImg.alt = 'Download on the App Store';
+    });
+  }
+</script>
+
+<style>
+.qr-toggle-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem 0;
+  background-color: white;
+}
+.toggle-buttons {
+  display: flex;
+  gap: 0;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+.toggle-buttons button {
+  width: 50%;
+  box-sizing: border-box;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #0c8ce0;
+  background: white;
+  color: #0c8ce0;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s;
+}
+.toggle-buttons button.active {
+  background: #0c8ce0;
+  color: white;
+}
+/* .toggle-buttons button:first-child {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+.toggle-buttons button:last-child {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+} */
+.qr-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.store-btn-link {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+.store-badge {
+  width: 205px;
+  height: 205px;
+  object-fit: contain;
+  display: block;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.1s;
+  margin: 0 auto;
+}
+.store-badge:hover {
+  transform: scale(1.04);
+}
+.qr-img {
+  width: 205px;
+  height: 205px;
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
+  border: 1px solid #eee;
+}
+</style> 
