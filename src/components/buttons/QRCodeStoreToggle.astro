@@ -84,6 +84,12 @@ const appStoreBadge = "/images/store/AppStore.svg";
       storeBtnImg.src = storeBtnImg.dataset.iosImg || '';
       storeBtnImg.alt = 'Download on the App Store';
     });
+
+    // Detect Apple device and set iOS as active by default
+    const isAppleDevice = /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent) && !(typeof window !== "undefined" && "MSStream" in window);
+    if (isAppleDevice) {
+      iosBtn.click();
+    }
   }
 </script>
 
