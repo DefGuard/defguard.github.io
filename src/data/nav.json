@@ -23,6 +23,12 @@
     "prefetch": true
   },
   {
+    "display": "Enterprise",
+    "url": "https://docs.defguard.net/enterprise/enterprise-features",
+    "prefetch": false,
+    "external": true
+  },
+  {
     "display": "Pricing",
     "url": "/pricing/",
     "prefetch": true
