@@ -22,12 +22,6 @@
     "url": "/compare/",
     "prefetch": true
   },
-  //{
-  //"display": "Enterprise",
-  //"url": "https://docs.defguard.net/enterprise",
-  //"prefetch": false,
-  //"external": true
-  //},
   {
     "display": "Pricing",
     "url": "/pricing/",
