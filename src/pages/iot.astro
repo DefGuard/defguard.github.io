@@ -24,6 +24,26 @@ import HeaderSection from "../components/HeaderSection.astro";
 import ImageURL from "../components/image/ImageURL.astro";
 import ImageCarousel from "../components/image/ImageCarousel.astro";
 import ContentLimiter from "../components/ContentLimiter.astro";
+import CodeBlock from "../components/CodeBlock.astro";
+
+const codeExample = `
+# easy provision new devices with REST API
+curl -X POST https://your.defguard.insn.ce/api/v1/device/network/start_cli \
+  -H "Authorization: Bearer X8q324nocap3laHG^nladfasd" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "sf-charger-24",
+    "location_id": 1,
+    "assigned_ips": ["10.0.0.24"],
+    "description": "Charger 24 in San Francisco network"
+  }'
+{"enrollment_token":"hiiJGYyQ69KbEyLk3OhTkIhXYKzHoIdi","enrollment_url":"https://enrollyour.defguard.insn.ce/"}
+
+# One simple command on the device
+
+bash# dg enroll -t hiiJGYyQ69KbEyLk3OhTkIhXYKzHoIdi -u "https://enrollyour.defguard.insn.ce"
+`;
+
 const testimonialsImportData = await Astro.glob("../data/home/testimonials/**/*.md");
 
 const testimonialsData: Array<TestimonialData> = testimonialsImportData.map((val) => {
@@ -82,8 +102,11 @@ const tags = [
     />
     <ContentLimiter >
       <ImageURL src="/images/iot/IoT.png" alt="Defguard and IoT and Edge Devices" />
-    </ContentLimiter>
     
+    <CodeBlock>
+      {codeExample}
+    </CodeBlock>
+  </ContentLimiter>
 
 <!-- 
 
