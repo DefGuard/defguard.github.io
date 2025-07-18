@@ -20,9 +20,11 @@ const highlighted = await codeToHtml(code, {
     const copyButtons = document.querySelectorAll('.copy-button');
     
     copyButtons.forEach(button => {
-      button.addEventListener('click', async function() {
+      button.addEventListener('click', async function(this: HTMLButtonElement) {
         const code = this.dataset.code;
         const icon = this.querySelector('i');
+        
+        if (!code || !icon) return;
         
         try {
           await navigator.clipboard.writeText(code);
