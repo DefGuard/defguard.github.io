@@ -1,28 +1,96 @@
 ---
-// No props needed, just slot content
+import { codeToHtml } from 'shiki';
+
+const { code, lang = "bash" } = Astro.props;
+const highlighted = await codeToHtml(code, {
+  lang,
+  theme: 'github-light'
+});
 ---
-<pre class="code-block"><code><slot /></code></pre>
+
+<div class="code-block-wrapper">
+  <button class="copy-button" data-code={code} title="Copy code">
+    <i class="lni lni-clipboard"></i>
+  </button>
+  <Fragment set:html={highlighted} />
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const copyButtons = document.querySelectorAll('.copy-button');
+    
+    copyButtons.forEach(button => {
+      button.addEventListener('click', async function() {
+        const code = this.dataset.code;
+        const icon = this.querySelector('i');
+        
+        try {
+          await navigator.clipboard.writeText(code);
+          
+          // Change icon to checkmark
+          icon.className = 'lni lni-checkmark';
+          
+          // Reset icon after 2 seconds
+          setTimeout(() => {
+            icon.className = 'lni lni-clipboard';
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy text: ', err);
+        }
+      });
+    });
+  });
+</script>
 
 <style lang="scss">
-.code-block {
+.code-block-wrapper {
+  position: relative;
+  
+  .copy-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 10;
+    background: var(--surface-frame-bg);
+    border: 1px solid var(--border-separator);
+    border-radius: 4px;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+    
+    &:hover {
+      opacity: 1;
+      background: var(--surface-main-primary);
+      color: white;
+      transform: translateY(-1px);
+    }
+    
+    i {
+      font-size: 1rem;
+      color: inherit;
+    }
+  }
+}
+
+:global(pre) {
   background: var(--code-bg, #fff);
   padding: 1rem;
   border-radius: 4px;
-  overflow-x: auto;
-  margin: 1.5rem 0;
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-  font-size: 0.95em;
-  font-weight: 300;
-  color: var(--text-body-primary);
+  overflow-x: hidden;
+  white-space: pre-wrap;
+  margin: 0;
 }
 
-.code-block code {
-  background: none;
-  padding: 0;
-  border-radius: 0;
-  font-size: inherit;
-  font-family: inherit;
-  color: inherit;
-  white-space: pre;
+:global(code) {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.666em;
+  font-weight: 300;
+  background: var(--code-bg, #fff);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
 }
-</style> 
+</style>

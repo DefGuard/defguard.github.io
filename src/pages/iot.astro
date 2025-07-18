@@ -26,8 +26,7 @@ import ImageCarousel from "../components/image/ImageCarousel.astro";
 import ContentLimiter from "../components/ContentLimiter.astro";
 import CodeBlock from "../components/CodeBlock.astro";
 
-const codeExample = `
-# easy provision new devices with REST API
+const codeExample = `# easy provision new devices with REST API
 curl -X POST https://your.defguard.insn.ce/api/v1/device/network/start_cli \
   -H "Authorization: Bearer X8q324nocap3laHG^nladfasd" \
   -H "Content-Type: application/json" \
@@ -100,13 +99,11 @@ const tags = [
         { name: "Book a Demo", link: "/book-a-demo?utm_source=iot" }
       ]}
     />
-    <ContentLimiter >
-      <ImageURL src="/images/iot/IoT.png" alt="Defguard and IoT and Edge Devices" />
-    
-    <CodeBlock>
-      {codeExample}
-    </CodeBlock>
-  </ContentLimiter>
+    <ContentLimiter>
+      <div style="margin-bottom:3rem;">
+        <ImageURL src="/images/iot/IoT.png" alt="Defguard and IoT and Edge Devices" />
+      </div>
+    </ContentLimiter>
 
 <!-- 
 
@@ -118,250 +115,101 @@ const tags = [
 
 -->
 
-    <HeaderSection
+    <FlexibleSection
+      leftRatio={0.4}
       title="Manage IoT infrastructure access from a unified control plane"
-      description="Defguard supports multiple locations (VPNs), allowing you to design, segment, and secure your IoT networks, corporate networks, and road warrior VPNs."
-      variant="white"
-    />
-    <FlexibleSection
       id="security-features"
       variant="gray"
       theme="light"
     >
       <div slot="left">
         <p>
-          <ImageURL src="/images/landing/wireguard.png" alt="WireGuard® logo" />
-        </p>
-        <h3>What makes WireGuard® best in class</h3>
-        <ul>
-          <li><strong>Fastest connections</strong> — up to 3x faster than OpenVPN</li>
-          <li><strong>Lower attack surface</strong> — only ~4,000 lines of code</li>
-          <li><strong>Mobile reliability</strong> — better for laptops, phones, roaming clients</li>
-        </ul>
-        <p>
-          <strong>Make it enterprise-grade</strong> with Defguard — everything you need to run WireGuard securely at scale.
+          Defguard supports multiple locations (VPNs), allowing you to design, segment, and secure your IoT networks, corporate networks, and road warrior VPNs.
         </p>
       </div>
 
       <div slot="right">
-        <p>
-          <ImageURL src="/images/landing/defguard.png" alt="defguard logo" />
-        </p>
-        <h3>What Defguard adds</h3>
-        <ul>
-          <li><strong>Built-in MFA</strong> — the only WireGuard® VPN with protocol-level multi-factor authentication</li>
-          <li><strong>User and device management</strong> — onboarding flows, config syncs, RBAC, ACLs</li>
-          <li><strong>Live config updates</strong> — update groups, routes, and policies instantly</li>
-          <li><strong>Real-time visibility</strong> — audit logs and integration with your SIEM</li>
-          <li><strong>Client enforcement</strong> — restrict use to <a href="https://defguard.net/client">official Defguard clients</a> for better control</li>
-        </ul>
-      </div>
-    </FlexibleSection>
-
-    <!-- <HeaderSection
-      title="Modern VPN Protocol. Now Enterprise-Ready."
-      description="WireGuard gives you speed and simplicity — Defguard gives you everything else you need to run it securely at scale."
-      variant="gray"
-    /> -->
-
-    <CTASection
-      showBorder={true}
-      title="Ready to Implement Enterprise-Grade WireGuard® VPN?"
-      description="See how Defguard fits into your zero-trust architecture and existing infrastructure."
-      buttonText="See Defguard Server Features"
-      buttonLink="/server?utm_source=landing"
-      id="cta-documentation"
-      variant="gray"
-    />
-
-<!-- 
-
-
-
-    Section Enrollment
-
-
-
--->
-
-    <HeaderSection
-      title="Secure and fast remote users enrollment."
-      description="Regardless of your configuration Defguard helps you to enroll and onboard your users in most secure and convenient ways."
-      variant="white"
-    />
-
-    <FlexibleSection
-      leftRatio={0.4}
-      id="security-features"
-      variant="white"
-      theme="light"
-    >
-      <div slot="left">
-        <p>
-          Defguard helps you to enroll and onboard your users in most secure and convenient ways.
-          <ul>
-            <li>With Defguard desktop client enrollment.</li>
-            <li>With web based (in browser) secure enrollment process.</li>
-          </ul>
-        </p>
-      </div>
-
-      <div slot="right">
-        <ImageCarousel
-          src="/images/landing/enrollment/data-verification.png,/images/landing/enrollment/create-password.png,/images/landing/enrollment/configure-mfa.png" alt="Simple Enrollment Process"
-          interval={3}
-          autoplay={true}
-        />
-      </div>
-    </FlexibleSection>
-
-    <CTASection
-      showBorder={true}
-      title="Ready to Implement Enterprise-Grade WireGuard® VPN?"
-      description="See how Defguard fits into your zero-trust architecture and existing infrastructure."
-      buttonText="See Client Features"
-      buttonLink="/client?utm_source=landing"
-      id="cta-documentation"
-      variant="white"
-    />
-
-<!-- 
-
-
-
-    Section Beyond VPN
-
-
-
--->
-    <HeaderSection
-      title="One Platform for Private Access & Identity"
-      description="Defguard is one platform for remote access and identity that enables you to go fully private and cloud-independent. It replaces siloed tools and legacy VPN appliances with a unified solution that combines remote access, identity, and access control — ideal for teams running private or hybrid infrastructure."
-      variant="gray"
-    />
-
-    <FlexibleSection
-      leftRatio={0.4}
-      title="Built-in Identity & SSO"
-      id="security-features"
-      variant="gray"
-      theme="light"
-    >
-      <div slot="left">
-        <ul>
-          <li>Acts as your Identity Provider (IdP)</li>
-          <li>Single Sign-On across your services</li>
-          <li>Easy integration with existing apps and tools</li>
-        </ul>
-      </div>
-
-      <div slot="right">
-        <ImageURL src="/images/features/OIDC SSO.png" alt="Built-in OIDC SSO, key management, forward-auth for legacy systems" />
+          <ImageURL src="/images/iot/manage.png" alt="Overview screen" />
       </div>
     </FlexibleSection>
 
     <FlexibleSection
     leftRatio={0.6}
-    title="Private cloud–ready"
+    title="Secure remote access to the whole network"
     id="security-features"
-    variant="gray"
+    variant="white"
     theme="light"
   >
     <div slot="left">
-      <ImageURL src="/images/landing/defguard-private.png" alt="Yubico YubiKey Hardware security key management and provisioning" />
+      <p>
+        Defguard supports multiple locations (VPNs), allowing you to design, segment, and secure your IoT networks, corporate networks, and road warrior VPNs.
+      </p>
+      <ImageURL src="/images/iot/acl.png" alt="ACL Management" />
+
     </div>
 
     <div slot="right">
       <ul>
-        <li>Self-host everything — including identity</li>
-        <li>No third-party auth providers required or cloud dependencies</li>
-        <li>Ideal for digital sovereignty and data-sensitive environments</li>
+        <li>
+          <a href="https://docs.defguard.net/admin-and-features/access-control-list">ACL management</a> is based on a level firewall management (supported on Linux, NetBSD, FreeBSD, OPNSense).
+        </li>
+        <li>
+          Defguard is the only solution offering two-factor/multi-factor authentication for each connection, securing your team’s remote access with a Zero-Trust approach.
+        </li>
+        <li>
+          Defguard IAM supports external OIDC (<a href="https://docs.defguard.net/admin-and-features/external-openid-providers/google">Google</a>, <a href="https://docs.defguard.net/admin-and-features/external-openid-providers/microsoft">Microsoft</a>, <a href="https://docs.defguard.net/admin-and-features/external-openid-providers/okta">Okta</a>, <a href="https://docs.defguard.net/admin-and-features/external-openid-providers/jumpcloud">JumpCloud</a>), Active Directory & LDAP as well as internal built-in OIDC server.
+        </li>
       </ul>
     </div>
   </FlexibleSection>
 
-  <FlexibleSection
-  leftRatio={0.4}
-  title="Hybrid infrastructure support"
-  id="security-features"
-  variant="gray"
-  theme="light"
->
-  <div slot="left">
-    <p>For organisations not ready to step down from the cloud we provide:</p>
-    <ul>
-      <li>integration with cloud Identity Providers</li>
-      <li>support for external SSO</li>
-    </ul>
-
-  </div>
-
-  <div slot="right">
-    <ImageURL src="/images/features/Sso active dir.png" alt="Integration with SSO providers, Active Directory, and LDAP" />
-  </div>
-</FlexibleSection>
-
-    <!-- <FlexibleIdentitySection /> -->
-
-    <CTASection
-      showBorder={true}
-      title="Ready to Experience the Most Secure, and Compliant VPN?"
-      description="Deploy our open-source WireGuard® protocol VPN in minutes and secure your remote workforce with enterprise-level features."
-      buttonText="Book a Demo"
-      buttonLink="/book-a-demo?utm_source=landingpage"
-      id="cta-download"
+    <FlexibleSection
+      title="Easy setup & provision devices"
+      id="security-features"
       variant="gray"
-    />
-
-<!-- 
-
-
-
-    Section Summary
-
-
-
--->
-    <HeaderSection
-      title="Real-world use cases"
-      description="Defguard secure architecture approach and user friendly interface makes it a unique solution in the VPN management space."
-      variant="white"
-    />
-    <TextDivider text="Case Studies" paddingTop="0" />
-    <CaseCapsules
-      cases={[
-        { title: "Build private cloud security with Defguard.", link: "https://defguard.net/blog/self-hosted-vpn-private-cloud-acquinox-defguard/" },
-        { title: "Replace Fortinet or Checkpoint with a lightweight, auditable stack", link: "" },
-        { title: "Give contractors and remote workers secure, controlled access", link: "" }
-      ]}
-    />
-    <TextDivider text="Testimonials" />
-    <HomeSection id="testimonials" variant="white">
-      <TestimonialsGrid data={testimonialsData} />
-    </HomeSection>
-
-    <CTASection
-      title="Try Defguard Today – Secure Access Without the Complexity"
-      description="Let your team experience the difference between a modern VPN and a legacy workaround."
-      buttonText="Book a Demo"
-      buttonLink="/book-a-demo?utm_source=landing"
-      button2Text="Get Evaluation License"
-      button2Link="/pricing?utm_source=landing#get-evaluation-license"
-      id="cta-documentation"
-      variant="white"
-    />
-
-
-    <HeaderSection
-      title="Roadmap of what's to come"
-      variant="gray"
+      theme="light"
     >
-      <span slot="description">
-        We are fully transparent also with our roadmap and feature management – here is a
-        <a href="https://github.com/orgs/DefGuard/projects/5/views/1" target="_blank" rel="noopener">detailed roadmap on github</a>
-      </span>
-    </HeaderSection>
-    <!-- <Roadmap variant="gray" /> -->
+      <div slot="left">
+        <p>
+          Either use our small Rust client available for embedded devices and wide OS support or connect directly through WireGuard® (if your devices do not support installation, but have WireGuard® built in).
+        </p>
+        <ImageURL src="/images/iot/network-devices.png" alt="network devices" />
+
+
+      </div>
+
+      <div slot="right">
+          <CodeBlock code={codeExample} lang="bash" />
+      </div>
+    </FlexibleSection>
+
+    <FlexibleSection
+    leftRatio={0.4}
+    title="WireGuard® reliably connects thousands of devices"
+    id="security-features"
+    variant="white"
+    theme="light"
+  >
+    <div slot="left">
+      <p>
+        WireGuard® is a lightweight protocol ideal for IoT, offering resilience and enabling low-latency and high speed data transfer across Satellite, LTE, 5G, and Wi-Fi networks.
+      </p>
+    </div>
+
+    <div slot="right">
+      <ImageURL src="/images/iot/stations.png" alt="location overview" />
+    </div>
+  </FlexibleSection>
+
+  <CTASection
+    showBorder={true}
+    title="Secure Zero Trust Access for Every IoT Device"
+    description="Deploy Defguard in minutes and secure your IoT network with WireGuard®, MFA, and granular access control—built for Zero Trust at scale."
+    buttonText="Book a Demo"
+    buttonLink="/book-a-demo?utm_source=iot"
+    id="cta-download"
+    variant="white"
+  />
 
   </main>
 </ProductLayout>
