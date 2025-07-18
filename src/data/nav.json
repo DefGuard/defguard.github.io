@@ -24,11 +24,6 @@
     "external": false
   },
   {
-    "display": "Compare",
-    "url": "/compare/",
-    "prefetch": true
-  },
-  {
     "display": "Enterprise",
     "url": "https://docs.defguard.net/enterprise/enterprise-features",
     "prefetch": false,
