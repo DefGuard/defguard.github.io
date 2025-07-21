@@ -1,0 +1,84 @@
+---
+title: "How Prusa 3D Adopted Defguard for Secure, Scalable VPN Access"
+publishDate: 2025-07-22
+description: "Prusa Research adopted Defguard to build a scalable, self-hosted VPN with WireGuard-level MFA, identity integration, and zero cloud reliance—now securing access for 490+ users."
+author: "Michał Gryczka"
+
+companyName: "Prusa"
+companyDescription: "Prusa Research is a Prague-based 3D printing company known for its open-source Original Prusa 3D printers and a global community of makers and professionals."
+companySegment: "Private Equity"
+companyWebsite: "https://www.prusa3d.com"
+
+image: "/images/blog/prusa.png"
+---
+
+![How Prusa Secured Global VPN Access with Defguard](/images/blog/prusa.png)
+
+Meet **Zdeněk Váňa**, an *IT Strategic Advisor* at Prusa Research, who studied Cybersecurity and worked at Avast VPN division. 
+
+Zdenek began evaluating VPN solutions for the company’s expanding global operations, looking for something specific: a secure, self-hosted and open source platform that could scale to thousands of users, enforce multi-factor authentication (MFA) at the network level, and integrate cleanly with Prusa’s identity systems.
+
+## About the Client — Prusa Research
+
+Prusa Research, based in Prague, is widely known for its Original Prusa 3D printers and for its strong commitment to open-source values. With **over 1000+ employees** spanning software, hardware, logistics, and support teams—many working remotely or across multiple sites.
+
+## Challenges
+
+Zdeněk knew the company’s VPN setup had to evolve. The team had experimented with WireGuard in the past, but out of the box, it lacked key features like true MFA enforcement and centralized user management. Although Prusa already utilised FortiGate router which can be at additional cost extended to handle VPN, it did not meet expectations in regard to **modern UI/UX** with clients and flexibility of management. Also **outdated IPsec** and SSL VPN, and vulnerabilities exposed every month failed at strict security standards.
+
+Zdeněk ruled out most SaaS VPNs like Tailscale, Firezone or Netbird platforms early in the process. While Firezone is in theory self-hosted, in practice they don't offer documentation or support. 
+
+> “We didn’t want our VPN metadata or access records stored outside our infrastructure,” he explained. And lack of true VPN level MFA at Netbird was a deal breaker. 
+
+As Prusa scaled its operations, several critical infrastructure needs emerged:
+
+- **True VPN-Level MFA**
+Existing solutions based on WireGuard lacked robust, enforceable multi-factor authentication for client connections—an essential requirement. Additionally support for YubiKeys was favoured. 
+
+- **User Base Scale and Distribution**
+With over 490 users spread across engineering, operations, and support, the VPN solution needed to scale without manual overhead.
+
+- **No Cloud Reliance**
+Unlike cloud-managed options like Tailscale and Firezone, Prusa required a **fully self-hosted** solution that stores no sensitive metadata or connection information outside their infrastructure.
+
+- **Identity Integration**
+The VPN platform needed seamless sync with Google Workspace and Active Directory for identity  for service-level role management.
+
+- **Open-Source Preference**
+In line with Prusa’s values, open-source transparency was a key selection factor—both for internal auditing and long-term independence.
+
+## Solution
+
+What stood out about Defguard was its architecture: self-hosted, open-source, built on WireGuard, and with features designed for teams that take security seriously.
+
+The unique approach to Defguard services design, especially secure architecture which separates the core from gateways and allows access via public proxy makes it very resilient when it comes to common thread vectors. That convinced the very security aware team at Prusa to adopt the solution in the first place.
+
+![Prusa Security Approach](/images/blog/prusa-security-approach.png)
+
+
+
+**Resource efficiency** of defguard played a significant role and solidified the decision. The core components are implemented in highly efficient Rust language, making the solution fast and secure at the same time. 
+Prusa used it to set a secure hybrid VPN network design with 4 gateways; two hosted in internal infrastructure and two others hosted in Google Cloud. 
+
+Internally Defguard runs on two VMs with 2 CPUs and 2GB of RAM each - other solutions would require much more resources. 
+
+Two other gateways run on Google Cloud (with Kubernetes) - it’s very cost friendly as with over 300 users (~150 concurrent connections) it uses only 0,5 CPU.
+
+![Resource Consumption Chart](/images/blog/prusa-resource-consumption.png)
+
+True Two Factor authentication to VPN, that differentiates defguard from alternatives (like tailscale or netbird), because it’s actually implemented on WireGuard protocol level gives Prusa Research unprecedented security for over 490 users connecting to the infrastructure on a daily basis. 
+
+With so many users, whose identity is stored in Google Workspace and LDAP it was also important to have support for fast and effortless synchronisation with VPN - which defguard guarantees with one of its enterprise features. This solved the problem of manual user management inside the VPN solution.
+
+Zdeněk also appreciated the direct access to the development team via defguard self-hosted Matrix communication platform and open source nature of the project which fosters self-resolution of issues.
+
+> “Most support teams I’ve worked with are slow and generic. Defguard’s team is the opposite — fast, technical, and actually helpful,” he said 
+
+## Results
+
+Today, over 490 employees securely access internal systems through Defguard. Onboarding a new team member takes minutes not hours. No manual VPN configuration. No shared credentials. Just clean, automated, role-based access and smooth onboarding and enrollment process.
+
+> “We chose Defguard because it gives us control without complexity.
+> It’s rare to find a tool that aligns with both our technical standards and our open-source mindset,” Zdeněk said.
+
+For Prusa, Defguard isn’t just a VPN. It’s the foundation of secure collaboration—built on principles the company believes in.
