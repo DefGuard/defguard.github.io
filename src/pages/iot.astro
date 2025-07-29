@@ -1,0 +1,318 @@
+---
+import Navigation from "../components/base/Navigation.astro";
+import HomeSection from "../components/home/HomeSection.astro";
+import ProductLayout from "../layouts/ProductLayout.astro";
+import Testimonials from "./_home/components/client-side/Testimonials/Testimonials";
+import TestimonialsGrid from "./_home/components/client-side/TestimonialsGrid/TestimonialsGrid.astro";
+import type { TestimonialData } from "./_home/components/client-side/Testimonials/type";
+import { testimonialSchema } from "./_home/components/client-side/Testimonials/type";
+import FlexibleIdentitySection from "./_home/components/FlexibleIdentity/FlexibleIdentitySection.astro";
+import HomeHeader from "./_home/components/HomeHeader.astro";
+import Roadmap from "./_home/components/Roadmap/Roadmap.astro";
+import FeatureCapsules from "./_home/components/FeatureCapsules.astro";
+import CaseCapsules from "./_home/components/CaseCapsules.astro";
+import FlexibleSection from "../components/FlexibleSection.astro";
+import signinwith from "/public/images/data/signinwith.png";
+import enrollment from "/public/images/data/enrollment-screen.png";
+import api from "/public/images/data/api.png";
+import Image from "astro/components/Image.astro";
+import YouTubeVideo from "../components/video/YouTubeVideo.astro";
+import CTASection from "../components/CTASection.astro";
+import TextDivider from "../components/TextDivider.astro";
+import TrustedBy from "./_home/components/TrustedBy.astro";
+import HeaderSection from "../components/HeaderSection.astro";
+import ImageURL from "../components/image/ImageURL.astro";
+import ImageCarousel from "../components/image/ImageCarousel.astro";
+import ContentLimiter from "../components/ContentLimiter.astro";
+import CodeBlock from "../components/CodeBlock.astro";
+
+const codeExample = `# easy provision new devices with REST API
+curl -X POST https://your.defguard.insn.ce/api/v1/device/network/start_cli \
+  -H "Authorization: Bearer X8q324nocap3laHG^nladfasd" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "sf-charger-24",
+    "location_id": 1,
+    "assigned_ips": ["10.0.0.24"],
+    "description": "Charger 24 in San Francisco network"
+  }'
+{"enrollment_token":"hiiJGYyQ69KbEyLk3OhTkIhXYKzHoIdi","enrollment_url":"https://enrollyour.defguard.insn.ce/"}
+
+# One simple command on the device
+
+bash# dg enroll -t hiiJGYyQ69KbEyLk3OhTkIhXYKzHoIdi -u "https://enrollyour.defguard.insn.ce"
+`;
+
+const testimonialsImportData = await Astro.glob("../data/home/testimonials/**/*.md");
+
+const testimonialsData: Array<TestimonialData> = testimonialsImportData.map((val) => {
+  const toValidate = { ...val.frontmatter, markdownRaw: val.rawContent() };
+  const res = testimonialSchema.parse(toValidate);
+  return res;
+});
+
+const title = "defguard - Secure Zero-Trust for Internet of Things";
+const featuredImage =
+  "github.com/DefGuard/defguard.github.io/raw/main/public/images/product/core/features/core-identity.png";
+const imageWidth = "1920";
+const imageHeight = "1080";
+const url = "https://defguard.net/iot";
+const tags = [
+  "defguard",
+  "iot",
+  "internet of things",
+  "edge devices",
+  "zero trust",
+  "vpn",
+  "mfa",
+  "2fa",
+  "wireguard",
+  "device management",
+  "secure onboarding",
+  "rust",
+  "docker",
+  "kubernetes",
+  "embedded",
+  "remote access",
+  "identity",
+  "open source"
+];
+---
+
+<ProductLayout
+  title={title}
+  featuredImage={featuredImage}
+  imageWidth={imageWidth}
+  imageHeight={imageHeight}
+  url={url}
+  tags={tags}
+>
+  <Navigation activeSlug="/iot/" />
+
+  <main id="home-page">
+    <HomeHeader
+      trustedBy={false}
+      title="Securely manage IoT & Edge Devices"
+      description="Access IoT network with the only in the world Multi-Factor Authentication on WireGuard®"
+      buttons={[
+        { name: "Get Started", link: "https://docs.defguard.net/admin-and-features/network-devices" },
+        { name: "Book a Demo", link: "/book-a-demo?utm_source=iot-up" }
+      ]}
+    />
+    <ContentLimiter>
+      <div style="margin-bottom:3rem;">
+        <ImageURL src="/images/iot/IoT.png" alt="Defguard and IoT and Edge Devices" />
+      </div>
+    </ContentLimiter>
+
+<!-- 
+
+
+
+    Section Main
+
+
+
+-->
+
+    <FlexibleSection
+      leftRatio={0.4}
+      title="Manage IoT infrastructure access from a unified control plane"
+      id="security-features"
+      variant="gray"
+      theme="light"
+    >
+      <div slot="left">
+        <p>
+          Defguard supports multiple locations (VPNs), allowing you to design, segment, and secure your IoT networks, corporate networks, and road warrior VPNs.
+        </p>
+      </div>
+
+      <div slot="right">
+          <ImageURL src="/images/iot/manage.png" alt="Overview screen" />
+      </div>
+    </FlexibleSection>
+
+    <FlexibleSection
+    leftRatio={0.6}
+    title="Secure remote access to the whole network"
+    id="security-features"
+    variant="white"
+    theme="light"
+  >
+    <div slot="left">
+      <ImageURL src="/images/iot/acl.png" alt="ACL Management" />
+    </div>
+
+    <div slot="right">
+      <ul>
+        <li>
+          <a href="https://docs.defguard.net/admin-and-features/access-control-list">ACL management</a> is based on a low-level Kernel firewall - supported on Linux, NetBSD, FreeBSD, OPNSense.
+        </li>
+        <li>
+          Defguard is the only solution offering two-factor/multi-factor authentication for each connection, securing your team’s remote access with a Zero-Trust approach.
+        </li>
+        <li>
+          Defguard IAM supports external OIDC (<a href="https://docs.defguard.net/admin-and-features/external-openid-providers/google">Google</a>, <a href="https://docs.defguard.net/admin-and-features/external-openid-providers/microsoft">Microsoft</a>, <a href="https://docs.defguard.net/admin-and-features/external-openid-providers/okta">Okta</a>, <a href="https://docs.defguard.net/admin-and-features/external-openid-providers/jumpcloud">JumpCloud</a>), Active Directory & LDAP as well as internal built-in OIDC server.
+        </li>
+      </ul>
+    </div>
+  </FlexibleSection>
+
+    <FlexibleSection
+      title="Easy setup & provision devices"
+      id="security-features"
+      variant="gray"
+      theme="light"
+    >
+      <div slot="left">
+        <p>
+          Either use our small Rust client available for embedded devices and wide OS support or connect directly through WireGuard® (if your devices do not support installation, but have WireGuard® built in).
+        </p>
+        <ImageURL src="/images/iot/network-devices.png" alt="network devices" />
+
+
+      </div>
+
+      <div slot="right">
+          <CodeBlock code={codeExample} lang="bash" />
+      </div>
+    </FlexibleSection>
+
+    <FlexibleSection
+    leftRatio={0.4}
+    title="WireGuard® reliably connects thousands of devices"
+    id="security-features"
+    variant="white"
+    theme="light"
+  >
+    <div slot="left">
+      <p>
+        WireGuard® is a lightweight protocol ideal for IoT, offering resilience and enabling low-latency and high speed data transfer across Satellite, LTE, 5G, and Wi-Fi networks.
+      </p>
+    </div>
+
+    <div slot="right">
+      <ImageURL src="/images/iot/stations.png" alt="location overview" />
+    </div>
+  </FlexibleSection>
+
+  <CTASection
+    showBorder={true}
+    title="Secure Zero Trust Access for Every IoT Device"
+    description="Deploy Defguard in minutes and secure your IoT network with WireGuard®, MFA, and granular access control—built for Zero Trust at scale."
+    buttonText="Book a Demo"
+    buttonLink="/book-a-demo?utm_source=iot-down"
+    id="cta-download"
+    variant="white"
+  />
+
+  </main>
+</ProductLayout>
+
+<style lang="scss" is:global>
+  #home-page {
+    --page-spacing-factor: 0.5;
+    @include break-up(lg) {
+      --page-spacing-factor: 1;
+    }
+
+    .flexible-content {
+      padding-top: page-spacing(20px);
+      padding-bottom: page-spacing(20px);
+
+      .section-title {
+        @include typography(
+          section
+        ); // Change back to section typography for main sections
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      h3 {
+        @include typography(h3);
+        margin-top: 0;
+        margin-bottom: 1rem;
+      }
+
+      p {
+        @include typography(paragraph);
+        margin-bottom: 1.5rem;
+      }
+
+      .learn-more {
+        margin-bottom: 1.5rem;
+      }
+
+      .learn-more-link {
+        @include typography(paragraph);
+          display: inline-block;
+          padding: 0.75rem 1.5rem;
+          background-color: var(--primary-button-bg, #0c8ce0);
+          color: var(--primary-button-text, white);
+          border-radius: 50px;
+          font-weight: 300;
+          font-size: calc(1rem * var(--font-scale-factor));
+          text-decoration: none;
+          transition: background-color 0.2s ease-in-out;
+
+        &:hover {
+          background-color: var(--primary-button-hover, #0a7bc5);
+        }
+      }
+
+      ul {
+        margin: 0 0 1.5rem 0;
+        padding-left: 20px;
+
+        li {
+          @include typography(paragraph);
+          margin-bottom: 0.5rem;
+        }
+      }
+
+      em {
+        font-size: 0.9em;
+        opacity: 0.8;
+      }
+
+      .column {
+        @media (max-width: 768px) {
+          &.right-column {
+            margin-top: 1rem;
+          }
+        }
+      }
+    }
+
+    .scroll-section {
+      padding-top: page-spacing(200px);
+      padding-bottom: page-spacing(200px);
+    }
+
+    .scroll-sections {
+      & > .static-slides {
+        display: flex;
+        flex-flow: column;
+        row-gap: 64px;
+
+        @media screen and (min-width: 1200px) {
+          display: none;
+        }
+      }
+    }
+
+    .product-features {
+      padding-top: 2rem; // Add some space after the section title
+
+      .product-feature {
+        header {
+          h2 {
+            @include typography(h3); // Change to h3 for better size
+            font-weight: 400; // Keep it light
+          }
+        }
+      }
+    }
+  }
+</style>

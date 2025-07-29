@@ -30,7 +30,7 @@
   @if $key == "title" {
     font-weight: 400;
     line-height: 105%;
-    @include font-scalable(72px);
+    @include font-scalable(64px);
 
     @include break-down(md) {
       @include font-scalable(56px);

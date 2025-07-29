@@ -18,13 +18,14 @@
     "external": false
   },
   {
-    "display": "Compare",
-    "url": "/compare/",
-    "prefetch": true
+    "display": "IoT",
+    "url": "/iot/",
+    "prefetch": true,
+    "external": false
   },
   {
     "display": "Enterprise",
-    "url": "https://docs.defguard.net/enterprise",
+    "url": "https://docs.defguard.net/enterprise/enterprise-features",
     "prefetch": false,
     "external": true
   },
