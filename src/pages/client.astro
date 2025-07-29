@@ -58,6 +58,8 @@ const tags = [
 ];
 
 const sections = [
+  { id: "clients", title: "Desktop and Mobile Clients" },
+  { id: "biometrics", title: "Biometrics as Multi-Factor method" },
   { id: "multiple-instances-and-vpn", title: "Multiple instances and VPN" },
   { id: "true-2fa-multi-factor", title: "True 2FA/Multi-Factor" },
   { id: "instant-vpn-configuration-updates", title: "Instant VPN configuration updates" },
@@ -80,11 +82,12 @@ const sections = [
   <main id="client-page" class="with-sidebar-nav">
     <HomeHeader
       trustedBy={false}
+      showStoreButtons={true}
       repo="client"
-      title="The Best WireGuard® desktop client"
-      description="Beautiful open-source, cross-platform client, with real WireGuard® 2FA/Multi-Factor Authentication. "
+      title="Desktop and mobile client for WireGuard® VPN"
+      description="Beautiful, open-source clients for desktop (Linux, macOS, Windows) and mobile (iOS, Android) — with real WireGuard® 2FA/Multi-Factor Authentication."
       buttons={[
-        { name: "Download Client", link: "/download/" }//,
+        { name: "Download Defguard Clients", link: "/download/" }//,
         //{ name: "Book a Demo", link: "/book-a-demo/" }
       ]}
     />
@@ -96,6 +99,66 @@ const sections = [
       </aside>
 
       <div class="main-content">
+
+        <FlexibleSection
+          leftRatio={0.6} 
+          title="Desktop and Mobile Clients"
+          id="clients"
+          variant="white"
+          theme="light"
+        >
+        <div slot="left">
+          <ImageCarousel
+            src="/images/client/devices-01.png,/images/client/iphone-01.png,/images/client/mac-01.png,/images/client/Multiple instances - w.png,/images/client/Instant VPN - w.png" alt="Defguard Clients"
+            interval={3}
+            autoplay={true}
+          />
+          <p><em>Stay secure, whether you're on desktop (Linux, macOS, Windows) or on the go with Android or iOS.</em></p>
+
+        </div>
+
+          <div slot="right">
+            <p>
+              The Defguard <strong>Mobile VPN Client Alpha is here</strong> - available for testing now alongside our desktop apps — bringing secure, zero-trust networking to all your devices.
+            </p>
+            <ul>
+              <li>
+                True 2FA/Multi-Factor authentication on WireGuard®
+              </li>
+              <li>
+                Multiple instances and VPN locations in one client
+              </li>
+              <li>
+                Biometrics as Multi-Factor Authenitication
+              </li>
+              <li>
+                Instant VPN configuration updates and flexible client management
+              </li>
+            </ul>
+          </div>
+        </FlexibleSection>
+
+           <FlexibleSection
+          leftRatio={0.6} 
+          title="Biometrics as Multi-Factor Authenitication method"
+          id="biometrics"
+          variant="white"
+          theme="light"
+        >
+        <div slot="left">
+          <ImageURL src="/images/client/Biometrics  - w.png" alt="VPN MFA biometric authentication" />
+          <p><em>Now you can use biometric methods for your VPN multi-factor authentication.</em></p>
+
+        </div>
+
+          <div slot="right">
+            <p>
+              Defguard iOS and Android clients enable you to secure your VPN connections with biometric MFA. 
+            </p>
+         
+          </div>
+        </FlexibleSection>
+
         <FlexibleSection
           leftRatio={0.4} 
           title="Multiple instances and VPN locations in one client"
@@ -108,7 +171,7 @@ const sections = [
               Defguard is uniquely designed for MSPs, cloud providers, and data centers. It allows deployment of multiple isolated Defguard instances (for different clients, sites, etc.) while maintaining unified access through a single desktop app.
             </p>
             <p>
-              <em>Mobile support coming in version 1.5!</em>  
+              <em>Now available on mobile!</em>  
             </p>
             <div class="learn-more">
               <a
@@ -116,8 +179,8 @@ const sections = [
                 class="learn-more-link"
               >
                 Learn about Network Overview
-          </a>
-        </div>
+              </a>
+            </div>
           </div>
 
           <div slot="right">
@@ -134,7 +197,7 @@ const sections = [
         >
         <div slot="left">
           <ImageCarousel
-            src="/images/features/True 2FA.png,/images/features/True 2FA2.png" alt="True 2FA/Multi-Factor authentication on WireGuard®"
+            src="/images/client/True 2FA - w.png,/images/features/True 2FA.png" alt="True 2FA/Multi-Factor authentication on WireGuard®"
             interval={3}
             autoplay={true}
           />
@@ -142,10 +205,10 @@ const sections = [
 
           <div slot="right">
             <p>
-              Desktop clients supports both Defguard internal Multi-Factor Authentication and external SSO (Google/Microsoft/Otka/others) MFA.
+              Both desktop and mobile clients supports both Defguard internal Multi-Factor Authentication and external SSO (Google/Microsoft/Otka/others) MFA.
             </p>
             <p>
-              <em>Mobile support coming in version 1.5!</em>
+              <em>Now available on mobile</em>
             </p>
           </div>
         </FlexibleSection>

@@ -39,13 +39,13 @@ const rightRatio = 1 - leftRatio;
   <ContentLimiter maxWidth={maxWidth}>
     <div class="flexible-content">
       {title && (
-        <div class={clsx("header", { "with-bottom-border": bottomBorder })}>
-          <TitleTag
-            class="section-title"
-            id={id ? `${id}-title` : undefined}
-            set:html={title}
-          />
-        </div>
+      <div class={clsx("header", { "with-bottom-border": bottomBorder })}>
+        <TitleTag
+          class="section-title"
+          id={id ? `${id}-title` : undefined}
+          set:html={title}
+        />
+      </div>
       )}
 
       <slot />

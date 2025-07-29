@@ -6,6 +6,7 @@ import HomeSection from "../../../components/home/HomeSection.astro";
 import headerImage from "/public/images/product/core/hero-image.png";
 import AstroButton from "../../../components/AstroButton.astro";
 import TrustedBy from "./TrustedBy.astro";
+import StoreButtons from "../../../components/buttons/StoreButtons.astro";
 
 interface CTAButton {
   name: string;
@@ -20,9 +21,10 @@ interface Props {
   description: string;
   buttons?: CTAButton[];
   repo?: string;
+  showStoreButtons?: boolean;
 }
 
-const { trustedBy = true, title, description, buttons = [], repo = "defguard" } = Astro.props;
+const { trustedBy = true, title, description, buttons = [], repo = "defguard", showStoreButtons = false } = Astro.props;
 ---
 
 <HomeSection variant="white" contentId="home-header">
@@ -34,18 +36,21 @@ const { trustedBy = true, title, description, buttons = [], repo = "defguard" } 
     <GithubStars owner="defguard" repo={repo} client:only="react" />
   </div>
   {buttons.length > 0 && (
-    <div class="link-track">
-      {buttons.map((button) => (
-        <AstroButton
-          link={{
-            href: button.link,
-            target: button.target || "_self",
-            preload: button.preload ?? true,
-          }}
-          text={button.name}
-        />
-      ))}
-    </div>
+    <>
+      <div class={"link-track" + (showStoreButtons ? " with-store-buttons" : "") }>
+        {buttons.map((button) => (
+          <AstroButton
+            link={{
+              href: button.link,
+              target: button.target || "_self",
+              preload: button.preload ?? true,
+            }}
+            text={button.name}
+          />
+        ))}
+      </div>
+      {showStoreButtons && <StoreButtons />}
+    </>
   )}
   <!-- <div class="hero-image-container">
     <Image src={headerImage} alt="Defguard Zero-Trust VPN diagram" loading={"eager"} />
@@ -85,6 +90,11 @@ const { trustedBy = true, title, description, buttons = [], repo = "defguard" } 
       justify-content: center;
       gap: 16px;
       padding: 60px 0px;
+      padding-bottom: 60px;
+
+      &.with-store-buttons {
+        padding-bottom: 20px;
+      }
 
       @include break-down(sm) {
         flex-flow: column;
