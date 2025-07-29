@@ -59,6 +59,7 @@ const tags = [
 
 const sections = [
   { id: "clients", title: "Desktop and Mobile Clients" },
+  { id: "biometrics", title: "Biometrics as Multi-Factor method" },
   { id: "multiple-instances-and-vpn", title: "Multiple instances and VPN" },
   { id: "true-2fa-multi-factor", title: "True 2FA/Multi-Factor" },
   { id: "instant-vpn-configuration-updates", title: "Instant VPN configuration updates" },
@@ -83,10 +84,10 @@ const sections = [
       trustedBy={false}
       showStoreButtons={true}
       repo="client"
-      title="The Best WireGuard® client"
+      title="Desktop and mobile client for WireGuard® VPN"
       description="Beautiful, open-source clients for desktop (Linux, macOS, Windows) and mobile (iOS, Android) — with real WireGuard® 2FA/Multi-Factor Authentication."
       buttons={[
-        { name: "Download Client", link: "/download/" }//,
+        { name: "Download Defguard Clients", link: "/download/" }//,
         //{ name: "Book a Demo", link: "/book-a-demo/" }
       ]}
     />
@@ -98,6 +99,7 @@ const sections = [
       </aside>
 
       <div class="main-content">
+
         <FlexibleSection
           leftRatio={0.6} 
           title="Desktop and Mobile Clients"
@@ -117,7 +119,7 @@ const sections = [
 
           <div slot="right">
             <p>
-              The Defguard <strong>mobile client is here</strong> — now alongside our desktop apps — bringing secure, zero-trust networking to all your devices.
+              The Defguard <strong>Mobile VPN Client Alpha is here</strong> - available for testing now alongside our desktop apps — bringing secure, zero-trust networking to all your devices.
             </p>
             <ul>
               <li>
@@ -135,6 +137,28 @@ const sections = [
             </ul>
           </div>
         </FlexibleSection>
+
+           <FlexibleSection
+          leftRatio={0.6} 
+          title="Biometrics as Multi-Factor Authenitication method"
+          id="biometrics"
+          variant="white"
+          theme="light"
+        >
+        <div slot="left">
+          <ImageURL src="/images/client/Biometrics  - w.png" alt="VPN MFA biometric authentication" />
+          <p><em>Now you can use biometric methods for your VPN multi-factor authentication.</em></p>
+
+        </div>
+
+          <div slot="right">
+            <p>
+              Defguard iOS and Android clients enable you to secure your VPN connections with biometric MFA. 
+            </p>
+         
+          </div>
+        </FlexibleSection>
+
         <FlexibleSection
           leftRatio={0.4} 
           title="Multiple instances and VPN locations in one client"

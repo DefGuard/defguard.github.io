@@ -38,18 +38,31 @@ const url = "https://defguard.net/download/";
         variant="white"
         theme="light"
       >
-        <div slot="left">
-          <h2 style="padding-top: 2rem;" >Get It for Your Desktop Device</h2>
+        
+      <div slot="left">
+          <h2 style="padding-top: 2rem;" >
+            Desktop Clients
+          </h2>
           <DefguardInfo owner="Defguard" repo="client" client:only="react" />
           <DownloadButtonList client:only="react" />
         </div>
+
         <div slot="right" style="background-color: #fff; padding: 2rem; border-radius: 10px;">
-          <h2>Get It for Your Mobile Device</h2>
+          <h2>Mobile Clients</h2>
           <p>
-            Current version: 1.0.0 | View changelog → <u>30.06.2025</u>
+            Defguard mobile are available for closed beta tests. If you want to give us early feedback please use the following links:
+            <ul>
+              <li>
+                <a href="https://testflight.apple.com/join/Jvdhkt7h">Defguard Mobile for iOS</a>
+              </li>
+              <li>
+                <a href="https://play.google.com/store/apps/details?id=net.defguard.mobile">Defguard Mobile for Android</a>
+              </li>
+            </ul>
           </p>
+  
           {/* Example: QR code toggle for mobile app stores (placeholder images) */}
-          <QRCodeStoreToggle />
+          <!-- <QRCodeStoreToggle /> -->
           <!-- <NewsletterSection
               headerLevel="2"
               title="Stay Updated on New Releases"
