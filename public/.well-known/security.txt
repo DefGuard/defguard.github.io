@@ -1,0 +1,3 @@
+Contact: mailto:security@defguard.net
+Preferred-Languages: en
+Canonical: https://defguard.net/.well-known/security.txt
