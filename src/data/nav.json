@@ -45,10 +45,5 @@
     "url": "/blog/",
     "prefetch": true,
     "external": false
-  },
-  {
-    "display": "FAQ",
-    "url": "/faq/",
-    "prefetch": false
   }
 ]
