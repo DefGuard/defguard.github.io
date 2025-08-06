@@ -1,0 +1,334 @@
+---
+import Navigation from "../components/base/Navigation.astro";
+import ProductLayout from "../layouts/ProductLayout.astro";
+import HomeHeader from "./_home/components/HomeHeader.astro";
+import FlexibleSection from "../components/FlexibleSection.astro";
+
+const title = "defguard - Zero-Trust WireGuard® 2FA/MFA VPN";
+const featuredImage =
+  "github.com/DefGuard/defguard.github.io/raw/main/public/images/product/core/hero-image.png";
+const imageWidth = "1920";
+const imageHeight = "1080";
+const url = "https://defguard.net/security";
+const tags = [
+  "defguard",
+  "zero trust",
+  "vpn",
+  "mfa",
+  "2fa",
+  "wireguard",
+  "device management",
+  "secure onboarding",
+  "rust",
+  "docker",
+  "kubernetes",
+  "embedded",
+  "remote access",
+  "identity",
+  "open source",
+];
+---
+
+<ProductLayout
+  title={title}
+  featuredImage={featuredImage}
+  imageWidth={imageWidth}
+  imageHeight={imageHeight}
+  url={url}
+  tags={tags}
+>
+  <Navigation activeSlug="/security/" />
+
+  <main id="home-page">
+    <HomeHeader
+      trustedBy={false}
+      title="Our Security Approach"
+      description="Building a secure software is a mindset. Features, great UI, and easy deployment are often things that draw users to the software, but when building software in the cybersecurity space, the approach to security should be what tips the scales of choice. Here is ours."
+    />
+
+    <FlexibleSection leftRatio={1} title="Software Architecture Matters" theme="light">
+      <div slot="left">
+        <ul>
+          <li>
+            Defguard’s software architecture and component communication were designed
+            with the highest security in mind. Our Control Plane (controlling other
+            components and user/network data) can be deployed in the Intranet segment, not
+            accessible from the Internet ever!
+          </li>
+          <li>
+            We have only two public components available from the Internet - when properly
+            deployed and secured, they guarantee your network's safety!
+            <ul>
+              <li>
+                Proxy is stateless and has no user/network data and no connection to any
+                other components — the control plane connects to proxy (not the other way
+                around), just collecting the data securely
+              </li>
+              <li>
+                Gateway only exposes the WireGuard port — meaning in order to breach it,
+                the Kernel would need to be vulnerable
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </FlexibleSection>
+
+    <FlexibleSection leftRatio={1} title="On-premise / self-hosted first!" theme="light">
+      <div slot="left">
+        <p>
+          We build with an "on-premise first" mindset and architecture so you can control
+          everything! Compare this to:
+        </p>
+        <ul>
+          <li>
+            <strong>Hardware solutions</strong> (Cisco, Palo Alto, Fortigate, etc.)
+            <ul>
+              <li>
+                All-in-one/inline solutions (firewall, router, and VPN on one device) are
+                a legacy approach. Being internet-facing entry points and at the same time
+                exposing services (like SSL VPN portals) broadens the attack surface.
+              </li>
+              <li>
+                Actually, the most CVEs currently discovered are based on SSL VPN services
+                for this type of device; breaching those services exposes your whole
+                network!
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Cloud solutions</strong> (Tailscale, Netbird, Firezone, Netmaker)
+            <ul>
+              <li>
+                Despite their claims, they do not actually support 2FA/MFA during
+                connection — only to configure the app or access the control plane
+              </li>
+              <li>You always are responsible — why not go a step further!</li>
+              <li>Cloud service providers operate in a shared responsibility model…</li>
+              <li>
+                All their services are publicly exposed on the Internet vs Defguard can be
+                secured in the Intranet
+              </li>
+              <li>If you value privacy — they store all your connection metadata</li>
+              <li>
+                Don’t rely on a 3rd party to be a Single Point of Failure for your whole
+                company!
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </FlexibleSection>
+
+    <FlexibleSection leftRatio={1} title="We chose Rust" theme="light">
+      <div slot="left">
+        <ul>
+          <li>
+            Memory safety first! Rust prevents bugs like null pointer dereferencing,
+            buffer overflows, and use-after-free through its ownership system, without
+            needing a garbage collector.
+          </li>
+          <li>
+            Rust enforces strict compile-time checks on lifetimes, mutability, and
+            borrowing, catching many bugs before the code runs.
+          </li>
+          <li>
+            Rust's type system prevents data races at compile time, ensuring safer
+            concurrent programming.
+          </li>
+          <li>
+            Secure dependency ecosystem: Cargo and crates.io encourage reproducible
+            builds, cryptographic signing, and dependency auditing.
+          </li>
+        </ul>
+        <p><strong>Rust vs..</strong></p>
+        <ul>
+          <li>
+            <strong>Rust vs C/C++:</strong> Code written in Rust's safe subset is guaranteed
+            not to invoke undefined behavior.
+          </li>
+          <li>
+            <strong>Rust vs Go:</strong> Rust offers stronger memory and thread safety guarantees
+            than Go without a garbage collector.
+          </li>
+        </ul>
+      </div>
+    </FlexibleSection>
+
+    <FlexibleSection leftRatio={1} title="We are open!" theme="light">
+      <div slot="left">
+        <ul>
+          <li>
+            Most of our code is open source, and the enterprise part is open code —
+            enabling you to freely test and verify.
+          </li>
+          <li>
+            Our whole process: <a href="https://docs.defguard.net/in-depth/release-cycle"
+              >release cycle</a
+            > and <a href="https://github.com/orgs/DefGuard/projects/5">roadmap</a> are openly
+            managed and shared.
+          </li>
+          <li>Security reviews are open (link to audit).</li>
+          <li>No hardware lock-in — install on whatever hardware you like.</li>
+        </ul>
+      </div>
+    </FlexibleSection>
+
+    <FlexibleSection leftRatio={1} title="We also self host everything" theme="light">
+      <div slot="left">
+        <ul>
+          <li>
+            We communicate internally and with our customers on secure on-premise Matrix (<a
+              href="https://matrix.org">matrix.org</a
+            >) channels.
+          </li>
+          <li>
+            We use only <strong>self-hosted runners</strong> on GitHub to build our releases.
+          </li>
+          <li>
+            Our software stack:
+            <ul>
+              <li>Debian (<a href="https://debian.org">debian.org</a>)</li>
+              <li>
+                Kubernetes with Rancher (<a href="https://github.com/rancher/rancher"
+                  >Rancher</a
+                >)
+              </li>
+              <li>
+                Knowledge management: Outline (<a
+                  href="https://github.com/outline/outline">Outline</a
+                >)
+              </li>
+              <li>
+                Password storage: VaultVarden (<a
+                  href="https://github.com/dani-garcia/vaultwarden">Vaultwarden</a
+                >)
+              </li>
+              <li>
+                Firewall: OPNSense (<a href="https://opnsense.org">opnsense.org</a>)
+              </li>
+              <li>
+                Monitoring: Kuma (<a href="https://github.com/louislam/uptime-kuma"
+                  >Uptime Kuma</a
+                >)
+              </li>
+              <li>
+                Backups: Restic (<a href="https://github.com/restic/restic">Restic</a>)
+              </li>
+              <li>IdM/SSO: Defguard</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </FlexibleSection>
+
+    <FlexibleSection leftRatio={1} title="Outside supervision" theme="light">
+      <div slot="left">
+        <ul>
+          <li>
+            Defguard's code and architecture was reviewed by Polish cybersecurity experts: <a
+              href="https://isec.pl">ISEC</a
+            >.
+          </li>
+          <li>
+            ISEC became an investor, and we have an ongoing relationship for pentests,
+            architecture supervision, and CVE insights.
+          </li>
+          <li>We are currently in the middle of ISO27001 certification.</li>
+        </ul>
+      </div>
+    </FlexibleSection>
+
+    <FlexibleSection
+      leftRatio={1}
+      title="Physical security of our organisation"
+      theme="light"
+    >
+      <div slot="left">
+        <ul>
+          <li>
+            Our services are hosted in an ISO27001-certified data center we helped design
+            (<a href="https://technopark-pomerania.pl/oferta/uslugi-centrum-danych-1"
+              >Technopark Pomerania</a
+            >).
+          </li>
+          <li>
+            Our network uses enterprise WiFi (via Defguard RADIUS & OpenLDAP) and VLAN
+            segmentation with OPNSense + Defguard.
+          </li>
+          <li>
+            We use Yubico YubiKeys for 2FA/MFA for everything, provisioned via <a
+              href="https://docs.defguard.net/admin-and-features/yubikey-provisioning"
+              >Defguard</a
+            >.
+          </li>
+          <li>Our office uses access cards for physical security control.</li>
+        </ul>
+      </div>
+    </FlexibleSection>
+
+    <FlexibleSection
+      leftRatio={1}
+      title="Found a security vulnerability in Defguard?"
+      theme="light"
+    >
+      <div slot="left">
+        <p>
+          We welcome responsible disclosure from the security community. If you've
+          discovered a potential vulnerability in Defguard, please contact our security
+          team at
+          <a href="mailto:security@defguard.net">security@defguard.net</a> using encrypted
+          communication.
+        </p>
+        <p>
+          To ensure your report is handled securely and confidentially, please follow
+          these guidelines:
+        </p>
+        <ul>
+          <li>
+            Report the vulnerability to us as early as possible, with as much detail as
+            you can provide.
+          </li>
+          <li>
+            Encrypt your message using our PGP public key, available at
+            <a href="https://defguard.net/pgp-key.txt">https://defguard.net/pgp-key.txt</a
+            >.
+          </li>
+          <li>
+            Allow us reasonable time to investigate and address the issue before any
+            public disclosure.
+          </li>
+        </ul>
+      </div>
+    </FlexibleSection>
+  </main>
+</ProductLayout>
+
+<style lang="scss" is:global>
+  #home-page {
+    --page-spacing-factor: 0.5;
+    @include break-up(lg) {
+      --page-spacing-factor: 1;
+    }
+
+    .flexible-content {
+      padding-top: page-spacing(20px);
+      padding-bottom: page-spacing(20px);
+
+      p {
+        @include typography(paragraph);
+        margin-bottom: 1.5rem;
+      }
+
+      ul {
+        margin: 0 0 1.5rem 0;
+        padding-left: 20px;
+
+        li {
+          @include typography(paragraph);
+          margin-bottom: 0.5rem;
+        }
+      }
+    }
+  }
+</style>

@@ -8,6 +8,11 @@
         "link": "/about/"
       },
       {
+        "text": "Security",
+        "external": false,
+        "link": "/security/"
+      },
+      {
         "text": "Enterprise",
         "external": true,
         "link": "https://docs.defguard.net/enterprise"
