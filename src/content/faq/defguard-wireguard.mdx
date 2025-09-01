@@ -1,19 +1,21 @@
 ---
-title: Difference between WireGuard® and defguard
+title: What VPN protocol does Defguard use and why is it preferred?
 order: 1
 ---
 
-WireGuard® is a VPN protocol with some low-level command-line tools.
-Defguard makes WireGuard® easy to deploy and use, adding additional features like
+Defguard uses the **WireGuard** protocol for VPN infrastructure access. It is **technologically and security-wise more modern and secure than SSL VPN and IPsec**. Examples of innovations not supported by IPsec/SSL VPN include:
 
-<a
-  href="https://docs.defguard.net/admin-and-features/wireguard/multi-factor-authentication-mfa-2fa"
-  target="_blank"
->
-  real 2FA/Multi-Factor Authentication
-</a>
-.
+* **Stateless:** No session renegotiation, full resilience to packet loss, which means faster connections, resilience to network disruptions and IP changes, and ideal for mobile users, VPN always-on, and roaming.
+* **High performance:** WireGuard operates in the system kernel (Linux kernel module), providing 2–5 times faster data transfer than OpenVPN and is significantly more CPU efficient than IPsec.
 
-Defguard has its own VPN <a href="/client/" target="_blank">desktop clients</a> (with mobile clients soon to be released) that include additional functionalities not available in standard WireGuard® clients.
+[Learn more about WireGuard and Zero-Trust VPN in the Defguard docs](https://docs.defguard.net/features/wireguard)
 
-Defguard also offers features outside of VPN, such as built-in OpenID Connect SSO, Yubico YubiKey provisioning, and more!
+---
+
+**What cryptographic algorithms does WireGuard use in Defguard?**
+
+WireGuard in Defguard uses modern and most secure algorithms, not supporting outdated or insecure algorithms like 3DES, Blowfish, or RSA. These are:
+
+* **ChaCha20** (encryption)
+* **Poly1305** (authentication)
+* **Curve25519** (key exchange)

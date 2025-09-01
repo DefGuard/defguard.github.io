@@ -1,0 +1,852 @@
+---
+import Navigation from "../components/base/Navigation.astro";
+import ProductLayout from "../layouts/ProductLayout.astro";
+import FlexibleSection from "../components/FlexibleSection.astro";
+import { getCollection } from "astro:content";
+
+const title = "defguard - Frequently Asked Questions";
+const featuredImage =
+  "github.com/DefGuard/defguard.github.io/raw/main/public/images/product/core/hero-image.png";
+const imageWidth = "1920";
+const imageHeight = "1080";
+const url = "https://defguard.net/faq/";
+const tags = [
+  "defguard",
+  "faq",
+  "questions",
+  "answers",
+  "vpn",
+  "WireGuard",
+  "mfa",
+  "2fa",
+  "security",
+  "authentication",
+  "zero-trust",
+];
+
+// Get FAQ items from content collection
+const faqItems = await getCollection("faq");
+const sortedFaqItems = faqItems.sort((a, b) => a.data.order - b.data.order);
+---
+
+<ProductLayout
+  title={title}
+  featuredImage={featuredImage}
+  imageWidth={imageWidth}
+  imageHeight={imageHeight}
+  url={url}
+  tags={tags}
+>
+  <Navigation activeSlug="/faq" />
+
+  <main id="faq-page">
+    <FlexibleSection title="Frequently Asked Questions" id="faq-hero" variant="white" theme="light">
+      <div slot="left">
+        <p>
+          Find answers to the most common questions about Defguard, our VPN technology, 
+          security features, and implementation details.
+        </p>
+      </div>
+      <div slot="right">
+        <p>
+          Can't find what you're looking for? Check our 
+          <a href="https://docs.defguard.net/" target="_blank" rel="noopener noreferrer">documentation</a> 
+          or contact our support team.
+        </p>
+      </div>
+    </FlexibleSection>
+
+    <FlexibleSection title="" id="faq-list" variant="gray" theme="light">
+      <div class="faq-container">
+        <div class="faq-item">
+          <details class="faq-details">
+            <summary class="faq-question">
+              <span class="faq-number">1</span>
+              <span class="faq-text">What VPN protocol does Defguard use and why is it preferred?</span>
+              <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Defguard uses the <strong>WireGuard</strong> protocol for VPN infrastructure access. 
+                It is <strong>technologically and security-wise more modern and secure than SSL VPN and IPsec</strong>. 
+                Examples of innovations not supported by IPsec/SSL VPN include:
+              </p>
+              <ul>
+                <li>
+                  <strong>Stateless:</strong> No session renegotiation, full resilience to packet loss, 
+                  which means faster connections, resilience to network disruptions and IP changes, 
+                  and ideal for mobile users, VPN always-on, and roaming.
+                </li>
+                <li>
+                  <strong>High performance:</strong> WireGuard operates in the system kernel (Linux kernel module), 
+                  providing 2–5 times faster data transfer than OpenVPN and is significantly more CPU efficient than IPsec.
+                </li>
+              </ul>
+              <p>
+                <a href="https://docs.defguard.net/features/wireguard" target="_blank" rel="noopener noreferrer">
+                  Learn more about WireGuard and Zero-Trust VPN in the Defguard docs
+                </a>
+              </p>
+            </div>
+          </details>
+        </div>
+
+        <div class="faq-item">
+          <details class="faq-details">
+            <summary class="faq-question">
+              <span class="faq-number">2</span>
+              <span class="faq-text">What cryptographic algorithms does WireGuard use in Defguard?</span>
+              <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                WireGuard in Defguard uses modern and most secure algorithms, not supporting outdated 
+                or insecure algorithms like 3DES, Blowfish, or RSA. These are:
+              </p>
+              <ul>
+                <li><strong>ChaCha20</strong> (encryption)</li>
+                <li><strong>Poly1305</strong> (authentication)</li>
+                <li><strong>Curve25519</strong> (key exchange)</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+
+        <div class="faq-item">
+          <details class="faq-details">
+            <summary class="faq-question">
+              <span class="faq-number">3</span>
+              <span class="faq-text">How does Defguard implement Multi-Factor Authentication (MFA) for WireGuard?</span>
+              <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Defguard is the <strong>only solution that supports Multi-Factor Authentication (MFA) 
+                at the WireGuard protocol level</strong>. This means that <strong>every connection 
+                undergoes multi-factor authentication</strong>, not just a 2FA process during application 
+                startup or configuration, making Defguard offer a <strong>Zero-Trust VPN</strong>. 
+                It has advanced MFA methods that support (beyond private and public keys):
+              </p>
+              <ul>
+                <li><strong>The first authentication step</strong> (see question 4)</li>
+                <li>
+                  <strong>The second authentication step</strong> using WireGuard PSK (Pre-Shared Key) keys, 
+                  which enhances encryption and <strong>protects against post-quantum attacks</strong>.
+                </li>
+                <li><strong>The third level</strong> is the exchange of WireGuard PSK session keys.</li>
+                <li>
+                  <strong>The fourth level</strong> is the physical configuration of the Gateway server 
+                  after the entire multi-factor session, without which the VPN server has no configuration 
+                  for a given client/device.
+                </li>
+              </ul>
+              <p>
+                <a href="https://docs.defguard.net/features/wireguard/multi-factor-authentication-mfa-2fa/architecture" target="_blank" rel="noopener noreferrer">
+                  See MFA architecture in Defguard docs
+                </a>
+              </p>
+            </div>
+          </details>
+        </div>
+
+        <div class="faq-item">
+          <details class="faq-details">
+            <summary class="faq-question">
+              <span class="faq-number">4</span>
+              <span class="faq-text">What MFA methods are available in Defguard for the first authentication step?</span>
+              <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </summary>
+            <div class="faq-answer">
+              <p>For the first authentication step, Defguard supports:</p>
+              <ul>
+                <li>
+                  <strong>Time-Based One-Time Password (TOTP)</strong>, e.g., Google Authenticator 
+                  or other desktop/mobile applications.
+                </li>
+                <li><strong>Time-based One-Time Password via EMAIL.</strong></li>
+                <li>On mobile devices: <strong>Biometrics (Touch ID, Face ID).</strong></li>
+                <li>
+                  In case of integration with an <strong>external identity provider (SSO)</strong>, 
+                  authentication occurs with that provider (e.g., Google, Microsoft, Okta, JumpCloud, OIDC) 
+                  through a dedicated authentication session in the browser.
+                </li>
+                <li>
+                  <strong>Hardware keys</strong> (e.g., YubiKey) are supported when Defguard acts as 
+                  an embedded identity provider for applications using SSO.
+                </li>
+              </ul>
+              <p>
+                <a href="https://docs.defguard.net/using-defguard-for-end-users/instance-configuration" target="_blank" rel="noopener noreferrer">
+                  Explore MFA setup and onboarding
+                </a>
+              </p>
+            </div>
+          </details>
+        </div>
+
+        <div class="faq-item">
+          <details class="faq-details">
+            <summary class="faq-question">
+              <span class="faq-number">5</span>
+              <span class="faq-text">How does multi-factor authentication in Defguard protect against post-quantum attacks?</span>
+              <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Protection against post-quantum attacks is achieved through the <strong>second authentication 
+                step using WireGuard PSK (Pre-Shared Key) keys</strong>. This is a secret generated for 
+                each VPN session, optionally used alongside public/private keys, which enhances encryption.
+              </p>
+              <p>
+                <a href="https://docs.defguard.net/features/wireguard/multi-factor-authentication-mfa-2fa/architecture" target="_blank" rel="noopener noreferrer">
+                  Learn about PSK-based MFA in the docs
+                </a>
+              </p>
+            </div>
+          </details>
+        </div>
+
+        <div class="faq-item">
+          <details class="faq-details">
+            <summary class="faq-question">
+              <span class="faq-number">6</span>
+              <span class="faq-text">With which external identity providers does Defguard integrate for MFA and authorization?</span>
+              <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Defguard is the only provider supporting multi-factor authentication using external 
+                identity providers and supports VPN authorization with them, such as:
+              </p>
+              <ul>
+                <li><strong>Google Workspace</strong></li>
+                <li><strong>Microsoft EntraID</strong> (formerly Azure EntraID)</li>
+                <li><strong>Okta</strong></li>
+                <li><strong>JumpCloud</strong></li>
+                <li><strong>Zitadel</strong></li>
+                <li>Any other provider supporting the <strong>OpenID Connect (OIDC)</strong> protocol</li>
+              </ul>
+              <p>
+                <a href="https://docs.defguard.net/about/features-overview" target="_blank" rel="noopener noreferrer">
+                  See all supported external SSO providers
+                </a>
+              </p>
+            </div>
+          </details>
+        </div>
+
+        <div class="faq-item">
+          <details class="faq-details">
+            <summary class="faq-question">
+              <span class="faq-number">7</span>
+              <span class="faq-text">How does Defguard provide secure remote configuration for clients?</span>
+              <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Defguard is the <strong>only solution offering secure remote client configuration 
+                (Desktop & Mobile)</strong> that <strong>does not require critical components to be 
+                publicly exposed</strong> (such as the user database or the main control plane integrated 
+                with an identity provider) on the internet. These components should only be accessible 
+                within the Intranet. Instead, Defguard handles configuration using a <strong>secure, 
+                stateless proxy component</strong>, which:
+              </p>
+              <ul>
+                <li>Can be safely exposed on the internet.</li>
+                <li>
+                  <strong>Does not have access to the Intranet/corporate network</strong>; it is the main 
+                  <strong>control plane (Defguard core) that connects to the proxy</strong>, ensuring secure firewall rules.
+                </li>
+                <li>
+                  Configuration occurs using <strong>tokens unique to the user and device</strong>, 
+                  valid for 24 hours from issuance and 10 minutes from their use.
+                </li>
+                <li>
+                  All business operations are performed in a secure segment inaccessible from the public network, 
+                  and only the result of these operations is passed to the proxy.
+                </li>
+              </ul>
+              <p>
+                <a href="https://docs.defguard.net/about/features-overview" target="_blank" rel="noopener noreferrer">
+                  More on remote enrollment and secure configuration
+                </a>
+              </p>
+            </div>
+          </details>
+        </div>
+
+        <div class="faq-item">
+          <details class="faq-details">
+            <summary class="faq-question">
+              <span class="faq-number">8</span>
+              <span class="faq-text">What operating systems does Defguard support for WireGuard VPN?</span>
+              <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Defguard supports WireGuard VPN on operating systems such as: 
+                <strong>Linux, FreeBSD, OPNSense, NetBSD</strong>
+              </p>
+              <p>
+                <a href="https://docs.defguard.net/about/features-overview" target="_blank" rel="noopener noreferrer">
+                  See platform support overview
+                </a>
+              </p>
+            </div>
+          </details>
+        </div>
+
+        <div class="faq-item">
+          <details class="faq-details">
+            <summary class="faq-question">
+              <span class="faq-number">9</span>
+              <span class="faq-text">What are the key features of Defguard Desktop and Mobile clients?</span>
+              <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </summary>
+            <div class="faq-answer">
+              <p>Desktop and Mobile clients offer many features:</p>
+              <ul>
+                <li><strong>Automatic configuration synchronization</strong>.</li>
+                <li>
+                  Support for <strong>multiple VPN locations</strong> and the ability to connect to 
+                  <strong>multiple Defguard instances</strong>.
+                </li>
+                <li>
+                  The option to choose whether the VPN should route <strong>only administrator-defined 
+                  traffic (predefined traffic) or all device traffic (all traffic)</strong>, with the 
+                  ability to disable this feature in the admin panel.
+                </li>
+                <li>
+                  The desktop client offers <strong>Grid</strong> views (displaying all VPN locations 
+                  and their status/statistics) and <strong>Detailed</strong> views (details of the 
+                  selected location/connection, statistics, activity history).
+                </li>
+                <li>
+                  An <strong>Enrollment process</strong> for the desktop client, which, during the 
+                  first configuration, not only automatically configures VPN locations but also allows 
+                  the user to <strong>securely remotely set the Defguard account password</strong>, 
+                  verify account data, and display the administrator's contact information.
+                </li>
+                <li>
+                  Defguard allows each user to <strong>configure their own Desktop & Mobile devices</strong> 
+                  in their profile, without needing to contact an administrator, with the ability to enable this functionality.
+                </li>
+                <li>
+                  Support for managing network devices, where an administrator can configure device 
+                  access to a selected VPN location using a server-side command-line client running 
+                  as a system service (automatic synchronization) or manual WireGuard configuration (for older devices).
+                </li>
+              </ul>
+              <p>
+                <a href="https://docs.defguard.net/features/wireguard/behavior-customization" target="_blank" rel="noopener noreferrer">
+                  Details on client behavior customization
+                </a>
+              </p>
+            </div>
+          </details>
+        </div>
+
+        <div class="faq-item">
+          <details class="faq-details">
+            <summary class="faq-question">
+              <span class="faq-number">10</span>
+              <span class="faq-text">Does Defguard act as an Identity Provider (IdP)? What are its capabilities in this regard?</span>
+              <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Yes, Defguard is an <strong>Identity Provider (IdP) compliant with the OIDC 
+                (OpenID Connect) protocol</strong>. This allows external applications to be configured 
+                to use Defguard as SSO, offering a "Log in with Defguard" option. It provides an 
+                easy GUI for application configuration and a list of authenticated applications in 
+                each user's profile, with the ability to easily revoke consent for access.
+              </p>
+              <p>
+                As an IdP, Defguard supports multi-factor authentication using <strong>TOTP, EMAIL 
+                one-time passwords, and hardware keys (e.g., YubiKey)</strong> when logging into 
+                applications using Defguard-based SSO.
+              </p>
+              <p>
+                Thanks to its built-in IdP, Defguard provides a single solution for <strong>one 
+                login/password and MFA system for logging into business applications and remote 
+                access simultaneously</strong>.
+              </p>
+              <p>
+                <a href="https://docs.defguard.net/about/features-overview" target="_blank" rel="noopener noreferrer">
+                  Identity management and SSO details
+                </a>
+              </p>
+            </div>
+          </details>
+        </div>
+
+        <div class="faq-item">
+          <details class="faq-details">
+            <summary class="faq-question">
+              <span class="faq-number">11</span>
+              <span class="faq-text">How does Defguard handle user directory synchronization?</span>
+              <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Defguard supports <strong>two-way synchronization of user and group directories</strong> 
+                using an <strong>LDAP server and Microsoft Active Directory</strong>. It also allows 
+                choosing whether Defguard or LDAP/Active Directory is the primary source of user data 
+                during synchronization.
+              </p>
+              <p>
+                When Defguard is configured with an external identity provider, it supports synchronization 
+                of user and group directories with: <strong>Google Workspace, Microsoft EntraID, and Okta</strong>.
+              </p>
+              <p>
+                <a href="https://docs.defguard.net/about/features-overview" target="_blank" rel="noopener noreferrer">
+                  Learn about LDAP and external IdP sync
+                </a>
+              </p>
+            </div>
+          </details>
+        </div>
+
+        <div class="faq-item">
+          <details class="faq-details">
+            <summary class="faq-question">
+              <span class="faq-number">12</span>
+              <span class="faq-text">What auditing features does Defguard offer and how can event logs be integrated with external systems?</span>
+              <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Defguard supports a <strong>full event log</strong> for both administrators (informing 
+                about every business event of each user, with detailed indication of VPN location, 
+                module, IP addresses) and for each user (detailed tracking of their own system activities).
+              </p>
+              <p>
+                The event log supports <strong>streaming events to external SIEM systems</strong>, such as:
+              </p>
+              <ul>
+                <li>
+                  <strong>Vector:</strong> A lightweight observability pipeline program, enabling data 
+                  forwarding to monitoring systems (Datadog, New Relic, Grafana Loki, Prometheus, InfluxDB, 
+                  ClickHouse), SIEM and logging systems (ElasticSearch, Splunk HEC, Graylog, Mezmo, Axiom), 
+                  and cloud services (AWS CloudWatch, Kinesis, S3, SNS/SQS; Google Cloud Pub/Sub, Monitoring, Storage).
+                </li>
+                <li>
+                  <strong>Logstash:</strong> Open-source server-side software that ingests, processes, 
+                  and forwards data for logging and analysis purposes.
+                </li>
+              </ul>
+              <p>
+                <a href="https://docs.defguard.net/about/features-overview" target="_blank" rel="noopener noreferrer">
+                  Audit log and SIEM integration guide
+                </a>
+              </p>
+            </div>
+          </details>
+        </div>
+
+        <div class="faq-item">
+          <details class="faq-details">
+            <summary class="faq-question">
+              <span class="faq-number">13</span>
+              <span class="faq-text">What is the purpose of the hardware key configuration module in Defguard?</span>
+              <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Defguard offers a <strong>hardware key configuration and initialization module 
+                (Workstation Provisioning)</strong>, which enables simple and secure configuration 
+                of <strong>YubiKey hardware keys</strong> for users. These keys are used for 
+                authentication (SSH, GPG/FIDO2) as part of multi-factor authentication (MFA). 
+                After initialization, the user's profile displays key details such as the YubiKey 
+                serial number and associated public keys (SSH and GPG).
+              </p>
+              <p>
+                <a href="https://docs.defguard.net/features/yubikey-provisioning" target="_blank" rel="noopener noreferrer">
+                  YubiKey provisioning documentation
+                </a>
+              </p>
+            </div>
+          </details>
+        </div>
+
+        <div class="faq-item">
+          <details class="faq-details">
+            <summary class="faq-question">
+              <span class="faq-number">14</span>
+              <span class="faq-text">Describe the basic security principles of Defguard's architecture.</span>
+              <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Defguard has a <strong>secure architecture</strong> that:
+              </p>
+              <ul>
+                <li>
+                  Allows the main control plane component (Core) to run <strong>in an internal network 
+                  inaccessible from the Internet</strong>, protecting all system and user data.
+                </li>
+                <li>
+                  All events requiring access from a public network (e.g., the Internet) are handled 
+                  by a <strong>stateless and secure Proxy component</strong>.
+                </li>
+                <li>
+                  The Core component connects to the Proxy and <strong>performs all business operations 
+                  in a secure segment inaccessible from the public network, passing only the result 
+                  of these operations to the proxy component</strong>.
+                </li>
+              </ul>
+              <p>
+                <a href="https://docs.defguard.net/about/features-overview" target="_blank" rel="noopener noreferrer">
+                  Architecture and security concepts
+                </a>
+              </p>
+            </div>
+          </details>
+        </div>
+
+        <div class="faq-item">
+          <details class="faq-details">
+            <summary class="faq-question">
+              <span class="faq-number">15</span>
+              <span class="faq-text">What programming language is Defguard written in, and what security benefits does it offer?</span>
+              <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Defguard is written in <strong>Rust</strong>, which offers the following security benefits:
+              </p>
+              <ul>
+                <li>
+                  <strong>Prevents errors:</strong> Rust prevents errors such as null pointer dereferences, 
+                  buffer overflows, and use-after-free issues thanks to its ownership system, without 
+                  the need for a garbage collector.
+                </li>
+                <li>
+                  <strong>Compile-time checks:</strong> It enforces strict compile-time checks regarding 
+                  lifetimes, mutability, and borrowing, detecting many errors before the code even runs.
+                </li>
+                <li>
+                  <strong>Safe concurrent programming:</strong> Rust's type system prevents data races at compile time.
+                </li>
+                <li>
+                  <strong>Secure dependency ecosystem:</strong> Cargo and crates.io support reproducible 
+                  builds, cryptographic signatures, and dependency auditing.
+                </li>
+              </ul>
+            </div>
+          </details>
+        </div>
+
+        <div class="faq-item">
+          <details class="faq-details">
+            <summary class="faq-question">
+              <span class="faq-number">16</span>
+              <span class="faq-text">What integration methods does Defguard offer for other systems?</span>
+              <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </summary>
+            <div class="faq-answer">
+              <p>Defguard supports the following integration methods:</p>
+              <ul>
+                <li><strong>Full REST API</strong></li>
+                <li>For selected events, <strong>WebHooks configuration</strong></li>
+              </ul>
+              <p>
+                <a href="https://docs.defguard.net/features/integrations/api-tokens" target="_blank" rel="noopener noreferrer">
+                  Integrations overview: REST API & Webhooks
+                </a>
+              </p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </FlexibleSection>
+
+    <FlexibleSection title="Need Help?" id="need-help" variant="white" theme="light">
+      <div class="help-container">
+        <div class="help-content">
+          <div class="help-text">
+            <h3>Can't find what you're looking for?</h3>
+            <p>We're here to help you get the answers you need.</p>
+            <div class="help-links">
+              <a href="https://docs.defguard.net/" target="_blank" rel="noopener noreferrer" class="help-link">
+                <div>
+                  <strong>Documentation</strong>
+                  <span>Check our comprehensive guides</span>
+                </div>
+              </a>
+              <a href="/book-a-demo/" target="_blank" rel="noopener noreferrer" class="help-link">
+                <div>
+                  <strong>Book a Call with our experts</strong>
+                  <span>See Defguard in action</span>
+                </div>
+              </a>
+              <a href="https://github.com/DefGuard/defguard" target="_blank" rel="noopener noreferrer" class="help-link">
+                <div>
+                  <strong>GitHub</strong>
+                  <span>Visit our repository</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </FlexibleSection>
+  </main>
+</ProductLayout>
+
+<style lang="scss">
+  .faq-container {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .faq-item {
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: var(--accent-color, #3b82f6);
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+    }
+  }
+
+  .faq-details {
+    width: 100%;
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    background: var(--background-secondary, #f9fafb);
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease;
+    gap: 1rem;
+
+    &:hover {
+      background: var(--background-tertiary, #f3f4f6);
+    }
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+  }
+
+  .faq-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    background: var(--accent-color, #3b82f6);
+    color: white;
+    border-radius: 50%;
+    font-weight: 600;
+    font-size: 0.875rem;
+    flex-shrink: 0;
+  }
+
+  .faq-text {
+    flex: 1;
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--text-primary, #111827);
+    line-height: 1.4;
+  }
+
+  .faq-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--text-secondary, #6b7280);
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .faq-details[open] .faq-icon {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    padding: 1.5rem;
+    background: white;
+    border-top: 1px solid var(--border-color, #e5e7eb);
+    line-height: 1.6;
+
+    p {
+      margin-bottom: 1rem;
+      color: var(--text-body, #374151);
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    ul {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+
+      li {
+        margin-bottom: 0.5rem;
+        color: var(--text-body, #374151);
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    a {
+      color: var(--accent-color, #3b82f6);
+      text-decoration: none;
+      font-weight: 500;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    strong {
+      color: var(--text-primary, #111827);
+      font-weight: 600;
+    }
+  }
+
+  .help-container {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .help-content {
+    padding: 2rem;
+    background: var(--background-secondary, #f9fafb);
+    border-radius: 12px;
+    border: 1px solid var(--border-color, #e5e7eb);
+  }
+
+  .help-text {
+    flex: 1;
+
+    h3 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-primary, #111827);
+    }
+
+    p {
+      margin: 0 0 1.5rem 0;
+      color: var(--text-body, #6b7280);
+      font-size: 1.125rem;
+    }
+  }
+
+  .help-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  .help-link {
+    display: block;
+    padding: 1rem;
+    background: white;
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: var(--accent-color, #3b82f6);
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+      transform: translateY(-1px);
+    }
+
+    div {
+      strong {
+        display: block;
+        font-weight: 600;
+        color: var(--text-primary, #111827);
+        margin-bottom: 0.25rem;
+      }
+
+      span {
+        font-size: 0.875rem;
+        color: var(--text-body, #6b7280);
+      }
+    }
+  }
+
+  // Responsive design
+  @media (max-width: 768px) {
+    .faq-question {
+      padding: 1rem;
+      gap: 0.75rem;
+    }
+
+    .faq-text {
+      font-size: 1rem;
+    }
+
+    .faq-answer {
+      padding: 1rem;
+    }
+
+    .faq-number {
+      width: 1.75rem;
+      height: 1.75rem;
+      font-size: 0.75rem;
+    }
+
+    .help-content {
+      flex-direction: column;
+      text-align: center;
+      padding: 1.5rem;
+      gap: 1rem;
+    }
+
+    .help-links {
+      grid-template-columns: 1fr;
+    }
+
+    .help-link {
+      padding: 0.75rem;
+    }
+  }
+</style>

@@ -1,0 +1,13 @@
+---
+title: How does Defguard provide secure remote configuration for clients?
+order: 7
+---
+
+Defguard is the **only solution offering secure remote client configuration (Desktop & Mobile)** that **does not require critical components to be publicly exposed** (such as the user database or the main control plane integrated with an identity provider) on the internet. These components should only be accessible within the Intranet. Instead, Defguard handles configuration using a **secure, stateless proxy component**, which:
+
+* Can be safely exposed on the internet.
+* **Does not have access to the Intranet/corporate network**; it is the main **control plane (Defguard core) that connects to the proxy**, ensuring secure firewall rules.
+* Configuration occurs using **tokens unique to the user and device**, valid for 24 hours from issuance and 10 minutes from their use.
+* All business operations are performed in a secure segment inaccessible from the public network, and only the result of these operations is passed to the proxy.
+
+[More on remote enrollment and secure configuration](https://docs.defguard.net/about/features-overview)

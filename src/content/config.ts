@@ -24,6 +24,14 @@ const productFeatures = defineCollection({
   }),
 });
 
+const faqSchema = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    order: z.number(),
+  }),
+});
+
 const pricingSchema = z.object({
   name: z.string(),
   order: z.number(),
@@ -67,6 +75,7 @@ const blog = defineCollection({
 export const collections = {
   "client-features": productFeatures,
   "core-features": productFeatures,
+  faq: faqSchema,
   pricing,
   roadmap,
   blog,

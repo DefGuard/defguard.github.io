@@ -1,0 +1,14 @@
+---
+title: What MFA methods are available in Defguard for the first authentication step?
+order: 4
+---
+
+For the first authentication step, Defguard supports:
+
+* **Time-Based One-Time Password (TOTP)**, e.g., Google Authenticator or other desktop/mobile applications.
+* **Time-based One-Time Password via EMAIL.**
+* On mobile devices: **Biometrics (Touch ID, Face ID).**
+* In case of integration with an **external identity provider (SSO)**, authentication occurs with that provider (e.g., Google, Microsoft, Okta, JumpCloud, OIDC) through a dedicated authentication session in the browser.
+* **Hardware keys** (e.g., YubiKey) are supported when Defguard acts as an embedded identity provider for applications using SSO.
+
+[Explore MFA setup and onboarding](https://docs.defguard.net/using-defguard-for-end-users/instance-configuration)

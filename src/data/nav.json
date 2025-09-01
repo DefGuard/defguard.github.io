@@ -35,6 +35,12 @@
     "prefetch": true
   },
   {
+    "display": "FAQ",
+    "url": "/faq/",
+    "prefetch": true,
+    "external": false
+  },
+  {
     "display": "Documentation",
     "url": "https://docs.defguard.net/",
     "prefetch": false,

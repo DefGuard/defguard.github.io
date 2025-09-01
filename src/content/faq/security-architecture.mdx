@@ -1,0 +1,12 @@
+---
+title: Describe the basic security principles of Defguard's architecture.
+order: 14
+---
+
+Defguard has a **secure architecture** that:
+
+* Allows the main control plane component (Core) to run **in an internal network inaccessible from the Internet**, protecting all system and user data.
+* All events requiring access from a public network (e.g., the Internet) are handled by a **stateless and secure Proxy component**.
+* The Core component connects to the Proxy and **performs all business operations in a secure segment inaccessible from the public network, passing only the result of these operations to the proxy component**.
+
+[Architecture and security concepts](https://docs.defguard.net/about/features-overview)

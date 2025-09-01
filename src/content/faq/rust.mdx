@@ -1,12 +1,11 @@
 ---
-title: Why Rust and not Go?
-order: 10
+title: What programming language is Defguard written in, and what security benefits does it offer?
+order: 15
 ---
 
-Rust is widely preferred over Go in cases of memory safety, performance and fine-grained control over system resources.
-It's ideal for security solutions, the biggest and best companies that value security and speed relay on rust, for example
+Defguard is written in **Rust**, which offers the following security benefits:
 
-<a href="https://blog.cloudflare.com/tag/rust/" target="_blank">
-  CloudFlare
-</a>
-.
+* **Prevents errors:** Rust prevents errors such as null pointer dereferences, buffer overflows, and use-after-free issues thanks to its ownership system, without the need for a garbage collector.
+* **Compile-time checks:** It enforces strict compile-time checks regarding lifetimes, mutability, and borrowing, detecting many errors before the code even runs.
+* **Safe concurrent programming:** Rust's type system prevents data races at compile time.
+* **Secure dependency ecosystem:** Cargo and crates.io support reproducible builds, cryptographic signatures, and dependency auditing.
