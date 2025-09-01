@@ -5,6 +5,7 @@ import FlexibleSection from "../components/FlexibleSection.astro";
 import { getCollection } from "astro:content";
 
 const title = "defguard - Frequently Asked Questions";
+const description = "Find answers to common questions about Defguard VPN, WireGuard protocol, MFA security, SSO integration, and enterprise deployment. Comprehensive FAQ covering security, authentication, and technical implementation.";
 const featuredImage =
   "github.com/DefGuard/defguard.github.io/raw/main/public/images/product/core/hero-image.png";
 const imageWidth = "1920";
@@ -27,16 +28,32 @@ const tags = [
 // Get FAQ items from content collection
 const faqItems = await getCollection("faq");
 const sortedFaqItems = faqItems.sort((a, b) => a.data.order - b.data.order);
+
+// Prepare FAQ schema data
+const faqSchemaData = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": sortedFaqItems.map((item, index) => ({
+    "@type": "Question",
+    "name": item.data.title,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.body // This will contain the raw markdown content
+    }
+  }))
+};
 ---
 
 <ProductLayout
   title={title}
+  description={description}
   featuredImage={featuredImage}
   imageWidth={imageWidth}
   imageHeight={imageHeight}
   url={url}
   tags={tags}
 >
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchemaData)} />
   <Navigation activeSlug="/faq" />
 
   <main id="faq-page">
@@ -57,23 +74,23 @@ const sortedFaqItems = faqItems.sort((a, b) => a.data.order - b.data.order);
     </FlexibleSection>
 
     <FlexibleSection title="" id="faq-list" variant="gray" theme="light">
-      <div class="faq-container">
+      <div class="faq-container" itemscope itemtype="https://schema.org/FAQPage">
         {sortedFaqItems.map(async (item, index) => {
           const { Content } = await item.render();
           return (
-            <div class="faq-item">
-              <details class="faq-details">
-                <summary class="faq-question">
-                  <span class="faq-number">{index + 1}</span>
-                  <span class="faq-text">{item.data.title}</span>
-                  <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </summary>
-                <div class="faq-answer">
+            <div class="faq-item" itemscope itemtype="https://schema.org/Question" data-faq-item={index}>
+              <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls={`faq-answer-${index}`}>
+                <span class="faq-number">{index + 1}</span>
+                <span class="faq-text" itemprop="name">{item.data.title}</span>
+                <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="faq-answer" id={`faq-answer-${index}`} aria-labelledby={`faq-question-${index}`} itemscope itemtype="https://schema.org/Answer">
+                <div itemprop="text">
                   <Content />
                 </div>
-              </details>
+              </div>
             </div>
           );
         })}
@@ -134,10 +151,6 @@ const sortedFaqItems = faqItems.sort((a, b) => a.data.order - b.data.order);
     }
   }
 
-  .faq-details {
-    width: 100%;
-  }
-
   .faq-question {
     display: flex;
     align-items: center;
@@ -147,14 +160,15 @@ const sortedFaqItems = faqItems.sort((a, b) => a.data.order - b.data.order);
     cursor: pointer;
     user-select: none;
     transition: background-color 0.2s ease;
-    list-style: none;
+    border-bottom: 1px solid var(--border-color, #e5e7eb);
 
     &:hover {
       background: var(--background-secondary, #f9fafb);
     }
 
-    &::-webkit-details-marker {
-      display: none;
+    &:focus {
+      outline: 2px solid var(--accent-color, #3b82f6);
+      outline-offset: -2px;
     }
   }
 
@@ -187,7 +201,7 @@ const sortedFaqItems = faqItems.sort((a, b) => a.data.order - b.data.order);
     flex-shrink: 0;
   }
 
-  .faq-details[open] .faq-icon {
+  .faq-question.expanded .faq-icon {
     transform: rotate(180deg);
   }
 
@@ -195,6 +209,16 @@ const sortedFaqItems = faqItems.sort((a, b) => a.data.order - b.data.order);
     padding: 0 1.5rem 1.5rem 4.5rem;
     color: var(--text-body, #374151);
     line-height: 1.6;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    opacity: 0;
+
+    &.expanded {
+      max-height: 1000px;
+      opacity: 1;
+      padding: 1.5rem 1.5rem 1.5rem 4.5rem;
+    }
 
     p {
       margin-bottom: 1rem;
@@ -314,3 +338,48 @@ const sortedFaqItems = faqItems.sort((a, b) => a.data.order - b.data.order);
     }
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    
+    faqQuestions.forEach((question: Element) => {
+      question.addEventListener('click', function(this: HTMLElement) {
+        const answer = this.nextElementSibling as HTMLElement;
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        
+        // Close all other FAQ items
+        faqQuestions.forEach((otherQuestion: Element) => {
+          if (otherQuestion !== this) {
+            otherQuestion.classList.remove('expanded');
+            otherQuestion.setAttribute('aria-expanded', 'false');
+            const otherAnswer = otherQuestion.nextElementSibling as HTMLElement;
+            if (otherAnswer) {
+              otherAnswer.classList.remove('expanded');
+            }
+          }
+        });
+        
+        // Toggle current FAQ item
+        if (isExpanded) {
+          this.classList.remove('expanded');
+          this.setAttribute('aria-expanded', 'false');
+          answer.classList.remove('expanded');
+        } else {
+          this.classList.add('expanded');
+          this.setAttribute('aria-expanded', 'true');
+          answer.classList.add('expanded');
+        }
+      });
+      
+      // Keyboard navigation support
+      question.addEventListener('keydown', function(e: Event) {
+        const target = e.target as HTMLElement;
+        if (e instanceof KeyboardEvent && (e.key === 'Enter' || e.key === ' ')) {
+          e.preventDefault();
+          target.click();
+        }
+      });
+    });
+  });
+</script>
