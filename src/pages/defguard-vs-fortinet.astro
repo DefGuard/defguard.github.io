@@ -4,7 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import ProductSection from "../layouts/ProductSection.astro";
 import OrganizationJSONLD from "../scripts/OrganizationJSONLD.astro";
 
-const title = "Defguard vs Fortinet: Modern WireGuard® VPN vs Legacy Solutions";
+const title = "Fortinet (FortiClient VPN) vs Defguard: Modern WireGuard® VPN vs Legacy Solutions";
 const description = "Compare Defguard's modern WireGuard®-based VPN with Fortinet VPN (FortiGate & FortiClient) legacy IPsec/SSL solutions. See why enterprises choose Defguard Enterprise VPN for zero-trust security, superior performance, and effortless management.";
 const featuredImage = "github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png";
 const imageWidth = "1080";
@@ -67,19 +67,14 @@ const tags = [
             </thead>
             <tbody>
               <tr>
-                <td>Open source</td>
-                <td>Yes - Fully open-source, written in Rust</td>
-                <td>No - Proprietary closed-source solution</td>
+                <td>MFA Enforcement</td>
+                <td>WireGuard VPN Protocol-level MFA - Every connection authenticated</td>
+                <td>MFA enabled throgh FortiToken and FortiAuthenticator</td>
               </tr>
               <tr>
                 <td>VPN Protocol</td>
                 <td>WireGuard® - Fast, stateless, resilient</td>
                 <td>IPsec & SSL VPN - Slower, stateful, legacy</td>
-              </tr>
-              <tr>
-                <td>MFA Enforcement</td>
-                <td>Protocol-level MFA - Every connection authenticated</td>
-                <td>Login-based MFA - Authentication only at login</td>
               </tr>
               <tr>
                 <td>Architecture</td>
@@ -93,9 +88,10 @@ const tags = [
               </tr>
               <tr>
                 <td>Performance</td>
-                <td>Superior - High throughput, low latency</td>
+                <td>Superior - High throughput, low latency peer to peer</td>
                 <td>Variable - Depends on protocol and hardware offloading</td>
               </tr>
+              
               <tr>
                 <td>Identity Management</td>
                 <td>Built-in OIDC IdP - Seamless SSO and directory sync</td>
@@ -105,6 +101,16 @@ const tags = [
                 <td>Security & Transparency</td>
                 <td>Open-source & auditable - Rust-based, minimal dependencies</td>
                 <td>Proprietary - Closed-source, larger attack surface</td>
+              </tr>
+              <tr>
+                <td>Open source</td>
+                <td>Yes - Fully open-source, written in Rust</td>
+                <td>No - Proprietary closed-source solution</td>
+              </tr>
+              <tr>
+                <td>Cost</td>
+                <td>Subscription-based - No hardware required, simple pricing based on number of users and locations</td>
+                <td>Complex pricing depending on the number of components and features. Additional high costs for MFA and HA</td>
               </tr>
             </tbody>
           </table>
@@ -222,8 +228,7 @@ const tags = [
           ChaCha20, HMAC‑SHA variants) for VPN tunnels, plus TLS for HTTPS management sessions and SSL inspection on NGFWs.
         </p>
         <p>
-          Of note, Fortinet is ending support for SSL VPN tunnel mode from version 7.6.3 onwards. Fortinet has been phasing out 
-          the functionality and is now forcing a migration to IPsec VPN solutions.
+          Fortinet is ending support for SSL VPN tunnel mode and is now forcing a migration to IPsec VPN solutions. The functionality of SSL VPN has been deprecated and is no longer supported. This creates a significant migration cost for customers who are not using IPsec VPN.
         </p>
         <p>
           Fortinet's approach allows for deep inspection for malware or anomalies through NGFW (next-generation firewall) services. 
