@@ -9,13 +9,3 @@ Defguard uses the **WireGuard** protocol for VPN infrastructure access. It is **
 * **High performance:** WireGuard operates in the system kernel (Linux kernel module), providing 2–5 times faster data transfer than OpenVPN and is significantly more CPU efficient than IPsec.
 
 [Learn more about WireGuard and Zero-Trust VPN in the Defguard docs](https://docs.defguard.net/features/wireguard)
-
----
-
-**What cryptographic algorithms does WireGuard use in Defguard?**
-
-WireGuard in Defguard uses modern and most secure algorithms, not supporting outdated or insecure algorithms like 3DES, Blowfish, or RSA. These are:
-
-* **ChaCha20** (encryption)
-* **Poly1305** (authentication)
-* **Curve25519** (key exchange)

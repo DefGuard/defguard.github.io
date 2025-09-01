@@ -5,7 +5,7 @@ order: 3
 
 Defguard is the **only solution that supports Multi-Factor Authentication (MFA) at the WireGuard protocol level**. This means that **every connection undergoes multi-factor authentication**, not just a 2FA process during application startup or configuration, making Defguard offer a **Zero-Trust VPN**. It has advanced MFA methods that support (beyond private and public keys):
 
-* **The first authentication step** (see question 4)
+* **The first authentication step**
 * **The second authentication step** using WireGuard PSK (Pre-Shared Key) keys, which enhances encryption and **protects against post-quantum attacks**.
 * **The third level** is the exchange of WireGuard PSK session keys.
 * **The fourth level** is the physical configuration of the Gateway server after the entire multi-factor session, without which the VPN server has no configuration for a given client/device.
