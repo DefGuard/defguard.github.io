@@ -14,6 +14,9 @@ const tags = [
   "defguard",
   "fortinet",
   "fortigate",
+  "fortinet 2fa"
+  "fortinet MFA"
+  "fortinet VPN MFA"
   "forticlient",
   "wireguard",
   "vpn",
@@ -69,7 +72,12 @@ const tags = [
               <tr>
                 <td>MFA Enforcement</td>
                 <td>WireGuard VPN Protocol-level MFA - Every connection authenticated</td>
-                <td>MFA enabled throgh FortiToken and FortiAuthenticator</td>
+                <td>No - 2FA enabled throgh FortiToken and FortiAuthenticator<td>
+              </tr>
+              <tr>
+                <td>Inspectability & Verifiability</td>
+                <td>Full - open code and open source project evailable on GitHub</td>
+                <td>None - Proprietary closed-source solution</td>
               </tr>
               <tr>
                 <td>VPN Protocol</td>
@@ -94,7 +102,7 @@ const tags = [
               
               <tr>
                 <td>Identity Management</td>
-                <td>Built-in OIDC IdP - Seamless SSO and directory sync</td>
+                <td>Built-in OIDC IdP and external IdP integration (Microsoft, Google etc.)</td>
                 <td>Part of broader suite - External IdPs, proprietary ecosystem</td>
               </tr>
               <tr>
@@ -158,7 +166,7 @@ const tags = [
             <div class="zoom-hint">Click to zoom</div>
           </div>
           <p class="diagram-caption">
-            Defguard's secure microservice architecture: Internal Core (protected) and external stateless Proxy (public-facing) 
+            Defguard's secure microservice architecture: Internal Core (eg. deployed in intranet and not) and external stateless Proxy (public-facing) 
             ensure sensitive data never leaves your internal network while providing secure remote access.
           </p>
         </div>
