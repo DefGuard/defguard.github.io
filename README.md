@@ -1,47 +1,100 @@
-# Defguard Mobile - WireGuard VPN mobile client
+# Defguard website
 
-The **DefGuard Mobile Client** is a secure, self-hosted **WireGuard VPN mobile client** designed for enterprise and personal use. It enables seamless management of WireGuard® VPN tunnels on the go with enhanced security through **multi-factor authentication (MFA)**, including biometrics, TOTP, and external SSO providers like Google, Okta, and Microsoft EntraID.
+Defguard website built on [Astro](https://astro.build)!
 
-This open-source, cross-platform VPN app supports easy QR code onboarding and flexible traffic routing to meet diverse secure remote access needs. DefGuard is part of a modular ecosystem built for VPN orchestration and identity management . Defguard provides a mobile VPN client with biometrics and TOTP.
+## Editing content
 
-## Key Features
-- Secure **WireGuard VPN mobile client** with **Multi-Factor Authentication (MFA)**  
-- Internal SSO/OIDC support with biometrics, TOTP, email verification  
-- External SSO support: Google, Okta, Microsoft EntraID, JumpCloud, and more  
-- Quick and easy onboarding via secure **QR code VPN onboarding** or URL/token  
-- Flexible traffic routing: all traffic via VPN or selective routing  
-- Real-time synchronization of VPN configurations with the DefGuard server  
-- Native **cross-platform VPN app** support for **Android VPN client** and iOS VPN client  
-- Fully **self-hosted VPN solution** for ultimate privacy and control  
-- Open-source codebase for transparency and customization  
+Most of the content is written in HTML but some parts ware made with ease of configuration in mind.
 
-## Screenshots
+### JSON
 
-<img width="250" alt="Add instancje QR" src="https://github.com/user-attachments/assets/32cfd409-6b57-47f6-a817-b4dd4603d8ad" />
-<img width="250" alt="Add instance token" src="https://github.com/user-attachments/assets/2f18b47d-f57d-487d-9f2a-23a972d9bcab" />
-<img width="250" alt="Traffic routing options" src="https://github.com/user-attachments/assets/c3ead16b-95e8-40cf-8f47-26e9bf861bcb" />
-<img width="250" alt="MFA external" src="https://github.com/user-attachments/assets/c959c1c2-e26c-4605-92a9-54d2788273a9" />
-<img width="250" alt="Instance list" src="https://github.com/user-attachments/assets/8fb7c5ba-4d11-4452-997a-b2bd17b468d0" />
-<img width="250" alt="MFA defguard IdP" src="https://github.com/user-attachments/assets/d08d008e-22f2-4f14-9b1b-db6eccb3c3dc" />
+Files inside [data](./src/data/) dare written in JSON format and contain configuration such as what items are shown in navigation and footer. Those configs are `data` only and so are not in Markdown
 
+### Markdown
 
-## Getting Started
+Files that build content on website are written in `.mdx` files and are stored in collections within [src/content](./src/content/) directory.
 
-You need to have a running [Defguard Server](https://github.com/DefGuard/defguard) to use the mobile app.
+### Formatter
 
-### Install the App
+Every content file begins with special section that defines additional information for that file's context, for example title, order of display etc.
+You can find definitions of this information inside [content.ts](./src/content/config.ts).
 
-Join closed beta for iOS or Android.
+## Content editing notes
 
-#### Android
-- Download from [Google Play](https://play.google.com/store/apps/details?id=net.defguard.mobile)
+### Pricing
 
-#### iOS
-- Available soon on the [App Store](https://testflight.apple.com/join/Jvdhkt7h)
+Pricing is a special case where we need to render MDX directly on client side only, this means importing any components in pricing collection is forbidden because it will not work. Raw HTML is still OK since we render it through rehype-raw.
 
-Documentation available at : [https://docs.defguard.net/help/mobile-client](https://docs.defguard.net/help/mobile-client)
+## Editor recommendation
 
-## About DefGuard
-DefGuard is a comprehensive platform offering **secure remote access**, **identity management**, and VPN orchestration with a focus on security using **multi-factor authentication for VPN**.  
+[VSCode](https://code.visualstudio.com/download) is by far the easiest to setup.
 
-Visit defguard.net for more information.
+### Recommended extensions
+
+To get syntax highlights and all the good stuff, first you need to have installed Node.js and dependencies for this project installed, look in `Development` section.
+
+Extensions to install:
+
+- [Astro](https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode)
+- [Eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+- [MDX](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx)
+
+## Development
+
+### Installing Node.js
+
+Version of Node.js should be the same Major as the one specified in [.nvmrc](./.nvmrc) file.
+
+#### Official source
+
+Follow instructions from [official site](https://nodejs.org/en/download/package-manager).
+
+#### Node version manager (NVM)(Recommended for development)
+
+Supports using dirreferent version of Node.js for each project.
+
+- [Windows](https://github.com/coreybutler/nvm-windows)
+- [Mac/Linux](https://github.com/nvm-sh/nvm)
+
+After correct install, in root of the project use (once):
+
+```bash
+nvm install
+```
+
+And then:
+
+```bash
+nvm use
+```
+
+### Installing dependencies
+
+Make sure package manager pnpm is installed.
+If not use this command to install it:
+
+```bash
+npm i -g pnpm
+```
+
+Then run install dependencies with:
+
+```bash
+pnpm install
+```
+
+And then run development server with:
+
+```bash
+pnpm dev
+```
+
+### Building project
+
+With correct Node.js environment run:
+
+```bash
+pnpm build
+```
+
+After that, built project should be in `dist` directory inside project root.
