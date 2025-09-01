@@ -74,7 +74,7 @@ const faqSchemaData = {
     </FlexibleSection>
 
     <FlexibleSection title="" id="faq-list" variant="gray" theme="light">
-      <div class="faq-container" itemscope itemtype="https://schema.org/FAQPage">
+      <div class="faq-container" itemscope>
         {sortedFaqItems.map(async (item, index) => {
           const { Content } = await item.render();
           return (
