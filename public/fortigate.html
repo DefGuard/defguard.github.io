@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Defguard | Secure VPN Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Dark Tech / Security -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0D1117;
+            color: #E2E8F0;
+        }
+        .active-tab {
+            border-bottom-color: #0069FF;
+            color: #0069FF;
+            font-weight: 600;
+        }
+        .tab-button {
+            transition: all 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-[#0D1117]/80 backdrop-blur-lg sticky top-0 z-50 border-b border-gray-800">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-white">
+                Defguard
+            </div>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="#comparison" class="text-gray-400 hover:text-blue-400 transition">Comparison</a>
+                <a href="#impact" class="text-gray-400 hover:text-blue-400 transition">Our Impact</a>
+                <a href="#audiences" class="text-gray-400 hover:text-blue-400 transition">For Your Team</a>
+                <a href="#features" class="text-gray-400 hover:text-blue-400 transition">Features</a>
+                <a href="#get-started" class="text-gray-400 hover:text-blue-400 transition">Get Started</a>
+            </div>
+            <a href="#get-started" class="hidden md:block bg-[#0069FF] text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition shadow-sm">
+                Elevate Your Security
+            </a>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 md:py-20">
+
+        <section class="text-center max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight">
+                Tired of Forti VPN? Demand a Real Alternative.
+            </h1>
+            <p class="mt-6 text-lg md:text-xl text-gray-400">
+                Traditional all-in-one appliances like FortiGate VPN create a broad attack surface and lock you into expensive hardware cycles. Defguard offers a modern, software solution (hardware agnostic), the ultimate **Fortinet VPN alternative** built for true security, **inspectability, and verifiability**.
+            </p>
+            <div class="mt-8">
+                <a href="#comparison" class="bg-[#0069FF] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-600 transition shadow-md">
+                    See the Difference
+                </a>
+            </div>
+        </section>
+
+        <section id="comparison" class="mt-20 md:mt-32">
+            <div class="text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-white">A Fundamentally Better Approach</h2>
+                <p class="mt-4 text-lg text-gray-400">
+                    See how Defguard's modern architecture stacks up against the limitations of traditional, all-in-one security appliances. Select a topic below to compare.
+                </p>
+            </div>
+
+            <div class="mt-12 max-w-6xl mx-auto">
+                <div class="border-b border-gray-700">
+                    <div class="flex flex-wrap -mb-px justify-center gap-x-4 sm:gap-x-8" id="tab-buttons">
+                         <button data-tab="architecture" class="tab-button py-4 px-1 border-b-2 font-medium text-sm sm:text-base text-gray-400 hover:text-blue-400 hover:border-blue-400 active-tab">Architecture</button>
+                         <button data-tab="cost" class="tab-button py-4 px-1 border-b-2 font-medium text-sm sm:text-base text-gray-400 hover:text-blue-400 hover:border-blue-400">Cost & Lock-in</button>
+                         <button data-tab="security" class="tab-button py-4 px-1 border-b-2 font-medium text-sm sm:text-base text-gray-400 hover:text-blue-400 hover:border-blue-400">Inspectability & Verifiability</button>
+                         <button data-tab="mfa" class="tab-button py-4 px-1 border-b-2 font-medium text-sm sm:text-base text-gray-400 hover:text-blue-400 hover:border-blue-400">Multi-factor authentication</button>
+                         <button data-tab="integration" class="tab-button py-4 px-1 border-b-2 font-medium text-sm sm:text-base text-gray-400 hover:text-blue-400 hover:border-blue-400">Integration</button>
+                    </div>
+                </div>
+
+                <div id="tab-content" class="mt-8">
+                    <div data-content="architecture" class="tab-pane">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+                                <h3 class="text-xl font-semibold text-red-400">Traditional Appliance</h3>
+                                <p class="mt-2 text-gray-400">An all-in-one design like FortiGate creates a single point of failure. A breach of any internet-facing component can expose the entire network.</p>
+                                <div class="mt-4 border-2 border-dashed border-red-600 rounded-lg p-4 text-center">
+                                    <div class="font-mono text-sm text-gray-300">
+                                        <p>[ Internet ] ↔ <span class="text-red-400 font-bold">[ Firewall | VPN | SSO | Control Plane ]</span> ↔ [ Internal Network ]</p>
+                                    </div>
+                                    <p class="text-xs mt-2 text-red-400">Broad Attack Surface</p>
+                                </div>
+                            </div>
+                            <div class="bg-gray-900 p-6 rounded-lg border-2 border-[#0069FF] shadow-lg shadow-blue-950/50">
+                                <h3 class="text-xl font-semibold text-blue-400">Defguard Architecture</h3>
+                                <p class="mt-2 text-gray-400">Secure, stateless architecture isolates components. The core control plane is physically inaccessible from the internet, eliminating the risk.</p>
+                                 <div class="mt-4 border-2 border-dashed border-blue-600 rounded-lg p-4 text-center">
+                                    <div class="font-mono text-sm text-gray-300">
+                                       <p>[ Internet ] ↔ <span class="text-blue-400 font-bold">[ Secure Gateway ]</span></p>
+                                       <p class="my-2 text-gray-500">[ DMZ ]</p>
+                                       <p><span class="text-green-400 font-bold">[ Core Control Plane ]</span> ↔ [ Internal Network ]</p>
+                                    </div>
+                                    <p class="text-xs mt-2 text-blue-400">Minimized Attack Surface</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-content="cost" class="tab-pane hidden">
+                        <div class="grid md:grid-cols-2 gap-8">
+                             <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+                                <h3 class="text-xl font-semibold text-red-400">Fortinet Pricing & Hardware Lock-in</h3>
+                                <ul class="mt-2 list-disc list-inside text-gray-400 space-y-2">
+                                    <li>Expensive hardware purchases required.</li>
+                                    <li>Security updates often demand costly equipment upgrades.</li>
+                                    <li>Creates a cycle of vendor lock-in and escalating costs.</li>
+                                </ul>
+                            </div>
+                            <div class="bg-gray-900 p-6 rounded-lg border-2 border-[#0069FF] shadow-lg shadow-blue-950/50">
+                                <h3 class="text-xl font-semibold text-blue-400">Defguard's Freedom</h3>
+                                <ul class="mt-2 list-disc list-inside text-gray-400 space-y-2">
+                                    <li>A true Fortinet alternative. Completely hardware and system-agnostic.</li>
+                                    <li>Deploy on any hardware or cloud provider (AWS, GCP, Azure).</li>
+                                    <li>Software-defined for maximum flexibility and cost-efficiency.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-content="security" class="tab-pane hidden">
+                        <div class="grid md:grid-cols-2 gap-8">
+                             <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+                                <h3 class="text-xl font-semibold text-red-400">The FortiGate Black Box</h3>
+                                <ul class="mt-2 list-disc list-inside text-gray-400 space-y-2">
+                                    <li>Closed-source code prevents inspection.</li>
+                                    <li>No way to verify security claims or patches.</li>
+                                    <li>Impossible to confirm if attackers persist after a breach.</li>
+                                    <li>You must trust the vendor's promises completely.</li>
+                                </ul>
+                            </div>
+                            <div class="bg-gray-900 p-6 rounded-lg border-2 border-[#0069FF] shadow-lg shadow-blue-950/50">
+                                <h3 class="text-xl font-semibold text-blue-400">Defguard's Inspectability & Verifiability</h3>
+                                <ul class="mt-2 list-disc list-inside text-gray-400 space-y-2">
+                                    <li>Full inspectability with open-source code.</li>
+                                    <li>Transparent development, testing, and release process.</li>
+                                    <li>Public penetration testing reports.</li>
+                                    <li>Full system access enables comprehensive monitoring.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-content="mfa" class="tab-pane hidden">
+                        <div class="grid md:grid-cols-2 gap-8">
+                             <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+                                <h3 class="text-xl font-semibold text-red-400">FortiClient's Costly 2FA</h3>
+                                <p class="mt-2 text-gray-400">Typically offers basic 2FA, often with additional costs for proprietary tokens or services.</p>
+                                <div class="mt-4 flex items-center gap-2"><span class="text-red-400">●</span><span>Basic 2FA (e.g., TOTP)</span></div>
+                            </div>
+                            <div class="bg-gray-900 p-6 rounded-lg border-2 border-[#0069FF] shadow-lg shadow-blue-950/50">
+                                <h3 class="text-xl font-semibold text-blue-400">Defguard's True Multi-Factor Authentication</h3>
+                                <p class="mt-2 text-gray-400">Provides true, layered **Multi-Factor Authentication** out-of-the-box for robust security.</p>
+                                <div class="mt-4 grid grid-cols-2 gap-2">
+                                    <div class="flex items-center gap-2"><span class="text-blue-400">●</span><span>Biometry</span></div>
+                                    <div class="flex items-center gap-2"><span class="text-blue-400">●</span><span>TOTP</span></div>
+                                    <div class="flex items-center gap-2"><span class="text-blue-400">●</span><span>Email Codes</span></div>
+                                    <div class="flex items-center gap-2"><span class="text-blue-400">●</span><span>WireGuard PSK</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-content="integration" class="tab-pane hidden">
+                         <div class="grid md:grid-cols-2 gap-8">
+                             <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+                                <h3 class="text-xl font-semibold text-red-400">FortiGate's Limited SSO</h3>
+                                <p class="mt-2 text-gray-400">Support for SSO/IdP is often limited to a few major enterprise providers, restricting your choices.</p>
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded-full text-sm">Active Directory Federation Services (ADFS)</span>
+                                    <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded-full text-sm">Microsoft Azure Active Directory (Microsoft Entra ID)</span>
+                                    <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded-full text-sm">Okta</span>
+                                    <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded-full text-sm">Google Workspace (Google SAML SSO)</span>
+                                </div>
+                            </div>
+                            <div class="bg-gray-900 p-6 rounded-lg border-2 border-[#0069FF] shadow-lg shadow-blue-950/50">
+                                <h3 class="text-xl font-semibold text-blue-400">Defguard's Broad Integration</h3>
+                                <p class="mt-2 text-gray-400">Extensive support for on-premise and cloud-based SSO/IdP solutions via OpenID Connect.</p>
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    <span class="bg-blue-900 text-blue-300 px-3 py-1 rounded-full text-sm">LDAP</span>
+                                    <span class="bg-blue-900 text-blue-300 px-3 py-1 rounded-full text-sm">Active Directory</span>
+                                    <span class="bg-blue-900 text-blue-300 px-3 py-1 rounded-full text-sm">Google Workspace</span>
+                                    <span class="bg-blue-900 text-blue-300 px-3 py-1 rounded-full text-sm">Azure EntraID</span>
+                                    <span class="bg-blue-900 text-blue-300 px-3 py-1 rounded-full text-sm">Okta</span>
+                                    <span class="bg-blue-900 text-blue-300 px-3 py-1 rounded-full text-sm">JumpCloud</span>
+                                    <span class="bg-blue-900 text-blue-300 px-3 py-1 rounded-full text-sm">Zitadel</span>
+                                    <span class="bg-blue-900 text-blue-300 px-3 py-1 rounded-full text-sm">...and more</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="impact" class="mt-20 md:mt-32">
+            <div class="text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-white">Here's how you unlock value with Defguard</h2>
+                <p class="mt-4 text-lg text-gray-400">
+                    Defguard delivers a modern security solution that provides tangible benefits for your team and your bottom line.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8 mt-12 max-w-6xl mx-auto text-center">
+                <div class="p-6">
+                    <h3 class="text-5xl md:text-6xl font-bold text-white">&lt; 30 min</h3>
+                    <p class="mt-4 text-gray-400">
+                        Total time to get your open-source VPN solution deployed and verified on your infrastructure.
+                    </p>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-5xl md:text-6xl font-bold text-white">99%</h3>
+                    <p class="mt-4 text-gray-400">
+                        Reduction in the risk of security vulnerabilities through a minimized attack surface and open code.
+                    </p>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-5xl md:text-6xl font-bold text-white">5x</h3>
+                    <p class="mt-4 text-gray-400">
+                        Improvement in the speed of your remote network access using the high-performance WireGuard protocol.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="audiences" class="mt-20 md:mt-32">
+            <div class="text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-white">A Solution Tailored to Your Role</h2>
+                <p class="mt-4 text-lg text-gray-400">
+                    Defguard provides the security, control, and flexibility your team needs, no matter your role.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8 mt-12 max-w-6xl mx-auto">
+                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 shadow-md shadow-gray-950/50">
+                    <div class="text-center text-5xl mb-4">
+                        🛡️
+                    </div>
+                    <h3 class="text-2xl font-semibold text-white text-center">For CISO & IT Management</h3>
+                    <ul class="mt-4 list-disc list-inside text-gray-400 space-y-2">
+                        <li>**Mitigate Risk:** Secure, stateless architecture minimizes your attack surface.</li>
+                        <li>**Ensure Compliance:** Full **inspectability** and transparent security empower audits.</li>
+                        <li>**Control Costs:** Avoid vendor lock-in and expensive hardware refresh cycles.</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 shadow-md shadow-gray-950/50">
+                    <div class="text-center text-5xl mb-4">
+                        🔧
+                    </div>
+                    <h3 class="text-2xl font-semibold text-white text-center">For Sys Admins</h3>
+                    <ul class="mt-4 list-disc list-inside text-gray-400 space-y-2">
+                        <li>**Easy Deployment:** Hardware-agnostic software for flexible installations.</li>
+                        <li>**Simplified Management:** Easy upgrades and seamless integration with existing tools.</li>
+                        <li>**Full Visibility:** Comprehensive system and network monitoring on-device.</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 shadow-md shadow-gray-950/50">
+                    <div class="text-center text-5xl mb-4">
+                        ⚙️
+                    </div>
+                    <h3 class="text-2xl font-semibold text-white text-center">For DevOps</h3>
+                    <ul class="mt-4 list-disc list-inside text-gray-400 space-y-2">
+                        <li>**Automated & Fast:** Built on WireGuard for high performance and speed.</li>
+                        <li>**Hybrid Cloud Ready:** Deploy on-premise or in any major cloud environment.</li>
+                        <li>**Flexible Integration:** Extensive SSO/IdP support via OpenID Connect.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="mt-20 md:mt-32">
+             <div class="text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-white">Engineered for the Modern Network</h2>
+                <p class="mt-4 text-lg text-gray-400">
+                    Defguard is more than just a replacement—it's an upgrade designed for today's dynamic infrastructure demands.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8 mt-12 max-w-6xl mx-auto">
+                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+                    <h3 class="text-xl font-semibold text-white">Engineered for Speed</h3>
+                    <p class="mt-2 text-gray-400">Leverages the high-performance WireGuard® protocol to ensure your network runs at peak efficiency without compromising on security.</p>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+                    <h3 class="text-xl font-semibold text-white">Hybrid Cloud Ready</h3>
+                    <p class="mt-2 text-gray-400">As a software solution, Defguard enables easy hybrid cloud deployment, securing both on-premise and cloud resources seamlessly.</p>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+                    <h3 class="text-xl font-semibold text-white">Easy, Verified Updates</h3>
+                    <p class="mt-2 text-gray-400">Avoid risky firmware updates. Our open-source nature lets you verify and test all releases in your own environment with no extra cost.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="get-started" class="mt-20 md:mt-32 bg-[#0069FF] rounded-lg text-white">
+            <div class="py-16 px-6 text-center">
+                 <h2 class="text-3xl md:text-4xl font-bold">Ready to Elevate Your Security?</h2>
+                 <p class="mt-4 text-lg text-blue-100 max-w-2xl mx-auto">
+                    Get started with Defguard today and experience security that is transparent, flexible, and powerful.
+                 </p>
+                 <div class="mt-8">
+                     <a href="#" class="bg-white text-blue-500 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition shadow-md">
+                         Request a Demo
+                     </a>
+                 </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="border-t border-gray-800 mt-20 md:mt-32">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-400">
+            <p>&copy; 2025 Defguard. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabButtonsContainer = document.getElementById('tab-buttons');
+            const tabContentContainer = document.getElementById('tab-content');
+
+            if (tabButtonsContainer && tabContentContainer) {
+                const tabButtons = tabButtonsContainer.querySelectorAll('.tab-button');
+                const tabPanes = tabContentContainer.querySelectorAll('.tab-pane');
+
+                tabButtonsContainer.addEventListener('click', function(event) {
+                    const clickedButton = event.target.closest('.tab-button');
+                    if (!clickedButton) return;
+
+                    const tabId = clickedButton.dataset.tab;
+
+                    tabButtons.forEach(button => {
+                        button.classList.remove('active-tab');
+                        button.classList.add('text-gray-400', 'hover:text-blue-400', 'hover:border-blue-400');
+                    });
+                    
+                    clickedButton.classList.add('active-tab');
+                    clickedButton.classList.remove('text-gray-400', 'hover:text-blue-400', 'hover:border-blue-400');
+
+                    tabPanes.forEach(pane => {
+                        if (pane.dataset.content === tabId) {
+                            pane.classList.remove('hidden');
+                        } else {
+                            pane.classList.add('hidden');
+                        }
+                    });
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
