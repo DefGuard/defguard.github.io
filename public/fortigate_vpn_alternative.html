@@ -10,6 +10,32 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z2X2PB0P4E"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-Z2X2PB0P4E', {
+            page_title: 'FortiGate VPN Alternative - Defguard',
+            page_location: window.location.href,
+            custom_map: {
+                'custom_parameter_1': 'fortigate_alternative'
+            },
+            debug_mode: true
+        });
+        
+        // Track page view
+        gtag('event', 'page_view', {
+            page_title: 'FortiGate VPN Alternative - Defguard',
+            page_location: window.location.href,
+            page_path: '/fortigate_vpn_alternative.html',
+            content_group1: 'Landing Pages',
+            content_group2: 'FortiGate Alternative'
+        });
+    </script>
+    
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -368,6 +394,13 @@
 
                     const tabId = clickedButton.dataset.tab;
 
+                    // Track tab interaction
+                    gtag('event', 'tab_click', {
+                        event_category: 'FortiGate Comparison',
+                        event_label: tabId,
+                        value: 1
+                    });
+
                     tabButtons.forEach(button => {
                         button.classList.remove('active-tab');
                         button.classList.add('text-gray-400', 'hover:text-blue-400', 'hover:border-blue-400');
@@ -385,6 +418,51 @@
                     });
                 });
             }
+
+            // Track CTA button clicks
+            const ctaButtons = document.querySelectorAll('a[href*="book-a-demo"], a[href*="defguard-vs-fortinet"]');
+            ctaButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const buttonText = this.textContent.trim();
+                    const buttonUrl = this.href;
+                    
+                    gtag('event', 'cta_click', {
+                        event_category: 'FortiGate Alternative',
+                        event_label: buttonText,
+                        value: 1,
+                        link_url: buttonUrl
+                    });
+                });
+            });
+
+            // Track navigation clicks
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const sectionId = this.getAttribute('href').substring(1);
+                    
+                    gtag('event', 'navigation_click', {
+                        event_category: 'FortiGate Alternative',
+                        event_label: sectionId,
+                        value: 1
+                    });
+                });
+            });
+
+            // Track scroll depth
+            let maxScroll = 0;
+            window.addEventListener('scroll', function() {
+                const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+                
+                if (scrollPercent > maxScroll && scrollPercent % 25 === 0) {
+                    maxScroll = scrollPercent;
+                    gtag('event', 'scroll_depth', {
+                        event_category: 'FortiGate Alternative',
+                        event_label: scrollPercent + '%',
+                        value: scrollPercent
+                    });
+                }
+            });
         });
     </script>
 
