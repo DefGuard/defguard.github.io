@@ -109,3 +109,51 @@
     url("/fonts/poppins/Poppins-BoldItalic.woff2") format("woff2");
   font-display: swap;
 }
+
+/* ============================
+   Geist Font Family Configuration
+   ============================ */
+
+/* Geist Light - 300 Normal */
+@font-face {
+  font-family: "Geist";
+  font-style: normal;
+  font-weight: 300;
+  src:
+    local("Geist Light"),
+    url("/fonts/Geist/Geist-Light.woff2") format("woff2");
+  font-display: swap;
+}
+
+/* Geist Regular - 400 Normal */
+@font-face {
+  font-family: "Geist";
+  font-style: normal;
+  font-weight: 400;
+  src:
+    local("Geist Regular"),
+    url("/fonts/Geist/Geist-Regular.woff2") format("woff2");
+  font-display: swap;
+}
+
+/* Geist Medium - 500 Normal */
+@font-face {
+  font-family: "Geist";
+  font-style: normal;
+  font-weight: 500;
+  src:
+    local("Geist Medium"),
+    url("/fonts/Geist/Geist-Medium.woff2") format("woff2");
+  font-display: swap;
+}
+
+/* Geist SemiBold - 600 Normal */
+@font-face {
+  font-family: "Geist";
+  font-style: normal;
+  font-weight: 600;
+  src:
+    local("Geist SemiBold"),
+    url("/fonts/Geist/Geist-SemiBold.woff2") format("woff2");
+  font-display: swap;
+}

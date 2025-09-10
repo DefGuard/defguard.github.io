@@ -41,12 +41,6 @@
     "external": false
   },
   {
-    "display": "Pen-testing",
-    "url": "/pen-testing/",
-    "prefetch": true,
-    "external": false
-  },
-  {
     "display": "Documentation",
     "url": "https://docs.defguard.net/",
     "prefetch": false,
