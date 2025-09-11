@@ -1,0 +1,199 @@
+---
+title: Main Release Notes
+publishDate: 2025-09-10
+description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse molestie, ex vitae auctor pretium, orci est convallis ipsum, non rhoncus mi dolor nec metus.
+draft: true
+---
+
+import YouTubeVideo from "../../components/video/YouTubeVideo.astro";
+
+# TL;DR;
+
+This is the biggest, most feature packed (and fixes) release we have ever done!  
+We’ve introduced 11 major features ! and nearly 100 bugfixes. Most important are:
+
+- 📲 Long awaited Mobile Clients (supporting  [External Multi-Factor Authentication](https://docs.defguard.net/1.5/features/wireguard/multi-factor-authentication-mfa-2fa/external-sso-based-mfa) and [Internal Multi-Factor Authentication](https://docs.defguard.net/1.5/features/wireguard/multi-factor-authentication-mfa-2fa/internal-sso-based-mfa)) are here!
+
+- 💫 Desktop Client now supports [External SSO/IdP MFA](https://docs.defguard.net/1.5/using-defguard-for-end-users/desktop-client/using-multi-factor-authentication-mfa#external-mfa)
+
+- 🫆 Our **innovation**: [**Multi-Factor Authentication on Desktop Client using Mobile client’s Biometry!**](https://docs.defguard.net/1.5/using-defguard-for-end-users/desktop-client/using-multi-factor-authentication-mfa#internal-mfa)
+
+- 🤝 Being a **completely open company**, we’ve introduced a number of public processes like the [Architecture Decision Records](https://docs.defguard.net/in-depth/architecture-decision-records) and the [public pentesting discoveries and fixes page](https://defguard.net/pentesting) prepared with our [security team](https://isec.pl) ] (as far as we know, we are the only VPN solution to do so).
+
+- 🚩 We’ve also explained in detail, why [**most WireGuard®-based solutions claiming to have MFA are highly misleading and potentially harmful to user security**](https://docs.defguard.net/1.5/features/wireguard/multi-factor-authentication-mfa-2fa).
+
+All and more in details below! Hope you will enjoy the read as much as we enjoyed delivering the 1.5!
+
+Please [star us on GitHub](https://github.com/defguard/defguard/) 🙏🫡
+
+# Key improvements released in Defguard 1.5
+
+## Mobile Clients (iOS/Android)
+
+Grab them from [App Store](tu_link) and [Play Store](https://play.google.com/store/apps/details?id=net.defguard.mobile). They support all our major features like:
+
+- Multi-Factor Authentication with Biometry (new), TOTP/Email codes (for Internal MFA) as well as External SSO MFA (when using Google/Okta/Microsoft/JumpCloud or other)  
+- Real time configuration updates  
+- Possibility to choose between Predefined or All traffic
+
+Here you can see all this in action:
+
+<YouTubeVideo
+  videoId="AHUUVGJxDQM"
+  title="CHANGEME"
+  startAt={0}
+  showControls={true}
+  showInfo={true}
+  allowFullscreen={true}
+  rel={false}
+/>
+
+## Multi-Factor Authentication with Mobile Biometry on Desktop
+
+After configuring VPN on your mobile device and enabling Biometry, we not only enable Biometry based connecting on a mobile device, but add an extra security layer to have the most secure/sophisticated MFA method available for Desktop (as they are more susceptible to attacks). After enabling Biometry we create an additional private/public key pair, with the private key stored on the OS backend secure storage, and inform in the UI, that this device now can be used for MFA using Biometry on a desktop client:
+
+![](/images/blog/main-release-notes/profile-screen.png)
+
+Now, when you connect on the desktop client to a location that has Internal MFA configured, you can choose “Mobile App” for MFA. A QR code will be shown that has to be scanned on the mobile device for additional MFA steps: 
+1) Biometry authentication that enables access to device secure storage 
+2) Additional validation with private/public key pair between mobile/desktop/core server. After that our “normal” MFA flow (with session keys, WireGuard private/public keys) takes place.
+
+Here you can see it in action:
+<YouTubeVideo
+  videoId="81MH7VXmHR0"
+  title="CHANGEME"
+  startAt={0}
+  showControls={true}
+  showInfo={true}
+  allowFullscreen={true}
+  rel={false}
+/>
+
+
+## Still not using Defguard, try it with our with [one-line deployment!](https://docs.defguard.net/getting-started/one-line-install)  
+
+
+## Multi-Factor Authentication with External SSO/IdPs
+
+Up to 1.4 we only supported our Internal Multi-Factor methods (configured in users profile), like TOTP or Email codes.  
+From 1.5 when an External SSO/IdP is configured in Defguard on each location you can choose between:
+
+- Internal MFA  - connecting to this location will require Mobile Biometry, TOTP or Email codes  
+- External MFA  - each connection will require to authenticate in the External SSO that is configured
+
+![](/images/blog/main-release-notes/mfa-method.png)
+
+See it in action here:
+
+<YouTubeVideo
+  videoId="81MH7VXmHR0"
+  title="CHANGEME"
+  startAt={0}
+  showControls={true}
+  showInfo={true}
+  allowFullscreen={true}
+  rel={false}
+/>
+
+
+## Version Checking between components (stability, visibility, security)
+
+Defguard is a critical component of an infrastructure, enabling secure access  - and as we just introduced many new  functionalities, we needed to figure out how to help our customers with smooth upgrades. We also wanted to deliver improved methods for customer support, when needed.
+
+With this in mind, for this release we’ve created the foundation for that, where all our components exchange detailed version information and log them in each communication instance:
+
+![](/images/blog/main-release-notes/activity-log-screen.png)
+
+This mechanism will be used in future releases, to provide automated upgrades but also detailed information for admin/operators (like what is the Users Desktop/Mobile client version  - to inform about upgrade, etc.).
+
+The first functionality we’re introducing based on this is information about [unsupported component versions](https://docs.defguard.net/1.5/deployment-strategies/setting-up-your-instance#updates) - if they are detected:
+
+![](/images/blog/main-release-notes/version-mismatch.avif)
+
+
+# Desktop Client based on Tauri v2
+
+Tauri is a great framework for building fast, secure, cross-platform applications. We’ve used Tauri v1 up to this point, which had a lot of issues and limited us with some features/bugfixes that many of you reported. Tauri v2 is stable now and we could upgrade, enabling a lot changes like:
+
+- ubuntu LTS packages!  - link  
+- tray menu  - …  
+- ….
+
+
+# Desktop Client seamless enrollment with a button click
+
+Tauri v2 finally enabled us to deliver the quickest way to configure a desktop client, with just one click, see it in action:
+
+<YouTubeVideo
+  videoId="q5-AXOPLgHc"
+  title="CHANGEME"
+  startAt={0}
+  showControls={true}
+  showInfo={true}
+  allowFullscreen={true}
+  rel={false}
+/>
+
+# Setting up MFA in Desktop Client during enrollment
+
+From early releases we’ve introduced a secure remote enrollment process, where users in their Desktop Client could set up their password and configure the client.  
+
+But one critical feature that was missing, is setting up any MFA method during enrollment. Consequently, if the VPN location defined by the admin required MFA  - that was a major obstacle  - as the user needs to have access to defguard (eg. from the office on-site) to configure MFA in the profile.
+
+Now, if there is any location using Internal MFA, user is required during enrollment to configure MFA. See it here:
+
+# JumpCloud Directory Sync
+
+We already supported directory sync for Google, Microsoft and Okta. Now we also support JumpCloud - see more details [here](https://docs.defguard.net/features/external-openid-providers/jumpcloud)
+
+# Possibility for admins to reset users MFA
+
+Now admins can go to user's profile and disable their MFA (check our [documentation](https://docs.defguard.net/1.5/support-1/troubleshooting#user-lost-access-to-their-2fa-methods))
+
+# Display event metadata in Activity Log
+
+Activity stream now has two additional columns:
+
+- Location  - indicating what VPN Location this event corresponds to  
+- Description  - with more detailed description of the event
+
+# Implement SNAT binding to specific IP for a specific user
+
+User SNAT bindings allow administrators to assign specific public IP addresses to users for outbound traffic from Defguard VPN gateways in a given location. This provides fine-grained control over how user traffic appears to external networks. More details in [documentation here](https://docs.defguard.net/1.5/features/user-snat-bindings).
+
+ # Key transparency improvements
+
+Our roadmap, development backlog and documentation was always open, now we bring new transparency standards:
+
+- [Public pentesting page](https://defguard.net/pentesting) - we’ve published PDF reports of our pentesting process before, but we always got a lot of questions  - *was the issue fixed? Where?* Now you can see it in detail [on an interactive pentesting page](https://defguard.net/pentesting).  
+- Architecture Decision Records  - concise documents that capture important architectural decisions we make during the lifecycle of Defguard’s development  - find them [here](https://docs.defguard.net/1.5/in-depth/architecture-decision-records)  
+- We’ve introduced our [Security Approach page](https://defguard.net/security), and [Vulnerability Disclosure Policy](https://defguard.net/security#VDP-title)
+
+ # What upcoming releases will bring
+
+Please remember, that our Enterprise customers have a huge influence on the roadmap and features that will be implemented ! Please [consider supporting us](https://defguard.net/pricing)!
+
+# Amazon Machine Images
+
+We’ve already have them prepared, just need to bring them to Amazon Marketplace.
+
+# Hardware Keys based MFA in desktop client (and data encryption)
+
+We know that submitting tokens (totp/email) or (much smoother but still pain in the ***) QR code scan+biometry for each connection can be annoying. That’s why we would like to introduce Hardware Keys provisioning in the desktop client (so it will be done securely on users device), which will enable: 
+1) to encrypt all Desktop Client’s data and make them inaccessible (yes, all! not only the WireGuard keys) without the HW key 
+2) MFA using the HW key  - for easy connection…
+
+Please discuss this here: https://github.com/DefGuard/client/issues/431
+
+# UI (and UX) of all apps
+
+We are aware of the shortcomings of the current UI and UX in all our apps. Over the years, as the system evolved, certain features were designed in ways that no longer meet current needs.
+
+Because of this from the next release (1.6) we are starting to work on the new UI and then new UX successively in all components and applications  - as this in our opinion is the most important next step.
+
+The plan is to introduce a new UI (and some UX improvements) in the Enrollment (proxy) and Defguard Core, hopefully in 1.6 release. After that we will work on Mobile and then Desktop apps (also bringing a simplified desktop app for less experienced users).
+
+# New MFA connect & re-authenticate approach
+
+For more details and discussion go here: [https://github.com/DefGuard/defguard/issues/1359](https://github.com/DefGuard/defguard/issues/1359)
+
