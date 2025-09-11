@@ -266,6 +266,26 @@ const tags = [
       </div>
     </FlexibleSection>
 
+    <FlexibleSection leftRatio={1} title="Verifiability of releases" theme="light">
+      <div slot="left">
+        <ul>
+          <li>
+            Authenticity and integrity of all release assets can be verified.
+          </li>
+          <li>
+            All official Docker images are signed using
+            <a href="https://github.com/sigstore/cosign">Cosign</a>
+            and automatically scanned for known vulnerabilities with
+            <a href="https://trivy.dev/">Trivy</a>.
+          </li>
+          <li>
+            All release assets (binaries, packages, etc.) include SHA256 checksums
+            that are automatically generated and published with each GitHub <a href="https://github.com/DefGuard/defguard/releases">release</a>.
+            </li>
+        </ul>
+      </div>
+    </FlexibleSection>
+
     <FlexibleSection
       leftRatio={1}
       title="Found a security vulnerability in Defguard?"
