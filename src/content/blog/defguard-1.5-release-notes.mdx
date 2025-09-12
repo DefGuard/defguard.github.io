@@ -3,13 +3,11 @@ title: Release 1.5 with Mobile apps, External SSO MFA, MFA with Biometry
 publishDate: 2025-09-10
 description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse molestie, ex vitae auctor pretium, orci est convallis ipsum, non rhoncus mi dolor nec metus.
 draft: true
-image: "/images/blog/defguard-1.5-release-notes/15_release_1.png"
 ---
 
 import YouTubeVideo from "../../components/video/YouTubeVideo.astro";
 
 ![Defguard release 1.5 notes](/images/blog/defguard-1.5-release-notes/15_release_1.png)
-
 
 # TL;DR;
 
@@ -113,11 +111,13 @@ This mechanism will be used in future releases, to provide automated upgrades bu
 
 The first functionality we’re introducing based on this is information about <a href="https://docs.defguard.net/1.5/deployment-strategies/setting-up-your-instance#updates" target="_blank">unsupported component versions</a> - if they are detected:
 
+
 ![](/images/blog/defguard-1.5-release-notes/version-mismatch.png)
 
 ## Desktop Client based on Tauri v2
 
 Tauri is a great framework for building fast, secure, cross-platform applications. We’ve used Tauri v1 up to this point, which had a lot of issues and limited us with some features/bugfixes that many of you reported. Tauri v2 is stable now and we could upgrade, enabling a lot changes like: <a href="https://github.com/DefGuard/client/issues/320" target="_blank">ability to install the client on Ubuntu 24 LTS</a>, <a href="https://github.com/DefGuard/client/issues/502" target="_blank">opening client by clicking tray icon</a>, <a href="https://github.com/DefGuard/client/issues/501" target="_blank">better MFA location connection handling via tray menu</a> and <a href="https://github.com/DefGuard/client/issues/461" target="_blank">some improvements to the Client on Windows</a>.
+
 
 
 ## Desktop Client seamless enrollment with a button click
@@ -176,7 +176,7 @@ User SNAT bindings allow administrators to assign specific public IP addresses t
 
 Our roadmap, development backlog and documentation was always open, now we bring new transparency standards:
 
-- <a href="https://defguard.net/pentesting" target="_blank">Public pentesting page</a> - we’ve published PDF reports of our pentesting process before, but we always got a lot of questions  - *was the issue fixed? Where?* Now you can see it in detail <a href="https://defguard.net/pentesting" target="_blank">on an interactive pentesting page</a>.  
+- <a href="https://defguard.net/pentesting" target="_blank">Public pentesting page</a> - we’ve published PDF reports of our pentesting process before, but we always got a lot of questions  - *was the issue fixed? Where?* Now you can see it in detail <a href="https://defguard.net/pentesting" target="_blank">on an interactive pentesting page</a>.
 - <a href="https://docs.defguard.net/1.5/in-depth/architecture-decision-records" target="_blank">Architecture Decision Records</a>  - concise documents that capture important architectural decisions we make during the lifecycle of Defguard’s development. 
 - We’ve introduced our <a href="https://defguard.net/security" target="_blank">Security Approach page</a>, and <a href="https://defguard.net/security#VDP-title" target="_blank">Vulnerability Disclosure Policy</a>
 
@@ -211,7 +211,6 @@ Here is a sneak peek of what we are working on:
 ![](/images/blog/defguard-1.5-release-notes/Enrollment_step_9.png)
 
 ![](/images/blog/defguard-1.5-release-notes/Overview.png)
-
 
 ## New MFA connect & re-authenticate approach
 
