@@ -7,6 +7,8 @@ draft: true
 
 import YouTubeVideo from "../../components/video/YouTubeVideo.astro";
 
+![Defguard release 1.5 notes](/images/blog/defguard-1.5-release-notes/15_release_1.png)
+
 # TL;DR;
 
 This is the biggest, most feature packed (and fixes) release we have ever done!  
@@ -40,7 +42,7 @@ Here you can see all this in action:
 
 <YouTubeVideo
   videoId="AHUUVGJxDQM"
-  title="CHANGEME"
+  title="Mobile Client"
   startAt={0}
   showControls={true}
   showInfo={true}
@@ -60,8 +62,8 @@ Now, when you connect on the desktop client to a location that has Internal MFA 
 
 Here you can see it in action:
 <YouTubeVideo
-  videoId="81MH7VXmHR0"
-  title="CHANGEME"
+  videoId="b-XC76k4KVU"
+  title="MFA desktop and mobile biometry"
   startAt={0}
   showControls={true}
   showInfo={true}
@@ -88,7 +90,7 @@ See it in action here:
 
 <YouTubeVideo
   videoId="81MH7VXmHR0"
-  title="CHANGEME"
+  title="MFA on desktop with External SSO"
   startAt={0}
   showControls={true}
   showInfo={true}
@@ -103,22 +105,19 @@ Defguard is a critical component of an infrastructure, enabling secure access  -
 
 With this in mind, for this release we’ve created the foundation for that, where all our components exchange detailed version information and log them in each communication instance:
 
-![](/images/blog/defguard-1.5-release-notes/activity-log-screen.png)
+![](/images/blog/defguard-1.5-release-notes/version-exchange.png)
 
 This mechanism will be used in future releases, to provide automated upgrades but also detailed information for admin/operators (like what is the Users Desktop/Mobile client version  - to inform about upgrade, etc.).
 
 The first functionality we’re introducing based on this is information about <a href="https://docs.defguard.net/1.5/deployment-strategies/setting-up-your-instance#updates" target="_blank">unsupported component versions</a> - if they are detected:
 
-![](/images/blog/defguard-1.5-release-notes/version-mismatch.avif)
 
+![](/images/blog/defguard-1.5-release-notes/version-mismatch.png)
 
 ## Desktop Client based on Tauri v2
 
-Tauri is a great framework for building fast, secure, cross-platform applications. We’ve used Tauri v1 up to this point, which had a lot of issues and limited us with some features/bugfixes that many of you reported. Tauri v2 is stable now and we could upgrade, enabling a lot changes like:
+Tauri is a great framework for building fast, secure, cross-platform applications. We’ve used Tauri v1 up to this point, which had a lot of issues and limited us with some features/bugfixes that many of you reported. Tauri v2 is stable now and we could upgrade, enabling a lot changes like: <a href="https://github.com/DefGuard/client/issues/320" target="_blank">ability to install the client on Ubuntu 24 LTS</a>, <a href="https://github.com/DefGuard/client/issues/502" target="_blank">opening client by clicking tray icon</a>, <a href="https://github.com/DefGuard/client/issues/501" target="_blank">better MFA location connection handling via tray menu</a> and <a href="https://github.com/DefGuard/client/issues/461" target="_blank">some improvements to the Client on Windows</a>.
 
-- ubuntu LTS packages!  - link  
-- tray menu  - …  
-- ….
 
 
 ## Desktop Client seamless enrollment with a button click
@@ -127,7 +126,7 @@ Tauri v2 finally enabled us to deliver the quickest way to configure a desktop c
 
 <YouTubeVideo
   videoId="q5-AXOPLgHc"
-  title="CHANGEME"
+  title="One click enrollment"
   startAt={0}
   showControls={true}
   showInfo={true}
@@ -143,9 +142,20 @@ But one critical feature that was missing, is setting up any MFA method during e
 
 Now, if there is any location using Internal MFA, user is required during enrollment to configure MFA. See it here:
 
+<YouTubeVideo
+  videoId="KdyZoAlBb9k"
+  title="Setting up MFA in Desktop Client during the enrollment"
+  startAt={0}
+  showControls={true}
+  showInfo={true}
+  allowFullscreen={true}
+  rel={false}
+/>
+
+
 ## JumpCloud Directory Sync
 
-We already supported directory sync for Google, Microsoft and Okta. Now we also support JumpCloud - see more details <a href="https://docs.defguard.net/features/external-openid-providers/jumpcloud" target="_blank">here</a>
+We already supported directory sync for Google, Microsoft and Okta. Now we also support JumpCloud - see more details <a href="https://docs.defguard.net/1.5/features/external-openid-providers/jumpcloud#directory-synchronization" target="_blank">here</a>.
 
 ## Possibility for admins to reset users MFA
 
@@ -166,8 +176,8 @@ User SNAT bindings allow administrators to assign specific public IP addresses t
 
 Our roadmap, development backlog and documentation was always open, now we bring new transparency standards:
 
-- <a href="https://defguard.net/pentesting" target="_blank">Public pentesting page</a> - we’ve published PDF reports of our pentesting process before, but we always got a lot of questions  - *was the issue fixed? Where?* Now you can see it in detail <a href="https://defguard.net/pentesting" target="_blank">on an interactive pentesting page</a>.  
-- Architecture Decision Records  - concise documents that capture important architectural decisions we make during the lifecycle of Defguard’s development  - find them <a href="https://docs.defguard.net/1.5/in-depth/architecture-decision-records" target="_blank">here</a>  
+- <a href="https://defguard.net/pentesting" target="_blank">Public pentesting page</a> - we’ve published PDF reports of our pentesting process before, but we always got a lot of questions  - *was the issue fixed? Where?* Now you can see it in detail <a href="https://defguard.net/pentesting" target="_blank">on an interactive pentesting page</a>.
+- <a href="https://docs.defguard.net/1.5/in-depth/architecture-decision-records" target="_blank">Architecture Decision Records</a>  - concise documents that capture important architectural decisions we make during the lifecycle of Defguard’s development. 
 - We’ve introduced our <a href="https://defguard.net/security" target="_blank">Security Approach page</a>, and <a href="https://defguard.net/security#VDP-title" target="_blank">Vulnerability Disclosure Policy</a>
 
 # What upcoming releases will bring
@@ -193,6 +203,14 @@ We are aware of the shortcomings of the current UI and UX in all our apps. Over 
 Because of this from the next release (1.6) we are starting to work on the new UI and then new UX successively in all components and applications  - as this in our opinion is the most important next step.
 
 The plan is to introduce a new UI (and some UX improvements) in the Enrollment (proxy) and Defguard Core, hopefully in 1.6 release. After that we will work on Mobile and then Desktop apps (also bringing a simplified desktop app for less experienced users).
+
+Here is a sneak peek of what we are working on:
+
+![](/images/blog/defguard-1.5-release-notes/Enrollment_step_1.png)
+
+![](/images/blog/defguard-1.5-release-notes/Enrollment_step_9.png)
+
+![](/images/blog/defguard-1.5-release-notes/Overview.png)
 
 ## New MFA connect & re-authenticate approach
 
