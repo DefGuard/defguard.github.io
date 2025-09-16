@@ -26,6 +26,8 @@ const { title, description, variant = "white" } = Astro.props;
 
     & > p {
       @include typography(paragraph);
+      font-weight: 400;
+      @include font-scalable(20px);
       padding-bottom: 8px;
     }
 

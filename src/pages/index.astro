@@ -81,7 +81,7 @@ const tags = [
     <HomeHeader
       trustedBy={false}
       title="Enterprise VPN with full control and transparency"
-      description="Defguard is the enterprise VPN solution built for IT leaders who demand security, visibility, and peace of mind. Powered by a zero-trust architecture and the WireGuard protocol, it delivers full data sovereignty and compliance — all in a self-hosted, open-source platform that you control."
+      description="Defguard is the enterprise VPN solution built for IT leaders who demand security, visibility, and peace of mind."
       buttons={[
         { name: "Book a Demo", link: "/book-a-demo?utm_source=landing" },
         { name: "Quick Install Guide", link: "https://docs.defguard.net/getting-started/one-line-install" }
@@ -89,8 +89,22 @@ const tags = [
     />
 
     <FeatureCapsules
-      header="Why businesses choose Defguard"
+      header="Why security aware organizations choose Defguard VPN"
       features={[
+         { 
+          title: "True VPN MFA", 
+          description: "The only VPN solution that implements multi-factor authentication directly at the WireGuard® protocol level.", 
+          icon: "lni-rocket",
+          linkText: "Defguard MFA Architecture",
+          linkUrl: "https://docs.defguard.net/in-depth/architecture/architecture"
+        },
+        { 
+          title: "Ultimate Security", 
+          description: "Written in Rust, built around WireGuard® and with components designed to be secure, fully auditable with open source code on GitHub" ,
+          icon: "lni-shield",
+          linkText: "Explore Secure Architecture",
+          linkUrl: "https://docs.defguard.net/in-depth/architecture"
+        }, 
         { 
           title: "Enterprise integrations", 
           description: 
@@ -108,13 +122,7 @@ const tags = [
           linkText: "Talk to our experts",
           linkUrl: "/book-a-demo?utm_source=landing"
         },
-        { 
-          title: "Ultimate Security", 
-          description: "Written in Rust, built around WireGuard® and with components designed to be secure, fully auditable with open source code on GitHub" ,
-          icon: "lni-shield",
-          linkText: "Explore Secure Architecture",
-          linkUrl: "https://docs.defguard.net/in-depth/architecture"
-        }, 
+    
         { 
           title: "Enables NIS2 compliance", 
           description: "True WireGuard® MFA implemented in protocol layer, easy to use with Defguad VPN desktop client. Defguard is NIS2 compliant.", 
@@ -122,13 +130,7 @@ const tags = [
           linkText: "VPN Level 2FA / MFA",
           linkUrl: "https://docs.defguard.net/admin-and-features/wireguard/multi-factor-authentication-mfa-2fa" 
         },
-        { 
-          title: "Easy to deploy anywhere", 
-          description: "Run and evaluate with few command lines then scale to production with Terraform, Kubernetes HA and failover. Deploy on-prem or in your private cloud.", 
-          icon: "lni-rocket",
-          linkText: "How to set up Defguard.",
-          linkUrl: "https://docs.defguard.net/deployment-strategies/setting-up-your-instance"
-        },
+       
         { 
           title: "European", 
           description: "Based in Poland and backed by European investors, Defguard operates entirely under EU law — ensuring full compliance with European security standards and zero foreign legal exposure.", 
@@ -153,7 +155,40 @@ const tags = [
 -->
 
     <HeaderSection
-      title="WireGuard® VPN Protocol. Now Enterprise-Ready."
+      title="True VPN multi-factor authentication"
+      description="Defguard is the only VPN solution that implements multi-factor authentication directly at the WireGuard® protocol level, providing true connection-level security that goes beyond traditional application-layer MFA."
+      variant="gray"
+    />
+    <FlexibleSection
+      id="connection-level-mfa"
+      variant="gray"
+      theme="light"
+    >
+      <div slot="left">
+        <h3>Why connection-level MFA matters</h3>
+        <ul>
+          <li><strong>True protocol security</strong> - MFA is enforced at the VPN connection level, not just the web interface</li>
+          <li><strong>Zero bypass vulnerabilities</strong> - attackers can't circumvent MFA by exploiting application layers</li>
+          <li><strong>Compliance ready</strong> - meets NIS2 and other regulatory requirements for VPN-level authentication</li>
+        </ul>
+        <p>
+          <strong>Industry first</strong> Defguard is the only VPN solution that brings enterprise-grade MFA directly to the WireGuard® protocol.
+        </p>
+        
+      </div>
+
+      <div slot="right">
+        <YouTubeVideo 
+          videoId="KdyZoAlBb9k"
+          title="Defguard MFA Demonstration"
+          showControls={true}
+          allowFullscreen={true}
+        />
+      </div>
+    </FlexibleSection>
+
+    <HeaderSection
+      title="WireGuard® VPN Speed and Security"
       description="WireGuard® is a game-changer in VPN technology — fast, lightweight, and secure. But it's just a protocol."
       variant="gray"
     />
@@ -198,7 +233,7 @@ const tags = [
       variant="gray"
     /> -->
 
-    <CTASection
+    <!-- <CTASection
       showBorder={true}
       title="Ready to Implement Enterprise-Grade WireGuard® VPN?"
       description="See how Defguard fits into your zero-trust architecture and existing infrastructure."
@@ -206,7 +241,7 @@ const tags = [
       buttonLink="/server?utm_source=landing"
       id="cta-documentation"
       variant="gray"
-    />
+    /> -->
 
 <!-- 
 
