@@ -18,8 +18,8 @@
     "external": false
   },
   {
-    "display": "IoT",
-    "url": "/iot/",
+    "display": "VPN MFA",
+    "url": "/vpn_mfa/",
     "prefetch": true,
     "external": false
   },
