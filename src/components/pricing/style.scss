@@ -4,6 +4,8 @@
   flex-flow: column;
   align-items: center;
   justify-content: flex-start;
+  padding: 0 20px;
+  box-sizing: border-box;
 
   #pricing-toggle {
     display: flex;
@@ -42,22 +44,40 @@
       justify-content: center;
 
       .pricing-card {
-        max-width: 255px;
+        max-width: 320px;
       }
     }
 
     @include break-up(sm) {
-      grid-template-columns: repeat(auto-fit, 255px);
-      column-gap: 25px;
-      row-gap: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      column-gap: 15px;
+      row-gap: 30px;
       justify-content: center;
     }
 
+    @include break-up(md) {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      column-gap: 20px;
+      row-gap: 30px;
+      justify-content: center;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    @include break-up(lg) {
+      grid-template-columns: repeat(4, minmax(280px, 320px));
+      column-gap: 30px;
+      row-gap: 30px;
+      justify-content: center;
+      max-width: none;
+      margin: 0;
+    }
+
     @include break-up(xl) {
-      grid-template-columns: repeat(auto-fit, 255px);
-      // justify-content: space-between;
-      column-gap: 25px;
-      row-gap: 25px;
+      grid-template-columns: repeat(4, 320px);
+      column-gap: 30px;
+      row-gap: 30px;
+      justify-content: center;
     }
 
     .pricing-card {
