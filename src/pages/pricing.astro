@@ -83,10 +83,8 @@ const tags = [
         <div class="left">
           <h2 id="license">Request offline or evalution license</h2>
           <p class="sla-description">
-            The plans above are also available in offline mode - meaning no connection to our licensing server is requeired. If you're interested in offline license, please fill the form below.
-          </br></br>
             For <strong>evaluations</strong> or proof-of-concept testing, we're happy to provide
-            a trial license.
+            a 14-day free of charge evaluation license. For convenience, please provide your company information (name, address and Tax Identification Number) in the form below.
           </p>
         </div>
         <ContentLimiter contentId="sla-support-content" maxWidth={1100}>
@@ -121,10 +119,10 @@ const tags = [
       }
 
       #pricing-tiers {
-        padding-bottom: calc(100px - var(--nav-height));
+        padding-bottom: calc(50px - var(--nav-height));
 
         @include break-up(md) {
-          padding-bottom: calc(200px - var(--nav-height));
+          padding-bottom: calc(80px - var(--nav-height));
         }
 
         h1 {
@@ -249,7 +247,7 @@ const tags = [
       .sla-support-wrapper {
         width: 100%;
         background-color: var(--background-secondary, #f5f5f5);
-        padding: 60px 0;
+        padding: 40px 0 60px 0;
       }
 
       #sla-support {
@@ -261,17 +259,13 @@ const tags = [
           width: 100%;
 
           & > h2 {
-            @include typography(paragraph);
+            @include typography(h2);
             box-sizing: border-box;
-            font-family: "Poppins";
-            font-size: 36px;
-            font-weight: 400;
-            line-height: 1.14;
             padding-top: 20px;
             padding-left: 20px;
             padding-right: 20px;
             padding-bottom: 0;
-            max-width: 1100px;
+            max-width: 1500px;
             margin: 0 auto;
             word-wrap: break-word;
             overflow-wrap: break-word;
@@ -281,7 +275,6 @@ const tags = [
               padding-top: 54px;
               padding-left: 20px;
               padding-right: 20px;
-              font-size: 55px;
               padding-bottom: 0;
             }
           }
@@ -306,7 +299,7 @@ const tags = [
         max-width: 1100px;
         margin: 0 auto;
         padding: 30px 20px;
-        padding-bottom: 100px;
+        padding-bottom: 30px;
         box-sizing: border-box;
       }
 
@@ -334,6 +327,11 @@ const tags = [
 
       .book .double-inputs {
         z-index: 1000;
+      }
+
+      /* Hide floating links on pricing page */
+      #floating-links {
+        display: none !important;
       }
     </style>
   </main>
