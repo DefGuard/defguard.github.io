@@ -10,6 +10,8 @@ import ImageURL from "../components/image/ImageURL.astro";
 import YouTubeVideo from "../components/video/YouTubeVideo.astro";
 
 const title = "True WireGuard® VPN MFA - Connection-Level Multi-Factor Authentication";
+const description =
+  "Enable WireGuard 2FA and MFA with Defguard for secure VPN connections. Learn how to set up connection-level multi-factor authentication with biometrics and external IdPs.";
 const featuredImage =
   "github.com/DefGuard/defguard.github.io/raw/main/public/images/product/core/hero-image.png";
 const imageWidth = "1920";
@@ -18,6 +20,12 @@ const url = "https://defguard.net/mfa";
 const tags = [
   "defguard",
   "mfa",
+  "vpn mfa",
+  "mfa for wireguard",
+  "wireguard 2fa",
+  "wireguard mfa",
+  "WireGuard MFA configuration",
+  "vpn multi-factor authentication",
   "2fa",
   "multi-factor authentication",
   "WireGuard®",
@@ -31,6 +39,7 @@ const tags = [
 
 <ProductLayout
   title={title}
+  description={description}
   featuredImage={featuredImage}
   imageWidth={imageWidth}
   imageHeight={imageHeight}
@@ -42,30 +51,78 @@ const tags = [
     <!-- Hero Section -->
     <HomeHeader
       trustedBy={true}
-      title="Most advanced VPN MFA"
-      description="Defguard provides enterprise grade VPN multi-factor authentication for WireGuard with biometrics for mobile and desktop users at VPN connection level."
+      title="True VPN MFA & 2FA for WireGuard® with Connection-Level authentication"
+      description="Defguard provides enterprise grade VPN multi-factor authentication (MFA/2FA) for WireGuard® with biometrics for mobile and desktop users at VPN connection level."
       buttons={[
-        { name: "Try Defguard Today", link: "/download?utm_source=mfa" },
+        { name: "Defguard One-Line Install", link: "https://docs.defguard.net/getting-started/one-line-install" },
         { name: "Book a Demo", link: "/book-a-demo?utm_source=mfa" },
       ]}
     />
     <!-- MFA Definition Section -->
-    <HomeSection variant="white" contentId="mfa-definition">
-      <h2>What is Multi-Factor Authentication?</h2>
-      <p>
-        MFA (Multi-Factor Authentication) is a method of securing IT systems that requires
-        the user to confirm their identity using at least two or more independent
-        verification factors.
-      </p>
-      <p>
-        The main purpose of MFA is to strengthen security by acting as a highly effective
-        barrier against cyberattacks such as phishing or brute-force attacks.
-      </p>
-      <p>
-        MFA is a critical component of Zero-Trust security, which is a security model that
-        assumes that all users, devices, and applications are potentially compromised.
-      </p>
-    </HomeSection>
+    <FlexibleSection
+      id="mfa-definition"
+      variant="white"
+      theme="light"
+    >
+      <div slot="left">
+        <h2>What is Multi-Factor Authentication?</h2>
+        <div class="mfa-definition">
+          <p class="definition-highlight">
+            <strong>MFA (Multi-Factor Authentication)</strong> is a security method that requires users to verify their identity using <strong>two or more independent factors</strong> before gaining access to systems or networks.
+          </p>
+          <p>
+            In the context of VPNs, this is often called <em>WireGuard 2FA</em>, but true MFA goes far beyond basic two-factor authentication.
+          </p>
+        </div>
+      </div>
+
+      <div slot="right">
+        <h3>Why MFA Matters</h3>
+        <div class="mfa-benefits">
+          <div class="benefit-item">
+            <div class="benefit-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2" fill="none"/>
+                <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" fill="none"/>
+              </svg>
+            </div>
+            <div class="benefit-content">
+              <h4>Blocks Cyberattacks</h4>
+              <p>Highly effective barrier against phishing, brute-force, and credential theft attacks</p>
+            </div>
+          </div>
+          
+          <div class="benefit-item">
+            <div class="benefit-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke="currentColor" stroke-width="2" fill="none"/>
+                <circle cx="12" cy="16" r="1" fill="currentColor"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="currentColor" stroke-width="2" fill="none"/>
+              </svg>
+            </div>
+            <div class="benefit-content">
+              <h4>Zero-Trust Foundation</h4>
+              <p>Critical component of Zero-Trust security that assumes all users and devices are potentially compromised</p>
+            </div>
+          </div>
+          
+          <div class="benefit-item">
+            <div class="benefit-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2" fill="none"/>
+                <circle cx="12" cy="12" r="1" fill="currentColor"/>
+                <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2" fill="none" stroke-dasharray="2 4"/>
+                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="benefit-content">
+              <h4>Layered Defense</h4>
+              <p>Provides multiple verification layers beyond just passwords or keys</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </FlexibleSection>
     <!-- The Problem Section -->
     <HomeSection variant="gray" contentId="mfa-problem">
       <h2>VPN "MFA" buzzwords can be misleading</h2>
@@ -78,8 +135,8 @@ const tags = [
       <div slot="left">
         <h3>Why Most VPN "MFA" Claims Are Misleading</h3>
         <p>
-          In most cases, "MFA" simply refers to 2FA for accessing the configuration panel
-          or performing the initial client setup - <strong
+          In most cases, "MFA" simply refers to WireGuard® 2FA for accessing the
+          configuration panel or performing the initial cli ent setup - <strong
             >not MFA during the connection stage</strong
           >.
         </p>
@@ -442,12 +499,13 @@ const tags = [
         </p>
       </div>
     </FlexibleSection>
+    
     <!-- Final CTA Section -->
     <CTASection
       title="Try Defguard Today"
-      description="Install free open source Defguard in 10 minutes and experience true connection-level MFA for WireGuard® VPN."
-      buttonText="Download Defguard"
-      buttonLink="/download?utm_source=mfa"
+      description="Install free open source Defguard in 10 minutes and experience true connection-level WireGuard 2FA and MFA for secure VPN connections."
+      buttonText="One-Line Install"
+      buttonLink="https://docs.defguard.net/getting-started/one-line-install"
       button2Text="Book a Demo"
       button2Link="/book-a-demo?utm_source=mfa"
       id="cta-mfa"
@@ -652,6 +710,116 @@ const tags = [
         .mfa-categories {
           .category-item {
             padding: 0.75rem;
+          }
+        }
+      }
+    }
+  }
+
+  // MFA Definition Section Styles
+  #mfa-definition {
+    .mfa-definition {
+      .definition-highlight {
+        font-size: 1.1em;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
+        border-left: 4px solid var(--surface-main-primary);
+        border-radius: 8px;
+        
+        strong {
+          color: var(--surface-main-primary);
+        }
+      }
+      
+      p {
+        line-height: 1.7;
+        margin-bottom: 1rem;
+        
+        em {
+          color: var(--surface-main-primary);
+          font-style: italic;
+        }
+      }
+    }
+    
+    .mfa-benefits {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      
+      .benefit-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1.25rem;
+        background: var(--surface-nav-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-separator);
+        transition: all 0.3s ease;
+        
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          border-color: var(--surface-main-primary);
+        }
+        
+        .benefit-icon {
+          flex-shrink: 0;
+          width: 48px;
+          height: 48px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: linear-gradient(135deg, var(--surface-main-primary), #0a7bc5);
+          border-radius: 12px;
+          color: white;
+          
+          svg {
+            color: white;
+            stroke: currentColor;
+            fill: none;
+          }
+        }
+        
+        .benefit-content {
+          flex: 1;
+          
+          h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--text-body-primary);
+            font-size: 1.1rem;
+            font-weight: 600;
+          }
+          
+          p {
+            margin: 0;
+            color: var(--text-body-secondary);
+            line-height: 1.5;
+            font-size: 0.95rem;
+          }
+        }
+      }
+    }
+    
+    h3 {
+      color: var(--text-body-primary);
+      margin-bottom: 1.5rem;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+    
+    @media (max-width: 768px) {
+      .mfa-benefits {
+        gap: 1rem;
+        
+        .benefit-item {
+          padding: 1rem;
+          
+          .benefit-icon {
+            width: 40px;
+            height: 40px;
           }
         }
       }
