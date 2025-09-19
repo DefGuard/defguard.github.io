@@ -66,6 +66,18 @@ const { trustedBy = true, title, description, buttons = [], repo = "defguard", s
     & > p {
       @include typography(paragraph);
       padding-bottom: 8px;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--text-body-primary);
+      
+      @include break-up(md) {
+        font-size: 20px;
+      }
+      
+      @include break-up(lg) {
+        font-size: 22px;
+      }
     }
 
     h1 {

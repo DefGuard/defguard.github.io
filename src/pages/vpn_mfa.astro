@@ -25,7 +25,7 @@ const tags = [
   "connection-level MFA",
   "biometric authentication",
   "protocol-level security",
-  "enterprise VPN"
+  "enterprise VPN",
 ];
 ---
 
@@ -38,123 +38,178 @@ const tags = [
   tags={tags}
 >
   <Navigation activeSlug="/mfa" />
-
   <main id="mfa-page">
     <!-- Hero Section -->
     <HomeHeader
-      trustedBy={false}
-      title="Securing WireGuard VPN with MFA at the connection level"
-      description="Defguard enables the most advanced multi-factor authentication flow for WireGuard VPN with biometrics for mobile and desktop users."
+      trustedBy={true}
+      title="Most advanced VPN MFA"
+      description="Defguard provides enterprise grade VPN multi-factor authentication for WireGuard with biometrics for mobile and desktop users at VPN connection level."
       buttons={[
         { name: "Try Defguard Today", link: "/download?utm_source=mfa" },
-        { name: "Book a Demo", link: "/book-a-demo?utm_source=mfa" }
+        { name: "Book a Demo", link: "/book-a-demo?utm_source=mfa" },
       ]}
     />
-
     <!-- MFA Definition Section -->
     <HomeSection variant="white" contentId="mfa-definition">
       <h2>What is Multi-Factor Authentication?</h2>
-      <p>MFA (Multi-Factor Authentication) is a method of securing IT systems that requires the user to confirm their identity using at least two or more independent verification factors.</p>
-      <p>The main purpose of MFA is to strengthen security by acting as a highly effective barrier against cyberattacks such as phishing or brute-force attacks. </p>
-      <p>MFA is a critical component of Zero-Trust security, which is a security model that assumes that all users, devices, and applications are potentially compromised.</p>
+      <p>
+        MFA (Multi-Factor Authentication) is a method of securing IT systems that requires
+        the user to confirm their identity using at least two or more independent
+        verification factors.
+      </p>
+      <p>
+        The main purpose of MFA is to strengthen security by acting as a highly effective
+        barrier against cyberattacks such as phishing or brute-force attacks.
+      </p>
+      <p>
+        MFA is a critical component of Zero-Trust security, which is a security model that
+        assumes that all users, devices, and applications are potentially compromised.
+      </p>
     </HomeSection>
-
     <!-- The Problem Section -->
     <HomeSection variant="gray" contentId="mfa-problem">
       <h2>VPN "MFA" buzzwords can be misleading</h2>
-      <p>The problem with MFA is that it's a widely overused marketing term for many (if not all) WireGuard®-based VPN solutions.</p>
+      <p>
+        The problem with MFA is that it's a widely overused marketing term for many (if
+        not all) WireGuard®-based VPN solutions.
+      </p>
     </HomeSection>
-    
-    <FlexibleSection
-      id="mfa-problem"
-      variant="gray"
-      theme="light"
-    >
+    <FlexibleSection id="mfa-problem" variant="gray" theme="light">
       <div slot="left">
         <h3>Why Most VPN "MFA" Claims Are Misleading</h3>
         <p>
-          In most cases, "MFA" simply refers to 2FA for accessing the configuration panel or performing the initial client setup - <strong>not MFA during the connection stage</strong>.
+          In most cases, "MFA" simply refers to 2FA for accessing the configuration panel
+          or performing the initial client setup - <strong
+            >not MFA during the connection stage</strong
+          >.
         </p>
         <p>
-          This approach does not provide ultimate security. Solutions that rely on external SSO for the initial device configuration only do not provide sufficient security in today's environment.
+          This approach does not provide ultimate security. Solutions that rely on
+          external SSO for the initial device configuration only do not provide sufficient
+          security in today's environment.
         </p>
         <p class="warning-text">
-          <strong>Marketing a VPN solution as providing MFA under these circumstances is highly misleading and potentially harmful to user security.</strong>
+          <strong
+            >Marketing a VPN solution as providing MFA under these circumstances is highly
+            misleading and potentially harmful to user security.</strong
+          >
         </p>
       </div>
-
       <div slot="right">
-        <h3>Why Connection-Level MFA is Essential</h3>
+        <h3>Why Connection-Level VPN MFA is Essential</h3>
         <ul>
-          <li><strong>Prevents credential theft attacks</strong> — Even if an attacker gains access to a user's WireGuard® private key, they cannot connect without additional factors</li>
-          <li><strong>Blocks unauthorized access</strong> — Protects critical private network resources and applications from exploitation</li>
-          <li><strong>Compliance requirements</strong> — Meets regulatory standards that require true MFA for network access</li>
-          <li><strong>Defense in depth</strong> — Provides multiple layers of security beyond just key-based authentication</li>
+          <li>
+            <strong>Prevents credential theft attacks</strong> Even if an attacker gains access
+            to a user's WireGuard® private key, they cannot connect without additional factors
+          </li>
+          <li>
+            <strong>Blocks unauthorized access</strong> Protects critical private network resources
+            and applications from exploitation
+          </li>
+          <li>
+            <strong>Compliance requirements</strong> Meets regulatory standards that require
+            true MFA for network access
+          </li>
+          <li>
+            <strong>Defense in depth</strong> Provides multiple layers of security beyond just
+            key-based authentication
+          </li>
         </ul>
       </div>
     </FlexibleSection>
-
     <!-- The Solution Section -->
     <HomeSection variant="white" contentId="mfa-solution">
-      <h2>The Solution: True VPN Connection-Level MFA</h2>
-      <p>MFA during a VPN connection requires the user to authenticate in the VPN client with two or more factors before the connection can be established.</p>
+      <h2>True VPN MFA at the connection level.</h2>
+      <p>
+        MFA during a VPN connection requires the user to authenticate in the VPN client
+        with two or more factors before the connection can be established.
+      </p>
     </HomeSection>
-
-    <FlexibleSection
-      id="mfa-solution"
-      variant="white"
-      theme="light"
-    >
+    <FlexibleSection id="mfa-solution" variant="white" theme="light">
       <div slot="left">
         <h3>Defguard's Unique Approach</h3>
         <p>
-          <strong>Defguard is the only solution that enables MFA at the level of WireGuard® VPN protocol</strong>, providing configuration flexibility with:
+          <strong
+            >Defguard is the only solution that enables MFA at the level of WireGuard®
+            VPN protocol</strong
+          >, providing configuration flexibility with:
         </p>
         <ul>
-          <li><strong>Built-in fully private IdP/SSO</strong> — Users manage their own MFA methods through Defguard admin panel</li>
-          <li><strong>External cloud IdP/SSO providers</strong> — Google, Microsoft, Okta, JumpCloud and others</li>
-          <li><strong>Biometric authentication</strong> — On both mobile and desktop clients</li>
-          <li><strong>Per-location MFA policies</strong> — Each VPN gateway can have its own MFA settings</li>
+          <li>
+            <strong>Built-in fully private IdP/SSO</strong> Users manage their own MFA methods
+            through Defguard admin panel
+          </li>
+          <li>
+            <strong>External cloud IdP/SSO providers</strong> Google, Microsoft, Okta, JumpCloud
+            and others
+          </li>
+          <li>
+            <strong>Biometric authentication</strong> On both mobile and desktop clients
+          </li>
+          <li>
+            <strong>Per-location MFA policies</strong> Each VPN gateway can have its own MFA
+            settings
+          </li>
         </ul>
       </div>
-
       <div slot="right">
         <h3>How It Works</h3>
         <ol>
-          <li><strong>User initiates connection</strong> — Attempts to connect to a VPN location with MFA enabled</li>
-          <li><strong>MFA challenge presented</strong> — Desktop or mobile client prompts for additional authentication</li>
-          <li><strong>Secure session establishment</strong> — WireGuard® pre-shared keys are securely generated</li>
-          <li><strong>Gateway configuration</strong> — VPN location is configured only after full authorization</li>
-          <li><strong>Connection established</strong> — Access granted with both WireGuard® key pairs and session keys</li>
+          <li>
+            <strong>User initiates connection</strong> Attempts to connect to a VPN location
+            with MFA enabled
+          </li>
+          <li>
+            <strong>MFA challenge presented</strong> Desktop or mobile client prompts for additional
+            authentication
+          </li>
+          <li>
+            <strong>Secure session establishment</strong> WireGuard® pre-shared keys are securely
+            generated
+          </li>
+          <li>
+            <strong>Gateway configuration</strong> VPN location is configured only after full
+            authorization
+          </li>
+          <li>
+            <strong>Connection established</strong> Access granted with both WireGuard® key
+            pairs and session keys
+          </li>
         </ol>
       </div>
     </FlexibleSection>
-
     <!-- MFA Demo Video Section -->
     <HomeSection variant="gray" contentId="mfa-demo">
       <h2>See True VPN MFA in Action</h2>
-      <p>Watch how Defguard implements genuine connection-level multi-factor authentication for WireGuard® VPN.</p>
+      <p>
+        Watch how Defguard implements genuine connection-level multi-factor authentication
+        for WireGuard® VPN.
+      </p>
     </HomeSection>
-    
-    <FlexibleSection
-      id="mfa-demo"
-      variant="gray"
-      theme="light"
-    >
+    <FlexibleSection id="mfa-demo" variant="gray" theme="light">
       <div slot="left">
         <h3>Connection-Level Security</h3>
         <ul>
-          <li><strong>Protocol-level enforcement</strong> — MFA verification happens before any VPN tunnel is established</li>
-          <li><strong>Zero bypass vulnerabilities</strong> — Attackers can't circumvent MFA by exploiting application layers</li>
-          <li><strong>Real-time policy updates</strong> — MFA requirements can be changed instantly without client reconfiguration</li>
+          <li>
+            <strong>Protocol-level enforcement</strong> MFA verification happens before any
+            VPN tunnel is established
+          </li>
+          <li>
+            <strong>Zero bypass vulnerabilities</strong> Attackers can't circumvent MFA by
+            exploiting application layers
+          </li>
+          <li>
+            <strong>Real-time policy updates</strong> MFA requirements can be changed instantly
+            without client reconfiguration
+          </li>
         </ul>
         <p>
-          <strong>Industry first</strong> — Defguard is the only VPN solution that brings enterprise-grade MFA directly to the WireGuard® protocol.
+          <strong>Industry first</strong> Defguard is the only VPN solution that brings enterprise-grade
+          MFA directly to the WireGuard® protocol.
         </p>
       </div>
-
       <div slot="right">
-        <YouTubeVideo 
+        <YouTubeVideo
           videoId="KdyZoAlBb9k"
           title="Defguard MFA Demonstration"
           showControls={true}
@@ -162,63 +217,94 @@ const tags = [
         />
       </div>
     </FlexibleSection>
-
     <!-- Advanced MFA Flows Section -->
     <HomeSection variant="white" contentId="advanced-mfa">
       <h2>Advanced Multi-Factor Authentication Flows</h2>
-      <p>Some of Defguard's MFA methods are even more sophisticated, such as establishing a VPN connection using mobile biometric authentication in the desktop client.</p>
+      <p>
+        Some of Defguard's MFA methods are even more sophisticated, such as establishing a
+        VPN connection using mobile biometric authentication in the desktop client.
+      </p>
     </HomeSection>
-
-    <FlexibleSection
-      id="advanced-mfa"
-      variant="white"
-      theme="light"
-    >
+    <FlexibleSection id="advanced-mfa" variant="white" theme="light">
       <div slot="left">
         <h3>Desktop MFA with Mobile Biometry</h3>
         <p><strong>User Prerequisites:</strong></p>
         <ul>
-          <li>A private WireGuard® key corresponding to the public key configured during Defguard enrollment</li>
+          <li>
+            A private WireGuard® key corresponding to the public key configured during
+            Defguard enrollment
+          </li>
           <li>A mobile device successfully enrolled and added to the user profile</li>
-          <li>Private keys in the mobile device's secure key store, accessible only via biometric authentication</li>
+          <li>
+            Private keys in the mobile device's secure key store, accessible only via
+            biometric authentication
+          </li>
         </ul>
       </div>
-
       <div slot="right">
         <h3>Extended MFA Flow Process</h3>
         <ol>
-          <li><strong>QR Code Scan</strong> — Scan the QR code displayed in the desktop app using the enrolled mobile device</li>
-          <li><strong>Biometric Verification</strong> — Perform MFA using biometric authentication and private/public key pair</li>
-          <li><strong>Secure Key Access</strong> — Keys are only accessible after successful biometric verification</li>
-          <li><strong>Connection Establishment</strong> — The remaining Defguard flow proceeds only after these steps are completed.</li>
+          <li>
+            <strong>QR Code Scan</strong> Scan the QR code displayed in the desktop app using
+            the enrolled mobile device
+          </li>
+          <li>
+            <strong>Biometric Verification</strong> Perform MFA using biometric authentication
+            and private/public key pair
+          </li>
+          <li>
+            <strong>Secure Key Access</strong> Keys are only accessible after successful biometric
+            verification
+          </li>
+          <li>
+            <strong>Connection Establishment</strong> The remaining Defguard flow proceeds
+            only after these steps are completed.
+          </li>
         </ol>
       </div>
     </FlexibleSection>
-
     <!-- MFA Categories Section -->
     <HomeSection variant="gray" contentId="mfa-categories">
       <h2>The Three Categories of Multi-Factor Authentication</h2>
-      <p>IT systems build authentication methods using these three areas and leverage them to secure operations.</p>
+      <p>
+        IT systems build authentication methods using these three areas and leverage them
+        to secure operations.
+      </p>
     </HomeSection>
-
-    <FlexibleSection
-      id="mfa-categories"
-      variant="gray"
-      theme="light"
-      leftRatio={0.3}
-    >
+    <FlexibleSection id="mfa-categories" variant="gray" theme="light" leftRatio={0.3}>
       <div slot="left">
         <div class="mfa-categories">
           <div class="category-item">
             <div class="category-icon">
-              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="2" fill="none"/>
-                <path d="M16 20c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="currentColor" stroke-width="2" fill="none"/>
-                <circle cx="20" cy="22" r="1.5" fill="currentColor"/>
-                <circle cx="28" cy="22" r="1.5" fill="currentColor"/>
-                <path d="M18 28c1.5 2 3.5 3 6 3s4.5-1 6-3" stroke="currentColor" stroke-width="2" fill="none"/>
-                <path d="M12 12l4 4M36 12l-4 4" stroke="currentColor" stroke-width="2"/>
-                <path d="M24 8V4M24 44v-4" stroke="currentColor" stroke-width="2"/>
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 48 48"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="24"
+                  cy="24"
+                  r="20"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"></circle>
+                <path
+                  d="M16 20c0-4.4 3.6-8 8-8s8 3.6 8 8"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"></path>
+                <circle cx="20" cy="22" r="1.5" fill="currentColor"></circle>
+                <circle cx="28" cy="22" r="1.5" fill="currentColor"></circle>
+                <path
+                  d="M18 28c1.5 2 3.5 3 6 3s4.5-1 6-3"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"></path>
+                <path d="M12 12l4 4M36 12l-4 4" stroke="currentColor" stroke-width="2"
+                ></path>
+                <path d="M24 8V4M24 44v-4" stroke="currentColor" stroke-width="2"></path>
               </svg>
             </div>
             <h4>Something You Know</h4>
@@ -226,15 +312,51 @@ const tags = [
           </div>
           <div class="category-item">
             <div class="category-icon">
-              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="8" y="12" width="32" height="24" rx="4" stroke="currentColor" stroke-width="2" fill="none"/>
-                <rect x="12" y="16" width="24" height="16" rx="2" stroke="currentColor" stroke-width="2" fill="none"/>
-                <circle cx="18" cy="24" r="2" fill="currentColor"/>
-                <path d="M22 24h8" stroke="currentColor" stroke-width="2"/>
-                <path d="M22 28h6" stroke="currentColor" stroke-width="2"/>
-                <rect x="18" y="6" width="12" height="4" rx="2" stroke="currentColor" stroke-width="2" fill="none"/>
-                <circle cx="38" cy="18" r="6" stroke="currentColor" stroke-width="2" fill="none"/>
-                <path d="M35 18l2 2 4-4" stroke="currentColor" stroke-width="2"/>
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 48 48"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  x="8"
+                  y="12"
+                  width="32"
+                  height="24"
+                  rx="4"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"></rect>
+                <rect
+                  x="12"
+                  y="16"
+                  width="24"
+                  height="16"
+                  rx="2"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"></rect>
+                <circle cx="18" cy="24" r="2" fill="currentColor"></circle>
+                <path d="M22 24h8" stroke="currentColor" stroke-width="2"></path>
+                <path d="M22 28h6" stroke="currentColor" stroke-width="2"></path>
+                <rect
+                  x="18"
+                  y="6"
+                  width="12"
+                  height="4"
+                  rx="2"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"></rect>
+                <circle
+                  cx="38"
+                  cy="18"
+                  r="6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"></circle>
+                <path d="M35 18l2 2 4-4" stroke="currentColor" stroke-width="2"></path>
               </svg>
             </div>
             <h4>Something You Have</h4>
@@ -242,14 +364,52 @@ const tags = [
           </div>
           <div class="category-item">
             <div class="category-icon">
-              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <ellipse cx="24" cy="20" rx="8" ry="10" stroke="currentColor" stroke-width="2" fill="none"/>
-                <ellipse cx="24" cy="22" rx="6" ry="8" stroke="currentColor" stroke-width="2" fill="none"/>
-                <ellipse cx="24" cy="24" rx="4" ry="6" stroke="currentColor" stroke-width="2" fill="none"/>
-                <ellipse cx="24" cy="26" rx="2" ry="4" stroke="currentColor" stroke-width="2" fill="none"/>
-                <circle cx="24" cy="28" r="1" fill="currentColor"/>
-                <path d="M16 38c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="currentColor" stroke-width="2" fill="none"/>
-                <path d="M12 42h24" stroke="currentColor" stroke-width="2"/>
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 48 48"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <ellipse
+                  cx="24"
+                  cy="20"
+                  rx="8"
+                  ry="10"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"></ellipse>
+                <ellipse
+                  cx="24"
+                  cy="22"
+                  rx="6"
+                  ry="8"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"></ellipse>
+                <ellipse
+                  cx="24"
+                  cy="24"
+                  rx="4"
+                  ry="6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"></ellipse>
+                <ellipse
+                  cx="24"
+                  cy="26"
+                  rx="2"
+                  ry="4"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"></ellipse>
+                <circle cx="24" cy="28" r="1" fill="currentColor"></circle>
+                <path
+                  d="M16 38c0-4.4 3.6-8 8-8s8 3.6 8 8"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"></path>
+                <path d="M12 42h24" stroke="currentColor" stroke-width="2"></path>
               </svg>
             </div>
             <h4>Something You Are</h4>
@@ -257,23 +417,31 @@ const tags = [
           </div>
         </div>
       </div>
-
       <div slot="right">
         <h3>How Defguard Leverages All Three Categories</h3>
         <p>
-          Defguard's MFA implementation can utilize all three authentication categories, providing the most comprehensive security approach available for WireGuard® VPN solutions.
+          Defguard's MFA implementation can utilize all three authentication categories,
+          providing the most comprehensive security approach available for WireGuard® VPN
+          solutions.
         </p>
         <ul>
-          <li><strong>Knowledge factors</strong> — Passwords and PINs for initial authentication</li>
-          <li><strong>Possession factors</strong> — Mobile devices, hardware keys, and authenticator apps</li>
-          <li><strong>Inherence factors</strong> — Biometric authentication on mobile and desktop</li>
+          <li>
+            <strong>Knowledge factors</strong> Passwords and PINs for initial authentication
+          </li>
+          <li>
+            <strong>Possession factors</strong> Mobile devices, hardware keys, and authenticator
+            apps
+          </li>
+          <li>
+            <strong>Inherence factors</strong> Biometric authentication on mobile and desktop
+          </li>
         </ul>
         <p>
-          This multi-layered approach ensures that even if one factor is compromised, your VPN connections remain secure.
+          This multi-layered approach ensures that even if one factor is compromised, your
+          VPN connections remain secure.
         </p>
       </div>
     </FlexibleSection>
-
     <!-- Final CTA Section -->
     <CTASection
       title="Try Defguard Today"
@@ -285,7 +453,6 @@ const tags = [
       id="cta-mfa"
       variant="white"
     />
-
   </main>
 </ProductLayout>
 
@@ -316,11 +483,11 @@ const tags = [
       font-size: calc(3.2rem * var(--font-scale-factor));
       max-width: 800px;
       line-height: 1.2;
-      
+
       @include break-up(md) {
         max-width: 900px;
       }
-      
+
       @include break-up(lg) {
         max-width: 1000px;
       }
@@ -332,7 +499,7 @@ const tags = [
       @include font-scalable(20px);
       padding-bottom: 8px;
       max-width: 800px;
-      
+
       @include break-up(md) {
         max-width: 900px;
       }
@@ -359,9 +526,9 @@ const tags = [
         font-size: calc(24px * var(--font-scale-factor));
         position: relative;
         padding-bottom: 0.5rem;
-        
+
         &::after {
-          content: '';
+          content: "";
           position: absolute;
           bottom: 0;
           left: 0;
@@ -370,7 +537,7 @@ const tags = [
           background: linear-gradient(135deg, #0c8ce0, #0a7bc5);
           border-radius: 2px;
         }
-        
+
         @include break-up(md) {
           font-size: calc(28px * var(--font-scale-factor));
         }
@@ -383,7 +550,7 @@ const tags = [
         font-weight: 600;
         font-size: calc(18px * var(--font-scale-factor));
         color: var(--text-heading-primary);
-        
+
         @include break-up(md) {
           font-size: calc(20px * var(--font-scale-factor));
         }
@@ -394,7 +561,8 @@ const tags = [
         margin-bottom: 1.5rem;
       }
 
-      ul, ol {
+      ul,
+      ol {
         margin: 0 0 1.5rem 0;
         padding-left: 20px;
 
@@ -445,18 +613,18 @@ const tags = [
             transition: all 0.3s ease;
             margin-left: auto;
             margin-right: auto;
-            
+
             svg {
               color: var(--primary-button-bg, #0c8ce0);
               transition: all 0.3s ease;
             }
-            
+
             &:hover {
               background: linear-gradient(135deg, #0c8ce0, #0a7bc5);
               border-color: transparent;
               transform: translateY(-2px);
               box-shadow: 0 8px 25px rgba(12, 140, 224, 0.25);
-              
+
               svg {
                 color: white;
               }
