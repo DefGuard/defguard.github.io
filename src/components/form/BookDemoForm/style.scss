@@ -22,6 +22,22 @@
     }
   }
 
+  select {
+    width: 100%;
+    height: 38px;
+    border: 1px solid var(--text-body-primary, #222);
+    transition: border-color 0.5s ease-out;
+    background-color: white;
+    padding: 0 8px;
+
+    @include typography(paragraph);
+    color: #222;
+    &:focus {
+      outline: 2px solid var(--surface-main-primary);
+      border-color: var(--surface-main-primary);
+    }
+  }
+
   label {
     display: flex;
     flex-direction: column;
@@ -50,8 +66,16 @@
     align-self: stretch;
   }
 
+  .triple-inputs {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    align-self: stretch;
+  }
+
   @include break-down(md) {
-    .double-inputs {
+    .double-inputs,
+    .triple-inputs {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
