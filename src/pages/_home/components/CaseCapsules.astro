@@ -1,8 +1,12 @@
 ---
 import ContentLimiter from "../../../components/ContentLimiter.astro";
+import ImageURL from "../../../components/image/ImageURL.astro";
+
 interface CaseItem {
   title: string;
   link: string;
+  image?: string;
+  description?: string;
 }
 
 interface Props {
@@ -23,20 +27,40 @@ const { cases } = Astro.props;
           tabindex={0}
           aria-label={caseItem.title + ' (Read more)'}
         >
-          <div class="case-header">
-            <h2>{caseItem.title}</h2>
-          </div>
-          <div class="case-link-container">
-            <span class="case-link">Read more</span>
+          {caseItem.image && (
+            <div class="case-image">
+              <ImageURL src={caseItem.image} alt={caseItem.title} />
+            </div>
+          )}
+          <div class="case-content">
+            <div class="case-header">
+              <h2>{caseItem.title}</h2>
+            </div>
+            {caseItem.description && (
+              <p class="case-description">{caseItem.description}</p>
+            )}
+            <div class="case-link-container">
+              <span class="case-link">Read more →</span>
+            </div>
           </div>
         </a>
       ) : (
         <div class="case-capsule case-capsule-link" tabindex={0} aria-label={caseItem.title + ' (Stay tuned)'}>
-          <div class="case-header">
-            <h2>{caseItem.title}</h2>
-          </div>
-          <div class="case-link-container">
-            <span class="case-link" style="text-decoration:unset;">Stay tuned – full story next week!</span>
+          {caseItem.image && (
+            <div class="case-image">
+              <ImageURL src={caseItem.image} alt={caseItem.title} />
+            </div>
+          )}
+          <div class="case-content">
+            <div class="case-header">
+              <h2>{caseItem.title}</h2>
+            </div>
+            {caseItem.description && (
+              <p class="case-description">{caseItem.description}</p>
+            )}
+            <div class="case-link-container">
+              <span class="case-link" style="text-decoration:unset;">Stay tuned – full story next week!</span>
+            </div>
           </div>
         </div>
       )
@@ -48,63 +72,91 @@ const { cases } = Astro.props;
 .case-capsules {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  // padding-bottom: 3rem;
+  gap: 20px;
   width: 100%;
   margin: 0 auto;
 
   .case-capsule {
     background: var(--surface-nav-bg, #f8f9fa);
     border: 1px solid var(--border-primary, #e9ecef);
-    padding: 2rem 3rem;
-    // border-radius: 12px;
+    border-radius: 12px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     transition: all 0.2s ease-in-out;
     width: 100%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     text-decoration: none;
     color: inherit;
     cursor: pointer;
+    overflow: hidden;
 
     &:hover, &:focus {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
       border-color: var(--surface-main-primary);
       outline: none;
     }
 
-    .case-header {
-      margin-bottom: 1.5rem;
-      h2 {
-        @include typography(h3);
-        font-size: calc(0.95rem * var(--font-scale-factor));
+    .case-image {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
       }
     }
 
-    p {
-      @include typography(paragraph);
-      margin-bottom: 1rem;
+    &:hover .case-image img {
+      transform: scale(1.05);
     }
-  }
 
-  .case-link-container {
-    margin-top: auto;
-    display: flex;
-    align-items: flex-end;
-    min-height: 2.5rem;
+    .case-content {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .case-header {
+      margin-bottom: 1rem;
+      h2 {
+        @include typography(h2);
+        font-size: calc(1.4rem * var(--font-scale-factor));
+        font-weight: 600;
+        line-height: 1.3;
+        margin: 0;
+      }
+    }
+
+    .case-description {
+      @include typography(paragraph);
+      margin-bottom: 1.5rem;
+      color: var(--text-body-secondary);
+      flex-grow: 1;
+    }
+
+    .case-link-container {
+      margin-top: auto;
+      display: flex;
+      align-items: flex-end;
+      min-height: 2rem;
+    }
   }
 
   @media (min-width: 768px) {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 16px;
+    gap: 24px;
     
     .case-capsule {
-      padding: 2rem 3rem;
-      width: 100%;
+      .case-image {
+        height: 180px;
+      }
     }
   }
 }

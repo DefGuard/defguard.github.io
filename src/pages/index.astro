@@ -214,7 +214,7 @@ const tags = [
 
     <HeaderSection
       title="WireGuard® VPN Speed and Security"
-      description="WireGuard® is a game-changer in VPN technology it's fast, lightweight, and secure."
+      description="WireGuard® is a game-changer in VPN technology it's fast, lightweight, and secure. Defguard makes it enterprise-grade with everything you need to run WireGuard securely at scale."
       variant="gray"
     />
     <FlexibleSection
@@ -268,6 +268,38 @@ const tags = [
       variant="gray"
     /> -->
 
+    <HeaderSection
+      title="Enterprise VPN meets WireGuard®"
+      description="Beyound enterprise grade architecture and security, Defguard offers professional support services designed for mission-critical enterprise deployments. Get the peace of mind that comes with dedicated support when you need it most."
+      variant="gray"
+    />
+    <FlexibleSection
+      id="enterprise-support"
+      variant="gray"
+      theme="light"
+    >
+      <div slot="left">
+        <h3>Dedicated Enterprise Support</h3>
+        <ul>
+          <li><strong>Custom SLA agreements</strong> - Tailored service level agreements to meet your business requirements</li>
+          <li><strong>Priority issue resolution</strong> - Critical issues addressed within one business day</li>
+          <li><strong>Assigned support representative</strong> - Direct access to a dedicated support engineer who knows your setup</li>
+          <li><strong>Pre-scheduled support calls</strong> - Regular check-ins for proactive issue resolution and configuration optimization</li>
+          <li><strong>Support for NIS-2 organisations</strong> - Specialized compliance assistance for organizations subject to NIS-2 directive requirements</li>
+        </ul>
+        <p>
+          <strong>Compliance & Certification:</strong> Defguard is currently proceeding with ISO 27001 certification, ensuring the highest standards of information security management. <a href="/newsletter?utm_source=iso-certification">Get notified when Defguard gets ISO 27001 certified →</a>
+        </p>
+        <p>
+          <a href="/book-a-demo?utm_source=enterprise-support" class="learn-more-link">Contact Enterprise Support →</a>
+        </p>
+      </div>
+
+      <div slot="right">
+        <ImageURL src="/images/features/SIEM integration.png" alt="Enterprise VPN Support Services" />
+      </div>
+    </FlexibleSection>
+
 <!-- 
 
 
@@ -279,8 +311,8 @@ const tags = [
 -->
 
     <HeaderSection
-      title="Secure and fast remote users enrollment."
-      description="Regardless of your configuration Defguard helps you to enroll and onboard your users in most secure and convenient ways."
+      title="Modern User Enrollment & Onboarding"
+      description="Seamless enrollment across all platforms with cutting-edge biometric authentication and one-click configuration. From mobile apps to desktop clients, get users connected securely in minutes."
       variant="white"
     />
 
@@ -291,18 +323,22 @@ const tags = [
       theme="light"
     >
       <div slot="left">
+        <h3>Multi-Platform Enrollment</h3>
+        <ul>
+          <li><strong>Mobile Clients (iOS/Android)</strong> - Native apps with biometric authentication and real-time config updates</li>
+          <li><strong>One-Click Desktop Enrollment</strong> - Seamless desktop client configuration with a single button click</li>
+          <li><strong>QR Code Configuration</strong> - Instant mobile device setup by scanning QR codes</li>
+          <li><strong>Biometric MFA Setup</strong> - Configure fingerprint, face recognition, and hardware key authentication during enrollment</li>
+          <li><strong>Secure Web enrollment portal</strong></li>
+        </ul>
         <p>
-          Defguard helps you to enroll and onboard your users in most secure and convenient ways.
-          <ul>
-            <li>With Defguard desktop client enrollment.</li>
-            <li>With web based (in browser) secure enrollment process.</li>
-          </ul>
+          <a href="https://docs.defguard.net/using-defguard-for-end-users/enrollment" class="learn-more-link" target="_blank">View Enrollment Guide →</a>
         </p>
       </div>
 
       <div slot="right">
         <ImageCarousel
-          src="/images/landing/enrollment/data-verification.png,/images/landing/enrollment/create-password.png,/images/landing/enrollment/configure-mfa.png" alt="Simple Enrollment Process"
+          src="/images/landing/enrollment/data-verification.png,/images/landing/enrollment/create-password.png,/images/landing/enrollment/configure-mfa.png" alt="Modern Enrollment Process with Mobile and Desktop Support"
           interval={3}
           autoplay={true}
         />
@@ -319,6 +355,7 @@ const tags = [
       variant="white"
     />
 
+
 <!-- 
 
 
@@ -329,10 +366,39 @@ const tags = [
 
 -->
     <HeaderSection
-      title="Defguard provides SSO and Identity Provider"
+      title="Flexible Identity & SSO approrach"
       description="Defguard is one platform for remote access and identity that enables you to go fully private and cloud-independent. It replaces siloed tools and legacy VPN appliances with a unified solution that combines remote access, identity, and access control — ideal for teams running private or hybrid infrastructure."
       variant="gray"
     />
+
+    <FlexibleSection
+      leftRatio={0.4}
+      title="Enterprise SSO & Identity Integrations - connect WireGuard® with any external SSO and Identity Provider"
+      id="security-features"
+      variant="gray"
+      theme="light"
+    >
+      <div slot="left">
+        <p>Defguard enable you to integrate WireGuard® with any external SSO and Identity Provider. Seamlessly integrate with your infrastructure:</p>
+        <ul>
+          <li><strong>Microsoft Integration</strong> - Azure AD, Microsoft Entra ID, and Office 365 SSO</li>
+          <li><strong>Google Workspace</strong> - Complete Google SSO and identity provider integration</li>
+          <li><strong>Enterprise IdPs</strong> - Okta, JumpCloud, Keycloak, Zitadel, and other OpenID Connect providers</li>
+          <li><strong>Legacy Systems</strong> - LDAP and Active Directory support for existing infrastructure</li>
+        </ul>
+        <p>
+          <a href="https://docs.defguard.net/features/external-openid-providers" class="learn-more-link" target="_blank">Learn about SSO Integration →</a>
+        </p>
+        <p>
+          <a href="https://docs.defguard.net/features/ldap-and-active-directory-integration" class="learn-more-link" target="_blank">View IdP Documentation →</a>
+        </p>
+
+      </div>
+
+      <div slot="right">
+        <ImageURL src="/images/features/OIDC SSO.png" alt="Enterprise SSO and OpenID Connect integrations with external identity providers" />
+      </div>
+    </FlexibleSection>
 
     <FlexibleSection
       leftRatio={0.4}
@@ -342,11 +408,17 @@ const tags = [
       theme="light"
     >
       <div slot="left">
+        <h3>Complete Identity Management Platform</h3>
+        <p>Defguard serves as a full-featured OpenID Connect (OIDC) Identity Provider, eliminating the need for external identity services:</p>
         <ul>
-          <li>Acts as your Identity Provider (IdP)</li>
-          <li>Single Sign-On across your services</li>
-          <li>Easy integration with existing apps and tools</li>
+          <li><strong>OpenID Connect SSO</strong> - Standards-compliant identity provider with "Log in with Defguard" capability</li>
+          <li><strong>Multi-Factor Authentication</strong> - Built-in TOTP, email tokens, WebAuthn/FIDO2 hardware keys, and biometric authentication for mobile and desktop</li>
+          <li><strong>User & Group Management</strong> - Comprehensive user lifecycle management with role-based access control</li>
+          <li><strong>Application Integration</strong> - Easy GUI for configuring external applications with SSO</li>
         </ul>
+        <p>
+          <a href="https://docs.defguard.net/features/openid-connect" class="learn-more-link" target="_blank">Learn about Identity Provider →</a>
+        </p>
       </div>
 
       <div slot="right">
@@ -374,26 +446,6 @@ const tags = [
     </div>
   </FlexibleSection>
 
-  <FlexibleSection
-  leftRatio={0.4}
-  title="Hybrid infrastructure support"
-  id="security-features"
-  variant="gray"
-  theme="light"
->
-  <div slot="left">
-    <p>For organisations not ready to step down from the cloud we provide:</p>
-    <ul>
-      <li>integration with cloud Identity Providers</li>
-      <li>support for external SSO</li>
-    </ul>
-
-  </div>
-
-  <div slot="right">
-    <ImageURL src="/images/features/Sso active dir.png" alt="Integration with SSO providers, Active Directory, and LDAP" />
-  </div>
-</FlexibleSection>
 
     <!-- <FlexibleIdentitySection /> -->
 
@@ -424,9 +476,24 @@ const tags = [
     <TextDivider text="Case Studies" paddingTop="0" />
     <CaseCapsules
       cases={[
-        { title: "Build private cloud security with Defguard.", link: "https://defguard.net/blog/self-hosted-vpn-private-cloud-acquinox-defguard/" },
-        { title: "Replace Fortinet or Checkpoint with a lightweight, auditable stack", link: "/defguard-vs-fortinet" },
-        { title: "Give contractors and remote workers secure, controlled access", link: "" }
+        { 
+          title: "How a Swiss Private Equity fund built a private cloud with Defguard", 
+          link: "/blog/self-hosted-vpn-private-cloud-acquinox-defguard",
+          image: "/images/blog/swiss-dg.png",
+          description: "Learn how Acquinox built a secure, compliant private cloud infrastructure using Defguard's enterprise VPN solution."
+        },
+        { 
+          title: "Replace Fortigate VPN and FortiClient with a lightweight, auditable modern VPN solution", 
+          link: "/defguard-vs-fortinet",
+          image: "/images/landing/defguard.png",
+          description: "Discover how Defguard provides enterprise-grade security with a fraction of the complexity of traditional VPN appliances."
+        },
+        { 
+          title: "How Prusa 3D Adopted Defguard for Secure, Scalable VPN Access", 
+          link: "/blog/prusa-vpn-scaling-with-defguard",
+          image: "/images/blog/prusa.png",
+          description: "Prusa Research adopted Defguard to build a scalable, self-hosted VPN with WireGuard-level MFA, securing access for 490+ users."
+        }
       ]}
     />
     <TextDivider text="Testimonials" />

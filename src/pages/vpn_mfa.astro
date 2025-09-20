@@ -501,6 +501,51 @@ const tags = [
     </FlexibleSection>
     
     <!-- Final CTA Section -->
+    <!-- FAQ Section -->
+    <HomeSection variant="gray" contentId="mfa-faq">
+      <h2>Frequently Asked Questions about WireGuard MFA</h2>
+      <p>Common questions about implementing multi-factor authentication with WireGuard VPN connections.</p>
+    </HomeSection>
+
+    <FlexibleSection
+      id="mfa-faq-content"
+      variant="gray"
+      theme="light"
+    >
+      <div slot="left">
+        <div class="faq-section">
+          <div class="faq-item">
+            <h3>How do I enable multi-factor authentication (MFA) on a WireGuard VPN?</h3>
+            <p>With Defguard, MFA is enabled at the VPN gateway level through the admin panel. Unlike other solutions that only provide MFA for initial setup, Defguard implements true connection-level MFA that triggers every time a user attempts to connect to a protected VPN location.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>What tools or solutions can I use to add MFA to my WireGuard VPN?</h3>
+            <p>Defguard is currently the only solution that provides genuine connection-level MFA for WireGuard. It supports built-in IdP/SSO, external providers like Google, Microsoft, Okta, and JumpCloud, plus biometric authentication on both mobile and desktop clients.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>Can I integrate Google Authenticator or Microsoft Authenticator with WireGuard MFA?</h3>
+            <p>Yes, Defguard supports TOTP (Time-based One-Time Password) authentication through apps like Google Authenticator and Microsoft Authenticator, as well as direct integration with Google and Microsoft IdP services for seamless SSO-based MFA.</p>
+          </div>
+        </div>
+      </div>
+
+      <div slot="right">
+        <div class="faq-section">
+          <div class="faq-item">
+            <h3>How does MFA improve the security of WireGuard VPN connections?</h3>
+            <p>MFA adds critical security layers beyond WireGuard's cryptographic keys. Even if private keys are compromised, attackers cannot establish VPN connections without additional authentication factors. This prevents credential theft, insider threats, and unauthorized access to private networks.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>What are common challenges when setting up MFA for WireGuard?</h3>
+            <p>The main challenge is that most VPN solutions only provide MFA for initial configuration, not connection-level authentication. Defguard solves this by implementing MFA directly in the WireGuard protocol flow. Common setup considerations include choosing appropriate MFA methods, configuring per-location policies, and ensuring mobile/desktop client compatibility.</p>
+          </div>
+        </div>
+      </div>
+    </FlexibleSection>
+
     <CTASection
       title="Try Defguard Today"
       description="Install free open source Defguard in 10 minutes and experience true connection-level WireGuard 2FA and MFA for secure VPN connections."
@@ -820,6 +865,62 @@ const tags = [
           .benefit-icon {
             width: 40px;
             height: 40px;
+          }
+        }
+      }
+    }
+  }
+
+  // FAQ Section Styles
+  #mfa-faq-content {
+    .faq-section {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      
+      .faq-item {
+        padding: 2rem;
+        background: var(--surface-nav-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-separator);
+        transition: all 0.3s ease;
+        
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+          border-color: var(--surface-main-primary);
+        }
+        
+        h3 {
+          color: var(--text-body-primary);
+          margin: 0 0 1rem 0;
+          font-size: 1.2rem;
+          font-weight: 600;
+          line-height: 1.4;
+        }
+        
+        p {
+          color: var(--text-body-secondary);
+          margin: 0;
+          line-height: 1.7;
+          font-size: 1rem;
+        }
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .faq-section {
+        gap: 1.5rem;
+        
+        .faq-item {
+          padding: 1.5rem;
+          
+          h3 {
+            font-size: 1.1rem;
+          }
+          
+          p {
+            font-size: 0.95rem;
           }
         }
       }
