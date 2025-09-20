@@ -12,6 +12,7 @@ interface Props {
   theme?: "light" | "dark";
   bottomBorder?: boolean;
   leftRatio?: number;
+  style?: string;
 }
 
 const {
@@ -24,6 +25,7 @@ const {
   theme = "light",
   bottomBorder = true,
   leftRatio = 0.5,
+  style,
 } = Astro.props;
 
 // Calculate right ratio automatically
@@ -34,7 +36,7 @@ const rightRatio = 1 - leftRatio;
   class={clsx("flexible-section", `variant-${variant}`, `theme-${theme}`, className)}
   id={id}
   aria-labelledby={id ? `${id}-title` : undefined}
-  style={`--left-ratio: ${leftRatio}; --right-ratio: ${rightRatio};`}
+  style={`--left-ratio: ${leftRatio}; --right-ratio: ${rightRatio}; ${style || ''}`}
 >
   <ContentLimiter maxWidth={maxWidth}>
     <div class="flexible-content">
