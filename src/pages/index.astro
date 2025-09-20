@@ -154,8 +154,30 @@ const tags = [
 
 -->
 
+    <FlexibleSection
+      leftRatio={0.4}
+      id="updates-section"
+      variant="white"
+      theme="light"
+      style="--section-height-factor: 0.6;"
+    >
+      <div slot="left">
+        <ImageURL src="/images/blog/defguard-1.5-release-notes/15_release_1.png" alt="Defguard 1.5 Release" />
+      </div>
+
+      <div slot="right">
+        <h2>Defguard 1.5 Release</h2>
+        <p>
+          Our biggest release yet! Mobile apps for iOS and Android, External SSO MFA, biometric authentication, and much more.
+        </p>
+        <p>
+          <a href="/blog/defguard-15-release-notes" class="learn-more-link">Read Full Release Notes →</a>
+        </p>
+      </div>
+    </FlexibleSection>
+
     <HeaderSection
-      title="True VPN multi-factor authentication"
+      title="True VPN MFA"
       description="Defguard is the only VPN solution that implements multi-factor authentication directly at the WireGuard® protocol level, providing true connection-level security that goes beyond traditional application-layer MFA."
       variant="gray"
     />
@@ -173,6 +195,9 @@ const tags = [
         </ul>
         <p>
           <strong>Industry first</strong> Defguard is the only VPN solution that brings enterprise-grade MFA directly to the WireGuard® protocol.
+        </p>
+        <p>
+          <a href="/vpn_mfa" class="learn-more-link">Learn More About VPN MFA →</a>
         </p>
         
       </div>
@@ -304,7 +329,7 @@ const tags = [
 
 -->
     <HeaderSection
-      title="One Platform for Private Access & Identity"
+      title="Defguard provides SSO and Identity Provider"
       description="Defguard is one platform for remote access and identity that enables you to go fully private and cloud-independent. It replaces siloed tools and legacy VPN appliances with a unified solution that combines remote access, identity, and access control — ideal for teams running private or hybrid infrastructure."
       variant="gray"
     />
