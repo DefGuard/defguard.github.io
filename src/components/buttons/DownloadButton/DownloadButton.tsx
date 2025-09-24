@@ -230,7 +230,7 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
         )}
         {(platform === PlatformType.MACOSINTEL || platform === PlatformType.MACOSARM) && (
           <>
-            <p>Requires version 10.5 or later</p>
+            <p>Requires macOS version 14 or later</p>
           </>
         )}
       </div>
