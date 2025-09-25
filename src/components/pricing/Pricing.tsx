@@ -110,7 +110,7 @@ const PricingCard = ({ data, activePlan }: CardProps) => {
             spaced: data.price === 0 || data.price === -1 || !isAnnual,
           })}
         >
-          {data.price > 0 && (
+          {data.price > 0 && !isAnnual && (
             <p
               className={clsx("monthly", {
                 discount: hasDiscount && isAnnual,
