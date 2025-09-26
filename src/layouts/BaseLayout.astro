@@ -4,6 +4,7 @@ import Footer from "../components/base/Footer.astro";
 import "../styles/global.scss";
 import { CookieBar } from "../components/base/CookieBar/CookieBar";
 import Google from "../components/analytics/Google.astro";
+import Clarity from "../components/analytics/Clarity.astro";
 
 const favSizes = [
   16, 32, 57, 60, 70, 72, 76, 96, 114, 120, 128, 144, 150, 152, 180, 192, 310, 384, 512,
@@ -82,6 +83,7 @@ const { url, title, description, featuredImage, imageWidth, imageHeight } = Astr
     <link rel="icon" type="image/ico" href="/favicon/favicon.ico" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <Google />
+    <Clarity />
   </head>
   <body>
     <div class="page-container">
