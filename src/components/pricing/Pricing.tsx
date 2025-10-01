@@ -142,7 +142,7 @@ const PricingCard = ({ data, activePlan }: CardProps) => {
           )}
           {data.price === -1 && (
             <a
-              className="action"
+              className="action contact-sales"
               target={data.linkTarget ?? "_self"}
               href={isAnnual ? data.annualPriceLink : data.priceLink}
             >
