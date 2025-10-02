@@ -12,15 +12,14 @@ import FlexibleSection from "../components/FlexibleSection.astro";
 // Per-component metadata (id, name, version, repo) to build exact URLs
 interface ComponentDef { id: 'defguard' | 'defguard-client' | 'defguard-mobile' | 'defguard-proxy' | 'defguard-gateway'; name: string; version: string; repo: string; status: string }
 const COMPONENTS: ComponentDef[] = [
-  { id: 'defguard', name: 'Core', version: '1.5.1', repo: 'defguard', status: 'Fix in testing' },
+  { id: 'defguard', name: 'Core', version: '1.5.1', repo: 'defguard', status: '' },
   { id: 'defguard-proxy', name: 'Proxy', version: '1.5.1', repo: 'proxy', status: '' },
   { id: 'defguard-gateway', name: 'Gateway', version: '1.5.1', repo: 'gateway', status: '' },
   { id: 'defguard-client', name: 'Desktop App', version: '1.5.1', repo: 'client', status: ''  },
-  { id: 'defguard-mobile', name: 'Mobile App', version: '1.5.1', repo: 'mobile-client', status: ''  },
+  { id: 'defguard-mobile', name: 'Mobile App', version: '1.5.1', repo: 'mobile-client', status: '' },
 ];
 
 const buildReleaseTag = (version: string): string => `v${version}`;
-// const basePath = 'sboms';
 const basePath = 'https://github.com/DefGuard';
 const buildBaseUrl = (repo: string, version: string): string => `${basePath}/${repo}/releases/download/${buildReleaseTag(version)}/`;
 const buildSbomUrl = (c: ComponentDef): string => `${buildBaseUrl(c.repo, c.version)}${c.id}-${c.version}.sbom.json`;
@@ -40,7 +39,13 @@ const pickHighestSeverity = (items: string[]): string => {
 
 // Group by component/version
 interface SbomEntry { name: string; version: string; url: string; status: string }
-interface Vulnerability { Severity?: string; VulnerabilityID?: string }
+interface Vulnerability { 
+  Severity?: string; 
+  VulnerabilityID?: string;
+  PkgID?: string;
+  PrimaryURL?: string;
+  Title?: string;
+}
 interface AdvisoryResult { Vulnerabilities?: Vulnerability[] }
 interface AdvisoryFile { CreatedAt?: string; Metadata?: { CreatedAt?: string }; Results?: AdvisoryResult[] }
 
@@ -65,12 +70,16 @@ await Promise.all(COMPONENTS.map(async (c) => {
 // Build components array for table
 const components = Array.from(sboms.values()).map((c: SbomEntry) => {
   const adv = advisories.get(`${c.name}@${c.version}`);
+  // Find the original component to get advisories URL
+  const comp = COMPONENTS.find(comp => comp.name === c.name);
+  const advisoriesUrl = comp ? buildAdvisoriesUrl(comp) : '';
   return {
     name: c.name,
     format: 'JSON',
     version: c.version,
     date: adv?.createdAt ? String(adv.createdAt).slice(0, 10) : '—',
     url: c.url,
+    advisoriesUrl,
     status: c.status,
   };
 });
@@ -145,9 +154,12 @@ const tags = [
     <FlexibleSection leftRatio={1} title="SBOM file list with vulnerability status" theme="light">
       <div slot="left" class="sbom-filelist">
         <p>
-          We publish separate SBOMs for <strong>mobile apps</strong> (Android, iOS), the <strong>desktop app</strong>
-          (Windows, macOS, Linux), and <strong>server components</strong> (Core, Proxy, Gateway). We provide them in the standard format
-          (SPDX), enabling integration with tools like Trivy, Syft, and Dependency‑Track.
+          Separate SBOMs are available for <strong>mobile apps</strong> (Android, iOS), the <strong>desktop app</strong>
+          (Windows, macOS, Linux), and <strong>server components</strong> (Core, Proxy, Gateway). Each SBOM is updated <strong>every day</strong> and provided in the standard
+          <strong>SPDX</strong> format, enabling integration with tools like Trivy or Syft.
+        </p>
+        <p>
+          Alongside each SBOM, <strong>advisories files</strong> are also published to summarize known vulnerabilities in detail. 
         </p>
         <div class="content-measure">
           <table class="sbom-table" role="table" aria-label="SBOM list with vulnerability status">
@@ -156,13 +168,13 @@ const tags = [
                 <th>Component</th>
                 <th>Version</th>
                 <th>Date checked</th>
-                <th>SBOM link</th>
+                <th>Links</th>
                 <th>Vulnerability status</th>
                 <th>Status</th>
             </tr>
           </thead>
           <tbody>
-            {components.map((c) => {
+            {components.map((c, index) => {
               const report = vulnReports.find((r) => r.component === c.name && r.version === c.version);
               const statusLabel = report
                 ? (report.status === 'ok' ? 'No vulnerabilities' : `${report.severity} vulnerabilities`)
@@ -171,15 +183,100 @@ const tags = [
               const badgeClass = report
                 ? (report.status === 'ok' ? 'ok' : (severity || 'issues'))
                 : 'na';
+              const hasVulns = report && report.status !== 'ok';
+              const rowId = `component-${index}`;
+              const detailsId = `details-${index}`;
+              
               return (
-                <tr>
-                  <td>{c.name}</td>
-                  <td class="nowrap">{c.version}</td>
-                  <td class="nowrap">{c.date}</td>
-                  <td><a href={c.url} rel="nofollow">Download</a></td>
-                  <td><span class={`badge ${badgeClass}`}>{statusLabel}</span></td>
-                  <td>{c.status || '—'}</td>
-                </tr>
+                <>
+                  <tr>
+                    <td>
+                      {hasVulns ? (
+                        <button 
+                          class="vuln-toggle" 
+                          data-target={detailsId}
+                          aria-expanded="false"
+                          aria-controls={detailsId}
+                        >
+                          <span class="toggle-icon">▶</span>
+                          {c.name}
+                        </button>
+                      ) : (
+                        c.name
+                      )}
+                    </td>
+                    <td class="nowrap">{c.version}</td>
+                    <td class="nowrap">{c.date}</td>
+                    <td>
+                      <a href={c.url} rel="nofollow">SBOM</a>
+                      {c.advisoriesUrl && (
+                        <>
+                          {' | '}
+                          <a href={c.advisoriesUrl} rel="nofollow">Advisories</a>
+                        </>
+                      )}
+                    </td>
+                    <td><span class={`badge ${badgeClass}`}>{statusLabel}</span></td>
+                    <td>{hasVulns ? (c.status || 'Patch in progress') : '—'}</td>
+                  </tr>
+                  {hasVulns && (
+                    <tr id={detailsId} class="vuln-details" style="display: none;">
+                      <td colspan="6">
+                        <div class="vuln-details-content">
+                          <h4>Vulnerability Details</h4>
+                          <div class="vuln-list">
+                            {(() => {
+                              const adv = advisories.get(`${c.name}@${c.version}`);
+                              const vulns = adv?.vulns || [];
+                              
+                              if (vulns.length === 0) {
+                                return <p>Vulnerabilities detected but no specific details available.</p>;
+                              }
+                              
+                              return (
+                                <div class="vuln-items">
+                                  {vulns.slice(0, 10).map((vuln) => (
+                                    <div class="vuln-item">
+                                      <div class="vuln-header">
+                                        <div class="vuln-cve">
+                                          {vuln.PrimaryURL ? (
+                                            <a href={vuln.PrimaryURL} target="_blank" rel="noopener noreferrer">
+                                              <strong>{vuln.VulnerabilityID || 'Unknown CVE'}</strong>
+                                            </a>
+                                          ) : (
+                                            <strong>{vuln.VulnerabilityID || 'Unknown CVE'}</strong>
+                                          )}
+                                          <span class={`severity-badge ${(vuln.Severity || 'unknown').toLowerCase()}`}>
+                                            {vuln.Severity || 'Unknown'}
+                                          </span>
+                                        </div>
+                                        {vuln.PkgID && (
+                                          <div class="vuln-package">
+                                            Package: <code>{vuln.PkgID}</code>
+                                          </div>
+                                        )}
+                                      </div>
+                                      {vuln.Title && (
+                                        <div class="vuln-title">
+                                          {vuln.Title}
+                                        </div>
+                                      )}
+                                    </div>
+                                  ))}
+                                  {vulns.length > 10 && (
+                                    <div class="vuln-more">
+                                      ... and {vulns.length - 10} more vulnerabilities
+                                    </div>
+                                  )}
+                                </div>
+                              );
+                            })()}
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                </>
               );
             })}
           </tbody>
@@ -285,4 +382,156 @@ const tags = [
     color: #555;
     border-color: #e5e5e5;
   }
+  
+  /* Vulnerability toggle button */
+  .vuln-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-align: left;
+  }
+  .vuln-toggle:hover {
+    color: #0066cc;
+  }
+  .toggle-icon {
+    font-size: 10px;
+    transition: transform 0.2s ease;
+    display: inline-block;
+    width: 12px;
+  }
+  .vuln-toggle[aria-expanded="true"] .toggle-icon {
+    transform: rotate(90deg);
+  }
+  
+  /* Vulnerability details row */
+  .vuln-details {
+    background: #f8f9fa;
+  }
+  .vuln-details-content {
+    padding: 16px;
+    border-left: 3px solid #dc3545;
+  }
+  .vuln-details-content h4 {
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+  }
+  .vuln-items {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .vuln-item {
+    padding: 12px;
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+  }
+  .vuln-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .vuln-cve {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .vuln-cve a {
+    color: #0066cc;
+    text-decoration: none;
+  }
+  .vuln-cve a:hover {
+    text-decoration: underline;
+  }
+  .vuln-cve strong {
+    font-family: monospace;
+    font-size: 13px;
+  }
+  .vuln-package {
+    font-size: 12px;
+    color: #666;
+  }
+  .vuln-package code {
+    background: #f8f9fa;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 11px;
+  }
+  .vuln-title {
+    font-size: 13px;
+    color: #333;
+    line-height: 1.4;
+  }
+  .vuln-more {
+    padding: 8px 12px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+    font-style: italic;
+  }
+  .severity-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .severity-badge.critical {
+    background: #dc3545;
+    color: white;
+  }
+  .severity-badge.high {
+    background: #fd7e14;
+    color: white;
+  }
+  .severity-badge.medium {
+    background: #ffc107;
+    color: #000;
+  }
+  .severity-badge.low {
+    background: #28a745;
+    color: white;
+  }
+  .severity-badge.unknown {
+    background: #6c757d;
+    color: white;
+  }
 </style>
+
+<script>
+  // Handle vulnerability details toggle
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggleButtons = document.querySelectorAll('.vuln-toggle');
+    
+    toggleButtons.forEach((button) => {
+      button.addEventListener('click', function(this: HTMLElement) {
+        const targetId = this.getAttribute('data-target');
+        if (!targetId) return;
+        const targetRow = document.getElementById(targetId);
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        
+        if (targetRow) {
+          if (isExpanded) {
+            targetRow.style.display = 'none';
+            this.setAttribute('aria-expanded', 'false');
+          } else {
+            targetRow.style.display = 'table-row';
+            this.setAttribute('aria-expanded', 'true');
+          }
+        }
+      });
+    });
+  });
+</script>
