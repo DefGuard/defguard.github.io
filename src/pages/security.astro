@@ -45,8 +45,9 @@ const tags = [
       title="Our Security Approach"
       description="Building a secure software is a mindset. Features, great UI, and easy deployment are often things that draw users to the software, but when building software in the cybersecurity space, the approach to security should be what tips the scales of choice. Here is ours."
       buttons={[
-        { name: "Pentesting Security Report", link: "/pentesting/" },
-        { name: "Vulnerability Disclosure Process", link: "#VDP" }
+        { name: "Pentesting Report", link: "/pentesting/" },
+        { name: "Daily SBOM CVE scans", link: "/sbom/" },
+        { name: "Vulnerability Disclosure", link: "#VDP" }
       ]}
     />
 
@@ -128,9 +129,16 @@ const tags = [
       <div slot="left">
         <ul>
           <li>As far as we know, we are <b>the only VPN solution that publishes 
-          <a href="https://defguard.net/pentesting/">detailed penetration testing reports</b> 
+          <a href="/pentesting/">detailed penetration testing reports</b> 
           from periodic security audits</a> conducted by <a href="https://isec.pl" target="_blank">
             ISEC</a> on all Defguard components.
+          </li>
+          <li>
+            We publish <b>Software Bill of Materials (SBOM)</b> for all our components, providing 
+            <a href="/sbom/">detailed information</a> about the ingridients of the software we ship. 
+            Every day we use the SBOMs to scan for vulnerabilities in our dependencies and publish 
+            the <a href="/sbom#sbom-list">results</a>.
+            <b>Reacting to new vulnerabilities is a high priority for us.</b>
           </li>
           <li>
             Most of our code is open source, and the enterprise part is open code —
