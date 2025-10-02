@@ -7,10 +7,13 @@ import MessageBottom from "../../alert/MessageBottom/MessageBottom";
 import { Button } from "../../buttons/Button/Button";
 
 type BookDemoType = {
-  first_name: string;
-  last_name: string;
+  company_name: string;
   email: string;
-  website_url: string;
+  vat_id: string;
+  country: string;
+  street_address: string;
+  town: string;
+  postal_code: string;
   tell_us_more: string;
 };
 
@@ -22,10 +25,13 @@ const BookDemoForm = ({ submit_text = "Submit" }: BookDemoFormProps) => {
   const [okMessage, setOkMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
   const [values, setValues] = useState<BookDemoType>({
-    first_name: "",
-    last_name: "",
+    company_name: "",
     email: "",
-    website_url: "",
+    vat_id: "",
+    country: "",
+    street_address: "",
+    town: "",
+    postal_code: "",
     tell_us_more: "",
   });
 
@@ -35,27 +41,26 @@ const BookDemoForm = ({ submit_text = "Submit" }: BookDemoFormProps) => {
   };
 
   const handleInputChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
-    const { name, value } = event.target as HTMLInputElement | HTMLTextAreaElement;
+    const { name, value } = event.target as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
     setValues({ ...values, [name]: value });
   };
 
   const onSubmit = () => {
     const data = new FormData();
-
+    
+    data.append("company_name", values.company_name);
     data.append("email", values.email);
-    data.append("website_url", values.website_url);
+    data.append("vat_id", values.vat_id);
+    data.append("country", values.country);
+    data.append("street_address", values.street_address);
+    data.append("town", values.town);
+    data.append("postal_code", values.postal_code);
     data.append(
       "tell_us_more",
       `${values.tell_us_more} \n\nform_source:${window.location.pathname + window.location.search + window.location.hash}`,
     );
-    data.append("company_name",values.first_name+" "+values.last_name);
-    data.append("vat_id", "");
-    data.append("country", "");
-    data.append("street_address", "");
-    data.append("town", "");
-    data.append("postal_code", "");
 
     fetch("https://pkgs.defguard.net/api/customer/signup", {
       mode: "no-cors",
@@ -82,29 +87,44 @@ const BookDemoForm = ({ submit_text = "Submit" }: BookDemoFormProps) => {
         }}
       >
         <div className="double-inputs">
-          <label htmlFor="first_name">
-            First name
-            <input type="text" required name="first_name" onChange={handleInputChange} />
+          <label htmlFor="company_name">
+            Company name
+            <input type="text" required name="company_name" onChange={handleInputChange} />
           </label>
-          <label htmlFor="last_name">
-            Last name
-            <input type="text" required name="last_name" onChange={handleInputChange} />
-          </label>
-        </div>
-        <div className="double-inputs">
           <label htmlFor="email">
             Email
             <input type="email" required name="email" onChange={handleInputChange} />
           </label>
-          <label htmlFor="website_url">
-            Company website URL
-            <input type="text" required name="website_url" onChange={handleInputChange} />
+        </div>
+        <div className="double-inputs">
+          <label htmlFor="vat_id">
+            Company VAT ID or registration number
+            <input type="text" required name="vat_id" onChange={handleInputChange} />
+          </label>
+          <label htmlFor="country">
+            Country
+            <input type="text" required name="country" onChange={handleInputChange} />
+          </label>
+        </div>
+        <div className="triple-inputs">
+          <label htmlFor="street_address">
+            Street address
+            <input type="text" required name="street_address" onChange={handleInputChange} />
+          </label>
+          <label htmlFor="town">
+            Town
+            <input type="text" required name="town" onChange={handleInputChange} />
+          </label>
+          <label htmlFor="postal_code">
+            Postal code
+            <input type="text" required name="postal_code" onChange={handleInputChange} />
           </label>
         </div>
         <label className="single-input" htmlFor="tell_us_more">
           Anything else you wish to tell us?
           <textarea rows={7} name="tell_us_more" onChange={handleInputChange}></textarea>
         </label>
+
         <div className="button">
           <Button text={submit_text} type="submit" />
         </div>
