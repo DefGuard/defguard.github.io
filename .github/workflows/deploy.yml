@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+  schedule:
+    - cron: '30 3 * * *' # 3:30 AM UTC (SBOMs regenerate at 2:30 AM UTC)
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
