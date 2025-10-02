@@ -65,12 +65,16 @@ await Promise.all(COMPONENTS.map(async (c) => {
 // Build components array for table
 const components = Array.from(sboms.values()).map((c: SbomEntry) => {
   const adv = advisories.get(`${c.name}@${c.version}`);
+  // Find the original component to get advisories URL
+  const comp = COMPONENTS.find(comp => comp.name === c.name);
+  const advisoriesUrl = comp ? buildAdvisoriesUrl(comp) : '';
   return {
     name: c.name,
     format: 'JSON',
     version: c.version,
     date: adv?.createdAt ? String(adv.createdAt).slice(0, 10) : '—',
     url: c.url,
+    advisoriesUrl,
     status: c.status,
   };
 });
@@ -145,9 +149,10 @@ const tags = [
     <FlexibleSection leftRatio={1} title="SBOM file list with vulnerability status" theme="light">
       <div slot="left" class="sbom-filelist">
         <p>
-          We publish separate SBOMs for <strong>mobile apps</strong> (Android, iOS), the <strong>desktop app</strong>
-          (Windows, macOS, Linux), and <strong>server components</strong> (Core, Proxy, Gateway). We provide them in the standard format
-          (SPDX), enabling integration with tools like Trivy, Syft, and Dependency‑Track.
+          Separate SBOMs are available for <strong>mobile apps</strong> (Android, iOS), the <strong>desktop app</strong>
+          (Windows, macOS, Linux), and <strong>server components</strong> (Core, Proxy, Gateway). Each SBOM is provided in the standard
+          <strong>SPDX</strong> format, enabling integration with tools like Trivy, Syft, and Dependency‑Track.
+          Alongside each SBOM, <strong>advisories files</strong> are also published to summarize known vulnerabilities and their status for every release. These advisories make it easy to track which issues affect each component and when they were last checked, supporting automated vulnerability management and compliance workflows.
         </p>
         <div class="content-measure">
           <table class="sbom-table" role="table" aria-label="SBOM list with vulnerability status">
@@ -156,7 +161,7 @@ const tags = [
                 <th>Component</th>
                 <th>Version</th>
                 <th>Date checked</th>
-                <th>SBOM link</th>
+                <th>Links</th>
                 <th>Vulnerability status</th>
                 <th>Status</th>
             </tr>
@@ -176,7 +181,15 @@ const tags = [
                   <td>{c.name}</td>
                   <td class="nowrap">{c.version}</td>
                   <td class="nowrap">{c.date}</td>
-                  <td><a href={c.url} rel="nofollow">Download</a></td>
+                  <td>
+                    <a href={c.url} rel="nofollow">SBOM</a>
+                    {c.advisoriesUrl && (
+                      <>
+                        {' | '}
+                        <a href={c.advisoriesUrl} rel="nofollow">Advisories</a>
+                      </>
+                    )}
+                  </td>
                   <td><span class={`badge ${badgeClass}`}>{statusLabel}</span></td>
                   <td>{report && report.status !== 'ok' ? c.status : '-'}</td>
                 </tr>
