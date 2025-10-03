@@ -3,7 +3,8 @@ import FloatingLinks from "../components/FloatingLinks.astro";
 import Footer from "../components/base/Footer.astro";
 import "../styles/global.scss";
 import { CookieBar } from "../components/base/CookieBar/CookieBar";
-import Google from "../components/analytics/Google.astro";
+import GTM from "../components/analytics/GTM.astro";
+import GTMBody from "../components/analytics/GTMBody.astro";
 import Clarity from "../components/analytics/Clarity.astro";
 
 const favSizes = [
@@ -82,10 +83,11 @@ const { url, title, description, featuredImage, imageWidth, imageHeight } = Astr
     }
     <link rel="icon" type="image/ico" href="/favicon/favicon.ico" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <Google />
+    <GTM />
     <Clarity />
   </head>
   <body>
+    <GTMBody />
     <div class="page-container">
       <slot />
       <Footer />
