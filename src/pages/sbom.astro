@@ -155,11 +155,12 @@ const tags = [
       <div slot="left" class="sbom-filelist">
         <p>
           Separate SBOMs are available for <strong>mobile apps</strong> (Android, iOS), the <strong>desktop app</strong>
-          (Windows, macOS, Linux), and <strong>server components</strong> (Core, Proxy, Gateway). Each SBOM is updated <strong>every day</strong> and provided in the standard
-          <strong>SPDX</strong> format, enabling integration with tools like Trivy or Syft.
+          (Windows, macOS, Linux), and <strong>server components</strong> (Core, Proxy, Gateway). 
+          Alongside each SBOM, <strong>advisories files</strong> are also published to summarize known vulnerabilities in detail. 
         </p>
         <p>
-          Alongside each SBOM, <strong>advisories files</strong> are also published to summarize known vulnerabilities in detail. 
+          We use <a href="https://trivy.dev/" target="_blank">Trivy</a> to generate SBOM files and scan for vulnerabilities in our dependencies.
+          Each SBOM is updated <strong>every day</strong> in <a target="_blank" href="https://github.com/DefGuard/defguard/blob/main/.github/workflows/sbom.yml">our CI/CD pipeline</a> and provided in the standard <a href="https://spdx.dev/" target="_blank">SPDX</a> format.
         </p>
         <div class="content-measure">
           <table class="sbom-table" role="table" aria-label="SBOM list with vulnerability status">
