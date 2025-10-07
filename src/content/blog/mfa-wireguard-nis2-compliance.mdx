@@ -6,7 +6,6 @@ author: "Piotr Borkowicz"
 image: "/images/blog/mfa-nis2-hero.jpg"
 ---
 
-import MfaDiagram from '../../components/MfaDiagram.astro';
 
 ![A central server connected securely to several computer terminals, representing a secure VPN network with MFA for NIS2 compliance.](/images/blog/mfa-nis2-hero.jpg)
 
@@ -33,7 +32,6 @@ Many organizations use VPNs (Virtual Private Networks) to allow employees remote
 
 As part of the NIS2 Directive, companies relying on VPN infrastructure to manage access to their network will be required to adopt MFA for VPN authentication. This ensures that even if VPN credentials are compromised, unauthorized access will still be difficult to achieve without additional factors, such as a biometric scan or a one-time passcode (OTP).
 
-<MfaDiagram />
 
 ## WireGuard: The Modern VPN That Needs MFA Support
 
@@ -114,10 +112,13 @@ With the NIS2 Directive pushing for stronger cybersecurity measures, adopting MF
 Solutions like Defguard make it easier than ever to integrate MFA into VPNs, while also offering identity management, SSO, and hardware key management. These added functionalities ensure organizations maintain the security, speed, and simplicity of their VPN while building a comprehensive, regulatory-compliant cybersecurity strategy. As cybersecurity continues to evolve, MFA and broader identity management capabilities will remain cornerstones of defense strategies, ensuring that even if credentials are compromised, access to critical systems remains secure.
 
 ---
-
+Piotr Borkowicz
+Technical Content Marketing Manager, Defguard
+piotr@defguard.net
+defguard.net
 
 <script type="application/ld+json" is:inline>
-{
+{`{
   "@context": "https://schema.org",
   "@type": "TechArticle",
   "mainEntityOfPage": {
@@ -126,49 +127,22 @@ Solutions like Defguard make it easier than ever to integrate MFA into VPNs, whi
   },
   "headline": "Adopting Multi-Factor Authentication (MFA) for WireGuard: A Path to Compliance with the NIS2 Directive",
   "description": "The NIS2 Directive mandates MFA for VPNs. Learn how to implement Multi-Factor Authentication on WireGuard with Defguard to ensure compliance and top-tier security.",
-  "image": "[PLACEHOLDER_URL_DO_GŁÓWNEJ_GRAFIKI_HERO]",
-  "author": {
-    "@type": "Person",
-    "name": "Piotr Borkowicz"
-  },
+  "image": "https://defguard.net/images/blog/Defguard-nis2-mfa/mfa-nis2-hero.jpg",
+  "author": { "@type": "Person", "name": "Piotr Borkowicz" },
   "publisher": {
     "@type": "Organization",
     "name": "Defguard",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "[PLACEHOLDER_URL_DO_LOGO_TWOJEJ_FIRMY]"
-    }
+    "logo": { "@type": "ImageObject", "url": "https://defguard.net/svg/logo-full.svg" }
   },
   "datePublished": "2025-10-07",
   "dateModified": "2025-10-07",
   "mainEntity": {
     "@type": "FAQPage",
     "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Is WireGuard alone sufficient for NIS2 compliance?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. The base WireGuard protocol does not include a native MFA mechanism, which is a key technical requirement for access control under the NIS2 Directive."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What MFA methods does Defguard support for WireGuard?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Defguard supports a wide range of methods, including Time-based One-Time Passwords (TOTP), push notifications, biometrics, and FIDO2 hardware keys like YubiKey."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How is Defguard different from other MFA solutions?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Defguard is an integrated, open-source platform that combines MFA with Identity Management (IdP), SSO, and WireGuard configuration management in a single tool."
-        }
-      }
+      { "@type": "Question", "name": "Is WireGuard alone sufficient for NIS2 compliance?", "acceptedAnswer": { "@type": "Answer", "text": "No. The base WireGuard protocol does not include a native MFA mechanism, which is a key technical requirement for access control under the NIS2 Directive." } },
+      { "@type": "Question", "name": "What MFA methods does Defguard support for WireGuard?", "acceptedAnswer": { "@type": "Answer", "text": "Defguard supports a wide range of methods, including Time-based One-Time Passwords (TOTP), push notifications, biometrics, and FIDO2 hardware keys like YubiKey." } },
+      { "@type": "Question", "name": "How is Defguard different from other MFA solutions?", "acceptedAnswer": { "@type": "Answer", "text": "Defguard is an integrated, open-source platform that combines MFA with Identity Management (IdP), SSO, and WireGuard configuration management in a single tool." } }
     ]
   }
-}
+}`}
 </script>
