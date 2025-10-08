@@ -1,0 +1,121 @@
+---
+// src/components/MfaDiagram.astro
+---
+<div class="diagram-container">
+  <div class="column">
+      <h3>Before: Password-Only Access</h3>
+      <div class="step">
+          <div class="icon"><i class="lni lni-user"></i></div>
+          <div class="label">User</div>
+      </div>
+      <div class="arrow"><i class="lni lni-arrow-down"></i></div>
+      <div class="step">
+          <div class="icon"><i class="lni lni-lock-alt"></i></div>
+          <div class="label">Password</div>
+      </div>
+      <div class="arrow"><i class="lni lni-arrow-down"></i></div>
+      <div class="step">
+          <div class="icon icon-insecure"><i class="lni lni-warning"></i></div>
+          <div class="label">Vulnerable Point</div>
+      </div>
+      <div class="arrow"><i class="lni lni-arrow-down"></i></div>
+      <div class="step">
+          <div class="icon"><i class="lni lni-database"></i></div>
+          <div class="label">Corporate Network</div>
+      </div>
+  </div>
+  <div class="column">
+      <h3>After: MFA-Secured Access</h3>
+      <div class="step">
+          <div class="icon"><i class="lni lni-user"></i></div>
+          <div class="label">User</div>
+      </div>
+      <div class="arrow"><i class="lni lni-arrow-down"></i></div>
+      <div class="step">
+          <div class="icon"><i class="lni lni-lock-alt"></i></div>
+          <div class="label">Password</div>
+      </div>
+      <div class="arrow"><i class="lni lni-arrow-down"></i></div>
+      <div class="step">
+          <div class="icon"><i class="lni lni-mobile"></i></div>
+          <div class="label">MFA (Biometric or One-Time Password verification)</div>
+      </div>
+      <div class="arrow"><i class="lni lni-arrow-down"></i></div>
+      <div class="step">
+          <div class="icon icon-secure"><i class="lni lni-checkmark-circle"></i></div>
+          <div class="label">Security Layer</div>
+      </div>
+      <div class="arrow"><i class="lni lni-arrow-down"></i></div>
+      <div class="step">
+          <div class="icon"><i class="lni lni-database"></i></div>
+          <div class="label">Corporate Network</div>
+      </div>
+  </div>
+</div>
+
+<style>
+  /* Te style są automatycznie izolowane przez Astro! */
+  .diagram-container {
+      display: flex;
+      gap: 2em;
+      width: 100%;
+      max-width: 800px;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+  }
+
+  .column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #ffffff;
+      padding: 1.5em;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e0e0e0;
+  }
+
+  .column h3 {
+      margin-top: 0;
+      margin-bottom: 1.5em;
+      color: #333;
+      text-align: center;
+  }
+
+  .step {
+      text-align: center;
+  }
+
+  .icon {
+      font-size: 3em;
+      margin-bottom: 0.25em;
+  }
+
+  .arrow {
+      font-size: 1.5em;
+      color: #adb5bd;
+      margin: 0.5em 0;
+  }
+  
+  .label {
+      font-size: 0.9em;
+      color: #6c757d;
+      margin-top: 0.25em;
+  }
+
+  .icon-insecure {
+      color: #e74c3c; /* Red */
+  }
+
+  .icon-secure {
+      color: #2ecc71; /* Green */
+  }
+  
+  /* Responsive design for smaller screens */
+  @media (max-width: 768px) {
+      .diagram-container {
+          flex-direction: column;
+      }
+  }
+</style>
