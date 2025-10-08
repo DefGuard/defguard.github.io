@@ -3,11 +3,12 @@ title: "MFA for WireGuard: How to Meet NIS2 Directive Requirements"
 publishDate: 2025-10-07
 description: "The NIS2 Directive mandates MFA for VPNs. Learn how to implement Multi-Factor Authentication on WireGuard with Defguard to ensure compliance and top-tier security."
 author: "Piotr Borkowicz"
-image: "/images/blog/mfa-nis2-hero.jpg"
+image: "/images/blog/Defguard-nis2-mfa/mfa-nis2-hero.jpg"
 ---
 
+import MfaDiagram from '../../components/MfaDiagram.astro';
 
-![A central server connected securely to several computer terminals, representing a secure VPN network with MFA for NIS2 compliance.](/images/blog/mfa-nis2-hero.jpg)
+![A central server connected securely to several computer terminals, representing a secure VPN network with MFA for NIS2 compliance.](/images/blog/Defguard-nis2-mfa/mfa-nis2-hero.jpg)
 
 Organizations seeking compliance with the NIS2 Directive can leverage Multi-Factor Authentication (MFA), not just as a regulatory checkbox but as a crucial layer of defense in their cybersecurity strategy. In this article, we’ll explore how MFA supports NIS2 compliance, the advantages of implementing MFA in modern Virtual Private Network (VPN) systems like **[WireGuard](https://www.wireguard.com/)**, and how open-source VPN management solutions like **[Defguard](https://defguard.net/)** facilitate MFA integration in WireGuard environments—while also providing functionalities like identity management, Single Sign-On (SSO), and hardware key management.
 
@@ -32,6 +33,7 @@ Many organizations use VPNs (Virtual Private Networks) to allow employees remote
 
 As part of the NIS2 Directive, companies relying on VPN infrastructure to manage access to their network will be required to adopt MFA for VPN authentication. This ensures that even if VPN credentials are compromised, unauthorized access will still be difficult to achieve without additional factors, such as a biometric scan or a one-time passcode (OTP).
 
+<MfaDiagram />
 
 ## WireGuard: The Modern VPN That Needs MFA Support
 
@@ -64,7 +66,7 @@ Another vital feature of Defguard is its ability to manage hardware keys like Yu
 
 Defguard is designed to enhance WireGuard by adding an MFA layer and offering additional capabilities like identity management, SSO, and hardware key management, helping organizations meet NIS2 compliance.
 
-![Screenshot of the Defguard interface showing options for enforcing Multi-Factor Authentication (MFA), with the "External MFA" option selected.](/images/blog/MFA-Defguard.png)
+![Screenshot of the Defguard interface showing options for enforcing Multi-Factor Authentication (MFA), with the "External MFA" option selected.](/images/blog/Defguard-nis2-mfa/MFA-Defguard.png)
 
 ### How Does Defguard Support MFA for WireGuard?
 
@@ -87,12 +89,44 @@ Not all MFA systems are created equal. Organizations can choose from a range of 
 
 ### Comparison of MFA Systems:
 
-| MFA Method | Security Level | User Convenience | Example |
-| :--- | :--- | :--- | :--- |
-| One-Time Passwords (OTP) | High | Medium | Google Authenticator, Authy |
-| Push Notifications | High | High | Defguard Mobile App |
-| Biometrics | Very High | High | Fingerprint, Face ID |
-| Hardware Keys (FIDO2) | Highest | Medium | YubiKey, Thetis |
+<div class="table-container" style="width: 100%; overflow-x: auto; margin: 2rem auto; max-width: 80ch;">
+  <table class="comparison-table" style="width: 100%; border-collapse: collapse; font-size: 0.95rem; table-layout: fixed; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; background: transparent;">
+    <thead>
+      <tr>
+        <th style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; background: transparent; border-bottom: 1px solid #e0e0e0; color: var(--text-body-primary);">MFA Method</th>
+        <th style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; background: transparent; border-bottom: 1px solid #e0e0e0; color: var(--text-body-primary);">Security Level</th>
+        <th style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; background: transparent; border-bottom: 1px solid #e0e0e0; color: var(--text-body-primary);">User Convenience</th>
+        <th style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; background: transparent; border-bottom: 1px solid #e0e0e0; color: var(--text-body-primary);">Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; width: 20%; color: var(--text-body-primary);">One-Time Passwords (OTP)</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; width: 26.67%; color: var(--text-body-primary);">High</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; width: 26.67%; color: var(--text-body-primary);">Medium</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; width: 26.67%; color: var(--text-body-primary);">Google Authenticator, Authy</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; width: 20%; color: var(--text-body-primary);">Push Notifications</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; width: 26.67%; color: var(--text-body-primary);">High</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; width: 26.67%; color: var(--text-body-primary);">High</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; width: 26.67%; color: var(--text-body-primary);">Defguard Mobile App</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; width: 20%; color: var(--text-body-primary);">Biometrics</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; width: 26.67%; color: var(--text-body-primary);">Very High</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; width: 26.67%; color: var(--text-body-primary);">High</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; width: 26.67%; color: var(--text-body-primary);">Fingerprint, Face ID</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; width: 20%; color: var(--text-body-primary);">Hardware Keys (FIDO2)</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; width: 26.67%; color: var(--text-body-primary);">Highest</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; width: 26.67%; color: var(--text-body-primary);">Medium</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; width: 26.67%; color: var(--text-body-primary);">YubiKey, Thetis</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 ## Frequently Asked Questions (FAQ)
 
@@ -111,10 +145,15 @@ With the NIS2 Directive pushing for stronger cybersecurity measures, adopting MF
 
 Solutions like Defguard make it easier than ever to integrate MFA into VPNs, while also offering identity management, SSO, and hardware key management. These added functionalities ensure organizations maintain the security, speed, and simplicity of their VPN while building a comprehensive, regulatory-compliant cybersecurity strategy. As cybersecurity continues to evolve, MFA and broader identity management capabilities will remain cornerstones of defense strategies, ensuring that even if credentials are compromised, access to critical systems remains secure.
 
+
 ---
+
 Piotr Borkowicz
+
 Technical Content Marketing Manager, Defguard
+
 piotr@defguard.net
+
 defguard.net
 
 <script type="application/ld+json" is:inline>

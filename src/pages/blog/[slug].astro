@@ -393,6 +393,57 @@ const hasCaseStudy =
           border-radius: 3px;
         }
 
+        /* Table styles matching the comparison page */
+        :global(.table-container) {
+          width: 100%;
+          overflow-x: auto;
+          margin: 2rem auto;
+          max-width: 80ch;
+        }
+
+        :global(.comparison-table) {
+          width: 100%;
+          border-collapse: collapse;
+          font-size: 0.95rem;
+          table-layout: fixed;
+          border: 1px solid #e0e0e0;
+          border-radius: 8px;
+          overflow: hidden;
+          background: transparent;
+          
+          th, td {
+            text-align: left;
+            padding: 16px 12px;
+            border: 1px solid #e0e0e0;
+            vertical-align: top;
+          }
+          
+          th {
+            font-weight: 600;
+            background: transparent;
+            border-bottom: 1px solid #e0e0e0;
+            color: var(--text-body-primary);
+          }
+          
+          td:first-child {
+            font-weight: 600;
+            width: 20%;
+            color: var(--text-body-primary);
+          }
+          
+          td:nth-child(2),
+          td:nth-child(3),
+          td:nth-child(4) {
+            width: 26.67%;
+          }
+          
+          td {
+            overflow-wrap: break-word;
+            hyphens: auto;
+            color: var(--text-body-primary);
+          }
+        }
+
         /* Markdown image styling */
         :global(img) {
           max-width: 100%;
