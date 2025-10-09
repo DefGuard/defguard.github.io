@@ -77,21 +77,67 @@ const tags = [
       </header>
     <!-- </ContentLimiter> -->
 
-    <div id="get-evaluation-license" class="sla-support-wrapper">
-      <div id="sla-support">
-        <div class="left">
-          <h2 id="license">Request offline or evalution license</h2>
-          <p class="sla-description">
-            For <strong>evaluations</strong> or proof-of-concept testing, we're happy to provide
-            a 14-day free of charge evaluation license. For convenience, please provide your company information (name, address and Tax Identification Number) in the form below.
-          </p>
-        </div>
-        <ContentLimiter contentId="sla-support-content" maxWidth={1100}>
-          <div class="product-features">
-            <BookEvaluationLicenseForm submit_text="Request Evaluation License" client:load />
+    <!-- FAQ Section -->
+    <div id="pricing-faq-section" class="pricing-faq-wrapper">
+      <ContentLimiter contentId="pricing-faq-content" maxWidth={1100}>
+        <FlexibleSection title="Frequently Asked Questions" id="pricing-faq" variant="gray" theme="light">
+          <div class="faq-container">
+            <div class="faq-item" data-faq-item="0">
+              <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-0">
+                <span class="faq-number">1</span>
+                <span class="faq-text">Does Defguard offer a free trial?</span>
+                <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="faq-answer" id="faq-answer-0" aria-labelledby="faq-question-0">
+                <div>
+                  <p>Yes. Defguard provides a 14-day evaluation license at no cost, allowing you to test the full capabilities of our enterprise VPN solution, including WireGuard®, MFA/2FA, and SSO integration.</p>
+                  <p>This trial is ideal for proof-of-concept testing or evaluating Defguard in your environment.</p>
+                </div>
+              </div>
+            </div>
+            <div class="faq-item" data-faq-item="1">
+              <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-1">
+                <span class="faq-number">2</span>
+                <span class="faq-text">What is Defguard's subscription retention policy?</span>
+                <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="faq-answer" id="faq-answer-1" aria-labelledby="faq-question-1">
+                <div>
+                  <p>All purchased and active <strong>annual subscriptions</strong> automatically renew <strong>once</strong> for the following year on the <strong>same pricing and terms</strong> as originally purchased.</p>
+                  <p>For example, if you purchase an annual subscription in 2025, it will renew in 2026 at the same price and conditions you originally agreed to. From 2027 onwards, if annual subscription pricing or terms have changed, the updated pricing/terms will apply starting from the next billing cycle.</p>
+                  <p><strong>In short:</strong> this policy guarantees one renewal under the original terms for your annual subscription, after which any new pricing or updated terms will take effect.</p>
+                </div>
+              </div>
+            </div>
           </div>
-        </ContentLimiter>
-      </div>
+        </FlexibleSection>
+      </ContentLimiter>
+    </div>
+
+    <!-- Evaluation License Section -->
+    <div id="evaluation-license-section" class="evaluation-license-wrapper">
+      <ContentLimiter contentId="evaluation-license-content" maxWidth={1100}>
+        <FlexibleSection title="Request Offline or Evaluation License" id="evaluation-license" variant="white" theme="light">
+          <div class="evaluation-content">
+            <div class="evaluation-description">
+              <p>
+                For <strong>evaluations</strong> or proof-of-concept testing, we're happy to provide 
+                a 14-day free of charge evaluation license.
+              </p>
+              <p>
+                For convenience, please provide your company information (name, address and Tax Identification Number) in the form below.
+              </p>
+            </div>
+            <div class="evaluation-form-container">
+              <BookEvaluationLicenseForm submit_text="Request Evaluation License" client:load />
+            </div>
+          </div>
+        </FlexibleSection>
+      </ContentLimiter>
     </div>
 
     <div class="nonprofit-wrapper">
@@ -296,48 +342,94 @@ const tags = [
         }
       }
 
-      .sla-support-wrapper {
+      /* Evaluation License Section */
+      .evaluation-license-wrapper {
         width: 100%;
-        background-color: var(--background-secondary, #f5f5f5);
-        padding: 40px 0 60px 0;
+        background-color: var(--surface-frame-bg);
+        padding: 80px 0;
       }
 
-      #sla-support {
+      .evaluation-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         width: 100%;
-        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+      }
 
-        .left {
-          position: relative;
-          width: 100%;
+      .evaluation-description {
+        text-align: center;
+        margin-bottom: 40px;
+        max-width: 600px;
 
-          & > h2 {
-            @include typography(h2);
-            box-sizing: border-box;
-            padding-top: 20px;
-            padding-left: 20px;
-            padding-right: 20px;
-            padding-bottom: 0;
-            max-width: 1500px;
-            margin: 0 auto;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            hyphens: auto;
+        p {
+          font-size: 16px;
+          line-height: 1.6;
+          margin-bottom: 16px;
+          color: var(--text-body-primary);
 
-            @include break-up(md) {
-              padding-top: 54px;
-              padding-left: 20px;
-              padding-right: 20px;
-              padding-bottom: 0;
-            }
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          strong {
+            font-weight: 600;
           }
         }
+      }
 
-        #sla-support-content {
-          width: 100%;
-          max-width: 1100px;
-          margin: 0 auto;
-          padding: 0 20px;
-          box-sizing: border-box;
+      .evaluation-form-container {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+
+        // Force single column layout for the evaluation form
+        :global(.book) {
+          form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+          }
+
+          .form-group {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin-bottom: 0;
+
+            label {
+              margin-bottom: 8px;
+              font-weight: 500;
+            }
+
+            input, textarea, select {
+              width: 100%;
+              box-sizing: border-box;
+            }
+          }
+
+          // Override any existing double-inputs to single column
+          .double-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+
+            .form-group {
+              width: 100%;
+            }
+          }
+
+          .form-description {
+            margin-bottom: 20px;
+          }
+
+          button[type="submit"] {
+            width: 100%;
+            margin-top: 10px;
+          }
         }
       }
 
@@ -385,6 +477,161 @@ const tags = [
       #floating-links {
         display: none !important;
       }
+
+      /* FAQ Section Styles */
+      .pricing-faq-wrapper {
+        width: 100%;
+        background-color: var(--background-secondary, #f5f5f5);
+        padding: 60px 0;
+      }
+
+      .faq-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+      }
+
+      .faq-item {
+        background: white;
+        border: 1px solid var(--border-primary, #e5e7eb);
+        border-radius: 12px;
+        overflow: hidden;
+        transition: all 0.2s ease;
+
+        &:hover {
+          border-color: var(--surface-main-primary);
+          box-shadow: 0 4px 12px rgba(12, 140, 224, 0.1);
+        }
+      }
+
+      .faq-question {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1.5rem;
+        background: white;
+        cursor: pointer;
+        user-select: none;
+        transition: background-color 0.2s ease;
+        border-bottom: 1px solid var(--border-primary, #e5e7eb);
+
+        &:hover {
+          background: var(--background-secondary, #f9fafb);
+        }
+
+        &:focus {
+          outline: 2px solid var(--surface-main-primary);
+          outline-offset: -2px;
+        }
+      }
+
+      .faq-number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        background: var(--surface-main-primary);
+        color: white;
+        border-radius: 50%;
+        font-size: 0.875rem;
+        font-weight: 600;
+        flex-shrink: 0;
+      }
+
+      .faq-text {
+        flex: 1;
+        font-weight: 600;
+        color: var(--text-body-primary);
+        font-size: 16px;
+      }
+
+      .faq-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+        color: var(--text-body-secondary);
+        transition: transform 0.2s ease;
+        flex-shrink: 0;
+      }
+
+      .faq-question.expanded .faq-icon {
+        transform: rotate(180deg);
+      }
+
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+        background: white;
+
+        &.expanded {
+          max-height: 1000px;
+          padding: 1.5rem;
+        }
+
+        div {
+          p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-body-primary);
+            margin-bottom: 1rem;
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+
+            strong {
+              font-weight: 600;
+            }
+          }
+        }
+      }
     </style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach((question: Element) => {
+          question.addEventListener('click', function(this: HTMLElement) {
+            const answer = this.nextElementSibling as HTMLElement;
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            
+            // Close all other FAQ items
+            faqQuestions.forEach((otherQuestion: Element) => {
+              if (otherQuestion !== this) {
+                otherQuestion.classList.remove('expanded');
+                otherQuestion.setAttribute('aria-expanded', 'false');
+                const otherAnswer = otherQuestion.nextElementSibling as HTMLElement;
+                if (otherAnswer) {
+                  otherAnswer.classList.remove('expanded');
+                }
+              }
+            });
+            
+            // Toggle current FAQ item
+            if (isExpanded) {
+              this.classList.remove('expanded');
+              this.setAttribute('aria-expanded', 'false');
+              answer.classList.remove('expanded');
+            } else {
+              this.classList.add('expanded');
+              this.setAttribute('aria-expanded', 'true');
+              answer.classList.add('expanded');
+            }
+          });
+          
+          // Keyboard navigation support
+          question.addEventListener('keydown', function(e: Event) {
+            const target = e.target as HTMLElement;
+            if (e instanceof KeyboardEvent && (e.key === 'Enter' || e.key === ' ')) {
+              e.preventDefault();
+              target.click();
+            }
+          });
+        });
+      });
+    </script>
   </main>
 </BaseLayout>
