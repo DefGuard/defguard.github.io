@@ -3,8 +3,7 @@ import { getCollection } from "astro:content";
 import Navigation from "../components/base/Navigation.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import OrganizationJSONLD from "../scripts/OrganizationJSONLD.astro";
-import BookDemoForm from "../components/form/BookDemoForm/BookDemoForm";
-import PricingHeaderContent from "../data/pricing/page-header.mdx";
+import BookEvaluationLicenseForm from "../components/form/BookDemoForm/BookEvaluationLicenseForm";
 import { PricingCards } from "../components/pricing/Pricing";
 import ContentLimiter from "../components/ContentLimiter.astro";
 import FlexibleSection from "../components/FlexibleSection.astro";
@@ -134,7 +133,7 @@ const tags = [
               </p>
             </div>
             <div class="evaluation-form-container">
-              <BookDemoForm submit_text="Request Evaluation License" client:load />
+              <BookEvaluationLicenseForm submit_text="Request Evaluation License" client:load />
             </div>
           </div>
         </FlexibleSection>
