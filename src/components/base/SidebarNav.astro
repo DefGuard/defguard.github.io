@@ -1,0 +1,177 @@
+---
+interface Props {
+  sections: Array<{
+    id: string;
+    title: string;
+  }>;
+  title?: string;
+}
+
+const { sections, title = "On this page" } = Astro.props;
+---
+
+<nav class="sidebar-nav">
+  <p>{title}</p>
+  <ul>
+    {sections.map((section) => (
+      <li>
+        <a href={`#${section.id}`} data-section={section.id}>
+          {section.title}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style lang="scss">
+  .sidebar-nav {
+    height: fit-content;
+    padding: 1rem;
+    background: var(--surface-frame-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--text-body-secondary);
+      border-radius: 2px;
+    }
+    
+    p{
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--text-body-secondary);
+      @include typography(paragraph);
+      font-size: calc(0.75rem * var(--font-scale-factor));
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      li {
+        margin: 0;
+        padding: 0;
+
+        a {
+          display: block;
+          padding: 0.2rem 0.5rem;
+          text-decoration: none;
+          color: var(--text-body-primary);
+          transition: all 0.2s ease;
+          @include typography(menu);
+          font-size: calc(0.9rem * var(--font-scale-factor));
+
+          &:hover {
+            background: var(--surface-main-primary);
+            color: white;
+          }
+
+          &.active {
+            border-right: 4px solid var(--surface-main-primary);
+          }
+        }
+      }
+    }
+  }
+</style>
+
+<script>
+  // Only run this script if the sidebar nav exists on the page
+  const sidebarNav = document.querySelector('.sidebar-nav');
+  if (sidebarNav) {
+    // Initialize sections visibility and currently active section
+    const visibilityMap: Record<string, number> = {};
+    let currentActiveSection: string | null = null;
+
+    // Thresholds for visibility changes
+    const thresholdsArray = Array.from({ length: 101 }, (_, idx) => idx / 100);
+
+    // Intersection Observer logic
+    const intersectionCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry: IntersectionObserverEntry) => {
+        if (entry.target.id) {
+          visibilityMap[entry.target.id] = entry.intersectionRatio;
+        }
+      });
+
+      // Determine the most visible section
+      const visibleSections = Object.entries(visibilityMap)
+        .filter(([, ratio]: [string, number]) => ratio > 0)
+        .sort((a: [string, number], b: [string, number]) => {
+          // Primary: sections with >= 0.7 ratio first, secondary: vertical order
+          const aHighVis = a[1] >= 0.7 ? 1 : 0;
+          const bHighVis = b[1] >= 0.7 ? 1 : 0;
+          if (bHighVis !== aHighVis) {
+            return bHighVis - aHighVis;
+          }
+          
+          // Secondary sort by vertical position
+          const aElement = document.getElementById(a[0]);
+          const bElement = document.getElementById(b[0]);
+          if (aElement && bElement) {
+            return aElement.offsetTop - bElement.offsetTop;
+          }
+          return 0;
+        });
+
+      const newActiveSection = visibleSections.length ? visibleSections[0][0] : null;
+      if (newActiveSection && newActiveSection !== currentActiveSection) {
+        document.querySelectorAll('.sidebar-nav a.active').forEach(el => el.classList.remove('active'));
+        document.querySelector(`.sidebar-nav a[data-section="${newActiveSection}"]`)?.classList.add('active');
+        currentActiveSection = newActiveSection;
+      }
+    };
+
+    const observerConfig: IntersectionObserverInit = {
+      root: null,
+      rootMargin: "0px 0px -30% 0px",
+      threshold: thresholdsArray,
+    };
+
+    const observer = new IntersectionObserver(intersectionCallback, observerConfig);
+
+    // Observe sections
+    const sectionsToObserve = document.querySelectorAll(".with-sidebar-nav section[id]");
+    sectionsToObserve.forEach((section) => {
+      const sectionId = section.getAttribute("id");
+      if (sectionId) {
+        visibilityMap[sectionId] = 0;
+        observer.observe(section);
+      }
+    });
+
+    // Initial intersection calculation
+    setTimeout(() => {
+      intersectionCallback([]);
+    }, 100);
+
+    // Smooth-scroll event listener
+    document.querySelectorAll(".sidebar-nav a").forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute("href")?.substring(1);
+        if (targetId) {
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        }
+      });
+    });
+  }
+</script>
+
