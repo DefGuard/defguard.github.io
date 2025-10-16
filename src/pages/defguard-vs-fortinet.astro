@@ -10,10 +10,12 @@ import AstroButton from "../components/AstroButton.astro";
 
 const title = "Defguard vs. Fortinet VPN: A Security-First Alternative (2025)";
 const description = "See a detailed comparison of Defguard vs. Fortinet's VPN. Discover how FortiGate's critical vulnerabilities and legacy design create unacceptable risk. Learn why a modern, open-source alternative is more resilient.";
+const url = "https://defguard.net/defguard-vs-fortinet/";
+const publishedDate = "2025-10-16";
+const lastUpdated = "2025-10-16";
 const featuredImage = "github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png";
 const imageWidth = "1080";
 const imageHeight = "540";
-const url = "https://defguard.net/defguard-vs-fortinet/";
 const tags = [
   "defguard",
   "fortinet",
@@ -33,6 +35,7 @@ const tags = [
 ];
 
 const sections = [
+  { id: "key-takeaways", title: "Key Takeaways" },
   { id: "comparison-matrix", title: "Comparison Matrix" },
   { id: "architecture", title: "Architecture & Performance" },
   { id: "security", title: "Security & Post-Breach Resilience" },
@@ -56,15 +59,15 @@ const faqEntries = [
   },
   {
     question: "How difficult is it to migrate from Fortinet to Defguard?",
-    answer: "Migration to Defguard is designed to be straightforward. As Defguard is a software-only solution with no hardware dependencies, it can be deployed quickly in any environment using simple one-line installs or infrastructure-as-code tools like Docker and Terraform. This eliminates the complex <strong>FortiGate</strong> hardware setup and <strong>FortiClient EMS</strong> management overhead associated with <strong>Fortinet's VPN solution</strong>."
+    answer: "Migration to Defguard is designed to be straightforward. As Defguard is a software-only solution, it eliminates the complex <strong>FortiGate</strong> hardware setup and <strong>FortiClient EMS</strong> management overhead. You can test Defguard with a one-line install script and deploy for production using modern infrastructure-as-code tools."
   },
   {
     question: "Can Defguard integrate with our existing identity provider like Microsoft Entra ID?",
-    answer: "Yes. Defguard natively integrates with any OpenID Connect (OIDC) compliant identity provider, including Microsoft Entra ID (Azure AD), Okta, Google Workspace, and more. This integration is included out-of-the-box, unlike <strong>Fortinet</strong>, which often requires additional costly components like <strong>FortiAuthenticator</strong> for full SSO capabilities."
+    answer: "Yes. Defguard natively integrates with any OpenID Connect (OIDC) compliant identity provider, including Microsoft Entra ID (Azure AD), Okta, and Google Workspace. This is a core feature, unlike <strong>Fortinet</strong>, which often requires costly components like <strong>FortiAuthenticator</strong> for full SSO."
   },
   {
-    question: "Is Defguard more cost-effective than Fortinet?",
-    answer: "Yes, for most organizations, Defguard offers a lower Total Cost of Ownership (TCO). Our <a href=\"https://defguard.net/pricing\" target=\"_blank\" rel=\"noopener noreferrer\">pricing is transparent</a> and all-inclusive, covering all features like MFA and SSO integration in a single subscription. <strong>Fortinet's</strong> model often involves numerous hidden costs, including separate licenses for <strong>FortiGate</strong> hardware, <strong>FortiClient</strong> endpoint clients, MFA tokens (FortiToken), and SSO integration (FortiAuthenticator)."
+    question: "Is Defguard more cost-effective than Fortinet's VPN?",
+    answer: "Yes. Defguard offers a lower TCO. Our <a href='https://defguard.net/pricing' target='_blank' rel='noopener noreferrer'>pricing is transparent</a>. <strong>Fortinet's</strong> model involves numerous hidden costs for <strong>FortiGate</strong> hardware, <strong>FortiClient</strong> licenses, support contracts, MFA tokens (FortiToken), and SSO integration (FortiAuthenticator)."
   },
   {
     question: "Why does being open-source make Defguard more secure than a closed-source solution like Fortinet's?",
@@ -83,7 +86,7 @@ const faqEntries = [
   tags={tags}
 >
   <OrganizationJSONLD slot="schema" title={title} description={description} url={url} tags={tags} />
-  <TechArticleJSONLD slot="schema" title={title} description={description} url={url} />
+  <TechArticleJSONLD slot="schema" title={title} description={description} url={url} publishedDate={publishedDate} lastUpdated={lastUpdated} />
   <FAQPageJSONLD slot="schema" entries={faqEntries} />
   <Navigation activeSlug="/defguard-vs-fortinet/" />
 
@@ -114,7 +117,7 @@ const faqEntries = [
     </header>
 
     <ProductSection padding="small">
-      <div class="key-takeaways">
+      <div id="key-takeaways" class="key-takeaways">
         <h3>Key Takeaways</h3>
         <ul>
           <li><strong>Architecture:</strong> Defguard's modern microservice design eliminates the single point of failure inherent in FortiGate's monolithic architecture.</li>

@@ -3,16 +3,19 @@ export interface Props {
   title: string;
   description: string;
   url: string;
+  publishedDate: string;
+  lastUpdated: string;
 }
-const { title, description, url } = Astro.props;
+const { title, description, url, publishedDate, lastUpdated } = Astro.props;
+
 const techArticleSchema = {
   "@context": "https://schema.org",
   "@type": "TechArticle",
   "headline": title,
   "description": description,
   "url": url,
-  "datePublished": "2025-10-16",
-  "dateModified": "2025-10-16",
+  "datePublished": publishedDate,
+  "dateModified": lastUpdated,
   "author": {
     "@type": "Organization",
     "name": "Defguard Security Team"
@@ -28,4 +31,3 @@ const techArticleSchema = {
 };
 ---
 <script type="application/ld+json" set:html={JSON.stringify(techArticleSchema)} />
-

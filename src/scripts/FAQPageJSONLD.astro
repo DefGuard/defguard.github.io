@@ -8,6 +8,9 @@ export interface Props {
 }
 const { entries } = Astro.props;
 
+// Usuwamy tagi HTML z odpowiedzi, aby JSON-LD był czystym tekstem
+const stripHtml = (html: string) => html.replace(/<[^>]*>?/gm, '');
+
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -16,7 +19,7 @@ const faqSchema = {
     "name": entry.question,
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": entry.answer
+      "text": stripHtml(entry.answer)
     }
   }))
 };
