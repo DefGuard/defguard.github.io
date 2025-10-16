@@ -1,0 +1,27 @@
+---
+export interface FAQEntry {
+  question: string;
+  answer: string;
+}
+export interface Props {
+  entries: FAQEntry[];
+}
+const { entries } = Astro.props;
+
+// Usuwamy tagi HTML z odpowiedzi, aby JSON-LD był czystym tekstem
+const stripHtml = (html: string) => html.replace(/<[^>]*>?/gm, '');
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": entries.map(entry => ({
+    "@type": "Question",
+    "name": entry.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": stripHtml(entry.answer)
+    }
+  }))
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
