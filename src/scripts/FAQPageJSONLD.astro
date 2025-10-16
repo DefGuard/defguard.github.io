@@ -1,46 +1,24 @@
 ---
+export interface FAQEntry {
+  question: string;
+  answer: string;
+}
+export interface Props {
+  entries: FAQEntry[];
+}
+const { entries } = Astro.props;
+
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": []
+  "mainEntity": entries.map(entry => ({
+    "@type": "Question",
+    "name": entry.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": entry.answer
+    }
+  }))
 };
 ---
-<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} id="faq-schema-template" />
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const faqContainer = document.getElementById('faq');
-    if (!faqContainer) return;
-    const questions = faqContainer.querySelectorAll('details');
-    const mainEntity = [];
-    questions.forEach(q => {
-      const questionText = q.querySelector('summary')?.innerText;
-      const answerText = q.querySelector('p')?.innerText;
-      if (questionText && answerText) {
-        mainEntity.push({
-          "@type": "Question",
-          "name": questionText,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": answerText
-          }
-        });
-      }
-    });
-    const schemaScript = document.getElementById('faq-schema-template');
-    if (schemaScript) {
-      const currentSchema = JSON.parse(schemaScript.textContent || '{}');
-      currentSchema.mainEntity = mainEntity;
-      // Add the new open-source question manually if it's not picked up by the script
-      mainEntity.push({
-        "@type": "Question",
-        "name": "Why does being open-source make Defguard more secure than a closed-source solution like Fortinet's?",
-        "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Defguard's open-source codebase allows for public scrutiny and independent audits by security experts worldwide. This transparency means vulnerabilities are often found and fixed faster than in a closed-source environment like Fortinet's, where users must blindly trust the vendor. Verifiable security builds a higher level of trust."
-        }
-      });
-      schemaScript.textContent = JSON.stringify(currentSchema);
-    }
-  });
-</script>
-
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />

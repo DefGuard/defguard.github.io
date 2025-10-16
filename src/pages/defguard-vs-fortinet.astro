@@ -44,6 +44,33 @@ const sections = [
   { id: "bottom-line", title: "The Bottom Line" },
   { id: "faq", title: "FAQ" },
 ];
+
+const faqEntries = [
+  {
+    question: "Why is Defguard a more resilient alternative to Fortinet's VPN solution?",
+    answer: "Defguard is more resilient due to its modern microservice architecture that separates control and data planes, minimizing the attack surface. Unlike <strong>FortiGate's</strong> monolithic design, which has proven vulnerable to persistent threats like COATHANGER that survive patching, Defguard's open-source, decentralized model is designed to contain threats and prevent deep network compromise."
+  },
+  {
+    question: "What are the benefits of WireGuard® over Fortinet's IPsec/SSL VPN?",
+    answer: "WireGuard® is a faster, more modern, and less complex protocol than IPsec/SSL VPN. It has a significantly smaller codebase, making it easier to audit and secure. This results in higher performance, lower latency, and a reduced attack surface compared to the legacy protocols used by <strong>Fortinet's VPN solution</strong>, which have a history of critical vulnerabilities."
+  },
+  {
+    question: "How difficult is it to migrate from Fortinet to Defguard?",
+    answer: "Migration to Defguard is designed to be straightforward. As Defguard is a software-only solution with no hardware dependencies, it can be deployed quickly in any environment using simple one-line installs or infrastructure-as-code tools like Docker and Terraform. This eliminates the complex <strong>FortiGate</strong> hardware setup and <strong>FortiClient EMS</strong> management overhead associated with <strong>Fortinet's VPN solution</strong>."
+  },
+  {
+    question: "Can Defguard integrate with our existing identity provider like Microsoft Entra ID?",
+    answer: "Yes. Defguard natively integrates with any OpenID Connect (OIDC) compliant identity provider, including Microsoft Entra ID (Azure AD), Okta, Google Workspace, and more. This integration is included out-of-the-box, unlike <strong>Fortinet</strong>, which often requires additional costly components like <strong>FortiAuthenticator</strong> for full SSO capabilities."
+  },
+  {
+    question: "Is Defguard more cost-effective than Fortinet?",
+    answer: "Yes, for most organizations, Defguard offers a lower Total Cost of Ownership (TCO). Our <a href=\"https://defguard.net/pricing\" target=\"_blank\" rel=\"noopener noreferrer\">pricing is transparent</a> and all-inclusive, covering all features like MFA and SSO integration in a single subscription. <strong>Fortinet's</strong> model often involves numerous hidden costs, including separate licenses for <strong>FortiGate</strong> hardware, <strong>FortiClient</strong> endpoint clients, MFA tokens (FortiToken), and SSO integration (FortiAuthenticator)."
+  },
+  {
+    question: "Why does being open-source make Defguard more secure than a closed-source solution like Fortinet's?",
+    answer: "Defguard's open-source codebase allows for public scrutiny and independent audits by security experts worldwide. This transparency means vulnerabilities are often found and fixed faster than in a closed-source environment like Fortinet's, where users must blindly trust the vendor. Verifiable security builds a higher level of trust."
+  }
+];
 ---
 
 <ProductLayout
@@ -57,7 +84,7 @@ const sections = [
 >
   <OrganizationJSONLD slot="schema" title={title} description={description} url={url} tags={tags} />
   <TechArticleJSONLD slot="schema" title={title} description={description} url={url} />
-  <FAQPageJSONLD slot="schema" />
+  <FAQPageJSONLD slot="schema" entries={faqEntries} />
   <Navigation activeSlug="/defguard-vs-fortinet/" />
 
   <main id="fortinet-comparison" class="with-sidebar-nav">
@@ -399,30 +426,12 @@ const sections = [
         <ProductSection padding="small">
           <section id="faq">
         <h2>Frequently Asked Questions</h2>
-        <details>
-          <summary>Why is Defguard a more resilient alternative to Fortinet's VPN solution?</summary>
-          <p>Defguard is more resilient due to its modern microservice architecture that separates control and data planes, minimizing the attack surface. Unlike <strong>FortiGate's</strong> monolithic design, which has proven vulnerable to persistent threats like COATHANGER that survive patching, Defguard's open-source, decentralized model is designed to contain threats and prevent deep network compromise.</p>
-        </details>
-        <details>
-          <summary>What are the benefits of WireGuard® over Fortinet's IPsec/SSL VPN?</summary>
-          <p>WireGuard® is a faster, more modern, and less complex protocol than IPsec/SSL VPN. It has a significantly smaller codebase, making it easier to audit and secure. This results in higher performance, lower latency, and a reduced attack surface compared to the legacy protocols used by <strong>Fortinet's VPN solution</strong>, which have a history of critical vulnerabilities.</p>
-        </details>
-        <details>
-          <summary>How difficult is it to migrate from Fortinet to Defguard?</summary>
-          <p>Migration to Defguard is designed to be straightforward. As Defguard is a software-only solution with no hardware dependencies, it can be deployed quickly in any environment using simple one-line installs or infrastructure-as-code tools like Docker and Terraform. This eliminates the complex <strong>FortiGate</strong> hardware setup and <strong>FortiClient EMS</strong> management overhead associated with <strong>Fortinet's VPN solution</strong>.</p>
-        </details>
-        <details>
-          <summary>Can Defguard integrate with our existing identity provider like Microsoft Entra ID?</summary>
-          <p>Yes. Defguard natively integrates with any OpenID Connect (OIDC) compliant identity provider, including Microsoft Entra ID (Azure AD), Okta, Google Workspace, and more. This integration is included out-of-the-box, unlike <strong>Fortinet</strong>, which often requires additional costly components like <strong>FortiAuthenticator</strong> for full SSO capabilities.</p>
-        </details>
-        <details>
-          <summary>Is Defguard more cost-effective than Fortinet?</summary>
-          <p>Yes, for most organizations, Defguard offers a lower Total Cost of Ownership (TCO). Our <a href="https://defguard.net/pricing" target="_blank" rel="noopener noreferrer">pricing is transparent</a> and all-inclusive, covering all features like MFA and SSO integration in a single subscription. <strong>Fortinet's</strong> model often involves numerous hidden costs, including separate licenses for <strong>FortiGate</strong> hardware, <strong>FortiClient</strong> endpoint clients, MFA tokens (FortiToken), and SSO integration (FortiAuthenticator).</p>
-        </details>
-        <details>
-          <summary>Why does being open-source make Defguard more secure than a closed-source solution like Fortinet's?</summary>
-          <p>Defguard's open-source codebase allows for public scrutiny and independent audits by security experts worldwide. This transparency means vulnerabilities are often found and fixed faster than in a closed-source environment like Fortinet's, where users must blindly trust the vendor. Verifiable security builds a higher level of trust.</p>
-        </details>
+        {faqEntries.map((entry) => (
+          <details>
+            <summary>{entry.question}</summary>
+            <p set:html={entry.answer} />
+          </details>
+        ))}
       </section>
         </ProductSection>
       </div>
