@@ -1,55 +1,84 @@
 [
   {
-    "display": "Home",
-    "url": "/",
-    "prefetch": true,
-    "external": false
+    "display": "Product",
+    "url": null,
+    "children": [
+      {
+        "display": "Server",
+        "url": "/server"
+      },
+      {
+        "display": "Client",
+        "url": "/client"
+      },
+      {
+        "display": "True VPN MFA",
+        "url": "/vpn_mfa"
+      },
+      {
+        "display": "Our Security Approach",
+        "url": "/security"
+      }
+    ]
   },
   {
-    "display": "Server",
-    "url": "/server/",
-    "prefetch": true,
-    "external": false
+    "display": "Solutions",
+    "url": null,
+    "children": [
+      {
+        "display": "Enterprise Features",
+        "url": "https://docs.defguard.net/enterprise/license"
+      },
+      {
+        "display": "Compare vs. Fortinet",
+        "url": "/defguard-vs-fortinet"
+      }
+    ]
   },
   {
-    "display": "Client",
-    "url": "/client/",
-    "prefetch": true,
-    "external": false
-  },
-  {
-    "display": "VPN MFA",
-    "url": "/vpn_mfa/",
-    "prefetch": true,
-    "external": false
-  },
-  {
-    "display": "Enterprise",
-    "url": "https://docs.defguard.net/enterprise/enterprise-features",
-    "prefetch": false,
-    "external": true
+    "display": "Customers",
+    "url": null,
+    "children": [
+      {
+        "display": "Prusa Research: Scaling Secure Access",
+        "url": "/blog/prusa-vpn-scaling-with-defguard"
+      },
+      {
+        "display": "Acquinox: Private Cloud & Data Sovereignty",
+        "url": "/blog/self-hosted-vpn-private-cloud-acquinox-defguard"
+      }
+    ]
   },
   {
     "display": "Pricing",
-    "url": "/pricing/",
+    "url": "/pricing",
     "prefetch": true
   },
   {
-    "display": "FAQ",
-    "url": "/faq/",
-    "prefetch": true,
-    "external": false
-  },
-  {
-    "display": "Documentation",
-    "url": "https://docs.defguard.net/",
-    "prefetch": false,
+    "display": "Docs",
+    "url": "https://docs.defguard.net",
     "external": true
   },
   {
-    "display": "Blog",
-    "url": "/blog/",
-    "prefetch": true,
-    "external": false
+    "display": "Resources",
+    "url": null,
+    "children": [
+      {
+        "display": "Blog",
+        "url": "/blog"
+      },
+      {
+        "display": "FAQ",
+        "url": "/faq"
+      },
+      {
+        "display": "GitHub (Source)",
+        "url": "https://github.com/DefGuard/defguard"
+      },
+      {
+        "display": "Matrix (Community)",
+        "url": "https://matrix.to/#/#defguard:teonite.com"
+      }
+    ]
   }
 ]

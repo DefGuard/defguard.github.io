@@ -1,5 +1,4 @@
 ---
-import FloatingLinks from "../components/FloatingLinks.astro";
 import Footer from "../components/base/Footer.astro";
 import "../styles/global.scss";
 import { CookieBar } from "../components/base/CookieBar/CookieBar";
@@ -91,7 +90,6 @@ const { url, title, description, featuredImage, imageWidth, imageHeight } = Astr
     <div class="page-container">
       <slot />
       <Footer />
-      <FloatingLinks />
       <CookieBar client:only="react" />
       <!-- <Clarity /> -->
     </div>
