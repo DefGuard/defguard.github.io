@@ -17,40 +17,91 @@ const { activeSlug } = Astro.props;
     <ul class="nav-items">
       {
         navItems.map((item) => (
-          <li class="nav-item">
-            <a
-              href={item.url}
-              target={item.external ? "_blank" : "_self"}
-              data-astro-prefetch={item.prefetch ? "hover" : "false"}
-              class:list={[
-                {
-                  active: activeSlug === item.url,
-                  external: item.external,
-                },
-              ]}
-            >
-              <span>{item.display}</span>
-              {item.external && (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="9"
-                  height="9"
-                  viewBox="0 0 12 13"
-                  fill="none"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M0 0.5H4V1.83333H1.33333V11.1667H10.6667V8.5H12V12.5H0V0.5ZM9.72386 1.83333H7.77778V0.5H12V4.72222H10.6667V2.77614L6.4714 6.9714L5.5286 6.0286L9.72386 1.83333Z"
-                    style={{ fill: "var(--text-body-primary)" }}
-                  />
-                </svg>
-              )}
-            </a>
+          <li class:list={["nav-item", { "has-dropdown": item.children }]}>
+            {item.url ? (
+              <a
+                href={item.url}
+                target={item.external ? "_blank" : "_self"}
+                data-astro-prefetch={item.prefetch ? "hover" : "false"}
+                class:list={[
+                  {
+                    active: activeSlug === item.url,
+                    external: item.external,
+                  },
+                ]}
+              >
+                <span>{item.display}</span>
+                {item.external && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="9"
+                    height="9"
+                    viewBox="0 0 12 13"
+                    fill="none"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M0 0.5H4V1.83333H1.33333V11.1667H10.6667V8.5H12V12.5H0V0.5ZM9.72386 1.83333H7.77778V0.5H12V4.72222H10.6667V2.77614L6.4714 6.9714L5.5286 6.0286L9.72386 1.83333Z"
+                      style={{ fill: "var(--text-body-primary)" }}
+                    />
+                  </svg>
+                )}
+              </a>
+            ) : (
+              <span class="nav-label">{item.display}</span>
+            )}
+            {item.children && (
+              <ul class="dropdown-menu">
+                {item.children.map((child) => (
+                  <li>
+                    <a
+                      href={child.url}
+                      target={child.url.startsWith("http") ? "_blank" : "_self"}
+                      data-astro-prefetch={!child.url.startsWith("http") ? "hover" : "false"}
+                      class:list={[
+                        {
+                          active: activeSlug === child.url,
+                          external: child.url.startsWith("http"),
+                        },
+                      ]}
+                    >
+                      <span>{child.display}</span>
+                      {child.url.startsWith("http") && (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="9"
+                          height="9"
+                          viewBox="0 0 12 13"
+                          fill="none"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M0 0.5H4V1.83333H1.33333V11.1667H10.6667V8.5H12V12.5H0V0.5ZM9.72386 1.83333H7.77778V0.5H12V4.72222H10.6667V2.77614L6.4714 6.9714L5.5286 6.0286L9.72386 1.83333Z"
+                            style={{ fill: "var(--text-body-primary)" }}
+                          />
+                        </svg>
+                      )}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
           </li>
         ))
       }
     </ul>
+    <div class="nav-actions">
+      <a
+        href="https://docs.defguard.net/getting-started/one-line-install"
+        target="_blank"
+        class="nav-cta nav-cta-secondary"
+      >
+        Get Started
+      </a>
+      <a href="/book-a-demo" class="nav-cta nav-cta-primary">Book a Demo</a>
+    </div>
   </nav>
   <section id="mobile-nav-bar">
     <a href="/" class="nav-logo" aria-label="defguard">
@@ -87,40 +138,109 @@ const { activeSlug } = Astro.props;
     <ul>
       {
         navItems.map((item) => (
-          <li class="nav-item">
-            <a
-              href={item.url}
-              target={item.external ? "_blank" : "_self"}
-              data-astro-prefetch={item.prefetch ? "hover" : "false"}
-              class:list={[
-                {
-                  active: activeSlug === item.url,
-                  external: item.external,
-                },
-              ]}
-            >
-              <span>{item.display}</span>
-              {item.external && (
+          <li class:list={["nav-item", { "has-dropdown": item.children }]}>
+            {item.url ? (
+              <a
+                href={item.url}
+                target={item.external ? "_blank" : "_self"}
+                data-astro-prefetch={item.prefetch ? "hover" : "false"}
+                class:list={[
+                  {
+                    active: activeSlug === item.url,
+                    external: item.external,
+                  },
+                ]}
+              >
+                <span>{item.display}</span>
+                {item.external && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="9"
+                    height="9"
+                    viewBox="0 0 12 13"
+                    fill="none"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M0 0.5H4V1.83333H1.33333V11.1667H10.6667V8.5H12V12.5H0V0.5ZM9.72386 1.83333H7.77778V0.5H12V4.72222H10.6667V2.77614L6.4714 6.9714L5.5286 6.0286L9.72386 1.83333Z"
+                      style={{ fill: "var(--text-body-primary)" }}
+                    />
+                  </svg>
+                )}
+              </a>
+            ) : (
+              <button class="nav-label dropdown-toggle">
+                <span>{item.display}</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="9"
-                  height="9"
-                  viewBox="0 0 12 13"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
                   fill="none"
+                  class="chevron"
                 >
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M0 0.5H4V1.83333H1.33333V11.1667H10.6667V8.5H12V12.5H0V0.5ZM9.72386 1.83333H7.77778V0.5H12V4.72222H10.6667V2.77614L6.4714 6.9714L5.5286 6.0286L9.72386 1.83333Z"
-                    style={{ fill: "var(--text-body-primary)" }}
+                    d="M4 6L8 10L12 6"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
                   />
                 </svg>
-              )}
-            </a>
+              </button>
+            )}
+            {item.children && (
+              <ul class="dropdown-menu">
+                {item.children.map((child) => (
+                  <li>
+                    <a
+                      href={child.url}
+                      target={child.url.startsWith("http") ? "_blank" : "_self"}
+                      data-astro-prefetch={!child.url.startsWith("http") ? "hover" : "false"}
+                      class:list={[
+                        {
+                          active: activeSlug === child.url,
+                          external: child.url.startsWith("http"),
+                        },
+                      ]}
+                    >
+                      <span>{child.display}</span>
+                      {child.url.startsWith("http") && (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="9"
+                          height="9"
+                          viewBox="0 0 12 13"
+                          fill="none"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M0 0.5H4V1.83333H1.33333V11.1667H10.6667V8.5H12V12.5H0V0.5ZM9.72386 1.83333H7.77778V0.5H12V4.72222H10.6667V2.77614L6.4714 6.9714L5.5286 6.0286L9.72386 1.83333Z"
+                            style={{ fill: "var(--text-body-primary)" }}
+                          />
+                        </svg>
+                      )}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
           </li>
         ))
       }
     </ul>
+    <div class="mobile-nav-actions">
+      <a
+        href="https://docs.defguard.net/getting-started/one-line-install"
+        target="_blank"
+        class="nav-cta nav-cta-secondary"
+      >
+        Get Started
+      </a>
+      <a href="/book-a-demo" class="nav-cta nav-cta-primary">Book a Demo</a>
+    </div>
   </nav>
 </Fragment>
 
@@ -138,6 +258,23 @@ const { activeSlug } = Astro.props;
       navIconOpen.classList.toggle("hidden");
     });
   }
+
+  // Accordion logic for mobile dropdown menus
+  const mobileDropdownItems = document.querySelectorAll(
+    "#mobile-nav .nav-item.has-dropdown"
+  );
+
+  mobileDropdownItems.forEach((item) => {
+    const toggle = item.querySelector(".dropdown-toggle");
+    const dropdownMenu = item.querySelector(".dropdown-menu");
+
+    if (toggle && dropdownMenu) {
+      toggle.addEventListener("click", (e) => {
+        e.preventDefault();
+        item.classList.toggle("open");
+      });
+    }
+  });
 </script>
 
 <style lang="scss" is:global>
@@ -155,6 +292,7 @@ const { activeSlug } = Astro.props;
     position: fixed;
     inset: 0;
     z-index: 3;
+    overflow-y: auto;
 
     &.open {
       display: block;
@@ -171,15 +309,16 @@ const { activeSlug } = Astro.props;
       display: flex;
       flex-flow: column;
       row-gap: 30px;
+      
       li {
         margin: 0;
         padding: 0;
+        
         a {
           display: flex;
           width: 100%;
           text-decoration: none;
           @include typography(menu);
-          // FIXME: to be decided
           font-size: 18px;
           border-left: 1px solid transparent;
           box-sizing: border-box;
@@ -201,6 +340,67 @@ const { activeSlug } = Astro.props;
             }
           }
         }
+
+        &.has-dropdown {
+          > .nav-label {
+            display: flex;
+            width: 100%;
+            @include typography(menu);
+            font-size: 18px;
+            border-left: 1px solid transparent;
+            box-sizing: border-box;
+            padding: 5px 10px;
+            background: none;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--text-body-primary);
+
+            .chevron {
+              transition: transform 0.3s ease;
+            }
+          }
+
+          &.open {
+            > .nav-label .chevron {
+              transform: rotate(180deg);
+            }
+
+            > .dropdown-menu {
+              display: flex;
+            }
+          }
+
+          .dropdown-menu {
+            display: none;
+            flex-direction: column;
+            list-style: none;
+            padding: 10px 0 10px 20px;
+            margin: 0;
+            row-gap: 15px;
+
+            li {
+              a {
+                font-size: 16px;
+                padding: 5px 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .mobile-nav-actions {
+      display: flex;
+      flex-direction: column;
+      padding: 20px 60px 40px;
+      row-gap: 15px;
+
+      .nav-cta {
+        width: 100%;
+        text-align: center;
       }
     }
   }
@@ -259,7 +459,7 @@ const { activeSlug } = Astro.props;
     width: 100%;
     flex-flow: row nowrap;
     height: var(--nav-height);
-    overflow: hidden;
+    overflow: visible;
     box-sizing: border-box;
     padding: var(--main-padding);
     align-items: center;
@@ -294,10 +494,13 @@ const { activeSlug } = Astro.props;
       list-style: none;
       column-gap: var(--items-gap);
 
-      li {
+      li.nav-item {
         user-select: none;
         display: block;
-        a {
+        position: relative;
+
+        a,
+        .nav-label {
           display: flex;
           flex-flow: row nowrap;
           align-items: center;
@@ -308,6 +511,7 @@ const { activeSlug } = Astro.props;
           border-top: 1px solid transparent;
           border-bottom: 1px solid transparent;
           box-sizing: border-box;
+          cursor: pointer;
 
           span {
             display: block;
@@ -333,6 +537,141 @@ const { activeSlug } = Astro.props;
             svg {
               user-select: none;
             }
+          }
+        }
+
+        .nav-label {
+          background: none;
+          border: none;
+          border-top: 1px solid transparent;
+          border-bottom: 1px solid transparent;
+          color: var(--text-body-primary);
+          cursor: default;
+        }
+
+        &.has-dropdown {
+          .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: auto;
+            z-index: 1000;
+            background-color: var(--surface-frame-bg);
+            border: 1px solid rgba(128, 128, 128, 0.15);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 16px;
+            margin-top: 8px;
+            min-width: fit-content;
+            list-style: none;
+            pointer-events: auto;
+
+            li {
+              margin: 0;
+              padding: 0;
+              list-style: none;
+
+              a {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 6px;
+                width: 100%;
+                padding: 10px 12px;
+                height: auto;
+                border: none;
+                border-radius: 4px;
+                transition: background-color 0.2s ease;
+                cursor: pointer;
+                box-sizing: border-box;
+                pointer-events: auto;
+                text-decoration: none;
+                color: var(--text-body-primary);
+                white-space: nowrap;
+
+                span {
+                  white-space: nowrap;
+                }
+
+                &:hover {
+                  background-color: rgba(128, 128, 128, 0.1);
+                  border: none;
+                  text-decoration: none;
+                }
+
+                &.active {
+                  background-color: rgba(128, 128, 128, 0.1);
+                  border: none;
+                }
+              }
+            }
+          }
+
+          /* ==================================================
+            == MOSTEK NAPRAWCZY DLA LUKI 8PX ==
+            ==================================================
+          */
+          &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 100%; // Zaczyna się na dole li.nav-item
+            height: 8px; // <-- Ta wysokość MUSI być taka sama jak margin-top menu!
+            background: transparent; // Jest całkowicie niewidzialny
+            cursor: default; 
+            pointer-events: auto; // Utrzymuje hover state podczas przechodzenia myszy
+          }
+          /* ==================================================
+            == KONIEC BLOKU MOSTKA ==
+            ==================================================
+          */
+
+          // Kluczowa reguła hover - pokazuje menu
+          &:hover > .dropdown-menu {
+            display: block;
+          }
+        }
+      }
+    }
+
+    .nav-actions {
+      display: flex;
+      margin-left: auto;
+      gap: 12px;
+      align-items: center;
+
+      .nav-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 20px;
+        text-decoration: none;
+        @include typography(menu);
+        border-radius: 6px;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+
+        &.nav-cta-primary {
+          background-color: var(--text-body-primary);
+          color: var(--surface-frame-bg);
+          border: 2px solid var(--text-body-primary);
+
+          &:hover {
+            background-color: transparent;
+            color: var(--text-body-primary);
+          }
+        }
+
+        &.nav-cta-secondary {
+          background-color: transparent;
+          color: var(--text-body-primary);
+          border: 2px solid var(--text-body-primary);
+
+          &:hover {
+            background-color: var(--text-body-primary);
+            color: var(--surface-frame-bg);
           }
         }
       }

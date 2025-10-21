@@ -5,14 +5,17 @@ import LogoFull from "/public/svg/logo-full.svg?raw";
 
 <footer>
   <div class="content-container">
-    <header>
-      <Fragment set:html={LogoFull} />
-    </header>
-    <div class="footer-cols">
+    
+    <div class="footer-grid">
+      
+      <header>
+        <Fragment set:html={LogoFull} />
+      </header>
+
       {
         footerData.map((col) => (
           <div class="col">
-            <p>{col.header}</p>{" "}
+            <p>{col.header}</p>
             <ul>
               {col.children.map((colItem) => (
                 <li>
@@ -41,7 +44,24 @@ import LogoFull from "/public/svg/logo-full.svg?raw";
           </div>
         ))
       }
+
+      <div class="newsletter-section">
+        <h3>Subscribe to our Newsletter</h3>
+        <p>Get product updates, security insights, and community news.</p>
+        <form action="/newsletter" method="get">
+          <input 
+            type="email" 
+            name="email" 
+            placeholder="Enter your email..." 
+            required
+            aria-label="Email address"
+          />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+
     </div>
+
     <div class="bottom">
       <p class="copyright">
         © 2025 <a href="https://defguard.net">defguard sp. z o.o.</a>
@@ -158,24 +178,112 @@ import LogoFull from "/public/svg/logo-full.svg?raw";
     }
   }
 
-  .footer-cols {
+  .footer-grid {
     display: grid;
-    column-gap: 15px;
-    row-gap: 20px;
-
     grid-template-columns: 1fr;
-    grid-template-columns: repeat(auto-fill, 300px);
+    gap: 40px;
+
+    @include break-up(md) {
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+    
+    @include break-up(lg) {
+      grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+      gap: 20px;
+    }
+
+    header {
+      display: flex;
+      flex-flow: row;
+      min-height: 0;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+    
     .col {
-      min-width: 300px;
+      min-width: 0;
+      
       & > p {
         min-height: 35px;
         padding-bottom: 5px;
         @include typography(footer-section);
       }
+      
       & > ul {
         display: flex;
         flex-flow: column;
         row-gap: 5px;
+      }
+    }
+  }
+
+  .newsletter-section {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+    border: none;
+
+    h3 {
+      @include typography(footer-section);
+      margin: 0 0 0.5rem 0;
+      color: var(--text-body-primary);
+    }
+
+    p {
+      @include typography(h3);
+      margin: 0 0 1rem 0;
+      color: var(--text-body-secondary);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      input {
+        width: 100%;
+        padding: 10px 15px;
+        border: 1px solid var(--text-body-primary);
+        border-radius: 6px;
+        background-color: var(--surface-frame-bg);
+        color: var(--text-body-primary);
+        @include typography(h3);
+        box-sizing: border-box;
+
+        &::placeholder {
+          color: var(--text-body-secondary);
+        }
+
+        &:focus {
+          outline: none;
+          border-color: var(--surface-main-primary);
+          box-shadow: 0 0 0 2px rgba(var(--surface-main-primary-rgb, 59, 130, 246), 0.1);
+        }
+      }
+
+      button {
+        width: 100%;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        background-color: var(--surface-main-primary);
+        color: white;
+        @include typography(menu);
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+
+        &:hover {
+          background-color: var(--surface-main-primary);
+          opacity: 0.9;
+          transform: translateY(-1px);
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
       }
     }
   }
