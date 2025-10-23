@@ -34,8 +34,8 @@
       },
       {
         "text": "Contact Us",
-        "external": true,
-        "link": "mailto:sales@defguard.net"
+        "external": false,
+        "link": "/book-a-demo/"
       }
     ]
   },

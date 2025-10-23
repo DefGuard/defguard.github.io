@@ -26,12 +26,12 @@
     "url": null,
     "children": [
       {
-        "display": "Enterprise Features",
-        "url": "https://docs.defguard.net/enterprise/license"
-      },
-      {
         "display": "Compare vs. Fortinet",
         "url": "/defguard-vs-fortinet"
+      },
+      {
+        "display": "Enterprise Features",
+        "url": "https://docs.defguard.net/enterprise/license"
       }
     ]
   },
