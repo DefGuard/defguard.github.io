@@ -43,7 +43,7 @@
   }
 
   @if $key == "menu" {
-    font-weight: 300;
+    font-weight: 400;
     @include font-scalable(16px);
   }
 

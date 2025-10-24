@@ -6,7 +6,6 @@ import OrganizationJSONLD from "../scripts/OrganizationJSONLD.astro";
 import TechArticleJSONLD from "../scripts/TechArticleJSONLD.astro";
 import FAQPageJSONLD from "../scripts/FAQPageJSONLD.astro";
 import SidebarNav from "../components/base/SidebarNav.astro";
-import AstroButton from "../components/AstroButton.astro";
 
 const title = "Defguard vs. Fortinet VPN: A Security-First Alternative (2025)";
 const description = "See a detailed comparison of Defguard vs. Fortinet's VPN. Discover how FortiGate's critical vulnerabilities and legacy design create unacceptable risk. Learn why a modern, open-source alternative is more resilient.";
@@ -96,24 +95,6 @@ const faqEntries = [
       <p class="description">
         Fortinet's recurring vulnerabilities are a liability, not a legacy. Switch to Defguard's modern, WireGuard®-based architecture for verifiable security and true post-breach resilience.
         </p>
-        <div class="cta-buttons">
-        <AstroButton
-          link={{
-            href: "/pricing/?utm_source=fortinet-comparison#get-evaluation-license",
-            target: "_self",
-            preload: true,
-          }}
-          text="Get Evaluation License"
-        />
-        <AstroButton
-          link={{
-            href: "/book-a-demo/?utm_source=fortinet-comparison",
-            target: "_self",
-            preload: true,
-          }}
-          text="Contact Sales"
-        />
-      </div>
     </header>
 
     <ProductSection padding="small">
