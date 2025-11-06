@@ -28,7 +28,7 @@ const formatDate = (date: Date) => {
   });
 };
 
-const title = `${entry.data.title} | Defguard Blog`;
+const title = `${entry.data.seoTitle || entry.data.title} | Defguard Blog`;
 const description = entry.data.description;
 const url = `https://defguard.net/blog/${entry.slug}`;
 
@@ -162,7 +162,73 @@ const hasCaseStudy =
   </main>
 
   <MoreStories currentSlug={entry.slug} posts={allPosts} />
+  
+  <!-- Image Lightbox -->
+  <div id="image-lightbox" class="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img" alt="" />
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
 </ProductLayout>
+
+<script>
+  // Image lightbox functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const lightbox = document.getElementById('image-lightbox');
+    const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const closeBtn = document.querySelector('.lightbox-close');
+    
+    // Get all images in post content (excluding hero images in header)
+    const postContent = document.querySelector('.post-content');
+    if (postContent) {
+      const images = postContent.querySelectorAll('img');
+      
+      images.forEach((img) => {
+        // Add cursor pointer to indicate clickable
+        img.style.cursor = 'pointer';
+        
+        img.addEventListener('click', () => {
+          if (lightbox && lightboxImg && lightboxCaption) {
+            lightbox.style.display = 'flex';
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt;
+            lightboxCaption.textContent = img.alt || '';
+            // Prevent body scroll when lightbox is open
+            document.body.style.overflow = 'hidden';
+          }
+        });
+      });
+    }
+    
+    // Close lightbox
+    const closeLightbox = () => {
+      if (lightbox) {
+        lightbox.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+    };
+    
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeLightbox);
+    }
+    
+    if (lightbox) {
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+          closeLightbox();
+        }
+      });
+    }
+    
+    // Close on ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeLightbox();
+      }
+    });
+  });
+</script>
 
 <style lang="scss">
   // Removed global overflow overrides that were interfering with sticky positioning
@@ -543,6 +609,59 @@ const hasCaseStudy =
           padding-bottom: 1rem;
         }
       }
+    }
+  }
+
+  /* Image Lightbox Styles */
+  .lightbox {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    
+    .lightbox-content {
+      max-width: 95%;
+      max-height: 85vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      border-radius: 4px;
+      margin: 0;
+    }
+    
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      color: #fff;
+      font-size: 48px;
+      font-weight: 300;
+      cursor: pointer;
+      transition: color 0.2s ease;
+      line-height: 1;
+      user-select: none;
+      
+      &:hover {
+        color: var(--primary-button-bg, #0c8ce0);
+      }
+    }
+    
+    .lightbox-caption {
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      max-width: 800px;
+      font-size: 16px;
+      margin-top: 15px;
     }
   }
 </style>
