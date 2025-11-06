@@ -10,7 +10,7 @@ image: "/images/blog/mfa-isnt-an-addon/mfa-hero.png"
 
 ## Table of Contents
 - [The Hidden "Security Tax": The True Cost of a Fragmented Model](#the-hidden-security-tax-the-true-cost-of-a-fragmented-model)
-- [Security by Design: The FortiToken Alternative](#security-by-design-the-fortitoken-alternative)
+- [Security by Design: The FortiToken Alternative](#security-by-design-the-fortitoken-alternative) 
 - [Defguard in Practice: The Prusa Research Case](#defguard-in-practice-the-prusa-research-case)
 - [The Real Choice: A Fragmented Model vs. A Unified Foundation](#the-real-choice-a-fragmented-model-vs-a-unified-foundation)
 - [Frequently Asked Questions (FAQ)](#frequently-asked-questions-faq)
@@ -65,37 +65,30 @@ Defguard is a self-hosted, unified solution where identity and access control ar
 
 #### 1. Built-in User Management (IdP)
 
-Defguard includes a native user database (often called an Identity Provider or IdP) as a core service.
-
-This is where you manage your users and groups directly — no premium extensions or add-ons. [Learn how Defguard works as an SSO provider](https://docs.defguard.net/admin-and-features/openid-connect) for your organization.
+Defguard includes a native user database — often referred to as an Identity Provider (IdP) — as a core service. It lets you manage users and groups directly, without premium extensions or add-ons, and can act as an [SSO provider](https://docs.defguard.net/features/openid-connect) for your organization.
 
 #### 2. Built-in Multi-Factor Authentication (MFA)
 
-Defguard also handles MFA as a core service, supporting standard time-based one-time passwords (TOTP) from authenticator apps such as Google Authenticator or Microsoft Authenticator — no proprietary tokens required. [Explore Defguard's built-in MFA](https://defguard.net/features/mfa).
+Defguard also handles MFA as a core service, supporting standard time-based one-time passwords (TOTP) from authenticator apps such as Google Authenticator or Microsoft Authenticator — no proprietary tokens required. You can [explore Defguard's built-in MFA](https://defguard.net/vpn_mfa/) to see how it integrates seamlessly into your existing security environment.
 
 #### 3. Integration with Your Existing Tools
 
-For organizations already using external identity systems like Microsoft Entra ID, Google Workspace, Okta, or JumpCloud, Defguard provides native integration.
-
-It uses the standard OpenID Connect (OIDC) protocol to securely connect to systems like Microsoft Entra ID, Google Workspace, Okta, or JumpCloud, letting users log in with their existing accounts. You can [see detailed SSO integration examples in our documentation](https://docs.defguard.net/admin-and-features/external-openid-providers).
+Defguard natively integrates with identity systems like Microsoft Entra ID, Google Workspace, Okta, and JumpCloud using the standard [OpenID Connect (OIDC) protocol](https://docs.defguard.net/features/external-openid-providers). This allows users to log in with their existing accounts while keeping authentication consistent and secure across your entire infrastructure.
 
 ![Defguard unified architecture — distributed locations overview](/images/blog/mfa-isnt-an-addon/defguard-prusa-location.png)
 *Unified architecture — one core, one proxy, multiple locations.*
 
 ### The Proof: It's in Our Open Source Plan
 
-These security capabilities are not tiered upsells.
+These security capabilities are not tiered upsells. The ultimate proof is in our design: [our Open Source plan](https://defguard.net/pricing/) includes both the built-in user database (IdP) and connection-level MFA from the start. 
 
-The ultimate proof is in our design: our Open Source plan includes both the built-in user database (IdP) and connection-level MFA from the start.
+This is the difference between a system built for monetization and one built for security — where essential protection is always included, and scale comes from context, not paywalls.
 
-This is the difference between a system built for upsell and one built for security.
 ## Defguard in Practice: The Prusa Research Case
 
-This isn't theoretical. **Prusa Research** needed to scale their VPN for over 500 users, including production-floor devices and remote employees.
+This isn't theoretical. **[Prusa Research](https://defguard.net/blog/prusa-vpn-scaling-with-defguard/)** needed to scale their VPN for over 500 users, including production-floor devices and remote employees.
 
-A fragmented model would have forced them to manage hundreds of separate token licenses and deal with complex identity integrations.
-
-This was not a scalable or efficient solution.
+A fragmented model would have forced them to manage hundreds of separate token licenses and deal with complex identity integrations. This was not a scalable or efficient solution.
 
 **How we solved their problem:**
 
@@ -106,34 +99,30 @@ They chose Defguard because it's a single, unified platform. Because MFA is buil
 100% of their VPN users have MFA enabled, because MFA isn't a license you can skip, it's part of the core platform.
 ## The Real Choice: A Fragmented Model vs. A Unified Foundation
 
-The problem with the legacy model is clear: you are forced to pay an enormous extra cost for MFA just to be compliant.
-
-This isn't an accident. It's the result of a business model designed to sell you security in separate, expensive pieces.
-
-Legacy VPNs treat security as a catalog of features; Defguard treats it as a foundation.
+The problem with the legacy model is clear: you are forced to pay an enormous extra cost for MFA just to be compliant. This isn't an accident. It's the result of a business model designed to sell you security in separate, expensive pieces. Legacy VPNs treat security as a catalog of features; Defguard treats it as a foundation.
 
 If you're facing another license renewal and see a "security tax" on your invoice, maybe it's time to move from a fragmented solution to a foundational one.
 
 **See what built-in security looks like.**
 
-[Book a Demo](/book-a-demo) and explore Defguard's modern VPN with MFA included.
+[Book a Demo](/book-a-demo/) and explore Defguard's modern VPN with MFA included.
 ## Frequently Asked Questions (FAQ)
 
-**How much does Fortinet MFA cost?**
+### How much does Fortinet MFA cost?
 
 Fortinet's MFA isn't a single price. It often requires separate purchases like FortiToken (for MFA) and FortiAuthenticator (for identity).
 
-These components are necessary for compliance and make the true TCO much higher than the base price — [see FortiToken licensing details](https://www.fortinet.com/products/fortitoken).
+These components are necessary for compliance and make the true TCO much higher than the base price.
 
-**Is FortiToken required for Fortinet VPN MFA?**
+### Is FortiToken required for Fortinet VPN MFA?
 
-Yes. In most FortiGate VPN configurations, FortiToken is the required component to enable MFA — as hardware or mobile tokens, licensed per user ([setup guide](https://docs.fortinet.com/document/fortigate/latest/administration-guide/fortitoken)).
+Yes. In most FortiGate VPN configurations, FortiToken is the required component to enable MFA — as hardware or mobile tokens, licensed per user.
 
-**What is a good FortiToken alternative?**
+### What is a good FortiToken alternative?
 
-A modern alternative to token-based MFA systems. Defguard includes Multi-Factor Authentication as a built-in feature — supporting standard TOTP codes from authenticator apps (like Google Authenticator) and a native user database (IdP) in every deployment. [Learn more about Defguard VPN with built-in MFA](https://defguard.net/features/mfa).
+A modern alternative to token-based MFA systems. Defguard includes Multi-Factor Authentication as a built-in feature — supporting standard TOTP codes from authenticator apps (like Google Authenticator) and a native user database (IdP) in every deployment. [Learn more about Defguard VPN with built-in MFA](https://docs.defguard.net/features/wireguard/multi-factor-authentication-mfa-2fa).
 
-**Are there VPNs with MFA included in the base price?**
+### Are there VPNs with MFA included in the base price?
 
 Yes. Defguard, as a modern WireGuard®-based platform, includes MFA by default — built into every deployment, with no extra licensing or modules.
 <script type="application/ld+json" is:inline>
