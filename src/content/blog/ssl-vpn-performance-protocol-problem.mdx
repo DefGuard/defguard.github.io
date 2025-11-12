@@ -1,0 +1,345 @@
+---
+title: "Stop Debugging Your \"Slow VPN.\" The Real Problem is the Protocol"
+seoTitle: "Why is Your Fortinet VPN Slow? The SSL VPN Protocol Problem"
+description: "Tired of users complaining your Fortinet VPN is slow? You're not alone. The problem is the SSL VPN protocol itself. See the facts & why even Fortinet is deprecating it."
+author: "Piotr Borkowicz"
+publishDate: 2025-11-12
+image: "/images/blog/ssl-vpn-performance-protocol-problem/hero.png"
+---
+
+## Table of Contents
+- [Why You Can't Make Your FortiGate VPN Faster](#why-you-cant-make-your-fortigate-vpn-faster)
+- [SSL VPN vs WireGuard Comparison](#ssl-vpn-vs-wireguard-comparison)
+- [SSL VPN Protocol Limitations Across the Market](#ssl-vpn-protocol-limitations-across-the-market)
+- [A Protocol Is Not a Product](#a-protocol-is-not-a-product)
+- [Conclusion](#conclusion)
+- [Frequently Asked Questions (FAQ)](#frequently-asked-questions-faq)
+
+As an IT administrator, you've heard the complaints every day. "The VPN is slow," "My files are taking forever to download," "I got disconnected... again."
+
+You've spent hours, maybe days, digging through logs, tweaking MTU settings, and checking firewall policies, convinced it's a configuration error.
+
+We’re here to tell you: **It's not your fault.**
+
+You are trying to optimize a foundation that was built for a different internet. The problem isn't your settings; it's the 20-year-old protocol you're forced to use.
+
+## Why You Can't Make Your FortiGate VPN Faster
+
+This is the "networking rabbit hole." When a user complains about a `FortiClient slow connection`, we've all followed the checklist:
+
+* Is it the user's home internet?
+* Is the firewall appliance overloaded?
+* Is it a routing issue?
+
+You're digging for a networking problem, but the real culprit is a *protocol* problem. Most legacy enterprise VPNs, like the common [SSL VPNs](https://openvpn.net/) on many all-in-one boxes, are built on protocols (like TCP) that are two decades old. They were designed for a world where "remote access" meant checking email, not running video calls and transferring multi-gigabyte files.
+
+You are stuck debugging a symptom. The disease is the technical debt of that legacy protocol.
+
+## SSL VPN vs WireGuard Comparison
+
+Before we even discuss products, let's look at the facts. A protocol designed 20 years ago simply cannot compete with a modern one. Here is the technical "receipt" for why your current VPN feels slow and unstable.
+
+<div class="table-container" style="width: 100%; overflow-x: auto; margin: 2rem auto;">
+  <table class="comparison-table" style="width: 100%; border-collapse: collapse; font-size: 0.95rem; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; background: transparent;">
+    <thead>
+      <tr>
+        <th style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; background: transparent; color: var(--text-body-primary); width: 20%;">Metric</th>
+        <th style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; background: transparent; color: var(--text-body-primary); width: 27%;">WireGuard® (Modern Protocol)</th>
+        <th style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; background: transparent; color: var(--text-body-primary); width: 27%;">Legacy Protocols (IPsec & SSL VPN)</th>
+        <th style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; background: transparent; color: var(--text-body-primary); width: 26%;">Why This Matters</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">1. Protocol Foundation</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Built on UDP. Designed for speed and mobility — connections stay stable even when the network changes.</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">IPsec: Complex, multi-stage protocol suite.<br/><br/>SSL VPN: Runs on TCP. This creates the <strong>"TCP-over-TCP" problem.</strong></td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">The "TCP-over-TCP" issue is a primary cause of high latency and poor performance on unstable networks. WireGuard's® UDP-based design eliminates this entirely, making it dramatically faster.</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">2. Codebase & Attack Surface</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">~4,000 lines of code.</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">~400,000+ (IPsec)<br/><br/>~500,000+ (OpenSSL)</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">A smaller codebase is verifiable. It's the difference between a "black box" and a system that can be audited (and has been, extensively). Fewer lines mean a smaller attack surface and fewer places for critical bugs to hide.</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">3. Connection & Roaming</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Stateless. Connections are instant. Roaming (e.g., moving from WiFi to 5G) is seamless and fast.</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Stateful. Connections break when the network changes. The system must reconnect and rebuild the session from scratch, often causing delays or errors.</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">This is the fix for "won't reconnect after sleep" problems. It eliminates a massive source of user frustration and help desk tickets.</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">4. Cryptography</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Uses one strong, proven set of encryption algorithms (ChaCha20, Poly1305).</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">"Crypto-Negotiation." Dozens of ciphers and options must be agreed upon by both client and server (e.g., AES-256, 3DES, SHA-1).</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">"Negotiation" is a bug, not a feature. It's a massive source of misconfigurations and "downgrade" attacks. WireGuard® is secure by default. No configuration traps or handshake errors.</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">5. Kernel vs. User-space</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Runs in the Kernel (Linux). Operates at the same level as the OS network stack.</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">User-space (Common for SSL VPNs). Runs as a user-level app. Every packet must go through extra layers, adding overhead and slowing down performance.</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Running in the kernel means WireGuard® can process packets with minimal CPU overhead and latency, resulting in near-native network speeds and better server efficiency.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+## SSL VPN Protocol Limitations Across the Market
+
+The first table proved the protocol is the problem. But as an admin, you know a protocol is not a product.
+
+You know that SSL VPN protocol limitations affect a wide range of products—from your Fortinet gateway to solutions like [OpenVPN](https://openvpn.net/). Likewise, the modern WireGuard® protocol is also used by innovative products like [Tailscale](https://tailscale.com/) and [NetBird](https://netbird.io/).
+
+The following table provides the broader, objective context for the solutions you will encounter.
+
+<div class="table-container" style="width: 100%; overflow-x: auto; margin: 2rem auto;">
+  <table class="comparison-table" style="width: 100%; border-collapse: collapse; font-size: 0.95rem; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; background: transparent;">
+    <thead>
+      <tr>
+        <th style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; background: transparent; color: var(--text-body-primary);">Product/Vendor</th>
+        <th style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; background: transparent; color: var(--text-body-primary);">VPN Type (Protocol)</th>
+        <th style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; background: transparent; color: var(--text-body-primary);">Access Model</th>
+        <th style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; background: transparent; color: var(--text-body-primary);">Key Features (Varies by SKU)</th>
+        <th style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; background: transparent; color: var(--text-body-primary);">Deployment Complexity</th>
+        <th style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; background: transparent; color: var(--text-body-primary);">Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Cisco AnyConnect</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">SSL VPN / IPsec</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Client-based</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">MFA, ZTNA Support, Centralized Mgmt</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">High</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Legacy Enterprise Suite</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Ivanti Connect Secure</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">SSL VPN</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Client-based, Web-based</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">"Always-on" VPN, MFA, Centralized Mgmt</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">High</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Enterprise suite</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">Fortinet SSL VPN</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">SSL VPN</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">Client-based, Web-based</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">MFA, Centralized Mgmt (FortiGate)</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">Medium</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">Fortinet SSL VPN tunnel mode deprecated (FortiOS 7.6.3+)</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">OpenVPN</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">SSL VPN</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Client-based</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">MFA (via plugins), Config-based</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Medium</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Open-source (Legacy)</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Citrix Gateway</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">SSL VPN</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Client-based, Web-based, Agentless</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">MFA, ZTNA Support, Centralized Mgmt</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">High</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Part of a larger VDI/app suite</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Check Point Remote Access</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">SSL VPN / IPsec</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Client-based, Web-based</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">MFA, ZTNA Support, Centralized Mgmt</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">High</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Legacy Enterprise Suite</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">SonicWall NetExtender</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">SSL VPN</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Client-based, Web-based</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">MFA, Centralized Mgmt</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Medium</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Legacy</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Barracuda SSL VPN</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">SSL VPN</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Client-based, Web-based</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">MFA, Centralized Mgmt</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Medium</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Legacy</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Tailscale</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">WireGuard®</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Client-based (Mesh)</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Identity-based (SSO), MFA, ZTNA-like</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Low</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Peer-to-peer mesh architecture. Not a gateway replacement.</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">NetBird</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">WireGuard®</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Client-based (Mesh)</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Identity-based (SSO), MFA, ZTNA-like</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Low</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Peer-to-peer mesh architecture. Not a gateway replacement.</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">Defguard</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">WireGuard®</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">Client-based</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">MFA (at protocol level), ZTNA-capable, Centralized Mgmt, Built-in IdP, SSO</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">Low to Medium</td>
+        <td style="text-align: left; padding: 16px 12px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">Open-source core. Designed as a Modern Enterprise Gateway (direct replacement for legacy SSL VPNs).</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+The available data shows three groups of remote access systems.
+
+1.  **Legacy Enterprise (SSL VPN / IPsec):**
+    Most current products — from Fortinet to OpenVPN — use older tunneling protocols that are being phased out for technical and security reasons.
+
+2.  **Peer-to-Peer Mesh (WireGuard®):**
+    Tools such as Tailscale and NetBird use WireGuard® but are designed for peer-to-peer connectivity, not as central gateways.
+
+3.  **Integrated Access Platforms:**
+    Systems such as [Defguard](https://defguard.net/) use the same modern protocol to provide centralized access control with built-in identity and MFA.
+
+The boundaries between these groups are now visible in real deployments.
+* Legacy systems are reaching performance and compliance limits.
+* **Fortinet has announced the phase-out of SSL VPN tunnel mode** starting with FortiOS 7.6.3, citing security and stability issues.
+* The Norwegian National Cyber Security Centre (NCSC) gives similar guidance, recommending a move from SSL VPN to stronger protocols such as IPsec IKEv2.
+
+These changes indicate a shift in how secure access is designed — from perimeter-based VPNs toward models that verify every connection instead of assuming trust.
+
+## A Protocol Is Not a Product
+
+The tables above prove two things:
+
+1.  **The Technology (Table 1):** WireGuard® is fundamentally faster, simpler, and more secure.
+2.  **The Market (Table 2):** The industry, including Fortinet itself, is abandoning SSL VPN, while "mesh" solutions don't solve the traditional enterprise gateway problem.
+
+But as an admin, you know a protocol is not a product.
+
+We aren't the only ones who use WireGuard®; you can see from the table that innovative products like Tailscale and NetBird are built on it. But they are built to solve a different problem (peer-to-peer mesh networking).
+
+If your problem is replacing a central, legacy gateway (like FortiGate) to manage access for all your users, you need more than just a protocol. You need an enterprise-grade platform built around that protocol.
+
+This is the gap we built Defguard to fill.
+
+We designed Defguard to be the Modern Enterprise Gateway you are now looking for. It combines the speed and stability of WireGuard® with the critical features an enterprise requires:
+
+* **Centralized Management** of all users, groups, and policies.
+* **MFA at the Protocol Level** (like TOTP, to help meet NIS2 compliance), built-in, not as a separate, complex product.
+* **Built-in IdP and SSO** (Google, Microsoft, etc.) to connect to your existing user database.
+* **Clear, self-hosted logs** that turn hours of debugging into seconds of diagnosis.
+
+## Conclusion
+
+You can spend another year trying to squeeze a few more megabits out of your old SSL VPN, or you can solve the problem for good.
+
+The "slow VPN" isn't a problem to be solved; it's a symptom of a foundation that needs to be replaced. You have seen the technical proof and the market trends. The logical next step is to look at a direct replacement.
+
+If you are tired of the networking rabbit hole, we invite you to see the [direct, merit-based comparison with Fortinet](/defguard-vs-fortinet/).
+
+Also feel free to review the full [Defguard documentation](https://docs.defguard.net/).
+
+---
+
+## Frequently Asked Questions (FAQ)
+
+### Why is my Fortinet VPN so slow?
+Your Fortinet VPN is likely slow due to the underlying SSL VPN protocol. It wasn't designed for modern high-bandwidth traffic and suffers from performance issues like "TCP-over-TCP," which creates significant latency. The problem isn't your settings; it's the protocol's technical debt.
+
+### How can I make my FortiGate VPN faster?
+While you can tweak MTU settings or firewall policies, these are minor fixes for a foundational problem. The most effective way to get a faster VPN is to switch to a modern protocol. Even Fortinet is deprecating SSL VPN tunnel mode, signaling a move away from the protocol.
+
+### What is the 'TCP-over-TCP' problem in SSL VPNs?
+The "TCP-over-TCP" problem occurs when you run TCP-based traffic (like a file transfer) over a TCP-based VPN (like SSL VPN). When a packet is lost, *both* layers try to retransmit, creating a cascade of latency and poor performance. This is a primary cause of 'slow' and 'unstable' connections.
+
+### Is Fortinet deprecating SSL VPN?
+Yes, Fortinet has announced the phase-out (deprecation) of SSL VPN tunnel mode starting in FortiOS 7.6.3. This move cites security and stability issues and strongly indicates that the industry, including legacy vendors, is moving away from SSL VPN toward more modern and secure protocols.
+
+### What is a faster alternative to Fortinet SSL VPN?
+The leading faster alternative is a solution built on the WireGuard® protocol. WireGuard® is a modern VPN protocol that is UDP-based, eliminating the "TCP-over-TCP" problem. Enterprise-grade solutions like Defguard use WireGuard® to provide a faster, more stable, and more secure remote access gateway.
+
+<script type="application/ld+json" is:inline>
+{`{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+  "headline": "Why is Your Fortinet VPN Slow? The SSL VPN Protocol Problem",
+      "description": "Tired of users complaining your Fortinet VPN is slow? You're not alone. The problem is the SSL VPN protocol itself. See the facts & why even Fortinet is deprecating it.",
+      "image": "https://defguard.net/images/blog/ssl-vpn-performance-protocol-problem/hero.png",
+  "author": {
+    "@type": "Person",
+    "name": "Michał Trojnar"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Defguard",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://defguard.net/svg/logo-full.svg"
+    }
+  },
+  "datePublished": "2025-11-12",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://defguard.net/blog/ssl-vpn-performance-protocol-problem/"
+      },
+      "articleSection": "Security, VPN, Performance",
+      "keywords": ["Fortinet VPN Slow", "FortiGate SSL VPN performance", "SSL VPN protocol limitations", "SSL VPN vs WireGuard", "FortiClient slow connection"]
+    },
+    {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why is my Fortinet VPN so slow?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Your Fortinet VPN is likely slow due to the underlying SSL VPN protocol. It wasn't designed for modern high-bandwidth traffic and suffers from performance issues like \"TCP-over-TCP,\" which creates significant latency. The problem isn't your settings; it's the protocol's technical debt."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I make my FortiGate VPN faster?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "While you can tweak MTU settings or firewall policies, these are minor fixes for a foundational problem. The most effective way to get a faster VPN is to switch to a modern protocol. Even Fortinet is deprecating SSL VPN tunnel mode, signaling a move away from the protocol."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the 'TCP-over-TCP' problem in SSL VPNs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The \"TCP-over-TCP\" problem occurs when you run TCP-based traffic (like a file transfer) over a TCP-based VPN (like SSL VPN). When a packet is lost, *both* layers try to retransmit, creating a cascade of latency and poor performance. This is a primary cause of 'slow' and 'unstable' connections."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Fortinet deprecating SSL VPN?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, Fortinet has announced the phase-out (deprecation) of SSL VPN tunnel mode starting in FortiOS 7.6.3. This move cites security and stability issues and strongly indicates that the industry, including legacy vendors, is moving away from SSL VPN toward more modern and secure protocols."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a faster alternative to Fortinet SSL VPN?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The leading faster alternative is a solution built on the WireGuard® protocol. WireGuard® is a modern VPN protocol that is UDP-based, eliminating the \"TCP-over-TCP\" problem. Enterprise-grade solutions like Defguard use WireGuard® to provide a faster, more stable, and more secure remote access gateway."
+        }
+      }
+    ]
+  }
+  ]
+}`}
+</script>
