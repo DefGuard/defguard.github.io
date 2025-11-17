@@ -37,6 +37,10 @@ const pickHighestSeverity = (items: string[]): string => {
   return highest;
 };
 
+// Import local advisory JSON files
+import defguardClientAdvisory from "../../defguard-client-1.5.2.advisories.json";
+
+
 // Group by component/version
 interface SbomEntry { name: string; version: string; url: string; status: string }
 interface Vulnerability { 
@@ -59,7 +63,7 @@ await Promise.all(COMPONENTS.map(async (c) => {
   try {
     const res = await fetch(buildAdvisoriesUrl(c));
     if (res.ok) {
-      const json = (await res.json()) as AdvisoryFile;
+      const json = defguardClientAdvisory as AdvisoryFile;
       const createdAt = json.CreatedAt || json.Metadata?.CreatedAt || null;
       const vulns = (json.Results || []).flatMap((r: AdvisoryResult) => (r.Vulnerabilities || []));
       advisories.set(idKey, { createdAt, vulns });
