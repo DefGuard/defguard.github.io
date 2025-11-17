@@ -46,11 +46,20 @@ interface Vulnerability {
   PrimaryURL?: string;
   Title?: string;
 }
-interface AdvisoryResult { Vulnerabilities?: Vulnerability[] }
+interface ExperimentalModifiedFinding {
+  Type?: string;
+  Status?: string;
+  Statement?: string;
+  Finding?: Vulnerability;
+}
+interface AdvisoryResult {
+  Vulnerabilities?: Vulnerability[];
+  ExperimentalModifiedFindings: ExperimentalModifiedFinding[];
+}
 interface AdvisoryFile { CreatedAt?: string; Metadata?: { CreatedAt?: string }; Results?: AdvisoryResult[] }
 
 const sboms = new Map<string, SbomEntry>();
-const advisories = new Map<string, { createdAt: string | null; vulns: Vulnerability[] }>();
+const advisories = new Map<string, { createdAt: string | null; vulns: Vulnerability[], ignores: ExperimentalModifiedFinding[] }>();
 
 // Build entries and fetch advisories from GitHub
 await Promise.all(COMPONENTS.map(async (c) => {
@@ -62,7 +71,8 @@ await Promise.all(COMPONENTS.map(async (c) => {
       const json = (await res.json()) as AdvisoryFile;
       const createdAt = json.CreatedAt || json.Metadata?.CreatedAt || null;
       const vulns = (json.Results || []).flatMap((r: AdvisoryResult) => (r.Vulnerabilities || []));
-      advisories.set(idKey, { createdAt, vulns });
+      const ignores = (json.Results || []).flatMap((r: AdvisoryResult) => (r.ExperimentalModifiedFindings || []));
+      advisories.set(idKey, { createdAt, vulns, ignores });
     }
   } catch {}
 }));
@@ -184,15 +194,20 @@ const tags = [
               const badgeClass = report
                 ? (report.status === 'ok' ? 'ok' : (severity || 'issues'))
                 : 'na';
+
+              const adv = advisories.get(`${c.name}@${c.version}`);
+              const vulns = adv?.vulns || [];
+              const ignores = adv?.ignores || [];
+
               const hasVulns = report && report.status !== 'ok';
-              const rowId = `component-${index}`;
+              const hasIgnores = ignores.length !== 0;
               const detailsId = `details-${index}`;
               
               return (
                 <>
                   <tr>
                     <td>
-                      {hasVulns ? (
+                      {(hasVulns || hasIgnores) ? (
                         <button 
                           class="vuln-toggle" 
                           data-target={detailsId}
@@ -220,62 +235,126 @@ const tags = [
                     <td><span class={`badge ${badgeClass}`}>{statusLabel}</span></td>
                     <td>{hasVulns ? (c.status || 'Patch in progress') : '—'}</td>
                   </tr>
-                  {hasVulns && (
-                    <tr id={detailsId} class="vuln-details" style="display: none;">
-                      <td colspan="6">
-                        <div class="vuln-details-content">
-                          <h4>Vulnerability Details</h4>
-                          <div class="vuln-list">
-                            {(() => {
-                              const adv = advisories.get(`${c.name}@${c.version}`);
-                              const vulns = adv?.vulns || [];
-                              
-                              if (vulns.length === 0) {
-                                return <p>Vulnerabilities detected but no specific details available.</p>;
-                              }
-                              
-                              return (
-                                <div class="vuln-items">
-                                  {vulns.slice(0, 10).map((vuln) => (
-                                    <div class="vuln-item">
-                                      <div class="vuln-header">
-                                        <div class="vuln-cve">
-                                          {vuln.PrimaryURL ? (
-                                            <a href={vuln.PrimaryURL} target="_blank" rel="noopener noreferrer">
-                                              <strong>{vuln.VulnerabilityID || 'Unknown CVE'}</strong>
-                                            </a>
-                                          ) : (
-                                            <strong>{vuln.VulnerabilityID || 'Unknown CVE'}</strong>
-                                          )}
-                                          <span class={`severity-badge ${(vuln.Severity || 'unknown').toLowerCase()}`}>
-                                            {vuln.Severity || 'Unknown'}
-                                          </span>
-                                        </div>
-                                        {vuln.PkgID && (
-                                          <div class="vuln-package">
-                                            Package: <code>{vuln.PkgID}</code>
+                  {(hasVulns || hasIgnores) && (
+                    <>
+                      {hasVulns && (
+                        <tr id={`${detailsId}-vulns`} class="vuln-details" style="display: none;">
+                          <td colspan="6">
+                            <div class="vuln-details-content">
+                              <h4>Vulnerability Details</h4>
+                              <div class="vuln-list">
+                                {(() => {
+                                  if (vulns.length === 0) {
+                                    return <p>Vulnerabilities detected but no specific details available.</p>;
+                                  }
+                                  
+                                  return (
+                                    <div class="vuln-items">
+                                      {vulns.slice(0, 10).map((vuln) => (
+                                        <div class="vuln-item">
+                                          <div class="vuln-header">
+                                            <div class="vuln-cve">
+                                              {vuln.PrimaryURL ? (
+                                                <a href={vuln.PrimaryURL} target="_blank" rel="noopener noreferrer">
+                                                  <strong>{vuln.VulnerabilityID || 'Unknown CVE'}</strong>
+                                                </a>
+                                              ) : (
+                                                <strong>{vuln.VulnerabilityID || 'Unknown CVE'}</strong>
+                                              )}
+                                              <span class={`severity-badge ${(vuln.Severity || 'unknown').toLowerCase()}`}>
+                                                {vuln.Severity || 'Unknown'}
+                                              </span>
+                                            </div>
+                                            {vuln.PkgID && (
+                                              <div class="vuln-package">
+                                                Package: <code>{vuln.PkgID}</code>
+                                              </div>
+                                            )}
                                           </div>
-                                        )}
-                                      </div>
-                                      {vuln.Title && (
-                                        <div class="vuln-title">
-                                          {vuln.Title}
+                                          {vuln.Title && (
+                                            <div class="vuln-title">
+                                              {vuln.Title}
+                                            </div>
+                                          )}
+                                        </div>
+                                      ))}
+                                      {vulns.length > 10 && (
+                                        <div class="vuln-more">
+                                          ... and {vulns.length - 10} more vulnerabilities
                                         </div>
                                       )}
                                     </div>
-                                  ))}
-                                  {vulns.length > 10 && (
-                                    <div class="vuln-more">
-                                      ... and {vulns.length - 10} more vulnerabilities
+                                  );
+                                })()}
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      )}
+                      {hasIgnores && (
+                        <tr id={`${detailsId}-ignores`} class="vuln-details" style="display: none;">
+                          <td colspan="6">
+                            <div class="vuln-details-content ignored">
+                              <h4>Ignored Vulnerability Details</h4>
+                              <div class="vuln-list">
+                                {(() => {
+                                  if (ignores.length === 0) {
+                                    return <p>Ignored vulnerabilities detected but no specific details available.</p>;
+                                  }
+                                  
+                                  return (
+                                    <div class="vuln-items">
+                                      {ignores.slice(0, 10).map((ignore) => {
+                                        const vuln = ignore.Finding;
+                                        if (!vuln) return null;
+                                        return (
+                                          <div class="vuln-item">
+                                            <div class="vuln-header">
+                                              <div class="vuln-cve">
+                                                {vuln.PrimaryURL ? (
+                                                  <a href={vuln.PrimaryURL} target="_blank" rel="noopener noreferrer">
+                                                    <strong>{vuln.VulnerabilityID || 'Unknown CVE'}</strong>
+                                                  </a>
+                                                ) : (
+                                                  <strong>{vuln.VulnerabilityID || 'Unknown CVE'}</strong>
+                                                )}
+                                                <span class={`severity-badge ${(vuln.Severity || 'unknown').toLowerCase()}`}>
+                                                  {vuln.Severity || 'Unknown'}
+                                                </span>
+                                              </div>
+                                              {vuln.PkgID && (
+                                                <div class="vuln-package">
+                                                  Package: <code>{vuln.PkgID}</code>
+                                                </div>
+                                              )}
+                                            </div>
+                                            {vuln.Title && (
+                                              <div class="vuln-title">
+                                                {vuln.Title}
+                                              </div>
+                                            )}
+                                            {ignore.Statement && (
+                                              <div class="ignore-statement">
+                                                <strong>Ignore Reason:</strong> {ignore.Statement}
+                                              </div>
+                                            )}
+                                          </div>
+                                        );
+                                      })}
+                                      {ignores.length > 10 && (
+                                        <div class="vuln-more">
+                                          ... and {ignores.length - 10} more ignored vulnerabilities
+                                        </div>
+                                      )}
                                     </div>
-                                  )}
-                                </div>
-                              );
-                            })()}
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
+                                  );
+                                })()}
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      )}
+                    </>
                   )}
                 </>
               );
@@ -418,6 +497,9 @@ const tags = [
     padding: 16px;
     border-left: 3px solid #dc3545;
   }
+  .vuln-details-content.ignored {
+    border-left-color: #ffc107;
+  }
   .vuln-details-content h4 {
     margin: 0 0 12px 0;
     font-size: 14px;
@@ -473,6 +555,15 @@ const tags = [
     color: #333;
     line-height: 1.4;
   }
+  .ignore-statement {
+    margin-top: 8px;
+    padding: 8px;
+    background: #f8f9fa;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #666;
+    border-left: 3px solid #6c757d;
+  }
   .vuln-more {
     padding: 8px 12px;
     background: #f8f9fa;
@@ -512,26 +603,31 @@ const tags = [
 </style>
 
 <script>
-  // Handle vulnerability details toggle
+  // Handle vulnerability details toggle for multiple rows
   document.addEventListener('DOMContentLoaded', function() {
     const toggleButtons = document.querySelectorAll('.vuln-toggle');
     
     toggleButtons.forEach((button) => {
-      button.addEventListener('click', function(this: HTMLElement) {
+      button.addEventListener('click', function() {
         const targetId = this.getAttribute('data-target');
         if (!targetId) return;
-        const targetRow = document.getElementById(targetId);
+        
+        // Find all related detail rows (vulnerabilities and ignores)
+        const vulnRow = document.getElementById(`${targetId}-vulns`);
+        const ignoreRow = document.getElementById(`${targetId}-ignores`);
+        
         const isExpanded = this.getAttribute('aria-expanded') === 'true';
         
-        if (targetRow) {
-          if (isExpanded) {
-            targetRow.style.display = 'none';
-            this.setAttribute('aria-expanded', 'false');
-          } else {
-            targetRow.style.display = 'table-row';
-            this.setAttribute('aria-expanded', 'true');
-          }
+        // Toggle visibility of all related rows
+        if (vulnRow) {
+          vulnRow.style.display = isExpanded ? 'none' : 'table-row';
         }
+        if (ignoreRow) {
+          ignoreRow.style.display = isExpanded ? 'none' : 'table-row';
+        }
+        
+        // Update button state
+        this.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
       });
     });
   });
