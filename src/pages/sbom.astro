@@ -50,7 +50,16 @@ interface Vulnerability {
   PrimaryURL?: string;
   Title?: string;
 }
-interface AdvisoryResult { Vulnerabilities?: Vulnerability[] }
+interface ExperimentalModifiedFinding {
+  Type?: string;
+  Status?: string;
+  Statement?: string;
+  Finding?: Vulnerability;
+}
+interface AdvisoryResult {
+  Vulnerabilities?: Vulnerability[];
+  ExperimentalModifiedFindings: ExperimentalModifiedFinding[];
+}
 interface AdvisoryFile { CreatedAt?: string; Metadata?: { CreatedAt?: string }; Results?: AdvisoryResult[] }
 
 const sboms = new Map<string, SbomEntry>();
