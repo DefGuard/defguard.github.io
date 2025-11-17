@@ -20,8 +20,8 @@
         packages = with pkgs; [
           nodejs_24
           pnpm
-          # TS/JS LSP
-          vtsls
+          # astro LSP
+          astro-language-server
         ];
       };
     });
