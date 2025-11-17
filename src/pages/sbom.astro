@@ -605,7 +605,7 @@ const tags = [
 <script>
   // Handle vulnerability details toggle for multiple rows
   document.addEventListener('DOMContentLoaded', function() {
-    const toggleButtons = document.querySelectorAll('.vuln-toggle');
+    const toggleButtons = document.querySelectorAll<HTMLButtonElement>('.vuln-toggle');
     
     toggleButtons.forEach((button) => {
       button.addEventListener('click', function() {
