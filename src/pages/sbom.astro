@@ -298,7 +298,7 @@ const tags = [
                       {hasIgnores && (
                         <tr id={`${detailsId}-ignores`} class="vuln-details" style="display: none;">
                           <td colspan="6">
-                            <div class="vuln-details-content">
+                            <div class="vuln-details-content ignored">
                               <h4>Ignored Vulnerability Details</h4>
                               <div class="vuln-list">
                                 {(() => {
@@ -500,6 +500,9 @@ const tags = [
   .vuln-details-content {
     padding: 16px;
     border-left: 3px solid #dc3545;
+  }
+  .vuln-details-content.ignored {
+    border-left-color: #ffc107;
   }
   .vuln-details-content h4 {
     margin: 0 0 12px 0;
