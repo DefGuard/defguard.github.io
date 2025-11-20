@@ -95,18 +95,27 @@ const components = Array.from(sboms.values()).map((c: SbomEntry) => {
 });
 
 // Build vulnerability reports aligned with components
-interface VulnReport { component: string; version: string; status: 'ok' | 'issues'; severity: string; cves: string[]; action: string }
+interface VulnReport { component: string; version: string; status: 'ok' | 'issues' | 'ignores'; severity: string; cves: string[]; action: string }
 const vulnReports: VulnReport[] = components.map((c) => {
   const adv = advisories.get(`${c.name}@${c.version}`);
   const vulns = adv?.vulns || [];
-  if (vulns.length === 0) {
+  const ignores = adv?.ignores || [];
+
+  const hasVulns = vulns.length !== 0;
+  const hasIgnores = ignores.length !== 0;
+
+  if (!hasVulns && !hasIgnores) {
     return { component: c.name, version: c.version, status: 'ok', severity: 'None', cves: [], action: '—' };
   }
-  const highest = pickHighestSeverity(vulns.map((v: Vulnerability) => v.Severity || 'unknown'));
-  // Normalize label case
+
+  const highestVulnSeverity = pickHighestSeverity(vulns.map((v: Vulnerability) => v.Severity || 'unknown'));
+  const highestIgnoreSeverity = pickHighestSeverity(ignores.map((ignore: ExperimentalModifiedFinding) => ignore.Finding?.Severity || 'unknown'));  // Normalize label case
+  const highest = pickHighestSeverity([highestVulnSeverity, highestIgnoreSeverity]);
+
   const severityLabel = highest.charAt(0).toUpperCase() + highest.slice(1);
   const cves = vulns.map((v: Vulnerability) => v.VulnerabilityID).filter(Boolean).slice(0, 5) as string[];
-  return { component: c.name, version: c.version, status: 'issues', severity: severityLabel, cves, action: '—' };
+
+  return { component: c.name, version: c.version, status: hasVulns? 'issues' : 'ignores', severity: severityLabel, cves, action: '—' };
 });
 
 // Note: table shows per-component status; page-level aggregate not used currently.
@@ -199,7 +208,7 @@ const tags = [
               const vulns = adv?.vulns || [];
               const ignores = adv?.ignores || [];
 
-              const hasVulns = report && report.status !== 'ok';
+              const hasVulns = vulns.length !== 0;
               const hasIgnores = ignores.length !== 0;
               const detailsId = `details-${index}`;
               
@@ -233,7 +242,7 @@ const tags = [
                       )}
                     </td>
                     <td><span class={`badge ${badgeClass}`}>{statusLabel}</span></td>
-                    <td>{hasVulns ? (c.status || 'Patch in progress') : '—'}</td>
+                    <td>{hasVulns ? (c.status || 'Patch in progress') : hasIgnores ? 'Awaiting upstream patch' : '—'}</td>
                   </tr>
                   {(hasVulns || hasIgnores) && (
                     <>
@@ -295,11 +304,11 @@ const tags = [
                         <tr id={`${detailsId}-ignores`} class="vuln-details" style="display: none;">
                           <td colspan="6">
                             <div class="vuln-details-content ignored">
-                              <h4>Ignored Vulnerability Details</h4>
+                              <h4>Upstream Vulnerability Details</h4>
                               <div class="vuln-list">
                                 {(() => {
                                   if (ignores.length === 0) {
-                                    return <p>Ignored vulnerabilities detected but no specific details available.</p>;
+                                    return <p>Upstream vulnerabilities detected but no specific details available.</p>;
                                   }
                                   
                                   return (
@@ -335,7 +344,7 @@ const tags = [
                                             )}
                                             {ignore.Statement && (
                                               <div class="ignore-statement">
-                                                <strong>Ignore Reason:</strong> {ignore.Statement}
+                                                <strong>Explanation:</strong> {ignore.Statement}
                                               </div>
                                             )}
                                           </div>
@@ -343,7 +352,7 @@ const tags = [
                                       })}
                                       {ignores.length > 10 && (
                                         <div class="vuln-more">
-                                          ... and {ignores.length - 10} more ignored vulnerabilities
+                                          ... and {ignores.length - 10} more upstream vulnerabilities
                                         </div>
                                       )}
                                     </div>
