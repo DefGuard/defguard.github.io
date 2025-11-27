@@ -1,0 +1,345 @@
+---
+title: "Understanding SSL VPN Limitations: Transport, Mobility and Modern Alternatives"
+seoTitle: "Why is Your Fortinet VPN Slow? The SSL VPN Protocol Problem"
+description: "Tired of users complaining your Fortinet VPN is slow? You're not alone. The problem is the SSL VPN protocol itself. See the facts & why even Fortinet is deprecating it."
+author: "Piotr Borkowicz"
+publishDate: 2025-11-12
+image: "/images/blog/SSLVPN/SSL-VPN.png"
+---
+
+![Understanding SSL VPN Limitations: Transport, Mobility and Modern Alternatives](/images/blog/SSLVPN/SSL-VPN.png)
+
+## Table of Contents
+- [Understanding SSL VPN Limitations: Transport, Mobility and Modern Alternatives](#understanding-ssl-vpn-limitations-transport-mobility-and-modern-alternatives)
+- [Limitations of TLS-over-TCP in SSL VPN Deployments](#limitations-of-tls-over-tcp-in-ssl-vpn-deployments)
+- [Why DTLS Is Only a Partial Solution](#why-dtls-is-only-a-partial-solution)
+- [Observable Issues in SSL VPN: What Administrators Actually See](#observable-issues-in-ssl-vpn-what-administrators-actually-see)
+- [Why Agencies and Vendors Recommend Alternatives to SSL VPN](#why-agencies-and-vendors-recommend-alternatives-to-ssl-vpn)
+- [WireGuard®: A Stateless, UDP-First Alternative](#wireguard-a-stateless-udp-first-alternative)
+- [Why Modern Infrastructure Demands Modern Protocol](#why-modern-infrastructure-demands-modern-protocol)
+- [Frequently Asked Questions (FAQ)](#frequently-asked-questions-faq)
+
+As a system administrator, you already know how this story goes. A user opens a ticket: "The VPN is slow." Another one: "My files take forever to download." And then the classic: "It disconnected again."
+
+You check the logs. You adjust the MTU. You review firewall rules and routing. 
+
+Everything appears correct but yet the symptoms keep coming back.
+
+When these issues appear during packet loss, jitter, short connectivity gaps, or when the client switches networks, the cause often lies below policy and routing. 
+
+To understand why these problems reoccur, we need to examine the SSL VPN transport layer, the part of the stack where most of these effects originate.
+
+## Limitations of TLS-over-TCP in SSL VPN Deployments
+
+Many SSL VPN deployments, including FortiClient and OpenVPN in TCP mode, rely on TLS-over-TCP for transport. This model introduces specific behaviours that appear whenever the inner TCP stream is carried through an outer TCP connection. 
+
+The resulting behaviour is determined by the transport design itself — not by firewall rules, policy settings, or application logic — because it suffers from following limitations:
+
+**Conflicting Congestion Control:** Two TCP layers work independently, each running its own congestion control loop. The inner TCP reacts to a distorted signal rather than the real network state, meaning that even small packet loss leads to a sharp drop in throughput.
+
+**Dependency on Static Addresses:** A TLS session relies on a stable combination of source IP, source port, destination IP, destination port, and protocol. Any change in the source IP or port breaks the transport and immediately invalidates the session. As a result, the user experiences a disconnect–reconnect cycle during any network transition, such as switching from Wi-Fi to LTE.
+
+At this point, many administrators naturally point to DTLS as the alternative transport. Several remote-access platforms (including Cisco AnyConnect, FortiClient/FortiGate) support Datagram TLS (DTLS) alongside TLS-over-TCP.
+
+DTLS is the UDP-based variant of TLS: it preserves the same cryptographic properties but does not rely on a reliable, ordered TCP stream.
+
+However, the practical impact of DTLS in SSL VPN deployments reduces to two observable behaviours:
+
+**Fallback when UDP is unavailable**
+
+If a network blocks or filters UDP, the client attempts DTLS, receives no usable response and switches to TLS-over-TCP. The VPN stays connected but now runs in TCP-over-TCP mode, which degrades throughput under packet loss or jitter.
+
+**No mobility**
+
+A DTLS session is still tied to a static network identity. When the client changes networks or interfaces, this tuple changes and the session must be re-established, which users experience as a disconnect and reconnect cycle.
+
+## Why DTLS Is Only a Partial Solution
+
+Taken together, the fallback to TLS-over-TCP and the lack of mobility in DTLS show that even when DTLS is active, the VPN session still breaks as soon as the client's network parameters change. These parameters are the session's 5-tuple: source IP, source port, destination IP, destination port and protocol. 
+
+When those parameters change: for example when the client's source IP or source port changes then the session cannot continue and must be renegotiated.
+
+Having established the session model and DTLS fallback, we can now focus on the transport path: TLS-over-TCP. This transport appears under two conditions: either DTLS was never enabled or the client has silently fallen back to it. TLS-over-TCP, by itself is not problematic; issues arise only when a TCP stream is encapsulated within this TCP tunnel, leading to 'TCP meltdown.' 
+
+These transport properties directly manifest in four recurring symptoms observed in production:
+
+## Observable Issues in SSL VPN: What Administrators Actually See
+
+User complaints about slow or unstable SSL VPN connections can be directly related to four specific, measurable transport behaviours that might be observed in logs and troubleshooting workflows in SSL VPN deployments:
+
+**Throughput collapse under packet loss:**
+
+Even minor packet loss (on the outer TCP path) can cause significant throughput degradation for TCP-over-TCP tunnels, because both TCP layers independently perform retransmissions and congestion control in response to real loss (outer TCP) and loss-like signals (inner TCP). Fortinet describes packet-loss-related SSL VPN performance symptoms in its [official troubleshooting guidance](https://community.fortinet.com/t5/FortiGate/Troubleshooting-Tip-How-to-troubleshoot-SSL-VPN-link-packet-loss/ta-p/411275).
+
+**Roaming failures when the client changes networks:**
+
+If the client moves between networks such as Wi-Fi, LTE and wired LAN, the outer TLS session breaks because it is bound to a specific five-tuple (source IP, source port, destination IP, destination port, protocol) A change in source IP or interface invalidates that connection unless additional mobility mechanisms are present.
+
+**Session resets on short connectivity interruptions:**
+
+Short outages, sleep/wake events, or network interface resets invalidate the TCP connection, requiring full renegotiation. The SSL VPN tunnel then has to be re-established and re-authenticated, which users experience as a disconnect and reconnect cycle. (Sophos documents similar disconnect/reconnect behaviour in its [SSL VPN troubleshooting guide](https://docs.sophos.com/nsg/sophos-firewall/20.0/Help/en-us/webhelp/onlinehelp/AdministratorHelp/RemoteAccessVPN/TroubleshootRASSLVPN/RASSLVPNTunnelsDisconnect/index.html), including cases where tunnels reset during short outages or endpoint sleep/wake).
+
+**Conflicting Congestion Control Layers:** 
+
+Because the inner TCP stream is encapsulated inside TLS, it cannot see the real network state. When loss occurs on the physical path, the outer TCP handles it first, so the inner TCP reacts to delay — not real loss — and its congestion logic adjusts the rate based on this distorted signal. At the same time the outer TCP slows down due to retransmissions. This opposing behaviour inflates queues inside the tunnel and turns loss into growing latency and reduced throughput. 
+
+This makes it harder to attribute latency and throughput issues to a specific point in the stack. Fortinet explains the sensitivity of SSL VPN tunnels to latency and retransmission behaviour in this [technical note](https://community.fortinet.com/t5/FortiGate/Technical-Tip-Why-SSL-VPN-tunnels-are-more-sensitive-to-latency/ta-p/214663).
+
+These transport behaviours aren't specific to a single vendor or configuration. They also appear in publications from national cybersecurity agencies and in vendor documentation, which point to similar limitations of SSL-based remote-access designs in unstable or high-latency networks.
+
+## Why Agencies and Vendors Recommend Alternatives to SSL VPN
+
+This protocol-level picture is consistent with what several national authorities and at least one major vendor have published in recent years:
+
+Global security agencies, including [NSA and CISA](https://www.cisa.gov/news-events/alerts/2024/06/18/cisa-and-partners-release-guidance-modern-approaches-network-access-security) in the United States, [advise organisations to minimise the public exposure of SSLVPN/WebVPN interfaces](https://media.defense.gov/2021/Sep/28/2002863184/-1/-1/0/csi_selecting-hardening-remote-access-vpns-20210928.pdf) and to use well-established VPN protocols such as IKEv2/IPsec, together with strict endpoint hardening
+
+[The Norwegian National Cyber Security Centre (NCSC) has published guidance](https://thecyberexpress.com/replacement-of-sslvpn-and-webvpn/) recommending a full phase-out of SSLVPN/WebVPN and migration to protocols with clearer isolation boundaries, such as IPsec IKEv2, citing repeated exploitation of SSLVPN/WebVPN edge services.
+
+[Fortinet has announced](https://docs.fortinet.com/document/fortigate/7.6.4/fortios-release-notes/173430/ssl-vpn-tunnel-mode-replaced-with-ipsec-vpn) the phase-out of SSL VPN tunnel mode in specific FortiOS releases (for example, 7.6.3) and instructs customers to migrate these tunnel-mode configurations to IPsec VPN before upgrading.
+
+These recommendations show a consistent direction: organisations are encouraged to minimise exposure of SSLVPN/WebVPN services and to rely on transport protocols with clearer isolation boundaries and more predictable behaviour under loss and network changes.
+
+This documented guidance does not predict the long-term future of SSL VPN, but it provides a clear reference point for evaluating alternatives that address the transport constraints highlighted earlier.
+
+## WireGuard®: A Stateless, UDP-First Alternative
+
+WireGuard® provides a useful reference point for this comparison because it is a modern protocol built from first principles, designed to operate over UDP with minimal state. 
+
+It avoids nested TCP interactions and does not bind session validity to a fixed client IP/port, which changes how remote-access tunnels behave under real-world mobility and instability.
+
+To make these distinctions explicit, the following table compares the two transport models side by side.
+
+### Comparison: WireGuard® vs. Legacy SSL VPN
+
+<div class="table-container" style="width: 100%; overflow-x: auto; margin: 2rem auto;">
+  <table class="comparison-table" style="width: 100%; border-collapse: collapse; font-size: 0.9rem; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; background: transparent;">
+    <thead>
+      <tr>
+        <th style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; background: transparent; color: var(--text-body-primary);">Metric</th>
+        <th style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; background: transparent; color: var(--text-body-primary);">WireGuard® (Modern Protocol)</th>
+        <th style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; background: transparent; color: var(--text-body-primary);">SSL VPN (Legacy protocol)</th>
+        <th style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; background: transparent; color: var(--text-body-primary);">Why this matters</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">Protocol Foundation</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">UDP, small codebase, fixed modern crypto; kernel-level design enables high throughput and stable behaviour under network changes.</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">TLS-over-TCP or DTLS; sessions bound to fixed 5-tuple; DTLS may fall back to TCP.</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">UDP has no long-lived socket; identity bound to keys → endpoint can update without resetting the session. TCP breaks when the 5-tuple changes.</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">Transport State</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Stateless with respect to IP/port; session tied to key pair.</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Stateful; TLS/DTLS session tied to 5-tuple.</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Stateless designs allow roaming without renegotiation; stateful designs drop sessions on IP/interface change.</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">Congestion Control</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Only inner TCP handles congestion and retransmissions.</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">TCP-over-TCP during fallback; double congestion control.</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Two independent loops can collapse throughput under loss or jitter.</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">Mobility</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Automatically updates endpoint on packets from new IP/port.</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">IP/port change breaks TLS/DTLS socket → renegotiation required.</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">WireGuard® survives roaming; SSL VPN typically reconnects.</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">Reconnection</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">No renegotiation after network change; cryptographic state persists.</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Requires new TCP + TLS handshake.</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Fewer drop/reconnect cycles in unstable networks.</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">Codebase</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">~4k LOC, minimal, focused.</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Large stacks via TLS libraries (e.g., OpenSSL).</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Smaller codebases are easier to audit and reason about.</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">Openness</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Fully open source.</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Often proprietary.</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Open code allows direct inspection; closed requires black-box evaluation.</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">Attack Surface</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Minimal transport-only surface.</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Multiple edge components (web portal, admin UI, file transfer tools).</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">More components → more exposed code and shared trust boundaries.</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">Cryptography</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">One fixed modern crypto suite (ChaCha20-Poly1305).</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Negotiated ciphers, including legacy options.</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Negotiation increases risk of misconfigurations and downgrades.</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">Kernel vs User Space</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Kernel-space on Linux → minimal copying, low latency.</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">User-space processing → more context switching.</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Kernel mode allows near-native performance (with higher impact if bugs appear).</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+Taken together, these transport properties explain why WireGuard® often behaves more consistently than the TLS-over-TCP transport model when the network introduces loss, roaming events or short interruptions.
+
+These behaviours follow directly from the transport design: UDP without connection state, identity tied to cryptographic keys rather than socket parameters, and a fixed cryptographic suite without negotiation.
+
+## Why Modern Infrastructure Demands Modern Protocol
+
+The technical advantages of WireGuard® are clear: it removes the transport, mobility and performance issues inherent in legacy SSL VPNs.This concludes what the protocol can solve, and what it cannot, because using WireGuard® on its own exposes the operational gap that SSL VPN gateways used to fill. 
+
+Defguard bridges this gap by providing the identity management, MFA and onboarding workflows that raw WireGuard® does not include. If you want to understand how organisations move from an SSL VPN-based setup to a WireGuard-based alternative, read our next article or [contact us](https://defguard.net/book-a-demo/).
+
+For a protocol-level comparison, see our merit-based analysis: [Defguard vs. FortiGate VPN](/defguard-vs-fortinet/).
+
+---
+
+## Frequently Asked Questions (FAQ)
+
+### 1. Why is the SSL-VPN on my FortiGate slow?
+
+FortiGate supports DTLS (UDP-based) for improved performance, but many networks, such as public Wi-Fi, guest VLANs, corporate outbound filters or mobile hotspots — block UDP. When that happens, FortiClient silently falls back to TLS-over-TCP.
+
+In fallback mode, TCP application traffic is encapsulated inside another TCP stream. Both layers react independently to packet loss and congestion, which can significantly reduce throughput even when the firewall and MTU are correctly configured.
+
+This behaviour is not specific to Fortinet; it is inherent to any SSL VPN operating in TLS-over-TCP mode.
+
+Platforms built on UDP-based transports (such as WireGuard) do not rely on this fallback mechanism and are less affected by outbound-UDP filtering, which helps maintain performance and stability across varied networks.
+
+### 2. How can I make my FortiGate SSL-VPN faster?
+
+MTU changes or firewall adjustments can improve edge cases, but they do not remove the limitations of TCP-over-TCP encapsulation. Fortinet's own documentation shows that SSL VPN throughput and stability issues persist even with correct configuration. The only structural improvement is to switch to a protocol that avoids nested TCP, such as IKEv2/IPsec or WireGuard®.
+
+### 3. Is SSL-VPN being deprecated on FortiGate?
+
+Yes. Fortinet has begun phasing out SSL VPN tunnel mode in FortiOS 7.6.x and instructs administrators to migrate these tunnels to IPsec. This change is specific to tunnel mode and is justified by Fortinet on the basis of stability and security behaviour.
+
+### 4. What is a faster alternative to FortiGate SSL-VPN?
+
+The most efficient alternative is a VPN built on a UDP-based protocol, such as WireGuard®. WireGuard removes TCP-over-TCP interactions, maintains session continuity across IP changes, and operates with minimal state. Enterprise platforms such as Defguard use WireGuard as the transport layer and add identity, MFA, policy enforcement, and auditing required in a remote-access gateway.
+
+### 5. Does WireGuard support MFA or SSO for enterprise remote-access VPNs?
+
+WireGuard as a protocol does not implement MFA, SSO, user authentication, or session authorisation. It authenticates peers solely by static key pairs and does not contain a mechanism to verify user identity at connection time. Therefore, MFA and SSO must be implemented by a platform that wraps identity checks around the WireGuard tunnel. Defguard provides this layer by enforcing MFA and identity binding before issuing WireGuard configuration or allowing a session.
+
+### 6. Can WireGuard replace FortiGate SSL-VPN for enterprise remote access?
+
+WireGuard can replace the transport layer, but not the gateway layer. The protocol provides encrypted UDP tunnels with good mobility properties, but it does not include gateway functions such as user identity, access policies, logging, or centralised auditing. To function as a remote-access replacement for SSL VPN, WireGuard must be combined with a gateway-style platform (such as Defguard) that handles identity, MFA, routing policies, and audit controls.
+
+<script type="application/ld+json" is:inline>
+{`{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "headline": "Understanding SSL VPN Limitations: Transport, Mobility and Modern Alternatives",
+      "alternativeHeadline": "Why is Your Fortinet VPN Slow? The SSL VPN Protocol Problem",
+      "description": "Tired of users complaining your Fortinet VPN is slow? You're not alone. The problem is the SSL VPN protocol itself. See the facts & why even Fortinet is deprecating it.",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://defguard.net/images/blog/SSLVPN/SSL-VPN.png",
+        "width": 1200,
+        "height": 630
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Piotr Borkowicz",
+        "url": "https://defguard.net"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Defguard",
+        "url": "https://defguard.net",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://defguard.net/svg/logo-full.svg",
+          "width": 600,
+          "height": 60
+        }
+      },
+      "datePublished": "2025-11-12",
+      "dateModified": "2025-11-12",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://defguard.net/blog/ssl-vpn-performance-protocol-problem/"
+      },
+      "articleSection": "Security",
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "SSL VPN"
+        },
+        {
+          "@type": "Thing",
+          "name": "WireGuard"
+        },
+        {
+          "@type": "Thing",
+          "name": "VPN Performance"
+        }
+      ],
+      "keywords": ["Fortinet VPN Slow", "FortiGate SSL VPN performance", "SSL VPN protocol limitations", "SSL VPN vs WireGuard", "FortiClient slow connection", "TCP over TCP", "VPN mobility", "enterprise VPN"],
+      "inLanguage": "en-US"
+    },
+    {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why is the SSL-VPN on my FortiGate slow?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "FortiGate supports DTLS (UDP-based) for improved performance, but many networks block UDP. When that happens, FortiClient silently falls back to TLS-over-TCP. In fallback mode, TCP application traffic is encapsulated inside another TCP stream. Both layers react independently to packet loss and congestion, which can significantly reduce throughput even when the firewall and MTU are correctly configured."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I make my FortiGate SSL-VPN faster?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "MTU changes or firewall adjustments can improve edge cases, but they do not remove the limitations of TCP-over-TCP encapsulation. Fortinet's own documentation shows that SSL VPN throughput and stability issues persist even with correct configuration. The only structural improvement is to switch to a protocol that avoids nested TCP, such as IKEv2/IPsec or WireGuard®."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is SSL-VPN being deprecated on FortiGate?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Fortinet has begun phasing out SSL VPN tunnel mode in FortiOS 7.6.x and instructs administrators to migrate these tunnels to IPsec. This change is specific to tunnel mode and is justified by Fortinet on the basis of stability and security behaviour."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a faster alternative to FortiGate SSL-VPN?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The most efficient alternative is a VPN built on a UDP-based protocol, such as WireGuard®. WireGuard removes TCP-over-TCP interactions, maintains session continuity across IP changes, and operates with minimal state. Enterprise platforms such as Defguard use WireGuard as the transport layer and add identity, MFA, policy enforcement, and auditing required in a remote-access gateway."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does WireGuard support MFA or SSO for enterprise remote-access VPNs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "WireGuard as a protocol does not implement MFA, SSO, user authentication, or session authorisation. It authenticates peers solely by static key pairs and does not contain a mechanism to verify user identity at connection time. Therefore, MFA and SSO must be implemented by a platform that wraps identity checks around the WireGuard tunnel. Defguard provides this layer by enforcing MFA and identity binding before issuing WireGuard configuration or allowing a session."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can WireGuard replace FortiGate SSL-VPN for enterprise remote access?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "WireGuard can replace the transport layer, but not the gateway layer. The protocol provides encrypted UDP tunnels with good mobility properties, but it does not include gateway functions such as user identity, access policies, logging, or centralised auditing. To function as a remote-access replacement for SSL VPN, WireGuard must be combined with a gateway-style platform (such as Defguard) that handles identity, MFA, routing policies, and audit controls."
+        }
+      }
+    ]
+  }
+  ]
+}`}
+</script>
