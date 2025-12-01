@@ -48,6 +48,14 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
         setDownloadName(`defguard-client_${version}_amd64.deb`);
         break;
       }
+      case PlatformType.FEDORAARM: {
+        setDownloadName(`defguard-client-${version}-1.aarch64.rpm`);
+        break;
+      }
+      case PlatformType.FEDORAX86: {
+        setDownloadName(`defguard-client-${version}-1.x86_64.rpm`);
+        break;
+      }
     }
   }, [platform, version]);
 
@@ -85,7 +93,10 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
             </div>
           </>
         )}
-        {(platform === PlatformType.DEBIAN || platform === PlatformType.ARCHLINUX) && (
+        {(platform === PlatformType.DEBIAN ||
+          platform === PlatformType.ARCHLINUX ||
+          platform === PlatformType.FEDORAARM ||
+          platform === PlatformType.FEDORAX86) && (
           <>
             <div className="download-icon">
               <LinuxIcon />
@@ -110,6 +121,26 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
                           }}
                         >
                           Debian
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          onClick={() => {
+                            swapPlatform(PlatformType.FEDORAARM);
+                            setIsLinuxMenuClicked(false);
+                          }}
+                        >
+                          Fedora (ARM)
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          onClick={() => {
+                            swapPlatform(PlatformType.FEDORAX86);
+                            setIsLinuxMenuClicked(false);
+                          }}
+                        >
+                          Fedora (x86)
                         </a>
                       </li>
                       <li>
@@ -199,11 +230,15 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
           {(platform === PlatformType.DEBIAN ||
             platform === PlatformType.MACOSINTEL ||
             platform === PlatformType.MACOSARM ||
-            platform === PlatformType.WINDOWS) && <>Download now</>}
+            platform === PlatformType.WINDOWS ||
+            platform === PlatformType.FEDORAX86 ||
+            platform === PlatformType.FEDORAARM) && <>Download now</>}
           {platform === PlatformType.ARCHLINUX && <>AUR package</>}
           {platform === PlatformType.DEBIAN && <p>Debian package</p>}
           {platform === PlatformType.MACOSINTEL && <p>Apple Intel</p>}
           {platform === PlatformType.MACOSARM && <p>Apple ARM</p>}
+          {platform === PlatformType.FEDORAX86 && <p>Fedora (x86)</p>}
+          {platform === PlatformType.FEDORAARM && <p>Fedora (ARM)</p>}
         </div>
         <div className="btn">
           {isButtonClicked ? (
@@ -216,7 +251,10 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
         </div>
       </a>
       <div className="download-footer">
-        {(platform === PlatformType.DEBIAN || platform === PlatformType.ARCHLINUX) && (
+        {(platform === PlatformType.DEBIAN ||
+          platform === PlatformType.ARCHLINUX ||
+          platform === PlatformType.FEDORAARM ||
+          platform === PlatformType.FEDORAX86) && (
           <>
             <p>
               Other ways to install Defguard on linux →{" "}
