@@ -1,0 +1,288 @@
+---
+title: "A Strategic Migration Path from SSL VPN to WireGuard®"
+seoTitle: "Migrating from Fortinet SSL VPN to WireGuard: The Enterprise Guide"
+description: "Does FortiGate support WireGuard? Native support is missing, and FortiOS 7.6.3 removes SSL VPN. Learn how to migrate to a self-hosted WireGuard solution as your modern alternative."
+slug: "fortigate-wireguard-migration"
+author: "Piotr Borkowicz"
+publishDate: 2025-12-08
+---
+
+## Table of Contents
+- [A Strategic Migration Path from SSL VPN to WireGuard®](#a-strategic-migration-path-from-ssl-vpn-to-wireguard)
+- [The Missing Layer: Data Plane vs. Control Plane](#the-missing-layer-data-plane-vs-control-plane)
+- [Choosing a WireGuard-Based Remote-Access Solution](#choosing-a-wireguard-based-remote-access-solution)
+- [Enabling Transition from SSL VPN to Defguard](#enabling-transition-from-ssl-vpn-to-defguard)
+- [Summary](#summary)
+- [Frequently Asked Questions (FAQ)](#frequently-asked-questions-faq)
+
+With [Fortinet deprecating SSL VPN support](https://docs.fortinet.com/document/fortigate/7.6.4/fortios-release-notes/173430/ssl-vpn-tunnel-mode-replaced-with-ipsec-vpn) and lacking native WireGuard® remote access capabilities, relying on TCP-based tunneling is becoming increasingly difficult to justify. As detailed in our [previous analysis](/blog/ssl-vpn-performance-protocol-problem/), SSL VPNs carry inherent transport limitations, including latency overhead and the risk of TCP-over-TCP meltdown.
+
+Transitioning to a UDP-based protocol like WireGuard® resolves these transport-layer deficiencies, effectively eliminating session drops during network roaming. However, WireGuard® serves purely as a Data Plane protocol; it is not a standalone replacement for an enterprise VPN because it lacks the necessary identity and access management controls out of the box.
+
+## The Missing Layer: Data Plane vs. Control Plane
+
+The Data Plane defines how packets are encapsulated, encrypted, and routed. WireGuard® operates on a principle of "cryptographic identity," recognizing only public keys and allowed IP addresses.
+
+**What WireGuard® lacks by design:**
+
+- **User Identity:** It cannot distinguish between "Alice" and "Bob," only between Key A and Key B.
+- **Authentication State:** It does not support MFA, session timeouts, or login flows.
+- **Central Policy:** It has no native concept of user groups, roles, or audit logs.
+
+Replacing a corporate VPN requires a complete Security Stack that integrates Identity, Policy, and Orchestration. Therefore, the migration challenge is not merely adopting a new protocol, but selecting a Control Plane Platform that bridges WireGuard® with the organization's Identity Provider (IdP) and enforces compliance.
+
+The next section categorizes these platforms and compares their differences side-by-side.
+
+## Choosing a WireGuard-Based Remote-Access Solution
+
+Migration is fundamentally a topology decision. To replace a traditional VPN Gateway effectively, one must choose a platform that aligns with the organization's control requirements. Solutions generally fall into two categories:
+
+**Gateway-Centric Platforms:** These follow a structured traffic model where traffic flows through defined Gateways. Unlike legacy monolithic VPNs, modern Gateway-Centric solutions allow for distributed ingress points. However, they retain a clear enforcement point for authentication, MFA, policy evaluation, and traffic inspection. This allows organizations to maintain auditability and access control similar to a firewall-based VPN.
+
+**Peer-to-Peer Overlay Networks (Mesh/P2P):** Traffic flows directly between devices (mesh), bypassing a central gateway. While policy is defined centrally via a coordination server, it is enforced locally on each device. This offers lower latency but decentralized traffic inspection.
+
+The table below categorizes these platforms based on their enterprise capabilities:
+
+<div class="table-container" style="width: 100%; overflow-x: auto; margin: 2rem auto;">
+  <table class="comparison-table" style="width: 100%; border-collapse: collapse; font-size: 0.9rem; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; background: transparent;">
+    <thead>
+      <tr>
+        <th style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; background: transparent; color: var(--text-body-primary);">Category</th>
+        <th style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; background: transparent; color: var(--text-body-primary);">Defguard</th>
+        <th style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; background: transparent; color: var(--text-body-primary);">Tailscale</th>
+        <th style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; background: transparent; color: var(--text-body-primary);">NetBird</th>
+        <th style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; background: transparent; color: var(--text-body-primary);">WG Easy</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">VPN Architecture</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Gateway-Centric (Multi-Site). Structured access via Gateways.</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Peer-to-peer overlay</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Peer-to-peer overlay</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Single-node WireGuard® server</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">Control Plane</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Self-hosted / on-prem Control Plane</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">SaaS (hosted by vendor)</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Self-hosted or vendor-hosted</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Local web UI only</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">Data Plane</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">WireGuard® connections between devices and VPN gateways</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">P2P WireGuard® tunnels + DERP relays if needed</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">WireGuard® P2P Encrypted Tunnels</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">WireGuard® tunnels to single node</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">Identity Provider Integration</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Built-in IdP/SSO + External (OIDC/LDAP)</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Only External IdP (OIDC/SAML)</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Only External IdP (OIDC)</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">None</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">MFA Enforcement</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Internal MFA for full privacy on connection (TOTP, email code, biometrics, PSK) + External IdP based</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Only external IdP-based: Enforced at SSO login. No per-tunnel MFA challenge.</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Only external IdP-based: Enforced at SSO login.</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">None</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">Policy Model</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">User/group policies at gateway + ACLs on firewall</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Distributed ACLs (pushed to endpoints)</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Distributed ACLs (pushed to endpoints)</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Peer list only</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">Access Segmentation Model</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Network-level segmentation enforced by ACL / firewall module</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Identity-based micro-segmentation</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Zero-trust micro-segmentation</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Basic routing only (no centralized policy or segmentation layer).</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">Open-Source Status</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Open-source core + open code</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Closed-source Coordination Server (SaaS) only</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Open-source</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Open-source</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">Primary Use Case</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Enterprise remote-access with centralised identity, MFA and policy enforcement</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Devs / Multi-cloud mesh connectivity</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Zero-trust overlay networks</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Simple WG VPN server</td>
+      </tr>
+      <tr style="background: transparent;">
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; font-weight: 600; color: var(--text-body-primary);">Firewall Support</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Linux, OPNsense, Mikrotik (Native support)</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Linux, OPNsense (Plugin), pfSense (Plugin)</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">Linux, OPNsense</td>
+        <td style="text-align: left; padding: 12px 10px; border: 1px solid #e0e0e0; vertical-align: top; color: var(--text-body-primary);">None</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+The table shows that mesh-style tools focus on peer-to-peer connectivity, whereas a platform like Defguard preserves the functional model of a remote-access VPN gateway.
+
+## Enabling Transition from SSL VPN to Defguard
+
+For organisations that operate remote access through SSL-based VPNs from vendors such as Fortinet (FortiGate VPN), Cisco (AnyConnect) or SonicWall, moving to a different transport protocol is not only a matter of changing the transport technology.
+
+These deployments often depend on a set of Control Plane capabilities that security teams rely on:
+
+- **RBAC (Role-Based Access Control):** Mapping network access to user roles, not just IP addresses.
+- **Authentication State:** Enforcing MFA and session validity.
+- **Directory Integration:** Syncing with Active Directory/LDAP/OIDC rather than managing static peer lists.
+- **Auditability:** Centralized logging of who accessed what and when.
+- **Topology:** Maintaining a Gateway-Centric architecture, which provides a clear point for traffic inspection and firewalling.
+
+Defguard provides these functions by adding an identity and policy layer on top of WireGuard®, enabling administrators to maintain the operational model they rely on today while adopting a modern transport protocol:
+
+- Fully self-hosted, no dependency on vendor hardware and operating system
+- User and group management with built-in IdP and SSO
+- Integration with external IdP/SSO provider: LDAP / AD or cloud based Entra ID, Google, Okta
+- MFA enforced at connection level (TOTP, email codes, biometrics)
+- VPN clients for all platforms (Windows, Mac, Linux, iOS, Android) with configuration synchronization multi instance handling
+
+These capabilities allow organisations to adopt WireGuard® for remote access without losing identity integration, MFA, policy enforcement or centralised access control. At the same time, Defguard reduces operational overhead by providing a unified management interface and simplified provisioning workflows.
+
+For administrators, the practical benefit is a remote-access setup that requires less manual intervention, produces fewer reconnect-related issues and is easier to maintain at scale, while end users experience a faster and more stable connection due to the properties of the WireGuard® transport.
+
+## Summary
+
+Defguard combines WireGuard®'s transport performance with the functions required to manage enterprise remote access consistently: user and group management, built-in or external IdP integration, MFA at connection time, policy enforcement and auditable access.
+
+If your organization is facing the mandatory migration from Fortinet SSL VPN or dealing with legacy client instability, it gives you a stable, modern upgrade without sacrificing oversight or security.
+
+Planning a complex migration and need to verify fit for your infrastructure? [Get in touch](/book-a-demo/) to map out your specific requirements with our Engineering Team.
+
+To explore protocol-level differences in more detail, see our merit-based comparison: [Defguard vs. FortiGate VPN](/defguard-vs-fortinet/).
+
+---
+
+## Frequently Asked Questions (FAQ)
+
+### Does WireGuard® natively support the MFA and Identity features found in FortiClient?
+
+No. WireGuard® is a stateless transport protocol designed for the kernel space; it explicitly lacks concepts like "users," "groups," or "2FA challenges." To match FortiClient's feature set, you must pair the protocol with a Control Plane like Defguard. Defguard handles the Identity and Access Management (IAM) layer, verifying MFA and SSO credentials during session initialization before authorizing the cryptographic keys required for the connection.
+
+### Why choose a Self-Hosted Control Plane over SaaS solutions?
+
+SaaS providers (like Tailscale) host the coordination server, so metadata about your network (devices, users, access policies, and connectivity patterns) is stored outside your infrastructure. Defguard is fully self‑hosted, so your user directory and policy rules stay entirely under your control, and no additional control-plane data has to leave your environment. This aligns with internal security policies and trust assumptions of a traditional on‑premise VPN.
+
+### Is WireGuard® ready for enterprise deployment out of the box?
+
+WireGuard® itself is purely a transport protocol based on static keys; it lacks built-in Identity Management (IdP). An enterprise deployment requires an orchestration layer (such as Defguard or Tailscale) to inject support for SSO, MFA, and centralized Access Control List (ACL) management.
+
+### What is the difference between Mesh and Gateway-Centric architectures?
+
+In a Gateway-Centric model (Defguard), traffic flows through defined enforcement points (Gateways). This allows security teams to inspect traffic, enforce network segmentation, and maintain a clear audit trail — similar to a traditional VPN but distributed across multiple nodes to avoid bottlenecks. A Mesh model (Tailscale) connects devices directly (P2P), which bypasses central controls, making it difficult to inspect traffic or enforce strict segmentation policies required in enterprise environments.
+
+### Is Fortinet officially deprecating SSL VPN?
+
+Starting with FortiOS 7.6.3, Fortinet has officially replaced SSL VPN tunnel mode with IPsec VPN. The feature is no longer available in the GUI or CLI, and existing settings are not migrated during the upgrade. This effectively forces administrators to manually migrate to IPsec (configurable on TCP 443) or adopt Universal ZTNA, which typically entails additional licensing requirements (e.g., FortiClient EMS). Defguard offers a third path: a WireGuard®-based solution that delivers IPsec-grade security with higher performance and simpler management, without tying you to a proprietary client ecosystem.
+
+<script type="application/ld+json" is:inline>
+{`{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "headline": "A Strategic Migration Path from SSL VPN to WireGuard®",
+      "alternativeHeadline": "Migrating from Fortinet SSL VPN to WireGuard: The Enterprise Guide",
+      "description": "Does FortiGate support WireGuard? Native support is missing, and FortiOS 7.6.3 removes SSL VPN. Learn how to migrate to a self-hosted WireGuard solution as your modern alternative.",
+      "author": {
+        "@type": "Person",
+        "name": "Piotr Borkowicz",
+        "url": "https://defguard.net"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Defguard",
+        "url": "https://defguard.net",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://defguard.net/svg/logo-full.svg",
+          "width": 600,
+          "height": 60
+        }
+      },
+      "datePublished": "2025-12-08",
+      "dateModified": "2025-12-08",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://defguard.net/blog/fortigate-wireguard-migration/"
+      },
+      "articleSection": "Security",
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "SSL VPN Migration"
+        },
+        {
+          "@type": "Thing",
+          "name": "WireGuard"
+        },
+        {
+          "@type": "Thing",
+          "name": "Enterprise VPN"
+        }
+      ],
+      "keywords": ["Fortinet SSL VPN migration", "FortiGate WireGuard", "SSL VPN to WireGuard", "enterprise VPN migration", "WireGuard control plane", "self-hosted VPN", "Defguard", "VPN orchestration"],
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does WireGuard® natively support the MFA and Identity features found in FortiClient?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. WireGuard® is a stateless transport protocol designed for the kernel space; it explicitly lacks concepts like 'users,' 'groups,' or '2FA challenges.' To match FortiClient's feature set, you must pair the protocol with a Control Plane like Defguard. Defguard handles the Identity and Access Management (IAM) layer, verifying MFA and SSO credentials during session initialization before authorizing the cryptographic keys required for the connection."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why choose a Self-Hosted Control Plane over SaaS solutions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SaaS providers (like Tailscale) host the coordination server, so metadata about your network (devices, users, access policies, and connectivity patterns) is stored outside your infrastructure. Defguard is fully self-hosted, so your user directory and policy rules stay entirely under your control, and no additional control-plane data has to leave your environment. This aligns with internal security policies and trust assumptions of a traditional on-premise VPN."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is WireGuard® ready for enterprise deployment out of the box?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "WireGuard® itself is purely a transport protocol based on static keys; it lacks built-in Identity Management (IdP). An enterprise deployment requires an orchestration layer (such as Defguard or Tailscale) to inject support for SSO, MFA, and centralized Access Control List (ACL) management."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between Mesh and Gateway-Centric architectures?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In a Gateway-Centric model (Defguard), traffic flows through defined enforcement points (Gateways). This allows security teams to inspect traffic, enforce network segmentation, and maintain a clear audit trail — similar to a traditional VPN but distributed across multiple nodes to avoid bottlenecks. A Mesh model (Tailscale) connects devices directly (P2P), which bypasses central controls, making it difficult to inspect traffic or enforce strict segmentation policies required in enterprise environments."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Fortinet officially deprecating SSL VPN?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Starting with FortiOS 7.6.3, Fortinet has officially replaced SSL VPN tunnel mode with IPsec VPN. The feature is no longer available in the GUI or CLI, and existing settings are not migrated during the upgrade. This effectively forces administrators to manually migrate to IPsec (configurable on TCP 443) or adopt Universal ZTNA, which typically entails additional licensing requirements (e.g., FortiClient EMS). Defguard offers a third path: a WireGuard®-based solution that delivers IPsec-grade security with higher performance and simpler management, without tying you to a proprietary client ecosystem."
+          }
+        }
+      ]
+    }
+  ]
+}`}
+</script>
