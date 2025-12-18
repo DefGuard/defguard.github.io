@@ -5,10 +5,13 @@ import ProductSection from "../layouts/ProductSection.astro";
 import OrganizationJSONLD from "../scripts/OrganizationJSONLD.astro";
 import TechArticleJSONLD from "../scripts/TechArticleJSONLD.astro";
 import FAQPageJSONLD from "../scripts/FAQPageJSONLD.astro";
-import SidebarNav from "../components/base/SidebarNav.astro";
+import AstroButton from "../components/AstroButton.astro";
+import HomeSection from "../components/home/HomeSection.astro";
+import FeatureCapsules from "../pages/_home/components/FeatureCapsules.astro";
+import TrustedBy from "../pages/_home/components/TrustedBy.astro";
 
-const title = "Defguard vs. Fortinet VPN: A Security-First Alternative (2025)";
-const description = "See a detailed comparison of Defguard vs. Fortinet's VPN. Discover how FortiGate's critical vulnerabilities and legacy design create unacceptable risk. Learn why a modern, open-source alternative is more resilient.";
+const title = "FortiGate VPN and FortiClient Alternative: Replace SSL VPN with WireGuard (2025)";
+const description = "Tired of FortiClient VPN? Switch to Defguard: a modern enterprise VPN solution with built-in MFA and SSO with fastest VPN protocol WireGuard.";
 const url = "https://defguard.net/defguard-vs-fortinet/";
 const publishedDate = "2025-10-16";
 const lastUpdated = "2025-10-16";
@@ -34,43 +37,47 @@ const tags = [
 ];
 
 const sections = [
-  { id: "key-takeaways", title: "Key Takeaways" },
+  { id: "comparison-interactive", title: "Legacy Hardware vs. Modern Software Architecture" },
+  { id: "roi", title: "The ROI of Switching: Engineered for Speed & Security" },
+  { id: "team-benefits", title: "Eliminate VPN Headaches for Your Entire Team" },
+  { id: "hybrid-infrastructure", title: "Engineered for the Modern Network" },
+  { id: "trusted-by", title: "Trusted by Industry Leaders" },
   { id: "comparison-matrix", title: "Comparison Matrix" },
-  { id: "architecture", title: "Architecture & Performance" },
-  { id: "security", title: "Security & Post-Breach Resilience" },
-  { id: "authentication", title: "Authentication & Identity Management" },
-  { id: "policy", title: "Policy Enforcement" },
-  { id: "strategic-difference", title: "The Strategic Difference" },
-  { id: "setup", title: "Initial Setup & Management" },
-  { id: "cost", title: "Cost & Licensing" },
-  { id: "bottom-line", title: "The Bottom Line" },
+  { id: "architecture", title: "Architecture: Why the Fortinet Monolith is Slow" },
+  { id: "security", title: "Security: Vulnerabilities & The 'Unpatchable' Risk (COATHANGER)" },
+  { id: "authentication", title: "Identity: Native MFA vs. The FortiAuthenticator Trap" },
+  { id: "policy", title: "Access Control: Identity-Based vs. Static IP Rules" },
+  { id: "strategic-difference", title: "Strategic Impact: Hardware Security vs. Software Agility" },
+  { id: "setup", title: "Management & Setup: Automated Provisioning vs. FortiClient EMS" },
+  { id: "cost", title: "Pricing: Transparent Subscription vs. Hidden Licensing Fees" },
+  { id: "bottom-line", title: "The Bottom Line: Why Modern Teams Switch" },
   { id: "faq", title: "FAQ" },
 ];
 
 const faqEntries = [
   {
-    question: "Why is Defguard a more resilient alternative to Fortinet's VPN solution?",
-    answer: "Defguard is more resilient due to its modern microservice architecture that separates control and data planes, minimizing the attack surface. Unlike <strong>FortiGate's</strong> monolithic design, which has proven vulnerable to persistent threats like COATHANGER that survive patching, Defguard's open-source, decentralized model is designed to contain threats and prevent deep network compromise."
+    question: "How does Defguard protect against vulnerabilities like COATHANGER?",
+    answer: "Legacy appliances are vulnerable to persistent malware because they run large, monolithic codebases. Defguard is built on a modern microservices architecture and open-source Rust code, minimizing the attack surface. Unlike legacy protocols which are inherently complex, WireGuard is lean and auditable. <a href='/blog/ssl-vpn-performance-protocol-problem/' target='_blank' rel='noopener noreferrer'>Read about the fundamental limitations of the SSL VPN protocol</a>."
   },
   {
-    question: "What are the benefits of WireGuard® over Fortinet's IPsec/SSL VPN?",
-    answer: "WireGuard® is a faster, more modern, and less complex protocol than IPsec/SSL VPN. It has a significantly smaller codebase, making it easier to audit and secure. This results in higher performance, lower latency, and a reduced attack surface compared to the legacy protocols used by <strong>Fortinet's VPN solution</strong>, which have a history of critical vulnerabilities."
+    question: "Can I use Defguard client to connect to my existing FortiGate SSL VPN?",
+    answer: "No. Defguard is not a \"Direct Fortinet Replacement\" client wrapper like OpenFortiVPN. We replace the entire legacy VPN stack. Defguard is a Protocol-Based Solution that requires installing a secure Gateway (Server) to handle traffic using the modern WireGuard® protocol instead of slow SSL VPN tunnels."
   },
   {
-    question: "How difficult is it to migrate from Fortinet to Defguard?",
-    answer: "Migration to Defguard is designed to be straightforward. As Defguard is a software-only solution, it eliminates the complex <strong>FortiGate</strong> hardware setup and <strong>FortiClient EMS</strong> management overhead. You can test Defguard with a one-line install script and deploy for production using modern infrastructure-as-code tools."
+    question: "How is Defguard different from OpenVPN or raw WireGuard®?",
+    answer: "Defguard belongs to the Protocol-Based Solutions category (like OpenVPN Access Server) but offers a modern architecture. While OpenVPN is legacy software and raw WireGuard lacks management features, Defguard provides a complete VPN Platform. It combines WireGuard performance with an Enterprise Management UI, MFA/2FA, and SSO — everything included in a self-hosted setup."
   },
   {
-    question: "Can Defguard integrate with our existing identity provider like Microsoft Entra ID?",
-    answer: "Yes. Defguard natively integrates with any OpenID Connect (OIDC) compliant identity provider, including Microsoft Entra ID (Azure AD), Okta, and Google Workspace. This is a core feature, unlike <strong>Fortinet</strong>, which often requires costly components like <strong>FortiAuthenticator</strong> for full SSO."
+    question: "Do I need a separate license for endpoint and device management like FortiClient EMS?",
+    answer: "No. Unlike Fortinet's fragmented model (Gateway + EMS), Defguard is a single, cohesive platform. Identity management, policy enforcement, and device provisioning are integrated directly into the system, not sold as an add-on. You get a unified control plane for both network access and fleet management — eliminating the need to deploy or license a separate EMS server."
   },
   {
-    question: "Is Defguard more cost-effective than Fortinet's VPN?",
-    answer: "Yes. Defguard offers a lower TCO. Our <a href='https://defguard.net/pricing' target='_blank' rel='noopener noreferrer'>pricing is transparent</a>. <strong>Fortinet's</strong> model involves numerous hidden costs for <strong>FortiGate</strong> hardware, <strong>FortiClient</strong> licenses, support contracts, MFA tokens (FortiToken), and SSO integration (FortiAuthenticator)."
+    question: "Can I replace Fortinet's VPN solution without replacing my FortiGate firewall?",
+    answer: "Yes. You can keep your existing FortiGate firewall for perimeter security and simply offload the VPN traffic to Defguard. Deploying Defguard alongside your current firewall (as a \"sidecar\") is the fastest way to upgrade your remote access performance without disrupting your core network infrastructure. <a href='/blog/fortigate-wireguard-migration/' target='_blank' rel='noopener noreferrer'>Read our step-by-step guide on how to migrate from SSL VPN to WireGuard</a>."
   },
   {
-    question: "Why does being open-source make Defguard more secure than a closed-source solution like Fortinet's?",
-    answer: "Defguard's open-source codebase allows for public scrutiny and independent audits by security experts worldwide. This transparency means vulnerabilities are often found and fixed faster than in a closed-source environment like Fortinet's, where users must blindly trust the vendor. Verifiable security builds a higher level of trust."
+    question: "Does Defguard provide Zero Trust (ZTNA) and SSO integration?",
+    answer: "Defguard enables a self-hosted ZTNA architecture by enforcing \"Identity-First\" access. We natively integrate with any OIDC Provider, including Microsoft Entra ID (Azure AD), Okta, and Google Workspace. Unlike legacy VPNs that trust IP addresses, Defguard verifies user identity and MFA status before allowing access. This delivers robust Zero Trust security out of the box — eliminating the need for expensive components like FortiAuthenticator."
   }
 ];
 ---
@@ -91,30 +98,213 @@ const faqEntries = [
 
   <main id="fortinet-comparison" class="with-sidebar-nav">
       <header id="hero">
-      <h1>The Resilient Alternative to Fortinet's VPN Solution</h1>
+      <h1>A Secure FortiGate VPN Alternative. Stop Battling Unpatched VPN Vulnerabilities.</h1>
       <p class="description">
-        Fortinet's recurring vulnerabilities are a liability, not a legacy. Switch to Defguard's modern, WireGuard®-based architecture for verifiable security and true post-breach resilience.
+        Legacy SSL VPNs expose your network to recurring critical vulnerabilities. Switch to Defguard: the secure, open-source FortiClient alternative. Built on modern WireGuard® protocol, Defguard provides fully inspectable code, native MFA, and built-in endpoint management, all without replacing your FortiGate firewall.
         </p>
+      <div class="cta-buttons">
+        <AstroButton text="See the Difference" link={{ href: "#comparison-interactive", target: "_self" }} />
+        <AstroButton text="Detailed Comparison" link={{ href: "#comparison-matrix", target: "_self" }} className="secondary" />
+      </div>
     </header>
 
+    <div class="page-content-wrapper">
+      <div class="main-content">
+
     <ProductSection padding="small">
-      <div id="key-takeaways" class="key-takeaways">
-        <h3>Key Takeaways</h3>
-        <ul>
-          <li><strong>Architecture:</strong> Defguard's modern microservice design eliminates the single point of failure inherent in FortiGate's monolithic architecture.</li>
-          <li><strong>Resilience:</strong> Documented malware like COATHANGER can survive patches on FortiGate. Defguard's architecture is designed to resist and contain such persistent threats.</li>
-          <li><strong>Transparency:</strong> Defguard is fully open-source, allowing for public verification. Fortinet's solution is a closed-source, proprietary system.</li>
-          <li><strong>Cost:</strong> Defguard's pricing is transparent and subscription-based, while Fortinet's model often includes numerous hidden costs for hardware, support, and essential features.</li>
-        </ul>
-      </div>
+      <section id="comparison-interactive">
+        <h2>Legacy Hardware vs. Modern Software Architecture</h2>
+        <p>See how Defguard's Enterprise VPN solution architecture stacks up against the limitations of traditional, all-in-one security appliances. Select a topic below to compare.</p>
+        
+        <div class="tab-comparison">
+          <div class="tab-buttons">
+            <button class="tab-button active" data-tab="architecture">1. Architecture</button>
+            <button class="tab-button" data-tab="cost">2. Cost & Lock-in</button>
+            <button class="tab-button" data-tab="security">3. Inspectability & Verifiability</button>
+            <button class="tab-button" data-tab="mfa">4. Multi-factor authentication</button>
+            <button class="tab-button" data-tab="integration">5. Integration</button>
+          </div>
+          
+          <div class="tab-content">
+            <div class="tab-pane active" data-content="architecture">
+              <div class="comparison-split">
+                <div class="comparison-item">
+                  <h3>Traditional Appliance (FortiGate)</h3>
+                  <p>Whether you use the official FortiClient or a client wrapper like OpenFortiVPN, you are still tethered to the slow, vulnerable SSL VPN protocol on a monolithic appliance. It's a single point of failure.</p>
+                  <div class="diagram-box">
+                    <div class="diagram-text">[ Internet ] ↔ [ Firewall | VPN | SSO | Control Plane ] ↔ [ Internal Network ]</div>
+                    <div class="diagram-result">Result: Broad Attack Surface</div>
+                  </div>
+                </div>
+                <div class="comparison-item">
+                  <h3>Defguard Architecture</h3>
+                  <p>Defguard is not a client wrapper. It is a complete Protocol-Based Solution that replaces the vulnerable SSL VPN stack with a modern WireGuard® Gateway. Built on a secure, stateless architecture, it isolates components and keeps the Core Control Plane physically inaccessible from the internet, eliminating the attack surface.</p>
+                  <div class="diagram-box">
+                    <div class="diagram-text">[ Internet ] ↔ [ Secure Gateway ]<br>[ DMZ ]<br>[ Core Control Plane ] ↔ [ Internal Network ]</div>
+                    <div class="diagram-result">Result: Minimized Attack Surface</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="tab-pane" data-content="cost">
+              <div class="comparison-split">
+                <div class="comparison-item">
+                  <h3>Fortinet Pricing & Hardware Lock-in</h3>
+                  <ul>
+                    <li>Expensive hardware purchases required.</li>
+                    <li>Security updates often demand costly equipment upgrades.</li>
+                    <li>Creates a cycle of vendor lock-in and escalating costs.</li>
+                  </ul>
+                </div>
+                <div class="comparison-item">
+                  <h3>Defguard's Freedom</h3>
+                  <ul>
+                    <li>A true FortiGate VPN alternative. Completely hardware and system-agnostic.</li>
+                    <li>Deploy on any hardware or cloud provider (AWS, GCP, Azure).</li>
+                    <li>Software-defined for maximum flexibility and cost-efficiency.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <div class="tab-pane" data-content="security">
+              <div class="comparison-split">
+                <div class="comparison-item">
+                  <h3>The FortiGate Black Box</h3>
+                  <ul>
+                    <li>Closed-source code prevents inspection.</li>
+                    <li>No way to verify security claims or patches.</li>
+                    <li>Impossible to confirm if attackers persist after a breach.</li>
+                    <li>You must trust the vendor's promises completely.</li>
+                  </ul>
+                </div>
+                <div class="comparison-item">
+                  <h3>Defguard's Inspectability & Verifiability</h3>
+                  <ul>
+                    <li>Full inspectability with open-source code.</li>
+                    <li>Transparent development, testing, and release process.</li>
+                    <li>Public penetration testing reports.</li>
+                    <li>Full system access enables comprehensive monitoring.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <div class="tab-pane" data-content="mfa">
+              <div class="comparison-split">
+                <div class="comparison-item">
+                  <h3>FortiClient's Costly 2FA</h3>
+                  <p>Typically offers basic 2FA, often with additional costs for proprietary tokens or services.</p>
+                  <ul>
+                    <li>Basic 2FA (e.g., TOTP)</li>
+                  </ul>
+                </div>
+                <div class="comparison-item">
+                  <h3>Defguard's True Multi-Factor Authentication</h3>
+                  <p>Provides true, layered <strong>Multi-Factor Authentication</strong> out-of-the-box for robust security.</p>
+                  <ul>
+                    <li>Biometry</li>
+                    <li>TOTP</li>
+                    <li>Email Codes</li>
+                    <li>WireGuard PSK</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <div class="tab-pane" data-content="integration">
+              <div class="comparison-split">
+                <div class="comparison-item">
+                  <h3>FortiGate's Limited SSO</h3>
+                  <p>Support for SSO/IdP is often limited to a few major enterprise providers, restricting your choices.</p>
+                  <p><strong>Supported:</strong> ADFS, Microsoft Entra ID, Okta, Google Workspace.</p>
+                </div>
+                <div class="comparison-item">
+                  <h3>Defguard's Broad Integration</h3>
+                  <p>Extensive support for on-premise and cloud-based SSO/IdP solutions via OpenID Connect.</p>
+                  <p><strong>Supported:</strong> LDAP, Active Directory, Google Workspace, Azure EntraID, Okta, JumpCloud, Zitadel, ...and more.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </ProductSection>
 
-    <div class="page-content-wrapper">
-      <aside class="sidebar-container">
-        <SidebarNav sections={sections} title="On this page" />
-      </aside>
+        <HomeSection id="roi" variant="white">
+          <h2>The ROI of Switching: Engineered for Speed & Security</h2>
+          <p>Replace legacy friction with measurable performance. Defguard upgrades your infrastructure with a modern, auditable stack that respects your team's time.</p>
+          <FeatureCapsules
+            features={[
+              {
+                title: "Instant Connection (< 100ms)",
+                description: "Stateless WireGuard® handshake eliminates the frustration of slow legacy VPN negotiation and re-connects instantly.",
+              },
+              {
+                title: "95% Reduced Attack Surface",
+                description: "Just ~4k lines of auditable code vs. 100k+ in legacy protocols, drastically minimizing the room for vulnerabilities.",
+              },
+              {
+                title: "4x Faster Throughput",
+                description: "Kernel-level processing delivers near-gigabit speeds, removing the bottleneck for remote workflows.",
+              }
+            ]}
+          />
+        </HomeSection>
 
-      <div class="main-content">
+        <HomeSection id="team-benefits" variant="white">
+          <h2>Eliminate VPN Headaches for Your Entire Team</h2>
+          <p>Defguard provides the security, control, and flexibility your team needs, no matter your role.</p>
+          <FeatureCapsules
+            features={[
+              {
+                title: "For CISO & IT Management",
+                description: "<ul><li><strong>Mitigate Risk:</strong> Secure, stateless architecture minimizes your attack surface.</li><li>Escape FortiGate SSL VPN vulnerabilities</li><li><strong>Ensure Compliance:</strong> Full <strong>inspectability</strong> and transparent security empower audits.</li><li><strong>Control Costs:</strong> Avoid vendor lock-in and FortiGate costs complexity</li></ul>",
+                icon: "lni-shield",
+              },
+              {
+                title: "For Sys Admins",
+                description: "<ul><li><strong>Easy Deployment:</strong> Hardware-agnostic software for flexible installations.</li><li><strong>Simplified Management:</strong> Easy upgrades and seamless integration with existing tools.</li><li><strong>Full Visibility:</strong> Comprehensive system and network monitoring on-device.</li></ul>",
+                icon: "lni-cog",
+              },
+              {
+                title: "For DevOps",
+                description: "<ul><li><strong>Automated & Fast:</strong> Built on WireGuard for high performance and speed.</li><li><strong>Hybrid Cloud Ready:</strong> Deploy on-premise or in any major cloud environment.</li><li><strong>Flexible Integration:</strong> Extensive SSO/IdP support via OpenID Connect.</li></ul>",
+                icon: "lni-layers",
+              }
+            ]}
+          />
+        </HomeSection>
+
+        <HomeSection id="hybrid-infrastructure" variant="white">
+          <h2>Engineered for the Modern Network</h2>
+          <p>Defguard is more than just a replacement—it's an upgrade designed for today's dynamic infrastructure demands.</p>
+          <FeatureCapsules
+            features={[
+              {
+                title: "Engineered for Speed",
+                description: "Leverages the high-performance WireGuard® protocol to ensure your network runs at peak efficiency without compromising on security.",
+              },
+              {
+                title: "Hybrid Cloud Ready",
+                description: "As a software solution, Defguard enables easy hybrid cloud deployment, securing both on-premise and cloud resources seamlessly.",
+              },
+              {
+                title: "Easy, Verified Updates",
+                description: "Avoid risky firmware updates. Defguard's open-source nature lets you verify and test all releases in your own environment with no extra cost - avoid FortiGate hardware lifecycle costs.",
+              }
+            ]}
+          />
+        </HomeSection>
+
+        <HomeSection id="trusted-by" variant="white">
+          <div class="trusted-by-content">
+            <h2>Trusted by Industry Leaders</h2>
+            <p>Organizations worldwide trust Defguard to secure their critical infrastructure and protect their digital assets.</p>
+            <TrustedBy forceScroll={false} />
+          </div>
+        </HomeSection>
 
     <ProductSection padding="small">
       <section id="comparison-matrix">
@@ -149,7 +339,7 @@ const faqEntries = [
               <tr>
                 <td>MFA Enforcement</td>
                 <td>Protocol-level MFA - Built-in, every connection authenticated.</td>
-                <td>Application-level 2FA - Requires costly add-ons like FortiToken.</td>
+                <td>Session-Based 2FA. Authenticates only once at login. Native tokens usually require separate licensing (like FortiToken).</td>
               </tr>
               <tr>
                 <td>Open Source</td>
@@ -159,7 +349,7 @@ const faqEntries = [
               <tr>
                 <td>Identity Management</td>
                 <td>Built-in IdP & simple SSO integration (Microsoft, Google, Okta).</td>
-                <td>Requires separate FortiAuthenticator component.</td>
+                <td>Fragmented. Basic local config per-firewall. Scalable IAM often requires FortiAuthenticator.</td>
               </tr>
               <tr>
                 <td>Onboarding</td>
@@ -184,7 +374,7 @@ const faqEntries = [
 
         <ProductSection padding="small">
           <section id="architecture">
-        <h2>Defguard vs. Fortinet VPN: Architecture & Performance</h2>
+        <h2>Architecture: Why the Fortinet Monolith is Slow</h2>
         <p>
           <strong>Fortinet's VPN solution</strong> relies on a traditional model where the <strong>FortiClient</strong> endpoint connects to a central <strong>FortiGate</strong> appliance. All traffic is funneled through a central FortiGate appliance. 
           This monolithic architecture, where dozens of services are bundled into the FortiOS codebase, creates a single, massive point of 
@@ -268,9 +458,37 @@ const faqEntries = [
       </section>
     </ProductSection>
 
+        <script>
+          // Tab functionality for interactive comparison
+          document.addEventListener('DOMContentLoaded', () => {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+            
+            if (tabButtons.length === 0) return;
+            
+            tabButtons.forEach((button) => {
+              button.addEventListener('click', (e) => {
+                const target = e.currentTarget as HTMLElement;
+                const tabId = target.dataset.tab;
+                
+                // Remove active class from all buttons and panes
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabPanes.forEach(pane => pane.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding pane
+                target.classList.add('active');
+                const targetPane = document.querySelector(`.tab-pane[data-content="${tabId}"]`);
+                if (targetPane) {
+                  targetPane.classList.add('active');
+                }
+              });
+            });
+          });
+        </script>
+
         <ProductSection padding="small">
           <section id="security">
-        <h2>Defguard vs. Fortinet VPN: Security & Post-Breach Resilience</h2>
+        <h2>Security: Vulnerabilities & The "Unpatchable" Risk (COATHANGER)</h2>
         <p class="critical-section">
           This is the most critical differentiator. Fortinet's security model has proven to be dangerously fragile against sophisticated threats.
         </p>
@@ -296,7 +514,7 @@ const faqEntries = [
 
     <ProductSection padding="small">
       <section id="authentication">
-        <h2>Defguard vs. Fortinet: Authentication & Identity Management</h2>
+        <h2>Identity: Native MFA vs. The FortiAuthenticator Trap</h2>
         <p>
           Fortinet requires a complex ecosystem for modern authentication, needing separate products like FortiAuthenticator for SSO and 
           FortiToken for MFA. This fragments security and inflates costs.
@@ -310,7 +528,7 @@ const faqEntries = [
 
     <ProductSection padding="small">
           <section id="policy">
-        <h2>Defguard vs. Fortinet: Policy Enforcement</h2>
+        <h2>Access Control: Identity-Based vs. Static IP Rules</h2>
         <p>
           Defguard uses a flexible, <a href="https://docs.defguard.net/features/access-control-list" target="_blank" rel="noopener noreferrer">identity-based ACL system</a>. Policies are tied to user identity, not static IP addresses, making them more secure and easier to manage than the complex rule sets on a centralized FortiGate appliance.
         </p>
@@ -319,7 +537,7 @@ const faqEntries = [
 
         <ProductSection padding="small">
           <section id="strategic-difference">
-        <h2>The Strategic Difference: Fortinet vs. Defguard</h2>
+        <h2>Strategic Impact: Hardware Security vs. Software Agility</h2>
         <p>
           The choice between Fortinet and Defguard is a choice between two fundamentally different security philosophies. 
           The table below shows the real-world consequences of each architectural approach.
@@ -331,10 +549,15 @@ const faqEntries = [
               <tr>
                 <th>Security Principle</th>
                 <th>Legacy Appliance Approach (FortiGate)</th>
-                <th>Modern Software Approach (Defguard)</th>
+                <th>Modern ZTNA Approach (Defguard)</th>
               </tr>
             </thead>
             <tbody>
+              <tr>
+                <td>ZTNA implementation</td>
+                <td>Perimeter-Based. Trust is assumed once connected. Even with "Fortinet ZTNA" features, the underlying architecture relies on a persistent tunnel that allows lateral movement.</td>
+                <td>Pure identity-first ZTNA: protocol-level MFA with dynamic session keys; no implicit trust, every session fully reauthenticated before tunnel establishment.</td>
+              </tr>
               <tr>
                 <td>Attack Surface</td>
                 <td>Large, monolithic, and complex; a single vulnerability can lead to full device compromise, as repeatedly demonstrated by multiple critical CVEs.</td>
@@ -363,19 +586,22 @@ const faqEntries = [
 
         <ProductSection padding="small">
           <section id="setup">
-        <h2>Initial Setup & Management</h2>
+        <h2>Management & Setup: Automated Provisioning vs. FortiClient EMS</h2>
         <p>
-          Deploying <strong>Fortinet's VPN</strong> is a resource-intensive process involving <strong>FortiGate</strong> hardware and <strong>FortiClient EMS</strong> for management.
+          Scaling remote access creates an "Empty Client" problem: distributing the app is easy, but securely distributing secrets is hard. Fortinet forces you to buy <strong>FortiClient EMS</strong> to solve this. Defguard solves it using the infrastructure you already own: Active Directory or Entra ID.
         </p>
         <p>
-          Defguard is designed for simplicity. To simplify evaluation, we provide a <strong><a href="https://defguard.net/docs/getting-started/one-line-install-script/" target="_blank" rel="noopener noreferrer">one-line install script</a></strong> to deploy a complete test instance, allowing you to get familiar with the solution's features quickly. For production-ready rollout, we support modern workflows with deployment options for <strong><a href="https://docs.defguard.net/deployment-strategies/docker-compose" target="_blank" rel="noopener noreferrer">Docker Compose</a></strong>, <strong><a href="https://docs.defguard.net/deployment-strategies/terraform" target="_blank" rel="noopener noreferrer">Terraform for AWS</a></strong>, and <strong><a href="https://docs.defguard.net/deployment-strategies/kubernetes" target="_blank" rel="noopener noreferrer">Kubernetes</a></strong>.
+          We offer true Zero-Touch Provisioning. Admins batch-generate tokens via API and sync them to user profiles. When you push the MSI via Intune or GPO, the client auto-detects the domain, retrieves the token, and pre-configures itself. Users launch the app and connect immediately: no emails, no copy-pasting, and no Helpdesk tickets.
+        </p>
+        <p>
+          To simplify evaluation, we provide a <strong><a href="https://defguard.net/docs/getting-started/one-line-install-script/" target="_blank" rel="noopener noreferrer">one-line install script</a></strong> to deploy a complete test instance, allowing you to get familiar with the solution's features quickly. For production-ready rollout, we support modern workflows with deployment options for <strong><a href="https://docs.defguard.net/deployment-strategies/docker-compose" target="_blank" rel="noopener noreferrer">Docker Compose</a></strong>, <strong><a href="https://docs.defguard.net/deployment-strategies/terraform" target="_blank" rel="noopener noreferrer">Terraform for AWS</a></strong>, and <strong><a href="https://docs.defguard.net/deployment-strategies/kubernetes" target="_blank" rel="noopener noreferrer">Kubernetes</a></strong>.
         </p>
       </section>
         </ProductSection>
 
         <ProductSection padding="small">
           <section id="cost">
-        <h2>Cost & Licensing</h2>
+        <h2>Pricing: Transparent Subscription vs. Hidden Licensing Fees</h2>
         <p>
           <strong>Fortinet's</strong> pricing requires multiple, separate licenses for <strong>FortiGate</strong> hardware, <strong>FortiClient</strong> endpoints, <strong><a href="https://defguard.net/vpn_mfa/" target="_blank" rel="noopener noreferrer">MFA</a></strong>, SSO, <strong>and mandatory support contracts</strong>, leading to unforeseen costs.
         </p>
@@ -387,7 +613,7 @@ const faqEntries = [
 
         <ProductSection padding="small">
           <section id="bottom-line">
-            <h2>The Bottom Line</h2>
+            <h2>The Bottom Line: Why Modern Teams Switch</h2>
             <p>
               <strong>Fortinet's VPN solution</strong> is a traditional VPN defined by its legacy architecture and a demonstrated history of critical security failures. 
               The <strong>FortiGate</strong> appliance's design allows for persistent compromises that survive patching – a risk modern businesses cannot afford.
@@ -401,8 +627,8 @@ const faqEntries = [
               Stop patching a broken architecture. Move to a platform designed for the modern threat landscape.
             </p>
             <div class="cta-buttons">
-              <a href="/pricing/?utm_source=fortinet-comparison#get-evaluation-license" class="btn primary">Get Evaluation License</a>
-              <a href="/book-a-demo/?utm_source=fortinet-comparison" class="btn secondary">Contact Sales</a>
+              <AstroButton text="Get Evaluation License" link={{ href: "/pricing/?utm_source=fortinet-comparison#get-evaluation-license", target: "_self" }} />
+              <AstroButton text="Contact Sales" link={{ href: "/book-a-demo/?utm_source=fortinet-comparison", target: "_self" }} className="secondary" />
             </div>
       </section>
     </ProductSection>
@@ -425,11 +651,262 @@ const faqEntries = [
 
 <style lang="scss" is:global>
   #fortinet-comparison {
+    // ROI section spacing
+    .home-section#roi {
+      padding-bottom: 80px;
+      padding-top: 60px;
+      
+      > h2 {
+        @include typography(section);
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+      
+      > p {
+        @include typography(paragraph);
+        margin-bottom: 0.75rem;
+        text-align: center;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .feature-capsules {
+        margin-top: 2rem;
+        
+        .feature-capsule {
+          .feature-header {
+            margin-bottom: 1rem;
+            
+            h2 {
+              @include typography(h3);
+              font-size: 1.5rem;
+              font-weight: 600;
+              line-height: 1.3;
+            }
+          }
+          
+          p {
+            text-align: left;
+            line-height: 1.6;
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+
+    // Comparison interactive section
+    #comparison-interactive {
+      > h2 {
+        @include typography(section);
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+      
+      > p {
+        @include typography(paragraph);
+        margin-bottom: 0.75rem;
+        text-align: center;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    // Team benefits section styling
+    .home-section#team-benefits {
+      > h2 {
+        @include typography(section);
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+      
+      > p {
+        @include typography(paragraph);
+        margin-bottom: 0.75rem;
+        text-align: center;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .feature-capsules {
+        margin-top: 2rem;
+        
+        .feature-capsule {
+          .feature-header {
+            margin-bottom: 1rem;
+            
+            h2 {
+              @include typography(h3);
+              font-size: 1.5rem;
+              font-weight: 600;
+              line-height: 1.3;
+            }
+          }
+          
+          p, .feature-description {
+            text-align: left;
+            line-height: 1.6;
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+
+    // Hybrid infrastructure section styling
+    .home-section#hybrid-infrastructure {
+      padding-top: 60px;
+      padding-bottom: 60px;
+      
+      > h2 {
+        @include typography(section);
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+      
+      > p {
+        @include typography(paragraph);
+        margin-bottom: 0.75rem;
+        text-align: center;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .feature-capsules {
+        margin-top: 2rem;
+        
+        .feature-capsule {
+          .feature-header {
+            margin-bottom: 1rem;
+            
+            h2 {
+              @include typography(h3);
+              font-size: 1.5rem;
+              font-weight: 600;
+              line-height: 1.3;
+            }
+          }
+          
+          p {
+            text-align: left;
+            line-height: 1.6;
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+
+    // Team benefits section - add spacing
+    .home-section#team-benefits {
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+
+    // Trusted by section - add spacing
+    .home-section#trusted-by {
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+    
+    // General spacing between HomeSection elements
+    .home-section + .home-section {
+      margin-top: 0;
+    }
+    
+    .home-section + .product-section {
+      margin-top: 0;
+    }
+    
+    // Add spacing before comparison matrix
+    #comparison-matrix {
+      padding-top: 40px;
+      margin-top: 0;
+    }
+
+    // Comparison interactive section
+    #comparison-interactive {
+      > h2 {
+        @include typography(section);
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+      
+      > p {
+        @include typography(paragraph);
+        margin-bottom: 0.75rem;
+        text-align: center;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    // Comparison interactive section
+    #comparison-interactive {
+      > h2 {
+        @include typography(section);
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+      
+      > p {
+        @include typography(paragraph);
+        margin-bottom: 0.75rem;
+        text-align: center;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    // Hybrid infrastructure section styling
+    .home-section#hybrid-infrastructure {
+      > h2 {
+        @include typography(section);
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+      
+      > p {
+        @include typography(paragraph);
+        margin-bottom: 0.75rem;
+        text-align: center;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .feature-capsules {
+        margin-top: 2rem;
+        
+        .feature-capsule {
+          .feature-header {
+            margin-bottom: 1rem;
+            
+            h2 {
+              @include typography(h3);
+              font-size: 1.5rem;
+              font-weight: 600;
+              line-height: 1.3;
+            }
+          }
+          
+          p {
+            text-align: left;
+            line-height: 1.6;
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+
          #hero {
       text-align: center;
       max-width: 900px;
        margin: 0 auto;
-      padding: 50px 2rem 60px;
+      padding: 50px 0.5rem 60px;
       
       h1 {
         @include typography(title);
@@ -463,11 +940,19 @@ const faqEntries = [
         align-items: center;
         justify-content: center;
         gap: 16px;
-        padding-top: 60px;
+        padding-top: 40px;
 
         @include break-down(sm) {
           flex-flow: column;
           align-items: center;
+          width: 100%;
+        }
+
+        .astro-btn-link {
+          @include break-down(sm) {
+            width: 100%;
+            max-width: 300px;
+          }
         }
       }
     }
@@ -478,7 +963,7 @@ const faqEntries = [
       border-radius: 8px;
       padding: 1.5rem;
       margin: 0 auto 2rem;
-      max-width: 80ch;
+      max-width: 100ch;
 
       h3 {
         margin-top: 0;
@@ -497,52 +982,27 @@ const faqEntries = [
       display: block;
       width: 100%;
       position: relative;
-      
-      @include break-up(lg) {
-        display: flex;
-        flex-direction: row;
-        gap: 2rem;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 2rem;
-        align-items: flex-start;
-      }
-    }
-
-    .sidebar-container {
-      display: none;
-      
-      @include break-up(lg) {
-        display: block;
-        position: sticky;
-        top: calc(var(--nav-height, 75px) + 2rem);
-        height: fit-content;
-        z-index: 10;
-        max-height: calc(100vh - var(--nav-height, 75px) - 4rem);
-        overflow-y: auto;
-        align-self: start;
-        min-width: 250px;
-        /* Remove any inherited transform or will-change */
-        transform: none;
-        will-change: auto;
-      }
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
     }
 
     .main-content {
-      flex: 1;
+      width: 100%;
       
       section[id] {
         scroll-margin-top: 100px;
       }
+      
 
-         .cta-buttons {
-       display: flex;
-       gap: 1rem;
-       justify-content: flex-start;
-       flex-wrap: wrap;
-       margin-top: 2rem;
+      .cta-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        margin-top: 2rem;
       }
-     }
+    }
 
     .btn {
       display: inline-block;
@@ -577,18 +1037,12 @@ const faqEntries = [
        @include typography(section);
        margin-bottom: 1rem;
        text-align: left;
-       max-width: 80ch;
-       margin-left: auto;
-       margin-right: auto;
      }
 
      p {
        @include typography(paragraph);
        margin-bottom: 0.75rem;
        line-height: 1.6;
-       max-width: 80ch;
-       margin-left: auto;
-       margin-right: auto;
 
       &.critical-section {
         font-weight: 600;
@@ -599,8 +1053,7 @@ const faqEntries = [
     }
 
     ul {
-      max-width: 80ch;
-      margin: 1rem auto;
+      margin: 1rem 0;
       padding-left: 2rem;
       
       li {
@@ -614,13 +1067,11 @@ const faqEntries = [
        width: 100%;
        overflow-x: auto;
        margin: 2rem auto;
-       max-width: 80ch;
+       max-width: 100%;
      }
 
      section {
-       max-width: 80ch;
-       margin-left: auto;
-       margin-right: auto;
+       width: 100%;
      }
 
          .comparison-table {
@@ -665,7 +1116,7 @@ const faqEntries = [
          details {
        border-top: 1px solid var(--border-separator);
        padding: 1rem 0;
-       max-width: 80ch;
+       max-width: 100ch;
        margin-left: auto;
        margin-right: auto;
        
@@ -694,7 +1145,7 @@ const faqEntries = [
        border-radius: 8px;
        padding: 1.5rem;
        border: 1px solid var(--border-separator);
-       max-width: 80ch;
+       max-width: 100ch;
        margin-left: auto;
        margin-right: auto;
        
@@ -707,7 +1158,7 @@ const faqEntries = [
 
      .architecture-diagram {
        margin: 2rem auto;
-       max-width: 80ch;
+       max-width: 100ch;
        text-align: center;
        
        h3 {
@@ -807,6 +1258,238 @@ const faqEntries = [
         
         th, td {
           padding: 12px 8px;
+        }
+      }
+    }
+
+    // Tab comparison styles
+    .tab-comparison {
+      margin: 2rem auto;
+      max-width: 100%;
+    }
+
+    .tab-buttons {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 0.25rem;
+      border-bottom: 2px solid var(--border-separator);
+      margin-bottom: 2rem;
+      justify-content: center;
+    }
+
+    .tab-button {
+      padding: 0.875rem 0.875rem;
+      background: transparent;
+      border: none;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: var(--text-body-secondary);
+      transition: all 0.2s ease;
+      margin-bottom: -2px;
+      position: relative;
+      white-space: nowrap;
+      flex-shrink: 0;
+
+      &:hover {
+        color: var(--accent-primary, #1d9bf0);
+      }
+
+      &.active {
+        color: var(--accent-primary, #1d9bf0);
+        border-bottom-color: var(--accent-primary, #1d9bf0);
+        font-weight: 600;
+      }
+    }
+
+    .tab-pane {
+      display: none;
+
+      &.active {
+        display: block;
+      }
+    }
+
+    .comparison-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+
+      @include break-down(md) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .comparison-item {
+      padding: 2rem;
+      border-radius: 12px;
+      border: 2px dashed;
+      background: var(--surface-frame-bg);
+      transition: all 0.3s ease;
+      position: relative;
+
+      &:first-child {
+        border-color: #dc3545;
+        background: rgba(220, 53, 69, 0.05);
+        
+        h3 {
+          color: #dc3545;
+          font-weight: 700;
+        }
+      }
+
+      &:last-child {
+        border-color: var(--accent-primary, #1d9bf0);
+        background: rgba(29, 155, 240, 0.05);
+        
+        h3 {
+          color: var(--accent-primary, #1d9bf0);
+          font-weight: 700;
+        }
+      }
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      }
+
+      h3 {
+        @include typography(h3);
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+      }
+
+      p {
+        margin-bottom: 1rem;
+        line-height: 1.7;
+      }
+
+      ul {
+        margin-top: 1rem;
+        padding-left: 1.5rem;
+        
+        li {
+          margin-bottom: 0.75rem;
+          line-height: 1.6;
+        }
+      }
+    }
+
+    .diagram-box {
+      margin-top: 1.5rem;
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 2px dashed;
+      background: rgba(0, 0, 0, 0.02);
+      
+      .comparison-item:first-child & {
+        border-color: #dc3545;
+        background: rgba(220, 53, 69, 0.08);
+      }
+      
+      .comparison-item:last-child & {
+        border-color: var(--accent-primary, #1d9bf0);
+        background: rgba(29, 155, 240, 0.08);
+      }
+    }
+
+    .diagram-text {
+      font-family: 'Courier New', monospace;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      line-height: 1.8;
+      font-weight: 500;
+      color: var(--text-body-primary);
+    }
+
+    .diagram-result {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      
+      .comparison-item:first-child & {
+        color: #dc3545;
+      }
+      
+      .comparison-item:last-child & {
+        color: var(--accent-primary, #1d9bf0);
+      }
+    }
+
+
+    // Trusted by styles
+    .trusted-by-content {
+      text-align: center;
+      max-width: 1000px;
+      margin: 0 auto;
+      
+      h2 {
+        @include typography(section);
+        margin-bottom: 0.75rem;
+        text-align: center;
+      }
+      
+      p {
+        @include typography(paragraph);
+        margin-bottom: 1.5rem;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+      
+      #trusted-by {
+        margin-top: 1.5rem;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 !important;
+        
+        // Hide the redundant "Trusted by:" label
+        > p {
+          display: none !important;
+        }
+        
+        .track-container {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+        }
+        
+        .track {
+          display: flex !important;
+          flex-wrap: wrap !important;
+          justify-content: center !important;
+          align-items: center !important;
+          gap: 2rem !important;
+          row-gap: 1.5rem !important;
+          width: 100% !important;
+          
+          @include break-up(lg) {
+            gap: 2rem !important;
+            row-gap: 1.5rem !important;
+          }
+          
+          img {
+            max-height: 50px;
+            width: auto;
+            object-fit: contain;
+            flex-shrink: 0;
+            
+            @include break-up(lg) {
+              max-height: 50px;
+            }
+          }
+          
+          // Hide scroll duplicate on desktop
+          .scroll-duplicate {
+            @include break-up(lg) {
+              display: none !important;
+            }
+          }
         }
       }
     }

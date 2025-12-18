@@ -31,9 +31,7 @@ const { features, header } = Astro.props;
           )}
           <h2>{feature.title}</h2>
         </div>
-        <p>
-          {feature.description}
-        </p>
+        <div set:html={feature.description} class="feature-description" />
         {feature.linkText && feature.linkUrl && (
           <div class="feature-link-container">
             <a
@@ -95,11 +93,26 @@ const { features, header } = Astro.props;
       }
     }
 
-    p {
+    p, .feature-description {
       @include typography(paragraph);
       margin-bottom: 1rem;
-      text-align: justify;
+      text-align: left;
       flex: 1 1 auto;
+      
+      ul {
+        margin: 0;
+        padding-left: 1.5rem;
+        list-style-type: disc;
+        
+        li {
+          margin-bottom: 0.5rem;
+          line-height: 1.6;
+          
+          strong {
+            font-weight: 600;
+          }
+        }
+      }
     }
     .feature-link-container {
       width: 100%;
