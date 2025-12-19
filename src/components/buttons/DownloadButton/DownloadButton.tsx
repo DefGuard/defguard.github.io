@@ -29,7 +29,7 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
   useEffect(() => {
     switch (platform) {
       case PlatformType.WINDOWS: {
-        setDownloadName(`defguard-client_${version}_x64_en-US.exe`);
+        setDownloadName(`Defguard_${version}_x64_en-US.msi`);
         break;
       }
       case PlatformType.MACOSARM: {
