@@ -1,22 +1,31 @@
 ---
 title: "Defguard 1.6 brings Zero-touch Enrollment at Enterprise Scale for WireGuard"
-description: "Zero-touch user enrollment, Pre-logon & Always On VPN locations, Clients in AppStore, AD/Entra ID based Provisioning"
+description: "Zero-touch WireGuard VPN enrollment, Pre-logon VPN for Active Directory, Always-On VPN, native macOS/Windows clients, and enterprise-scale device provisioning. The most complete open-source WireGuard VPN solution."
 publishDate: 2025-12-19
 author: "Michał Gryczka"
 image: "/images/blog/defguard-1.6-release-notes/Release-1.6.png"
-tags: ["release", "wireguard enterprise", "enterprise vpn", "vpn", "security", "active directory"]
+tags: ["release", "wireguard enterprise", "enterprise vpn", "vpn", "security", "active directory", "zero-touch enrollment", "macos vpn", "windows vpn", "msi installer", "pre-logon vpn", "always-on vpn", "entra id", "device provisioning"]
 draft: false
 ---
 
-![Defguard 1.6 Release](/images/blog/defguard-1.6-release-notes/Release-1.6.png)
+![Defguard 1.6 Release Banner - Enterprise WireGuard VPN with Zero-touch Enrollment](/images/blog/defguard-1.6-release-notes/Release-1.6.png)
 
-Our mission at Defguard is to deliver a complete Enterprise VPN management solution for Wireguard VPN protocol, that is fully private and guarantees total control and infrastructure ownership. 
+Our mission at Defguard is to deliver a complete self-hosted WireGuard Enterprise VPN management solution that is fully private and guarantees total control and infrastructure ownership. 
 
-Release 1.6 marks an important step in that journey by introducing features requested by many medium and large enterprises, making large scale deployments faster, client management easier and solving a particular blocker for Microsoft Active Directory and EntraID based organisations to deploy WireGuard on scale.
+Release 1.6 marks an important step in that journey by introducing features requested by many medium and large enterprises—features that make Defguard a compelling alternative to solutions like Fortinet, Tailscale, and traditional OpenVPN setups, making large-scale deployments faster and client management easier.
+> **TL;DR - Key Highlights:**
+> - 🔐 **Pre-logon VPN** - Connect to AD before Windows login
+> - ⚡ **Zero-touch Enrollment** - Automate user provisioning at scale
+> - 🍎 **macOS App Store** - Native Swift VPN with system integration
+> - 🪟 **Windows MSI** - Enterprise deployment via Intune/GPO
+> - 📏 **MTU Settings** - Fix connectivity on restrictive networks
 
-## What's new?
+You can support us by leaving a <a href="https://github.com/defguard/defguard/" target="_blank">star on GitHub</a> 🙏
 
-### Unlocking Active Directory remote authentication with VPN pre-logon
+
+## What's new? 🚀
+
+### 🔐 Unlocking Active Directory remote authentication with WireGuard VPN pre-logon
 
 Organisations that use Active Directory (AD) to authenticate users on Windows machines face a significant remote access problem: AD should never be exposed to the public internet, since it was designed exclusively for intranet use. Thus, users working remotely—outside of the organisation's perimeter—cannot securely log in without risking exposure of the AD infrastructure to external threats.
 
@@ -24,9 +33,9 @@ The secure solution of that remote access problem is to put Active Directory beh
 
 Defguard 1.6 is the first—and currently the only—on-premises enterprise VPN solution that establishes WireGuard connections before user login.
 
-We introduced Service Locations - a special kind of locations that allow establishing automatic VPN connections on system boot and are not visible to the end user. 
+We introduced Service Locations - a special kind of locations that allow establishing automatic WireGuard VPN connections on system boot and are not visible to the end user. 
 
-![Service Location configuration](/images/blog/defguard-1.6-release-notes/always-on vpn.jpg)
+![Service Location configuration panel showing Pre-logon and Always-on VPN modes](/images/blog/defguard-1.6-release-notes/always-on_vpn.jpg)
 
 As shown on a location configuration screenshot above, Service Location can run in two modes: "Pre-logon" and "Always-on".
 
@@ -34,37 +43,37 @@ In Pre-logon mode the connection is terminated when the user completes login to 
 
 If the lack of pre-logon option for WireGuard was a blocker for your deployment, now you can give it a try with Defguard. 
 
-### Enforcing strict security with Client Traffic Policy and Always-on VPN
+### 🛡️ Enforcing strict security with Client Traffic Policy and Always-on VPN
 
 Service locations can be also configured to stay active after the user logs in by selecting "Always-on" mode. The connection won't be terminated or restarted unless the Desktop Client receives a network update or is uninstalled.
 
 Always-on mode paired with the option to force the clients to route all traffic through the VPN allows the admin to enforce strict security policy and guarantee access to on-prem resources, preventing data leaks on untrusted networks.
 
-![Client Traffic Policy and Always-on VPN](/images/blog/defguard-1.6-release-notes/traffic-routing.jpg) 
+![Client Traffic Policy settings for routing all traffic through VPN](/images/blog/defguard-1.6-release-notes/traffic-routing.jpg)
 
 > **Dive deeper with Service Locations documentation:** [https://docs.defguard.net/1.6/features/service-locations](https://docs.defguard.net/1.6/features/service-locations)
 
 ---
 
-## Enabling Zero-touch enrollment and device provisioning
+## ⚡ Zero-touch Enrollment for WireGuard Enterprise Deployments
 
 From the outset, Defguard focused on simplicity and security of user enrollment by offering a secure enrollment portal. While convenient for smaller organisations, this approach has limitations when enrolling hundreds or thousands of users.
 
 With the Defguard 1.6 release, we deliver the core elements necessary for automation of Desktop Client Provisioning on all platforms (Windows, Mac and Linux). On a high level:
 
-* **Windows Desktop Client** is now available as an MSI package, enabling admins to distribute the app via tools like Microsoft Intune, Active Directory GPO or other package managers (we are working on publishing to Chocolatey and Scoop).
-* **The macOS Client** is now available in the Mac App Store (instead of a standalone PKG installer). This enables automatic updates for users, ensures the application is reviewed and approved by Apple and enables app distribution to managed machines with MDM/UEM tools.
-* **All clients** now support file based enrollment configuration (the enrollment token and URL) at first launch as a universal mechanism allowing administrators to preconfigure endpoints for users with any type of provisioning or distribution tool they prefer.
-* Also, we've introduced automated enrollment through Active Directory and EntraID in the Windows Client MSI installer
+* 🪟 **Windows Desktop Client** is now available as an MSI package, enabling admins to distribute the app via tools like Microsoft Intune, Active Directory GPO or other package managers (we are working on publishing to Chocolatey and Scoop).
+* 🍎 **The macOS Client** is now available in the Mac App Store (instead of a standalone PKG installer). This enables automatic updates for users, ensures the application is reviewed and approved by Apple and enables app distribution to managed machines with MDM/UEM tools.
+* 📱 **All clients** now support file based enrollment configuration (the enrollment token and URL) at first launch as a universal mechanism allowing administrators to preconfigure endpoints for users with any type of provisioning or distribution tool they prefer.
+* 🔗 Also, we've introduced automated enrollment through Active Directory and EntraID in the Windows Client MSI installer
 
 Altogether this release provides all necessary tools for the admins to fully automate user enrollment and device provisioning.
 
 The provisioning process is dependent on your specific environment and tooling but there are some general steps to follow:
 
-1. Generate enrollment tokens for your users. This can be automated by leveraging our REST API.
-2. Transfer tokens to end-user machines as a configuration file or in case of Windows connected with AD/EntraID store the tokens in the directory.
-3. Install Defguard desktop client on end-user machines.
-4. On first startup the user will be redirected to the enrollment flow.
+1. 🔑 Generate enrollment tokens for your users. This can be automated by leveraging our REST API.
+2. 📤 Transfer tokens to end-user machines as a configuration file or in case of Windows connected with AD/EntraID store the tokens in the directory.
+3. 💻 Install Defguard desktop client on end-user machines.
+4. 🚀 On first startup the user will be redirected to the enrollment flow.
 
 This way you can achieve Zero-touch user enrollment and scalability of your deployments.
 
@@ -72,17 +81,17 @@ This way you can achieve Zero-touch user enrollment and scalability of your depl
 
 ---
 
-## Defguard Desktop for macOS in AppStore with system integrations and native VPN
+## 🍎 Defguard Desktop for macOS in AppStore with system integrations and native VPN
 
 The macOS Client now integrates with the macOS system, removing the dependency on external WireGuard binaries and introducing native Swift/macOS VPN implementation.
 
 This allows for an improved macOS usability:
-* Maintaining VPN connections while switching from one network to another (e.g. changing WIFI networks). 
+* Maintaining VPN connections while switching from one network to another (e.g. changing Wi-Fi networks). 
 * Integration with System Settings and Control Center - Defguard VPN connections are now listed in system settings.
 
-![macOS VPN integration](/images/blog/defguard-1.6-release-notes/vpns.jpg)
+![macOS System Settings showing Defguard VPN integration](/images/blog/defguard-1.6-release-notes/vpns.jpg)
 
-Introducing changes make App Store distribution possible and future Defguard client updates seamless. 
+These changes make App Store distribution possible and future Defguard client updates seamless. 
 
 You can download Defguard Desktop client from [AppStore](https://apps.apple.com/pl/app/defguard-desktop-client/id6754601166?mt=12)
 
@@ -94,9 +103,9 @@ To upgrade to the client, while maintaining the configuration, please follow the
 
 ---
 
-## Defguard Windows Client with MSI and native WireGuard networking
+## 🪟 Defguard Windows Client with MSI and native WireGuard networking
 
-The Windows Desktop Client now uses a native WireGuard networking implementation based on WireGuardNT, High performance in-kernel WireGuard implementation for Windows ([https://github.com/WireGuard/wireguard-nt](https://github.com/WireGuard/wireguard-nt)). By removing the dependency on the external WireGuard binary, we were able to ship a proper MSI installer, enabling distribution through the Windows Store and standard enterprise deployment channels.
+The Windows Desktop Client now uses a native WireGuard networking implementation based on WireGuardNT, a high-performance in-kernel WireGuard implementation for Windows ([https://github.com/WireGuard/wireguard-nt](https://github.com/WireGuard/wireguard-nt)). By removing the dependency on the external WireGuard binary, we were able to ship a proper MSI installer, enabling distribution through the Windows Store and standard enterprise deployment channels.
 
 This change is also foundational for automated provisioning on Windows. All major Windows provisioning and device management solutions rely on MSI-based installers. By moving to MSI, Defguard can integrate with these workflows and execute installer-time scripts.
 
@@ -104,13 +113,13 @@ During installation, helper scripts can connect to Active Directory or Microsoft
 
 ### Important installation and migration considerations
 
-It's important to note that Installing the new 1.6.0 Client from the .msi will leave the previous Client version still installed. This can also cause old VPN connections to still be active until a next system restart is performed.
+It's important to note that installing the new 1.6.0 Client from the .msi will leave the previous Client version still installed. This can also cause old VPN connections to still be active until the next system restart is performed.
 
 To resolve this, before upgrading, we recommend first uninstalling the old Client. This will leave your configuration intact and it should carry over to the new Client after its installation, without the need to configure everything again.
 
 ---
 
-## MTU settings support in all clients
+## 📏 MTU settings support in all clients
 
 On some networks - especially mobile or carrier-grade networks - the MTU (Maximum Transmission Unit) may be lower than usual. When this happens, VPN packets can exceed the network's MTU and get dropped during transmission. This often results in partial connectivity issues or a complete failure to connect to VPN servers.
 
@@ -120,9 +129,9 @@ As of Defguard Desktop 1.6 (all platforms) you can manually configure the MTU in
 
 ---
 
-## How to upgrade to Defguard 1.6?
+## 📦 How to upgrade to Defguard 1.6?
 
-This release brings major changes to all components including clients, core and proxy. Upgrading all the components is required for the new feature to work.
+This release brings major changes to all components including clients, core and proxy. Upgrading all the components is required for the new features to work.
 
 As usual, we've prepared a migration guide outlining steps you need to take to upgrade your Defguard setup to the latest version.
 
@@ -132,19 +141,33 @@ Defguard offers Basic Support via email/ticketing system for all Business subscr
 
 If you need additional support, please contact Sales.
 
+
 ---
 
-## What's next - Defguard 2.0!
+## 🎯 Ready to Deploy WireGuard at Enterprise Scale?
+
+Whether you're managing 10 or 10,000 devices, Defguard 1.6 gives you the tools for seamless, secure VPN deployment.
+
+- 📥 [**Start with one-line install**](https://docs.defguard.net/getting-started/one-line-install) - Get started in minutes
+- 💼 [**View Pricing**](/pricing) - Plans for every organization size  
+- 📅 [**Book a Demo**](/book-a-demo) - See Defguard in action
+- 📖 [**Read the Docs**](https://docs.defguard.net) - Full documentation
+
+------
+
+
+
+## 🔮 What's next - Defguard 2.0!
 
 Defguard's future plans are centered on radically simplifying installation and day-one usability, making deployment as frictionless as possible in every scenario we can design for. 
 
 We will include a complete UI&UX redesign with streamlined component startup, clearer and more complete documentation, and eventually standardized deployment artifacts such as appliance images. While current implementation constraints limit some of these options today, removing these obstacles is a key priority so administrators can get Defguard running quickly and confidently, without deep specialist knowledge.
 
-### Components Orchestration
+### 🎛️ Components Orchestration
 
 At the same time, Defguard aims to evolve into a true enterprise-grade vendor—positioned as a serious alternative to solutions like Fortinet as well as to SaaS offerings. The Defguard Core will become the central orchestrator for the entire platform, coordinating all components from a single control plane but still maintaining strict component isolation. This unified architecture is designed to reduce complexity, minimize configuration errors, and address one of the biggest pain points today. 
 
-### UI & UX you deserve
+### ✨ UI & UX you deserve
 
 UI 2.0 plays a crucial role in this vision by introducing a simpler, more intuitive administrative experience. While many SaaS vendors promise simplicity at the cost of privacy and control, Defguard takes a different approach: delivering even stronger security while keeping ownership fully in the customer's hands. By allowing every component to be self-hosted and controlled, Defguard provides enterprise-level security and autonomy—paired with a consumer-grade user experience that makes setup, management, and scaling straightforward.
 
@@ -156,7 +179,7 @@ To give you an idea what we're building, we share a preview of Edge Component (e
 
 ![Full High Availability](/images/blog/defguard-1.6-release-notes/Step_6_completed.png)
 
-### Full High Availability
+### 🔄 Full High Availability
 
 And finally Defguard 2.0 will provide high-availability of all components delivering secure and scalable deployments for any type of organisation.
 
