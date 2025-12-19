@@ -8,8 +8,6 @@ tags: ["macos", "migration", "app store", "update", "guide"]
 draft: false
 ---
 
-import YouTubeVideo from "../../components/video/YouTubeVideo.astro";
-
 ![Defguard 1.6 macOS App Store migration guide](/images/blog/macos-migration/macos-migration-1.6.png)
 
 Defguard 1.6 introduces an important change for macOS users: the Desktop Client now integrates with the macOS system and removes the dependency on external WireGuard binaries, which makes App Store distribution possible. For a complete overview of all new features in Defguard 1.6, see our [release notes](/blog/defguard-1.6-release-notes).
@@ -61,15 +59,7 @@ The migration tool:
 4.  Click **Migrate**. If everything went well it should display a confirmation message: *“Configuration has been migrated”*.
 5.  After the migration process, launch Defguard 1.6 from the Mac App Store. Your existing configuration should be available.
 
-<YouTubeVideo
-  videoId="dLgC-WsmEsw"
-  title="Migrating from Defguard client 1.5 to 1.6"
-  startAt={0}
-  showControls={true}
-  showInfo={true}
-  allowFullscreen={true}
-  rel={false}
-/>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dLgC-WsmEsw" title="Defguard macOS Migration Guide" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ### Method B - Manual migration (copy/move the settings folder)
 
@@ -129,17 +119,8 @@ This method is recommended when you want users to start with a clean Defguard 1.
 This approach configures Defguard 1.6 as a new client and does not reuse local configuration data from version 1.5.
 
 > **Official documentation:** [Desktop client instance configuration guide](https://docs.defguard.net/using-defguard-for-end-users/desktop-client/instance-configuration)
->
 
-<YouTubeVideo
-  videoId="FU_Qs6KjMTE"
-  title="Migrating from Defguard client 1.5 to 1.6"
-  startAt={0}
-  showControls={true}
-  showInfo={true}
-  allowFullscreen={true}
-  rel={false}
-/>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dLgC-WsmEsw" title="Defguard macOS Migration Guide" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## Making sure the migration worked
 
@@ -147,3 +128,103 @@ Launch Defguard 1.6 and verify:
 
 * your VPN instances and locations are present
 * the VPN connection works as expected
+
+## Frequently Asked Questions
+
+### Why can't I just update Defguard 1.5 to 1.6 automatically?
+
+Defguard 1.6 is distributed through the Mac App Store, which uses a different installation method than the PKG installer used for version 1.5. App Store apps are sandboxed, meaning they store data in a different location than non-App Store applications. Because of this, Defguard 1.6 cannot automatically find and use your existing 1.5 configuration.
+
+### Do I need to uninstall Defguard 1.5 before installing 1.6?
+
+No, you don't need to uninstall version 1.5. However, make sure Defguard 1.6 is not running when you perform the migration using Method B (manual migration). After successful migration, you can remove the old PKG version if you no longer need it.
+
+### Will I lose my VPN configuration during migration?
+
+No, if you follow one of the migration methods (A, B, or C), your configuration will be preserved. Method A and B migrate your existing settings, while Method C requires re-enrollment but your VPN instances remain available on the server side.
+
+### Can I use both Defguard 1.5 and 1.6 at the same time?
+
+While technically possible, it's not recommended. Having both versions installed can cause confusion and potential conflicts. We recommend completing the migration to version 1.6 and removing the old PKG version.
+
+### What if the migration tool doesn't detect my configuration?
+
+If the migration tool (Method A) doesn't detect your Defguard 1.5 configuration, you can use Method B (manual migration) to copy the settings folder manually, or use Method C (re-enrollment) to set up Defguard 1.6 as a new client.
+
+<script type="application/ld+json" is:inline>
+{`{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "headline": "New Defguard on macOS: App Store Launch and Migration Guide",
+      "description": "Defguard 1.6 brings the macOS client to the App Store. Learn why migration is required and how to move your configuration from version 1.5.",
+      "image": "https://defguard.net/images/blog/macos-migration/macos-migration-1.6.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Defguard Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Defguard",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://defguard.net/svg/logo-full.svg"
+        }
+      },
+      "datePublished": "2025-01-15",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://defguard.net/blog/macos-migration/"
+      },
+      "articleSection": "macOS, Migration, App Store, Update, Guide",
+      "keywords": ["macos", "migration", "app store", "update", "guide", "Defguard", "WireGuard", "VPN"]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why can't I just update Defguard 1.5 to 1.6 automatically?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Defguard 1.6 is distributed through the Mac App Store, which uses a different installation method than the PKG installer used for version 1.5. App Store apps are sandboxed, meaning they store data in a different location than non-App Store applications. Because of this, Defguard 1.6 cannot automatically find and use your existing 1.5 configuration."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to uninstall Defguard 1.5 before installing 1.6?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, you don't need to uninstall version 1.5. However, make sure Defguard 1.6 is not running when you perform the migration using Method B (manual migration). After successful migration, you can remove the old PKG version if you no longer need it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will I lose my VPN configuration during migration?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, if you follow one of the migration methods (A, B, or C), your configuration will be preserved. Method A and B migrate your existing settings, while Method C requires re-enrollment but your VPN instances remain available on the server side."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use both Defguard 1.5 and 1.6 at the same time?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "While technically possible, it's not recommended. Having both versions installed can cause confusion and potential conflicts. We recommend completing the migration to version 1.6 and removing the old PKG version."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if the migration tool doesn't detect my configuration?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "If the migration tool (Method A) doesn't detect your Defguard 1.5 configuration, you can use Method B (manual migration) to copy the settings folder manually, or use Method C (re-enrollment) to set up Defguard 1.6 as a new client."
+          }
+        }
+      ]
+    }
+  ]
+}`}
+</script>
