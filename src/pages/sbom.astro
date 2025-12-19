@@ -12,11 +12,11 @@ import FlexibleSection from "../components/FlexibleSection.astro";
 // Per-component metadata (id, name, version, repo) to build exact URLs
 interface ComponentDef { id: 'defguard' | 'defguard-client' | 'defguard-mobile' | 'defguard-proxy' | 'defguard-gateway'; name: string; version: string; repo: string; status: string }
 const COMPONENTS: ComponentDef[] = [
-  { id: 'defguard', name: 'Core', version: '1.5.2', repo: 'defguard', status: '' },
-  { id: 'defguard-proxy', name: 'Proxy', version: '1.5.1', repo: 'proxy', status: '' },
-  { id: 'defguard-gateway', name: 'Gateway', version: '1.5.1', repo: 'gateway', status: '' },
-  { id: 'defguard-client', name: 'Desktop App', version: '1.5.2', repo: 'client', status: ''  },
-  { id: 'defguard-mobile', name: 'Mobile App', version: '1.5.1', repo: 'mobile-client', status: '' },
+  { id: 'defguard', name: 'Core', version: '1.6.0', repo: 'defguard', status: '' },
+  { id: 'defguard-proxy', name: 'Proxy', version: '1.6.0', repo: 'proxy', status: '' },
+  { id: 'defguard-gateway', name: 'Gateway', version: '1.6.0', repo: 'gateway', status: '' },
+  { id: 'defguard-client', name: 'Desktop App', version: '1.6.1', repo: 'client', status: ''  },
+  { id: 'defguard-mobile', name: 'Mobile App', version: '1.6.0', repo: 'mobile-client', status: '' },
 ];
 
 const buildReleaseTag = (version: string): string => `v${version}`;
