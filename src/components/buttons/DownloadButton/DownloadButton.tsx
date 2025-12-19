@@ -18,6 +18,7 @@ interface DownloadProps {
 }
 
 const ARCHLINK = "https://aur.archlinux.org/packages/defguard-client";
+const APPSTORE_LINK = "https://apps.apple.com/pl/app/defguard-desktop-client/id6754601166?mt=12";
 
 export const DownloadButton = ({ platformType, owner, repo, version }: DownloadProps) => {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
@@ -29,7 +30,7 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
   useEffect(() => {
     switch (platform) {
       case PlatformType.WINDOWS: {
-        setDownloadName(`defguard-client_${version}_x64_en-US.exe`);
+        setDownloadName(`Defguard_${version}_x64_en-US.msi`);
         break;
       }
       case PlatformType.MACOSARM: {
@@ -221,19 +222,22 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
         href={
           platform === PlatformType.ARCHLINUX
             ? ARCHLINK
-            : `https://github.com/${owner}/${repo}/releases/download/v${version}/${downloadName}`
+            : platform === PlatformType.MACOSARM || platform === PlatformType.MACOSINTEL
+              ? APPSTORE_LINK
+              : `https://github.com/${owner}/${repo}/releases/download/v${version}/${downloadName}`
         }
         className="download-main"
         onClick={handleClick}
       >
         <div className="download-text">
           {(platform === PlatformType.DEBIAN ||
-            platform === PlatformType.MACOSINTEL ||
-            platform === PlatformType.MACOSARM ||
             platform === PlatformType.WINDOWS ||
             platform === PlatformType.FEDORAX86 ||
             platform === PlatformType.FEDORAARM) && <>Download now</>}
           {platform === PlatformType.ARCHLINUX && <>AUR package</>}
+          {(platform === PlatformType.MACOSINTEL || platform === PlatformType.MACOSARM) && (
+            <>App Store</>
+          )}
           {platform === PlatformType.DEBIAN && <p>Debian package</p>}
           {platform === PlatformType.MACOSINTEL && <p>Apple Intel</p>}
           {platform === PlatformType.MACOSARM && <p>Apple ARM</p>}
@@ -243,10 +247,12 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
         <div className="btn">
           {isButtonClicked ? (
             <CheckIcon />
-          ) : platform !== PlatformType.ARCHLINUX ? (
-            <DownloadIcon />
-          ) : (
+          ) : platform === PlatformType.ARCHLINUX ||
+            platform === PlatformType.MACOSARM ||
+            platform === PlatformType.MACOSINTEL ? (
             <h3>→</h3>
+          ) : (
+            <DownloadIcon />
           )}
         </div>
       </a>
