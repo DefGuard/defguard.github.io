@@ -3,7 +3,6 @@ import { getCollection } from "astro:content";
 import Navigation from "../components/base/Navigation.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import OrganizationJSONLD from "../scripts/OrganizationJSONLD.astro";
-import BookEvaluationLicenseForm from "../components/form/BookDemoForm/BookEvaluationLicenseForm";
 import { PricingCards } from "../components/pricing/Pricing";
 import ContentLimiter from "../components/ContentLimiter.astro";
 import FlexibleSection from "../components/FlexibleSection.astro";
@@ -93,7 +92,7 @@ const tags = [
               <div class="faq-answer" id="faq-answer-0" aria-labelledby="faq-question-0">
                 <div>
                   <p>Yes. Defguard provides a 14-day evaluation license at no cost, allowing you to test the full capabilities of our enterprise VPN solution, including WireGuard®, MFA/2FA, and SSO integration.</p>
-                  <p>This trial is ideal for proof-of-concept testing or evaluating Defguard in your environment.</p>
+                  <p>This trial is ideal for proof-of-concept testing or evaluating Defguard in your environment. <a href="/evaluation-license/">Request your evaluation license here</a>.</p>
                 </div>
               </div>
             </div>
@@ -112,28 +111,6 @@ const tags = [
                   <p><strong>In short:</strong> this policy guarantees one renewal under the original terms for your annual subscription, after which any new pricing or updated terms will take effect.</p>
                 </div>
               </div>
-            </div>
-          </div>
-        </FlexibleSection>
-      </ContentLimiter>
-    </div>
-
-    <!-- Evaluation License Section -->
-    <div id="evaluation-license-section" class="evaluation-license-wrapper">
-      <ContentLimiter contentId="evaluation-license-content" maxWidth={1100}>
-        <FlexibleSection title="Request Offline or Evaluation License" id="evaluation-license" variant="white" theme="light">
-          <div class="evaluation-content">
-            <div class="evaluation-description">
-              <p>
-                For <strong>evaluations</strong> or proof-of-concept testing, we're happy to provide 
-                a 14-day free of charge evaluation license.
-              </p>
-              <p>
-                For convenience, please provide your company information (name, address and Tax Identification Number) in the form below.
-              </p>
-            </div>
-            <div class="evaluation-form-container">
-              <BookEvaluationLicenseForm submit_text="Request Evaluation License" client:load />
             </div>
           </div>
         </FlexibleSection>
@@ -338,97 +315,6 @@ const tags = [
                 font-weight: 600;
               }
             }
-          }
-        }
-      }
-
-      /* Evaluation License Section */
-      .evaluation-license-wrapper {
-        width: 100%;
-        background-color: var(--surface-frame-bg);
-        padding: 80px 0;
-      }
-
-      .evaluation-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        max-width: 800px;
-        margin: 0 auto;
-      }
-
-      .evaluation-description {
-        text-align: center;
-        margin-bottom: 40px;
-        max-width: 800px;
-
-        p {
-          font-size: 16px;
-          line-height: 1.6;
-          margin-bottom: 16px;
-          color: var(--text-body-primary);
-
-          &:last-child {
-            margin-bottom: 0;
-          }
-
-          strong {
-            font-weight: 600;
-          }
-        }
-      }
-
-      .evaluation-form-container {
-        width: 100%;
-        max-width: 800px;
-        margin: 0 auto;
-
-        // Force single column layout for the evaluation form
-        :global(.book) {
-          form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            width: 100%;
-          }
-
-          .form-group {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            margin-bottom: 0;
-
-            label {
-              margin-bottom: 8px;
-              font-weight: 500;
-            }
-
-            input, textarea, select {
-              width: 100%;
-              box-sizing: border-box;
-            }
-          }
-
-          // Override any existing double-inputs to single column
-          .double-inputs {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            width: 100%;
-
-            .form-group {
-              width: 100%;
-            }
-          }
-
-          .form-description {
-            margin-bottom: 20px;
-          }
-
-          button[type="submit"] {
-            width: 100%;
-            margin-top: 10px;
           }
         }
       }
