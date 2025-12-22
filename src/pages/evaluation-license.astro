@@ -1,0 +1,124 @@
+---
+import Navigation from "../components/base/Navigation.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProductSection from "../layouts/ProductSection.astro";
+import FlexibleSection from "../components/FlexibleSection.astro";
+import BookEvaluationLicenseForm from "../components/form/BookDemoForm/BookEvaluationLicenseForm";
+import OrganizationJSONLD from "../scripts/OrganizationJSONLD.astro";
+
+const title = "Request Evaluation License - defguard Enterprise VPN";
+const featuredImage =
+  "github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png";
+const imageWidth = "1080";
+const imageHeight = "540";
+const description = "Request a 14-day free evaluation license for defguard enterprise VPN with full WireGuard® MFA/2FA and SSO integration capabilities.";
+const url = "https://defguard.net/evaluation-license/";
+const tags = [
+  "defguard",
+  "evaluation",
+  "trial",
+  "free trial",
+  "WireGuard®",
+  "enterprise vpn",
+  "mfa/2fa",
+  "sso",
+  "proof of concept",
+  "license",
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  featuredImage={featuredImage}
+  imageWidth={imageWidth}
+  imageHeight={imageHeight}
+  url={url}
+>
+  <OrganizationJSONLD
+    slot="schema"
+    title={title}
+    description={description}
+    url={url}
+    tags={tags}
+  />
+  <Navigation activeSlug="/evaluation-license/" />
+  <main id="evaluation-license-page">
+    <ProductSection padding="none">
+      <FlexibleSection
+        title="Free Defguard Trial"
+        titleTag="h1"
+        id="evaluation-license"
+        variant="white"
+        theme="light"
+      >
+        <div slot="left">
+          <h2>🚀 Try Before You Buy</h2>
+          <p>
+            If you're looking to evaluate Defguard for your specific infrastructure, compliance requirements, and deployment scale, we're happy to provide a 14-day free of charge evaluation license.
+          </p>
+          
+          <h2>✨ What You'll Get</h2>
+          <ul>
+            <li>🔓 Full access to all enterprise features for 14 days</li>
+            <li>💬 Technical support with Defguard during your trial period</li>
+          </ul>
+
+          <h2>📝 How to Apply</h2>
+          <p>
+            For convenience, please provide your company information (name, address and Tax Identification Number) in the form.
+          </p>
+          
+          <h2>📧 What Happens Next</h2>
+          <p>
+            After we review your request, we'll send you a license via email you've provided.
+          </p>
+        </div>
+        <div slot="right">
+          <BookEvaluationLicenseForm submit_text="Request Evaluation License" client:load />
+        </div>
+      </FlexibleSection>
+    </ProductSection>
+  </main>
+</BaseLayout>
+
+<style lang="scss" is:global>
+  #evaluation-license-page {
+    .product-section {
+      padding-top: 0 !important;
+      padding-bottom: 4rem !important;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-body-primary);
+      
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    ul {
+      margin: 0.5rem 0 1rem;
+      padding-left: 1.5rem;
+      
+      li {
+        margin-bottom: 0.5rem;
+        line-height: 1.6;
+      }
+    }
+
+    p {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+      
+      strong {
+        font-weight: 600;
+      }
+    }
+  }
+</style>
+
