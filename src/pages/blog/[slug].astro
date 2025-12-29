@@ -4,6 +4,7 @@ import Navigation from "../../components/base/Navigation.astro";
 import ProductLayout from "../../layouts/ProductLayout.astro";
 import ShareButtons from "../../components/ShareButtons.astro";
 import MoreStories from "../../components/MoreStories.astro";
+import BlogArticleJSONLD from "../../scripts/BlogArticleJSONLD.astro";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blog");
@@ -28,6 +29,20 @@ const formatDate = (date: Date) => {
   });
 };
 
+// Calculate word count for schema
+const getWordCount = (body: string) => {
+  const plainText = body
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/`[^`]*`/g, '')
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/[#*_~>\-]/g, '')
+    .replace(/<[^>]*>/g, '')
+    .replace(/import\s+.*?from\s+['"][^'"]*['"]/g, '')
+    .replace(/\{[^}]*\}/g, '');
+  return plainText.split(/\s+/).filter(word => word.length > 0).length;
+};
+
+const wordCount = getWordCount(entry.body);
 const title = `${entry.data.seoTitle || entry.data.title} | Defguard Blog`;
 const description = entry.data.description;
 const url = `https://defguard.net/blog/${entry.slug}`;
@@ -40,7 +55,7 @@ const imageUrl = entry.data.image
   ? (entry.data.image.startsWith('http') ? entry.data.image : `https://defguard.net${entry.data.image}`)
   : imageMatch
     ? (imageMatch[1].startsWith('http') ? imageMatch[1] : `https://defguard.net${imageMatch[1]}`)
-    : "defguard.net/images/png/defguard.png";
+    : "https://defguard.net/images/png/defguard.png";
 
 // Generate relevant tags for blog post
 const blogTags = [
@@ -72,6 +87,19 @@ const hasCaseStudy =
   {entry.data.author && <meta slot="schema" property="article:author" content={entry.data.author} />}
   <meta slot="schema" property="article:section" content="Technology" />
   {blogTags.map(tag => <meta slot="schema" property="article:tag" content={tag} />)}
+  
+  <!-- Structured Data for Blog Post -->
+  <BlogArticleJSONLD
+    slot="schema"
+    title={entry.data.title}
+    description={description}
+    url={url}
+    image={imageUrl}
+    datePublished={entry.data.publishDate.toISOString()}
+    author={entry.data.author}
+    tags={blogTags}
+    wordCount={wordCount}
+  />
   
   <Navigation activeSlug="/blog/" />
 

@@ -1,0 +1,97 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  url: string;
+  image: string;
+  datePublished: string;
+  dateModified?: string;
+  author?: string;
+  tags?: string[];
+  wordCount?: number;
+}
+
+const { 
+  title, 
+  description, 
+  url, 
+  image, 
+  datePublished, 
+  dateModified,
+  author = "Defguard Team",
+  tags = [],
+  wordCount
+} = Astro.props;
+
+// Estimate reading time from word count
+const readingTime = wordCount ? `PT${Math.max(1, Math.ceil(wordCount / 200))}M` : undefined;
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": title,
+  "description": description,
+  "url": url,
+  "image": {
+    "@type": "ImageObject",
+    "url": image,
+    "width": 1200,
+    "height": 630
+  },
+  "datePublished": datePublished,
+  "dateModified": dateModified || datePublished,
+  "author": {
+    "@type": "Person",
+    "name": author
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "defguard",
+    "url": "https://defguard.net",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://defguard.net/images/png/defguard.png",
+      "width": 512,
+      "height": 512
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": url
+  },
+  "keywords": tags.join(", "),
+  ...(readingTime && { "timeRequired": readingTime }),
+  ...(wordCount && { "wordCount": wordCount }),
+  "inLanguage": "en-US",
+  "isAccessibleForFree": true
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://defguard.net"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://defguard.net/blog"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": title,
+      "item": url
+    }
+  ]
+};
+---
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+

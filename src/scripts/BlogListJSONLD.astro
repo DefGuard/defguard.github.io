@@ -1,0 +1,72 @@
+---
+interface BlogPost {
+  slug: string;
+  title: string;
+  description: string;
+  publishDate: Date;
+  image?: string;
+  author?: string;
+}
+
+interface Props {
+  posts: BlogPost[];
+}
+
+const { posts } = Astro.props;
+
+const blogListSchema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "defguard Blog",
+  "description": "Latest news, tutorials, case studies, and security insights about Defguard - the open-source enterprise VPN.",
+  "url": "https://defguard.net/blog",
+  "publisher": {
+    "@type": "Organization",
+    "name": "defguard",
+    "url": "https://defguard.net",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://defguard.net/images/png/defguard.png"
+    }
+  },
+  "blogPost": posts.slice(0, 10).map((post) => ({
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.description,
+    "url": `https://defguard.net/blog/${post.slug}`,
+    "datePublished": post.publishDate.toISOString(),
+    ...(post.image && {
+      "image": post.image.startsWith('http') ? post.image : `https://defguard.net${post.image}`
+    }),
+    ...(post.author && {
+      "author": {
+        "@type": "Person",
+        "name": post.author
+      }
+    })
+  }))
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://defguard.net"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://defguard.net/blog"
+    }
+  ]
+};
+---
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(blogListSchema)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
