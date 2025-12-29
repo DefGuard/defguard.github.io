@@ -65,40 +65,50 @@ const tags = [
   <Navigation activeSlug="/download-confirm/" />
   <main id="download-confirm">
     <ProductSection padding="none">
-      <FlexibleSection title="Download Defguard Server" id="release-info" variant="white" theme="light">
+      <div class="page-header">
+        <h1>Download Defguard Server</h1>
+        <p class="subtitle">Secure. Self-Hosted. Enterprise-Grade WireGuard® control-plane</p>
+      </div>
+      <FlexibleSection id="release-info" variant="white" theme="light" leftRatio={0.55}>
         <div slot="left">
           <GithubReleases repoUrl="https://github.com/DefGuard/defguard" />
         </div>
         <div slot="right">
-          <NewsletterSection
-            headerLevel="2"
-            title="Stay Updated on New Releases"
-            description="Release notes and occasional news — no spam, just one email per month max."
-          />
+          <div class="whats-new-section">
+            <h2>What's new in 1.6?</h2>
+            <div class="release-image">
+              <ImageURL src="/images/blog/defguard-1.6-release-notes/Release-1.6.png" alt="defguard release 1.6 - Zero-touch Enrollment and Pre-logon VPN" />
+            </div>
+            <ul>
+              <li>
+                <strong>Pre-logon VPN for Active Directory:</strong> Connect before Windows login for secure AD authentication.
+              </li>
+              <li>
+                <strong>Zero-touch Enrollment:</strong> Automated provisioning via MSI (Intune/GPO), App Store (MDM), AD/Entra ID.
+              </li>
+              <li>
+                <strong>Always-On VPN Mode:</strong> Persistent connections with security policy enforcement.
+              </li>
+              <li>
+                <strong>Native Platform Clients:</strong> macOS App Store + Windows WireGuardNT integration.
+              </li>
+              <li>
+                <strong>MTU Settings:</strong> Fix connectivity on restrictive networks.
+              </li>
+            </ul>
+            <div class="learn-more">
+              <a href="/blog/defguard-16-release-notes/" class="learn-more-link">Read Full Release Notes →</a>
+            </div>
+          </div>
+          
+          <div class="newsletter-wrapper">
+            <NewsletterSection
+              headerLevel="3"
+              title="Stay Updated on New Releases"
+              description="Release notes and occasional news — no spam, just one email per month max."
+            />
+          </div>
         </div>
-      </FlexibleSection>
-      <FlexibleSection title="What's new?" id="new-features" variant="white" theme="light">
-        <div slot="left">
-        <ul>
-          <li>
-            <strong>Enhanced Observability & Auditing:</strong> Includes a detailed Activity Log UI, Activity Log Streaming for enterprise-grade integrations, and a new Locations Overview for centralized visibility.
-          </li>
-          <li>
-            <strong>Improved Deployment & VPN Support:</strong> Now supports Terraform-based AWS deployment and the ability to assign multiple IP addresses (IPv4 and IPv6) to VPN clients for greater network flexibility.
-          </li>
-        </ul>
-      </div>
-      <div slot="right">
-        <ImageURL src="/images/releases/release-1.4.png" alt="defguard release-1.4.0" />
-        <!-- <YouTubeVideo
-          videoId="Om28IuV5AcM"
-          title="Your video title"
-          showControls={true}
-          showInfo={true}
-          allowFullscreen={true}
-          rel={false}
-        /> -->
-      </div>
       </FlexibleSection>
     </ProductSection>
   </main>
@@ -132,28 +142,96 @@ const tags = [
 
   #download-confirm {
     .product-section {
-      padding-top: 0 !important; /* Match the 4rem padding from FlexibleSection */
+      padding-top: 0 !important;
       padding-bottom: 0rem !important;
       border: none;
       display: unset;
+    }
+
+    .page-header {
+      text-align: center;
+      padding: 3rem 1.5rem 2rem;
+      
       h1 {
+        font-size: 2.25rem;
+        font-weight: 700;
+        margin: 0 0 0.75rem 0;
+        color: var(--text-body-primary);
+
         @include break-down(md) {
-          padding-top:20px;
-          border-top: 1px solid black;
+          font-size: 1.75rem;
+        }
+      }
+
+      .subtitle {
+        font-size: 1.125rem;
+        color: var(--text-body-secondary, #666);
+        margin: 0;
+        font-weight: 400;
+        letter-spacing: 0.02em;
+      }
+    }
+
+    .whats-new-section {
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border-separator, #e5e7eb);
+
+      h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 0 0 1rem 0;
+        color: var(--text-body-primary);
+      }
+
+      .release-image {
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: auto;
+          display: block;
+        }
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 1.25rem;
+        
+        li {
+          font-size: 0.9rem;
+          line-height: 1.5;
+          margin-bottom: 0.5rem;
+          color: var(--text-body-secondary, #666);
+
+          strong {
+            color: var(--text-body-primary);
+          }
         }
       }
     }
+
+    .newsletter-wrapper {
+      .newsletter-section {
+        padding: 0;
+        background: transparent;
+      }
+    }
+
     .learn-more {
-        margin-top: 1.5rem;
+        margin-top: 1rem;
     }
       
     .learn-more-link {
         display: inline-block;
-        padding: 0.75rem 1.5rem;
+        padding: 0.5rem 1rem;
         background-color: var(--primary-button-bg, #0c8ce0);
         color: var(--primary-button-text, white);
         border-radius: 50px;
-        font-weight: 600;
+        font-weight: 500;
+        font-size: 0.875rem;
         text-decoration: none;
         transition: background-color 0.2s ease-in-out;
 
