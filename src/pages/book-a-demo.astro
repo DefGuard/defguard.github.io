@@ -1,45 +1,29 @@
 ---
-import FeaturesTable from "../components/FeaturesTable/FeaturesTable";
 import Navigation from "../components/base/Navigation.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ProductSection from "../layouts/ProductSection.astro";
-import FlexibleSection from "../components/FlexibleSection.astro";
+import ContentLimiter from "../components/ContentLimiter.astro";
 import BookDemoForm from "../components/form/BookDemoForm/BookDemoForm";
-import { featuresTableData } from "../data/compare-table";
-import { Button } from "../components/buttons/Button/Button";
 import OrganizationJSONLD from "../scripts/OrganizationJSONLD.astro";
+import TrustedBy from "./_home/components/TrustedBy.astro";
 
-const title = "Zero-Trust WireGuard® 2FA/MFA VPN: Book a Demo";
+const title = "Book a Demo - You Chose WireGuard®. Now Choose Enterprise Control.";
 const featuredImage =
   "github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png";
 const imageWidth = "1080";
 const imageHeight = "540";
-const description = "defguard - Zero-Trust WireGuard® 2FA/MFA VPN - Book a Demo";
+const description = "See how Defguard helps teams migrate from OpenVPN, FortiGate, and Cisco to modern WireGuard® VPN with true MFA, SSO integration, and compliance-ready security.";
 const url = "https://defguard.net/book-a-demo/";
 const tags = [
-  "defgaurd",
-  "compare",
-  "WireGuard®",
-  "2fa",
+  "defguard",
+  "demo",
+  "WireGuard",
+  "enterprise vpn",
   "mfa",
-  "mfa/2fa",
-  "openid",
-  "secure",
-  "ldap",
-  "acl",
-  "vpn",
   "sso",
-  "firewall",
-  "desktop client",
-  "mesh",
-  "mesh vpn",
-  "nat",
-  "yubikey",
-  "email",
-  "email notifications",
-  "gateway",
-  "auth",
-  "ssh",
+  "compliance",
+  "iso 27001",
+  "soc2",
+  "nis2",
 ];
 ---
 
@@ -59,62 +43,664 @@ const tags = [
     tags={tags}
   />
   <Navigation activeSlug="/book-a-demo/" />
-  <main id="book-a-demo">
-    <ProductSection padding="none">
-      <FlexibleSection
-        title="Book a Demo"
-        id="press-contact"
-        variant="white"
-        theme="light"
-      >
-        <div slot="left">
-          <p>What you can expect?</p>
-          <p>
-            <ul>
-              <li>
-                A walkthrough of defguard’s core features, including secure identity
-                management, access policies, and user enrollment
-              </li>
-              <li>
-                Insights into how Defguard can enhance your security and streamline
-                operations
-              </li>
-              <li>
-                A discussion on how Defguard can integrate with your existing
-                infrastructure
-              </li>
-            </ul>
-          </p>
-          <p>Our demo takes around 20-30 min.</p>
+  
+  <main id="book-a-demo-v2">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <ContentLimiter maxWidth={1200}>
+        <div class="hero-grid">
+          <div class="hero-content">
+            <span class="hero-badge">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="6" width="10" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M4 6V4C4 2.34315 5.34315 1 7 1C8.65685 1 10 2.34315 10 4V6" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+              Enterprise VPN Demo
+            </span>
+            <h1>You Chose WireGuard®. Now Choose Enterprise&nbsp;Control.</h1>
+            <p class="hero-subtitle">
+              Whether you're migrating from OpenVPN, FortiGate, or Cisco — or preparing for ISO 27001/SOC2/NIS2 compliance — we'll show you exactly how Defguard fits your infrastructure.
+            </p>
+            
+            <div class="hero-benefits">
+              <div class="benefit-item">
+                <svg class="benefit-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="9" cy="9" r="8" stroke="#0C8CE0" stroke-width="2"/>
+                  <path d="M5 9L8 12L13 6" stroke="#0C8CE0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Personalized to your use case</span>
+              </div>
+              <div class="benefit-item">
+                <svg class="benefit-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="9" cy="9" r="8" stroke="#0C8CE0" stroke-width="2"/>
+                  <path d="M5 9L8 12L13 6" stroke="#0C8CE0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Deployment, Identity integration and MFA covered</span>
+              </div>
+              <div class="benefit-item">
+                <svg class="benefit-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="9" cy="9" r="8" stroke="#0C8CE0" stroke-width="2"/>
+                  <path d="M5 9L8 12L13 6" stroke="#0C8CE0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Followed by optional Defguard Trial</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="hero-form">
+            <div class="form-card">
+              <h2>Schedule Your Demo</h2>
+              <p class="form-subtitle">Typically respond within 24 hours</p>
+              <BookDemoForm client:load submit_text="Request Demo" />
+              <p class="form-privacy">
+                <svg width="12" height="12" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="2" y="6" width="10" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M4 6V4C4 2.34315 5.34315 1 7 1C8.65685 1 10 2.34315 10 4V6" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+                Your data stays private. We never share your information.
+              </p>
+            </div>
+          </div>
         </div>
-        <div slot="right">
-          <BookDemoForm client:load />
+      </ContentLimiter>
+    </section>
+
+    <!-- Trusted By -->
+    <section class="trusted-section">
+      <TrustedBy />
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="use-cases-section">
+      <ContentLimiter maxWidth={1100}>
+        <h2>What brings most teams to Defguard?</h2>
+        <p class="section-subtitle">Select your use case and we'll tailor the demo to your needs</p>
+        
+        <div class="use-cases-grid">
+          <div class="use-case-card">
+            <div class="use-case-icon">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 16H26M26 16L20 10M26 16L20 22" stroke="#0C8CE0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 6L6 6C4.89543 6 4 6.89543 4 8L4 24C4 25.1046 4.89543 26 6 26H12" stroke="#0C8CE0" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Legacy VPN Replacement</h3>
+            <p>Migrating from OpenVPN, FortiGate, Sophos, Cisco AnyConnect, or Ivanti due to performance issues or SSL VPN deprecation.</p>
+          </div>
+          
+          <div class="use-case-card">
+            <div class="use-case-icon">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="4" width="24" height="24" rx="2" stroke="#0C8CE0" stroke-width="2"/>
+                <path d="M10 16L14 20L22 12" stroke="#0C8CE0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Compliance Requirements</h3>
+            <p>Preparing for ISO 27001, SOC2, or NIS2 with protocol-level MFA enforcement and audit-ready access logs.</p>
+          </div>
+          
+          <div class="use-case-card">
+            <div class="use-case-icon">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="16" cy="10" r="4" stroke="#0C8CE0" stroke-width="2"/>
+                <path d="M8 26C8 21.5817 11.5817 18 16 18C20.4183 18 24 21.5817 24 26" stroke="#0C8CE0" stroke-width="2" stroke-linecap="round"/>
+                <path d="M24 14L28 14M28 14L28 10M28 14L24 10" stroke="#0C8CE0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Secure Developer Access</h3>
+            <p>Granular access to GCP, AWS, Azure resources or lab environments for remote developers and external consultants.</p>
+          </div>
+          
+          <div class="use-case-card">
+            <div class="use-case-icon">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="4" width="10" height="10" rx="2" stroke="#0C8CE0" stroke-width="2"/>
+                <rect x="18" y="4" width="10" height="10" rx="2" stroke="#0C8CE0" stroke-width="2"/>
+                <rect x="4" y="18" width="10" height="10" rx="2" stroke="#0C8CE0" stroke-width="2"/>
+                <rect x="18" y="18" width="10" height="10" rx="2" stroke="#0C8CE0" stroke-width="2"/>
+                <circle cx="16" cy="16" r="3" fill="#0C8CE0"/>
+              </svg>
+            </div>
+            <h3>Network Segmentation</h3>
+            <p>ACL-based access control ensuring Marketing, Engineering, and Finance only reach their authorized subnets.</p>
+          </div>
+          
+          <div class="use-case-card">
+            <div class="use-case-icon">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="16" cy="10" rx="10" ry="4" stroke="#0C8CE0" stroke-width="2"/>
+                <path d="M6 10V16C6 18.2091 10.4772 20 16 20C21.5228 20 26 18.2091 26 16V10" stroke="#0C8CE0" stroke-width="2"/>
+                <path d="M6 16V22C6 24.2091 10.4772 26 16 26C21.5228 26 26 24.2091 26 22V16" stroke="#0C8CE0" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3>Multi-Cloud Management</h3>
+            <p>Single control plane for AWS, GCP, Azure, and on-premise — no more juggling multiple VPN configurations.</p>
+          </div>
+          
+          <div class="use-case-card">
+            <div class="use-case-icon">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 4L6 9V15C6 21.0751 10.0254 26.4247 16 28C21.9746 26.4247 26 21.0751 26 15V9L16 4Z" stroke="#0C8CE0" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M12 16L15 19L20 13" stroke="#0C8CE0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Data Sovereignty & Air-Gapped</h3>
+            <p>Keep all metadata on your infrastructure with offline licenses for regulated and air-gapped environments.</p>
+          </div>
         </div>
-      </FlexibleSection>
-    </ProductSection>
+      </ContentLimiter>
+    </section>
+
+    <!-- FAQ Section - Address Common Questions -->
+    <section class="faq-section">
+      <ContentLimiter maxWidth={900}>
+        <h2>Questions We'll Answer in Your Demo</h2>
+        
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="8" r="4" stroke="#0C8CE0" stroke-width="2"/>
+                <path d="M4 20C4 16.6863 7.13401 14 11 14" stroke="#0C8CE0" stroke-width="2" stroke-linecap="round"/>
+                <path d="M15 17L17 19L21 15" stroke="#0C8CE0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="faq-content">
+              <h3>SSO & Identity Integration</h3>
+              <p>How Defguard integrates with <strong>Microsoft Entra ID, Google Workspace, and Okta</strong> — including directory sync and group mapping.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 4V20M12 4L8 8M12 4L16 8" stroke="#0C8CE0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="4" y="14" width="16" height="6" rx="1" stroke="#0C8CE0" stroke-width="2"/>
+              </svg>
+            </div>
+            <div class="faq-content">
+              <h3>Deployment & Enrollment</h3>
+              <p>Rolling out via <strong>Intune, SCCM, or other MDM</strong> solutions. Automated enrollment without manual token pasting.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="4" width="16" height="16" rx="2" stroke="#0C8CE0" stroke-width="2"/>
+                <path d="M9 12L11 14L15 10" stroke="#0C8CE0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 2V4M12 20V22M2 12H4M20 12H22" stroke="#0C8CE0" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="faq-content">
+              <h3>Zero-Touch Enrollment</h3>
+              <p>Deploy via <strong>Intune, SCCM, or MDM</strong> with automated token provisioning — no manual setup for end users.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L4 6V12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12V6L12 2Z" stroke="#0C8CE0" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M9 12L11 14L15 10" stroke="#0C8CE0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="faq-content">
+              <h3>Data Sovereignty</h3>
+              <p>Whether metadata leaves your infrastructure. <strong>Offline licenses</strong> for air-gapped environments.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="4" width="18" height="14" rx="2" stroke="#0C8CE0" stroke-width="2"/>
+                <path d="M7 20H17" stroke="#0C8CE0" stroke-width="2" stroke-linecap="round"/>
+                <path d="M12 18V20" stroke="#0C8CE0" stroke-width="2"/>
+                <circle cx="12" cy="11" r="2" stroke="#0C8CE0" stroke-width="2"/>
+                <path d="M12 7V9" stroke="#0C8CE0" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="faq-content">
+              <h3>Pre-Logon VPN</h3>
+              <p>Connecting <strong>before Windows login</strong> to reach Active Directory for GPO updates.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="3" width="18" height="18" rx="2" stroke="#0C8CE0" stroke-width="2"/>
+                <rect x="7" y="7" width="6" height="6" rx="1" fill="#0C8CE0"/>
+                <path d="M17 9H19M17 12H19M17 15H19" stroke="#0C8CE0" stroke-width="2" stroke-linecap="round"/>
+                <path d="M7 17H13" stroke="#0C8CE0" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="faq-content">
+              <h3>White Labeling</h3>
+              <p>Adding your company logo and customizing enrollment welcome messages for end users.</p>
+            </div>
+          </div>
+        </div>
+      </ContentLimiter>
+    </section>
+
+    <!-- Testimonial -->
+    <section class="testimonial-section">
+      <ContentLimiter maxWidth={800}>
+        <blockquote>
+          <p>"It's a unique modern VPN solution — you can run all microservices components yourself without any requirements for communication with other services running by someone else. And all of this is open-source with community driven development."</p>
+          <footer>
+            <img src="/images/data/testimonials/prusa-p.jpg" alt="Zdeněk Váňa" loading="lazy" />
+            <div class="author-info">
+              <cite>Zdeněk Váňa</cite>
+              <span>Cloud & DevOps Team Lead at Prusa Research</span>
+            </div>
+          </footer>
+        </blockquote>
+      </ContentLimiter>
+    </section>
+
+    <!-- Alternative CTA -->
+    <section class="alternative-section">
+      <ContentLimiter maxWidth={800}>
+        <div class="alternative-card">
+          <h2>Not ready for a demo?</h2>
+          <p>Try Defguard free for 14 days with full access to all enterprise features.</p>
+          <div class="alternative-actions">
+            <a href="/evaluation-license/" class="btn-primary">Get Free Trial</a>
+            <a href="/pricing/" class="btn-secondary">View Pricing</a>
+          </div>
+        </div>
+      </ContentLimiter>
+    </section>
   </main>
 </BaseLayout>
 
 <style lang="scss" is:global>
-  #book-a-demo {
-    .product-section {
-      padding-top: 0 !important; /* Match the 4rem padding from FlexibleSection */
-      padding-bottom: 4rem !important;
+  #book-a-demo-v2 {
+    /* Hero Section */
+    .hero-section {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      padding: 80px 20px;
+      
+      @media (max-width: 768px) {
+        padding: 40px 20px;
+      }
     }
-
-    .contact {
-      width: 100%;
-      border-top: 1px solid var(--border-separator);
-      display: flex;
-      flex-flow: row;
+    
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
       align-items: center;
+      
+      @media (max-width: 968px) {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+    
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface-main-primary);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 20px;
+      
+      svg {
+        flex-shrink: 0;
+      }
+    }
+    
+    .hero-content h1 {
+      font-size: 2.5rem;
+      line-height: 1.2;
+      color: var(--text-body-primary);
+      margin-bottom: 20px;
+      
+      @media (max-width: 768px) {
+        font-size: 1.875rem;
+      }
+    }
+    
+    .hero-subtitle {
+      font-size: 1.125rem;
+      line-height: 1.7;
+      color: var(--text-body-secondary);
+      margin-bottom: 30px;
+    }
+    
+    .hero-benefits {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .benefit-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      color: var(--text-body-primary);
+      
+      .benefit-icon {
+        flex-shrink: 0;
+      }
+    }
+    
+    .hero-form {
+      @media (max-width: 968px) {
+        order: -1;
+      }
+    }
+    
+    .form-card {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      
+      h2 {
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+        color: var(--text-body-primary);
+      }
+      
+      .form-subtitle {
+        font-size: 14px;
+        color: var(--text-body-secondary);
+        margin-bottom: 24px;
+      }
+      
+      .form-privacy {
+        font-size: 13px;
+        color: var(--text-body-secondary);
+        text-align: center;
+        margin-top: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        
+        svg {
+          flex-shrink: 0;
+        }
+      }
+    }
+    
+    /* Trusted Section */
+    .trusted-section {
+      background: white;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border-separator, #e5e7eb);
+    }
+    
+    /* Use Cases Section */
+    .use-cases-section {
+      background: white;
+      padding: 80px 20px;
+      
+      h2 {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 12px;
+        color: var(--text-body-primary);
+      }
+      
+      .section-subtitle {
+        text-align: center;
+        font-size: 1.125rem;
+        color: var(--text-body-secondary);
+        margin-bottom: 50px;
+      }
+    }
+    
+    .use-cases-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      
+      @media (max-width: 968px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .use-case-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 28px;
+      transition: all 0.2s ease;
+      
+      &:hover {
+        border-color: var(--surface-main-primary);
+        box-shadow: 0 4px 20px rgba(12, 140, 224, 0.1);
+      }
+      
+      .use-case-icon {
+        width: 48px;
+        height: 48px;
+        background: rgba(12, 140, 224, 0.1);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        
+        svg {
+          width: 32px;
+          height: 32px;
+        }
+      }
+      
+      h3 {
+        font-size: 1.125rem;
+        margin-bottom: 10px;
+        color: var(--text-body-primary);
+      }
+      
+      p {
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--text-body-secondary);
+        margin: 0;
+      }
+    }
+    
+    /* FAQ Section */
+    .faq-section {
+      background: var(--surface-frame-bg, #f5f5f5);
+      padding: 80px 20px;
+      
+      h2 {
+        text-align: center;
+        font-size: 1.75rem;
+        margin-bottom: 40px;
+        color: var(--text-body-primary);
+      }
+    }
+    
+    .faq-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .faq-item {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      
+      .faq-icon {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        background: rgba(12, 140, 224, 0.1);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        svg {
+          width: 24px;
+          height: 24px;
+        }
+      }
+      
+      .faq-content {
+        flex: 1;
+        
+        h3 {
+          font-size: 1rem;
+          margin-bottom: 8px;
+          color: var(--text-body-primary);
+        }
+        
+        p {
+          font-size: 14px;
+          line-height: 1.6;
+          color: var(--text-body-secondary);
+          margin: 0;
+          
+          strong {
+            color: var(--text-body-primary);
+          }
+        }
+      }
+    }
+    
+    /* Testimonial Section */
+    .testimonial-section {
+      background: white;
+      padding: 80px 20px;
+      
+      blockquote {
+        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        border-radius: 16px;
+        padding: 40px;
+        margin: 0;
+        border-left: 4px solid var(--surface-main-primary);
+        
+        p {
+          font-size: 1.25rem;
+          line-height: 1.7;
+          color: var(--text-body-primary);
+          font-style: italic;
+          margin: 0 0 24px 0;
+        }
+        
+        footer {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          
+          img {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+          
+          .author-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            
+            cite {
+              font-style: normal;
+              font-weight: 600;
+              color: var(--text-body-primary);
+            }
+            
+            span {
+              font-size: 14px;
+              color: var(--text-body-secondary);
+            }
+          }
+        }
+      }
+    }
+    
+    /* Alternative Section */
+    .alternative-section {
+      background: var(--surface-frame-bg, #f5f5f5);
+      padding: 80px 20px;
+    }
+    
+    .alternative-card {
+      background: white;
+      border-radius: 16px;
+      padding: 50px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      
+      h2 {
+        font-size: 1.5rem;
+        margin-bottom: 12px;
+        color: var(--text-body-primary);
+      }
+      
+      p {
+        font-size: 1.125rem;
+        color: var(--text-body-secondary);
+        margin-bottom: 30px;
+      }
+    }
+    
+    .alternative-actions {
+      display: flex;
+      gap: 16px;
       justify-content: center;
-      box-sizing: border-box;
-      padding: 100px 10px 0px 10px;
-
+      flex-wrap: wrap;
+      
       a {
+        padding: 14px 28px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 15px;
         text-decoration: none;
+        transition: all 0.2s ease;
+      }
+      
+      .btn-primary {
+        background: #0C8CE0;
+        color: white;
+        
+        &:hover {
+          background: #0a7bc9;
+          box-shadow: 0 4px 12px rgba(12, 140, 224, 0.3);
+        }
+      }
+      
+      .btn-secondary {
+        background: #f8fafc;
+        color: var(--text-body-primary);
+        border: 1px solid var(--border-separator, #e5e7eb);
+        
+        &:hover {
+          background: #f0f4f8;
+          border-color: #0C8CE0;
+          color: #0C8CE0;
+        }
       }
     }
   }
 </style>
+

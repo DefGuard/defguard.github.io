@@ -1,0 +1,120 @@
+---
+import FeaturesTable from "../components/FeaturesTable/FeaturesTable";
+import Navigation from "../components/base/Navigation.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProductSection from "../layouts/ProductSection.astro";
+import FlexibleSection from "../components/FlexibleSection.astro";
+import BookDemoForm from "../components/form/BookDemoForm/BookDemoForm";
+import { featuresTableData } from "../data/compare-table";
+import { Button } from "../components/buttons/Button/Button";
+import OrganizationJSONLD from "../scripts/OrganizationJSONLD.astro";
+
+const title = "Zero-Trust WireGuard® 2FA/MFA VPN: Book a Demo";
+const featuredImage =
+  "github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png";
+const imageWidth = "1080";
+const imageHeight = "540";
+const description = "defguard - Zero-Trust WireGuard® 2FA/MFA VPN - Book a Demo";
+const url = "https://defguard.net/book-a-demo/";
+const tags = [
+  "defgaurd",
+  "compare",
+  "WireGuard®",
+  "2fa",
+  "mfa",
+  "mfa/2fa",
+  "openid",
+  "secure",
+  "ldap",
+  "acl",
+  "vpn",
+  "sso",
+  "firewall",
+  "desktop client",
+  "mesh",
+  "mesh vpn",
+  "nat",
+  "yubikey",
+  "email",
+  "email notifications",
+  "gateway",
+  "auth",
+  "ssh",
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  featuredImage={featuredImage}
+  imageWidth={imageWidth}
+  imageHeight={imageHeight}
+  url={url}
+>
+  <OrganizationJSONLD
+    slot="schema"
+    title={title}
+    description={description}
+    url={url}
+    tags={tags}
+  />
+  <Navigation activeSlug="/book-a-demo/" />
+  <main id="book-a-demo">
+    <ProductSection padding="none">
+      <FlexibleSection
+        title="Book a Demo"
+        id="press-contact"
+        variant="white"
+        theme="light"
+      >
+        <div slot="left">
+          <p>What you can expect?</p>
+          <p>
+            <ul>
+              <li>
+                A walkthrough of defguard’s core features, including secure identity
+                management, access policies, and user enrollment
+              </li>
+              <li>
+                Insights into how Defguard can enhance your security and streamline
+                operations
+              </li>
+              <li>
+                A discussion on how Defguard can integrate with your existing
+                infrastructure
+              </li>
+            </ul>
+          </p>
+          <p>Our demo takes around 20-30 min.</p>
+        </div>
+        <div slot="right">
+          <BookDemoForm client:load />
+        </div>
+      </FlexibleSection>
+    </ProductSection>
+  </main>
+</BaseLayout>
+
+<style lang="scss" is:global>
+  #book-a-demo {
+    .product-section {
+      padding-top: 0 !important; /* Match the 4rem padding from FlexibleSection */
+      padding-bottom: 4rem !important;
+    }
+
+    .contact {
+      width: 100%;
+      border-top: 1px solid var(--border-separator);
+      display: flex;
+      flex-flow: row;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      padding: 100px 10px 0px 10px;
+
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+</style>
