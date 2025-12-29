@@ -3,6 +3,13 @@ import "./style.scss";
 import type { ChangeEvent } from "react";
 import { useState } from "react";
 
+// TypeScript declaration for dataLayer
+declare global {
+  interface Window {
+    dataLayer: Record<string, unknown>[];
+  }
+}
+
 import MessageBottom from "../../alert/MessageBottom/MessageBottom";
 import { Button } from "../../buttons/Button/Button";
 
@@ -92,6 +99,24 @@ const BookDemoForm = ({ submit_text = "Submit" }: BookDemoFormProps) => {
     })
       .then(() => {
         setOkMessage(true);
+        
+        // Push to dataLayer for GTM/GA4 tracking
+        if (typeof window !== 'undefined' && window.dataLayer) {
+          const urlParams = new URLSearchParams(window.location.search);
+          window.dataLayer.push({
+            event: 'book_demo_submit',
+            form_name: 'book_a_demo',
+            form_location: window.location.pathname,
+            utm_source: urlParams.get('utm_source') || 'direct',
+            utm_medium: urlParams.get('utm_medium') || '',
+            utm_campaign: urlParams.get('utm_campaign') || '',
+            utm_content: urlParams.get('utm_content') || '',
+            topics_selected: selectedTopics.join(','),
+            topics_count: selectedTopics.length,
+            company_domain: values.website_url,
+            user_email_domain: values.email.split('@')[1] || ''
+          });
+        }
       })
       .catch(() => {
         setErrorMessage(true);
