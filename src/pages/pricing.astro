@@ -64,17 +64,351 @@ const tags = [
     <ContentLimiter contentId="pricing-tiers" maxWidth={1100}>
       <header>
         <FlexibleSection
-          title="Pricing for Defguard Enterprise VPN"
+          title="Pricing"
           titleTag="h1"
-          id="blog-header"
+          id="pricing-header"
           variant="white"
           theme="light"
-        >
-          
-        </FlexibleSection>
-        <PricingCards client:load data={pricingData} />
+          bottomBorder={false}
+          style="padding-bottom: 0.5rem;"
+        />
+        <PricingCards client:load data={pricingData} subtitle="Choose your plan" />
       </header>
-    <!-- </ContentLimiter> -->
+    </ContentLimiter>
+
+    <!-- Compare Features Section -->
+    <div id="compare-features-section" class="compare-features-wrapper">
+      <ContentLimiter contentId="compare-features-content" maxWidth={1100}>
+        <FlexibleSection title="Compare Features" id="compare-features" variant="gray" theme="light" bottomBorder={false}>
+          <div class="features-table-container">
+            <table class="features-table">
+              <thead>
+                <tr>
+                  <th class="feature-name">Feature</th>
+                  <th class="plan-col">Starter</th>
+                  <th class="plan-col">Team</th>
+                  <th class="plan-col">Business</th>
+                  <th class="plan-col">Enterprise</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Account Limits -->
+                <tr class="section-header">
+                  <td colspan="5">Account Limits</td>
+                </tr>
+                <tr>
+                  <td class="feature-name">Users</td>
+                  <td>5</td>
+                  <td>85</td>
+                  <td>250</td>
+                  <td>Custom</td>
+                </tr>
+                <tr>
+                  <td class="feature-name">VPN Locations</td>
+                  <td>1</td>
+                  <td>3</td>
+                  <td>5</td>
+                  <td>Custom</td>
+                </tr>
+
+                <!-- Enterprise Authentication & Identity -->
+                <tr class="section-header">
+                  <td colspan="5">🔐 Enterprise Authentication & Identity</td>
+                </tr>
+                <tr>
+                  <td class="feature-name">
+                    <a href="https://docs.defguard.net/features/openid-connect" target="_blank" rel="noopener">Built-in Identity Provider (SSO)</a>
+                    <span class="feature-desc">OpenID Connect provider for user authentication</span>
+                  </td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="feature-name">
+                    <a href="https://docs.defguard.net/features/external-openid-providers/" target="_blank" rel="noopener">External OIDC Authentication</a>
+                    <span class="feature-desc">Login via Google, Microsoft, Okta, JumpCloud, or custom providers</span>
+                  </td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="feature-name">
+                    <a href="https://docs.defguard.net/features/wireguard/multi-factor-authentication-mfa-2fa/internal-sso-based-mfa" target="_blank" rel="noopener">VPN-Level MFA (Internal)</a>
+                    <span class="feature-desc">True connection-level multi-factor authentication</span>
+                  </td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="feature-name">
+                    <a href="https://docs.defguard.net/features/external-openid-providers/" target="_blank" rel="noopener">VPN-Level MFA (External SSO)</a>
+                    <span class="feature-desc">MFA enforced per VPN location with external IdP (Desktop & Mobile)</span>
+                  </td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="feature-name">
+                    <a href="https://docs.defguard.net/features/external-openid-providers/external-oidc-secure-enrollment/" target="_blank" rel="noopener">Secure Remote Enrollment via OIDC</a>
+                    <span class="feature-desc">External OIDC for secure user enrollment and client configuration</span>
+                  </td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="feature-name">
+                    <a href="https://docs.defguard.net/features/ldap-and-active-directory-integration/two-way-ldap-and-active-directory-synchronization/" target="_blank" rel="noopener">Two-way LDAP & Active Directory Sync</a>
+                    <span class="feature-desc">Bi-directional synchronization with LDAP / AD</span>
+                  </td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="feature-name">
+                    Biometric MFA
+                    <span class="feature-desc">Use mobile device biometrics for desktop VPN authentication</span>
+                  </td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+
+                <!-- Client & VPN Management -->
+                <tr class="section-header">
+                  <td colspan="5">🖥️ Client & VPN Management</td>
+                </tr>
+                <tr>
+                  <td class="feature-name">
+                    <a href="/client" target="_blank">Desktop & Mobile VPN Clients</a>
+                    <span class="feature-desc">Native apps for Windows, macOS, Linux, iOS, Android</span>
+                  </td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="feature-name">
+                    <a href="https://docs.defguard.net/features/remote-user-enrollment/automatic-real-time-desktop-client-configuration/" target="_blank" rel="noopener">Real-time Client Configuration Sync</a>
+                    <span class="feature-desc">Automatic, instant configuration updates to all clients</span>
+                  </td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="feature-name">
+                    <a href="https://docs.defguard.net/features/wireguard/behavior-customization/#disable-for-users-to-manage-their-devices" target="_blank" rel="noopener">Admin-only Device Management</a>
+                    <span class="feature-desc">Prevent users from managing their own devices</span>
+                  </td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="feature-name">
+                    <a href="https://docs.defguard.net/features/wireguard/behavior-customization/#disable-ability-to-configure-other-vpn-clients-then-defguard-desktop-client" target="_blank" rel="noopener">Enforced Defguard Client Usage</a>
+                    <span class="feature-desc">Block configuration of non-Defguard WireGuard clients</span>
+                  </td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="feature-name">
+                    <a href="https://docs.defguard.net/features/wireguard/behavior-customization/#client-traffic-policy-selection" target="_blank" rel="noopener">Client Traffic Policies</a>
+                    <span class="feature-desc">Configure and enforce VPN client traffic behavior</span>
+                  </td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="feature-name">
+                    <a href="https://docs.defguard.net/features/service-locations" target="_blank" rel="noopener">Service VPN Locations</a>
+                    <span class="feature-desc">VPN connections established at system boot level</span>
+                  </td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="feature-name">
+                    Pre-logon VPN Mode
+                    <span class="feature-desc">Establish VPN before user login</span>
+                  </td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="feature-name">
+                    Always-on VPN Mode
+                    <span class="feature-desc">Persistent VPN connection that auto-reconnects</span>
+                  </td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+
+                <!-- Security & Compliance -->
+                <tr class="section-header">
+                  <td colspan="5">🛡️ Security & Compliance</td>
+                </tr>
+                <tr>
+                  <td class="feature-name">
+                    <a href="https://docs.defguard.net/features/access-control-list/" target="_blank" rel="noopener">Access Control Lists (ACL)</a>
+                    <span class="feature-desc">Define and enforce granular network access rules</span>
+                  </td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="feature-name">
+                    <a href="https://docs.defguard.net/features/activity-log" target="_blank" rel="noopener">Activity & Audit Logs</a>
+                    <span class="feature-desc">Comprehensive logging of all system activity</span>
+                  </td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="feature-name">
+                    <a href="https://docs.defguard.net/features/activity-log/activity-log-streaming/" target="_blank" rel="noopener">Log Streaming to SIEM</a>
+                    <span class="feature-desc">Stream logs in real-time to external SIEM systems</span>
+                  </td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+
+                <!-- Integrations & Automation -->
+                <tr class="section-header">
+                  <td colspan="5">🔌 Integrations & Automation</td>
+                </tr>
+                <tr>
+                  <td class="feature-name">
+                    <a href="https://docs.defguard.net/features/remote-user-enrollment" target="_blank" rel="noopener">Remote User Enrollment</a>
+                    <span class="feature-desc">Self-service user onboarding and device setup</span>
+                  </td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="feature-name">
+                    <a href="https://docs.defguard.net/features/integrations/api-tokens/" target="_blank" rel="noopener">REST API Access</a>
+                    <span class="feature-desc">Integrate Defguard with external systems and tooling</span>
+                  </td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+
+                <!-- Support -->
+                <tr class="section-header">
+                  <td colspan="5">💬 Support</td>
+                </tr>
+                <tr>
+                  <td class="feature-name">Community Support</td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="feature-name">Email & Ticket Support</td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="feature-name">Priority Support & SLA</td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="feature-name">Video Call Support</td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="feature-name">Deployment Assistance</td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+
+                <!-- Billing & Terms -->
+                <tr class="section-header">
+                  <td colspan="5">💳 Billing & Terms</td>
+                </tr>
+                <tr>
+                  <td class="feature-name">Pay by Credit Card</td>
+                  <td>—</td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="feature-name">Pay by Invoice</td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="feature-name">Custom MSA & SLA</td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="feature-name">Multi-year Agreements</td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="cross">—</span></td>
+                  <td><span class="check">✓</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </FlexibleSection>
+      </ContentLimiter>
+    </div>
 
     <!-- FAQ Section -->
     <div id="pricing-faq-section" class="pricing-faq-wrapper">
@@ -198,6 +532,20 @@ const tags = [
 
         @include break-up(md) {
           padding-bottom: calc(80px - var(--nav-height));
+        }
+
+        // Reduce header spacing for pricing page
+        #pricing-header {
+          padding: 1rem 0 0.5rem 0;
+          
+          .flexible-content .header {
+            padding-bottom: 0.5rem;
+            
+            .section-title {
+              margin-bottom: 0;
+              padding-bottom: 0.5rem;
+            }
+          }
         }
 
         h1 {
@@ -362,6 +710,164 @@ const tags = [
       /* Hide floating links on pricing page */
       #floating-links {
         display: none !important;
+      }
+
+      /* Compare Features Section Styles */
+      .compare-features-wrapper {
+        width: 100%;
+        background-color: var(--background-secondary, #f5f5f5);
+        padding: 60px 0;
+      }
+
+      #compare-features {
+        padding: 0;
+        
+        .flexible-content .header {
+          padding-bottom: 1.5rem;
+          
+          .section-title {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--text-body-secondary, #555);
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+            
+            @include break-up(md) {
+              font-size: 1.75rem;
+            }
+          }
+        }
+      }
+
+      .features-table-container {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .features-table {
+        width: 100%;
+        min-width: 700px;
+        border-collapse: collapse;
+        font-size: 14px;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+        thead {
+          background: var(--surface-main-primary, #0c8ce0);
+          color: white;
+          position: sticky;
+          top: 0;
+          z-index: 10;
+
+          th {
+            padding: 16px 12px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+            white-space: nowrap;
+
+            &.feature-name {
+              text-align: left;
+              width: 40%;
+            }
+
+            &.plan-col {
+              width: 15%;
+            }
+          }
+        }
+
+        tbody {
+          tr {
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.15s ease;
+
+            &:hover:not(.section-header) {
+              background-color: #f9fafb;
+            }
+
+            &:last-child {
+              border-bottom: none;
+            }
+          }
+
+          td {
+            padding: 14px 12px;
+            text-align: center;
+            vertical-align: middle;
+            color: var(--text-body-primary);
+
+            &.feature-name {
+              text-align: left;
+              font-weight: 500;
+              
+              a {
+                color: var(--text-body-primary);
+                text-decoration: none;
+                transition: color 0.2s ease;
+
+                &:hover {
+                  color: var(--surface-main-primary);
+                }
+              }
+
+              .feature-desc {
+                display: block;
+                font-size: 12px;
+                font-weight: 400;
+                color: var(--text-body-secondary, #666);
+                margin-top: 2px;
+              }
+            }
+          }
+
+          .section-header {
+            background: linear-gradient(135deg, #f8f9fa 0%, #f0f1f2 100%);
+
+            td {
+              font-weight: 600;
+              font-size: 14px;
+              color: var(--text-body-primary);
+              padding: 12px;
+              text-align: left;
+            }
+          }
+
+          .check {
+            color: #16a34a;
+            font-weight: 600;
+            font-size: 16px;
+          }
+
+          .cross {
+            color: #d1d5db;
+            font-size: 14px;
+          }
+        }
+      }
+
+      /* Mobile table adjustments */
+      @media (max-width: 768px) {
+        .features-table {
+          font-size: 13px;
+
+          thead th {
+            padding: 12px 8px;
+            font-size: 12px;
+          }
+
+          tbody td {
+            padding: 10px 8px;
+
+            &.feature-name .feature-desc {
+              display: none;
+            }
+          }
+        }
       }
 
       /* FAQ Section Styles */

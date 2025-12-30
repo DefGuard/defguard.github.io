@@ -11,6 +11,7 @@ type PricingData = PricingSchema & { content: string; id: string | number };
 
 type PricingProps = {
   data: PricingData[];
+  subtitle?: string;
 };
 
 enum PricingPlan {
@@ -18,7 +19,7 @@ enum PricingPlan {
   MONTHLY,
 }
 
-export const PricingCards = ({ data }: PricingProps) => {
+export const PricingCards = ({ data, subtitle }: PricingProps) => {
   const annualEnabled = useMemo(
     () => data.filter((p) => p.annualPrice !== undefined).length > 0,
     [data],
@@ -27,13 +28,18 @@ export const PricingCards = ({ data }: PricingProps) => {
 
   return (
     <div id="pricing-container">
-      {annualEnabled && (
-        <PricingToggle
-          onChange={(v) => {
-            setPlan(v);
-          }}
-          state={plan}
-        />
+      {(subtitle || annualEnabled) && (
+        <div className="pricing-header-row">
+          {subtitle && <h2 className="pricing-subtitle">{subtitle}</h2>}
+          {annualEnabled && (
+            <PricingToggle
+              onChange={(v) => {
+                setPlan(v);
+              }}
+              state={plan}
+            />
+          )}
+        </div>
       )}
       <div className="plans">
         {data.map((pricingData) => (

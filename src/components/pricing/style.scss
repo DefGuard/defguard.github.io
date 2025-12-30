@@ -7,6 +7,33 @@
   padding: 0 20px;
   box-sizing: border-box;
 
+  .pricing-header-row {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    gap: 16px;
+
+    @include break-down(sm) {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .pricing-subtitle {
+      font-size: 1.5rem;
+      color: var(--text-body-secondary, #555);
+      font-weight: 300;
+      margin: 0;
+      
+      @include break-up(md) {
+        font-size: 1.75rem;
+      }
+    }
+  }
+
   #pricing-toggle {
     display: flex;
     flex-flow: row;
@@ -15,7 +42,6 @@
     border: 1px solid var(--text-body-primary);
     border-radius: 50px;
     min-height: 38px;
-    margin-bottom: 50px;
 
     & > button {
       box-sizing: border-box;
@@ -51,34 +77,34 @@
     }
 
     @include break-up(sm) {
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      column-gap: 15px;
-      row-gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      column-gap: 12px;
+      row-gap: 24px;
       justify-content: center;
     }
 
     @include break-up(md) {
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      column-gap: 20px;
-      row-gap: 30px;
+      grid-template-columns: repeat(2, minmax(220px, 280px));
+      column-gap: 16px;
+      row-gap: 24px;
       justify-content: center;
-      max-width: 620px;
+      max-width: 600px;
       margin: 0 auto;
     }
 
     @include break-up(lg) {
-      grid-template-columns: repeat(4, minmax(280px, 320px));
-      column-gap: 30px;
-      row-gap: 30px;
+      grid-template-columns: repeat(4, minmax(200px, 260px));
+      column-gap: 16px;
+      row-gap: 24px;
       justify-content: center;
       max-width: none;
       margin: 0;
     }
 
     @include break-up(xl) {
-      grid-template-columns: repeat(4, 320px);
-      column-gap: 30px;
-      row-gap: 30px;
+      grid-template-columns: repeat(4, 260px);
+      column-gap: 20px;
+      row-gap: 24px;
       justify-content: center;
     }
 
@@ -95,10 +121,10 @@
         align-items: center;
         justify-content: center;
         box-sizing: border-box;
-        padding: 20px;
+        padding: 16px;
 
         p {
-          font-size: 18px;
+          font-size: 16px;
           font-weight: 500;
           line-height: 1.4;
           color: var(--text-body-primary);
@@ -112,8 +138,8 @@
         flex-flow: column;
         align-items: center;
         justify-content: flex-start;
-        row-gap: 10px;
-        padding: 20px 0;
+        row-gap: 8px;
+        padding: 16px 0;
 
         & > .price {
           display: flex;
@@ -135,7 +161,7 @@
 
           .free {
             font-family: "Poppins";
-            font-size: 30px;
+            font-size: 24px;
             font-weight: 600;
             color: var(--text-body-primary);
           }
@@ -158,7 +184,7 @@
           .monthly {
             font-family: "Poppins";
             font-weight: 600;
-            font-size: 30px;
+            font-size: 24px;
           }
 
           .annually {
@@ -167,13 +193,13 @@
         }
 
         & > .annual-message {
-          font-size: 12px;
-          line-height: 1.5;
+          font-size: 11px;
+          line-height: 1.4;
           color: var(--text-body-primary);
           text-align: center;
           text-wrap: balance;
           box-sizing: border-box;
-          padding: 0 20px;
+          padding: 0 14px;
         }
 
         & > .action-container {
@@ -189,13 +215,13 @@
             flex-flow: row nowrap;
             align-items: center;
             justify-content: center;
-            min-width: calc(86.5px + (32 * 2px));
+            min-width: calc(70px + (24 * 2px));
             border-radius: 25px;
             border: 1px solid var(--surface-main-primary);
             background-color: var(--surface-main-primary);
             box-sizing: border-box;
             text-decoration: none;
-            padding: 10px;
+            padding: 8px 12px;
             transition: border-color 0.2s, color 0.2s, background-color 0.2s;
 
             &:hover, &:focus {
@@ -209,7 +235,7 @@
             }
 
             span {
-              font-size: 14px;
+              font-size: 13px;
               font-weight: 500;
               line-height: 1.4;
               color: var(--text-button-secondary);
@@ -278,35 +304,35 @@
   .pricing-card {
     .content-container {
       box-sizing: border-box;
-      padding: 20px;
+      padding: 14px;
 
       // Override typography for pricing page specific smaller fonts
       strong {
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 600;
-        line-height: 1.8;
+        line-height: 1.6;
         display: block;
-        margin-bottom: 12px;
+        margin-bottom: 8px;
         color: var(--text-body-primary);
       }
 
       ul {
         margin: 0;
         padding: 0;
-        padding-left: 15px;
-        line-height: 1.8;
+        padding-left: 14px;
+        line-height: 1.6;
 
         li {
-          font-size: 14px;
+          font-size: 12px;
           font-weight: 400;
-          line-height: 1.7;
-          margin-bottom: 10px;
+          line-height: 1.5;
+          margin-bottom: 6px;
           text-wrap: balance;
 
           & > span {
             display: block;
-            font-size: 12px;
-            line-height: 1.5;
+            font-size: 11px;
+            line-height: 1.4;
             color: var(--text-body-primary);
           }
         }
@@ -325,9 +351,9 @@
 
       // Optimize paragraph spacing
       p {
-        font-size: 14px;
-        line-height: 1.6;
-        margin-bottom: 12px;
+        font-size: 12px;
+        line-height: 1.5;
+        margin-bottom: 8px;
       }
     }
   }
