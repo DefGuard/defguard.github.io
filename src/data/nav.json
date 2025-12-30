@@ -26,12 +26,8 @@
     "url": null,
     "children": [
       {
-        "display": "Compare vs. Fortinet",
+        "display": "Fortigate VPN Replacement",
         "url": "/defguard-vs-fortinet"
-      },
-      {
-        "display": "Enterprise Features",
-        "url": "https://docs.defguard.net/enterprise/license"
       }
     ]
   },
