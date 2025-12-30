@@ -1,89 +1,952 @@
 ---
-import { getCollection } from "astro:content";
 import Navigation from "../components/base/Navigation.astro";
 import ProductLayout from "../layouts/ProductLayout.astro";
 import ProductSection from "../layouts/ProductSection.astro";
-import { ProductFeature } from "../components/product/ProductFeature/ProductFeature";
-import ProductBuiltBy from "../components/product/ProductBuiltBy.astro";
-import ImageGallery from "../components/image/ImageGallery.astro";
-import BookDemoForm from "../components/form/BookDemoForm/BookDemoForm";
-import MigrateIllustration from "/public/svg/migrate-illustration.svg?raw";
+import OrganizationJSONLD from "../scripts/OrganizationJSONLD.astro";
+import TechArticleJSONLD from "../scripts/TechArticleJSONLD.astro";
+import FAQPageJSONLD from "../scripts/FAQPageJSONLD.astro";
+import AstroButton from "../components/AstroButton.astro";
+import HomeSection from "../components/home/HomeSection.astro";
+import FeatureCapsules from "../pages/_home/components/FeatureCapsules.astro";
+import TrustedBy from "../pages/_home/components/TrustedBy.astro";
 
-const openvpnFeatures = (await getCollection("openvpn-features")).sort(
-  (f1, f2) => f1.data.order - f2.data.order,
-);
-const title =
-  "defguard Zero-Trust WireGuard® 2FA/MFA VPN: Migrate from OpenVPN to WireGuard®";
-const featuredImage =
-  "github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png";
+const title = "OpenVPN to WireGuard Migration: Replace OpenVPN with Faster Enterprise VPN";
+const description = "Migrate from OpenVPN to WireGuard with Defguard. Get 3x faster VPN speeds, native MFA, zero-touch enrollment, and Active Directory integration. Free 14-day trial for enterprise teams.";
+const url = "https://defguard.net/openvpn/";
+const publishedDate = "2024-01-15";
+const lastUpdated = "2025-12-30";
+const featuredImage = "github.com/DefGuard/defguard.github.io/raw/main/public/images/png/defguard.png";
 const imageWidth = "1080";
 const imageHeight = "540";
-const url = "https://defguard.net/openvpn/";
 const tags = [
-  "defguard",
-  "migrate",
-  "migration",
-  "opevpn",
-  "WireGuard®",
-  "vpn",
-  "2fa/mfa",
-  "mfa",
-  "2fa",
-  "enterprise",
-  "opensense",
-  "docker",
-  "kubernetes",
-  "k8s",
-  "open source",
-  "sso",
-  "secure",
-  "rust",
+  "openvpn alternative",
+  "openvpn replacement",
+  "openvpn to wireguard",
+  "openvpn migration",
+  "wireguard vpn",
+  "wireguard enterprise",
+  "enterprise vpn solution",
+  "vpn mfa",
+  "vpn 2fa",
+  "self-hosted vpn",
+  "open source vpn",
+  "openvpn access server alternative",
+  "vpn performance",
+  "zero trust vpn",
+  "active directory vpn",
+];
+
+const faqEntries = [
+  {
+    question: "How much faster is WireGuard compared to OpenVPN?",
+    answer: "WireGuard is significantly faster than OpenVPN—typically 3x or more in real-world conditions. This is because WireGuard operates at the kernel level with only ~4,000 lines of code, while OpenVPN runs in userspace with over 100,000 lines. WireGuard's stateless design also enables instant connections (<100ms) versus OpenVPN's multi-second handshakes."
+  },
+  {
+    question: "Can I migrate from OpenVPN Access Server to Defguard?",
+    answer: "Yes. Defguard is designed as a complete replacement for OpenVPN Access Server. It provides all enterprise features including user management, SSO integration, MFA, and centralized administration—but with the performance benefits of WireGuard. Our documentation includes step-by-step migration guides."
+  },
+  {
+    question: "Does Defguard support the same authentication methods as OpenVPN?",
+    answer: "Defguard supports more authentication options than OpenVPN. In addition to TOTP and certificate-based auth, Defguard offers biometric MFA (using mobile device biometrics for desktop authentication) and native SSO integration with providers like Microsoft Entra ID, Google Workspace, Okta, and JumpCloud."
+  },
+  {
+    question: "How does Defguard handle network changes compared to OpenVPN?",
+    answer: "WireGuard handles network changes (like switching from Wi-Fi to cellular) seamlessly without dropping connections. OpenVPN typically loses the connection during network transitions and requires reconnection. This makes Defguard ideal for mobile workers and users who frequently change networks."
+  },
+  {
+    question: "Is Defguard open-source like OpenVPN?",
+    answer: "Defguard's core components are open-source under the Apache 2.0 license, including the server (Core), gateway, and clients. Some enterprise features require a license. All core code is fully auditable, and we publish <a href='/pentesting' target='_blank'>public penetration testing reports</a>."
+  },
+  {
+    question: "Can I deploy Defguard alongside my existing OpenVPN setup?",
+    answer: "Absolutely. Many organizations run Defguard in parallel with their existing OpenVPN infrastructure during migration. You can gradually move users to Defguard while keeping OpenVPN operational, ensuring zero downtime during the transition."
+  },
+  {
+    question: "What enterprise features does Defguard offer that OpenVPN doesn't?",
+    answer: "Defguard includes features not available in standard OpenVPN: true <a href='https://docs.defguard.net/features/wireguard/multi-factor-authentication-mfa-2fa' target='_blank'>protocol-level MFA</a> (not just login-time auth), <a href='https://docs.defguard.net/features/wireguard/multi-factor-authentication-mfa-2fa' target='_blank'>biometric authentication</a> via mobile, <a href='/blog/defguard-1.6-release-notes/'>zero-touch enrollment</a> at scale, <a href='https://docs.defguard.net/features/service-locations' target='_blank'>pre-logon VPN</a> for Active Directory, real-time configuration sync to all clients, built-in <a href='https://docs.defguard.net/features/access-control-list' target='_blank'>Access Control Lists</a> with firewall management, and comprehensive <a href='https://docs.defguard.net/features/activity-log' target='_blank'>audit logging</a> with SIEM integration."
+  }
 ];
 ---
 
 <ProductLayout
   title={title}
+  description={description}
   featuredImage={featuredImage}
   imageWidth={imageWidth}
   imageHeight={imageHeight}
   url={url}
   tags={tags}
 >
+  <OrganizationJSONLD slot="schema" title={title} description={description} url={url} tags={tags} />
+  <TechArticleJSONLD slot="schema" title={title} description={description} url={url} publishedDate={publishedDate} lastUpdated={lastUpdated} />
+  <FAQPageJSONLD slot="schema" entries={faqEntries} />
+  <script slot="schema" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://defguard.net/" },
+      { "@type": "ListItem", "position": 2, "name": "Solutions", "item": "https://defguard.net/#solutions" },
+      { "@type": "ListItem", "position": 3, "name": "OpenVPN Migration", "item": url }
+    ]
+  })} />
   <Navigation activeSlug="/openvpn/" />
-  <main id="product-content" class="product-main">
-    <ProductSection padding="small">
-      <header id="main-header">
-        <h1>Migrate<br />from OpenVPN</h1>
-        <p>
-          Defguard is an enterprise and open-source, easy to deploy and manage WireGuard®
-          based VPN solution with real 2FA/Multi-Factor Authentication & SSO.
-        </p>
-      </header>
-    </ProductSection>
-    <ProductSection padding="none">
-      <Fragment set:html={MigrateIllustration} />
-    </ProductSection>
-    <ProductSection padding="small">
-      <div class="product-features">
-        <h3>Why migrate from OpenVPN to defguard:</h3>
-        {
-          openvpnFeatures.map(async (f, index) => {
-            const { Content } = await f.render();
-            return (
-              <ProductFeature title={f.data.title} id={index} context="core" client:load>
-                <Content />
-              </ProductFeature>
-            );
-          })
-        }
+
+  <main id="openvpn-migration" class="with-sidebar-nav">
+    <header id="hero">
+      <h1>OpenVPN to WireGuard Migration: Faster Enterprise VPN with Native MFA</h1>
+      <p class="description">
+        Replace OpenVPN with Defguard—a modern WireGuard® VPN that's 3x faster with native multi-factor authentication, zero-touch enrollment, and Active Directory integration. Self-hosted for complete data control.
+      </p>
+      <div class="cta-buttons">
+        <AstroButton text="See the Difference" link={{ href: "#comparison-interactive", target: "_self" }} />
+        <AstroButton text="Start Free Trial" link={{ href: "/evaluation-license/", target: "_self" }} className="secondary" />
       </div>
-    </ProductSection>
-    <ImageGallery />
-    <ProductSection padding="none">
-      <div class="product-features">
-        <BookDemoForm client:load />
+    </header>
+
+    <div class="page-content-wrapper">
+      <div class="main-content">
+
+        <ProductSection padding="small">
+          <section id="comparison-interactive">
+            <h2>OpenVPN vs. Modern WireGuard® Architecture</h2>
+            <p>See how Defguard's WireGuard-based solution compares to legacy OpenVPN. Select a topic to explore the differences.</p>
+            
+            <div class="tab-comparison">
+              <div class="tab-buttons">
+                <button class="tab-button active" data-tab="performance">1. Performance</button>
+                <button class="tab-button" data-tab="security">2. Security Model</button>
+                <button class="tab-button" data-tab="mfa">3. Authentication</button>
+                <button class="tab-button" data-tab="management">4. Management</button>
+                <button class="tab-button" data-tab="code">5. Code Quality</button>
+              </div>
+              
+              <div class="tab-content">
+                <div class="tab-pane active" data-content="performance">
+                  <div class="comparison-split">
+                    <div class="comparison-item legacy">
+                      <h3>OpenVPN Performance</h3>
+                      <p>OpenVPN runs in userspace, requiring data to pass between kernel and application space for every packet. This creates significant overhead.</p>
+                      <ul>
+                        <li>Runs in userspace (slow context switching)</li>
+                        <li>100,000+ lines of code to process</li>
+                        <li>Multi-second connection establishment</li>
+                        <li>Drops connection on network changes</li>
+                      </ul>
+                      <div class="diagram-box">
+                        <div class="diagram-result">Result: ~50-100 Mbps typical throughput</div>
+                      </div>
+                    </div>
+                    <div class="comparison-item modern">
+                      <h3>Defguard + WireGuard® Performance</h3>
+                      <p>WireGuard operates directly in the kernel with a minimal, audited codebase. Packets never leave kernel space during encryption.</p>
+                      <ul>
+                        <li>Runs in kernel space (zero context switching)</li>
+                        <li>~4,000 lines of auditable code</li>
+                        <li>Sub-100ms connection establishment</li>
+                        <li>Seamless roaming between networks</li>
+                      </ul>
+                      <div class="diagram-box">
+                        <div class="diagram-result">Result: Near-gigabit throughput</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="tab-pane" data-content="security">
+                  <div class="comparison-split">
+                    <div class="comparison-item legacy">
+                      <h3>OpenVPN Security Model</h3>
+                      <p>OpenVPN uses legacy TLS/SSL with configurable cipher suites, creating complexity and potential misconfiguration risks.</p>
+                      <ul>
+                        <li>Multiple cipher options (easy to misconfigure)</li>
+                        <li>Complex certificate management</li>
+                        <li>Large attack surface (100k+ LOC)</li>
+                        <li>Stateful connections (vulnerable to attacks)</li>
+                      </ul>
+                    </div>
+                    <div class="comparison-item modern">
+                      <h3>Defguard Security Model</h3>
+                      <p>WireGuard uses modern, fixed cryptographic primitives with no configuration options—eliminating misconfiguration vulnerabilities.</p>
+                      <ul>
+                        <li>Fixed modern cryptography (ChaCha20, Curve25519)</li>
+                        <li>Simple key exchange (no PKI complexity)</li>
+                        <li>Minimal attack surface (~4k LOC)</li>
+                        <li>Stateless design (cryptokey routing)</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="tab-pane" data-content="mfa">
+                  <div class="comparison-split">
+                    <div class="comparison-item legacy">
+                      <h3>OpenVPN Authentication</h3>
+                      <p>OpenVPN's MFA is typically bolt-on, authenticating only at login time. Once connected, the tunnel stays open.</p>
+                      <ul>
+                        <li>Login-time 2FA only</li>
+                        <li>Requires third-party plugins</li>
+                        <li>Certificate + password combo</li>
+                        <li>No per-connection reauthentication</li>
+                      </ul>
+                    </div>
+                    <div class="comparison-item modern">
+                      <h3>Defguard True MFA</h3>
+                      <p>Defguard implements protocol-level MFA. Every connection attempt can require fresh authentication with multiple factors.</p>
+                      <ul>
+                        <li><a href="https://docs.defguard.net/features/wireguard/multi-factor-authentication-mfa-2fa" target="_blank" rel="noopener">Per-connection MFA</a> enforcement</li>
+                        <li><a href="https://docs.defguard.net/features/wireguard/multi-factor-authentication-mfa-2fa" target="_blank" rel="noopener">Biometric auth</a> via mobile device</li>
+                        <li><a href="https://docs.defguard.net/features/external-openid-providers" target="_blank" rel="noopener">SSO integration</a> (Okta, Entra ID, Google)</li>
+                        <li>Session-based pre-shared keys</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="tab-pane" data-content="management">
+                  <div class="comparison-split">
+                    <div class="comparison-item legacy">
+                      <h3>OpenVPN Management</h3>
+                      <p>OpenVPN Access Server provides basic management, but advanced features require complex configuration or third-party tools.</p>
+                      <ul>
+                        <li>Manual client configuration distribution</li>
+                        <li>Limited SSO integration</li>
+                        <li>No real-time config sync</li>
+                        <li>Basic user management UI</li>
+                      </ul>
+                    </div>
+                    <div class="comparison-item modern">
+                      <h3>Defguard Enterprise Management</h3>
+                      <p>Defguard provides comprehensive management features designed for enterprise-scale deployments.</p>
+                      <ul>
+                        <li><a href="/blog/defguard-1.6-release-notes/">Zero-touch enrollment</a> at scale</li>
+                        <li><a href="https://docs.defguard.net/features/service-locations" target="_blank" rel="noopener">Pre-logon VPN</a> for Active Directory</li>
+                        <li>Real-time configuration sync</li>
+                        <li>Built-in <a href="https://docs.defguard.net/features/access-control-list" target="_blank" rel="noopener">ACLs and firewall management</a></li>
+                        <li>Full <a href="https://docs.defguard.net/features/activity-log" target="_blank" rel="noopener">audit trail</a> with SIEM export</li>
+                        <li><a href="https://docs.defguard.net/features/integrations/api-tokens" target="_blank" rel="noopener">REST API</a> and webhooks</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="tab-pane" data-content="code">
+                  <div class="comparison-split">
+                    <div class="comparison-item legacy">
+                      <h3>OpenVPN Codebase</h3>
+                      <p>OpenVPN's large C codebase has accumulated technical debt over 20+ years, making security audits challenging.</p>
+                      <ul>
+                        <li>100,000+ lines of C code</li>
+                        <li>Memory safety vulnerabilities possible</li>
+                        <li>Complex dependency chain</li>
+                        <li>Difficult to audit comprehensively</li>
+                      </ul>
+                    </div>
+                    <div class="comparison-item modern">
+                      <h3>Defguard Codebase</h3>
+                      <p>Defguard is written entirely in Rust, eliminating entire classes of vulnerabilities at compile time.</p>
+                      <ul>
+                        <li>Memory-safe by design (Rust)</li>
+                        <li>WireGuard: ~4,000 audited lines</li>
+                        <li>Core open-source (Apache 2.0)</li>
+                        <li>Public penetration test reports</li>
+                        <li>Reproducible builds</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </ProductSection>
+
+        <HomeSection id="performance-benefits" variant="white">
+          <h2>Why WireGuard is Faster Than OpenVPN</h2>
+          <p>Your remote teams deserve a VPN that doesn't slow them down. Here's the performance gain when you migrate from OpenVPN to WireGuard.</p>
+          <FeatureCapsules
+            features={[
+              {
+                title: "3x Faster Throughput",
+                description: "WireGuard's kernel-level processing delivers near-gigabit speeds. Large file transfers, video calls, and cloud applications run without the latency tax of OpenVPN.",
+              },
+              {
+                title: "Instant Connections (<100ms)",
+                description: "WireGuard's stateless handshake connects instantly. No more waiting seconds for OpenVPN to negotiate ciphers and establish tunnels.",
+              },
+              {
+                title: "Seamless Network Roaming",
+                description: "Switch from Wi-Fi to cellular without dropping your connection. WireGuard maintains the tunnel transparently—OpenVPN requires reconnection.",
+              }
+            ]}
+          />
+        </HomeSection>
+
+        <HomeSection id="enterprise-features" variant="white">
+          <h2>Enterprise VPN Features Missing from OpenVPN</h2>
+          <p>Defguard includes enterprise capabilities that OpenVPN Access Server doesn't offer—making large-scale VPN deployments manageable.</p>
+          <FeatureCapsules
+            features={[
+              {
+                title: "Zero-Touch Enrollment",
+                description: "Deploy VPN to thousands of devices without manual configuration. Integrate with Intune, GPO, or your existing MDM. Users launch the app and connect—no setup required. <a href='/blog/defguard-1.6-release-notes/'>Learn more in our 1.6 release notes →</a>",
+              },
+              {
+                title: "Pre-logon VPN for AD",
+                description: "Enable Windows login against Active Directory before user authentication. Critical for remote workers who need domain resources from day one. <a href='https://docs.defguard.net/features/service-locations' target='_blank' rel='noopener'>See documentation →</a>",
+              },
+              {
+                title: "Biometric MFA",
+                description: "Use your phone's biometrics (Face ID, fingerprint) to authenticate desktop VPN connections. True multi-factor without tokens or codes. <a href='https://docs.defguard.net/features/wireguard/multi-factor-authentication-mfa-2fa' target='_blank' rel='noopener'>Learn about MFA →</a>",
+              }
+            ]}
+          />
+        </HomeSection>
+
+        <HomeSection id="trusted-by" variant="white">
+          <div class="trusted-by-content">
+            <h2>Trusted by Organizations Worldwide</h2>
+            <p>Companies have already made the switch from legacy VPNs to Defguard's modern architecture.</p>
+            <TrustedBy forceScroll={false} />
+          </div>
+        </HomeSection>
+
+        <ProductSection padding="small">
+          <section id="comparison-table">
+            <h2>OpenVPN Access Server vs. Defguard: Full Feature Comparison</h2>
+            <p>A detailed comparison showing why enterprises are replacing OpenVPN with WireGuard-based solutions like Defguard.</p>
+            
+            <div class="table-container">
+              <table class="comparison-table">
+                <thead>
+                  <tr>
+                    <th>Feature</th>
+                    <th>Defguard</th>
+                    <th>OpenVPN Access Server</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>VPN Protocol</td>
+                    <td>WireGuard® — Kernel-level, ~4k lines of code</td>
+                    <td>OpenVPN — Userspace, 100k+ lines of code</td>
+                  </tr>
+                  <tr>
+                    <td>Typical Throughput</td>
+                    <td>Near-gigabit (depends on hardware)</td>
+                    <td>50-100 Mbps typical</td>
+                  </tr>
+                  <tr>
+                    <td>Connection Time</td>
+                    <td>&lt;100ms (instant)</td>
+                    <td>2-5 seconds</td>
+                  </tr>
+                  <tr>
+                    <td>Network Roaming</td>
+                    <td>Seamless — maintains connection</td>
+                    <td>Drops and reconnects</td>
+                  </tr>
+                  <tr>
+                    <td><a href="https://docs.defguard.net/features/wireguard/multi-factor-authentication-mfa-2fa" target="_blank" rel="noopener">MFA Implementation</a></td>
+                    <td>Protocol-level, per-connection</td>
+                    <td>Login-time only, plugin-based</td>
+                  </tr>
+                  <tr>
+                    <td><a href="https://docs.defguard.net/features/wireguard/multi-factor-authentication-mfa-2fa" target="_blank" rel="noopener">Biometric Auth</a></td>
+                    <td><strong>Yes</strong> — Mobile biometrics for desktop</td>
+                    <td>No</td>
+                  </tr>
+                  <tr>
+                    <td><a href="/blog/defguard-1.6-release-notes/">Zero-Touch Enrollment</a></td>
+                    <td><strong>Yes</strong> — MSI, PKG, GPO, Intune</td>
+                    <td>Limited — manual config distribution</td>
+                  </tr>
+                  <tr>
+                    <td><a href="https://docs.defguard.net/features/service-locations" target="_blank" rel="noopener">Pre-logon VPN (AD)</a></td>
+                    <td><strong>Yes</strong> — Connect before Windows login</td>
+                    <td>No</td>
+                  </tr>
+                  <tr>
+                    <td>SSO Integration</td>
+                    <td>Native OIDC — Entra ID, Okta, Google, etc.</td>
+                    <td>Limited — SAML with extra config</td>
+                  </tr>
+                  <tr>
+                    <td>Real-time Config Sync</td>
+                    <td><strong>Yes</strong> — Changes push instantly</td>
+                    <td>No — Manual redistribution</td>
+                  </tr>
+                  <tr>
+                    <td><a href="https://docs.defguard.net/features/access-control-list" target="_blank" rel="noopener">Built-in Firewall ACLs</a></td>
+                    <td><strong>Yes</strong> — NFTables/PF management</td>
+                    <td>Basic access rules only</td>
+                  </tr>
+                  <tr>
+                    <td>Open Source</td>
+                    <td><strong>Core</strong> — Server, gateway, and clients</td>
+                    <td>Partially — Community Edition limitations</td>
+                  </tr>
+                  <tr>
+                    <td>Self-Hosted</td>
+                    <td><strong>Yes</strong> — Full data sovereignty</td>
+                    <td>Yes</td>
+                  </tr>
+                  <tr>
+                    <td>Language</td>
+                    <td>Rust (memory-safe)</td>
+                    <td>C (memory vulnerabilities possible)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </ProductSection>
+
+        <ProductSection padding="small">
+          <section id="migration-path">
+            <h2>How to Migrate from OpenVPN to WireGuard</h2>
+            <p>
+              Moving from OpenVPN to Defguard doesn't require a forklift upgrade. Follow this step-by-step OpenVPN migration guide for zero downtime.
+            </p>
+            
+            <div class="migration-steps">
+              <div class="migration-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                  <h3>Deploy Defguard Alongside OpenVPN</h3>
+                  <p>Install Defguard on your infrastructure using <a href="https://docs.defguard.net/admin-and-features/setting-up-your-instance/docker-compose" target="_blank" rel="noopener">Docker</a>, <a href="https://docs.defguard.net/admin-and-features/setting-up-your-instance/kubernetes" target="_blank" rel="noopener">Kubernetes</a>, or our <a href="https://docs.defguard.net/getting-started/one-line-install" target="_blank" rel="noopener">one-line install script</a>. Both VPN solutions can run in parallel.</p>
+                </div>
+              </div>
+              <div class="migration-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                  <h3>Configure SSO & User Sync</h3>
+                  <p>Connect Defguard to your <a href="https://docs.defguard.net/features/external-openid-providers" target="_blank" rel="noopener">identity provider</a> (Entra ID, Okta, Google, LDAP). Users are automatically provisioned—no manual account creation.</p>
+                </div>
+              </div>
+              <div class="migration-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                  <h3>Pilot with Power Users</h3>
+                  <p>Roll out <a href="/client/">Defguard clients</a> to a pilot group. They'll immediately notice the performance improvement and seamless reconnections.</p>
+                </div>
+              </div>
+              <div class="migration-step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                  <h3>Enterprise Rollout</h3>
+                  <p>Use <a href="https://docs.defguard.net/features/remote-user-enrollment" target="_blank" rel="noopener">zero-touch enrollment</a> to deploy to all users via Intune, GPO, or your MDM. Decommission OpenVPN when ready.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </ProductSection>
+
+        <ProductSection padding="small">
+          <section id="bottom-line">
+            <h2>Ready to Leave OpenVPN Behind?</h2>
+            <p>
+              OpenVPN was revolutionary in its time, but the world has moved on. WireGuard represents the next generation of VPN technology, and Defguard makes it enterprise-ready with the management features, security controls, and deployment options your organization needs.
+            </p>
+            <p>
+              Join the organizations that have already made the switch to faster, more secure, and easier-to-manage VPN infrastructure.
+            </p>
+            <div class="cta-buttons">
+              <AstroButton text="Get 14-Day Trial" link={{ href: "/evaluation-license/", target: "_self" }} />
+              <AstroButton text="Book a Demo" link={{ href: "/book-a-demo/?utm_source=openvpn-migration", target: "_self" }} className="secondary" />
+            </div>
+          </section>
+        </ProductSection>
+
+        <ProductSection padding="small">
+          <section id="faq">
+            <h2>OpenVPN Migration FAQ</h2>
+            {faqEntries.map((entry) => (
+              <details>
+                <summary>{entry.question}</summary>
+                <p set:html={entry.answer} />
+              </details>
+            ))}
+          </section>
+        </ProductSection>
       </div>
-    </ProductSection>
-    <ProductBuiltBy />
+    </div>
   </main>
 </ProductLayout>
+
+<script>
+  // Tab functionality for interactive comparison
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+    
+    if (tabButtons.length === 0) return;
+    
+    tabButtons.forEach((button) => {
+      button.addEventListener('click', (e) => {
+        const target = e.currentTarget as HTMLElement;
+        const tabId = target.dataset.tab;
+        
+        // Remove active class from all buttons and panes
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabPanes.forEach(pane => pane.classList.remove('active'));
+        
+        // Add active class to clicked button and corresponding pane
+        target.classList.add('active');
+        const targetPane = document.querySelector(`.tab-pane[data-content="${tabId}"]`);
+        if (targetPane) {
+          targetPane.classList.add('active');
+        }
+      });
+    });
+  });
+</script>
+
+<style lang="scss" is:global>
+  #openvpn-migration {
+    // Hero section
+    #hero {
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 50px 1rem 60px;
+      
+      h1 {
+        @include typography(title);
+        color: var(--text-body-primary);
+        padding-bottom: 40px;
+        text-wrap: balance;
+      }
+      
+      .description {
+        @include typography(paragraph);
+        padding-bottom: 8px;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 1.6;
+        color: var(--text-body-primary);
+        text-wrap: balance;
+        margin: 0 auto;
+        
+        @include break-up(md) {
+          font-size: 20px;
+        }
+      }
+
+      .cta-buttons {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        padding-top: 40px;
+
+        @include break-down(sm) {
+          flex-flow: column;
+          width: 100%;
+        }
+      }
+    }
+
+    // Page content wrapper
+    .page-content-wrapper {
+      display: block;
+      width: 100%;
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .main-content {
+      width: 100%;
+      
+      section[id] {
+        scroll-margin-top: 100px;
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+      }
+    }
+
+    // Typography
+    h2 {
+      @include typography(section);
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+
+    p {
+      @include typography(paragraph);
+      margin-bottom: 0.75rem;
+      line-height: 1.6;
+    }
+
+    ul {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+      
+      li {
+        @include typography(paragraph);
+        margin-bottom: 0.5rem;
+        line-height: 1.6;
+      }
+    }
+
+    // Tab comparison styles
+    .tab-comparison {
+      margin: 2rem auto;
+      max-width: 100%;
+    }
+
+    .tab-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+      border-bottom: 2px solid var(--border-separator);
+      margin-bottom: 2rem;
+      justify-content: center;
+    }
+
+    .tab-button {
+      padding: 0.875rem;
+      background: transparent;
+      border: none;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: var(--text-body-secondary);
+      transition: all 0.2s ease;
+      margin-bottom: -2px;
+      white-space: nowrap;
+
+      &:hover {
+        color: var(--accent-primary, #1d9bf0);
+      }
+
+      &.active {
+        color: var(--accent-primary, #1d9bf0);
+        border-bottom-color: var(--accent-primary, #1d9bf0);
+        font-weight: 600;
+      }
+    }
+
+    .tab-pane {
+      display: none;
+
+      &.active {
+        display: block;
+      }
+    }
+
+    .comparison-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+
+      @include break-down(md) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .comparison-item {
+      padding: 2rem;
+      border-radius: 12px;
+      border: 2px dashed;
+      background: var(--surface-frame-bg);
+      transition: all 0.3s ease;
+
+      &.legacy {
+        border-color: #dc3545;
+        background: rgba(220, 53, 69, 0.05);
+        
+        h3 {
+          color: #dc3545;
+          font-weight: 700;
+        }
+        
+        .diagram-result {
+          color: #dc3545;
+        }
+      }
+
+      &.modern {
+        border-color: var(--accent-primary, #1d9bf0);
+        background: rgba(29, 155, 240, 0.05);
+        
+        h3 {
+          color: var(--accent-primary, #1d9bf0);
+          font-weight: 700;
+        }
+        
+        .diagram-result {
+          color: var(--accent-primary, #1d9bf0);
+        }
+      }
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      }
+
+      h3 {
+        @include typography(h3);
+        margin-bottom: 1rem;
+        font-size: 1.25rem;
+      }
+
+      p {
+        margin-bottom: 1rem;
+        line-height: 1.6;
+      }
+
+      ul {
+        margin-top: 1rem;
+        padding-left: 1.25rem;
+        
+        li {
+          margin-bottom: 0.5rem;
+          line-height: 1.5;
+        }
+      }
+    }
+
+    .diagram-box {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.03);
+    }
+
+    .diagram-result {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    // Home sections styling
+    .home-section#performance-benefits,
+    .home-section#enterprise-features {
+      padding: 60px 0;
+      
+      > h2 {
+        @include typography(section);
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+      
+      > p {
+        @include typography(paragraph);
+        margin-bottom: 0.75rem;
+        text-align: center;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .feature-capsules {
+        margin-top: 2rem;
+        
+        .feature-capsule {
+          .feature-header h2 {
+            @include typography(h3);
+            font-size: 1.5rem;
+            font-weight: 600;
+          }
+          
+          p {
+            text-align: left;
+            line-height: 1.6;
+          }
+        }
+      }
+    }
+
+    // Trusted by section
+    .home-section#trusted-by {
+      padding: 40px 0;
+    }
+
+    .trusted-by-content {
+      text-align: center;
+      max-width: 1000px;
+      margin: 0 auto;
+      
+      h2 {
+        @include typography(section);
+        margin-bottom: 0.75rem;
+        text-align: center;
+      }
+      
+      p {
+        @include typography(paragraph);
+        margin-bottom: 1.5rem;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+      
+      #trusted-by {
+        margin-top: 1.5rem;
+        
+        > p {
+          display: none !important;
+        }
+        
+        .track {
+          display: flex !important;
+          flex-wrap: wrap !important;
+          justify-content: center !important;
+          gap: 2rem !important;
+          
+          img {
+            max-height: 50px;
+            width: auto;
+          }
+        }
+      }
+    }
+
+    // Comparison table
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      margin: 2rem 0;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      border: 2px solid var(--border-separator);
+      border-radius: 8px;
+      overflow: hidden;
+      
+      th, td {
+        text-align: left;
+        padding: 14px 12px;
+        border: 1px solid var(--border-separator);
+        vertical-align: top;
+      }
+      
+      th {
+        font-weight: 600;
+        background: var(--surface-frame-bg);
+        border-bottom: 2px solid var(--border-separator);
+      }
+      
+      td:first-child {
+        font-weight: 600;
+        width: 20%;
+      }
+      
+      td:nth-child(2) {
+        color: var(--accent-primary, #1d9bf0);
+      }
+    }
+
+    // Migration steps
+    .migration-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .migration-step {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      padding: 1.5rem;
+      background: var(--surface-frame-bg);
+      border-radius: 12px;
+      border: 1px solid var(--border-separator);
+    }
+
+    .step-number {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-primary, #1d9bf0);
+      color: white;
+      font-size: 1.25rem;
+      font-weight: 700;
+      border-radius: 50%;
+    }
+
+    .step-content {
+      h3 {
+        @include typography(h3);
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+      }
+      
+      p {
+        margin-bottom: 0;
+        line-height: 1.6;
+      }
+    }
+
+    // FAQ section
+    #faq {
+      h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+    }
+
+    details {
+      border-top: 1px solid var(--border-separator);
+      padding: 1rem 0;
+      max-width: 100ch;
+      margin-left: auto;
+      margin-right: auto;
+      
+      &:first-of-type {
+        border-top: none;
+      }
+      
+      summary {
+        cursor: pointer;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        
+        &:hover {
+          color: var(--accent-primary);
+        }
+      }
+      
+      p {
+        margin-top: 0.5rem;
+        margin-bottom: 0;
+      }
+    }
+
+    // Bottom line CTA
+    #bottom-line {
+      text-align: center;
+      
+      h2 {
+        text-align: center;
+      }
+      
+      p {
+        text-align: center;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .cta-buttons {
+        justify-content: center;
+      }
+    }
+  }
+</style>

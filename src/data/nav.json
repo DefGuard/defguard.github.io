@@ -28,6 +28,10 @@
       {
         "display": "Fortigate VPN Replacement",
         "url": "/defguard-vs-fortinet"
+      },
+      {
+        "display": "OpenVPN Migration",
+        "url": "/openvpn"
       }
     ]
   },
