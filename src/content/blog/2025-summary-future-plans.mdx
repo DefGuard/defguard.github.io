@@ -1,0 +1,77 @@
+---
+title: "2025 Summary & Future Plans"
+description: "A look back at Defguard's achievements in 2025 and a preview of what's coming in 2026, including the 2.0 release with easier deployment and UI redesign."
+publishDate: 2025-12-31
+author: "Robert"
+image: "/images/blog/defguard-1.6-release-notes/Step_6_inprogress.png"
+tags: ["defguard", "roadmap", "2025", "2026", "release", "enterprise vpn", "wireguard", "future plans"]
+draft: false
+---
+
+We've started Defguard with two main reasons: to bring 1) security and 2) privacy/control as an absolute standard to anyone who is seeking it in their organization (or at home like I use it).
+
+That required a specific "format" and approach: Open Source/Open Code, secured by design and architecture and creating a completely new and open company.  
+What now seems obvious was really risky and the opposite of "typical" security approach and trends.  
+2025 was the year that has assured us that it was the right path and gave us tremendous courage to continue our mission and efforts.
+
+So here is a brief summary of what 2025 was for us and what's coming in 2026.
+
+## 2025 review
+
+### Funding
+
+First and foremost, we built an entirely new company with the trust and backing of exceptional angel investors and venture capital partners. That support gives us focus, stability, and added momentum, while instilling confidence in our product as we pursue a clear ambition to create an extraordinary product for a global market.
+
+### Business milestones
+
+We have reached critical business milestones with nearly 2000% increase in revenue and 20-fold increase in the number of clients (vs 2024 which was the first year we've introduced our business plans).
+
+This is the main factor that assured us that companies do need an alternative to legacy and black-box security systems!
+
+### Releases
+
+We have published:  
+- 5 major releases ([v1.2](https://github.com/DefGuard/defguard/releases/tag/v1.2.0), [v1.3](https://github.com/DefGuard/defguard/releases/tag/v1.3.0), [v1.4](https://github.com/DefGuard/defguard/releases/tag/v1.4.0), [v1.5](https://github.com/DefGuard/defguard/releases/tag/v1.5.0) and [v1.6](https://github.com/DefGuard/defguard/releases/tag/v1.6.0))  
+- 31 testing releases  
+- and 8 bugfix/minor ones
+
+### Major features
+
+We have delivered a suite of significant functionalities that have since become foundational to our product offering, including: [Firewall/ACLs](https://docs.defguard.net/features/access-control-list), Mobile Clients, [External SSO Multi-Factor Authentication](https://docs.defguard.net/features/external-openid-providers), [Desktop Client MFA with Mobile Client Biometry](https://docs.defguard.net/using-defguard-for-end-users/desktop-client/using-multi-factor-authentication-mfa#multi-factor-authentication-via-mobile-biometry), [LDAP and Active Directory two-way synchronization](https://docs.defguard.net/features/ldap-and-active-directory-integration/two-way-ldap-and-active-directory-synchronization), [Activity Stream and SIEM systems integration](https://docs.defguard.net/features/activity-log), Desktop Clients rewrite for Windows (with wireguardNT) and macOS (with native system VPN extensions), [Desktop Clients zero-touch provisioning and enrollment](https://docs.defguard.net/features/desktop-client-auto-provisioning).
+
+## 2026 - what's coming and what to expect
+
+We take great pride in genuinely listening to our customers and their needs. I recognize that we have previously "promised" certain features (such as mesh networking and site-to-site configuration), and while we are fully committed to delivering these capabilities in Defguard over time, our current roadmap is being shaped primarily by the requirements of our active paying customers, as well as prospective customers who are currently unable to deploy due to missing functionality.
+
+As you can see, this provides a direct and effective way to influence the roadmap, which is why the roadmap presented here reflects that input. Consequently, the roadmap (including future releases) may evolve as these priorities continue to develop.
+
+### 2.0 release!
+
+The most significant feedback we have received is that, while Defguard performs exceptionally well once deployed, the deployment process itself can be overwhelming. This is partly a consequence of our secure-by-design architecture, which involves multiple components and network segments, as well as the breadth of deployment methods we support, all of which require manual configuration with numerous options for each component.
+
+That is why version 2.0 will deliver significantly easier deployment through automated configuration and dynamic component adaptation.
+
+We're also launching a completely redesigned user interface that makes the experience far more intuitive and enjoyable, resolves many commonly reported usability issues, and introduces an easy, wizard-driven configuration workflow.
+
+![Defguard 2.0 UI Preview](/images/blog/defguard-1.6-release-notes/Step_6_inprogress.png)
+
+### Beyond 2.0
+
+After 2.0 we plan to get on track with much anticipated feature development, including: Device Policy Postures ([all systems](https://github.com/DefGuard/defguard/issues/1634), [Windows specific](https://github.com/DefGuard/client/issues/602), [macOS specific](https://github.com/DefGuard/client/issues/603)), [Hardware Key Provisioning](https://github.com/DefGuard/client/issues/431) on Desktop Clients, that will enable Multi-Factor Authentication with hardware keys, as well as Desktop Client full encryption, [Static IP Assignment](https://github.com/DefGuard/defguard/issues/955). and more.
+
+But as we continue to expand Defguard's Enterprise VPN capabilities, our vision extends beyond this single core feature. From the outset, we envisioned Defguard as a fundamental security platform (which is why built-in SSO was integrated from the beginning).
+
+Our goal is to deliver a comprehensive platform for securing an organization. This includes secure remote access via VPN, identity and Single Sign-On for business applications, and the enforcement of robust security policies.
+
+### Full-featured, standalone firewall
+
+The final component: enforcing comprehensive security, requires careful and extensive design and implementation. To achieve this, and to thoroughly battle-test it, we have implemented ACLs, providing a full low-level firewall for Linux and *BSD systems at the VPN level. This implementation can also be extended into a full-featured, standalone firewall.
+
+Defguard's unique security architecture further amplifies the value of this approach: communication between components ensures that no user data is ever exposed to the Internet, even during VPN or MFA authentication, while all critical user and business data remains securely contained within the intranet. This design enables one of the most secure and resilient firewall deployments possible - something all-in-one appliance solutions cannot achieve, as they often introduce single points of failure and potential data exposure.
+
+### Centralized and securely isolated control plane
+
+Additionally, this architecture provides a unique opportunity to deliver a single, centralized control plane for administrators, integrating access control and activity monitoring. This unified approach makes it significantly easier to detect and trace potential attack vectors, tasks that typically require integration across multiple systems and security appliances.
+
+To follow our journey, please subscribe to our newsletter. If you'd like to discuss this vision or share your own ideas, my email is always open - just like our code: robert at defguard dot net.
+
