@@ -27,180 +27,56 @@ const testimonialsData: Array<TestimonialData> = testimonialsImportData.map((val
   return res;
 });
 
-const title = "Enterprise WireGuard® VPN Client with MFA/2FA | defguard";
-const description = "Self-hosted WireGuard® VPN client with true 2FA, biometric MFA & SSO. Open-source desktop (Windows, macOS, Linux) and mobile (iOS, Android) apps for enterprise.";
+const title = "defguard - The Best WireGuard® desktop client";
 const featuredImage =
   "/public/images/product/client/main-screen.png";
 const imageWidth = "1920";
 const imageHeight = "1080";
 const url = "https://defguard.net/client";
 const tags = [
-  // Primary - Enterprise & Security focus
-  "enterprise wireguard client",
-  "wireguard vpn client mfa",
-  "wireguard 2fa client",
-  "self-hosted vpn client",
-  "zero trust vpn client",
-  // Platform keywords
-  "wireguard client windows",
-  "wireguard client macos",
-  "wireguard client linux",
-  "wireguard client ios",
-  "wireguard client android",
-  // Feature keywords
-  "vpn biometric authentication",
-  "wireguard sso client",
-  "multi-factor vpn authentication",
-  "corporate vpn client",
-  "managed wireguard client",
-  // Zero-touch & Provisioning
-  "zero-touch vpn enrollment",
-  "vpn auto provisioning",
-  "wireguard msi installer",
-  "vpn active directory integration",
-  "vpn entra id",
-  "mdm vpn deployment",
-  // Technical/Brand
-  "defguard client",
-  "open source vpn client",
-  "wireguard desktop client",
-  "wireguard mobile client",
+  "defguard",
+  "server",
+  "WireGuard®",
+  "vpn",
+  "mfa",
+  "2fa",
+  "WireGuard®",
+  "ldap",
+  "openldap",
+  "postgresql",
+  "postgres",
+  "openid",
+  "totp",
+  "webauthn",
+  "opensense",
+  "freebsd",
+  "rust",
+  "secure",
+  "docker",
+  "kubernetes",
+  "k8s",
 ];
 
 const sections = [
-  { id: "clients", title: "Enterprise Desktop & Mobile Clients" },
-  { id: "true-2fa-multi-factor", title: "True 2FA/Multi-Factor for WireGuard®" },
-  { id: "biometrics", title: "Biometric MFA Authentication" },
-  { id: "instant-vpn-configuration-updates", title: "Real-time VPN Configuration" },
-  { id: "zero-touch-provisioning", title: "Zero-Touch Provisioning" },
-  { id: "multiple-instances-and-vpn", title: "Multi-Instance VPN Management" },
-  { id: "detailed-connection-overview", title: "Detailed Connection Analytics" },
-  { id: "multiplatform-multi-architecture", title: "Cross-Platform Support" },
-  { id: "any-wireguard", title: "Universal WireGuard® Compatibility" },
-  { id: "faq", title: "FAQ" },
+  { id: "clients", title: "Desktop and Mobile Clients" },
+  { id: "biometrics", title: "Biometrics as Multi-Factor method" },
+  { id: "multiple-instances-and-vpn", title: "Multiple instances and VPN" },
+  { id: "true-2fa-multi-factor", title: "True 2FA/Multi-Factor" },
+  { id: "instant-vpn-configuration-updates", title: "Instant VPN configuration updates" },
+  { id: "detailed-connection-overview", title: "Detailed connection overview" },
+  { id: "multiplatform-multi-architecture", title: "Multiplatform and Multi architecture" },
+  { id: "any-wireguard", title: "Universal WireGuard® Support" },
 ];
-
-// FAQ Data for both visible section and schema
-const faqItems = [
-  {
-    question: "Does defguard WireGuard client support 2FA/MFA?",
-    answer: "Yes, defguard is the only WireGuard client with true 2FA/Multi-Factor Authentication. It supports biometrics (Face ID, Touch ID, fingerprint), TOTP, and SSO providers like Google, Microsoft, and Okta."
-  },
-  {
-    question: "Can I use defguard client with any WireGuard server?",
-    answer: "Yes, defguard client works with any WireGuard server. Simply import your existing configuration via the setup wizard. However, 2FA/MFA features require defguard server integration for complete enterprise security."
-  },
-  {
-    question: "Is defguard client free and open-source?",
-    answer: "Yes, defguard desktop and mobile clients are fully open-source and free to use. Enterprise features for server-side management are available with Business and Enterprise plans."
-  },
-  {
-    question: "What platforms does defguard VPN client support?",
-    answer: "Defguard supports Windows, macOS, Linux (Ubuntu, Debian, Arch, RPM-based distributions), iOS, and Android. Both Intel/x64 and ARM architectures are supported on desktop platforms."
-  },
-  {
-    question: "How do I deploy defguard client at enterprise scale?",
-    answer: "Defguard supports zero-touch provisioning via Windows MSI installer (for Microsoft Intune, Active Directory GPO, or SCCM), macOS App Store (for MDM/UEM tools), and file-based enrollment with Active Directory or Entra ID integration."
-  },
-  {
-    question: "Does defguard support pre-logon VPN for Active Directory?",
-    answer: "Yes, defguard 1.6+ supports pre-logon VPN connections, allowing Windows devices to connect to your VPN before user login. This enables secure remote authentication against Active Directory without exposing AD to the internet."
-  }
-];
-
-// FAQ Schema for rich snippets
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": faqItems.map(item => ({
-    "@type": "Question",
-    "name": item.question,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": item.answer
-    }
-  }))
-};
-
-// SoftwareApplication Schema
-const softwareSchema = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Defguard Desktop Client",
-  "description": description,
-  "applicationCategory": "SecurityApplication",
-  "applicationSubCategory": "VPN Client",
-  "operatingSystem": "Windows, macOS, Linux, iOS, Android",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock"
-  },
-  "downloadUrl": "https://defguard.net/download/",
-  "installUrl": "https://defguard.net/download/",
-  "softwareVersion": "1.6.0",
-  "releaseNotes": "https://defguard.net/blog/defguard-16-release-notes/",
-  "screenshot": "https://defguard.net/images/client/devices-01.png",
-  "image": "https://defguard.net/images/client/devices-01.png",
-  "author": {
-    "@type": "Organization",
-    "name": "defguard",
-    "url": "https://defguard.net"
-  },
-  "featureList": [
-    "WireGuard VPN with true 2FA/MFA",
-    "Biometric authentication (Face ID, Touch ID)",
-    "SSO integration (Google, Microsoft, Okta)",
-    "Zero-touch enterprise provisioning",
-    "Multi-instance VPN management",
-    "Active Directory and Entra ID integration",
-    "Pre-logon VPN for Windows",
-    "Real-time configuration updates",
-    "Cross-platform support"
-  ]
-};
-
-// VideoObject Schema - for video rich snippets in search results
-const videoSchema = {
-  "@context": "https://schema.org",
-  "@type": "VideoObject",
-  "name": "Defguard Desktop Client - MFA Setup & Biometric Authentication Demo",
-  "description": "Learn how to set up Multi-Factor Authentication (MFA) with biometrics on the Defguard WireGuard VPN desktop client. This video demonstrates the enrollment process and biometric authentication on desktop and mobile.",
-  "thumbnailUrl": "https://img.youtube.com/vi/b-XC76k4KVU/maxresdefault.jpg",
-  "uploadDate": "2024-11-15",
-  "duration": "PT3M45S",
-  "contentUrl": "https://www.youtube.com/watch?v=b-XC76k4KVU",
-  "embedUrl": "https://www.youtube.com/embed/b-XC76k4KVU",
-  "publisher": {
-    "@type": "Organization",
-    "name": "defguard",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://defguard.net/images/defguard-logo.png"
-    }
-  }
-};
 ---
 
 <ProductLayout
   title={title}
-  description={description}
   featuredImage={featuredImage}
   imageWidth={imageWidth}
   imageHeight={imageHeight}
   url={url}
   tags={tags}
 >
-  <!-- Structured Data: FAQ Schema -->
-  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-  
-  <!-- Structured Data: SoftwareApplication Schema -->
-  <script type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
-
-  <!-- Structured Data: VideoObject Schema -->
-  <script type="application/ld+json" set:html={JSON.stringify(videoSchema)} />
-
   <Navigation activeSlug="/client/" />
 
   <main id="client-page" class="with-sidebar-nav">
@@ -208,11 +84,11 @@ const videoSchema = {
       trustedBy={false}
       showStoreButtons={true}
       repo="client"
-      title="Enterprise WireGuard® VPN Client with 2FA/MFA"
-      description="Open-source WireGuard® VPN clients for desktop (Windows, macOS, Linux) and mobile (iOS, Android) — featuring true 2FA/Multi-Factor Authentication, SSO integration, and biometric security for enterprise zero-trust networks."
+      title="Desktop and mobile client for WireGuard® VPN"
+      description="Beautiful, open-source clients for desktop (Linux, macOS, Windows) and mobile (iOS, Android) — with real WireGuard® 2FA/Multi-Factor Authentication."
       buttons={[
-        { name: "Download Defguard Clients", link: "/download/" },
-        { name: "Explore Self-Hosted Control Plane", link: "/server/" }
+        { name: "Download Defguard Clients", link: "/download/" }//,
+        //{ name: "Book a Demo", link: "/book-a-demo/" }
       ]}
     />
     
@@ -226,163 +102,76 @@ const videoSchema = {
 
         <FlexibleSection
           leftRatio={0.6} 
-          title="Enterprise WireGuard® Desktop & Mobile VPN Clients"
+          title="Desktop and Mobile Clients"
           id="clients"
           variant="white"
           theme="light"
         >
         <div slot="left">
           <ImageCarousel
-            src="/images/client/devices-01.png,/images/client/iphone-01.png,/images/client/mac-01.png,/images/client/Multiple instances - w.png,/images/client/Instant VPN - w.png" alt="Enterprise WireGuard VPN client interface for Windows, macOS, Linux, iOS and Android"
+            src="/images/client/devices-01.png,/images/client/iphone-01.png,/images/client/mac-01.png,/images/client/Multiple instances - w.png,/images/client/Instant VPN - w.png" alt="Defguard Clients"
             interval={3}
             autoplay={true}
           />
-          <p><em>Enterprise-grade security on desktop (Windows, macOS, Linux) and mobile (iOS, Android) with self-hosted VPN management.</em></p>
+          <p><em>Stay secure, whether you're on desktop (Linux, macOS, Windows) or on the go with Android or iOS.</em></p>
 
         </div>
 
           <div slot="right">
             <p>
-              The Defguard <strong>enterprise VPN client</strong> delivers secure, zero-trust networking across all your devices — purpose-built for organizations requiring self-hosted WireGuard® infrastructure.
+              The Defguard <strong>Mobile VPN Client is here</strong> - now alongside our desktop apps — bringing secure, zero-trust networking to all your devices.
             </p>
             <ul>
               <li>
-                True 2FA/Multi-Factor Authentication on WireGuard® with <b>biometric security</b>
+                True 2FA/Multi-Factor Authentication on WireGuard® with <b>Biometrics</b>
               </li>
               <li>
-                Multi-instance VPN management with multiple locations in one client
+                Multiple instances and VPN locations in one client
               </li>
               <!-- <li>
                 Biometrics as Multi-Factor Authenitication
               </li> -->
               <li>
-                Real-time VPN configuration updates and centralized client management
+                Instant VPN configuration updates and flexible client management
               </li>
             </ul>
           </div>
         </FlexibleSection>
 
-        <FlexibleSection
-          leftRatio={0.4} 
-          title="True 2FA/Multi-Factor Authentication for WireGuard® VPN"
-          id="true-2fa-multi-factor"
-          variant="gray"
-          theme="light"
-        >
-          <div slot="left">
-            <p>
-              Enterprise-grade security with true WireGuard® MFA. Both desktop and mobile clients support Defguard's internal Multi-Factor Authentication and external SSO providers (Google, Microsoft, Okta, and others) for seamless identity management integration.
-            </p>
-            <p>
-              <em>Full 2FA/MFA support now available on mobile</em>
-            </p>
-          </div>
-
-          <div slot="right">
-            <ImageCarousel
-              src="/images/client/True 2FA - w.png,/images/features/True 2FA.png" alt="WireGuard VPN 2FA multi-factor authentication with SSO integration"
-              interval={3}
-              autoplay={true}
-            />
-          </div>
-        </FlexibleSection>
-
-        <FlexibleSection
+           <!-- <FlexibleSection
           leftRatio={0.6} 
-          title="Biometric MFA for WireGuard® VPN Security"
+          title="Biometrics as Multi-Factor Authenitication method"
           id="biometrics"
           variant="white"
           theme="light"
         >
-          <div slot="left">
-            <ImageURL src="/images/client/Biometrics  - w.png" alt="VPN MFA biometric authentication on iOS and Android" />
-          </div>
+        <div slot="left">
+          <ImageURL src="/images/client/Biometrics  - w.png" alt="VPN MFA biometric authentication" />
+          <p><em>Now you can use biometric methods for your VPN multi-factor authentication.</em></p>
+
+        </div>
 
           <div slot="right">
             <p>
-              Secure your WireGuard® VPN connections with biometric Multi-Factor Authentication. Defguard iOS and Android clients support Face ID, Touch ID, and fingerprint authentication for seamless yet secure access.
+              Defguard iOS and Android clients enable you to secure your VPN connections with biometric MFA. 
             </p>
-            <p>
-              <em>Use your device's biometrics as a convenient MFA method for enterprise VPN.</em>
-            </p>
+         
           </div>
-        </FlexibleSection>
+        </FlexibleSection> -->
 
         <FlexibleSection
           leftRatio={0.4} 
-          title="Real-time VPN Configuration & Centralized Client Management"
-          id="instant-vpn-configuration-updates"
-          variant="gray"
-          theme="light"
-        >
-          <div slot="left">
-            <p>
-              Enterprise VPN management made simple. Defguard enables real-time synchronization and centralized configuration of all client applications. Any changes in WireGuard® VPN configuration or access management are immediately pushed to users. Administrators can manage client behavior remotely — enabling full traffic routing, enforcing security policies, or restricting client features.
-            </p>
-            <div class="learn-more">
-              <a
-                href="https://docs.defguard.net/enterprise/all-enteprise-features/behavior-customization"
-                class="learn-more-link"
-              >
-                Learn more about enterprise client management
-              </a>
-            </div>
-          </div>
-
-          <div slot="right">
-            <ImageURL src="/images/features/Instant VPN.png" alt="Real-time WireGuard VPN configuration updates and centralized enterprise client management" />
-          </div>
-        </FlexibleSection>
-
-        <FlexibleSection
-          leftRatio={1} 
-          title="Zero-Touch VPN Enrollment for Enterprise Deployments"
-          id="zero-touch-provisioning"
-          variant="white"
-          theme="light"
-        >
-          <div slot="left">
-            <p>
-              Automate WireGuard® VPN client provisioning at enterprise scale. Deploy to hundreds or thousands of devices with zero manual configuration — perfect for IT teams managing large fleets.
-            </p>
-            <ul>
-              <li>
-                <strong>Windows MSI installer</strong> — distribute via Microsoft Intune, Active Directory GPO, or SCCM
-              </li>
-              <li>
-                <strong>macOS App Store</strong> — automatic updates and MDM/UEM deployment ready
-              </li>
-              <li>
-                <strong>AD/Entra ID integration</strong> — automated enrollment through directory services
-              </li>
-              <li>
-                <strong>File-based provisioning</strong> — preconfigure enrollment tokens for any deployment tool
-              </li>
-            </ul>
-            <div class="learn-more">
-              <a
-                href="https://docs.defguard.net/features/desktop-client-auto-provisioning"
-                class="learn-more-link"
-              >
-                Learn about auto-provisioning
-              </a>
-            </div>
-          </div>
-        </FlexibleSection>
-
-        <FlexibleSection
-          leftRatio={0.4} 
-          title="Multi-Instance VPN: Manage Multiple WireGuard® Connections"
+          title="Multiple instances and VPN locations in one client"
           id="multiple-instances-and-vpn"
           variant="gray"
           theme="light"
         >
           <div slot="left">
             <p>
-              Defguard's enterprise WireGuard® client is uniquely designed for MSPs, cloud providers, and data centers. Deploy multiple isolated VPN instances (for different clients, sites, or environments) while maintaining unified access through a single self-hosted client application.
+              Defguard is uniquely designed for MSPs, cloud providers, and data centers. It allows deployment of multiple isolated Defguard instances (for different clients, sites, etc.) while maintaining unified access through a single desktop app.
             </p>
             <p>
-              <em>Multi-instance management now available on mobile!</em>  
+              <em>Now available on mobile!</em>  
             </p>
             <div class="learn-more">
               <a
@@ -395,119 +184,127 @@ const videoSchema = {
           </div>
 
           <div slot="right">
-            <ImageURL src="/images/client/Manage multiple.png" alt="Multi-instance WireGuard VPN management with multiple locations in enterprise client" />
+            <ImageURL src="/images/client/Manage multiple.png" alt="Multiple instances and VPN locations in one client" />
           </div>
         </FlexibleSection>
 
         <FlexibleSection
           leftRatio={0.6} 
-          title="Detailed VPN Connection Analytics & Monitoring"
-          id="detailed-connection-overview"
+          title="True 2FA/Multi-Factor authentication on WireGuard®"
+          id="true-2fa-multi-factor"
           variant="white"
           theme="light"
         >
-          <div slot="left">
-            <ImageURL src="/images/client/Detailed view.png" alt="WireGuard VPN connection analytics showing detailed statistics and tunnel monitoring" />
-          </div>
+        <div slot="left">
+          <ImageCarousel
+            src="/images/client/True 2FA - w.png,/images/features/True 2FA.png" alt="True 2FA/Multi-Factor authentication on WireGuard®"
+            interval={3}
+            autoplay={true}
+          />
+        </div>
 
           <div slot="right">
             <p>
-              Enterprise visibility into every WireGuard® connection. Track detailed statistics, connection logs, and tunnel configuration (IPs, ports, DNS settings, routing tables) — essential for IT teams managing corporate VPN infrastructure.
+              Both desktop and mobile clients supports both Defguard internal Multi-Factor Authentication and external SSO (Google/Microsoft/Otka/others) MFA.
+            </p>
+            <p>
+              <em>Now available on mobile</em>
             </p>
           </div>
         </FlexibleSection>
 
         <FlexibleSection
           leftRatio={0.4} 
-          title="Cross-Platform WireGuard® Client: Windows, macOS, Linux"
+          title="Instant VPN configuration updates and flexible client management"
+          id="instant-vpn-configuration-updates"
+          variant="gray"
+          theme="light"
+        >
+          <div slot="left">
+            <p>
+              Defguard enables real-time synchronization and configuration of client applications used by users. Any changes in VPN configuration or access management are immediately reflected on the user side. Additionally, it allows managing client behavior (e.g., enabling full traffic routing through the VPN or blocking certain features of the client).
+            </p>
+            <div class="learn-more">
+              <a
+                href="https://docs.defguard.net/enterprise/all-enteprise-features/behavior-customization"
+                class="learn-more-link"
+              >
+                Learn more about client features
+              </a>
+            </div>
+          </div>
+
+          <div slot="right">
+            <ImageURL src="/images/features/Instant VPN.png" alt="Instant VPN configuration updates and flexible client management" />
+          </div>
+        </FlexibleSection>
+
+        <FlexibleSection
+          leftRatio={0.6} 
+          title="Detailed connection overview"
+          id="detailed-connection-overview"
+          variant="white"
+          theme="light"
+        >
+          <div slot="left">
+            <ImageURL src="/images/client/Detailed view.png" alt="Detailed connection overview" />
+          </div>
+
+          <div slot="right">
+            <p>
+              Each connection can be tracked with detailed statistics, logs and tunnel details (IPs, ports, DNS settings, routing tables)
+            </p>
+          </div>
+        </FlexibleSection>
+
+        <FlexibleSection
+          leftRatio={0.4} 
+          title="Multiplatform and Multi architecture"
           id="multiplatform-multi-architecture"
           variant="gray"
           theme="light"
         >
           <div slot="left">
             <p>
-              Deploy across your entire organization. Enterprise WireGuard® client available for macOS, Windows, and Linux (Ubuntu, Debian, Arch, RPM-based distributions) supporting both Intel/x64 and ARM architectures.
+              Available form macOS, Windows and Linux (Ubuntu/Arch/RPMs) and Intel/ARM architectures.
             </p>
+
           </div>
 
           <div slot="right">
-            <ImageURL src="/images/client/Platforms.png" alt="Cross-platform WireGuard VPN client for Windows macOS Linux with Intel and ARM support" />
+            <ImageURL src="/images/client/Platforms.png" alt="Multiplatform and Multi architecture" />
           </div>
         </FlexibleSection>
 
         <FlexibleSection
           leftRatio={0.6} 
-          title="Universal WireGuard® Compatibility - Zero Vendor Lock-in"
+          title="Any WireGuard® server is supported"
           id="any-wireguard"
           variant="white"
           theme="light"
         >
           <div slot="left">
-            <ImageURL src="/images/client/Tunnel.png" alt="Universal WireGuard VPN client compatible with any WireGuard server" />
+            <ImageURL src="/images/client/Tunnel.png" alt="Any WireGuard® server is supported" />
           </div>
 
           <div slot="right">
             <ul>
               <li>
-                Works with any WireGuard® server — not just Defguard. Import your existing VPN configuration via the setup wizard and use Defguard's enterprise client with your current self-hosted infrastructure.
+                Not only Defguard instances but any WireGuard® server is supported - just import (by wizard) your current configuration and use Defguard client with your current setup!
               </li>
               <li>
-                Note: True 2FA/Multi-Factor Authentication requires <a href="https://docs.defguard.net/admin-and-features/wireguard/multi-factor-authentication-mfa-2fa">Defguard server integration</a> for complete enterprise security.
+                Note: that only Defguard instances (<a href="https://docs.defguard.net/admin-and-features/wireguard/multi-factor-authentication-mfa-2fa">combined with Defguard server</a>) enables 2FA/Multi-Factor support.
               </li>
             </ul>
           </div>
         </FlexibleSection>
 
-        <!-- Mid-page Enterprise CTA -->
-        <div class="enterprise-cta-section" id="enterprise-evaluation">
-          <div class="enterprise-cta-card">
-            <div class="cta-header">
-              <h3>Planning an Enterprise WireGuard® Deployment?</h3>
-              <p>Get a technical consultation with our team. We'll help you evaluate defguard for your specific infrastructure, compliance requirements, and deployment scale.</p>
-            </div>
-            <div class="cta-features">
-              <div class="feature-item">
-                <span class="feature-icon">🔬</span>
-                <span class="feature-text">POC & pilot support</span>
-              </div>
-              <div class="feature-item">
-                <span class="feature-icon">🛠️</span>
-                <span class="feature-text">Custom deployment guidance</span>
-              </div>
-              <div class="feature-item">
-                <span class="feature-icon">📋</span>
-                <span class="feature-text">SLA & enterprise support</span>
-              </div>
-            </div>
-            <div class="cta-buttons">
-              <a href="/pricing/" class="btn-secondary">View Pricing</a>
-              <a href="/book-a-demo?utm_source=client&utm_content=mid-page-cta" class="btn-primary">Book Technical Call →</a>
-            </div>
-          </div>
-        </div>
-
-        <FlexibleSection
-          leftRatio={1}
-          title="Frequently Asked Questions"
-          id="faq"
-          variant="gray"
-          theme="light"
-        >
-          <div slot="left" class="faq-container">
-            {faqItems.map((item) => (
-              <details class="faq-item">
-                <summary>{item.question}</summary>
-                <p>{item.answer}</p>
-              </details>
-            ))}
-          </div>
-        </FlexibleSection>
 
         <CTASection
-          title="Ready for Enterprise-Grade Self-Hosted WireGuard® VPN?"
-          description="See how Defguard's enterprise VPN client with MFA, SSO, and identity management fits into your zero-trust architecture."
+          title="Ready to Implement Enterprise-Grade WireGuard® VPN?"
+          description="See how Defguard fits into your zero-trust architecture and existing infrastructure."
           buttonText="Book a Demo"
-          buttonLink="/book-a-demo?utm_source=client"
+          buttonLink="/book-a-demo?utm_source=server"
           id="cta-documentation"
           variant="white"
         />
@@ -650,201 +447,6 @@ const videoSchema = {
     .scroll-section {
       padding-top: page-spacing(200px);
       padding-bottom: page-spacing(200px);
-    }
-
-    // Enterprise CTA Section Styles
-    .enterprise-cta-section {
-      margin-bottom: 90px;
-    }
-
-    .enterprise-cta-card {
-      background-color: var(--surface-nav-bg);
-      border-radius: 10px;
-      box-shadow: var(--box-shadow);
-      padding: 2rem 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      border: 1px solid var(--border-separator, rgba(0, 0, 0, 0.08));
-
-      @include break-up(lg) {
-        flex-direction: row;
-        align-items: center;
-        padding: 2.5rem;
-        gap: 2.5rem;
-      }
-
-      .cta-header {
-        flex: 1;
-
-        h3 {
-          @include typography(h3);
-          margin: 0 0 0.75rem 0;
-          color: var(--text-body-primary);
-        }
-
-        p {
-          @include typography(paragraph);
-          margin: 0;
-          color: var(--text-body-secondary, #666);
-          line-height: 1.6;
-        }
-      }
-
-      .cta-features {
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-
-        @include break-up(md) {
-          flex-direction: row;
-          gap: 1.5rem;
-        }
-
-        @include break-up(lg) {
-          flex-direction: column;
-          gap: 0.75rem;
-        }
-
-        .feature-item {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          white-space: nowrap;
-
-          .feature-icon {
-            font-size: 1.1rem;
-          }
-
-          .feature-text {
-            @include typography(paragraph);
-            font-size: 0.9rem;
-            color: var(--text-body-secondary, #666);
-            margin: 0;
-          }
-        }
-      }
-
-      .cta-buttons {
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-        flex-shrink: 0;
-
-        @include break-up(sm) {
-          flex-direction: row;
-        }
-
-        @include break-up(lg) {
-          flex-direction: column;
-        }
-
-        a {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          padding: 0.75rem 1.5rem;
-          border-radius: 50px;
-          font-weight: 500;
-          font-size: 0.95rem;
-          text-decoration: none;
-          transition: all 0.2s ease-in-out;
-          white-space: nowrap;
-
-          &.btn-primary {
-            background-color: var(--primary-button-bg, #0c8ce0);
-            color: var(--primary-button-text, white);
-
-            &:hover {
-              background-color: var(--primary-button-hover, #0a7bc5);
-              transform: translateY(-1px);
-            }
-          }
-
-          &.btn-secondary {
-            background-color: transparent;
-            color: var(--text-body-primary);
-            border: 1px solid var(--border-separator, #ddd);
-
-            &:hover {
-              border-color: var(--primary-button-bg, #0c8ce0);
-              color: var(--primary-button-bg, #0c8ce0);
-            }
-          }
-        }
-      }
-    }
-
-    // FAQ Section Styles
-    .faq-container {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      width: 100%;
-    }
-
-    .faq-item {
-      background: var(--surface-main-bg, #fff);
-      border: 1px solid var(--border-separator, #e0e0e0);
-      border-radius: 8px;
-      overflow: hidden;
-      transition: box-shadow 0.2s ease;
-
-      &:hover {
-        box-shadow: var(--box-shadow);
-      }
-
-      &[open] {
-        box-shadow: var(--box-shadow);
-        
-        summary {
-          border-bottom: 1px solid var(--border-separator, #e0e0e0);
-        }
-
-        summary::after {
-          transform: rotate(180deg);
-        }
-      }
-
-      summary {
-        @include typography(paragraph);
-        font-weight: 600;
-        padding: 1.25rem 1.5rem;
-        cursor: pointer;
-        list-style: none;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 1rem;
-        user-select: none;
-
-        &::-webkit-details-marker {
-          display: none;
-        }
-
-        &::after {
-          content: "";
-          width: 12px;
-          height: 12px;
-          border-right: 2px solid var(--text-body-primary);
-          border-bottom: 2px solid var(--text-body-primary);
-          transform: rotate(45deg);
-          transition: transform 0.2s ease;
-          flex-shrink: 0;
-        }
-
-        &:hover {
-          color: var(--primary-button-bg, #0c8ce0);
-        }
-      }
-
-      p {
-        @include typography(paragraph);
-        padding: 1.25rem 1.5rem;
-        margin: 0;
-        color: var(--text-body-secondary, #666);
-        line-height: 1.7;
-      }
     }
   }
 </style> 
