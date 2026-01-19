@@ -1,0 +1,318 @@
+.custom-header {
+  padding: 80px 0 60px 0;
+  background-color: var(--background-primary, #f9f9f9);
+  text-align: center;
+
+  .page-title {
+    font-size: 3.5em;
+    font-weight: 700;
+    color: var(--text-heading-primary, #111);
+    margin-bottom: 20px;
+    line-height: 1.2;
+
+    @media (max-width: 768px) {
+      font-size: 2.5em;
+    }
+  }
+
+  .page-subtitle {
+    font-size: 1.3em;
+    color: var(--text-body-primary, #333);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+    font-weight: 400;
+
+    @media (max-width: 768px) {
+      font-size: 1.1em;
+      padding: 0 20px;
+    }
+  }
+}
+
+.cert-info {
+  background-color: var(--background-secondary, #f5f5f5);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  font-weight: 500;
+
+  p {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.cert-table-container {
+  background-color: var(--background-primary, #f9f9f9);
+  border-radius: 8px;
+  margin-bottom: 30px;
+  border: 1px solid var(--text-body-primary, #333);
+  overflow: hidden;
+}
+
+.cert-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95em;
+
+  tbody {
+    tr {
+      border-bottom: 1px solid var(--text-body-primary, rgba(51, 51, 51, 0.1));
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:nth-child(even) {
+        background-color: var(--background-secondary, rgba(0, 0, 0, 0.02));
+      }
+    }
+  }
+
+  td {
+    padding: 16px 20px;
+    vertical-align: top;
+
+    &.label {
+      font-weight: 600;
+      color: var(--text-heading-primary, #111);
+      background-color: var(--background-secondary, rgba(0, 0, 0, 0.05));
+      width: 30%;
+      min-width: 180px;
+      border-right: 1px solid var(--text-body-primary, rgba(51, 51, 51, 0.1));
+
+      @media (max-width: 768px) {
+        width: 40%;
+        min-width: 140px;
+      }
+    }
+
+    &.value {
+      color: var(--text-body-primary, #333);
+      line-height: 1.5;
+      word-wrap: break-word;
+
+      strong {
+        color: var(--text-heading-primary, #111);
+        font-weight: 600;
+      }
+
+      small {
+        display: block;
+        color: var(--text-body-secondary, #666);
+        font-size: 0.85em;
+        margin-top: 4px;
+        line-height: 1.4;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.9em;
+
+    td {
+      padding: 12px 16px;
+
+      &.label {
+        font-size: 0.9em;
+      }
+
+      &.value {
+        font-size: 0.9em;
+      }
+    }
+  }
+}
+
+.cert-document {
+  background-color: var(--background-primary, #f9f9f9);
+  padding: 30px;
+  border-radius: 8px;
+  border: 1px solid var(--text-body-primary, #333);
+
+  h3 {
+    font-size: 1.3em;
+    margin-bottom: 15px;
+    color: var(--text-heading-primary, #111);
+    font-weight: 600;
+  }
+
+  p {
+    margin-bottom: 20px;
+    line-height: 1.6;
+    color: var(--text-body-primary, #333);
+  }
+
+  .certificate-actions {
+    margin: 20px 0;
+    text-align: center;
+
+    .certificate-download-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--theme-primary, #2563eb);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1em;
+      transition: all 0.3s ease;
+      border-bottom: 2px solid transparent;
+
+      &:hover {
+        color: var(--theme-primary-dark, #1d4ed8);
+        border-bottom-color: var(--theme-primary, #2563eb);
+        text-decoration: none;
+      }
+
+      &:visited {
+        color: var(--theme-primary, #2563eb);
+      }
+
+      .download-icon {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+        transition: transform 0.3s ease;
+      }
+
+      &:hover .download-icon {
+        transform: scale(1.1);
+      }
+
+      @media (max-width: 768px) {
+        font-size: 1em;
+        gap: 6px;
+
+        .download-icon {
+          width: 18px;
+          height: 18px;
+        }
+      }
+    }
+  }
+
+  .certificate-image {
+    margin: 20px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      border: 1px solid var(--text-body-primary, #333);
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+      @media (max-width: 768px) {
+        border-radius: 4px;
+      }
+    }
+  }
+
+  blockquote {
+    border-left: 4px solid var(--theme-primary, #007bff);
+    padding-left: 20px;
+    margin: 20px 0 0 0;
+    font-style: italic;
+    color: var(--text-body-secondary, #666);
+    font-size: 1.1em;
+    background-color: var(--background-secondary, #f5f5f5);
+    padding: 20px 20px 20px 40px;
+  }
+}
+
+.benefits-list {
+  list-style: disc inside;
+  margin-bottom: 30px;
+  padding-left: 20px;
+
+  li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+}
+
+.compliance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  margin: 30px 0;
+
+  .compliance-item {
+    background-color: var(--background-secondary, #f8f9fa);
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid var(--text-body-primary, rgba(51, 51, 51, 0.1));
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
+    }
+
+    h4 {
+      color: var(--theme-primary, #2563eb);
+      margin-bottom: 15px;
+      font-size: 1.3em;
+      font-weight: 700;
+    }
+
+    p {
+      color: var(--text-body-primary, #333);
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 20px;
+
+      li {
+        margin-bottom: 8px;
+        line-height: 1.5;
+        color: var(--text-body-secondary, #666);
+        font-size: 0.95em;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+
+    .compliance-item {
+      padding: 20px;
+
+      h4 {
+        font-size: 1.2em;
+      }
+    }
+  }
+}
+
+.compliance-note {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: var(--background-primary, #f9f9f9);
+  border-radius: 8px;
+  border-left: 4px solid var(--theme-primary, #2563eb);
+
+  p {
+    margin: 0;
+    color: var(--text-body-primary, #333);
+    font-size: 0.95em;
+    line-height: 1.5;
+
+    strong {
+      color: var(--theme-primary, #2563eb);
+      font-weight: 600;
+    }
+  }
+}

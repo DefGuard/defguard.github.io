@@ -1,0 +1,161 @@
+---
+import Navigation from "../components/base/Navigation.astro";
+import ProductLayout from "../layouts/ProductLayout.astro";
+import HomeHeader from "./_home/components/HomeHeader.astro";
+import FlexibleSection from "../components/FlexibleSection.astro";
+import { Image } from "astro:assets";
+import isoCertificate from "../../public/images/iso-27001/DEFGUAR_ISO27001_2025-2028_ENG.png";
+import "../styles/compliance.scss";
+
+const title = "Compliance";
+const featuredImage =
+  "github.com/DefGuard/defguard.github.io/raw/main/public/images/product/core/hero-image.png";
+const imageWidth = "1920";
+const imageHeight = "1080";
+const url = "https://defguard.net/compliance";
+const tags = [
+  "defguard",
+  "zero trust",
+  "vpn",
+  "mfa",
+  "2fa",
+  "wireguard",
+  "iso27001",
+  "certification",
+  "security",
+  "compliance",
+  "enterprise",
+  "open source",
+];
+---
+
+<ProductLayout
+  title={title}
+  featuredImage={featuredImage}
+  imageWidth={imageWidth}
+  imageHeight={imageHeight}
+  url={url}
+  tags={tags}
+>
+  <Navigation activeSlug="/compliance/" />
+
+  <main id="home-page">
+    <section class="custom-header">
+      <div class="container">
+        <h1 class="page-title">Compliance</h1>
+        <p class="page-subtitle">Defguard - Certified, Audited, and Transparent</p>
+      </div>
+    </section>
+
+    <FlexibleSection leftRatio={1} title="ISO-27001:2023 Certification" theme="light">
+
+      <div slot="left">
+        <div>
+          <p>
+            Our ISO-27001:2013 certification and rigorous internal audits ensure that our systems, processes, and operations meet globally recognized benchmarks.
+          
+            Beyond compliance, we offer fully transparent development process and <a href="/security/">Secure By Design approach</a>.
+          </p>
+        </div>
+        <div class="cert-info">
+          <p><strong>Certificate issued:</strong> 7 January 2026</p>
+          <p><strong>Valid until:</strong> 6 January 2029</p>
+          <p><strong>Certificate No.:</strong> PL018610/P</p>
+        </div>
+
+        <div class="cert-table-container">
+          <table class="cert-table">
+            <tbody>
+              <tr>
+                <td class="label">Certification Body</td>
+                <td class="value">Bureau Veritas Certification Polska</td>
+              </tr>
+              <tr>
+                <td class="label">Standard</td>
+                <td class="value">PN-EN ISO/IEC 27001:2023-08<br><small>Information security, cybersecurity and privacy protection — Information security management systems — Requirements</small></td>
+              </tr>
+              <tr>
+                <td class="label">Certificate Number</td>
+                <td class="value">PL018610/P</td>
+              </tr>
+              <tr>
+                <td class="label">Issue Date</td>
+                <td class="value">7 January 2026</td>
+              </tr>
+              <tr>
+                <td class="label">Certification Cycle Start Date</td>
+                <td class="value">7 January 2026</td>
+              </tr>
+              <tr>
+                <td class="label">Valid Until</td>
+                <td class="value">6 January 2029</td>
+              </tr>
+              <tr>
+                <td class="label">Scope of Certification</td>
+                <td class="value">DELIVERING IT CYBERSECURITY SOLUTIONS FOR IDENTITY, SSO, REMOTE ACCESS, AND DEVICE ACCESS MANAGEMENT IN NETWORKS.</td>
+              </tr>
+              <tr>
+                <td class="label">Verification</td>
+                <td class="value">
+                  To verify certificate validity please contact:<br>
+                  <strong>Bureau Veritas Polska</strong><br>
+                  +48 22 549 04 00
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cert-document">
+          <h3>Certificate</h3>
+          <p>Issued by Bureau Veritas Polska Sp. z o.o., ul. Domaniewska 44A, 02-672 Warszawa, Poland</p>
+
+          <div class="certificate-actions">
+            <a href="/images/iso-27001/DEFGUAR_ISO27001_2025-2028_ENG%20copy.pdf" class="certificate-download-link" target="_blank" rel="noopener noreferrer">
+              Download Certificate PDF (Official Bureau Veritas Certificate)
+            </a>
+          </div>
+
+          <div class="certificate-image">
+            <Image
+              src={isoCertificate}
+              alt="Defguard ISO 27001:2023-08 Certificate issued by Bureau Veritas Certification Polska - Certificate No. PL018610/P, Valid from 7 January 2026 to 6 January 2029"
+              widths={[400, 800, 1200]}
+              format="webp"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
+        </div>
+      </div>
+    </FlexibleSection>
+
+    <FlexibleSection leftRatio={1} title="Why ISO 27001 Matters for Our Users" theme="light">
+      <div slot="left">
+        <p>At Defguard we have always built security into the core of our product — from protocol-level WireGuard® MFA, through open-source transparency, to data sovereignty and zero foreign legal exposure.</p>
+        <p>Achieving ISO 27001 certification formalizes and externally validates our Information Security Management System. It demonstrates to enterprises, regulated organizations and public sector clients that:</p>
+
+        <ul class="benefits-list">
+          <li>Information security risks are systematically identified, assessed and treated</li>
+          <li>Security controls follow international best practices</li>
+          <li>Processes are continuously improved and audited</li>
+          <li>We maintain the same high standards internally that we provide to you</li>
+          <li>Your trust in Defguard as a secure, reliable VPN & zero-trust platform is backed by third-party certification</li>
+        </ul>
+
+        <h3>Complements our existing compliance strengths</h3>
+        <ul>
+          <li>NIS2-ready architecture with true VPN-level MFA</li>
+          <li>Full EU data residency & governance (Poland-based)</li>
+          <li>Audit-ready logs and SIEM integration</li>
+          <li>Support for GDPR, HIPAA, PCI DSS, NIST & similar frameworks through strong technical controls</li>
+        </ul>
+      </div>
+      <div slot="left">
+        <p>Are you missing any compliance certifications? Feel free to reach out to us at <a href="mailto:sales@defguard.net">sales@defguard.net</a></p>
+      </div>
+    </FlexibleSection>
+
+
+  </main>
+</ProductLayout>
