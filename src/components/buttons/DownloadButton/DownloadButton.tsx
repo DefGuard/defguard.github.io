@@ -45,6 +45,10 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
         setDownloadName(`defguard-client_${version}_amd64.deb`);
         break;
       }
+      case PlatformType.DEBIANARM: {
+        setDownloadName(`defguard-client_${version}_arm64.deb`);
+        break;
+      }
       case PlatformType.ARCHLINUX: {
         setDownloadName(`defguard-client_${version}_amd64.deb`);
         break;
@@ -55,6 +59,14 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
       }
       case PlatformType.FEDORAX86: {
         setDownloadName(`defguard-client-${version}-1.x86_64.rpm`);
+        break;
+      }
+      case PlatformType.DEBIAN12ARM: {
+        setDownloadName(`defguard-client${version}_arm64_ubuntu-22-04-lts.deb`);
+        break;
+      }
+      case PlatformType.DEBIAN12X86: {
+        setDownloadName(`defguard-client${version}_amd64_ubuntu-22-04-lts.deb`);
         break;
       }
     }
@@ -95,6 +107,9 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
           </>
         )}
         {(platform === PlatformType.DEBIAN ||
+          platform === PlatformType.DEBIANARM ||
+          platform === PlatformType.DEBIAN12ARM ||
+          platform === PlatformType.DEBIAN12X86 ||
           platform === PlatformType.ARCHLINUX ||
           platform === PlatformType.FEDORAARM ||
           platform === PlatformType.FEDORAX86) && (
@@ -121,17 +136,37 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
                             setIsLinuxMenuClicked(false);
                           }}
                         >
-                          Debian
+                          Debian (x86)
                         </a>
                       </li>
                       <li>
                         <a
                           onClick={() => {
-                            swapPlatform(PlatformType.FEDORAARM);
+                            swapPlatform(PlatformType.DEBIANARM);
                             setIsLinuxMenuClicked(false);
                           }}
                         >
-                          Fedora (ARM)
+                          Debian (ARM)
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          onClick={() => {
+                            swapPlatform(PlatformType.DEBIAN12X86);
+                            setIsLinuxMenuClicked(false);
+                          }}
+                        >
+                          Debian 12/13 | Ubuntu 22 (x86)
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          onClick={() => {
+                            swapPlatform(PlatformType.DEBIAN12ARM);
+                            setIsLinuxMenuClicked(false);
+                          }}
+                        >
+                          Debian 12/13 | Ubuntu 22 (ARM)
                         </a>
                       </li>
                       <li>
@@ -142,6 +177,16 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
                           }}
                         >
                           Fedora (x86)
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          onClick={() => {
+                            swapPlatform(PlatformType.FEDORAARM);
+                            setIsLinuxMenuClicked(false);
+                          }}
+                        >
+                          Fedora (ARM)
                         </a>
                       </li>
                       <li>
@@ -231,6 +276,9 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
       >
         <div className="download-text">
           {(platform === PlatformType.DEBIAN ||
+            platform === PlatformType.DEBIANARM ||
+            platform === PlatformType.DEBIAN12ARM ||
+            platform === PlatformType.DEBIAN12X86 ||
             platform === PlatformType.WINDOWS ||
             platform === PlatformType.FEDORAX86 ||
             platform === PlatformType.FEDORAARM) && <>Download now</>}
@@ -238,7 +286,10 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
           {(platform === PlatformType.MACOSINTEL || platform === PlatformType.MACOSARM) && (
             <>App Store</>
           )}
-          {platform === PlatformType.DEBIAN && <p>Debian package</p>}
+          {platform === PlatformType.DEBIAN && <p>Debian (x86)</p>}
+          {platform === PlatformType.DEBIANARM && <p>Debian (ARM)</p>}
+          {platform === PlatformType.DEBIAN12X86 && <p>Debian 12/13 | Ubuntu 22 (x86)</p>}
+          {platform === PlatformType.DEBIAN12ARM && <p>Debian 12/13 | Ubuntu 22 (ARM)</p>}
           {platform === PlatformType.MACOSINTEL && <p>Apple Intel</p>}
           {platform === PlatformType.MACOSARM && <p>Apple ARM</p>}
           {platform === PlatformType.FEDORAX86 && <p>Fedora (x86)</p>}
@@ -260,7 +311,11 @@ export const DownloadButton = ({ platformType, owner, repo, version }: DownloadP
         {(platform === PlatformType.DEBIAN ||
           platform === PlatformType.ARCHLINUX ||
           platform === PlatformType.FEDORAARM ||
-          platform === PlatformType.FEDORAX86) && (
+          platform === PlatformType.FEDORAX86 ||
+          platform === PlatformType.DEBIANARM ||
+          platform === PlatformType.DEBIAN12ARM ||
+          platform === PlatformType.DEBIAN12X86
+        ) && (
           <>
             <p>
               Other ways to install Defguard on linux →{" "}
