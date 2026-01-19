@@ -6,4 +6,7 @@ export enum PlatformType {
   ARCHLINUX = 4,
   FEDORAARM = 5,
   FEDORAX86 = 6,
+  DEBIANARM = 7,
+  DEBIAN12ARM = 8,
+  DEBIAN12X86 = 9,
 }
