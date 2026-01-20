@@ -13,11 +13,6 @@
         "link": "/security/"
       },
       {
-        "text": "Enterprise",
-        "external": true,
-        "link": "https://docs.defguard.net/enterprise"
-      },
-      {
         "text": "Pricing",
         "external": false,
         "link": "/pricing/"
@@ -26,6 +21,11 @@
         "text": "Documentation",
         "external": true,
         "link": "https://docs.defguard.net"
+      },
+      {
+        "text": "Compliance",
+        "external": false,
+        "link": "/compliance/"
       },
       {
         "text": "Press",

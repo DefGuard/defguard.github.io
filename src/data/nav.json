@@ -63,9 +63,13 @@
     "display": "Resources",
     "url": null,
     "children": [
-      {
+      { 
         "display": "Blog",
         "url": "/blog"
+      },
+      { 
+        "display": "Compliance",
+        "url": "/compliance"
       },
       {
         "display": "FAQ",
