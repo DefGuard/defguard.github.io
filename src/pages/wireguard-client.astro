@@ -4,9 +4,10 @@ import ProductLayout from "../layouts/ProductLayout.astro";
 import TrustedBy from "./_home/components/TrustedBy.astro";
 import DefguardInfo from "../components/download/DownloadInfo/DownloadInfo";
 import { UpdateDownloadLinks } from "../components/download/UpdateDownloadLinks";
+import FAQPageJSONLD from "../scripts/FAQPageJSONLD.astro";
 
-const title = "WireGuard Client - Secure VPN Client for Modern Networks";
-const description = "Fast, secure, and easy-to-use WireGuard VPN client for desktop and mobile devices. Enterprise-grade security with modern user experience.";
+const title = "Best WireGuard Client - Free WireGuard VPN Client Download for Windows, macOS, Linux";
+const description = "Download the best free WireGuard client alternative for Windows, macOS, and Linux. Defguard Client is an open-source WireGuard VPN client with modern UI and enterprise security.";
 const url = "https://defguard.net/wireguard-client";
 const featuredImage = "/images/png/defguard.png";
 const imageWidth = "1080";
@@ -14,6 +15,12 @@ const imageHeight = "540";
 const tags = [
   "wireguard",
   "wireguard-client",
+  "wireguard-client-download",
+  "best-wireguard-client",
+  "wireguard-windows-client",
+  "wireguard-desktop-client",
+  "wireguard-alternative-client",
+  "defguard-client",
   "vpn-client",
   "vpn",
   "secure-vpn",
@@ -27,6 +34,21 @@ const faqItems = [
     question: "Is Defguard Client free and open source?",
     answer:
       "Yes. Defguard Client is free and open source. You can review the source code and build it yourself.",
+  },
+  {
+    question: "Is Defguard Client a good WireGuard alternative client?",
+    answer:
+      "Yes. Defguard Client is the best WireGuard alternative client. It is free and open source. You can review the source code and build it yourself. Yet it provides more features than official WireGuard client and consistent UI across all platforms.",
+  },
+  {
+    question: "What is the best WireGuard client for Windows?",
+    answer:
+      "Defguard Client is the best WireGuard client for Windows. It offers a modern UI, easy configuration management, and enterprise features like MDM support. Download the WireGuard Windows client MSI installer for Windows 10/11.",
+  },
+  {
+    question: "What is the best WireGuard desktop client?",
+    answer:
+      "Defguard Client is the best WireGuard desktop client, supporting Windows, macOS, and Linux. It provides a consistent user experience across all platforms with advanced features like multi-profile management and secure key handling.",
   },
   {
     question: "Which platforms are supported?",
@@ -57,6 +79,58 @@ const faqItems = [
   description={description}
   bodyClass="white-background"
 >
+  <!-- FAQ Structured Data -->
+  <FAQPageJSONLD slot="schema" entries={faqItems} />
+
+  <!-- SoftwareApplication Structured Data -->
+  <script slot="schema" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Defguard Client",
+    "applicationCategory": "SecurityApplication",
+    "operatingSystem": ["Windows", "macOS", "Linux"],
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": description,
+    "url": url,
+    "image": `https://defguard.net${featuredImage}`,
+    "softwareVersion": "1.6.4",
+    "releaseNotes": "https://github.com/DefGuard/client/releases",
+    "downloadUrl": "https://github.com/DefGuard/client/releases",
+    "screenshot": [
+      `https://defguard.net/images/wireguard-client/dg-client.jpg`,
+      `https://defguard.net/images/wireguard-client/wg-client.jpg`
+    ],
+    "featureList": [
+      "Multi-profile management",
+      "Real-time connection statistics",
+      "Connection history",
+      "Import WireGuard configs",
+      "Cross-platform support",
+      "Enterprise MDM support"
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.5",
+      "ratingCount": "350",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "DefGuard",
+      "url": "https://defguard.net"
+    },
+    "license": "https://github.com/DefGuard/client/blob/main/LICENSE.md",
+    "softwareRequirements": "Windows 10/11, macOS 11+, Linux (Debian 10+, Ubuntu 20.04+, Fedora 33+)",
+    "browserRequirements": "Not required",
+    "applicationSubCategory": "VPN Client",
+    "keywords": tags.join(", ")
+  })} />
+
   <Navigation activeSlug="/wireguard-client/" />
 
   <main id="wireguard-client-page">
@@ -72,14 +146,14 @@ const faqItems = [
         />
         <h1 class="wireguard-hero__title">
           <span class="wireguard-hero__title--accent">Free &amp; Open-Source</span>
-          <span class="wireguard-hero__title--primary">WireGuard VPN Client</span>
+          <span class="wireguard-hero__title--primary">Best WireGuard VPN Client</span>
         </h1>
         <p class="wireguard-hero__subtitle">
-          Secure &amp; compliant alternative WireGuard client.
+          Secure &amp; compliant WireGuard alternative client for Windows, macOS, and Linux.
         </p>
-        <p class="wireguard-hero__subtitle">
-          Cross-platform, user-friendly UI.
-        </p>
+        <!-- <p class="wireguard-hero__subtitle">
+          Cross-platform WireGuard desktop client with user-friendly UI.
+        </p> -->
         <div class="wireguard-hero__stars">
           <span class="wireguard-hero__star-icon" aria-hidden="true">
             <svg width="18" height="18" viewBox="0 0 24 24" role="img" focusable="false">
@@ -205,11 +279,10 @@ const faqItems = [
         <div class="compare-row">
           <div class="compare-cell compare-cell--label">License</div>
           <div class="compare-cell compare-cell--highlight">
-            <span class="compare-yes">Dual license with Open Source AGPLv3 core
+            <span class="compare-yes"><a href="https://github.com/DefGuard/client/blob/main/LICENSE.md">Dual license with Open Source AGPLv3 core</a>
           </div>
           <div class="compare-cell">
-            <span class="compare-yes">varies by OS and component. Windows: MIT.
-            macOS/iOS: MIT. Android: Apache 2.0. Linux tooling (wg/wg-quick): GPL-2.0-only.
+            Windows: MIT. macOS/iOS: MIT. Android: Apache 2.0. Linux tooling (wg/wg-quick): GPL-2.0-only.
           </div>
         </div>
 
@@ -253,18 +326,26 @@ const faqItems = [
         <div class="compare-row">
           <div class="compare-cell compare-cell--label">Pentested</div>
           <div class="compare-cell compare-cell--highlight">
-            <span class="compare-yes">Yes:</span> public penetration testing reports and daily security
-            scans
+            <span class="compare-yes">Yes:</span>
+            <a href="/security/" class="compare-link">public penetration testing reports and daily security scans</a>
           </div>
-          <div class="compare-cell">N/A: no comparable public pentest program stated</div>
+          <div class="compare-cell">No publicly available pentest reports</div>
         </div>
 
         <div class="compare-row">
-          <div class="compare-cell compare-cell--label">ISO 27001</div>
+          <div class="compare-cell compare-cell--label">Compliance</div>
           <div class="compare-cell compare-cell--highlight">
-            <span class="compare-yes">Yes:</span> Defguard is ISO 27001 certified
+            <span class="compare-yes">Yes:</span>
+            <a href="/compliance/" class="compare-link">ISO 27001 certified</a>
           </div>
-          <div class="compare-cell">N/A: no ISO 27001 claim</div>
+          <div class="compare-cell">-</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell compare-cell--label">Server</div>
+          <div class="compare-cell compare-cell--highlight">
+            WireGuard server or Defguard server with MFA support
+          </div>
+          <div class="compare-cell">Wireguard only</div>
         </div>
       </div>
     </section>
@@ -438,7 +519,7 @@ const faqItems = [
                 Manage all VPN users from a single control plane. Add, remove, and control access
                 for every user across all locations.
               </p>
-              <a class="control-panel__cta" href="/download/">
+              <a class="control-panel__cta" href="/server/">
                 Install free Defguard control plane.
               </a>
             </div>
@@ -517,7 +598,7 @@ const faqItems = [
                 Full-featured mobile client for iOS and Android with the same enterprise
                 capabilities as desktop.
               </p>
-              <a class="control-panel__cta" href="/download/">
+              <a class="control-panel__cta" href="/server/">
                 Install free Defguard control plane.
               </a>
             </div>
@@ -556,7 +637,7 @@ const faqItems = [
                 Manage multiple VPN gateways and locations from a single dashboard. Perfect for
                 distributed teams and multi-site deployments.
               </p>
-              <a class="control-panel__cta" href="/download/">
+              <a class="control-panel__cta" href="/server/">
                 Install free Defguard control plane.
               </a>
             </div>
@@ -595,7 +676,7 @@ const faqItems = [
                 Onboard remote users securely without IT intervention. Enrollment links with
                 expiration and one-time use.
               </p>
-              <a class="control-panel__cta" href="/download/">
+              <a class="control-panel__cta" href="/server/">
                 Install free Defguard control plane.
               </a>
             </div>
@@ -659,8 +740,8 @@ const faqItems = [
       <div class="wireguard-downloads__inner">
         <div class="wireguard-downloads__header">
           <div class="wireguard-downloads__title-group">
-            <h2>All Downloads</h2>
-            <p>Choose the right package for your platform.</p>
+            <h2>Download WireGuard Client - Windows, macOS, Linux</h2>
+            <p>Download the best WireGuard client for your platform. Choose the right package below.</p>
           </div>
           <div class="wireguard-downloads__search">
             <input
@@ -688,14 +769,14 @@ const faqItems = [
         <div class="wireguard-downloads__desktop">
           <div class="download-column">
             <div class="download-column__header">
-              <h3>Windows</h3>
-              <p>Windows 10/11</p>
+              <h3>Best WireGuard Client for Windows</h3>
+              <p>WireGuard Windows client for Windows 10/11</p>
             </div>
             <div class="download-cards">
               <div class="download-card">
                 <div class="download-card__content">
                   <h4>MSI (x64)</h4>
-                  <p>For Windows 10/11. Recommended for enterprise MDM deployment.</p>
+                  <p>Download WireGuard Windows client for Windows 10/11. Best WireGuard client for Windows with enterprise MDM support.</p>
                 </div>
                 <a
                   href="https://github.com/DefGuard/client/releases/download/v1.6.4/Defguard_1.6.4_x64_en-US.msi"
@@ -715,8 +796,8 @@ const faqItems = [
 
           <div class="download-column">
             <div class="download-column__header">
-              <h3>macOS</h3>
-              <p>Apple Silicon and Intel</p>
+              <h3>WireGuard Client for macOS</h3>
+              <p>WireGuard desktop client for Apple Silicon and Intel</p>
             </div>
             <div class="download-cards">
               <div class="download-card">
@@ -746,8 +827,8 @@ const faqItems = [
         <div class="wireguard-downloads__linux">
           <div class="download-column download-column--full">
             <div class="download-column__header">
-              <h3>Linux</h3>
-              <p>DEB, RPM, AUR</p>
+              <h3>WireGuard Desktop Client for Linux</h3>
+              <p>WireGuard Linux client - DEB, RPM, AUR packages</p>
             </div>
             <div class="download-cards download-cards--grid">
               <div class="download-card">
@@ -909,11 +990,47 @@ const faqItems = [
           searchInput.addEventListener("input", (e) => {
             filterDownloads(e.target.value);
           });
+
+          // Simple Google Analytics download tracking
+          const downloadButtons = document.querySelectorAll(".download-btn");
+          downloadButtons.forEach((button) => {
+            button.addEventListener("click", function() {
+              const href = this.getAttribute("href") || "";
+              const downloadType = this.getAttribute("data-download-type") || "";
+              
+              // Determine platform from download type or URL
+              let platform = "Unknown";
+              if (downloadType.includes("windows") || href.includes("Defguard_")) {
+                platform = "Windows";
+              } else if (href.includes("apps.apple.com")) {
+                platform = "macOS";
+              } else if (downloadType.includes("debian") || downloadType.includes("fedora") || href.includes("aur.archlinux.org")) {
+                platform = "Linux";
+              }
+
+              // Push event to dataLayer (works with GTM and GA4)
+              if (window.dataLayer) {
+                window.dataLayer.push({
+                  event: "wireguard_client_download",
+                  download_platform: platform,
+                  download_url: href
+                });
+              }
+
+              // Also send directly to GA4 if gtag is available
+              if (typeof gtag !== "undefined") {
+                gtag("event", "wireguard_client_download", {
+                  platform: platform,
+                  download_url: href
+                });
+              }
+            });
+          });
         })();
       </script>
     </section>
 
-    <section class="wireguard-faq" aria-label="Frequently asked questions">
+    <section class="wireguard-faq" aria-label="Frequently asked questions" itemscope itemtype="https://schema.org/FAQPage">
       <div class="wireguard-faq__inner">
         <div class="wireguard-faq__heading">
           <h2>Frequently asked questions</h2>
@@ -921,13 +1038,15 @@ const faqItems = [
         </div>
         <div class="wireguard-faq__list">
           {faqItems.map((item, index) => (
-            <details class="wireguard-faq__item">
-              <summary>
+            <details class="wireguard-faq__item" itemscope itemtype="https://schema.org/Question">
+              <summary itemprop="name">
                 <span>{item.question}</span>
                 <span class="wireguard-faq__icon" aria-hidden="true">+</span>
               </summary>
-              <div class="wireguard-faq__answer">
-                <p>{item.answer}</p>
+              <div class="wireguard-faq__answer" itemscope itemtype="https://schema.org/Answer">
+                <div itemprop="text">
+                  <p>{item.answer}</p>
+                </div>
               </div>
             </details>
           ))}
