@@ -2,6 +2,8 @@
 import Navigation from "../components/base/Navigation.astro";
 import ProductLayout from "../layouts/ProductLayout.astro";
 import TrustedBy from "./_home/components/TrustedBy.astro";
+import DefguardInfo from "../components/download/DownloadInfo/DownloadInfo";
+import { UpdateDownloadLinks } from "../components/download/UpdateDownloadLinks";
 
 const title = "WireGuard Client - Secure VPN Client for Modern Networks";
 const description = "Fast, secure, and easy-to-use WireGuard VPN client for desktop and mobile devices. Enterprise-grade security with modern user experience.";
@@ -647,6 +649,12 @@ const faqItems = [
       </script>
     </section>
 
+    <!-- Hidden component to fetch version into store -->
+    <div style="display: none;">
+      <DefguardInfo owner="Defguard" repo="client" client:only="react" />
+      <UpdateDownloadLinks client:only="react" />
+    </div>
+
     <section id="wireguard-downloads" class="wireguard-downloads" aria-label="All downloads">
       <div class="wireguard-downloads__inner">
         <div class="wireguard-downloads__header">
@@ -692,6 +700,7 @@ const faqItems = [
                 <a
                   href="https://github.com/DefGuard/client/releases/download/v1.6.4/Defguard_1.6.4_x64_en-US.msi"
                   class="download-btn download-btn--primary"
+                  data-download-type="windows-msi"
                 >
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -749,6 +758,7 @@ const faqItems = [
                 <a
                   href="https://github.com/DefGuard/client/releases/download/v1.6.4/defguard-client_1.6.4_amd64.deb"
                   class="download-btn download-btn--primary"
+                  data-download-type="debian-x86"
                 >
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -767,6 +777,7 @@ const faqItems = [
                 <a
                   href="https://github.com/DefGuard/client/releases/download/v1.6.4/defguard-client_1.6.4_arm64.deb"
                   class="download-btn download-btn--secondary"
+                  data-download-type="debian-arm"
                 >
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -785,6 +796,7 @@ const faqItems = [
                 <a
                   href="https://github.com/DefGuard/client/releases/download/v1.6.4/defguard-client1.6.4_amd64_ubuntu-22-04-lts.deb"
                   class="download-btn download-btn--secondary"
+                  data-download-type="debian12-x86"
                 >
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -803,6 +815,7 @@ const faqItems = [
                 <a
                   href="https://github.com/DefGuard/client/releases/download/v1.6.4/defguard-client1.6.4_arm64_ubuntu-22-04-lts.deb"
                   class="download-btn download-btn--secondary"
+                  data-download-type="debian12-arm"
                 >
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -821,6 +834,7 @@ const faqItems = [
                 <a
                   href="https://github.com/DefGuard/client/releases/download/v1.6.4/defguard-client-1.6.4-1.x86_64.rpm"
                   class="download-btn download-btn--secondary"
+                  data-download-type="fedora-x86"
                 >
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -839,6 +853,7 @@ const faqItems = [
                 <a
                   href="https://github.com/DefGuard/client/releases/download/v1.6.4/defguard-client-1.6.4-1.aarch64.rpm"
                   class="download-btn download-btn--secondary"
+                  data-download-type="fedora-arm"
                 >
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
