@@ -29,7 +29,7 @@ const faqItems = [
   {
     question: "Which platforms are supported?",
     answer:
-      "Desktop clients are available for Windows, macOS, and Linux. Mobile apps are available for iOS and Android.",
+      "Desktop clients are available for Windows, macOS, and Linux. To use mobile apps available for iOS and Android, you need Defguard server.",
   },
   {
     question: "Can I import existing WireGuard configs?",
@@ -39,7 +39,7 @@ const faqItems = [
   {
     question: "Does Defguard support MFA?",
     answer:
-      "Yes. When connected to a Defguard control plane, you can enable multi-factor authentication for each connection.",
+      "Yes. When connected to a Defguard self-hosted control plane (server), you can enable multi-factor authentication for each connection.",
   },
 ];
 
@@ -76,7 +76,7 @@ const faqItems = [
           Secure &amp; compliant alternative WireGuard client.
         </p>
         <p class="wireguard-hero__subtitle">
-          Cross-platform, user-friendly UI. No CLI.
+          Cross-platform, user-friendly UI.
         </p>
         <div class="wireguard-hero__stars">
           <span class="wireguard-hero__star-icon" aria-hidden="true">
@@ -115,7 +115,7 @@ const faqItems = [
             height="48"
           />
         </div>
-        <a class="wireguard-hero__cta" href="/download/">
+        <a class="wireguard-hero__cta" href="#wireguard-downloads">
           Download Free Client
         </a>
       </div>
@@ -195,24 +195,24 @@ const faqItems = [
         <div class="compare-row compare-row--header">
           <div class="compare-cell">Feature</div>
           <div class="compare-cell compare-cell--highlight">
-            Defguard Client (free, open source)
+            Defguard Client
           </div>
-          <div class="compare-cell">Official WireGuard Client (free, open source)</div>
+          <div class="compare-cell">Official WireGuard Client</div>
         </div>
 
         <div class="compare-row">
-          <div class="compare-cell compare-cell--label">Open source (licenses)</div>
+          <div class="compare-cell compare-cell--label">License</div>
           <div class="compare-cell compare-cell--highlight">
-            <span class="compare-yes">Yes:</span> AGPLv3*
+            <span class="compare-yes">Dual license with Open Source AGPLv3 core
           </div>
           <div class="compare-cell">
-            <span class="compare-yes">Yes:</span> varies by OS and component. Windows: MIT.
+            <span class="compare-yes">varies by OS and component. Windows: MIT.
             macOS/iOS: MIT. Android: Apache 2.0. Linux tooling (wg/wg-quick): GPL-2.0-only.
           </div>
         </div>
 
         <div class="compare-row">
-          <div class="compare-cell compare-cell--label">Desktop apps (platforms)</div>
+          <div class="compare-cell compare-cell--label">Desktop apps</div>
           <div class="compare-cell compare-cell--highlight">Windows, macOS, Linux</div>
           <div class="compare-cell">Windows and macOS</div>
         </div>
@@ -234,7 +234,7 @@ const faqItems = [
             <span class="compare-yes">Yes:</span> connection history view
           </div>
           <div class="compare-cell">
-            Not designed for history analytics (feature set varies by OS)
+            No
           </div>
         </div>
 
@@ -279,12 +279,7 @@ const faqItems = [
         <div class="wireguard-security__grid">
           <article class="security-card">
             <div class="security-card__icon" aria-hidden="true">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="2">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                <path d="M12 15v3M9 18h6" stroke-linecap="round"/>
-                <path d="M12 7v4" stroke-linecap="round"/>
-              </svg>
+              <img src="/images/wireguard-client/icons/protection.png" alt="" width="32" height="32" />
             </div>
             <h3>Penetration tested</h3>
             <p>
@@ -297,13 +292,7 @@ const faqItems = [
           </article>
           <article class="security-card">
             <div class="security-card__icon" aria-hidden="true">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="2">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                <line x1="16" y1="2" x2="16" y2="6"/>
-                <line x1="8" y1="2" x2="8" y2="6"/>
-                <line x1="3" y1="10" x2="21" y2="10"/>
-                <path d="M9 16l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+              <img src="/images/wireguard-client/icons/activity.png" alt="" width="32" height="32" />
             </div>
             <h3>Daily security scan.</h3>
             <p>
@@ -316,10 +305,7 @@ const faqItems = [
           </article>
           <article class="security-card">
             <div class="security-card__icon" aria-hidden="true">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="2">
-                <path d="M8 3H4a2 2 0 0 0-2 2v4m18-6h-4m4 0v4m0-4h-4m-8 18H4a2 2 0 0 1-2-2v-4m18 6h-4m4 0v-4m0 4h-4"/>
-                <path d="M8 21H4a2 2 0 0 1-2-2v-4m18 6h-4m4 0v-4m0 4h-4"/>
-              </svg>
+              <img src="/images/wireguard-client/icons/code.png" alt="" width="32" height="32" />
             </div>
             <h3>Open-source codebase</h3>
             <p>
@@ -344,43 +330,28 @@ const faqItems = [
         <div class="wireguard-trust__grid">
           <div class="trust-card">
             <div class="trust-card__icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M9 3h6v6H9zM3 9h6v6H3zM15 9h6v6h-6zM9 15h6v6H9z"/>
-              </svg>
+              <img src="/images/wireguard-client/icons/code.png" alt="" width="48" height="48" />
             </div>
             <h3 class="trust-card__title">Open source</h3>
-            <p class="trust-card__subtitle">AGPLv3 License</p>
+            <p class="trust-card__subtitle">Dual license with Open Source AGPLv3 core</p>
           </div>
           <div class="trust-card">
             <div class="trust-card__icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="3" width="18" height="18" rx="2"/>
-                <path d="M9 3v18M15 3v18M3 9h18M3 15h18"/>
-                <circle cx="18" cy="6" r="2" fill="currentColor"/>
-              </svg>
+              <img src="/images/wireguard-client/icons/protection.png" alt="" width="48" height="48" />
             </div>
             <h3 class="trust-card__title">Security audited</h3>
             <p class="trust-card__subtitle">Independent code review</p>
           </div>
           <div class="trust-card">
             <div class="trust-card__icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="3" width="6" height="6"/>
-                <rect x="3" y="11" width="6" height="6"/>
-                <rect x="11" y="3" width="6" height="6"/>
-                <rect x="11" y="11" width="6" height="6"/>
-                <circle cx="18" cy="6" r="2" fill="currentColor"/>
-              </svg>
+              <img src="/images/wireguard-client/icons/servers.png" alt="" width="48" height="48" />
             </div>
             <h3 class="trust-card__title">SOC 2 ready</h3>
             <p class="trust-card__subtitle">Compliant architecture</p>
           </div>
           <div class="trust-card">
             <div class="trust-card__icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
-                <path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+              <img src="/images/wireguard-client/icons/protection.png" alt="" width="48" height="48" />
             </div>
             <h3 class="trust-card__title">GDPR Ready</h3>
             <p class="trust-card__subtitle">Privacy by design</p>
@@ -393,7 +364,7 @@ const faqItems = [
     <section class="wireguard-control" aria-label="Control plane features" data-control-tabs>
       <div class="wireguard-control__inner">
         <div class="wireguard-control__heading">
-          <h2>Level up your WireGuard with MFA and identity controls</h2>
+          <h2>Looking for WireGuard MFA/2FA?</h2>
           <p>
             Install Defguard control plane (open source &amp; free) and turn your WireGuard into ZTNA
             solution.
@@ -438,7 +409,7 @@ const faqItems = [
             aria-controls="control-panel-locations"
             data-tab="locations"
           >
-            Locations
+            Mulitple VPNs (locations)
           </button>
           <button
             class="control-tab"
@@ -448,7 +419,7 @@ const faqItems = [
             aria-controls="control-panel-enrollment"
             data-tab="enrollment"
           >
-            Enrollment
+            Remote Enrollment
           </button>
         </div>
 
@@ -466,26 +437,32 @@ const faqItems = [
                 for every user across all locations.
               </p>
               <a class="control-panel__cta" href="/download/">
-                Install defguard control plane (it&apos;s free!)
+                Install free Defguard control plane.
               </a>
             </div>
             <div class="control-panel__list">
               <div class="control-item">
-                <span class="control-item__icon" aria-hidden="true">👤</span>
+                <span class="control-item__icon" aria-hidden="true">
+                  <img src="/images/wireguard-client/icons/users.png" alt="" width="40" height="40" />
+                </span>
                 <div>
                   <h4>User Directory</h4>
                   <p>Centralized user management with groups and permissions.</p>
                 </div>
               </div>
               <div class="control-item">
-                <span class="control-item__icon" aria-hidden="true">🔒</span>
+                <span class="control-item__icon" aria-hidden="true">
+                  <img src="/images/wireguard-client/icons/lock-closed.png" alt="" width="40" height="40" />
+                </span>
                 <div>
                   <h4>Access Control</h4>
                   <p>Fine-grained control over who can access which network resources.</p>
                 </div>
               </div>
               <div class="control-item">
-                <span class="control-item__icon" aria-hidden="true">📋</span>
+                <span class="control-item__icon" aria-hidden="true">
+                  <img src="/images/wireguard-client/icons/activity.png" alt="" width="40" height="40" />
+                </span>
                 <div>
                   <h4>Audit Logs</h4>
                   <p>Complete visibility into all user activity and connection events.</p>
@@ -501,13 +478,15 @@ const faqItems = [
                 Verify every connection with MFA. Supports multiple authentication methods for
                 flexible security policies.
               </p>
-              <a class="control-panel__cta" href="/download/">
-                Install defguard control plane (it&apos;s free!)
+              <a class="control-panel__cta" href="/server/">
+                Install free Defguard control plane.
               </a>
             </div>
             <div class="control-panel__list">
               <div class="control-item">
-                <span class="control-item__icon" aria-hidden="true">🛡️</span>
+                <span class="control-item__icon" aria-hidden="true">
+                  <img src="/images/wireguard-client/icons/token.png" alt="" width="40" height="40" />
+                </span>
                 <div>
                   <h4>Time-based OTP (TOTP)</h4>
                   <p>
@@ -517,19 +496,15 @@ const faqItems = [
                 </div>
               </div>
               <div class="control-item">
-                <span class="control-item__icon" aria-hidden="true">✉️</span>
+                <span class="control-item__icon" aria-hidden="true">
+                  <img src="/images/wireguard-client/icons/key.png" alt="" width="40" height="40" />
+                </span>
                 <div>
                   <h4>Email Verification</h4>
                   <p>Send verification codes via email for passwordless authentication.</p>
                 </div>
               </div>
-              <div class="control-item">
-                <span class="control-item__icon" aria-hidden="true">🔑</span>
-                <div>
-                  <h4>WebAuthn / FIDO2</h4>
-                  <p>Hardware security keys and biometric authentication support.</p>
-                </div>
-              </div>
+              
             </div>
           </div>
 
@@ -541,26 +516,24 @@ const faqItems = [
                 capabilities as desktop.
               </p>
               <a class="control-panel__cta" href="/download/">
-                Install defguard control plane (it&apos;s free!)
+                Install free Defguard control plane.
               </a>
             </div>
             <div class="control-panel__list">
               <div class="control-item">
-                <span class="control-item__icon" aria-hidden="true">📱</span>
+                <span class="control-item__icon" aria-hidden="true">
+                  <img src="/images/wireguard-client/icons/devices.png" alt="" width="40" height="40" />
+                </span>
                 <div>
                   <h4>iOS &amp; Android</h4>
                   <p>Native apps available on App Store and Google Play.</p>
                 </div>
               </div>
+             
               <div class="control-item">
-                <span class="control-item__icon" aria-hidden="true">🔔</span>
-                <div>
-                  <h4>Push Notifications</h4>
-                  <p>Real-time alerts for connection events and security notifications.</p>
-                </div>
-              </div>
-              <div class="control-item">
-                <span class="control-item__icon" aria-hidden="true">✅</span>
+                <span class="control-item__icon" aria-hidden="true">
+                  <img src="/images/wireguard-client/icons/lock-closed.png" alt="" width="40" height="40" />
+                </span>
                 <div>
                   <h4>Biometric Unlock</h4>
                   <p>Use Face ID, Touch ID, or fingerprint to unlock the app.</p>
@@ -582,31 +555,29 @@ const faqItems = [
                 distributed teams and multi-site deployments.
               </p>
               <a class="control-panel__cta" href="/download/">
-                Install defguard control plane (it&apos;s free!)
+                Install free Defguard control plane.
               </a>
             </div>
             <div class="control-panel__list">
               <div class="control-item">
-                <span class="control-item__icon" aria-hidden="true">🛰️</span>
+                <span class="control-item__icon" aria-hidden="true">
+                  <img src="/images/wireguard-client/icons/gateway.png" alt="" width="40" height="40" />
+                </span>
                 <div>
                   <h4>Multi-Gateway Support</h4>
                   <p>Connect to multiple WireGuard gateways across different regions.</p>
                 </div>
               </div>
               <div class="control-item">
-                <span class="control-item__icon" aria-hidden="true">🧭</span>
+                <span class="control-item__icon" aria-hidden="true">
+                  <img src="/images/wireguard-client/icons/location-tracking.png" alt="" width="40" height="40" />
+                </span>
                 <div>
                   <h4>Location Policies</h4>
                   <p>Define routing and access policies per location.</p>
                 </div>
               </div>
-              <div class="control-item">
-                <span class="control-item__icon" aria-hidden="true">🗂️</span>
-                <div>
-                  <h4>Failover &amp; Load Balancing</h4>
-                  <p>Automatic failover between locations for high availability.</p>
-                </div>
-              </div>
+              
             </div>
           </div>
 
@@ -623,31 +594,29 @@ const faqItems = [
                 expiration and one-time use.
               </p>
               <a class="control-panel__cta" href="/download/">
-                Install defguard control plane (it&apos;s free!)
+                Install free Defguard control plane.
               </a>
             </div>
             <div class="control-panel__list">
               <div class="control-item">
-                <span class="control-item__icon" aria-hidden="true">🔗</span>
+                <span class="control-item__icon" aria-hidden="true">
+                  <img src="/images/wireguard-client/icons/arrow-right.png" alt="" width="40" height="40" />
+                </span>
                 <div>
                   <h4>Enrollment Links</h4>
                   <p>Generate secure, time-limited enrollment links for new users.</p>
                 </div>
               </div>
               <div class="control-item">
-                <span class="control-item__icon" aria-hidden="true">🧾</span>
+                <span class="control-item__icon" aria-hidden="true">
+                  <img src="/images/wireguard-client/icons/config.png" alt="" width="40" height="40" />
+                </span>
                 <div>
                   <h4>QR Code Enrollment</h4>
                   <p>Scan QR codes for instant mobile device enrollment.</p>
                 </div>
               </div>
-              <div class="control-item">
-                <span class="control-item__icon" aria-hidden="true">✅</span>
-                <div>
-                  <h4>Approval Workflows</h4>
-                  <p>Optional admin approval before device access is granted.</p>
-                </div>
-              </div>
+             
             </div>
           </div>
         </div>
@@ -673,6 +642,257 @@ const faqItems = [
 
           tabs.forEach((tab) => {
             tab.addEventListener("click", () => activateTab(tab));
+          });
+        })();
+      </script>
+    </section>
+
+    <section id="wireguard-downloads" class="wireguard-downloads" aria-label="All downloads">
+      <div class="wireguard-downloads__inner">
+        <div class="wireguard-downloads__header">
+          <div class="wireguard-downloads__title-group">
+            <h2>All Downloads</h2>
+            <p>Choose the right package for your platform.</p>
+          </div>
+          <div class="wireguard-downloads__search">
+            <input
+              type="search"
+              placeholder="Search: msi, deb, rpm, arm..."
+              class="download-search"
+              aria-label="Search downloads"
+            />
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.35-4.35" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Desktop Platforms (Windows & macOS) -->
+        <div class="wireguard-downloads__desktop">
+          <div class="download-column">
+            <div class="download-column__header">
+              <h3>Windows</h3>
+              <p>Windows 10/11</p>
+            </div>
+            <div class="download-cards">
+              <div class="download-card">
+                <div class="download-card__content">
+                  <h4>MSI (x64)</h4>
+                  <p>For Windows 10/11. Recommended for enterprise MDM deployment.</p>
+                </div>
+                <a
+                  href="https://github.com/DefGuard/client/releases/download/v1.6.4/Defguard_1.6.4_x64_en-US.msi"
+                  class="download-btn download-btn--primary"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                  Download
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="download-column">
+            <div class="download-column__header">
+              <h3>macOS</h3>
+              <p>Apple Silicon and Intel</p>
+            </div>
+            <div class="download-cards">
+              <div class="download-card">
+                <div class="download-card__content">
+                  <h4>App Store (Universal)</h4>
+                  <p>Auto updates. Best for managed fleets.</p>
+                </div>
+                <a
+                  href="https://apps.apple.com/pl/app/defguard-desktop-client/id6754601166?mt=12"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="download-btn download-btn--primary"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                  View
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Linux Section -->
+        <div class="wireguard-downloads__linux">
+          <div class="download-column download-column--full">
+            <div class="download-column__header">
+              <h3>Linux</h3>
+              <p>DEB, RPM, AUR</p>
+            </div>
+            <div class="download-cards download-cards--grid">
+              <div class="download-card">
+                <div class="download-card__content">
+                  <h4>Debian (x86)</h4>
+                  <p>For Debian, Ubuntu, and derivatives.</p>
+                </div>
+                <a
+                  href="https://github.com/DefGuard/client/releases/download/v1.6.4/defguard-client_1.6.4_amd64.deb"
+                  class="download-btn download-btn--primary"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                  Download
+                </a>
+              </div>
+
+              <div class="download-card">
+                <div class="download-card__content">
+                  <h4>Debian (ARM)</h4>
+                  <p>For Debian ARM64 and derivatives.</p>
+                </div>
+                <a
+                  href="https://github.com/DefGuard/client/releases/download/v1.6.4/defguard-client_1.6.4_arm64.deb"
+                  class="download-btn download-btn--secondary"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                  Download
+                </a>
+              </div>
+
+              <div class="download-card">
+                <div class="download-card__content">
+                  <h4>Debian 12/13 - Ubuntu 22 (x86)</h4>
+                  <p>For Debian 12/13 and Ubuntu 22.04 LTS (x86).</p>
+                </div>
+                <a
+                  href="https://github.com/DefGuard/client/releases/download/v1.6.4/defguard-client1.6.4_amd64_ubuntu-22-04-lts.deb"
+                  class="download-btn download-btn--secondary"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                  Download
+                </a>
+              </div>
+
+              <div class="download-card">
+                <div class="download-card__content">
+                  <h4>Debian 12/13 - Ubuntu 22 (ARM)</h4>
+                  <p>For Debian 12/13 and Ubuntu 22.04 LTS (ARM).</p>
+                </div>
+                <a
+                  href="https://github.com/DefGuard/client/releases/download/v1.6.4/defguard-client1.6.4_arm64_ubuntu-22-04-lts.deb"
+                  class="download-btn download-btn--secondary"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                  Download
+                </a>
+              </div>
+
+              <div class="download-card">
+                <div class="download-card__content">
+                  <h4>Fedora (x86)</h4>
+                  <p>For Fedora, RHEL, CentOS, openSUSE.</p>
+                </div>
+                <a
+                  href="https://github.com/DefGuard/client/releases/download/v1.6.4/defguard-client-1.6.4-1.x86_64.rpm"
+                  class="download-btn download-btn--secondary"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                  Download
+                </a>
+              </div>
+
+              <div class="download-card">
+                <div class="download-card__content">
+                  <h4>Fedora (ARM)</h4>
+                  <p>For Fedora ARM, RHEL ARM, CentOS ARM.</p>
+                </div>
+                <a
+                  href="https://github.com/DefGuard/client/releases/download/v1.6.4/defguard-client-1.6.4-1.aarch64.rpm"
+                  class="download-btn download-btn--secondary"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                  Download
+                </a>
+              </div>
+
+              <div class="download-card">
+                <div class="download-card__content">
+                  <h4>ArchLinux</h4>
+                  <p>Arch Linux User Repository</p>
+                </div>
+                <a
+                  href="https://aur.archlinux.org/packages/defguard-client"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="download-btn download-btn--secondary"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                  View
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script is:inline>
+        (() => {
+          const searchInput = document.querySelector(".download-search");
+          const downloadCards = document.querySelectorAll(".download-card");
+          const downloadLinks = document.querySelectorAll(".download-link");
+
+          if (!searchInput) return;
+
+          const filterDownloads = (query) => {
+            const lowerQuery = query.toLowerCase();
+            const allItems = [...downloadCards, ...downloadLinks];
+
+            allItems.forEach((item) => {
+              const text = item.textContent.toLowerCase();
+              const matches = text.includes(lowerQuery);
+              item.style.display = matches ? "" : "none";
+            });
+          };
+
+          searchInput.addEventListener("input", (e) => {
+            filterDownloads(e.target.value);
           });
         })();
       </script>
@@ -704,6 +924,28 @@ const faqItems = [
 </ProductLayout>
 
 <style lang="scss" is:global>
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Hide navbar items and actions, keep only logo */
+  #desktop-nav {
+    .nav-items,
+    .nav-actions {
+      display: none;
+    }
+  }
+
+  #mobile-nav-bar {
+    #mobile-nav-menu-burger {
+      display: none;
+    }
+  }
+
+  #mobile-nav {
+    display: none;
+  }
+
   main#wireguard-client-page {
     --page-spacing-factor: 1;
     background-color: #fff;
@@ -844,24 +1086,26 @@ const faqItems = [
     .wireguard-trust__grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      border-top: 1px solid rgba(236, 72, 153, 0.2);
-      border-bottom: 1px solid rgba(236, 72, 153, 0.2);
-      background: #fff;
+      gap: 1.5rem;
+      background: transparent;
     }
 
     .trust-card {
       padding: 2rem 1.5rem;
       text-align: center;
       background: #fff;
-      border-right: 1px solid #e5e9f2;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 1rem;
-    }
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
 
-    .trust-card:last-child {
-      border-right: none;
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      }
     }
 
     .trust-card__icon {
@@ -871,11 +1115,19 @@ const faqItems = [
       align-items: center;
       justify-content: center;
       color: #111827;
-    }
 
-    .trust-card__icon svg {
-      width: 100%;
-      height: 100%;
+      img {
+        width: 48px;
+        height: 48px;
+        object-fit: contain;
+        filter: brightness(0);
+      }
+
+      svg {
+        width: 48px;
+        height: 48px;
+        stroke: #111827;
+      }
     }
 
     .trust-card__title {
@@ -897,33 +1149,11 @@ const faqItems = [
       .wireguard-trust__grid {
         grid-template-columns: repeat(2, 1fr);
       }
-
-      .trust-card {
-        border-right: 1px solid #e5e9f2;
-        border-bottom: 1px solid #e5e9f2;
-      }
-
-      .trust-card:nth-child(2n) {
-        border-right: none;
-      }
-
-      .trust-card:nth-last-child(-n + 2) {
-        border-bottom: none;
-      }
     }
 
     @include break-down(md) {
       .wireguard-trust__grid {
         grid-template-columns: 1fr;
-      }
-
-      .trust-card {
-        border-right: none;
-        border-bottom: 1px solid #e5e9f2;
-      }
-
-      .trust-card:last-child {
-        border-bottom: none;
       }
     }
 
@@ -999,18 +1229,18 @@ const faqItems = [
 
     .wireguard-compat__grid {
       display: grid;
-      gap: 2rem;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      max-width: 1100px;
+      gap: 3rem;
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 1400px;
       margin: 0 auto;
     }
 
     .wireguard-compat__card {
       margin: 0;
-      background: #fff;
-      border-radius: 18px;
-      padding: 1.5rem;
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+      background: transparent;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
       display: flex;
       flex-direction: column;
       gap: 1rem;
@@ -1018,14 +1248,24 @@ const faqItems = [
 
       figcaption {
         font-weight: 600;
+        font-size: 18px;
         color: var(--text-title);
+        margin-bottom: 0.5rem;
       }
 
       img {
         width: 100%;
         height: auto;
-        border-radius: 12px;
-        background: #f5f5f5;
+        border-radius: 0;
+        background: transparent;
+        max-width: 100%;
+      }
+    }
+
+    @include break-down(lg) {
+      .wireguard-compat__grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
       }
     }
 
@@ -1122,39 +1362,19 @@ const faqItems = [
 
     .wireguard-security {
       padding: page-spacing(80px) 1.5rem page-spacing(80px);
-      background: #fff;
+      background: #f9fafb;
     }
 
     .wireguard-security__inner {
       max-width: 1200px;
       margin: 0 auto;
-      background: #fff;
+      background: transparent;
     }
 
     .wireguard-security__heading {
       text-align: center;
-      margin-bottom: 4rem;
-      position: relative;
-      padding: 2rem 0;
-
-      &::before,
-      &::after {
-        content: "";
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 120px;
-        height: 2px;
-        background: #2e6fe3;
-      }
-
-      &::before {
-        top: 0;
-      }
-
-      &::after {
-        bottom: 0;
-      }
+      margin-bottom: 3rem;
+      padding: 0;
 
       h2 {
         margin: 0;
@@ -1170,7 +1390,7 @@ const faqItems = [
     .wireguard-security__grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
+      gap: 1.5rem;
       margin-bottom: 3rem;
     }
 
@@ -1178,14 +1398,16 @@ const faqItems = [
       background: #fff;
       border-radius: 16px;
       padding: 2rem;
-      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+      box-shadow: none;
+      border: none;
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      transition: box-shadow 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
 
       &:hover {
-        box-shadow: 0 8px 30px rgba(15, 23, 42, 0.12);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.1);
       }
 
       h3 {
@@ -1193,7 +1415,7 @@ const faqItems = [
         font-size: 20px;
         font-weight: 600;
         line-height: 28px;
-        color: #111827;
+        color: #000;
         font-family: "Geist", sans-serif;
       }
 
@@ -1201,7 +1423,7 @@ const faqItems = [
         margin: 0;
         font-size: 18px;
         line-height: 28px;
-        color: #6b7280;
+        color: #374151;
         flex: 1;
       }
     }
@@ -1211,15 +1433,22 @@ const faqItems = [
       height: 48px;
       border-radius: 0;
       background: transparent;
-      color: #374151;
       display: flex;
       align-items: flex-start;
       justify-content: flex-start;
       margin-bottom: 0.5rem;
 
+      img {
+        width: 48px;
+        height: 48px;
+        object-fit: contain;
+        filter: brightness(0);
+      }
+
       svg {
-        width: 32px;
-        height: 32px;
+        width: 48px;
+        height: 48px;
+        stroke: #000;
       }
     }
 
@@ -1249,6 +1478,18 @@ const faqItems = [
       line-height: 28px;
       color: #111827;
       padding-top: 2rem;
+    }
+
+    @include break-down(lg) {
+      .wireguard-security__grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .wireguard-security__heading h2 {
+        font-size: clamp(2rem, 5vw, 52px);
+        line-height: 1.2;
+      }
     }
 
     @include break-down(lg) {
@@ -1417,6 +1658,14 @@ const faqItems = [
       align-items: center;
       justify-content: center;
       font-size: 1.1rem;
+      flex-shrink: 0;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 8px;
+      }
     }
 
     .control-item h4 {
@@ -1442,6 +1691,296 @@ const faqItems = [
 
       .wireguard-control__tabs {
         gap: 0.5rem;
+      }
+    }
+
+    .wireguard-downloads {
+      padding: page-spacing(80px) 1.5rem page-spacing(80px);
+      background: #fff;
+      scroll-margin-top: 100px;
+    }
+
+    .wireguard-downloads__inner {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .wireguard-downloads__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 3rem;
+      gap: 2rem;
+    }
+
+    .wireguard-downloads__title-group {
+      h2 {
+        margin: 0 0 0.5rem;
+        font-size: 52px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 52px;
+        color: #2e6fe3;
+        font-family: "Geist", sans-serif;
+      }
+
+      p {
+        margin: 0;
+        font-size: 18px;
+        line-height: 28px;
+        color: #6b7280;
+      }
+    }
+
+    .wireguard-downloads__search {
+      position: relative;
+      flex-shrink: 0;
+
+      .download-search {
+        width: 300px;
+        padding: 0.75rem 2.5rem 0.75rem 1rem;
+        border: 1px solid #e5e9f2;
+        border-radius: 8px;
+        font-size: 16px;
+        color: #111827;
+        background: #fff;
+
+        &::placeholder {
+          color: #9ca3af;
+        }
+
+        &:focus {
+          outline: none;
+          border-color: #2e6fe3;
+        }
+      }
+
+      svg {
+        position: absolute;
+        right: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #9ca3af;
+        pointer-events: none;
+      }
+    }
+
+    .wireguard-downloads__desktop {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .wireguard-downloads__linux {
+      margin-top: 2rem;
+    }
+
+    .download-column {
+      display: flex;
+      flex-direction: column;
+
+      &--full {
+        width: 100%;
+      }
+    }
+
+    .download-column__header {
+      margin-bottom: 1.5rem;
+
+      h3 {
+        margin: 0 0 0.25rem;
+        font-size: 24px;
+        font-weight: 600;
+        color: #111827;
+        font-family: "Geist", sans-serif;
+      }
+
+      p {
+        margin: 0;
+        font-size: 16px;
+        color: #6b7280;
+      }
+    }
+
+    .download-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      &--grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1rem;
+      }
+    }
+
+    .download-card {
+      background: #fff;
+      border: 1px solid #e5e9f2;
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: border-color 0.2s ease;
+
+      &:hover {
+        border-color: #2e6fe3;
+      }
+
+      &--info {
+        background: #f9fafb;
+      }
+    }
+
+    .download-card__content {
+      flex: 1;
+
+      h4 {
+        margin: 0 0 0.5rem;
+        font-size: 18px;
+        font-weight: 600;
+        color: #111827;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        svg {
+          width: 16px;
+          height: 16px;
+          color: #6b7280;
+        }
+      }
+
+      p {
+        margin: 0 0 0.5rem;
+        font-size: 16px;
+        line-height: 24px;
+        color: #6b7280;
+      }
+    }
+
+    .download-card__size {
+      display: block;
+      font-size: 14px;
+      color: #9ca3af;
+      margin-top: 0.5rem;
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      width: 100%;
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      &--primary {
+        background: #2e6fe3;
+        color: #fff;
+        border-color: #2e6fe3;
+
+        &:hover {
+          background: #2563eb;
+          border-color: #2563eb;
+        }
+      }
+
+      &--secondary {
+        background: #fff;
+        color: #111827;
+        border-color: #e5e9f2;
+
+        &:hover {
+          border-color: #2e6fe3;
+          color: #2e6fe3;
+        }
+      }
+    }
+
+    .download-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #6b7280;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.2s ease;
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      &:hover {
+        color: #2e6fe3;
+      }
+
+      &--button {
+        padding: 0.75rem 1.5rem;
+        border: 1px solid #e5e9f2;
+        border-radius: 8px;
+        background: #f9fafb;
+        justify-content: center;
+        margin-top: 0.5rem;
+
+        &:hover {
+          border-color: #2e6fe3;
+          background: #fff;
+        }
+      }
+    }
+
+    .download-info {
+      padding: 1rem;
+      background: #f9fafb;
+      border-radius: 8px;
+      margin-top: 0.5rem;
+
+      p {
+        margin: 0;
+        font-size: 14px;
+        line-height: 20px;
+        color: #6b7280;
+
+        strong {
+          color: #111827;
+        }
+      }
+    }
+
+    @include break-down(lg) {
+      .wireguard-downloads__header {
+        flex-direction: column;
+      }
+
+      .wireguard-downloads__search {
+        width: 100%;
+
+        .download-search {
+          width: 100%;
+        }
+      }
+
+      .wireguard-downloads__desktop {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .download-cards--grid {
+        grid-template-columns: 1fr;
       }
     }
 
