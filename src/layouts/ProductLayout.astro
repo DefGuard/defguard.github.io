@@ -10,6 +10,7 @@ interface Props {
   url: string;
   tags?: string[];
   description?: string;
+  bodyClass?: string;
 }
 
 const {
@@ -20,6 +21,7 @@ const {
   url,
   tags = [],
   description,
+  bodyClass,
 } = Astro.props;
 const defaultDescription =
   "defguard - enterprise open-source SSO&VPN - the only open-source solution with real WireGuard® MFA/2FA & integrated OpenID Connect SSO";
@@ -32,6 +34,7 @@ const defaultDescription =
   imageWidth={imageWidth}
   imageHeight={imageHeight}
   url={url}
+  bodyClass={bodyClass}
 >
   <OrganizationJSONLD
     slot="schema"
