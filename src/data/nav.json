@@ -8,8 +8,12 @@
         "url": "/server"
       },
       {
-        "display": "Client",
+        "display": "Defguard Client with MFA",
         "url": "/client"
+      },
+      {
+        "display": "Free WireGuard Client",
+        "url": "/wireguard-client"
       },
       {
         "display": "True VPN MFA",
