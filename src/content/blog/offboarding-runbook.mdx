@@ -1,0 +1,210 @@
+---
+title: "VPN Access Offboarding Runbook"
+description: "Complete operational runbook for immediate revocation of VPN access during employee/contractor departures, ensuring complete access termination within 15 minutes."
+publishDate: 2026-01-22
+author: "Defguard Team"
+tags: ["security", "operations", "runbook", "vpn", "offboarding", "compliance", "wireguard"]
+draft: false
+---
+
+## Overview
+
+This runbook outlines the steps for immediate revocation of VPN access upon an employee's or contractor's departure, with the goal of achieving complete termination within 15 minutes of the offboarding trigger.
+
+It assumes a standard WireGuard or Defguard deployment—adjust timing expectations based on your specific environment. For Defguard-specific procedures (such as disabling user accounts, revoking devices/sessions, or managing group/location access), refer to the official documentation at [docs.defguard.net](https://docs.defguard.net).
+
+---
+
+## Trigger Events
+
+| Event | Response Time | Initiated By |
+|-------|---------------|--------------|
+| Voluntary resignation | Same day (before EOD) | HR + IT |
+| Involuntary termination | Immediate (before employee notified) | HR + IT |
+| Contractor end date | Scheduled (midnight before last day) | IT |
+| Security incident | Immediate | Security team |
+| Device loss/theft | Immediate | User report + IT |
+
+---
+
+## Pre-Offboarding Checklist
+
+- **Confirm identity**: Verify correct user account(s) to disable
+- **Identify all devices**: List all registered VPN devices for this user
+- **Notify stakeholders**: Inform manager of access removal timing
+- **Document reason**: Record offboarding type for audit trail
+
+---
+
+## Standalone WireGuard Revocation
+
+### Step 1: Identify Peer Public Keys
+
+```bash
+# List all peers (match by comment or AllowedIPs)
+grep -A5 "# username" /etc/wireguard/wg0.conf
+
+# Or check live config
+wg show wg0 | grep -A2 "peer:"
+```
+
+### Step 2: Remove Peer(s) from Server
+
+```bash
+# Remove peer immediately (takes effect instantly)
+wg set wg0 peer <PUBLIC_KEY> remove
+
+# Verify removal
+wg show wg0 peers | grep <PUBLIC_KEY>  # Should return nothing
+```
+
+### Step 3: Update Persistent Configuration
+
+```bash
+# Remove from config file to prevent restoration on restart
+wg-quick strip wg0 > /etc/wireguard/wg0.conf.new
+mv /etc/wireguard/wg0.conf.new /etc/wireguard/wg0.conf
+```
+
+### Step 4: Verify Disconnection
+
+```bash
+# Confirm no active handshake
+wg show wg0 latest-handshakes | grep <PUBLIC_KEY>  # Should be empty
+
+# Check for any residual connections
+ss -tunap | grep 51820
+```
+
+**Timing:** Revocation is instantaneous. Next handshake attempt will fail.
+
+---
+
+## Defguard-Managed Revocation
+
+### Step 1: Disable User Account
+
+1. Navigate to **Users** in Defguard admin panel
+2. Find user by name or email
+3. Click **Disable User** (not delete, preserves audit trail)
+
+**Effect:** All devices for this user immediately lose VPN access. No handshakes will succeed.
+
+### Step 2: Revoke Individual Devices (Optional)
+
+If only revoking specific devices while keeping user active:
+
+1. Navigate to **Users** → **[User]** → **Devices**
+2. Click **Revoke** on target device(s)
+3. Confirm revocation
+
+### Step 3: Verify in Audit Log
+
+1. Navigate to **Settings** → **Audit Logs**
+2. Filter by user or action type
+3. Confirm "User Disabled" or "Device Revoked" entry
+
+**Verify in [docs.defguard.net](https://docs.defguard.net):** Exact timing of access revocation after user disable
+
+---
+
+## Revocation Timing Benchmarks
+
+| Method | Time to Effect | Verification Method |
+|--------|----------------|---------------------|
+| WireGuard `wg set peer remove` | Instant | `wg show` (no peer listed) |
+| Defguard user disable | < 30 seconds | Audit log + device status |
+| Config file edit + restart | 1-5 seconds (during restart) | Service status |
+
+**Important:** WireGuard has no traditional "session" concept. Removing a peer prevents future handshakes but does not terminate an existing tunnel immediately. However, WireGuard sessions expire and require rekeying after 2 minutes (REKEY-AFTER-TIME), with a hard rejection after 3 minutes (REJECT-AFTER-TIME), so maximum effective delay is approximately 3 minutes.
+
+---
+
+## Post-Revocation Verification
+
+- **Peer removed from all gateways**: Check each WireGuard server
+- **No active handshakes**: Verify with `wg show`
+- **Audit log entry**: Confirm revocation is logged with timestamp
+- **User notified** (if appropriate): Confirm access has been removed
+- **Manager notified**: Confirm IT has completed revocation
+
+---
+
+## Multi-Gateway Environments
+
+If user had access to multiple VPN locations:
+
+```bash
+# Script to remove peer from all gateways
+for gateway in gateway1 gateway2 gateway3; do
+  ssh admin@$gateway "wg set wg0 peer <PUBLIC_KEY> remove"
+  echo "Removed from $gateway"
+done
+```
+
+**Defguard advantage:** Single user disable revokes access across all locations automatically.
+
+---
+
+## Rollback Procedure
+
+If revocation was made in error:
+
+### Standalone WireGuard
+```bash
+# Re-add peer with original configuration
+wg set wg0 peer <PUBLIC_KEY> allowed-ips <IP>/32 endpoint <ENDPOINT>
+
+# Update persistent config
+wg-quick save wg0
+```
+
+### Defguard
+1. Navigate to **Users** → **[User]**
+2. Click **Enable User**
+3. User's devices will reconnect automatically
+
+---
+
+## Escalation Matrix
+
+| Issue | Escalate To | Contact Method |
+|-------|-------------|----------------|
+| Cannot access gateway | Infrastructure team | Slack #infra-oncall |
+| Defguard admin access issue | Identity team | Slack #identity-oncall |
+| User claims still has access | Security team | security@company.com |
+| Compliance/legal question | Legal/HR | Direct contact |
+
+---
+
+## Audit Requirements
+
+For compliance, record:
+
+- [ ] Timestamp of revocation request
+- [ ] Timestamp of revocation completion
+- [ ] User/device identifier(s)
+- [ ] Operator who performed revocation
+- [ ] Reason (offboarding type)
+- [ ] Verification method used
+- [ ] Any anomalies or delays
+
+---
+
+## Common Issues
+
+| Problem | Cause | Resolution |
+|---------|-------|------------|
+| User still shows "connected" in monitoring | Stale data, session will expire | Wait 2-3 min, refresh |
+| Cannot find user's public key | Multiple devices, different naming | Check all device entries |
+| Revocation didn't persist after restart | Config file not updated | Run `wg-quick save` |
+| User re-added themselves | Compromised admin credentials | Investigate, rotate admin creds |
+
+---
+
+## Security Considerations
+
+- **Least privilege:** Offboarding operators should only have revoke permissions, not create
+- **Separation of duties:** HR triggers, IT executes, Security verifies
+- **Audit trail:** All revocations must be logged with timestamp and operator
+- **No exceptions:** VPN access is revoked regardless of "special circumstances"

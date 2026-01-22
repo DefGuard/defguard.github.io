@@ -1,0 +1,300 @@
+---
+title: "MTU/MSS Decision Tree for WireGuard Deployments"
+description: "Complete troubleshooting guide for MTU and MSS issues in WireGuard VPN deployments, including decision trees, discovery procedures, and configuration examples."
+publishDate: 2026-01-22
+author: "Defguard Team"
+tags: ["wireguard", "troubleshooting", "mtu", "mss", "networking", "vpn", "connectivity"]
+draft: false
+---
+
+## Overview
+
+This guide covers common MTU/MSS scenarios for WireGuard. For complex network topologies or carrier-specific issues, consult your network engineering team.
+
+---
+
+## Quick Reference
+
+| Path Type | Recommended MTU | Notes |
+|-----------|-----------------|-------|
+| Standard internet | 1420 | Safe default for most deployments |
+| PPPoE (DSL/Fiber) | 1412 | PPPoE adds 8-byte overhead |
+| Mobile/LTE | 1400 | Conservative for variable paths |
+| Satellite | 1400 | High latency, avoid fragmentation |
+| Data center (jumbo frames) | 1420 | WireGuard overhead still applies |
+| Double NAT | 1400 | Extra encapsulation possible |
+
+---
+
+## Decision Tree
+
+```
+START: User reports connectivity issues
+    │
+    ▼
+┌─────────────────────────────────────────┐
+│ Can user establish handshake?           │
+│ Check: wg show wg0 latest-handshakes    │
+└─────────────────────────────────────────┘
+    │
+    ├── NO ──► Handshake Issues (not MTU)
+    │          - Check firewall (UDP 51820)
+    │          - Check endpoint resolution
+    │          - Check key configuration
+    │
+    ▼ YES
+┌─────────────────────────────────────────┐
+│ Can user ping gateway (small packets)?  │
+│ ping -c 3 -s 64 <gateway_ip>            │
+└─────────────────────────────────────────┘
+    │
+    ├── NO ──► Routing Issues (not MTU)
+    │          - Check AllowedIPs
+    │          - Check server-side routing
+    │
+    ▼ YES
+┌─────────────────────────────────────────┐
+│ Do large transfers fail or stall?       │
+│ - Web pages partially load              │
+│ - SSH works, SCP fails                  │
+│ - Small pings OK, large pings timeout   │
+└─────────────────────────────────────────┘
+    │
+    ├── NO ──► Not an MTU issue
+    │          - Check bandwidth limits
+    │          - Check application issues
+    │
+    ▼ YES
+┌─────────────────────────────────────────┐
+│ ══════════════════════════════════════  │
+│         LIKELY MTU PROBLEM              │
+│ ══════════════════════════════════════  │
+└─────────────────────────────────────────┘
+    │
+    ▼
+Proceed to MTU Discovery below
+```
+
+---
+
+## MTU Discovery Procedure
+
+### Step 1: Find Working MTU (Client Side)
+
+Test from client through VPN tunnel to a host on the other side:
+
+```bash
+# Linux/macOS - Start high, decrease until success
+# -M do = don't fragment (Linux)
+# -D = don't fragment (macOS)
+
+# Linux - Start with 1472 (1500 - 28), decrease by 10s until success
+ping -c 3 -M do -s 1472 <target_ip>
+
+# macOS - Start with 1472
+ping -c 3 -D -s 1472 <target_ip>
+
+# Windows - Start with 1472
+ping -n 3 -f -l 1472 <target_ip>
+```
+
+### Step 2: Binary Search for Optimal MTU
+
+```bash
+# If 1472 fails, try progressively smaller values
+ping -c 3 -M do -s 1462 <target_ip>  # Try 10 bytes smaller
+
+# If that works, try larger values to find the boundary
+ping -c 3 -M do -s 1468 <target_ip>  # Try 6 bytes larger
+
+# Continue testing in 2-4 byte increments until you find the exact boundary
+```
+
+### Step 3: Calculate Interface MTU
+
+```
+Interface MTU = Successful ping size + 28 (IP + ICMP headers)
+
+Example: ping -s 1372 works
+Interface MTU = 1372 + 28 = 1400
+```
+
+---
+
+## MTU Overhead Breakdown
+
+```
+┌─────────────────────────────────────────────────────────┐
+│ Standard Ethernet Frame (1500 bytes)                    │
+├─────────────────────────────────────────────────────────┤
+│ ┌─────────────────────────────────────────────────────┐ │
+│ │ Outer IP Header (20 bytes)                          │ │
+│ ├─────────────────────────────────────────────────────┤ │
+│ │ UDP Header (8 bytes)                                │ │
+│ ├─────────────────────────────────────────────────────┤ │
+│ │ WireGuard Header (32 bytes)                         │ │
+│ ├─────────────────────────────────────────────────────┤ │
+│ │ ┌─────────────────────────────────────────────────┐ │ │
+│ │ │ Inner Packet (max 1440 bytes)                   │ │ │
+│ │ │   - Inner IP Header (20 bytes)                  │ │ │
+│ │ │   - Inner TCP Header (20 bytes)                 │ │ │
+│ │ │   - Payload (max 1400 bytes)                    │ │ │
+│ │ └─────────────────────────────────────────────────┘ │ │
+│ ├─────────────────────────────────────────────────────┤ │
+│ │ WireGuard Auth Tag (16 bytes)                       │ │
+│ └─────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────┘
+
+WireGuard overhead: 20 + 8 + 32 + 16 = 60 bytes (IPv4)
+                    40 + 8 + 32 + 16 = 80 bytes (IPv6)
+
+Safe WireGuard MTU: 1500 - 80 = 1420 (conservative, works for both IPv4 and IPv6)
+```
+
+---
+
+## Configuration Examples
+
+### WireGuard Interface MTU
+
+```ini
+# /etc/wireguard/wg0.conf
+[Interface]
+PrivateKey = <key>
+Address = 10.0.0.2/24
+MTU = 1400  # Conservative setting
+
+[Peer]
+PublicKey = <key>
+Endpoint = vpn.example.com:51820
+AllowedIPs = 0.0.0.0/0
+```
+
+### Linux: Set MTU on Running Interface
+
+```bash
+# Temporary (until restart)
+ip link set wg0 mtu 1400
+
+# Verify
+ip link show wg0 | grep mtu
+```
+
+### MSS Clamping (Alternative to MTU Adjustment)
+
+When you cannot change client MTU, clamp MSS on the server to prevent TCP segmentation issues:
+
+```bash
+# On WireGuard server - Option 1: Automatic clamping to PMTU
+iptables -t mangle -A FORWARD -i wg0 -p tcp \
+  --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
+
+# Option 2: Set explicit MSS (WireGuard MTU - 40 bytes for TCP/IP headers)
+# For standard IPv4 WireGuard MTU 1420: MSS = 1420 - 40 = 1380
+iptables -t mangle -A FORWARD -i wg0 -p tcp \
+  --tcp-flags SYN,RST SYN -j TCPMSS --set-mss 1380
+```
+
+---
+
+## Common Scenarios
+
+### Scenario 1: PPPoE Connection
+
+```
+Problem: User on DSL/Fiber with PPPoE cannot load large pages
+Cause: PPPoE adds 8-byte overhead, reducing path MTU to 1492
+
+Solution:
+- Set WireGuard MTU to 1412 (1492 - 80)
+- Or use MSS clamping to 1372 (1412 - 40)
+```
+
+### Scenario 2: Mobile User
+
+```
+Problem: Laptop user reports intermittent failures on mobile hotspot
+Cause: Mobile carriers often have variable/reduced MTU
+
+Solution:
+- Set WireGuard MTU to 1280 (minimum IPv6 MTU, always works)
+- Or use 1400 as reasonable compromise
+```
+
+### Scenario 3: Double NAT / CGNAT
+
+```
+Problem: User behind carrier-grade NAT has connectivity issues
+Cause: Additional encapsulation in carrier network
+
+Solution:
+- Reduce MTU to 1380 or lower
+- Test empirically with ping method above
+```
+
+### Scenario 4: Corporate Firewall
+
+```
+Problem: User behind corporate proxy/firewall drops large packets
+Cause: Firewall may filter or fragment oversized UDP
+
+Solution:
+- Test MTU from inside corporate network
+- May need MTU as low as 1280
+- Consider if firewall blocks UDP entirely (use TCP fallback if available)
+```
+
+---
+
+## Troubleshooting Commands
+
+### Check Current MTU
+
+```bash
+# Linux
+ip link show wg0 | grep mtu
+
+# macOS
+ifconfig utun3 | grep mtu  # utun number varies
+
+# Windows (PowerShell)
+Get-NetIPInterface | Where-Object {$_.InterfaceAlias -like "*WireGuard*"}
+```
+
+### Check Path MTU
+
+```bash
+# Linux - trace with MTU discovery
+tracepath <destination>
+
+# Check for ICMP fragmentation needed messages
+tcpdump -i eth0 'icmp[0] == 3 and icmp[1] == 4'
+```
+
+### Verify MSS Clamping
+
+```bash
+# Capture TCP SYN to see MSS option
+tcpdump -i wg0 'tcp[tcpflags] & tcp-syn != 0' -v
+```
+
+---
+
+## Best Practices
+
+1. **Start conservative**: Use 1400 or lower initially, optimize later
+2. **Test from affected client**: MTU issues are path-specific
+3. **Document per-location settings**: Different offices may need different MTU
+4. **Consider MSS clamping**: Often easier than changing client configs
+5. **Monitor for regressions**: ISP changes can alter path MTU
+
+---
+
+## Quick Fix Cheat Sheet
+
+| Symptom | Quick Fix | Permanent Fix |
+|---------|-----------|---------------|
+| Large transfers stall | Lower MTU to 1280 | Find optimal MTU with ping test |
+| Random disconnects | Lower MTU to 1400 | Test path MTU, set precisely |
+| Works on some networks | Set MTU to 1280 | Create per-network profiles |
+| VoIP/video issues | Check MTU + QoS | Ensure MTU consistent both ends |
