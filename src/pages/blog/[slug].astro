@@ -255,6 +255,57 @@ const hasCaseStudy =
         closeLightbox();
       }
     });
+
+    // Add anchors to headers
+    const addAnchorsToHeaders = () => {
+      const postContent = document.querySelector('.post-content');
+      if (!postContent) return;
+
+      // Function to generate a slug from text
+      const slugify = (text: string): string => {
+        return text
+          .toLowerCase()
+          .trim()
+          .replace(/[^\w\s-]/g, '') // Remove special characters
+          .replace(/[\s_-]+/g, '-') // Replace spaces and underscores with hyphens
+          .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
+      };
+
+      // Find all headers (h1-h4) in post content
+      const headers = postContent.querySelectorAll('h1, h2, h3, h4');
+      
+      headers.forEach((header) => {
+        const text = header.textContent || '';
+        if (!text.trim()) return;
+
+        // Generate ID from header text
+        let id = slugify(text);
+        
+        // Ensure unique IDs (in case of duplicate headers)
+        let counter = 1;
+        let uniqueId = id;
+        while (document.getElementById(uniqueId)) {
+          uniqueId = `${id}-${counter}`;
+          counter++;
+        }
+        id = uniqueId;
+
+        // Set the ID on the header
+        header.id = id;
+
+        // Create anchor link
+        const anchor = document.createElement('a');
+        anchor.href = `#${id}`;
+        anchor.className = 'header-anchor';
+        anchor.setAttribute('aria-label', `Link to ${text}`);
+        anchor.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>';
+        
+        // Insert anchor link before header text
+        header.insertBefore(anchor, header.firstChild);
+      });
+    };
+
+    addAnchorsToHeaders();
   });
 </script>
 
@@ -461,6 +512,14 @@ const hasCaseStudy =
           box-shadow: none;
         }
 
+        :global(h1),
+        :global(h2),
+        :global(h3),
+        :global(h4) {
+          position: relative;
+          scroll-margin-top: calc(var(--nav-height) + 1rem);
+        }
+
         :global(h1) {
           font-size: calc(2.25rem * var(--font-scale-factor));
           margin: 2rem 0 1rem;
@@ -487,6 +546,54 @@ const hasCaseStudy =
           margin: 1.25rem 0 0.75rem;
           font-weight: 400;
           color: var(--text-body-primary);
+        }
+
+        :global(.header-anchor) {
+          position: absolute;
+          left: -1.5rem;
+          top: 50%;
+          transform: translateY(-50%);
+          opacity: 0;
+          transition: opacity 0.2s ease;
+          color: var(--primary-color, #0c8ce0);
+          text-decoration: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 1.2rem;
+          height: 1.2rem;
+          
+          svg {
+            width: 100%;
+            height: 100%;
+          }
+
+          &:hover {
+            opacity: 1 !important;
+            color: var(--primary-color, #0c8ce0);
+          }
+
+          &:focus {
+            opacity: 1;
+            outline: 2px solid var(--primary-color, #0c8ce0);
+            outline-offset: 2px;
+            border-radius: 2px;
+          }
+        }
+
+        :global(h1:hover .header-anchor),
+        :global(h2:hover .header-anchor),
+        :global(h3:hover .header-anchor),
+        :global(h4:hover .header-anchor) {
+          opacity: 0.6;
+        }
+
+        @media (max-width: 768px) {
+          :global(.header-anchor) {
+            left: -1.2rem;
+            width: 1rem;
+            height: 1rem;
+          }
         }
 
         :global(p) {
