@@ -9,7 +9,18 @@ draft: true
 
 ## Overview
 
-This checklist is provided as operational guidance. Verify all commands in your environment before production use. For Defguard-specific procedures, consult [docs.defguard.net](https://docs.defguard.net).
+This is a practical checklist for safely rotating WireGuard cryptographic keys (private/public keypairs) to maintain security — e.g., as part of routine maintenance, compliance, suspected compromise, or offboarding. Verify all commands in your environment before production use. 
+
+For Defguard-specific procedures, see [docs.defguard.net](https://docs.defguard.net).
+
+## Important notes:
+
+- Always test commands in your specific environment first.
+- For Defguard-managed setups, use the web UI where possible (simpler and centralized) — see docs.defguard.net for exact steps.
+
+## Core principle:
+
+Rotate keys without causing prolonged outages, and always have a rollback path.
 
 ---
 
@@ -37,15 +48,16 @@ chmod 600 privatekey
 ```
 
 **Security Notes:**
-- Generate keys on the device that will use them (avoid network transfer of private keys)
-- Never reuse keys across devices
-- Never commit private keys to version control
+
+- Generate keys **on the device** that will use them (never transfer private keys over the network).
+- Never reuse the same keypair on multiple devices.
+- Never commit private keys to git, backups, or any version control.
 
 ---
 
-## Server-Side Update
+## Server-Side Update (Updating the Gateway)
 
-**Important:** Due to WireGuard's Cryptokey Routing, avoid configuring the same AllowedIPs for multiple peers simultaneously.
+**Important:** Due to WireGuard's Cryptokey Routing, avoid configuring the same AllowedIPs for multiple peers simultaneously. Order is critical to avoid breaking connectivity:
 
 1. **Generate new keys on client first**
 2. **Update client configuration** with new private key
@@ -61,10 +73,18 @@ wg set wg0 peer <NEW_PUBLIC_KEY> allowed-ips <CLIENT_IP>/32
 wg show wg0 latest-handshakes
 ```
 
-6. **Remove old peer:**
+6. **Once confirmed working, remove the old peer:**
 ```bash
 wg set wg0 peer <OLD_PUBLIC_KEY> remove
 ```
+
+**Note on old session persistence**: WireGuard has no instant "kill switch" for existing sessions. Remember the following after removing a peer:
+- Existing sessions continue until the next rekey attempt fails or the session expires.
+- Rekey is attempted ~every 2 minutes (REKEY_AFTER_TIME ≈ 120 seconds) if traffic is flowing.
+- Sessions are hard-rejected after ~3 minutes of no activity (REJECT_AFTER_TIME ≈ 180 seconds).
+- Maximum persistence of an old session is typically **3–5 minutes**, depending on traffic, keepalive settings (default 10s), and whether the peer is actively sending/receiving data. In practice, most old tunnels become unusable within 180–300 seconds after removal.
+
+**Key reminder:** Thanks to WireGuard’s “Cryptokey Routing,” never have two peers with overlapping AllowedIPs at the same time — it causes unpredictable routing.
 
 ---
 
@@ -78,16 +98,11 @@ PrivateKey = <NEW_PRIVATE_KEY>
 ```
 
 2. **Restart WireGuard interface**:
-```bash
-# Linux
-wg-quick down wg0 && wg-quick up wg0
 
-# macOS (Defguard client)
-# Use Defguard desktop app to refresh configuration
+Linux:```bash wg-quick down wg0 && wg-quick up wg0 ```
 
-# Windows (Defguard client)
-# Use Defguard desktop app to refresh configuration
-```
+macOS/Windows (Defguard client): Use the Defguard desktop app to refresh/pull new config
+
 
 3. **Verify connectivity**:
 ```bash
@@ -104,12 +119,12 @@ ping -c 3 <GATEWAY_IP>
 
 When using Defguard, key rotation is simplified through the web interface:
 
-- Access device management in the admin panel
-- Regenerate device keys or enrollment tokens as needed
-- Clients automatically sync new configurations
-- Monitor device status for successful reconnection
+- Log into Defguard admin panel → Device management section.
+- Regenerate keys or enrollment tokens for the target device(s).
+- Clients automatically receive and apply the new configuration (via Defguard sync).
+- Monitor device status in the UI for successful reconnection/handshake.
 
-**Benefit:** Centralized key management eliminates manual coordination between server and clients.
+**Benefit:** Centralized, no manual copy-paste of keys, automatic across multiple locations.
 
 **Verify in [docs.defguard.net](https://docs.defguard.net):** Current procedures for device key management and rotation
 
@@ -117,7 +132,7 @@ When using Defguard, key rotation is simplified through the web interface:
 
 ## Post-Rotation Verification
 
-- **Handshake confirmed**: `wg show` shows recent handshake (< 2 min)
+- **Handshake confirmed**: `wg show` shows recent handshake (within last 3–5 minutes)
 - **Traffic flowing**: Ping test to internal resources succeeds
 - **Audit log updated**: Rotation event logged (Defguard: check audit trail)
 - **Old keys destroyed**: Securely delete old private key files
@@ -131,13 +146,14 @@ If rotation fails:
 
 1. **Client side**: Restore previous private key in config
 2. **Server side**: Re-add old public key as peer
+```bash
+# Server-side rollback
+wg set wg0 peer <OLD_PUBLIC_KEY> allowed-ips <CLIENT_IP>/32
+```
 3. **Restart interfaces**: Both client and server
 4. **Investigate**: Check logs for handshake failures
 
 ```bash
-# Server-side rollback
-wg set wg0 peer <OLD_PUBLIC_KEY> allowed-ips <CLIENT_IP>/32
-
 # Check for errors
 dmesg | grep wireguard
 journalctl -u wg-quick@wg0 --since "10 minutes ago"
@@ -149,7 +165,7 @@ journalctl -u wg-quick@wg0 --since "10 minutes ago"
 
 | Scenario | Frequency | Trigger |
 |----------|-----------|---------|
-| Normal operations | 30 days (monthly) | Scheduled |
+| Normal operations | 3–12 months or per policy | Scheduled / Compliance-driven |
 | Suspected compromise | Immediate | Incident response |
 | Employee offboarding | Immediate | HR event |
 | Device loss/theft | Immediate | User report |
@@ -179,3 +195,10 @@ For compliance, log the following:
 - Verification method used
 
 **Defguard users:** Audit trail is automatic. Export via Settings → Audit Logs.
+
+## Core takeaway: ##
+WireGuard key rotation is straightforward but requires careful sequencing:
+
+generate → update client → add new peer on server → verify → remove old peer.
+
+Defguard dramatically simplifies this with centralized UI-based rotation and automatic client sync. Always prepare rollback, verify at every step, and document for compliance. Test in non-production first, and never expose private keys.
