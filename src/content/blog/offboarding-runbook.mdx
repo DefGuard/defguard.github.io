@@ -16,6 +16,7 @@ It assumes a standard WireGuard or Defguard deployment—adjust timing expectati
 ---
 
 ## Trigger Events
+Lists common scenarios that start the offboarding process, with expected response timing and who initiates:
 
 | Event | Response Time | Initiated By |
 |-------|---------------|--------------|
@@ -28,6 +29,7 @@ It assumes a standard WireGuard or Defguard deployment—adjust timing expectati
 ---
 
 ## Pre-Offboarding Checklist
+Quick preparation steps before revoking access:
 
 - **Confirm identity**: Verify correct user account(s) to disable
 - **Identify all devices**: List all registered VPN devices for this user
@@ -37,9 +39,11 @@ It assumes a standard WireGuard or Defguard deployment—adjust timing expectati
 ---
 
 ## Standalone WireGuard Revocation
+For environments without centralized management like Defguard:
 
-### Step 1: Identify Peer Public Keys
+### Step 1: Identify the peer’s public key(s)
 
+Search config file:
 ```bash
 # List all peers (match by comment or AllowedIPs)
 grep -A5 "# username" /etc/wireguard/wg0.conf
@@ -58,7 +62,7 @@ wg set wg0 peer <PUBLIC_KEY> remove
 wg show wg0 peers | grep <PUBLIC_KEY>  # Should return nothing
 ```
 
-### Step 3: Update Persistent Configuration
+### Step 3: Update the persistent configuration file
 
 ```bash
 # Remove from config file to prevent restoration on restart
@@ -71,12 +75,16 @@ mv /etc/wireguard/wg0.conf.new /etc/wireguard/wg0.conf
 ```bash
 # Confirm no active handshake
 wg show wg0 latest-handshakes | grep <PUBLIC_KEY>  # Should be empty
+```
 
+Check listening socket (check unexpected connections):
+
+```bash
 # Check for any residual connections
 ss -tunap | grep 51820
 ```
 
-**Timing:** Revocation is instantaneous. Next handshake attempt will fail.
+**Timing:** Revocation is instant for new connections. Existing tunnels expire naturally within ~2–3 minutes due to WireGuard’s rekey timers (REKEY-AFTER-TIME = 2 min, REJECT-AFTER-TIME = 3 min).
 
 ---
 
@@ -168,12 +176,12 @@ wg-quick save wg0
 
 ## Escalation Matrix
 
-| Issue | Escalate To | Contact Method |
-|-------|-------------|----------------|
-| Cannot access gateway | Infrastructure team | Slack #infra-oncall |
-| Defguard admin access issue | Identity team | Slack #identity-oncall |
-| User claims still has access | Security team | security@company.com |
-| Compliance/legal question | Legal/HR | Direct contact |
+| Issue | Escalate To |
+|-------|-------------|
+| Cannot access gateway | Infrastructure team |
+| Defguard admin access issue | Identity team |
+| User claims still has access | Security team |
+| Compliance/legal question | Legal/HR 
 
 ---
 
@@ -181,13 +189,13 @@ wg-quick save wg0
 
 For compliance, record:
 
-- [ ] Timestamp of revocation request
-- [ ] Timestamp of revocation completion
-- [ ] User/device identifier(s)
-- [ ] Operator who performed revocation
-- [ ] Reason (offboarding type)
-- [ ] Verification method used
-- [ ] Any anomalies or delays
+- Timestamp of revocation request
+- Timestamp of revocation completion
+- User/device identifier(s)
+- Operator who performed revocation
+- Reason (offboarding type)
+- Verification method used
+- Any anomalies or delays
 
 ---
 
@@ -208,3 +216,7 @@ For compliance, record:
 - **Separation of duties:** HR triggers, IT executes, Security verifies
 - **Audit trail:** All revocations must be logged with timestamp and operator
 - **No exceptions:** VPN access is revoked regardless of "special circumstances"
+
+## Core takeaway
+
+This runbook emphasizes speed, verification, and auditability. In Defguard environments, disabling a single user account is usually the fastest and safest method (often 30 seconds across all devices/locations). For raw WireGuard, manual peer removal + config update is effective but requires careful verification to avoid persistence or multi-gateway oversights. Always document and verify every step for compliance and security.

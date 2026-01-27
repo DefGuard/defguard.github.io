@@ -11,9 +11,16 @@ draft: true
 
 This guide covers common MTU/MSS scenarios for WireGuard. For complex network topologies or carrier-specific issues, consult your network engineering team.
 
+## Purpose:
+This is a complete troubleshooting guide focused on solving MTU (Maximum Transmission Unit) and MSS (Maximum Segment Size) problems in WireGuard VPN setups.
+These issues often cause symptoms like stalled large file transfers, partial web page loads, SSH working but SCP failing, or intermittent connectivity — even when the VPN handshake succeeds.
+
+For very complex networks or carrier-specific quirks, involve your network engineering team.
+
 ---
 
 ## Quick Reference
+Provides safe starting MTU values depending on the user's internet connection type:
 
 | Path Type | Recommended MTU | Notes |
 |-----------|-----------------|-------|
@@ -27,6 +34,7 @@ This guide covers common MTU/MSS scenarios for WireGuard. For complex network to
 ---
 
 ## Decision Tree
+The guide gives a logical flowchart to quickly determine whether your issue is MTU-related:
 
 ```
 START: User reports connectivity issues
@@ -78,6 +86,7 @@ Proceed to MTU Discovery below
 ---
 
 ## MTU Discovery Procedure
+Step-by-step process to empirically find the maximum safe packet size through the tunnel.
 
 ### Step 1: Find Working MTU (Client Side)
 
@@ -122,7 +131,11 @@ Interface MTU = 1372 + 28 = 1400
 ---
 
 ## MTU Overhead Breakdown
+Shows exactly where the overhead comes from in a WireGuard packet:
 
+- Outer: IP (20 IPv4 / 40 IPv6) + UDP (8) = 28 / 48 bytes
+- WireGuard: Header (32) + Authentication tag (16) = 48 bytes
+- Total overhead: 60 bytes (IPv4) or 80 bytes (IPv6)
 ```
 ┌─────────────────────────────────────────────────────────┐
 │ Standard Ethernet Frame (1500 bytes)                    │
@@ -156,6 +169,7 @@ Safe WireGuard MTU: 1500 - 80 = 1420 (conservative, works for both IPv4 and IPv6
 ## Configuration Examples
 
 ### WireGuard Interface MTU
+Set MTU directly in WireGuard config (recommended):
 
 ```ini
 # /etc/wireguard/wg0.conf
@@ -171,6 +185,7 @@ AllowedIPs = 0.0.0.0/0
 ```
 
 ### Linux: Set MTU on Running Interface
+Change MTU on a running interface (temporary):
 
 ```bash
 # Temporary (until restart)
@@ -180,7 +195,11 @@ ip link set wg0 mtu 1400
 ip link show wg0 | grep mtu
 ```
 
-### MSS Clamping (Alternative to MTU Adjustment)
+### MSS Clamping(alternative when you can’t/won’t change client MTU):
+
+- On the server, use iptables to clamp TCP MSS during handshake:
+- Automatic (best): ```bash--clamp-mss-to-pmtu```
+- Manual example (for MTU 1420): ```bash--set-mss 1380``` (1420 – 40 for TCP+IP headers)
 
 When you cannot change client MTU, clamp MSS on the server to prevent TCP segmentation issues:
 
@@ -201,48 +220,51 @@ iptables -t mangle -A FORWARD -i wg0 -p tcp \
 
 ### Scenario 1: PPPoE Connection
 
-```
-Problem: User on DSL/Fiber with PPPoE cannot load large pages
+
+Problem:
+User on DSL/Fiber with PPPoE cannot load large pages
 Cause: PPPoE adds 8-byte overhead, reducing path MTU to 1492
 
 Solution:
 - Set WireGuard MTU to 1412 (1492 - 80)
 - Or use MSS clamping to 1372 (1412 - 40)
-```
+
 
 ### Scenario 2: Mobile User
 
-```
-Problem: Laptop user reports intermittent failures on mobile hotspot
+
+Problem:
+Laptop user reports intermittent failures on mobile hotspot
 Cause: Mobile carriers often have variable/reduced MTU
 
 Solution:
 - Set WireGuard MTU to 1280 (minimum IPv6 MTU, always works)
 - Or use 1400 as reasonable compromise
-```
+
 
 ### Scenario 3: Double NAT / CGNAT
 
-```
-Problem: User behind carrier-grade NAT has connectivity issues
+
+Problem:
+User behind carrier-grade NAT has connectivity issues
 Cause: Additional encapsulation in carrier network
 
 Solution:
 - Reduce MTU to 1380 or lower
 - Test empirically with ping method above
-```
+
 
 ### Scenario 4: Corporate Firewall
 
-```
-Problem: User behind corporate proxy/firewall drops large packets
-Cause: Firewall may filter or fragment oversized UDP
+Problem:
+User behind corporate proxy/firewall drops large packets
+(Cause: Firewall may filter or fragment oversized UDP).
 
 Solution:
 - Test MTU from inside corporate network
 - May need MTU as low as 1280
 - Consider if firewall blocks UDP entirely (use TCP fallback if available)
-```
+
 
 ---
 
@@ -298,3 +320,7 @@ tcpdump -i wg0 'tcp[tcpflags] & tcp-syn != 0' -v
 | Random disconnects | Lower MTU to 1400 | Test path MTU, set precisely |
 | Works on some networks | Set MTU to 1280 | Create per-network profiles |
 | VoIP/video issues | Check MTU + QoS | Ensure MTU consistent both ends |
+
+## Core takeaway: ##
+
+Most WireGuard "connectivity but no large traffic" problems are MTU-related. Use the decision tree first, then discover the real path MTU with ping tests, set a safe value (often 1400 or lower), or apply server-side MSS clamping as a simpler fix.

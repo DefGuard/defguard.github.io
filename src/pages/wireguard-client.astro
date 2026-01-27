@@ -9,6 +9,7 @@ import FAQPageJSONLD from "../scripts/FAQPageJSONLD.astro";
 const title = "Best WireGuard Client - Free WireGuard VPN Client Download for Windows, macOS, Linux";
 const description = "Download the best free WireGuard client alternative for Windows, macOS, and Linux. Defguard Client is an open-source WireGuard VPN client with modern UI and enterprise security.";
 const url = "https://defguard.net/wireguard-client";
+const canonicalUrl = "https://defguard.net/wireguard-client";
 const featuredImage = "/images/png/defguard.png";
 const imageWidth = "1080";
 const imageHeight = "540";
@@ -64,6 +65,26 @@ const faqItems = [
     question: "Does Defguard support MFA?",
     answer:
       "Yes. When connected to a Defguard self-hosted control plane (server), you can enable multi-factor authentication for each connection.",
+  },
+  {
+    question: "Can Defguard Client only route specific traffic through the VPN?",
+    answer:
+      "Yes. You can use the predefined traffic option, which routes only the traffic your setup defines, instead of pushing everything through the tunnel.",
+  },
+  {
+    question: "Does Defguard Client keep syncing with the server all the time?",
+    answer:
+      "No. The desktop client stores instance info locally and doesn't communicate with Defguard outside the registration/update process, so what you see is a snapshot until you update the instance.",
+  },
+  {
+    question: "Any Linux requirements I should know about?",
+    answer:
+      "Two common ones: the client uses resolvconf for DNS management (often linked to resolvectl on newer distros), and your user may need to be in the defguard group to access the client's IPC socket. You might need to log out and back in (or reboot) after first install.",
+  },
+  {
+    question: "Does Defguard Client require the official WireGuard app on Windows?",
+    answer:
+      "No. On Windows, Defguard Client bundles the official WireGuard tools it needs. If you already have the official WireGuard client installed, Defguard Client installation can fail, so it's best to remove it first.",
   },
 ];
 
@@ -128,87 +149,82 @@ const faqItems = [
     "softwareRequirements": "Windows 10/11, macOS 11+, Linux (Debian 10+, Ubuntu 20.04+, Fedora 33+)",
     "browserRequirements": "Not required",
     "applicationSubCategory": "VPN Client",
-    "keywords": tags.join(", ")
+    "keywords": tags.join(", "),
+    "datePublished": "2023-01-01",
+    "dateModified": new Date().toISOString().split('T')[0]
   })} />
 
   <Navigation activeSlug="/wireguard-client/" />
 
   <main id="wireguard-client-page">
+    <div class="wireguard-hero-container">
     <section class="wireguard-hero">
       <div class="wireguard-hero__content">
-        <img
-          class="wireguard-hero__logo"
-          src="/svg/logo-full.svg"
-          alt="Defguard"
-          loading="eager"
-          width="160"
-          height="40"
-        />
         <h1 class="wireguard-hero__title">
-          <span class="wireguard-hero__title--accent">Free &amp; Open-Source</span>
-          <span class="wireguard-hero__title--primary">Best WireGuard VPN Client</span>
+          Free Open-Source<br />WireGuard VPN Client
         </h1>
         <p class="wireguard-hero__subtitle">
-          Secure &amp; compliant WireGuard alternative client for Windows, macOS, and Linux.
+          Everything you expect from WireGuard. Just easier.
         </p>
-        <!-- <p class="wireguard-hero__subtitle">
-          Cross-platform WireGuard desktop client with user-friendly UI.
-        </p> -->
-        <div class="wireguard-hero__stars">
-          <span class="wireguard-hero__star-icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" role="img" focusable="false">
-              <path
-                d="M12 2l2.97 6.02 6.64.97-4.8 4.68 1.13 6.61L12 17.77l-5.94 3.11 1.13-6.61-4.8-4.68 6.64-.97L12 2z"
-                fill="currentColor"
-              />
-            </svg>
-          </span>
-          <span>350 GitHub stars</span>
-        </div>
         <div class="wireguard-hero__platforms">
-          <img
-            class="platform-icon"
-            src="/images/wireguard-client/macos-icon.png"
-            alt="macOS"
-            loading="eager"
-            width="48"
-            height="48"
-          />
-          <img
-            class="platform-icon"
-            src="/images/wireguard-client/windows-icon.png"
-            alt="Windows"
-            loading="eager"
-            width="48"
-            height="48"
-          />
-          <img
-            class="platform-icon"
-            src="/images/wireguard-client/linux-logo.png"
-            alt="Linux"
-            loading="eager"
-            width="48"
-            height="48"
-          />
+      
+     
+          <a href="#wireguard-downloads" class="platform-icon-link">
+            <img
+              class="platform-icon"
+              src="/images/wireguard-client/windows-icon.png"
+              alt="Windows"
+              loading="eager"
+              width="48"
+              height="48"
+            />
+          </a>
+          <a href="#wireguard-downloads" class="platform-icon-link">
+            <img
+              class="platform-icon"
+              src="/images/wireguard-client/macos-icon.png"
+              alt="macOS"
+              loading="eager"
+              width="48"
+              height="48"
+            />
+          </a>
+          <a href="#wireguard-downloads" class="platform-icon-link">
+            <img
+              class="platform-icon"
+              src="/images/wireguard-client/linux-logo.png"
+              alt="Linux"
+              loading="eager"
+              width="48"
+              height="48"
+            />
+          </a>
         </div>
+        <p class="wireguard-hero__platform-desc">
+          Cross-platform, user-friendly UI. No CLI.
+        </p>
         <a class="wireguard-hero__cta" href="#wireguard-downloads">
-          Download Free Client
+          Download now
         </a>
       </div>
       <div class="wireguard-hero__visual">
-        <video
-          class="wireguard-hero__video"
-          src="/images/wireguard-client/defguard-vpn-client.mp4"
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-          poster="/images/wireguard-client/wg-client.jpg"
-        ></video>
+        <div class="wireguard-hero__video-wrapper">
+          <video
+            class="wireguard-hero__video"
+            src="/images/wireguard-client/defguard-vpn-client.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            poster="/images/wireguard-client/wg-client.jpg"
+          ></video>
+        </div>
       </div>
     </section>
+    </div>
 
+    <TrustedBy forceScroll={true} />
 
     <!-- <section class="wireguard-social-proof" aria-label="Social proof">
       <p class="wireguard-social-proof__eyebrow">Trusted by security-focused teams</p>
@@ -227,8 +243,6 @@ const faqItems = [
         </div>
       </div>
     </section> -->
-
-    <TrustedBy forceScroll={true} />
 
     <section class="wireguard-compat" aria-label="WireGuard compatibility">
       <div class="wireguard-compat__heading">
@@ -281,8 +295,10 @@ const faqItems = [
           <div class="compare-cell compare-cell--highlight">
             <span class="compare-yes"><a href="https://github.com/DefGuard/client/blob/main/LICENSE.md">Dual license with Open Source AGPLv3 core</a>
           </div>
-          <div class="compare-cell">
-            Windows: MIT. macOS/iOS: MIT. Android: Apache 2.0. Linux tooling (wg/wg-quick): GPL-2.0-only.
+          <div class="compare-cell compare-cell--multiline">
+            <div>Windows: MIT.</div>
+            <div>macOS/iOS: MIT. Android: Apache 2.0.</div>
+            <div>Linux tooling (wg/wg-quick): GPL-2.0-only.</div>
           </div>
         </div>
 
@@ -362,7 +378,7 @@ const faqItems = [
         <div class="wireguard-security__grid">
           <article class="security-card">
             <div class="security-card__icon" aria-hidden="true">
-              <img src="/images/wireguard-client/icons/protection.png" alt="" width="32" height="32" />
+              <img src="/images/wireguard-client/icons/protection.png" alt="Security protection icon" width="32" height="32" />
             </div>
             <h3>Penetration tested</h3>
             <p>
@@ -375,7 +391,7 @@ const faqItems = [
           </article>
           <article class="security-card">
             <div class="security-card__icon" aria-hidden="true">
-              <img src="/images/wireguard-client/icons/activity.png" alt="" width="32" height="32" />
+              <img src="/images/wireguard-client/icons/activity.png" alt="Security activity monitoring icon" width="32" height="32" />
             </div>
             <h3>Daily security scan.</h3>
             <p>
@@ -388,7 +404,7 @@ const faqItems = [
           </article>
           <article class="security-card">
             <div class="security-card__icon" aria-hidden="true">
-              <img src="/images/wireguard-client/icons/code.png" alt="" width="32" height="32" />
+              <img src="/images/wireguard-client/icons/code.png" alt="Open source code icon" width="32" height="32" />
             </div>
             <h3>Open-source codebase</h3>
             <p>
@@ -401,15 +417,14 @@ const faqItems = [
           </article>
         </div>
         <p class="wireguard-security__footer">
-          Defguard is ISO/IEC 27001:2023 certified and implements stringent security requirements
-          across its development processes and security testing.
+          Defguard is ISO/IEC 27001:2023 certified and implements stringent security requirements across its development processes and security testing.
         </p>
       </div>
     </section>
 
     <section class="wireguard-trust" aria-label="Trust features">
       <div class="wireguard-trust__inner">
-        <h2 class="wireguard-trust__heading">OPEN-SOURCE WIREGUARD CLIENT YOU CAN TRUST</h2>
+        <h2 class="wireguard-trust__heading">Open-source WireGuard client you can trust</h2>
         <div class="wireguard-trust__grid">
           <div class="trust-card">
             <div class="trust-card__icon" aria-hidden="true">
@@ -535,7 +550,7 @@ const faqItems = [
               </div>
               <div class="control-item">
                 <span class="control-item__icon" aria-hidden="true">
-                  <img src="/images/wireguard-client/icons/lock-closed.png" alt="" width="40" height="40" />
+                  <img src="/images/wireguard-client/icons/access-settings.png" alt="" width="40" height="40" />
                 </span>
                 <div>
                   <h4>Access Control</h4>
@@ -615,7 +630,7 @@ const faqItems = [
              
               <div class="control-item">
                 <span class="control-item__icon" aria-hidden="true">
-                  <img src="/images/wireguard-client/icons/lock-closed.png" alt="" width="40" height="40" />
+                  <img src="/images/wireguard-client/icons/protection.png" alt="" width="40" height="40" />
                 </span>
                 <div>
                   <h4>Biometric Unlock</h4>
@@ -1030,7 +1045,7 @@ const faqItems = [
       </script>
     </section>
 
-    <section class="wireguard-faq" aria-label="Frequently asked questions" itemscope itemtype="https://schema.org/FAQPage">
+    <section class="wireguard-faq" aria-label="Frequently asked questions">
       <div class="wireguard-faq__inner">
         <div class="wireguard-faq__heading">
           <h2>Frequently asked questions</h2>
@@ -1038,15 +1053,13 @@ const faqItems = [
         </div>
         <div class="wireguard-faq__list">
           {faqItems.map((item, index) => (
-            <details class="wireguard-faq__item" itemscope itemtype="https://schema.org/Question">
-              <summary itemprop="name">
+            <details class="wireguard-faq__item">
+              <summary>
                 <span>{item.question}</span>
                 <span class="wireguard-faq__icon" aria-hidden="true">+</span>
               </summary>
-              <div class="wireguard-faq__answer" itemscope itemtype="https://schema.org/Answer">
-                <div itemprop="text">
-                  <p>{item.answer}</p>
-                </div>
+              <div class="wireguard-faq__answer">
+                <p>{item.answer}</p>
               </div>
             </details>
           ))}
@@ -1068,11 +1081,25 @@ const faqItems = [
     .nav-actions {
       display: none;
     }
+    
+    /* Center the logo */
+    justify-content: center;
+    
+    .nav-logo {
+      margin: 0 auto;
+    }
   }
-
+  
   #mobile-nav-bar {
     #mobile-nav-menu-burger {
       display: none;
+    }
+    
+    /* Center the logo on mobile */
+    justify-content: center !important;
+    
+    .nav-logo {
+      margin: 0 auto !important;
     }
   }
 
@@ -1083,117 +1110,306 @@ const faqItems = [
   main#wireguard-client-page {
     --page-spacing-factor: 1;
     background-color: #fff;
+    padding-top: var(--nav-height);
+
+    .wireguard-hero-container {
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
 
     .wireguard-hero {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      padding: page-spacing(80px) 1.5rem page-spacing(40px);
-      gap: 2.5rem;
+      padding: 1rem 1rem;
+      gap: 1.5rem;
+      justify-content: flex-start;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      position: relative;
+      overflow-x: hidden;
+
+      @include break-up(sm) {
+        padding: 1.5rem 1.5rem;
+        gap: 1.75rem;
+      }
+
+      @include break-up(md) {
+        padding: 2rem 1.5rem;
+        gap: 2rem;
+      }
+
+      @include break-up(lg) {
+        padding: 2rem 2rem;
+        gap: 2.5rem;
+      }
     }
 
     .wireguard-hero__content {
-      max-width: 760px;
+      max-width: 100%;
+      width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 1rem;
+      flex-shrink: 0;
+      padding: 0 0.5rem;
+      box-sizing: border-box;
+      position: relative;
+      z-index: 1;
+      order: 1;
+
+      @include break-up(sm) {
+        max-width: 760px;
+        gap: 1rem;
+        padding: 0;
+      }
+
+      @include break-up(md) {
+        gap: 1.25rem;
+      }
+
+      @include break-up(lg) {
+        gap: 1.5rem;
+      }
     }
 
     .wireguard-hero__logo {
-      height: auto;
-      width: 160px;
+      display: none;
     }
 
     .wireguard-hero__title {
       margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-      font-weight: 700;
-    }
-
-    .wireguard-hero__title--accent {
-      color: #2e6fe3;
-      font-size: clamp(2rem, 4vw, 3.25rem);
+      color: #000000;
+      font-weight: 500;
+      font-size: clamp(2.5rem, 8vw, 4rem);
       line-height: 1.1;
-    }
-
-    .wireguard-hero__title--primary {
-      color: var(--text-title);
-      font-size: clamp(2.1rem, 4.2vw, 3.4rem);
-      line-height: 1.1;
+      text-align: center;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      font-family:
+        "Poppins",
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Oxygen,
+        Ubuntu,
+        Cantarell,
+        "Open Sans",
+        "Helvetica Neue",
+        sans-serif;
     }
 
     .wireguard-hero__subtitle {
-      margin: 0;
-      @include typography(paragraph);
-      color: var(--text-paragraph);
+      margin: 1.5rem 0 0;
+      color: #000000;
+      font-weight: 400;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      line-height: 1.5;
+      text-align: center;
+      max-width: 100%;
+      padding: 0 0.5rem;
+      box-sizing: border-box;
+
+      @include break-up(sm) {
+        padding: 0;
+      }
     }
 
-    .wireguard-hero__stars {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: #f4b740;
-      font-weight: 600;
-    }
+    .wireguard-hero__platform-desc {
+      margin: 1rem 0 0;
+      color: #000000;
+      font-weight: 400;
+      font-size: clamp(0.875rem, 1.5vw, 1rem);
+      line-height: 1.5;
+      text-align: center;
+      max-width: 100%;
+      padding: 0 0.5rem;
+      box-sizing: border-box;
 
-    .wireguard-hero__star-icon {
-      display: inline-flex;
-      color: #f4b740;
+      @include break-up(sm) {
+        padding: 0;
+      }
     }
 
     .wireguard-hero__platforms {
       display: flex;
-      gap: 0.75rem;
       flex-wrap: wrap;
+      align-items: center;
       justify-content: center;
+      gap: 1rem;
+      row-gap: 1rem;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      margin-top: 2rem;
+    }
+
+    .platform-icon-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      cursor: pointer;
+      flex-shrink: 0;
+      max-width: 100%;
+    }
+
+    .platform-icon-link:hover {
+      transform: scale(1.1);
+      opacity: 1;
     }
 
     .platform-icon {
-      width: 44px;
-      height: 44px;
+      width: 36px;
+      height: 36px;
+      max-width: 100%;
+      height: auto;
       object-fit: contain;
-      opacity: 0.9;
+      opacity: 0.6;
+      filter: grayscale(100%);
+      transition: opacity 0.2s ease;
+      flex-shrink: 0;
+
+      @include break-up(sm) {
+        width: 40px;
+        height: 40px;
+      }
+
+      @include break-up(md) {
+        width: 44px;
+        height: 44px;
+      }
+    }
+
+    .platform-icon-link:hover .platform-icon {
+      opacity: 0.8;
     }
 
     .wireguard-hero__cta {
-      margin-top: 0.5rem;
-      padding: 0.85rem 2.25rem;
-      border-radius: 12px;
-      background: #2e6fe3;
-      color: #fff;
+      margin-top: 2.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      background: #4278F3;
+      color: #ffffff;
       text-decoration: none;
-      font-weight: 600;
-      box-shadow: 0 12px 24px rgba(46, 111, 227, 0.25);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      font-weight: 500;
+      font-size: clamp(1rem, 2vw, 1.125rem);
+      transition: background-color 0.2s ease;
+      white-space: nowrap;
+      width: auto;
+      max-width: 100%;
+      flex-shrink: 0;
+      display: inline-block;
+      box-sizing: border-box;
+      border: none;
+      box-shadow: 0 2px 8px rgba(66, 120, 243, 0.25);
+      cursor: pointer;
+
+      @include break-up(sm) {
+        padding: 0.75rem 1.5rem;
+      }
+
+      @include break-up(md) {
+        padding: 0.75rem 1.5rem;
+      }
     }
 
     .wireguard-hero__cta:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 18px 30px rgba(46, 111, 227, 0.3);
+      background: #3565d9;
+      box-shadow: 0 4px 12px rgba(66, 120, 243, 0.3);
     }
 
     .wireguard-hero__visual {
-      width: min(100%, 1100px);
-      padding: 0 1rem;
+      width: 100%;
+      max-width: 100%;
+      padding: 0 0.5rem;
+      flex-shrink: 0;
+      min-height: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      transition: padding 0.3s ease;
+      position: relative;
+      z-index: 0;
+      order: 2;
+      margin-top: 0.5rem;
+      overflow: hidden;
+
+      @include break-up(sm) {
+        padding: 0 1rem;
+        max-width: min(100%, 1100px);
+        margin-top: 1rem;
+      }
+
+      @include break-up(md) {
+        padding: 0 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      @include break-up(lg) {
+        padding: 0 2rem;
+        margin-top: 2rem;
+      }
     }
 
     .wireguard-hero__visual img {
       width: 100%;
+      max-width: 100%;
       height: auto;
       border-radius: 16px;
       box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .wireguard-hero__video-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      background: #111;
+      aspect-ratio: 16 / 9;
+      box-sizing: border-box;
+
+      @include break-up(sm) {
+        max-width: min(95%, 1000px);
+        border-radius: 16px;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+      }
+
+      @include break-up(md) {
+        max-width: min(95%, 1100px);
+      }
+
+      @include break-up(lg) {
+        max-width: min(95%, 1200px);
+      }
+
+      @include break-up(xl) {
+        max-width: min(95%, 1300px);
+      }
     }
 
     .wireguard-hero__video {
+      position: absolute;
+      inset: 0;
       width: 100%;
-      height: auto;
-      border-radius: 16px;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
-      background: #111;
+      height: 100%;
+      object-fit: cover;
+      border-radius: inherit;
+      transition: all 0.3s ease;
+      display: block;
     }
 
     .wireguard-trust {
@@ -1208,13 +1424,9 @@ const faqItems = [
 
     .wireguard-trust__heading {
       text-align: center;
-      text-transform: uppercase;
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      font-weight: 600;
-      color: #111827;
-      letter-spacing: 0.05em;
+      @include typography(section);
+      color: var(--text-title);
       margin: 0 0 2.5rem;
-      font-family: "Geist", sans-serif;
     }
 
     .wireguard-trust__grid {
@@ -1266,17 +1478,15 @@ const faqItems = [
 
     .trust-card__title {
       margin: 0;
-      font-size: 1.125rem;
+      @include typography(h3);
       font-weight: 600;
       color: #111827;
-      font-family: "Geist", sans-serif;
     }
 
     .trust-card__subtitle {
       margin: 0;
-      font-size: 0.95rem;
+      @include typography(paragraph);
       color: #6b7280;
-      line-height: 1.5;
     }
 
     @include break-down(lg) {
@@ -1346,7 +1556,7 @@ const faqItems = [
 
       h2 {
         margin: 0 0 0.75rem;
-        font-size: clamp(2rem, 4vw, 2.75rem);
+        @include typography(section);
         color: var(--text-title);
 
         span {
@@ -1381,8 +1591,8 @@ const faqItems = [
       align-items: center;
 
       figcaption {
+        @include typography(h3);
         font-weight: 600;
-        font-size: 18px;
         color: var(--text-title);
         margin-bottom: 0.5rem;
       }
@@ -1414,7 +1624,7 @@ const faqItems = [
 
       h2 {
         margin: 0;
-        font-size: clamp(2rem, 4vw, 2.75rem);
+        @include typography(section);
         color: var(--text-title);
       }
     }
@@ -1446,8 +1656,7 @@ const faqItems = [
 
     .compare-cell {
       padding: 1.25rem 1.5rem;
-      font-size: 0.98rem;
-      line-height: 1.5;
+      @include typography(paragraph);
       color: var(--text-paragraph);
     }
 
@@ -1459,6 +1668,16 @@ const faqItems = [
 
     .compare-cell--highlight {
       background: #f3f5ff;
+    }
+
+    .compare-cell--multiline {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      
+      > div {
+        line-height: 1.4;
+      }
     }
 
     .compare-yes {
@@ -1512,12 +1731,8 @@ const faqItems = [
 
       h2 {
         margin: 0;
-        font-size: 52px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 60px;
+        @include typography(section);
         color: #000;
-        font-family: "Geist", sans-serif;
       }
     }
 
@@ -1546,17 +1761,14 @@ const faqItems = [
 
       h3 {
         margin: 0;
-        font-size: 20px;
+        @include typography(h3);
         font-weight: 600;
-        line-height: 28px;
         color: #000;
-        font-family: "Geist", sans-serif;
       }
 
       p {
         margin: 0;
-        font-size: 18px;
-        line-height: 28px;
+        @include typography(paragraph);
         color: #374151;
         flex: 1;
       }
@@ -1608,10 +1820,11 @@ const faqItems = [
       margin: 0;
       max-width: 100%;
       text-align: center;
-      font-size: 18px;
-      line-height: 28px;
+      @include typography(paragraph);
       color: #111827;
       padding-top: 2rem;
+      white-space: normal;
+      display: block;
     }
 
     @include break-down(lg) {
@@ -1621,8 +1834,7 @@ const faqItems = [
       }
 
       .wireguard-security__heading h2 {
-        font-size: clamp(2rem, 5vw, 52px);
-        line-height: 1.2;
+        @include typography(section);
       }
     }
 
@@ -1636,8 +1848,7 @@ const faqItems = [
         padding: 1.5rem 0;
 
         h2 {
-          font-size: clamp(2rem, 5vw, 52px);
-          line-height: 1.2;
+          @include typography(section);
         }
       }
     }
@@ -1658,22 +1869,15 @@ const faqItems = [
     }
 
     .wireguard-control__heading {
-      font-family: "Geist", sans-serif;
-
       h2 {
         margin: 0 0 0.75rem;
-        font-family: "Geist", sans-serif;
-        font-size: 52px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 52px;
+        @include typography(section);
         color: #000;
       }
 
       p {
         margin: 0 0 2rem;
-        font-size: 20px;
-        line-height: 30px;
+        @include typography(paragraph);
         color: #6b7280;
       }
     }
@@ -1728,15 +1932,14 @@ const faqItems = [
 
     .control-panel__main h3 {
       margin: 0;
-      font-size: 1.5rem;
+      @include typography(section);
       color: #111827;
     }
 
     .control-panel__main p {
       margin: 0;
+      @include typography(paragraph);
       color: #6b7280;
-      font-size: 18px;
-      line-height: 28px;
     }
 
     .control-panel__cta {
@@ -1804,14 +2007,24 @@ const faqItems = [
 
     .control-item h4 {
       margin: 0 0 0.25rem;
-      font-size: 1rem;
+      @include typography(h3);
       color: #111827;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .control-item__title-icon {
+      display: inline-flex;
+      align-items: center;
+      color: #2e6fe3;
+      flex-shrink: 0;
     }
 
     .control-item p {
       margin: 0;
+      @include typography(paragraph);
       color: #6b7280;
-      font-size: 0.95rem;
     }
 
     @include break-down(md) {
@@ -1850,18 +2063,13 @@ const faqItems = [
     .wireguard-downloads__title-group {
       h2 {
         margin: 0 0 0.5rem;
-        font-size: 52px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 52px;
+        @include typography(section);
         color: #2e6fe3;
-        font-family: "Geist", sans-serif;
       }
 
       p {
         margin: 0;
-        font-size: 18px;
-        line-height: 28px;
+        @include typography(paragraph);
         color: #6b7280;
       }
     }
@@ -1924,15 +2132,13 @@ const faqItems = [
 
       h3 {
         margin: 0 0 0.25rem;
-        font-size: 24px;
-        font-weight: 600;
+        @include typography(section);
         color: #111827;
-        font-family: "Geist", sans-serif;
       }
 
       p {
         margin: 0;
-        font-size: 16px;
+        @include typography(paragraph);
         color: #6b7280;
       }
     }
@@ -1973,7 +2179,7 @@ const faqItems = [
 
       h4 {
         margin: 0 0 0.5rem;
-        font-size: 18px;
+        @include typography(h3);
         font-weight: 600;
         color: #111827;
         display: flex;
@@ -1989,8 +2195,7 @@ const faqItems = [
 
       p {
         margin: 0 0 0.5rem;
-        font-size: 16px;
-        line-height: 24px;
+        @include typography(paragraph);
         color: #6b7280;
       }
     }
@@ -2134,19 +2339,14 @@ const faqItems = [
 
       h2 {
         margin: 0 0 1rem;
-        font-size: 52px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 52px;
+        @include typography(section);
         color: #000;
-        font-family: "Geist", sans-serif;
       }
 
       p {
         margin: 0;
+        @include typography(paragraph);
         color: #6b7280;
-        font-size: 20px;
-        line-height: 30px;
       }
     }
 
@@ -2179,10 +2379,9 @@ const faqItems = [
       display: flex;
       align-items: center;
       justify-content: space-between;
+      @include typography(paragraph);
       font-weight: 600;
       color: #111827;
-      font-size: 18px;
-      line-height: 28px;
       transition: color 0.2s ease;
     }
 
@@ -2226,14 +2425,55 @@ const faqItems = [
 
     .wireguard-faq__answer p {
       margin: 0;
+      @include typography(paragraph);
       color: #6b7280;
-      font-size: 18px;
-      line-height: 28px;
     }
 
     @include break-up(lg) {
       .wireguard-hero {
-        padding: page-spacing(120px) 2rem page-spacing(60px);
+        padding: 2rem 2rem;
+        gap: 2.5rem;
+      }
+    }
+
+    @include break-down(sm) {
+      .wireguard-hero {
+        gap: 1rem;
+        padding: 1rem 0.75rem;
+      }
+
+      .wireguard-hero__content {
+        gap: 0.75rem;
+        padding: 0 0.25rem;
+      }
+
+      .wireguard-hero__title {
+        gap: 0.25rem;
+      }
+
+      .wireguard-hero__platforms {
+        gap: 0.5rem;
+        row-gap: 0.5rem;
+      }
+
+      .wireguard-hero__visual {
+        padding: 0 0.25rem;
+        margin-top: 0.75rem;
+      }
+
+      .wireguard-hero__video-wrapper {
+        border-radius: 8px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    @include break-up(xl) {
+      .wireguard-hero__content {
+        max-width: 800px;
+      }
+
+      .wireguard-hero__visual {
+        max-width: 1400px;
       }
     }
   }
