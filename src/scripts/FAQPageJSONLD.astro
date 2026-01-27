@@ -11,17 +11,30 @@ const { entries } = Astro.props;
 // Usuwamy tagi HTML z odpowiedzi, aby JSON-LD był czystym tekstem
 const stripHtml = (html: string) => html.replace(/<[^>]*>?/gm, '');
 
+// Ensure entries is an array and filter out invalid entries
+const validEntries = Array.isArray(entries) ? entries.filter(entry => 
+  entry && 
+  typeof entry.question === 'string' && 
+  entry.question.trim() !== '' &&
+  typeof entry.answer === 'string' && 
+  entry.answer.trim() !== ''
+) : [];
+
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": entries.map(entry => ({
-    "@type": "Question",
-    "name": entry.question,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": stripHtml(entry.answer)
-    }
-  }))
+  "mainEntity": validEntries.length > 0 
+    ? validEntries.map(entry => ({
+        "@type": "Question",
+        "name": entry.question.trim(),
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": stripHtml(entry.answer).trim()
+        }
+      }))
+    : []
 };
 ---
-<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+{validEntries.length > 0 && (
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+)}
