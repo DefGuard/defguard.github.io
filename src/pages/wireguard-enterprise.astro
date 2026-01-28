@@ -1,0 +1,1334 @@
+---
+import Navigation from "../components/base/Navigation.astro";
+import ProductLayout from "../layouts/ProductLayout.astro";
+import AstroButton from "../components/AstroButton.astro";
+import FAQPageJSONLD from "../scripts/FAQPageJSONLD.astro";
+import TrustedBy from "./_home/components/TrustedBy.astro";
+
+const title = "Enterprise WireGuard VPN with MFA & controlled access";
+const description = "WireGuard is a great tunnel. Businesses still need identity, MFA, provisioning, policy, and visibility. This page explains why, and where Defguard fits.";
+const url = "https://defguard.net/wireguard-enterprise";
+const canonicalUrl = "https://defguard.net/wireguard-enterprise";
+const featuredImage = "/images/png/defguard.png";
+const imageWidth = "1080";
+const imageHeight = "540";
+const tags = [
+  "wireguard",
+  "wireguard-enterprise",
+  "wireguard-vpn",
+  "enterprise-vpn",
+  "wireguard-mfa",
+  "wireguard-control-plane",
+  "vpn",
+  "secure-vpn",
+  "enterprise-vpn"
+];
+
+const faqItems = [
+  {
+    question: "Is WireGuard better than OpenVPN for business?",
+    answer: "Often, WireGuard is a better building block with a simpler model and strong performance characteristics. But 'business-ready' depends on the operational layer you add for identity, provisioning, and auditing.",
+  },
+  {
+    question: "Is WireGuard an IPsec replacement?",
+    answer: "For many remote access and modern connectivity cases, it can be. IPsec still has deep legacy enterprise adoption and flexibility, so the right answer depends on requirements and constraints.",
+  },
+  {
+    question: "Does WireGuard support MFA?",
+    answer: "Not natively. WireGuard authenticates using keys and does not have built-in user login flows. MFA is typically enforced by a system layered on top.",
+  },
+  {
+    question: "Why is WireGuard hard to manage at scale?",
+    answer: "Because scale creates work around key distribution, reachability, NAT traversal, and keeping configs consistent across many devices and users.",
+  },
+  {
+    question: "What devices support WireGuard?",
+    answer: "Many routers and gateways support it, including UniFi, MikroTik, and TP-Link, plus most major OS platforms via native or userspace implementations.",
+  },
+  {
+    question: "What is a mesh VPN?",
+    answer: "A mesh VPN automates peer connectivity and coordination so devices can reach each other directly when possible, often using NAT traversal and relays when needed.",
+  },
+  {
+    question: "Are mesh VPN ACLs the same as a firewall?",
+    answer: "No. ACLs are useful access rules, but they do not fully replace a firewall's segmentation and enforcement model.",
+  },
+  {
+    question: "How does Defguard work with WireGuard?",
+    answer: "Defguard adds a control plane around WireGuard: identity and access workflows, MFA before connection, centralized configuration, and visibility that supports operations.",
+  },
+];
+
+---
+
+<ProductLayout
+  title={title}
+  featuredImage={featuredImage}
+  imageWidth={imageWidth}
+  imageHeight={imageHeight}
+  url={url}
+  tags={tags}
+  description={description}
+  bodyClass="white-background"
+>
+  <!-- FAQ Structured Data -->
+  <FAQPageJSONLD slot="schema" entries={faqItems} />
+
+  <Navigation activeSlug="/wireguard-enterprise/" />
+
+  <main id="wireguard-enterprise-page">
+    <!-- Hero Section -->
+    <section class="wg-enterprise-hero">
+      <div class="wg-enterprise-hero__inner">
+        <h1>Enterprise WireGuard VPN with MFA & controlled access</h1>
+        <p class="wg-enterprise-hero__description">
+          WireGuard is fast and secure. Defguard turns it into a managed system with a control plane for identity, provisioning, policy, visibility, and MFA at protocol level.
+        </p>
+
+        <div class="wg-enterprise-hero__value-grid">
+          <h2 class="wg-enterprise-hero__value-heading">Designed for real-world operations</h2>
+          <div class="wg-enterprise-hero__value-cards">
+            <article class="wg-enterprise-hero__value-card">
+              <h3>MFA-gated WireGuard access</h3>
+              <p>
+                Require users to complete multi-factor authentication before a WireGuard tunnel is established, not after.
+              </p>
+            </article>
+            <article class="wg-enterprise-hero__value-card">
+              <h3>Centralized config &amp; onboarding</h3>
+              <p>
+                Manage WireGuard configs from a single control plane and onboard or offboard devices without emailing files around.
+              </p>
+            </article>
+            <article class="wg-enterprise-hero__value-card">
+              <h3>Visibility &amp; audit trail</h3>
+              <p>
+                Keep a verifiable record of who connected, when, from where, and with which device for every VPN session.
+              </p>
+            </article>
+            <article class="wg-enterprise-hero__value-card">
+              <h3>ISO 27001 and data sovereignty</h3>
+              <p>
+                Run a security-audited platform in your own environment so identity, policies, and access data stay under your control.
+              </p>
+            </article>
+          </div>
+        </div>
+        <div class="wg-enterprise-hero__ctas">
+          <AstroButton text="Get free trial license key" />
+          <AstroButton text="Read the Defguard docs" link={{ href: "/docs/...", target: "_self" }} className="secondary" />
+        </div>
+        <div class="wg-enterprise-hero__logos">
+          <TrustedBy forceScroll={true} />
+        </div>
+      </div>
+    </section>
+
+    <!-- What is WireGuard? -->
+    <section id="what-is-wireguard" class="wg-enterprise-section">
+      <div class="wg-enterprise-section__inner">
+        <h2>What is WireGuard?</h2>
+        <p>
+          WireGuard is a modern VPN protocol designed to be small, fast, and easy to reason about. It uses a compact design and modern cryptography, with a configuration model built around keys and peers.
+        </p>
+        <p>A key distinction for buyers:</p>
+        <div class="wg-enterprise-callout wg-enterprise-callout--highlight">
+          <p><strong>WireGuard is the tunnel.</strong><br />
+          It encrypts traffic between peers, but it does not provide a full operations platform for onboarding, offboarding, policy workflows, or audit reporting.</p>
+        </div>
+
+        <h2>Tunnel vs control plane</h2>
+        <div class="wg-enterprise-comparison">
+          <div class="wg-enterprise-comparison__item">
+            <h4>Tunnel (WireGuard):</h4>
+            <ul>
+              <li>Encrypts IP traffic between peers</li>
+              <li>Authenticates peers via keys</li>
+              <li>Routes traffic based on allowed IPs</li>
+            </ul>
+          </div>
+          <div class="wg-enterprise-comparison__item">
+            <h4>Control Plane (what WireGuard omits):</h4>
+            <ul>
+              <li>Identity and group mapping (SSO, directory sync)</li>
+              <li>MFA and enrollment gating</li>
+              <li>Device onboarding and revocation</li>
+              <li>Policy and access boundaries</li>
+              <li>Visibility, logs, audit trail, delegated administration</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How WireGuard works -->
+    <section id="how-wireguard-works" class="wg-enterprise-section wg-enterprise-section--alt">
+      <div class="wg-enterprise-section__inner">
+        <h2>How WireGuard works</h2>
+        <div class="wg-enterprise-mini-grid">
+          <article class="wg-enterprise-mini-card">
+            <h3>Peers</h3>
+            <p>Each device is a peer with its own identity in the form of a keypair.</p>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <h3>Keys</h3>
+            <p>Authentication is based on public keys, not usernames and passwords.</p>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <h3>Allowed IPs</h3>
+            <p>Each peer defines which CIDRs are routed through the tunnel.</p>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <h3>Endpoints</h3>
+            <p>Optional IP:port where a peer can be reached (often impacted by NAT).</p>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <h3>Handshake</h3>
+            <p>A lightweight key exchange maintains secure session state.</p>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <h3>Transport</h3>
+            <p>WireGuard typically uses UDP for the tunnel.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why WireGuard is popular -->
+    <section id="why-wireguard-is-popular" class="wg-enterprise-section">
+      <div class="wg-enterprise-section__inner">
+        <h2>Why WireGuard is popular</h2>
+        <p>WireGuard gets adopted because it is practical and efficient:</p>
+        <div class="wg-enterprise-popular">
+          <article class="wg-enterprise-popular__card">
+            <h3>Performance in real environments</h3>
+            <p>Strong performance characteristics in many environments, with low protocol overhead and modern crypto.</p>
+          </article>
+          <article class="wg-enterprise-popular__card">
+            <h3>Simpler configuration model</h3>
+            <p>A simpler configuration model than many legacy VPN stacks—peers, keys, and allowed IPs instead of complex profiles.</p>
+          </article>
+          <article class="wg-enterprise-popular__card">
+            <h3>Roaming-friendly by design</h3>
+            <p>Good roaming behavior in real-world usage, such as changing client networks without constantly reconnecting.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Where teams get stuck -->
+    <section id="where-teams-get-stuck" class="wg-enterprise-section wg-enterprise-section--alt">
+      <div class="wg-enterprise-section__inner">
+        <h2>Where teams get stuck</h2>
+        <p>The hard part is not bringing up one tunnel. The hard part is doing it reliably for dozens or hundreds of users and devices:</p>
+        <div class="wg-enterprise-stuck">
+          <article class="wg-enterprise-stuck__card">
+            <h3>Key management at scale</h3>
+            <p>
+              Key distribution and rotation, plus drift across endpoints, turns simple configs into a constant coordination problem.
+            </p>
+          </article>
+          <article class="wg-enterprise-stuck__card">
+            <h3>Connectivity &amp; reachability</h3>
+            <p>
+              NAT traversal and reachability issues make it hard to keep tunnels stable for users spread across networks and devices.
+            </p>
+          </article>
+          <article class="wg-enterprise-stuck__card">
+            <h3>Lifecycle &amp; audit noise</h3>
+            <p>
+              Onboarding and offboarding without sharing configs in email or chat, and answering “who had access to what, and when”
+              without manual log hunting.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kernel vs userspace implementations -->
+    <section id="kernel-vs-userspace" class="wg-enterprise-section">
+      <div class="wg-enterprise-section__inner">
+        <h2>Kernel vs userspace implementations</h2>
+        <p>
+          WireGuard is integrated into the mainline Linux kernel (Linux 5.6+), which is why Linux is often described as the most direct implementation path.
+        </p>
+        <p>
+          On other platforms, WireGuard support exists and works well, but it is commonly delivered via userspace implementations or platform-specific integrations. That is normal. It is still useful to understand what "kernel-integrated" means when you compare operational tradeoffs, debugging, and performance expectations.
+        </p>
+      </div>
+    </section>
+
+    <!-- What "no MFA" means in practice -->
+    <section id="no-mfa-practice" class="wg-enterprise-section wg-enterprise-section--alt">
+      <div class="wg-enterprise-section__inner">
+        <h2>What "no MFA" means in practice</h2>
+        <p>
+          WireGuard authenticates peers by key possession. It does not provide user authentication or MFA as a built-in part of the protocol.
+        </p>
+        <p>In practice, that often means:</p>
+        <div class="wg-enterprise-mini-grid">
+          <article class="wg-enterprise-mini-card">
+            <h3>Protecting the admin UI</h3>
+            <p>You can protect the admin UI of a device (router, gateway, controller) with MFA or SSO, but that does not secure the tunnel itself.</p>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <h3>Key-based tunnel authentication</h3>
+            <p>The VPN tunnel itself is still authenticated by possession of a private key, not a user login flow.</p>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <h3>Impact of leaked keys</h3>
+            <p>If a private key or config leaks, access may persist until the peer is removed, keys are rotated, or policy blocks the traffic.</p>
+          </article>
+        </div>
+
+        <h3>Examples of devices that support WireGuard</h3>
+        <p>Many routers and gateways support WireGuard, including products from:</p>
+        <div class="wg-enterprise-mini-grid">
+          <article class="wg-enterprise-mini-card">
+            <img
+              src="/images/wireguard-enterprise/unifi-logo.png"
+              alt="UniFi logo"
+              class="wg-enterprise-vendor-logo"
+              loading="lazy"
+              width="180"
+              height="48"
+            />
+            <h3>UniFi</h3>
+            <p>Ubiquiti UniFi gateways and routers with built-in WireGuard support.</p>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <img
+              src="/images/wireguard-enterprise/mikrotik-logo.png"
+              alt="MikroTik logo"
+              class="wg-enterprise-vendor-logo"
+              loading="lazy"
+              width="180"
+              height="48"
+            />
+            <h3>MikroTik</h3>
+            <p>MikroTik routers and firewalls providing WireGuard tunnel termination.</p>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <img
+              src="/images/wireguard-enterprise/tplink-logo.png"
+              alt="TP-Link logo"
+              class="wg-enterprise-vendor-logo"
+              loading="lazy"
+              width="180"
+              height="48"
+            />
+            <h3>TP-Link</h3>
+            <p>TP-Link devices that offer WireGuard VPN features for branch and edge sites.</p>
+          </article>
+        </div>
+        <div class="wg-enterprise-callout wg-enterprise-callout--info">
+          <p><strong>Note:</strong> device support for WireGuard does not automatically imply user-level MFA for each VPN connection attempt. That needs to be enforced by the system built around the tunnel, such as Defguard.</p>
+        </div>
+
+        <h3>Defguard deployment guides</h3>
+        <div class="wg-enterprise-mini-grid">
+          <article class="wg-enterprise-mini-card">
+            <h3>UniFi + Defguard</h3>
+            <a href="/docs/..." class="wg-enterprise-deployment-button">Check the deployment guide</a>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <h3>MikroTik + Defguard</h3>
+            <a href="/docs/..." class="wg-enterprise-deployment-button">Check the deployment guide</a>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <h3>TP-Link + Defguard</h3>
+            <a href="/docs/..." class="wg-enterprise-deployment-button">Check the deployment guide</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- WireGuard vs IPsec -->
+    <section id="wireguard-vs-ipsec" class="wg-enterprise-section">
+      <div class="wg-enterprise-section__inner">
+        <h2>WireGuard vs IPsec</h2>
+        <p>
+          WireGuard can be a strong IPsec alternative for many modern remote access and site connectivity cases, especially when simplicity and performance matter.
+        </p>
+        <p>
+          IPsec remains entrenched in many enterprise environments and supports a wide range of scenarios through a large ecosystem of vendor implementations and configuration options.
+        </p>
+
+        <h3>Business-focused comparison</h3>
+        <div class="wg-enterprise-table-wrapper">
+          <table class="wg-enterprise-table">
+            <thead>
+              <tr>
+                <th>Dimension</th>
+                <th>WireGuard</th>
+                <th>IPsec</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Configuration model</td>
+                <td>Simple primitives (peers, keys, allowed IPs)</td>
+                <td>Often more moving parts and vendor profiles</td>
+              </tr>
+              <tr>
+                <td>Typical performance overhead</td>
+                <td>Often low overhead with modern defaults</td>
+                <td>Varies by suite, mode, and implementation</td>
+              </tr>
+              <tr>
+                <td>Operational clarity at scale</td>
+                <td>Easy per-peer configs, but sprawl without a control plane</td>
+                <td>Mature tooling exists, but complexity can reduce clarity</td>
+              </tr>
+              <tr>
+                <td>Crypto defaults</td>
+                <td>Opinionated, modern set</td>
+                <td>Flexible, can be strong, depends on choices and policy</td>
+              </tr>
+              <tr>
+                <td>Legacy enterprise adoption</td>
+                <td>Still catching up in some environments</td>
+                <td>Deep integration across vendors and existing programs</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- WireGuard vs OpenVPN -->
+    <section id="wireguard-vs-openvpn" class="wg-enterprise-section wg-enterprise-section--alt">
+      <div class="wg-enterprise-section__inner">
+        <h2>WireGuard vs OpenVPN and SSL VPN</h2>
+        <p>
+          WireGuard is commonly evaluated as a modern alternative to OpenVPN and SSL VPN stacks. OpenVPN and SSL VPN solutions are widely deployed and feature-rich, but they often bring more overhead and a larger surface area.
+        </p>
+
+        <h3>Business-focused comparison</h3>
+        <div class="wg-enterprise-table-wrapper">
+          <table class="wg-enterprise-table">
+            <thead>
+              <tr>
+                <th>Dimension</th>
+                <th>WireGuard</th>
+                <th>OpenVPN / SSL VPN</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Implementation path</td>
+                <td>Kernel integration on Linux; other platforms vary</td>
+                <td>Commonly userspace</td>
+              </tr>
+              <tr>
+                <td>Throughput and latency</td>
+                <td>Can be high, depends on routing, MTU, environment</td>
+                <td>Can be lower under load, varies by implementation</td>
+              </tr>
+              <tr>
+                <td>Scale and config sprawl</td>
+                <td>Simple configs, can explode without orchestration</td>
+                <td>Central servers exist, policies and client configs can still sprawl</td>
+              </tr>
+              <tr>
+                <td>Client UX and roaming</td>
+                <td>Often strong roaming behavior</td>
+                <td>Varies widely by client and vendor</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Official WireGuard client -->
+    <section id="official-client-minimal" class="wg-enterprise-section">
+      <div class="wg-enterprise-section__inner">
+        <h2>The official WireGuard client is minimal by design</h2>
+        <p>
+          The official WireGuard client focuses on bringing up a secure tunnel and staying out of the way. That minimalism is deliberate.
+        </p>
+
+        <h2>What the protocol does not provide</h2>
+        <div class="wg-enterprise-mini-grid">
+          <article class="wg-enterprise-mini-card">
+            <h3>User login flows</h3>
+            <p>WireGuard does not implement user-facing login flows on its own—it focuses purely on tunnel establishment.</p>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <h3>Built-in MFA</h3>
+            <p>There is no native multi-factor authentication step inside the WireGuard protocol; access is key-based.</p>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <h3>Centralized policy workflows</h3>
+            <p>Policy definition, approval, and rollout must be handled by systems around WireGuard, not by the client itself.</p>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <h3>Audit reporting as a system</h3>
+            <p>WireGuard does not provide an operational audit layer that tracks decisions and access history for compliance.</p>
+          </article>
+        </div>
+
+        <h2>What teams typically need at scale</h2>
+        <div class="wg-enterprise-mini-grid">
+          <article class="wg-enterprise-mini-card">
+            <h3>MFA-gated enrollment &amp; revocation</h3>
+            <p>
+              Enforce multi-factor authentication when users enroll or reconnect, and revoke access cleanly when they leave.
+            </p>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <h3>Remote, centralized config distribution</h3>
+            <p>
+              Push configuration changes from a single control plane instead of managing individual files on every endpoint.
+            </p>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <h3>Connection visibility &amp; history</h3>
+            <p>
+              See who connected, when, from where, and what they accessed without stitching together ad‑hoc logs.
+            </p>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <h3>Delegated administration</h3>
+            <p>
+              Use roles, groups, and permissions so operations teams can manage access without sharing root credentials.
+            </p>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <h3>Change control &amp; predictable offboarding</h3>
+            <p>
+              Apply policy changes in a controlled way and ensure access is removed reliably when people or devices leave.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Solution: Defguard -->
+    <section id="defguard-solution" class="wg-enterprise-section wg-enterprise-section--alt">
+      <div class="wg-enterprise-section__inner">
+        <h2>Defguard as the control plane for WireGuard</h2>
+        <div class="wg-enterprise-video-wrapper">
+          <video
+            class="wg-enterprise-video"
+            src="/images/wireguard-client/defguard-vpn-client.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            poster="/images/wireguard-client/wg-client.jpg"
+          ></video>
+        </div>
+        <p class="wg-enterprise-video-caption">
+          <em>Video is a placeholder - we will record Defguard admin panel instead.</em>
+        </p>
+        <p>
+          Defguard is the layer around WireGuard that turns a great protocol into something you can operate: governed onboarding, identity-driven access, and visibility you can audit.
+        </p>
+
+        <h2>MFA-gated WireGuard access</h2>
+        <p>
+          WireGuard itself authenticates peers using keys, not users. That is why "MFA inside plain WireGuard" is not a native concept.
+        </p>
+        <p>
+          Defguard adds an authentication step before a tunnel is established, so a leaked config alone does not equal access.
+        </p>
+        <p><strong>Why it matters:</strong></p>
+        <div class="wg-enterprise-mini-grid">
+          <article class="wg-enterprise-mini-card">
+            <h3>Stolen keys &amp; copied configs</h3>
+            <p>Stolen keys and copied configs are real-world failure modes that can grant unauthorized access if not protected by additional authentication.</p>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <h3>Shared devices</h3>
+            <p>Shared devices happen in many organizations, and key-based access alone doesn't distinguish between authorized and unauthorized users.</p>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <h3>Immediate offboarding</h3>
+            <p>Offboarding needs to be immediate and reliable—when someone leaves, their access should stop working right away, not after a key rotation cycle.</p>
+          </article>
+        </div>
+
+        <h2>Centralized config sync and device onboarding</h2>
+        <p>
+          Stop distributing configs via email or chat. Push changes centrally, reduce drift, and revoke access cleanly when users or devices should no longer connect.
+        </p>
+
+        <h2>Visibility and audit trail</h2>
+        <p>Operations need answers to:</p>
+        <div class="wg-enterprise-mini-grid">
+          <article class="wg-enterprise-mini-card">
+            <h3>Who connected</h3>
+            <p>Identify the specific user or identity that established each VPN connection for accountability and audit purposes.</p>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <h3>When they connected</h3>
+            <p>Track precise timestamps for connection start and end times to correlate with security events and compliance requirements.</p>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <h3>From where</h3>
+            <p>Record the source IP address and geographic location of each connection to detect anomalies and enforce policies.</p>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <h3>With which device</h3>
+            <p>Associate each connection with a specific device identifier to track device-level access patterns and manage device lifecycle.</p>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <h3>What access they had</h3>
+            <p>Document which network resources, applications, or services were accessible through the VPN tunnel during each session.</p>
+          </article>
+        </div>
+        <h2 class="wg-enterprise-visibility-heading">Defguard provides visibility and logs that support real operations</h2>
+
+        <div class="wg-enterprise-mini-grid">
+          <article class="wg-enterprise-mini-card">
+            <h3>Zero-touch provisioning</h3>
+            <p>
+              Enroll devices without manual config distribution. This is the difference between a lab setup and an operational rollout.
+            </p>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <h3>Identity, groups, and RBAC</h3>
+            <p>
+              Map access to users, groups, and roles. Delegate admin responsibility without sharing root access to your VPN layer.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Do I need mesh? -->
+    <section id="do-i-need-mesh" class="wg-enterprise-section">
+      <div class="wg-enterprise-section__inner">
+        <h2>Do I need mesh?</h2>
+        <p>
+          A mesh VPN usually means peer-to-peer connectivity between endpoints, plus a coordination layer that automates key distribution and connectivity. When direct connectivity is not possible, many mesh systems use NAT traversal techniques and relays.
+        </p>
+
+        <h3>Why mesh is attractive</h3>
+        <div class="wg-enterprise-mini-grid">
+          <article class="wg-enterprise-mini-card">
+            <h3>Fast to set up</h3>
+            <p>Stand up secure connectivity quickly without building out a large central VPN gateway footprint.</p>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <h3>Fewer central gateways</h3>
+            <p>Rely on fewer central gateways by letting peers connect directly where it makes sense for your topology.</p>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <h3>Great for device-to-device access</h3>
+            <p>Well-suited for teams that primarily need systems to talk directly to each other rather than through a hub.</p>
+          </article>
+        </div>
+
+        <h3>For corporate environments: not by default</h3>
+        <p>Many organizations want:</p>
+        <div class="wg-enterprise-mini-grid">
+          <article class="wg-enterprise-mini-card">
+            <h3>Segmented access</h3>
+            <p>Hub-and-spoke or segmented access patterns, not every-to-every connectivity for all peers.</p>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <h3>Policy-aligned access</h3>
+            <p>Policies that map cleanly to applications, environments, and business networks instead of ad-hoc rules.</p>
+          </article>
+          <article class="wg-enterprise-mini-card">
+            <h3>Clear enforcement points</h3>
+            <p>Auditing and enforcement patterns that benefit from clear choke points where traffic can be observed and controlled.</p>
+          </article>
+        </div>
+
+        <h3>Mesh ACLs are not a firewall</h3>
+        <p>
+          ACLs help express "who can talk to what" inside an overlay, but they do not fully replace a firewall's broader segmentation model, enforcement patterns, and inspection capabilities.
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="wg-enterprise-faq">
+      <div class="wg-enterprise-faq__inner">
+        <h2>FAQ</h2>
+        <div class="wg-enterprise-faq__list">
+          {faqItems.map((item) => (
+            <details class="wg-enterprise-faq__item">
+              <summary>
+                <span>{item.question}</span>
+                <span class="wg-enterprise-faq__icon" aria-hidden="true">+</span>
+              </summary>
+              <div class="wg-enterprise-faq__answer">
+                <p>{item.answer}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+  </main>
+</ProductLayout>
+
+<style lang="scss" is:global>
+  html {
+    scroll-behavior: smooth;
+  }
+
+  main#wireguard-enterprise-page {
+    --page-spacing-factor: 1;
+    background-color: #fff;
+    padding-top: var(--nav-height);
+
+    .wg-enterprise-hero {
+      padding: page-spacing(60px) 1.5rem page-spacing(40px);
+      text-align: center;
+      background: linear-gradient(180deg, #fff 0%, #f9fafb 100%);
+
+      @include break-up(md) {
+        padding: page-spacing(80px) 2rem page-spacing(60px);
+      }
+    }
+
+    .wg-enterprise-hero__inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .wg-enterprise-hero h1 {
+      margin: 0 0 1.5rem;
+      @include typography(section);
+      color: var(--text-title);
+      font-weight: 700;
+      line-height: 1.2;
+
+      @include break-up(md) {
+        font-size: clamp(2rem, 4vw, 3.5rem);
+      }
+    }
+
+    .wg-enterprise-hero__description {
+      margin: 0 0 1.5rem;
+      @include typography(paragraph);
+      color: var(--text-paragraph);
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      line-height: 1.6;
+    }
+
+    .wg-enterprise-hero__value-prop {
+      margin: 0 0 2rem;
+      @include typography(paragraph);
+      color: var(--text-title);
+      font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+      line-height: 1.6;
+    }
+
+    .wg-enterprise-hero__ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .wg-enterprise-hero__value-grid {
+      margin-top: 2.5rem;
+      margin-bottom: 2.5rem;
+      text-align: left;
+    }
+
+    .wg-enterprise-hero__value-heading {
+      margin: 0 0 1.5rem;
+      @include typography(h3);
+      font-weight: 600;
+      color: var(--text-title);
+      text-align: center;
+      font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+    }
+
+    .wg-enterprise-hero__value-cards {
+      display: grid;
+      gap: 1rem;
+
+      @include break-up(md) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      @include break-up(lg) {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    .wg-enterprise-hero__value-card {
+      background: #ffffff;
+      border-radius: 0.9rem;
+      border: 1px solid #e5e7eb;
+      padding: 1.25rem 1.25rem 1.1rem;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.05);
+
+      h3 {
+        margin: 0 0 0.5rem;
+        @include typography(paragraph);
+        font-weight: 600;
+        color: var(--text-title);
+      }
+
+      p {
+        margin: 0;
+        @include typography(paragraph);
+        color: var(--text-paragraph);
+        font-size: 0.95rem;
+      }
+    }
+
+    .wg-enterprise-hero__logos {
+      margin-top: 2rem;
+
+      #trusted-by {
+        padding-top: 1.5rem !important;
+        padding-bottom: 0 !important;
+      }
+    }
+
+    .wg-enterprise-toc {
+      padding: page-spacing(40px) 1.5rem;
+      background: #fff;
+      border-bottom: 1px solid #e5e7eb;
+
+      @include break-up(md) {
+        padding: page-spacing(50px) 2rem;
+      }
+    }
+
+    .wg-enterprise-toc__inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .wg-enterprise-toc h2 {
+      margin: 0 0 1.5rem;
+      @include typography(h3);
+      color: var(--text-title);
+      font-weight: 600;
+    }
+
+    .wg-enterprise-toc__nav {
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 0.75rem 1.5rem;
+
+        @include break-up(md) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      li {
+        margin: 0;
+      }
+
+      a {
+        display: block;
+        padding: 0.5rem 0;
+        @include typography(paragraph);
+        color: #2e6fe3;
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: all 0.2s ease;
+
+        &:hover {
+          border-bottom-color: #2e6fe3;
+          color: #2563eb;
+        }
+      }
+    }
+
+    .wg-enterprise-section {
+      padding: page-spacing(60px) 1.5rem;
+      scroll-margin-top: 100px;
+
+      @include break-up(md) {
+        padding: page-spacing(80px) 2rem;
+      }
+
+      &--alt {
+        background: #f9fafb;
+      }
+    }
+
+    .wg-enterprise-section__inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .wg-enterprise-section h2 {
+      margin: 0 0 1.5rem;
+      @include typography(section);
+      color: var(--text-title);
+      font-weight: 600;
+      scroll-margin-top: 100px;
+    }
+
+    .wg-enterprise-visibility-heading {
+      margin-top: 6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .wg-enterprise-section h3 {
+      margin: 2rem 0 1rem;
+      @include typography(h3);
+      color: var(--text-title);
+      font-weight: 600;
+    }
+
+    .wg-enterprise-section h4 {
+      margin: 1.5rem 0 0.75rem;
+      @include typography(paragraph);
+      color: var(--text-title);
+      font-weight: 600;
+      font-size: 1.1em;
+    }
+
+    .wg-enterprise-section p {
+      margin: 0 0 1.25rem;
+      @include typography(paragraph);
+      color: var(--text-paragraph);
+      line-height: 1.7;
+    }
+
+    .wg-enterprise-video-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 12px;
+      background: #111;
+      box-sizing: border-box;
+      display: block;
+      margin: 2rem 0 2rem;
+
+      @include break-up(sm) {
+        border-radius: 16px;
+      }
+    }
+
+    .wg-enterprise-video {
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+      object-fit: contain;
+      border-radius: inherit;
+      transition: all 0.3s ease;
+      display: block;
+      vertical-align: middle;
+    }
+
+    .wg-enterprise-video-caption {
+      text-align: center;
+      margin: -1rem 0 1.5rem;
+      @include typography(paragraph);
+      color: var(--text-paragraph);
+      font-style: italic;
+      font-size: 0.9rem;
+    }
+
+    .wg-enterprise-section ul {
+      margin: 1rem 0 1.5rem;
+      padding-left: 1.5rem;
+      @include typography(paragraph);
+      color: var(--text-paragraph);
+      line-height: 1.8;
+
+      li {
+        margin-bottom: 0.75rem;
+      }
+    }
+
+    .wg-enterprise-section a {
+      color: #2e6fe3;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
+
+      &:hover {
+        border-bottom-color: #2e6fe3;
+      }
+    }
+
+    .wg-enterprise-vendor-logo {
+      display: block;
+      max-width: 180px;
+      max-height: 48px;
+      margin: 0 auto 0.75rem;
+      object-fit: contain;
+    }
+
+    .wg-enterprise-mini-grid {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      margin-bottom: 2rem;
+
+      @include break-up(md) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .wg-enterprise-mini-card {
+      background: #ffffff;
+      border-radius: 0.9rem;
+      border: 1px solid #e5e7eb;
+      padding: 1.25rem 1.25rem 1.1rem;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+
+      h3 {
+        margin: 0 0 0.5rem;
+        @include typography(paragraph);
+        font-weight: 600;
+        color: var(--text-title);
+      }
+
+      p {
+        margin: 0;
+        @include typography(paragraph);
+        color: var(--text-paragraph);
+        font-size: 0.95rem;
+      }
+    }
+
+    .wg-enterprise-deployment-button {
+      display: inline-block;
+      margin-top: 0.75rem;
+      padding: 0.625rem 1.25rem;
+      background: #374151;
+      text-decoration: none;
+      border-radius: 0.5rem;
+      @include typography(paragraph);
+      color: #ffffff !important;
+      font-weight: 500;
+      font-size: 0.95rem;
+      text-align: center;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        background: #1f2937;
+        color: #ffffff !important;
+        transform: translateY(-1px);
+      }
+
+      &:active {
+        transform: translateY(0);
+        color: #ffffff !important;
+      }
+    }
+
+    .wg-enterprise-stuck {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.5rem;
+
+      @include break-up(md) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .wg-enterprise-stuck__card {
+      background: #ffffff;
+      border-radius: 0.9rem;
+      border: 1px solid #e5e7eb;
+      padding: 1.25rem 1.25rem 1.1rem;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+
+      h3 {
+        margin: 0 0 0.5rem;
+        @include typography(paragraph);
+        font-weight: 600;
+        color: var(--text-title);
+      }
+
+      p {
+        margin: 0;
+        @include typography(paragraph);
+        color: var(--text-paragraph);
+        font-size: 0.95rem;
+      }
+    }
+
+    .wg-enterprise-popular {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.5rem;
+
+      @include break-up(md) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .wg-enterprise-popular__card {
+      background: #ffffff;
+      border-radius: 0.9rem;
+      border: 1px solid #e5e7eb;
+      padding: 1.25rem 1.25rem 1.1rem;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+
+      h3 {
+        margin: 0 0 0.5rem;
+        @include typography(paragraph);
+        font-weight: 600;
+        color: var(--text-title);
+      }
+
+      p {
+        margin: 0;
+        @include typography(paragraph);
+        color: var(--text-paragraph);
+        font-size: 0.95rem;
+      }
+    }
+
+    .wg-enterprise-comparison {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin: 2rem 0;
+
+      @include break-up(md) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .wg-enterprise-comparison__item {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 1.5rem;
+
+      h4 {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        color: var(--text-title);
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 1.25rem;
+      }
+    }
+
+    .wg-enterprise-callout {
+      background: #f3f5ff;
+      border-left: 4px solid #2e6fe3;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: 8px;
+
+      &--highlight {
+        background: #fff9e6;
+        border-left-color: #f4b740;
+      }
+
+      &--info {
+        background: #e0f2fe;
+        border-left-color: #0ea5e9;
+      }
+
+      &--warning {
+        background: #fef3c7;
+        border-left-color: #f59e0b;
+      }
+
+      p {
+        margin: 0;
+        @include typography(paragraph);
+        color: var(--text-title);
+        line-height: 1.6;
+      }
+    }
+
+    .wg-enterprise-cta-band {
+      background: #111;
+      color: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: center;
+      margin: 3rem 0 0;
+
+      p {
+        margin: 0;
+        @include typography(section);
+        color: #fff;
+        font-weight: 600;
+        font-size: clamp(1.1rem, 2vw, 1.5rem);
+      }
+    }
+
+    .wg-enterprise-table-wrapper {
+      overflow-x: auto;
+      margin: 2rem 0;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .wg-enterprise-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      min-width: 600px;
+
+      thead {
+        background: #f7f8fc;
+      }
+
+      th {
+        padding: 1rem 1.25rem;
+        text-align: left;
+        @include typography(paragraph);
+        font-weight: 600;
+        color: var(--text-title);
+        border-bottom: 2px solid #e5e7eb;
+      }
+
+      td {
+        padding: 1rem 1.25rem;
+        @include typography(paragraph);
+        color: var(--text-paragraph);
+        border-bottom: 1px solid #e5e7eb;
+        vertical-align: top;
+        line-height: 1.6;
+      }
+
+      tr:last-child td {
+        border-bottom: none;
+      }
+
+      a {
+        color: #2e6fe3;
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.2s ease;
+
+        &:hover {
+          border-bottom-color: #2e6fe3;
+        }
+      }
+    }
+
+    @include break-down(md) {
+      .wg-enterprise-table-wrapper {
+        margin: 1.5rem -1.5rem;
+        border-left: none;
+        border-right: none;
+        border-radius: 0;
+      }
+
+      .wg-enterprise-table {
+        th, td {
+          padding: 0.75rem 1rem;
+          font-size: 0.9rem;
+        }
+      }
+    }
+
+    .wg-enterprise-faq {
+      padding: page-spacing(80px) 1.5rem page-spacing(80px);
+      background: #fff;
+    }
+
+    .wg-enterprise-faq__inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .wg-enterprise-faq h2 {
+      margin: 0 0 3rem;
+      text-align: center;
+      @include typography(section);
+      color: var(--text-title);
+      font-weight: 600;
+    }
+
+    .wg-enterprise-faq__list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .wg-enterprise-faq__item {
+      border: none;
+      border-top: 1px solid #e5e9f2;
+      border-radius: 0;
+      padding: 0;
+      background: #fff;
+    }
+
+    .wg-enterprise-faq__item:first-child {
+      border-top: none;
+    }
+
+    .wg-enterprise-faq__item:last-child {
+      border-bottom: 1px solid #e5e9f2;
+    }
+
+    .wg-enterprise-faq__item summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 1.5rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      @include typography(paragraph);
+      font-weight: 600;
+      color: #111827;
+      transition: color 0.2s ease;
+    }
+
+    .wg-enterprise-faq__item summary:hover {
+      color: #2e6fe3;
+    }
+
+    .wg-enterprise-faq__item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .wg-enterprise-faq__icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid #e5e9f2;
+      background: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #6b7280;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-left: 1.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .wg-enterprise-faq__item[open] .wg-enterprise-faq__icon {
+      transform: rotate(45deg);
+      background: #2e6fe3;
+      border-color: #2e6fe3;
+      color: #fff;
+    }
+
+    .wg-enterprise-faq__answer {
+      padding: 0 0 1.5rem;
+      color: #6b7280;
+    }
+
+    .wg-enterprise-faq__answer p {
+      margin: 0;
+      @include typography(paragraph);
+      color: #6b7280;
+    }
+  }
+</style>
