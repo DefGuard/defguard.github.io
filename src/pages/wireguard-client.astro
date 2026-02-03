@@ -293,75 +293,106 @@ const faqItems = [
         <div class="compare-row">
           <div class="compare-cell compare-cell--label">License</div>
           <div class="compare-cell compare-cell--highlight">
-            <span class="compare-yes"><a href="https://github.com/DefGuard/client/blob/main/LICENSE.md">Dual license with Open Source AGPLv3 core</a>
+            <span class="compare-badge compare-badge--yes">Yes</span>
+            <a href="https://github.com/DefGuard/client/blob/main/LICENSE.md" class="compare-link">Dual license with Open Source AGPLv3 core</a>
           </div>
-          <div class="compare-cell compare-cell--multiline">
-            <div>Windows: MIT.</div>
-            <div>macOS/iOS: MIT. Android: Apache 2.0.</div>
-            <div>Linux tooling (wg/wg-quick): GPL-2.0-only.</div>
+          <div class="compare-cell">
+            <span class="compare-badge compare-badge--limited">Limited</span>
+            <div class="compare-cell--multiline">
+              <div>Windows: MIT.</div>
+              <div>macOS/iOS: MIT. Android: Apache 2.0.</div>
+              <div>Linux tooling (wg/wg-quick): GPL-2.0-only.</div>
+            </div>
           </div>
         </div>
 
         <div class="compare-row">
           <div class="compare-cell compare-cell--label">Desktop apps</div>
-          <div class="compare-cell compare-cell--highlight">Windows, macOS, Linux</div>
-          <div class="compare-cell">Windows and macOS</div>
+          <div class="compare-cell compare-cell--highlight">
+            <div class="compare-icons">
+              <img src="/images/wireguard-client/windows-icon.png" alt="Windows" width="24" height="24" />
+              <img src="/images/wireguard-client/macos-icon.png" alt="macOS" width="24" height="24" />
+              <img src="/images/wireguard-client/linux-logo.png" alt="Linux" width="24" height="24" />
+            </div>
+          </div>
+          <div class="compare-cell">
+            <div class="compare-icons">
+              <img src="/images/wireguard-client/windows-icon.png" alt="Windows" width="24" height="24" />
+              <img src="/images/wireguard-client/macos-icon.png" alt="macOS" width="24" height="24" />
+            </div>
+          </div>
         </div>
 
         <div class="compare-row">
           <div class="compare-cell compare-cell--label">Live connection stats</div>
           <div class="compare-cell compare-cell--highlight">
-            <span class="compare-yes">Yes:</span> real-time charts and detailed connection statistics
+            <span class="compare-badge compare-badge--yes">Yes</span>
+            Real-time charts and detailed connection statistics
           </div>
           <div class="compare-cell">
-            <span class="compare-limited">Limited:</span> basic status counters (feature set varies by
-            OS), no built-in charts
+            <span class="compare-badge compare-badge--limited">Limited</span>
+            Basic status counters (feature set varies by OS), no built-in charts
           </div>
         </div>
 
         <div class="compare-row">
           <div class="compare-cell compare-cell--label">Connection history</div>
           <div class="compare-cell compare-cell--highlight">
-            <span class="compare-yes">Yes:</span> connection history view
+            <span class="compare-badge compare-badge--yes">Yes</span>
+            Connection history view
           </div>
           <div class="compare-cell">
-            No
+            <span class="compare-badge compare-badge--no">No</span>
+            Some text must be here
           </div>
         </div>
 
         <div class="compare-row">
           <div class="compare-cell compare-cell--label">Logs</div>
           <div class="compare-cell compare-cell--highlight">
-            <span class="compare-yes">Yes:</span> client logs
+            <span class="compare-badge compare-badge--yes">Yes</span>
+            Client logs
           </div>
           <div class="compare-cell">
-            <span class="compare-limited">Limited:</span> logging depends on OS/client implementation
+            <span class="compare-badge compare-badge--limited">Limited</span>
+            Logging depends on OS/client implementation
           </div>
         </div>
 
         <div class="compare-row">
           <div class="compare-cell compare-cell--label">Pentested</div>
           <div class="compare-cell compare-cell--highlight">
-            <span class="compare-yes">Yes:</span>
-            <a href="/security/" class="compare-link">public penetration testing reports and daily security scans</a>
+            <span class="compare-badge compare-badge--yes">Yes</span>
+            <a href="/pentesting/" class="compare-link">Public penetration testing reports and daily security scans</a>
           </div>
-          <div class="compare-cell">No publicly available pentest reports</div>
+          <div class="compare-cell">
+            <span class="compare-badge compare-badge--no">No</span>
+            No publicly available penetration testing reports
+          </div>
         </div>
 
         <div class="compare-row">
           <div class="compare-cell compare-cell--label">Compliance</div>
           <div class="compare-cell compare-cell--highlight">
-            <span class="compare-yes">Yes:</span>
+            <span class="compare-badge compare-badge--yes">Yes</span>
             <a href="/compliance/" class="compare-link">ISO 27001 certified</a>
           </div>
-          <div class="compare-cell">-</div>
+          <div class="compare-cell">
+            <span class="compare-badge compare-badge--no">No</span>
+            Some information here
+          </div>
         </div>
+
         <div class="compare-row">
           <div class="compare-cell compare-cell--label">Server</div>
           <div class="compare-cell compare-cell--highlight">
+            <span class="compare-badge compare-badge--yes">Yes</span>
             WireGuard server or Defguard server with MFA support
           </div>
-          <div class="compare-cell">Wireguard only</div>
+          <div class="compare-cell">
+            <span class="compare-badge compare-badge--limited">Limited</span>
+            Wireguard only
+          </div>
         </div>
       </div>
     </section>
@@ -1023,20 +1054,32 @@ const faqItems = [
                 platform = "Linux";
               }
 
+              // Initialize dataLayer if it doesn't exist
+              window.dataLayer = window.dataLayer || [];
+              
               // Push event to dataLayer (works with GTM and GA4)
-              if (window.dataLayer) {
-                window.dataLayer.push({
-                  event: "wireguard_client_download",
-                  download_platform: platform,
-                  download_url: href
-                });
-              }
+              window.dataLayer.push({
+                event: "wireguard_client_download",
+                download_platform: platform,
+                download_url: href
+              });
 
               // Also send directly to GA4 if gtag is available
               if (typeof gtag !== "undefined") {
                 gtag("event", "wireguard_client_download", {
                   platform: platform,
                   download_url: href
+                });
+              }
+              
+              // Debug logging (remove in production)
+              if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+                console.log("Download event tracked:", {
+                  event: "wireguard_client_download",
+                  platform: platform,
+                  download_url: href,
+                  dataLayer: window.dataLayer,
+                  gtagAvailable: typeof gtag !== "undefined"
                 });
               }
             });
@@ -1296,13 +1339,13 @@ const faqItems = [
 
     .wireguard-hero__cta {
       margin-top: 2.5rem;
-      padding: 0.75rem 1.5rem;
+      padding: 0.5rem 1.25rem;
       border-radius: 999px;
       background: #4278F3;
       color: #ffffff;
       text-decoration: none;
       font-weight: 500;
-      font-size: clamp(1rem, 2vw, 1.125rem);
+      font-size: clamp(0.875rem, 1.5vw, 1rem);
       transition: background-color 0.2s ease;
       white-space: nowrap;
       width: auto;
@@ -1313,13 +1356,14 @@ const faqItems = [
       border: none;
       box-shadow: 0 2px 8px rgba(66, 120, 243, 0.25);
       cursor: pointer;
+      line-height: 1.5;
 
       @include break-up(sm) {
-        padding: 0.75rem 1.5rem;
+        padding: 0.5rem 1.25rem;
       }
 
       @include break-up(md) {
-        padding: 0.75rem 1.5rem;
+        padding: 0.5rem 1.25rem;
       }
     }
 
@@ -1624,70 +1668,173 @@ const faqItems = [
 
       h2 {
         margin: 0;
-        @include typography(section);
-        color: var(--text-title);
+        font-family:
+          "Poppins",
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          Oxygen,
+          Ubuntu,
+          Cantarell,
+          "Open Sans",
+          "Helvetica Neue",
+          sans-serif;
+        font-weight: 700;
+        font-size: clamp(1.75rem, 4vw, 2.5rem);
+        color: #000000;
+        line-height: 1.2;
       }
     }
 
     .wireguard-compare__table {
       max-width: 1100px;
       margin: 0 auto;
-      border-radius: 16px;
+      border-radius: 8px;
       overflow: hidden;
-      border: 1px solid rgba(15, 23, 42, 0.08);
-      background: #fff;
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
     }
 
     .compare-row {
       display: grid;
       grid-template-columns: minmax(180px, 1fr) minmax(220px, 1.1fr) minmax(240px, 1.2fr);
-      border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .compare-row:first-child {
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
     }
 
     .compare-row:last-child {
       border-bottom: none;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
     }
 
     .compare-row--header {
-      background: #f7f8fc;
+      background: #ffffff;
       font-weight: 600;
     }
 
     .compare-cell {
       padding: 1.25rem 1.5rem;
-      @include typography(paragraph);
-      color: var(--text-paragraph);
+      font-family:
+        "Poppins",
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Oxygen,
+        Ubuntu,
+        Cantarell,
+        "Open Sans",
+        "Helvetica Neue",
+        sans-serif;
+      font-weight: 400;
+      font-size: 1rem;
+      color: #333333;
+      line-height: 1.5;
+      border-right: 1px solid #e0e0e0;
+    }
+
+    .compare-cell:last-child {
+      border-right: none;
     }
 
     .compare-cell--label {
+      font-weight: 400;
+      color: #333333;
+      background: #ffffff;
+    }
+
+    .compare-row--header .compare-cell {
       font-weight: 600;
-      color: var(--text-title);
-      background: #fff;
+      color: #333333;
     }
 
     .compare-cell--highlight {
-      background: #f3f5ff;
+      background: #ffffff;
     }
 
     .compare-cell--multiline {
       display: flex;
       flex-direction: column;
       gap: 0.25rem;
+      margin-top: 0.5rem;
       
       > div {
         line-height: 1.4;
       }
     }
 
-    .compare-yes {
-      color: #18a957;
-      font-weight: 600;
+    .compare-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-weight: 500;
+      font-size: 0.875rem;
+      white-space: nowrap;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+      font-family:
+        "Poppins",
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Oxygen,
+        Ubuntu,
+        Cantarell,
+        "Open Sans",
+        "Helvetica Neue",
+        sans-serif;
     }
 
-    .compare-limited {
-      color: #c56a1a;
-      font-weight: 600;
+    .compare-badge--yes {
+      background: #6CCF78;
+      color: #ffffff;
+    }
+
+    .compare-badge--limited {
+      background: #F39C12;
+      color: #ffffff;
+    }
+
+    .compare-badge--no {
+      background: #E74C3C;
+      color: #ffffff;
+    }
+
+    .compare-link {
+      color: #3498DB;
+      text-decoration: underline;
+      text-decoration-color: #3498DB;
+      font-weight: 400;
+      
+      &:hover {
+        color: #2980B9;
+        text-decoration-color: #2980B9;
+      }
+    }
+
+    .compare-icons {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      
+      img {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+        opacity: 0.6;
+        filter: grayscale(100%);
+      }
     }
 
     @include break-down(md) {
@@ -1701,15 +1848,17 @@ const faqItems = [
 
       .compare-cell {
         padding: 1rem 1.25rem;
-        border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+        border-bottom: 1px solid #e0e0e0;
+        border-right: none;
       }
 
       .compare-cell--label {
-        background: #f7f8fc;
+        background: #ffffff;
+        font-weight: 600;
       }
 
       .compare-cell--highlight {
-        background: #f3f5ff;
+        background: #ffffff;
       }
     }
 
