@@ -55,40 +55,59 @@ const tags = [
         <div class="wge-hero__layout">
           <div class="wge-hero__inner">
             <h1 id="wge-hero-title" class="wge-hero__title">
-              <span class="wge-hero__title-line1">Partnering with</span>
-              <span class="wge-hero__title-line2">Defguard</span>
+              <span class="wge-hero__title-line1">Partnering with Defguard</span>
             </h1>
             <p class="wge-hero__subhead">
-              Partner with Defguard to deliver WireGuard VPN with identity, MFA, and zero-trust access ensuring secure connections, seamless onboarding, precise control, complete visibility, and audit-ready trails.
+              Offer the most secure WireGuard VPN solution with identity, MFA, and zero-trust access to your clients on prefered terms.
             </p>
             <div class="wge-hero__ctas">
-              <a href="#wge-features-headline" class="wge-hero__btn wge-hero__btn--secondary">Learn more about Defguard</a>
+              <a href="#wge-access-headline" class="wge-hero__btn wge-hero__btn--primary">Become Defguard Partner</a>
             </div>
-            <div class="wge-hero__logos" aria-label="Trusted by xcomp and epssi">
-              <div class="wge-hero__logo-block">
-                <a href="https://xcomp.pl/en/home/" target="_blank" rel="noopener noreferrer" aria-label="Xcomp – Defguard MSP Partner Poland">
-                  <img src="/images/partnering-with-defguard/xcomp-logo.png" alt="xcomp" class="wge-hero__logo" width="125" height="125" loading="lazy" />
-                </a>
-                <p class="wge-hero__trust">Defguard MSP Partner Poland</p>
+            <div class="wge-hero__benefits">
+              <div class="wge-hero__benefit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Technical enablement</span>
               </div>
-              <div class="wge-hero__logo-block">
-                <img src="/images/partnering-with-defguard/epssi-logo.png" alt="epssi" class="wge-hero__logo" width="125" height="125" loading="lazy" />
-                <p class="wge-hero__trust">Defguard MSP Partner France</p>
+              <div class="wge-hero__benefit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Co-marketing support</span>
+              </div>
+              <div class="wge-hero__benefit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Deal support</span>
               </div>
             </div>
           </div>
-          <div class="wge-hero__form">
-            <form class="wge-hero-form" action="/book-a-demo" method="get" aria-label="Contact form">
-              <input type="hidden" name="utm_source" value="partnering-with-defguard" />
-              <label for="wge-hero-name" class="wge-hero-form__label">Name</label>
-              <input id="wge-hero-name" class="wge-hero-form__input" type="text" name="name" placeholder="Your name" required />
-              <label for="wge-hero-email" class="wge-hero-form__label">Email</label>
-              <input id="wge-hero-email" class="wge-hero-form__input" type="email" name="email" placeholder="you@company.com" required />
-              <label for="wge-hero-message" class="wge-hero-form__label">Message</label>
-              <textarea id="wge-hero-message" class="wge-hero-form__input wge-hero-form__textarea" name="message" placeholder="Tell us about your interest in partnering" rows="3"></textarea>
-              <button type="submit" class="wge-hero-form__submit">Get in touch</button>
-            </form>
-          </div>
+        </div>
+      </ContentLimiter>
+    </section>
+
+    <!-- Partners -->
+    <section class="wge-partners" aria-labelledby="wge-partners-headline">
+      <ContentLimiter maxWidth={1100}>
+        <h2 id="wge-partners-headline" class="wge-partners__headline">Our Partners</h2>
+        <p class="wge-partners__sub">Trusted partners delivering Defguard solutions worldwide</p>
+        <div class="wge-partners__grid" aria-label="Trusted by xcomp and epssi">
+          <article class="wge-partners__card">
+            <a href="https://xcomp.pl/en/home/" target="_blank" rel="noopener noreferrer" class="wge-partners__link" aria-label="Xcomp – Defguard MSP Partner Poland">
+              <div class="wge-partners__logo-wrapper">
+                <img src="/images/partnering-with-defguard/xcomp-logo.png" alt="xcomp" class="wge-partners__logo" width="125" height="125" loading="lazy" />
+              </div>
+              <p class="wge-partners__label">Defguard MSP Partner Poland</p>
+            </a>
+          </article>
+          <article class="wge-partners__card">
+            <div class="wge-partners__logo-wrapper">
+              <img src="/images/partnering-with-defguard/epssi-logo.png" alt="epssi" class="wge-partners__logo" width="125" height="125" loading="lazy" />
+            </div>
+            <p class="wge-partners__label">Defguard MSP Partner France</p>
+          </article>
         </div>
       </ContentLimiter>
     </section>
@@ -96,8 +115,12 @@ const tags = [
     <!-- Power your portfolio with Defguard (blue theme, same as What partners get) -->
     <section class="wge-why wge-why--blue" aria-labelledby="wge-why-headline">
       <ContentLimiter maxWidth={1100}>
-        <h2 id="wge-why-headline" class="wge-why__headline">Power your portfolio with Defguard</h2>
-        <p class="wge-why__sub">Defguard is the control plane for Enterprise WireGuard VPN. Partners get technical support, co-marketing, and a product customers trust.</p>
+        <h2 id="wge-why-headline" class="wge-why__headline">Partnership types</h2>
+        <p class="wge-why__sub">
+          
+          We provide the most secure WireGuard VPN solution with identity, MFA, and zero-trust access to your clients. You can resell it directly to your clients or integrate it into your managed services. 
+
+        </p>
         <div class="wge-why__grid">
           <article class="wge-why-card">
             <div class="wge-why-card__icon" aria-hidden="true">
@@ -106,7 +129,7 @@ const tags = [
               </svg>
             </div>
             <h3 class="wge-why-card__title">Value-Added Reseller</h3>
-            <p class="wge-why-card__body">Offer Defguard's enterprise WireGuard solutions directly to your clients, delivering secure connectivity while earning a competitive margin.</p>
+            <p class="wge-why-card__body"></p>
           </article>
           <article class="wge-why-card">
             <div class="wge-why-card__icon" aria-hidden="true">
@@ -116,6 +139,15 @@ const tags = [
             </div>
             <h3 class="wge-why-card__title">Managed Services Providers</h3>
             <p class="wge-why-card__body">Integrate Defguard into your managed services to provide stronger security, streamlined VPN management, and seamless network control.</p>
+          </article>
+          <article class="wge-why-card">
+            <div class="wge-why-card__icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="44" height="44" fill="#3d72c1">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+            </div>
+            <h3 class="wge-why-card__title">Defguard Whitelabel</h3>
+            <p class="wge-why-card__body">Rebrand Defguard with your own branding and offer it as your own solution to your customers.</p>
           </article>
         </div>
       </ContentLimiter>
@@ -161,6 +193,43 @@ const tags = [
             <h3 class="wge-pain-card__title">Deal support</h3>
             <p class="wge-pain-card__body">Deal registration, proof-of-concept assistance, and escalation paths for enterprise opportunities.</p>
           </article>
+        </div>
+      </ContentLimiter>
+    </section>
+
+    <!-- Partner contact (blue theme, same as Security) -->
+    <section class="wge-access wge-access--blue" aria-labelledby="wge-access-headline">
+      <ContentLimiter maxWidth={1100}>
+        <div class="wge-access__layout">
+          <div class="wge-access__left">
+            <h2 id="wge-access-headline" class="wge-access__headline">Ready to explore a partnership with us?</h2>
+            <p class="wge-access__sub">Defguard is experiencing fast adoption as the go-to enterprise orchestration platform for WireGuard, and we are actively building partnerships around the world.<br /><br />Share your goals and requirements, and we will get back to you shortly.</p>
+          </div>
+          <div class="wge-access__right">
+            <form class="wge-partner-form" action="/book-a-demo" method="get" aria-label="Partner contact form">
+              <input type="hidden" name="utm_source" value="partnering-with-defguard" />
+              <label for="wge-partner-name" class="wge-partner-form__label">Contact name</label>
+              <input id="wge-partner-name" class="wge-partner-form__input" type="text" name="name" placeholder="Your name" required />
+              <label for="wge-partner-company" class="wge-partner-form__label">Company name</label>
+              <input id="wge-partner-company" class="wge-partner-form__input" type="text" name="company" placeholder="Your company" required />
+              <label for="wge-partner-company-url" class="wge-partner-form__label">Company URL</label>
+              <input id="wge-partner-company-url" class="wge-partner-form__input" type="url" name="company_url" placeholder="https://example.com" />
+              <label for="wge-partner-email" class="wge-partner-form__label">Email</label>
+              <input id="wge-partner-email" class="wge-partner-form__input" type="email" name="email" placeholder="you@company.com" required />
+              <label for="wge-partner-phone" class="wge-partner-form__label">Phone</label>
+              <input id="wge-partner-phone" class="wge-partner-form__input" type="tel" name="phone" placeholder="+1 (555) 123-4567" />
+              <label for="wge-partner-partner-type" class="wge-partner-form__label">Partner type</label>
+              <select id="wge-partner-partner-type" class="wge-partner-form__input" name="partner_type" required>
+                <option value="">Select partner type</option>
+                <option value="MSP">MSP</option>
+                <option value="Reseller">Reseller</option>
+                <option value="Distributor">Distributor</option>
+              </select>
+              <label for="wge-partner-message" class="wge-partner-form__label">Tell us how you want to partner with Defguard</label>
+              <textarea id="wge-partner-message" class="wge-partner-form__input wge-partner-form__textarea" name="message" placeholder="Tell us how you want to partner with Defguard" rows="3"></textarea>
+              <button type="submit" class="wge-partner-form__submit">Send inquiry</button>
+            </form>
+          </div>
         </div>
       </ContentLimiter>
     </section>
@@ -221,58 +290,6 @@ const tags = [
         </div>
       </ContentLimiter>
     </section>
-
-    <!-- Partner contact (blue theme, same as Security) -->
-    <section class="wge-access wge-access--blue" aria-labelledby="wge-access-headline">
-      <ContentLimiter maxWidth={1100}>
-        <div class="wge-access__layout">
-          <div class="wge-access__left">
-            <h2 id="wge-access-headline" class="wge-access__headline">Ready to explore a partnership with us?</h2>
-            <p class="wge-access__sub">Defguard is experiencing fast adoption as the go-to enterprise orchestration platform for WireGuard, and we are actively building partnerships around the world.<br /><br />Share your goals and requirements, and we will get back to you shortly.</p>
-          </div>
-          <div class="wge-access__right">
-            <form class="wge-partner-form" action="/book-a-demo" method="get" aria-label="Partner contact form">
-              <input type="hidden" name="utm_source" value="partnering-with-defguard" />
-              <label for="wge-partner-name" class="wge-partner-form__label">Name</label>
-              <input id="wge-partner-name" class="wge-partner-form__input" type="text" name="name" placeholder="Your name" required />
-              <label for="wge-partner-email" class="wge-partner-form__label">Email</label>
-              <input id="wge-partner-email" class="wge-partner-form__input" type="email" name="email" placeholder="you@company.com" required />
-              <label for="wge-partner-message" class="wge-partner-form__label">Message</label>
-              <textarea id="wge-partner-message" class="wge-partner-form__input wge-partner-form__textarea" name="message" placeholder="Tell us about your interest in partnering" rows="3"></textarea>
-              <button type="submit" class="wge-partner-form__submit">Send inquiry</button>
-            </form>
-          </div>
-        </div>
-      </ContentLimiter>
-    </section>
-
-    <!-- Security (light theme, same as Stories from teams) -->
-    <section class="wge-security wge-security--light" aria-labelledby="wge-security-headline">
-      <ContentLimiter maxWidth={1100}>
-        <h2 id="wge-security-headline" class="wge-security__headline">Someone is always testing our security. So are we.</h2>
-        <div class="wge-security__grid">
-          <article class="wge-security-card">
-            <div class="wge-security-card__icon" aria-hidden="true"><i class="lni lni-shield"></i></div>
-            <h3 class="wge-security-card__title">Pentested by security experts</h3>
-            <p class="wge-security-card__body">Regular penetration tests &amp; security reviews covering configuration, key handling, privilege boundaries, and update paths.</p>
-            <a class="wge-security-card__link" href="/pentesting/">Read penetration reports →</a>
-          </article>
-          <article class="wge-security-card">
-            <div class="wge-security-card__icon" aria-hidden="true"><i class="lni lni-pulse"></i></div>
-            <h3 class="wge-security-card__title">Daily vulnerability monitoring</h3>
-            <p class="wge-security-card__body">Full Software Bill of Materials (SBOM) published per release, with daily scans for known vulnerabilities and supply-chain risks.</p>
-            <a class="wge-security-card__link" href="/sbom/">View SBOM results →</a>
-          </article>
-          <article class="wge-security-card">
-            <div class="wge-security-card__icon" aria-hidden="true"><i class="lni lni-code"></i></div>
-            <h3 class="wge-security-card__title">Verifiable open source</h3>
-            <p class="wge-security-card__body">Public, auditable source code enabling independent review, reproducible builds, and external third-party verification.</p>
-            <a class="wge-security-card__link" href="https://github.com/DefGuard" target="_blank" rel="noopener noreferrer">Check our code →</a>
-          </article>
-        </div>
-        <p class="wge-security__footer">Defguard is ISO/IEC 27001:2023 certified and implements stringent security<br />requirements across its development processes and security testing.</p>
-      </ContentLimiter>
-    </section>
   </main>
 </ProductLayout>
 
@@ -293,26 +310,41 @@ const tags = [
   }
 
   .wge-hero--light {
-    background: #fff;
+    background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
     color: #222;
-    padding: page-spacing(80px) 0;
-  }
+    padding: page-spacing(100px) 0;
+    position: relative;
+    overflow: hidden;
 
-  .wge-hero__layout {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-    align-items: start;
+    @include break-up(md) {
+      padding: page-spacing(120px) 0 page-spacing(100px);
+    }
 
-    @include break-up(lg) {
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: start;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 50%, rgba(61, 114, 193, 0.05) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(12, 140, 224, 0.05) 0%, transparent 50%);
+      pointer-events: none;
     }
   }
 
+  .wge-hero__layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
   .wge-hero__inner {
-    max-width: 680px;
+    max-width: 800px;
+    text-align: center;
+    width: 100%;
   }
 
   .wge-hero__form {
@@ -385,73 +417,97 @@ const tags = [
   }
 
   .wge-hero__title {
-    margin: 0 0 1rem;
-    font-weight: 600;
-    font-size: clamp(1.925rem, 4.4vw, 3.025rem);
-    line-height: 1.2;
+    margin: 0 0 1.5rem;
+    @include typography(title);
+    font-weight: 400;
+    line-height: 1.1;
     letter-spacing: -0.02em;
     color: #fff !important;
   }
 
   .wge-hero--light .wge-hero__title {
-    color: #222 !important;
-  }
-
-  .wge-hero__title-line1,
-  .wge-hero__title-line2 {
-    color: #fff !important;
-  }
-
-  .wge-hero--light .wge-hero__title-line1,
-  .wge-hero--light .wge-hero__title-line2 {
-    color: #222 !important;
+    color: #1a1d24 !important;
   }
 
   .wge-hero__title-line1 {
-    display: block;
+    display: inline;
   }
 
   .wge-hero__title-line2 {
-    display: block;
-    font-size: 1.1em;
+    display: inline;
+  }
+
+  .wge-hero__title-line1 {
+    color: #fff !important;
+  }
+
+  .wge-hero--light .wge-hero__title-line1 {
+    color: #1a1d24 !important;
+  }
+
+  .wge-hero__title-line2 {
+    background: linear-gradient(135deg, #3d72c1 0%, #0c8ce0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .wge-hero--light .wge-hero__title-line2 {
+    background: linear-gradient(135deg, #3d72c1 0%, #0c8ce0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .wge-hero__subhead {
-    margin: 0 0 2rem;
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    line-height: 1.6;
+    margin: 0 auto 2.5rem;
+    @include typography(paragraph);
+    line-height: 1.7;
     color: #fff;
-    max-width: 56ch;
+    max-width: 65ch;
   }
 
   .wge-hero--light .wge-hero__subhead {
-    color: #222;
+    color: #4b5563;
   }
 
   .wge-hero__ctas {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    margin-bottom: 1.5rem;
+    justify-content: center;
+    margin-bottom: 3rem;
   }
 
   .wge-hero__btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 14px 28px;
-    border-radius: 8px;
+    padding: 16px 32px;
+    border-radius: 10px;
+    @include typography(paragraph);
     font-weight: 500;
-    font-size: 1rem;
     text-decoration: none;
     border: 2px solid transparent;
     cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
   .wge-hero__btn--primary {
-    background-color: #0c8ce0;
-    border-color: #0c8ce0;
+    background: linear-gradient(135deg, #3d72c1 0%, #0c8ce0 100%);
+    border-color: transparent;
     color: #fff !important;
+  }
+
+  .wge-hero__btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(61, 114, 193, 0.4);
+    background: linear-gradient(135deg, #3565a8 0%, #0a7bc4 100%);
+  }
+
+  .wge-hero__btn--primary:active {
+    transform: translateY(0);
   }
 
   .wge-hero__btn--secondary {
@@ -464,6 +520,33 @@ const tags = [
     background-color: transparent;
     border-color: #222;
     color: #222 !important;
+  }
+
+  .wge-hero__benefits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem 2rem;
+    justify-content: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  .wge-hero__benefit {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    @include typography(paragraph);
+    font-size: calc(16px * var(--font-scale-factor));
+    color: #6b7280;
+    font-weight: 500;
+  }
+
+  .wge-hero__benefit svg {
+    flex-shrink: 0;
+    color: #3d72c1;
+    width: 18px;
+    height: 18px;
   }
 
   .wge-hero__trust {
@@ -527,6 +610,114 @@ const tags = [
     background: #fff;
   }
 
+  .wge-partners {
+    background: #f9fafb;
+    padding: page-spacing(80px) 0;
+  }
+
+  .wge-partners__headline {
+    margin: 0 0 0.5rem;
+    text-align: center;
+    @include typography(section);
+    font-weight: 400;
+    color: #222;
+  }
+
+  .wge-partners__sub {
+    margin: 0 auto 3rem;
+    text-align: center;
+    @include typography(paragraph);
+    color: #6b7280;
+    line-height: 1.6;
+    max-width: 56ch;
+  }
+
+  .wge-partners__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+
+    @include break-up(md) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+    }
+  }
+
+  .wge-partners__card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  }
+
+  .wge-partners__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .wge-partners__link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    width: 100%;
+    color: inherit;
+  }
+
+  .wge-partners__logo-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 125px;
+    transition: transform 0.2s ease;
+  }
+
+  .wge-partners__card:hover .wge-partners__logo-wrapper {
+    transform: scale(1.05);
+  }
+
+  .wge-partners__logo {
+    width: auto;
+    max-width: 125px;
+    max-height: 125px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    filter: grayscale(100%);
+    opacity: 0.7;
+    transition: filter 0.2s ease, opacity 0.2s ease;
+  }
+
+  .wge-partners__card:hover .wge-partners__logo {
+    filter: grayscale(0%);
+    opacity: 1;
+  }
+
+  .wge-partners__label {
+    margin: 0;
+    @include typography(paragraph);
+    font-size: calc(16px * var(--font-scale-factor));
+    font-weight: 500;
+    color: #374151;
+    text-align: center;
+    line-height: 1.4;
+    transition: color 0.2s ease;
+  }
+
+  .wge-partners__card:hover .wge-partners__label {
+    color: #3d72c1;
+  }
+
   .wge-why {
     background: #fff;
     padding: page-spacing(80px) 0;
@@ -541,7 +732,7 @@ const tags = [
     margin: 0 0 0.5rem;
     text-align: center;
     @include typography(section);
-    font-weight: 600;
+    font-weight: 400;
     color: #222;
   }
 
@@ -553,7 +744,6 @@ const tags = [
     margin: 0 auto 3rem;
     text-align: center;
     @include typography(paragraph);
-    font-size: 1rem;
     color: #222;
     line-height: 1.6;
     max-width: 56ch;
@@ -570,6 +760,11 @@ const tags = [
 
     @include break-up(md) {
       grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    @include break-up(lg) {
+      grid-template-columns: repeat(3, 1fr);
       gap: 2rem;
     }
   }
@@ -602,7 +797,7 @@ const tags = [
   .wge-why-card__title {
     margin: 0;
     @include typography(h3);
-    font-weight: 600;
+    font-weight: 300;
     color: #222;
   }
 
@@ -610,7 +805,6 @@ const tags = [
     margin: 0;
     flex: 1;
     @include typography(paragraph);
-    font-size: 0.95rem;
     color: #374151;
     line-height: 1.6;
   }
@@ -629,7 +823,7 @@ const tags = [
     margin: 0 0 0.5rem;
     text-align: center;
     @include typography(section);
-    font-weight: 600;
+    font-weight: 400;
     color: #fff;
   }
 
@@ -641,7 +835,6 @@ const tags = [
     margin: 0 auto 2.5rem;
     text-align: center;
     @include typography(paragraph);
-    font-size: 1rem;
     color: rgba(255, 255, 255, 0.9);
     line-height: 1.6;
     max-width: 56ch;
@@ -696,7 +889,7 @@ const tags = [
   .wge-pain-card__title {
     margin: 0;
     @include typography(h3);
-    font-weight: 600;
+    font-weight: 300;
     color: #222;
   }
 
@@ -704,7 +897,6 @@ const tags = [
     margin: 0;
     flex: 1;
     @include typography(paragraph);
-    font-size: 0.95rem;
     color: #374151;
     line-height: 1.6;
   }
@@ -944,7 +1136,7 @@ const tags = [
   .wge-access__headline {
     margin: 0 0 1.25rem;
     @include typography(section);
-    font-weight: 600;
+    font-weight: 400;
     color: #222;
     text-align: left;
   }
@@ -978,7 +1170,8 @@ const tags = [
 
   .wge-partner-form__label {
     display: block;
-    font-size: 0.9rem;
+    @include typography(paragraph);
+    font-size: calc(16px * var(--font-scale-factor));
     font-weight: 500;
     color: #222;
   }
@@ -994,7 +1187,7 @@ const tags = [
     border: 1px solid #e5e7eb;
     background: #fff;
     color: #222;
-    font-size: 1rem;
+    @include typography(paragraph);
     font-family: inherit;
     transition: border-color 0.2s ease;
   }
@@ -1025,7 +1218,7 @@ const tags = [
     border: 2px solid #0c8ce0;
     background: #fff;
     color: #0c8ce0;
-    font-size: 0.95rem;
+    @include typography(paragraph);
     font-weight: 500;
     font-family: inherit;
     cursor: pointer;
@@ -1047,7 +1240,7 @@ const tags = [
     margin: 0 0 0.5rem;
     scroll-margin-top: calc(var(--nav-height) + 1rem);
     @include typography(section);
-    font-weight: 600;
+    font-weight: 400;
     color: #fff;
     text-align: center;
   }
@@ -1055,7 +1248,6 @@ const tags = [
   .wge-features__sub {
     margin: 0 0 2.5rem;
     @include typography(paragraph);
-    font-size: 1rem;
     color: #9ca3af;
     line-height: 1.5;
     text-align: center;
@@ -1081,14 +1273,13 @@ const tags = [
   .wge-feature__title {
     margin: 0 0 0.5rem;
     @include typography(h3);
-    font-weight: 600;
+    font-weight: 300;
     color: #fff;
   }
 
   .wge-feature__body {
     margin: 0;
     @include typography(paragraph);
-    font-size: 0.9rem;
     color: #e5e7eb;
     line-height: 1.5;
   }
@@ -1102,7 +1293,7 @@ const tags = [
     margin: 0 0 3rem;
     text-align: center;
     @include typography(section);
-    font-weight: 600;
+    font-weight: 400;
     color: #222;
   }
 
@@ -1131,7 +1322,6 @@ const tags = [
   .wge-testimonial__quote {
     margin: 0;
     @include typography(paragraph);
-    font-size: 0.95rem;
     color: #222;
     line-height: 1.6;
   }
@@ -1149,7 +1339,7 @@ const tags = [
   .wge-testimonial__attr {
     margin: 0;
     @include typography(paragraph);
-    font-size: 0.875rem;
+    font-size: calc(16px * var(--font-scale-factor));
     color: #6b7280;
     line-height: 1.5;
   }
