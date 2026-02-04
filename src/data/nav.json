@@ -59,6 +59,11 @@
     "prefetch": true
   },
   {
+    "display": "Partnership",
+    "url": "/partnership",
+    "prefetch": true
+  },
+  {
     "display": "Docs",
     "url": "https://docs.defguard.net",
     "external": true
