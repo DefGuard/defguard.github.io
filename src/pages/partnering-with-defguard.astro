@@ -1,0 +1,1156 @@
+---
+import Navigation from "../components/base/Navigation.astro";
+import ProductLayout from "../layouts/ProductLayout.astro";
+import ContentLimiter from "../components/ContentLimiter.astro";
+import type { TestimonialData } from "./_home/components/client-side/Testimonials/type";
+import { testimonialSchema } from "./_home/components/client-side/Testimonials/type";
+
+const testimonialsImportData = await Astro.glob("../data/home/testimonials/**/*.md");
+const testimonialsData: Array<TestimonialData> = testimonialsImportData
+  .map((val) => {
+    const toValidate = { ...val.frontmatter, markdownRaw: val.rawContent() };
+    return testimonialSchema.parse(toValidate);
+  })
+  .sort((a, b) => {
+    const order = ["prusa", "acquinox", "sipro"];
+    const ia = order.findIndex((k) => a.imageSecondary.toLowerCase().includes(k));
+    const ib = order.findIndex((k) => b.imageSecondary.toLowerCase().includes(k));
+    return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+  })
+  .slice(0, 3);
+
+const title = "Partnering with Defguard";
+const description =
+  "Join the Defguard partner program. Resell, integrate, or build on Defguard for Enterprise WireGuard VPN and zero-trust access.";
+const url = "https://defguard.net/partnering-with-defguard";
+const featuredImage = "/images/png/defguard.png";
+const imageWidth = "1080";
+const imageHeight = "540";
+const tags = [
+  "defguard",
+  "partners",
+  "wireguard",
+  "enterprise-vpn",
+  "reseller",
+  "integration",
+];
+---
+
+<ProductLayout
+  title={title}
+  featuredImage={featuredImage}
+  imageWidth={imageWidth}
+  imageHeight={imageHeight}
+  url={url}
+  tags={tags}
+  description={description}
+  bodyClass="white-background"
+>
+  <Navigation activeSlug="/partnering-with-defguard/" />
+
+  <main id="partnering-with-defguard-page">
+    <!-- Hero (light theme) -->
+    <section class="wge-hero wge-hero--light" aria-labelledby="wge-hero-title">
+      <ContentLimiter maxWidth={1100}>
+        <div class="wge-hero__layout">
+          <div class="wge-hero__inner">
+            <h1 id="wge-hero-title" class="wge-hero__title">
+              <span class="wge-hero__title-line1">Partnering with</span>
+              <span class="wge-hero__title-line2">Defguard</span>
+            </h1>
+            <p class="wge-hero__subhead">
+              Partner with Defguard to deliver WireGuard VPN with identity, MFA, and zero-trust access ensuring secure connections, seamless onboarding, precise control, complete visibility, and audit-ready trails.
+            </p>
+            <div class="wge-hero__ctas">
+              <a href="#wge-features-headline" class="wge-hero__btn wge-hero__btn--secondary">Learn more about Defguard</a>
+            </div>
+            <div class="wge-hero__logos" aria-label="Trusted by xcomp and epssi">
+              <div class="wge-hero__logo-block">
+                <a href="https://xcomp.pl/en/home/" target="_blank" rel="noopener noreferrer" aria-label="Xcomp – Defguard MSP Partner Poland">
+                  <img src="/images/partnering-with-defguard/xcomp-logo.png" alt="xcomp" class="wge-hero__logo" width="125" height="125" loading="lazy" />
+                </a>
+                <p class="wge-hero__trust">Defguard MSP Partner Poland</p>
+              </div>
+              <div class="wge-hero__logo-block">
+                <img src="/images/partnering-with-defguard/epssi-logo.png" alt="epssi" class="wge-hero__logo" width="125" height="125" loading="lazy" />
+                <p class="wge-hero__trust">Defguard MSP Partner France</p>
+              </div>
+            </div>
+          </div>
+          <div class="wge-hero__form">
+            <form class="wge-hero-form" action="/book-a-demo" method="get" aria-label="Contact form">
+              <input type="hidden" name="utm_source" value="partnering-with-defguard" />
+              <label for="wge-hero-name" class="wge-hero-form__label">Name</label>
+              <input id="wge-hero-name" class="wge-hero-form__input" type="text" name="name" placeholder="Your name" required />
+              <label for="wge-hero-email" class="wge-hero-form__label">Email</label>
+              <input id="wge-hero-email" class="wge-hero-form__input" type="email" name="email" placeholder="you@company.com" required />
+              <label for="wge-hero-message" class="wge-hero-form__label">Message</label>
+              <textarea id="wge-hero-message" class="wge-hero-form__input wge-hero-form__textarea" name="message" placeholder="Tell us about your interest in partnering" rows="3"></textarea>
+              <button type="submit" class="wge-hero-form__submit">Get in touch</button>
+            </form>
+          </div>
+        </div>
+      </ContentLimiter>
+    </section>
+
+    <!-- Power your portfolio with Defguard (blue theme, same as What partners get) -->
+    <section class="wge-why wge-why--blue" aria-labelledby="wge-why-headline">
+      <ContentLimiter maxWidth={1100}>
+        <h2 id="wge-why-headline" class="wge-why__headline">Power your portfolio with Defguard</h2>
+        <p class="wge-why__sub">Defguard is the control plane for Enterprise WireGuard VPN. Partners get technical support, co-marketing, and a product customers trust.</p>
+        <div class="wge-why__grid">
+          <article class="wge-why-card">
+            <div class="wge-why-card__icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 265.23 240.11" width="44" height="44" fill="#3d72c1">
+                <path d="M213.471,88.167 L248.43,79.63 L158.19,193.447 z M16.679,77.042 L48.779,85.76 L102.276,189.981 z M130.862,9.348 C175.645,9.348 201.713,15.032 208.098,18.695 C203.828,21.146 190.739,24.498 169.147,26.45 L169.086,26.447 L169.007,26.463 C158.345,27.422 145.628,28.042 130.862,28.042 C86.079,28.042 60.011,22.359 53.624,18.695 C60.011,15.032 86.079,9.348 130.862,9.348 M217.875,30.385 L251.952,69.148 L215.318,78.094 z M137.237,95.412 L202.187,89.552 L135.772,216.031 z M127.89,95.295 L126.417,216.544 L60.148,87.44 z M46.908,75.565 L13.048,66.369 L43.98,30.42 z M55.949,70.559 L53.238,28.726 C57.679,30.437 63.666,31.906 71.424,33.217 C76.513,34.078 82.138,34.813 88.162,35.417 z M123.635,85.392 L61.623,78.202 L96.224,40.455 z M132.625,82.18 L104.879,36.694 C113.17,37.149 121.908,37.39 130.862,37.39 C141.203,37.39 151.258,37.071 160.663,36.466 z M204.373,79.97 L141.466,85.646 L170.026,39.081 z M206.5,67.969 L178.685,34.857 C182.79,34.374 186.685,33.828 190.301,33.217 C198.129,31.894 204.152,30.41 208.605,28.679 z M264.066,68.773 L218.175,16.571 C216.521,10.936 207.928,7.153 190.301,4.173 C174.382,1.483 153.273,-0 130.862,-0 C108.451,-0 87.342,1.483 71.424,4.173 C53.767,7.157 45.177,10.948 43.544,16.598 L1.13,65.889 C-0.306,67.559 -0.382,70.005 0.949,71.76 L127.116,238.232 C127.37,238.572 127.668,238.874 127.999,239.131 L128.007,239.138 L128.018,239.145 L128.02,239.147 L128.027,239.152 L128.034,239.159 L128.043,239.163 C128.174,239.264 128.309,239.355 128.45,239.439 L128.451,239.439 L128.46,239.446 L128.47,239.451 L128.477,239.456 L128.48,239.459 C129.181,239.873 129.993,240.106 130.84,240.11 L130.862,240.11 C131.529,240.11 132.173,239.969 132.761,239.707 L132.763,239.707 L132.774,239.702 L132.776,239.7 C133.196,239.512 133.587,239.261 133.936,238.959 L133.943,238.951 C134.162,238.759 134.364,238.546 134.545,238.314 L264.219,74.762 C265.622,72.991 265.558,70.47 264.066,68.773" fill="#3d72c1"/>
+              </svg>
+            </div>
+            <h3 class="wge-why-card__title">Value-Added Reseller</h3>
+            <p class="wge-why-card__body">Offer Defguard's enterprise WireGuard solutions directly to your clients, delivering secure connectivity while earning a competitive margin.</p>
+          </article>
+          <article class="wge-why-card">
+            <div class="wge-why-card__icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="44" height="44" fill="#3d72c1">
+                <path d="M5 5h1v1H5zm2 1h1V5H7zm2-.001L9.999 6 10 5.001 9.001 5zM22 3v17H2V3zm-1 13H3v3h18zm0-4H3v3h18zm0-4H3v3h18zm0-1V4H3v3zM6 9H5v1h1zm2 0H7v1h1zm2 .001L9.001 9 9 9.999l.999.001zM6 13H5v1h1zm2 0H7v1h1zm2 .001L9.001 13 9 13.999l.999.001zM6 17H5v1h1zm2 0H7v1h1zm2 .001L9.001 17 9 17.999l.999.001z"/>
+              </svg>
+            </div>
+            <h3 class="wge-why-card__title">Managed Services Providers</h3>
+            <p class="wge-why-card__body">Integrate Defguard into your managed services to provide stronger security, streamlined VPN management, and seamless network control.</p>
+          </article>
+        </div>
+      </ContentLimiter>
+    </section>
+
+    <!-- What partners get (light theme, same as Stories from teams) -->
+    <section class="wge-pain wge-pain--light" aria-labelledby="wge-pain-headline">
+      <ContentLimiter maxWidth={1100}>
+        <h2 id="wge-pain-headline" class="wge-pain__headline">What partners get</h2>
+        <p class="wge-pain__sub">We support partners with technical enablement, go-to-market resources, and a product roadmap aligned with enterprise needs.</p>
+        <div class="wge-pain__grid">
+          <article class="wge-pain-card">
+            <div class="wge-pain-card__icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="44" height="44" fill="none" stroke="#3d72c1" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M39.67,29.59c.5-.22,1.07-.22,1.58,0l22.92,9.82c1.62.69,1.62,2.98,0,3.68l-22.92,9.82c-.5.22-1.07.22-1.58,0l-22.92-9.82c-1.62-.69-1.62-2.98,0-3.68l22.92-9.82Z"/>
+                <path d="M24.66,47.03l-7.91,3.39c-1.62.69-1.62,2.98,0,3.68l22.92,9.82c.5.22,1.07.22,1.58,0l22.92-9.82c1.62-.69,1.62-2.98,0-3.68l-7.91-3.39"/>
+                <path d="M68.38,22.26h-16"/>
+                <path d="M60.38,30.26v-16"/>
+              </svg>
+            </div>
+            <h3 class="wge-pain-card__title">Technical enablement</h3>
+            <p class="wge-pain-card__body">Documentation, training, and sandbox access so your team can deploy and support Defguard confidently.</p>
+          </article>
+          <article class="wge-pain-card">
+            <div class="wge-pain-card__icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="44" height="44" fill="none" stroke="#3d72c1" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M71.01,40c-1.13-2.42-2.55-4.72-4.25-6.85-6.5-8.15-16.35-12.89-26.77-12.89s-20.27,4.74-26.77,12.89c-1.7,2.13-3.12,4.43-4.25,6.85"/>
+                <path d="M71.01,40c-1.13,2.42-2.55,4.72-4.25,6.85-6.5,8.15-16.35,12.89-26.77,12.89s-20.27-4.74-26.77-12.89c-1.7-2.13-3.12-4.43-4.25-6.85"/>
+                <path d="M35.31,49.74c2.96,1.43,6.42,1.43,9.38,0s5.12-4.13,5.85-7.34c.73-3.21-.04-6.57-2.09-9.15-2.05-2.57-5.16-4.07-8.45-4.07s-6.4,1.5-8.45,4.07c-2.05,2.57-2.82,5.94-2.09,9.15.73,3.21,2.89,5.91,5.85,7.34Z"/>
+              </svg>
+            </div>
+            <h3 class="wge-pain-card__title">Co-marketing</h3>
+            <p class="wge-pain-card__body">Joint webinars, case studies, and demand-generation support to reach security and infrastructure buyers.</p>
+          </article>
+          <article class="wge-pain-card">
+            <div class="wge-pain-card__icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="44" height="44" fill="none" stroke="#3d72c1" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M72,68H10c-1.1,0-2-.9-2-2V12"/>
+                <path d="M8,51.67l16.62-16.62c1.56-1.56,4.09-1.56,5.66,0l8.49,8.49c1.56,1.56,4.09,1.56,5.66,0l15.91-15.91"/>
+                <path d="M65.81,33.11l-10.97-10.97c-1.11-1.11-.32-3,1.24-3h9.73c1.66,0,3,1.34,3,3v9.73c0,1.57-1.89,2.35-3,1.24Z"/>
+              </svg>
+            </div>
+            <h3 class="wge-pain-card__title">Deal support</h3>
+            <p class="wge-pain-card__body">Deal registration, proof-of-concept assistance, and escalation paths for enterprise opportunities.</p>
+          </article>
+        </div>
+      </ContentLimiter>
+    </section>
+
+    <!-- Feature grid (dark) -->
+    <section class="wge-features" aria-labelledby="wge-features-headline">
+      <ContentLimiter maxWidth={1100}>
+        <h2 id="wge-features-headline" class="wge-features__headline">Defguard capabilities for your customers</h2>
+        <p class="wge-features__sub">Enterprise WireGuard VPN with identity, MFA, and governed operations. Built for production and scale.</p>
+        <div class="wge-features__grid">
+          <article class="wge-feature">
+            <h3 class="wge-feature__title">Connection-level MFA/2FA</h3>
+            <p class="wge-feature__body">Verify access when the tunnel comes up, not just in a web login.</p>
+          </article>
+          <article class="wge-feature">
+            <h3 class="wge-feature__title">SSO and directory sync</h3>
+            <p class="wge-feature__body">Use existing identity to manage users and groups.</p>
+          </article>
+          <article class="wge-feature">
+            <h3 class="wge-feature__title">Zero-touch enrollment</h3>
+            <p class="wge-feature__body">Make new devices predictable to onboard and offboard.</p>
+          </article>
+          <article class="wge-feature">
+            <h3 class="wge-feature__title">Access policy</h3>
+            <p class="wge-feature__body">Define who can reach what, and keep it consistent.</p>
+          </article>
+          <article class="wge-feature">
+            <h3 class="wge-feature__title">Visibility</h3>
+            <p class="wge-feature__body">See active devices and access events in one place.</p>
+          </article>
+          <article class="wge-feature">
+            <h3 class="wge-feature__title">Audit trail</h3>
+            <p class="wge-feature__body">Track admin actions and access history for reviews.</p>
+          </article>
+        </div>
+      </ContentLimiter>
+    </section>
+
+    <!-- Customer Testimonials -->
+    <section class="wge-testimonials" aria-labelledby="wge-testimonials-headline">
+      <ContentLimiter maxWidth={1100}>
+        <h2 id="wge-testimonials-headline" class="wge-testimonials__headline">Stories from teams running Defguard</h2>
+        <div class="wge-testimonials__grid">
+          {testimonialsData.map((t) => (
+            <article class="wge-testimonial">
+              <blockquote class="wge-testimonial__quote">
+                "{t.markdownRaw?.trim() ?? ""}"
+              </blockquote>
+              <div class="wge-testimonial__logo">
+                <img src={t.imageSecondary} alt="" width="120" height="32" loading="lazy" />
+              </div>
+              <p class="wge-testimonial__attr">
+                {t.title}
+                {t.subtitle ? `, ${t.subtitle}` : ""}
+              </p>
+            </article>
+          ))}
+        </div>
+      </ContentLimiter>
+    </section>
+
+    <!-- Partner contact (blue theme, same as Security) -->
+    <section class="wge-access wge-access--blue" aria-labelledby="wge-access-headline">
+      <ContentLimiter maxWidth={1100}>
+        <div class="wge-access__layout">
+          <div class="wge-access__left">
+            <h2 id="wge-access-headline" class="wge-access__headline">Ready to explore a partnership with us?</h2>
+            <p class="wge-access__sub">Defguard is experiencing fast adoption as the go-to enterprise orchestration platform for WireGuard, and we are actively building partnerships around the world.<br /><br />Share your goals and requirements, and we will get back to you shortly.</p>
+          </div>
+          <div class="wge-access__right">
+            <form class="wge-partner-form" action="/book-a-demo" method="get" aria-label="Partner contact form">
+              <input type="hidden" name="utm_source" value="partnering-with-defguard" />
+              <label for="wge-partner-name" class="wge-partner-form__label">Name</label>
+              <input id="wge-partner-name" class="wge-partner-form__input" type="text" name="name" placeholder="Your name" required />
+              <label for="wge-partner-email" class="wge-partner-form__label">Email</label>
+              <input id="wge-partner-email" class="wge-partner-form__input" type="email" name="email" placeholder="you@company.com" required />
+              <label for="wge-partner-message" class="wge-partner-form__label">Message</label>
+              <textarea id="wge-partner-message" class="wge-partner-form__input wge-partner-form__textarea" name="message" placeholder="Tell us about your interest in partnering" rows="3"></textarea>
+              <button type="submit" class="wge-partner-form__submit">Send inquiry</button>
+            </form>
+          </div>
+        </div>
+      </ContentLimiter>
+    </section>
+
+    <!-- Security (light theme, same as Stories from teams) -->
+    <section class="wge-security wge-security--light" aria-labelledby="wge-security-headline">
+      <ContentLimiter maxWidth={1100}>
+        <h2 id="wge-security-headline" class="wge-security__headline">Someone is always testing our security. So are we.</h2>
+        <div class="wge-security__grid">
+          <article class="wge-security-card">
+            <div class="wge-security-card__icon" aria-hidden="true"><i class="lni lni-shield"></i></div>
+            <h3 class="wge-security-card__title">Pentested by security experts</h3>
+            <p class="wge-security-card__body">Regular penetration tests &amp; security reviews covering configuration, key handling, privilege boundaries, and update paths.</p>
+            <a class="wge-security-card__link" href="/pentesting/">Read penetration reports →</a>
+          </article>
+          <article class="wge-security-card">
+            <div class="wge-security-card__icon" aria-hidden="true"><i class="lni lni-pulse"></i></div>
+            <h3 class="wge-security-card__title">Daily vulnerability monitoring</h3>
+            <p class="wge-security-card__body">Full Software Bill of Materials (SBOM) published per release, with daily scans for known vulnerabilities and supply-chain risks.</p>
+            <a class="wge-security-card__link" href="/sbom/">View SBOM results →</a>
+          </article>
+          <article class="wge-security-card">
+            <div class="wge-security-card__icon" aria-hidden="true"><i class="lni lni-code"></i></div>
+            <h3 class="wge-security-card__title">Verifiable open source</h3>
+            <p class="wge-security-card__body">Public, auditable source code enabling independent review, reproducible builds, and external third-party verification.</p>
+            <a class="wge-security-card__link" href="https://github.com/DefGuard" target="_blank" rel="noopener noreferrer">Check our code →</a>
+          </article>
+        </div>
+        <p class="wge-security__footer">Defguard is ISO/IEC 27001:2023 certified and implements stringent security<br />requirements across its development processes and security testing.</p>
+      </ContentLimiter>
+    </section>
+  </main>
+</ProductLayout>
+
+<style lang="scss">
+  main#partnering-with-defguard-page {
+    --page-spacing-factor: 1;
+  }
+
+  .wge-hero {
+    background: linear-gradient(180deg, #1a1d24 0%, #0f1115 100%);
+    color: #fff;
+    padding: page-spacing(60px) 0 page-spacing(80px);
+    text-align: left;
+
+    @include break-up(md) {
+      padding: page-spacing(80px) 0 page-spacing(100px);
+    }
+  }
+
+  .wge-hero--light {
+    background: #fff;
+    color: #222;
+    padding: page-spacing(80px) 0;
+  }
+
+  .wge-hero__layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: start;
+
+    @include break-up(lg) {
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+  }
+
+  .wge-hero__inner {
+    max-width: 680px;
+  }
+
+  .wge-hero__form {
+    @include break-up(lg) {
+      position: relative;
+    }
+  }
+
+  .wge-hero-form {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .wge-hero-form__label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: -0.25rem;
+  }
+
+  .wge-hero-form__input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+
+  .wge-hero-form__input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .wge-hero-form__input:focus {
+    outline: none;
+    border-color: #0c8ce0;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .wge-hero-form__textarea {
+    min-height: 80px;
+    resize: vertical;
+  }
+
+  .wge-hero-form__submit {
+    margin-top: 0.25rem;
+    padding: 0.875rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    background: #0c8ce0;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .wge-hero-form__submit:hover {
+    background: #0a7bc4;
+  }
+
+  .wge-hero__title {
+    margin: 0 0 1rem;
+    font-weight: 600;
+    font-size: clamp(1.925rem, 4.4vw, 3.025rem);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: #fff !important;
+  }
+
+  .wge-hero--light .wge-hero__title {
+    color: #222 !important;
+  }
+
+  .wge-hero__title-line1,
+  .wge-hero__title-line2 {
+    color: #fff !important;
+  }
+
+  .wge-hero--light .wge-hero__title-line1,
+  .wge-hero--light .wge-hero__title-line2 {
+    color: #222 !important;
+  }
+
+  .wge-hero__title-line1 {
+    display: block;
+  }
+
+  .wge-hero__title-line2 {
+    display: block;
+    font-size: 1.1em;
+  }
+
+  .wge-hero__subhead {
+    margin: 0 0 2rem;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    line-height: 1.6;
+    color: #fff;
+    max-width: 56ch;
+  }
+
+  .wge-hero--light .wge-hero__subhead {
+    color: #222;
+  }
+
+  .wge-hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .wge-hero__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 1rem;
+    text-decoration: none;
+    border: 2px solid transparent;
+    cursor: pointer;
+  }
+
+  .wge-hero__btn--primary {
+    background-color: #0c8ce0;
+    border-color: #0c8ce0;
+    color: #fff !important;
+  }
+
+  .wge-hero__btn--secondary {
+    background-color: #222;
+    border-color: #374151;
+    color: #fff !important;
+  }
+
+  .wge-hero--light .wge-hero__btn--secondary {
+    background-color: transparent;
+    border-color: #222;
+    color: #222 !important;
+  }
+
+  .wge-hero__trust {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #fff;
+  }
+
+  .wge-hero--light .wge-hero__trust {
+    color: #6b7280;
+  }
+
+  .wge-hero__logos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem 2rem;
+    margin-top: 1.5rem;
+    justify-content: flex-start;
+  }
+
+  .wge-hero__logo {
+    width: 125px;
+    height: 125px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .wge-hero__logo-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .wge-hero__logo-block .wge-hero__trust {
+    margin: 0;
+    text-align: center;
+  }
+
+  .wge-hero--light .wge-hero-form {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+  }
+
+  .wge-hero--light .wge-hero-form__label {
+    color: #222;
+  }
+
+  .wge-hero--light .wge-hero-form__input {
+    background: #fff;
+    border-color: #e5e7eb;
+    color: #222;
+  }
+
+  .wge-hero--light .wge-hero-form__input::placeholder {
+    color: #6b7280;
+  }
+
+  .wge-hero--light .wge-hero-form__input:focus {
+    background: #fff;
+  }
+
+  .wge-why {
+    background: #fff;
+    padding: page-spacing(80px) 0;
+  }
+
+  .wge-why--blue {
+    background: #3d72c1;
+    padding: page-spacing(80px) 0;
+  }
+
+  .wge-why__headline {
+    margin: 0 0 0.5rem;
+    text-align: center;
+    @include typography(section);
+    font-weight: 600;
+    color: #222;
+  }
+
+  .wge-why--blue .wge-why__headline {
+    color: #fff;
+  }
+
+  .wge-why__sub {
+    margin: 0 auto 3rem;
+    text-align: center;
+    @include typography(paragraph);
+    font-size: 1rem;
+    color: #222;
+    line-height: 1.6;
+    max-width: 56ch;
+  }
+
+  .wge-why--blue .wge-why__sub {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .wge-why__grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+
+    @include break-up(md) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+  }
+
+  .wge-why-card {
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 1.75rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .wge-why-card__icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: #3d72c1;
+  }
+
+  .wge-why-card__icon svg {
+    width: 44px;
+    height: 44px;
+    display: block;
+  }
+
+  .wge-why-card__title {
+    margin: 0;
+    @include typography(h3);
+    font-weight: 600;
+    color: #222;
+  }
+
+  .wge-why-card__body {
+    margin: 0;
+    flex: 1;
+    @include typography(paragraph);
+    font-size: 0.95rem;
+    color: #374151;
+    line-height: 1.6;
+  }
+
+  .wge-pain {
+    background: #3d72c1;
+    padding: page-spacing(80px) 0;
+  }
+
+  .wge-pain--light {
+    background: #fff;
+    padding: page-spacing(80px) 0;
+  }
+
+  .wge-pain__headline {
+    margin: 0 0 0.5rem;
+    text-align: center;
+    @include typography(section);
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .wge-pain--light .wge-pain__headline {
+    color: #222;
+  }
+
+  .wge-pain__sub {
+    margin: 0 auto 2.5rem;
+    text-align: center;
+    @include typography(paragraph);
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    max-width: 56ch;
+  }
+
+  .wge-pain--light .wge-pain__sub {
+    color: #222;
+  }
+
+  .wge-pain__grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+
+    @include break-up(md) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+  }
+
+  .wge-pain-card {
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 1.75rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .wge-pain--light .wge-pain-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  .wge-pain-card__icon {
+    width: 48.4px;
+    height: 48.4px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: #3d72c1;
+  }
+
+  .wge-pain-card__icon svg {
+    width: 48.4px;
+    height: 48.4px;
+    display: block;
+  }
+
+  .wge-pain-card__title {
+    margin: 0;
+    @include typography(h3);
+    font-weight: 600;
+    color: #222;
+  }
+
+  .wge-pain-card__body {
+    margin: 0;
+    flex: 1;
+    @include typography(paragraph);
+    font-size: 0.95rem;
+    color: #374151;
+    line-height: 1.6;
+  }
+
+  .wge-edu {
+    padding: page-spacing(60px) 0;
+  }
+
+  .wge-edu--light {
+    background: #f9fafb;
+  }
+
+  .wge-edu--dark {
+    background: #1a1d24;
+    color: #fff;
+  }
+
+  .wge-edu__h2 {
+    margin: 0 0 1.5rem;
+    @include typography(section);
+    font-weight: 600;
+    color: #222;
+  }
+
+  .wge-edu__h2--light {
+    color: #fff;
+  }
+
+  .wge-edu__h3 {
+    margin: 2rem 0 0.75rem;
+    @include typography(h3);
+    font-weight: 600;
+    color: #222;
+  }
+
+  .wge-edu__h3:first-of-type {
+    margin-top: 0;
+  }
+
+  .wge-edu__p {
+    margin: 0 0 1rem;
+    @include typography(paragraph);
+    color: #222;
+    line-height: 1.6;
+    max-width: 65ch;
+  }
+
+  .wge-edu__p--light {
+    color: #e5e7eb;
+  }
+
+  .wge-edu__callout {
+    margin: 1.25rem 0;
+    padding: 1.25rem 1.5rem;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    border-left: 4px solid #0c8ce0;
+  }
+
+  .wge-edu__callout p {
+    margin: 0;
+    @include typography(paragraph);
+    color: #222;
+    line-height: 1.6;
+  }
+
+  .wge-edu__concepts {
+    margin: 1rem 0;
+    display: grid;
+    gap: 0.5rem 1.5rem;
+    max-width: 65ch;
+
+    @include break-up(sm) {
+      grid-template-columns: auto 1fr;
+    }
+  }
+
+  .wge-edu__concepts dt {
+    margin: 0;
+    @include typography(paragraph);
+    font-weight: 600;
+    color: #222;
+  }
+
+  .wge-edu__concepts dd {
+    margin: 0;
+    @include typography(paragraph);
+    color: #222;
+    line-height: 1.5;
+  }
+
+  .wge-edu__list {
+    margin: 0 0 1rem;
+    padding-left: 1.5rem;
+    max-width: 65ch;
+  }
+
+  .wge-edu__list li {
+    margin-bottom: 0.5rem;
+    @include typography(paragraph);
+    color: #222;
+    line-height: 1.5;
+  }
+
+  .wge-security--light {
+    background: #fff;
+    padding: page-spacing(80px) 0;
+  }
+
+  .wge-security__headline {
+    margin: 0 0 3rem;
+    text-align: center;
+    @include typography(section);
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .wge-security--light .wge-security__headline {
+    color: #222;
+  }
+
+  .wge-security__grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+    margin-bottom: 2.5rem;
+
+    @include break-up(md) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+  }
+
+  .wge-security-card {
+    background: #252830;
+    border-radius: 12px;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .wge-security--light .wge-security-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  .wge-security-card__icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #3d72c1;
+    font-size: 2.75rem;
+  }
+
+  .wge-security-card__title {
+    margin: 0;
+    @include typography(h3);
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .wge-security--light .wge-security-card__title {
+    color: #222;
+  }
+
+  .wge-security-card__body {
+    margin: 0;
+    flex: 1;
+    @include typography(paragraph);
+    font-size: 0.95rem;
+    color: #e5e7eb;
+    line-height: 1.6;
+  }
+
+  .wge-security--light .wge-security-card__body {
+    color: #374151;
+  }
+
+  .wge-security-card__link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    margin-top: 0.25rem;
+  }
+
+  .wge-security--light .wge-security-card__link {
+    color: #0c8ce0;
+  }
+
+  .wge-security-card__link:hover {
+    text-decoration: underline;
+  }
+
+  .wge-security__footer {
+    margin: 0;
+    text-align: center;
+    @include typography(paragraph);
+    font-size: 0.9rem;
+    color: #9ca3af;
+    line-height: 1.6;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .wge-security--light .wge-security__footer {
+    color: #6b7280;
+  }
+
+  .wge-access {
+    background: #fff;
+    padding: page-spacing(80px) 0;
+  }
+
+  .wge-access--blue {
+    background: #3d72c1;
+    padding: page-spacing(80px) 0;
+  }
+
+  .wge-access__layout {
+    display: grid;
+    gap: 2.5rem;
+    grid-template-columns: 1fr;
+
+    @include break-up(lg) {
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+      gap: 3rem;
+    }
+  }
+
+  .wge-access__headline {
+    margin: 0 0 1.25rem;
+    @include typography(section);
+    font-weight: 600;
+    color: #222;
+    text-align: left;
+  }
+
+  .wge-access--blue .wge-access__headline {
+    color: #fff;
+    text-align: left;
+  }
+
+  .wge-access__sub {
+    margin: 0 0 1.5rem;
+    @include typography(paragraph);
+    color: #222;
+    line-height: 1.5;
+  }
+
+  .wge-access--blue .wge-access__sub {
+    color: rgba(255, 255, 255, 0.9);
+    text-align: left;
+  }
+
+  .wge-access__left {
+    max-width: 28rem;
+  }
+
+  .wge-partner-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .wge-partner-form__label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #222;
+  }
+
+  .wge-access--blue .wge-partner-form__label {
+    color: #fff;
+  }
+
+  .wge-partner-form__input {
+    width: 100%;
+    padding: 0.65rem 0.875rem;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    color: #222;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s ease;
+  }
+
+  .wge-access--blue .wge-partner-form__input {
+    background: #f9fafb;
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .wge-partner-form__input::placeholder {
+    color: #6b7280;
+  }
+
+  .wge-partner-form__input:focus {
+    outline: none;
+    border-color: #0c8ce0;
+  }
+
+  .wge-partner-form__textarea {
+    min-height: 80px;
+    resize: vertical;
+  }
+
+  .wge-partner-form__submit {
+    margin-top: 0.25rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    border: 2px solid #0c8ce0;
+    background: #fff;
+    color: #0c8ce0;
+    font-size: 0.95rem;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+    align-self: flex-start;
+  }
+
+  .wge-partner-form__submit:hover {
+    background: #f0f7ff;
+    color: #0a7bc4;
+  }
+
+  .wge-features {
+    background: #1a1d24;
+    padding: page-spacing(80px) 0;
+  }
+
+  .wge-features__headline {
+    margin: 0 0 0.5rem;
+    scroll-margin-top: calc(var(--nav-height) + 1rem);
+    @include typography(section);
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+  }
+
+  .wge-features__sub {
+    margin: 0 0 2.5rem;
+    @include typography(paragraph);
+    font-size: 1rem;
+    color: #9ca3af;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .wge-features__grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+
+    @include break-up(md) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+  }
+
+  .wge-feature {
+    background: #252830;
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .wge-feature__title {
+    margin: 0 0 0.5rem;
+    @include typography(h3);
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .wge-feature__body {
+    margin: 0;
+    @include typography(paragraph);
+    font-size: 0.9rem;
+    color: #e5e7eb;
+    line-height: 1.5;
+  }
+
+  .wge-testimonials {
+    background: #fff;
+    padding: page-spacing(80px) 0;
+  }
+
+  .wge-testimonials__headline {
+    margin: 0 0 3rem;
+    text-align: center;
+    @include typography(section);
+    font-weight: 600;
+    color: #222;
+  }
+
+  .wge-testimonials__grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+
+    @include break-up(md) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+  }
+
+  .wge-testimonial {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.75rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .wge-testimonial__quote {
+    margin: 0;
+    @include typography(paragraph);
+    font-size: 0.95rem;
+    color: #222;
+    line-height: 1.6;
+  }
+
+  .wge-testimonial__logo {
+    margin-top: auto;
+  }
+
+  .wge-testimonial__logo img {
+    max-height: 32px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .wge-testimonial__attr {
+    margin: 0;
+    @include typography(paragraph);
+    font-size: 0.875rem;
+    color: #6b7280;
+    line-height: 1.5;
+  }
+</style>
