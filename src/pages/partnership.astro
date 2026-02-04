@@ -62,6 +62,13 @@ const tags = [
             </p>
             <div class="wge-hero__ctas">
               <a href="#wge-access-headline" class="wge-hero__btn wge-hero__btn--primary">Become Defguard Partner</a>
+              <a href="mailto:partner@defguard.net" class="wge-hero__btn wge-hero__btn--contact">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                <span>Get in touch</span>
+              </a>
             </div>
             <div class="wge-hero__benefits">
               <div class="wge-hero__benefit">
@@ -202,33 +209,39 @@ const tags = [
       <ContentLimiter maxWidth={1100}>
         <div class="wge-access__layout">
           <div class="wge-access__left">
-            <h2 id="wge-access-headline" class="wge-access__headline">Ready to explore a partnership with us?</h2>
-            <p class="wge-access__sub">Defguard is experiencing fast adoption as the go-to enterprise orchestration platform for WireGuard, and we are actively building partnerships around the world.<br /><br />Share your goals and requirements, and we will get back to you shortly.</p>
+            <h2 id="wge-access-headline" class="wge-access__headline" style="color: #fff;">Ready to explore a partnership with us?</h2>
+            <p class="wge-access__sub" style="color: #fff;">Defguard is experiencing fast adoption as the go-to enterprise orchestration platform for WireGuard.</p>
+            <p class="wge-access__sub" style="color: #fff;">To register your interest in becoming a Defguard partner, please follow these steps:</p>
+            <ul style="color: #fff;">
+              <li>Share your goals and requirements like number of customers and number of Defguard licenses you plan to sell.</li>
+              <li>Review our partner program agreement</li>
+              <li>Sehcudel a call with our partnership team to discuss the details.</li>
+              <li>Sign the partner program agreement and get access to our deal registration portal.</li>
+            </ul>
           </div>
           <div class="wge-access__right">
-            <form class="wge-partner-form" action="/book-a-demo" method="get" aria-label="Partner contact form">
-              <input type="hidden" name="utm_source" value="partnering-with-defguard" />
-              <label for="wge-partner-name" class="wge-partner-form__label">Contact name</label>
-              <input id="wge-partner-name" class="wge-partner-form__input" type="text" name="name" placeholder="Your name" required />
-              <label for="wge-partner-company" class="wge-partner-form__label">Company name</label>
-              <input id="wge-partner-company" class="wge-partner-form__input" type="text" name="company" placeholder="Your company" required />
-              <label for="wge-partner-company-url" class="wge-partner-form__label">Company URL</label>
-              <input id="wge-partner-company-url" class="wge-partner-form__input" type="url" name="company_url" placeholder="https://example.com" />
-              <label for="wge-partner-email" class="wge-partner-form__label">Email</label>
-              <input id="wge-partner-email" class="wge-partner-form__input" type="email" name="email" placeholder="you@company.com" required />
-              <label for="wge-partner-phone" class="wge-partner-form__label">Phone</label>
-              <input id="wge-partner-phone" class="wge-partner-form__input" type="tel" name="phone" placeholder="+1 (555) 123-4567" />
-              <label for="wge-partner-partner-type" class="wge-partner-form__label">Partner type</label>
-              <select id="wge-partner-partner-type" class="wge-partner-form__input" name="partner_type" required>
-                <option value="">Select partner type</option>
-                <option value="MSP">MSP</option>
-                <option value="Reseller">Reseller</option>
-                <option value="Distributor">Distributor</option>
-              </select>
-              <label for="wge-partner-message" class="wge-partner-form__label">Tell us how you want to partner with Defguard</label>
-              <textarea id="wge-partner-message" class="wge-partner-form__input wge-partner-form__textarea" name="message" placeholder="Tell us how you want to partner with Defguard" rows="3"></textarea>
-              <button type="submit" class="wge-partner-form__submit">Send inquiry</button>
-            </form>
+            <div class="wge-partner-contact">
+              <div class="wge-partner-contact__icon-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+              </div>
+              <h3 class="wge-partner-contact__title">Get in touch</h3>
+              <p class="wge-partner-contact__text">Reach out to our partnership team to discuss how we can work together.</p>
+              <a href="mailto:partner@defguard.net" class="wge-partner-contact__email">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                <span>partner@defguard.net</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="wge-partner-contact__arrow">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+              <p class="wge-partner-contact__note">We typically respond within 24 hours</p>
+            </div>
           </div>
         </div>
       </ContentLimiter>
@@ -520,6 +533,27 @@ const tags = [
     background-color: transparent;
     border-color: #222;
     color: #222 !important;
+  }
+
+  .wge-hero__btn--contact {
+    background-color: transparent;
+    border: 2px solid #3d72c1;
+    color: #3d72c1 !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .wge-hero__btn--contact:hover {
+    background-color: rgba(61, 114, 193, 0.1);
+    border-color: #0c8ce0;
+    color: #0c8ce0 !important;
+  }
+
+  .wge-hero__btn--contact svg {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
   }
 
   .wge-hero__benefits {
@@ -1135,6 +1169,7 @@ const tags = [
 
   .wge-access__headline {
     margin: 0 0 1.25rem;
+    scroll-margin-top: calc(var(--nav-height) + 2rem);
     @include typography(section);
     font-weight: 400;
     color: #222;
@@ -1229,6 +1264,137 @@ const tags = [
   .wge-partner-form__submit:hover {
     background: #f0f7ff;
     color: #0a7bc4;
+  }
+
+  .wge-partner-contact {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    padding: 3rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .wge-partner-contact:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .wge-partner-contact__icon-wrapper {
+    width: 64px;
+    height: 64px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    color: #fff;
+    transition: all 0.3s ease;
+  }
+
+  .wge-partner-contact:hover .wge-partner-contact__icon-wrapper {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+  }
+
+  .wge-partner-contact__icon-wrapper svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .wge-partner-contact__title {
+    margin: 0 0 0.75rem;
+    @include typography(section);
+    font-size: calc(28px * var(--font-scale-factor));
+    font-weight: 400;
+    color: #fff;
+  }
+
+  .wge-partner-contact__text {
+    margin: 0 0 2rem;
+    @include typography(paragraph);
+    color: rgba(255, 255, 255, 0.85);
+    font-size: calc(16px * var(--font-scale-factor));
+    line-height: 1.6;
+    max-width: 400px;
+  }
+
+  .wge-partner-contact__email {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    @include typography(paragraph);
+    font-size: calc(18px * var(--font-scale-factor));
+    font-weight: 500;
+    color: #fff;
+    text-decoration: none;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .wge-partner-contact__email::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .wge-partner-contact__email:hover::before {
+    left: 100%;
+  }
+
+  .wge-partner-contact__email:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  .wge-partner-contact__email:active {
+    transform: translateY(-1px);
+  }
+
+  .wge-partner-contact__email svg {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+  }
+
+  .wge-partner-contact__arrow {
+    margin-left: 0.25rem;
+    opacity: 0.7;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .wge-partner-contact__email:hover .wge-partner-contact__arrow {
+    transform: translateX(4px);
+    opacity: 1;
+  }
+
+  .wge-partner-contact__note {
+    margin: 1.5rem 0 0;
+    @include typography(paragraph);
+    font-size: calc(14px * var(--font-scale-factor));
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
   }
 
   .wge-features {
