@@ -136,7 +136,7 @@ const tags = [
               </svg>
             </div>
             <h3 class="wge-why-card__title">Value-Added Reseller</h3>
-            <p class="wge-why-card__body"></p>
+            <p class="wge-why-card__body">Deliver Defguard to your customers to expand your security portfolio, create new recurring revenue streams, and strengthen long-term client relationships.</p>
           </article>
           <article class="wge-why-card">
             <div class="wge-why-card__icon" aria-hidden="true">
@@ -149,12 +149,14 @@ const tags = [
           </article>
           <article class="wge-why-card">
             <div class="wge-why-card__icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="44" height="44" fill="#3d72c1">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="44" height="44" fill="none" stroke="#3d72c1" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M40 22L14 18V58L40 66V22Z" />
+                <path d="M40 22L66 18V58L40 66" />
+                <path d="M14 18L40 14L66 18" />
               </svg>
             </div>
             <h3 class="wge-why-card__title">Defguard Whitelabel</h3>
-            <p class="wge-why-card__body">Rebrand Defguard with your own branding and offer it as your own solution to your customers.</p>
+            <p class="wge-why-card__body">Rebrand Defguard as your own solution to offer customers a fully branded platform, while maintaining ownership of service delivery and customer experience.</p>
           </article>
         </div>
       </ContentLimiter>
@@ -215,7 +217,7 @@ const tags = [
             <ul style="color: #fff;">
               <li>Share your goals and requirements like number of customers and number of Defguard licenses you plan to sell.</li>
               <li>Review our partner program agreement</li>
-              <li>Sehcudel a call with our partnership team to discuss the details.</li>
+              <li>Schedule a call with our partnership team to discuss the details.</li>
               <li>Sign the partner program agreement and get access to our deal registration portal.</li>
             </ul>
           </div>
@@ -1334,7 +1336,7 @@ const tags = [
     @include typography(paragraph);
     font-size: calc(18px * var(--font-scale-factor));
     font-weight: 500;
-    color: #fff;
+    color: #fff !important;
     text-decoration: none;
     padding: 1rem 2rem;
     background: rgba(255, 255, 255, 0.2);
@@ -1343,6 +1345,10 @@ const tags = [
     border: 2px solid rgba(255, 255, 255, 0.3);
     position: relative;
     overflow: hidden;
+  }
+
+  .wge-partner-contact__email span {
+    color: #fff !important;
   }
 
   .wge-partner-contact__email::before {
