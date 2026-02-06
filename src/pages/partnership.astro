@@ -215,7 +215,7 @@ const tags = [
             <ul style="color: #fff;">
               <li>Share your goals and requirements like number of customers and number of Defguard licenses you plan to sell.</li>
               <li>Review our partner program agreement</li>
-              <li>Sehcudel a call with our partnership team to discuss the details.</li>
+              <li>Schedule a call with our partnership team to discuss the details.</li>
               <li>Sign the partner program agreement and get access to our deal registration portal.</li>
             </ul>
           </div>
@@ -1334,9 +1334,18 @@ const tags = [
     @include typography(paragraph);
     font-size: calc(18px * var(--font-scale-factor));
     font-weight: 500;
-    color: #fff;
+    color: #fff !important;
     text-decoration: none;
     padding: 1rem 2rem;
+
+    &:visited,
+    &:visited span {
+      color: #fff !important;
+    }
+
+    span {
+      color: #fff !important;
+    }
     background: rgba(255, 255, 255, 0.2);
     border-radius: 12px;
     transition: all 0.3s ease;
