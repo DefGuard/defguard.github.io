@@ -76,7 +76,7 @@ const DealRegistrationForm = ({ submit_text = "Submit" }: DealRegistrationFormPr
     );
 
 
-    fetch("https://update-service-dev.teonite.net/api/customer/signup", {
+    fetch("https://update-service-dev.defguard.net/api/customer/signup", {
       method: "POST",
       body: data,
     })
