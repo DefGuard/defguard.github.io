@@ -100,13 +100,21 @@ const tags = [
       <ContentLimiter maxWidth={1100}>
         <h2 id="wge-partners-headline" class="wge-partners__headline">Our Partners</h2>
         <p class="wge-partners__sub">Trusted partners delivering Defguard solutions worldwide</p>
-        <div class="wge-partners__grid" aria-label="Trusted by xcomp and epssi">
+        <div class="wge-partners__grid" aria-label="Trusted by xcomp, epssi and FOX IT">
           <article class="wge-partners__card">
             <a href="https://xcomp.pl/en/home/" target="_blank" rel="noopener noreferrer" class="wge-partners__link" aria-label="Xcomp – Defguard MSP Partner Poland">
               <div class="wge-partners__logo-wrapper">
                 <img src="/images/partnering-with-defguard/xcomp-logo.png" alt="xcomp" class="wge-partners__logo" width="125" height="125" loading="lazy" />
               </div>
               <p class="wge-partners__label">Defguard MSP Partner Poland</p>
+            </a>
+          </article>
+          <article class="wge-partners__card">
+            <a href="https://fox-it.de/" target="_blank" rel="noopener noreferrer" class="wge-partners__link" aria-label="FOX IT – Defguard MSP Partner Germany">
+              <div class="wge-partners__logo-wrapper">
+                <img src="/images/partnering-with-defguard/foxit-logo.png" alt="FOX IT" class="wge-partners__logo" width="125" height="125" loading="lazy" />
+              </div>
+              <p class="wge-partners__label">Defguard MSP Partner Germany</p>
             </a>
           </article>
           <article class="wge-partners__card">
@@ -670,11 +678,11 @@ const tags = [
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 2rem;
-    max-width: 600px;
+    max-width: 900px;
     margin: 0 auto;
 
     @include break-up(md) {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 3rem;
     }
   }
