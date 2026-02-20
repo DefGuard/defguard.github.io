@@ -13,8 +13,8 @@ const testimonialsData: Array<TestimonialData> = testimonialsImportData
   })
   .sort((a, b) => {
     const order = ["prusa", "acquinox", "sipro"];
-    const ia = order.findIndex((k) => a.imageSecondary.toLowerCase().includes(k));
-    const ib = order.findIndex((k) => b.imageSecondary.toLowerCase().includes(k));
+    const ia = order.findIndex((k) => (a.imageSecondary ?? "").toLowerCase().includes(k));
+    const ib = order.findIndex((k) => (b.imageSecondary ?? "").toLowerCase().includes(k));
     return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
   })
   .slice(0, 3);

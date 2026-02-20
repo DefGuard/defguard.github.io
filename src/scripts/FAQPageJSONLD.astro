@@ -36,5 +36,5 @@ const faqSchema = {
 };
 ---
 {validEntries.length > 0 && (
-  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)} />
 )}
