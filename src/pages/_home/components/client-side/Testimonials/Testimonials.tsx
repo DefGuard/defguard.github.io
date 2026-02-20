@@ -62,22 +62,26 @@ const Testimonial = ({ data }: TestimonialProps) => {
       <div className="testimonial">
         <div className="left">
           <div className="image-logo-wrapper">
-            <div className="image">
-              <img
-                src={data.imagePrimary}
-                alt="person image"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <div className="logo">
-              <img
-                src={data.imageSecondary}
-                alt="logo image"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
+            {data.imagePrimary && (
+              <div className="image">
+                <img
+                  src={data.imagePrimary}
+                  alt="person image"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            )}
+            {data.imageSecondary && (
+              <div className="logo">
+                <img
+                  src={data.imageSecondary}
+                  alt="logo image"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            )}
           </div>
         </div>
         <div className="right">

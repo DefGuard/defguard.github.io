@@ -31,6 +31,14 @@ const testimonialsData: Array<TestimonialData> = testimonialsImportData.map((val
   return res;
 });
 
+// Swap placement of Dimitar D. and Jan Zajc (Sipro) testimonials
+const enterpriseIdx = testimonialsData.findIndex((t) => t.title === "Dimitar D.");
+const siproIdx = testimonialsData.findIndex((t) => t.title === "Jan Zajc");
+if (enterpriseIdx !== -1 && siproIdx !== -1) {
+  [testimonialsData[enterpriseIdx], testimonialsData[siproIdx]] =
+    [testimonialsData[siproIdx], testimonialsData[enterpriseIdx]];
+}
+
 const title = "defguard - Zero-Trust WireGuard® 2FA/MFA VPN";
 const featuredImage =
   "github.com/DefGuard/defguard.github.io/raw/main/public/images/product/core/hero-image.png";
