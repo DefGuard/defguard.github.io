@@ -1,0 +1,109 @@
+---
+title: "Secure multi-tenant remote access built by French MSP for research institutions with Defguard "
+publishDate: 2026-02-23
+description: "Eskemm Numérique, a French public company delivering hosted services to universities and research institutions across Brittany, replaced manual VPN with Defguard to achieve secure, compliant, multi-tenant remote access while meeting HDS and ISO 27001 obligations."
+author: "Michał Gryczka"
+
+companyName: "Eskemm Numérique"
+companyDescription: "French public company responsible for delivering hosted services to universities and research institutions across the Brittany region, operating a shared infrastructure platform for multiple universities and laboratories."
+companySegment: "Research & Education / Hosted Services"
+companyWebsite: ""
+
+image: "/images/blog/eskemm_case_study.png"
+draft: true
+tags: []
+---
+
+![Secure multi-tenant remote access built by French MSP for research institutions with Defguard](/images/blog/eskemm_case_study.png)
+
+Meet **Pierre Doucet**, Technical Manager, and **Marc Simonneau**, Technical Architect at Eskemm Numérique.
+
+Marc and Pierre were facing a rapid expansion of the organization and stringent compliance requirements. They needed to replace their manual VPN setup with a secure, compliant and automated platform. Due to the organisation's character they focused on self-hosted, European based solutions—essential for meeting their HDS and ISO 27001 obligations.
+
+## About the client — Eskemm Numérique
+
+**Eskemm Numérique** is a French public company responsible for delivering hosted services to universities and research institutions across the Brittany region. It operates a shared infrastructure platform currently supporting several universities and laboratories. The characteristics of the organisation made the project of new VPN deployment not a trivial task.
+
+## Challenges
+
+Eskemm Numérique needed a remote access system based on open and modern encryption. As a public-sector organization, they preferred a solution that could be **fully self-hosted** to keep control over their data inside their perimeter and European borders. Pierre and Marc managed remote access for different tenants and services. This gap forced them into manual key management, generating delays and security risks.
+
+Another big challenge was ensuring **network segmentation and isolation** between client environments (tenants). As the team described it:
+
+> "We tried to find a solution in which we can connect each customer to his tenant — and only his tenant."
+
+With infrastructure growing, the team urgently needed a solution capable of **automated scaling**.
+
+To address these gaps, they identified requirements for the desired remote access solution:
+
+- **Multi-Tenancy Isolation** — ability to manage multiple clients' access from the same control plane.
+- **Authentication** — support Multi-Factor Authentication (MFA/2FA) for WireGuard VPN (a mandatory requirement to maintain security certifications) and support for LDAP and KeyCloak integrations.
+- **Security and Encryption** — The VPN solution should be based on modern, fast and secure WireGuard protocol. It also matched the open source preference of the organization.
+- **Compliance** — To meet strict security requirements (HDS, ISO 27001), the platform had to be European and self-hosted. US-based cloud services like Tailscale or Twingate were ruled out because of data privacy risks (like storing metadata outside the EU) and lack of ownership and control over the networking environment.
+- **Automation** — a robust API for seamless integration with their existing automation tools.
+
+## Solution
+
+Pierre and Marc scanned the landscape of modern VPN and remote access technologies to find that **only Defguard ticked all the boxes** by providing a scalable way to deploy WireGuard while maintaining security and privacy in a self-hosted environment. Defguard also uses WireGuard VPN protocol for the data layer, thus matching the organisation's expectations perfectly.
+
+### Complete Multi-Tenancy Isolation
+
+Eskemm Numérique's environment utilizes many gateways deployed on Virtual Machines (Nutanix) to serve two distinct use cases, each with a specific security approach:
+
+**Use case #1 — Customer-Specific Access with complete per-customer isolation**
+
+To manage access to dedicated resources for each client and project, Pierre and Marc leveraged Defguard's ability to create an **unlimited number of VPN Locations**. On a physical level a location is a VPN network to which users can connect; it also enabled them to define which user groups should have access to that network and set the desired MFA (OIDC compatible provider).
+
+To reflect the organisational structure of multiple clients and projects present at Eskemm Numérique, they decided to create **one Location per project**.
+
+Multiple clients can connect through one Defguard instance since Defguard desktop and mobile clients show only locations that the user has access to.
+
+Real-time client configuration synchronisation guarantees that any changes to location configuration, including group assignment, are immediately applied on the client side. [Learn more in the documentation](https://docs.defguard.net/enterprise/automatic-real-time-desktop-client-configuration).
+
+**Use case #2 — Shared Infrastructure Access (Services)**
+
+In the second scenario, the requirement was to securely connect multiple clients to centralized resources and guarantee that each client has access only to specific services.
+
+To support this case, Eskemm deployed a **dedicated Location for shared services** accessible to all authorized customers. This setup introduces a higher risk profile, because multiple clients must access only selected infrastructure without access to all other network segments and seeing each other's workloads.
+
+Currently, access is limited to only a few services. To enhance that, Pierre and Marc plan to leverage **granular group-based access control** (RBAC capabilities of Defguard). While User Groups currently control who can enter this shared gateway on a higher level, they will implement firewall rules using Defguard's **Access Control Lists (ACLs)** module built into Defguard to precisely define access to specific services (IPs, ports and protocols). [ACLs documentation](https://docs.defguard.net/enterprise/all-enteprise-features/access-control-list).
+
+The expected result—a simple but powerful way to control access to shared resources based on user identity and organisation privileges.
+
+### Authentication
+
+Defguard enabled Eskemm to introduce **MFA for several VPN locations** on connection level, while providing flexibility of configuration and authentication via TOTP codes. Defguard also supports **biometric authentication** using Defguard clients on mobile devices.
+
+This was a major factor for choosing Defguard as it's the only solution that delivers **MFA authentication for WireGuard VPN** in a self-hosted environment. It guarantees full data privacy and no third-party dependencies.
+
+### Security & Compliance
+
+The compliance and security requirements are imposed on Eskemm through **HDS (Hébergeur de Données de Santé)**—a mandatory certification in France for any organization hosting health data on behalf of third parties, such as hospitals, clinics, or medical professionals.
+
+Defguard's "Secure By Design" approach and **segmented architecture** that cleanly separates the Control Plane (Core) from the Data Plane fulfils those strict regulatory requirements.
+
+Its design allows Eskemm to host the Core within their own secure datacenter, keeping it **completely hidden from the public internet**. As a result, all sensitive metadata remains strictly within French/EU jurisdiction, fully satisfying HDS and ISO 27001 standards.
+
+The fact that Defguard is a Polish company and the product is developed in the European Union makes it a preferable choice for Eskemm and companies that want to build a **sovereign technology stack**.
+
+### Automation & API
+
+Managing gateways manually would slow down recovery and increase configuration errors. Eskemm therefore managed gateway deployment and Defguard configuration **through code** using **Ansible and Terraform**.
+
+By integrating Defguard's **API** into these pipelines, the team established a reproducible deployment strategy, ensuring that new gateways are provisioned instantly without manual input. Furthermore, the system automatically propagates changes to user devices, making infrastructure updates almost transparent while maintaining strict consistency across all clients.
+
+As Marc stated, the value became clear during a power outage they experienced:
+
+> "We had a power issue in our data center and had to reapply the configuration on a shared gateway. Thanks to automation and the Defguard API, it took around ten seconds."
+
+For most users, the change was almost invisible—which would not have been possible with manual recovery.
+
+## Result
+
+By deploying Defguard as a centralized platform integrated with their automation stack, Eskemm achieved significant gains in security, operations, and scalability:
+
+- Passed penetration tests and maintained **HDS and ISO 27001 certifications**.
+- **Secure remote access** to several tenants.
+- Managing many users across isolated environments, **without increasing administrative overhead**.
+- **High operational efficiency** with zero-downtime maintenance.
+- **Seamless BYOD experience** with transparent updates.
