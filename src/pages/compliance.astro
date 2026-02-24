@@ -1,13 +1,14 @@
 ---
 import Navigation from "../components/base/Navigation.astro";
 import ProductLayout from "../layouts/ProductLayout.astro";
-import HomeHeader from "./_home/components/HomeHeader.astro";
 import FlexibleSection from "../components/FlexibleSection.astro";
 import { Image } from "astro:assets";
 import isoCertificate from "../../public/images/iso-27001/DEFGUAR_ISO27001_2025-2028_ENG.png";
 import "../styles/compliance.scss";
 
-const title = "Compliance";
+const title = "Compliance & Certifications | ISO 27001, GDPR, NIS2 | Defguard";
+const description =
+  "Defguard compliance: ISO 27001 certified, EU-based for GDPR and NIS2. Biometric MFA, data sovereignty, SBOM, and open-source transparency for enterprise and regulated sectors.";
 const featuredImage =
   "github.com/DefGuard/defguard.github.io/raw/main/public/images/product/core/hero-image.png";
 const imageWidth = "1920";
@@ -26,33 +27,120 @@ const tags = [
   "compliance",
   "enterprise",
   "open source",
+  "gdpr",
+  "nis2",
+  "eu",
+  "sbom",
 ];
+
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: title,
+  description,
+  url,
+  mainEntity: {
+    "@type": "Organization",
+    name: "Defguard",
+    url: "https://defguard.net",
+  },
+};
 ---
 
 <ProductLayout
   title={title}
+  description={description}
   featuredImage={featuredImage}
   imageWidth={imageWidth}
   imageHeight={imageHeight}
   url={url}
   tags={tags}
 >
+  <script slot="schema" type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />
   <Navigation activeSlug="/compliance/" />
 
-  <main id="home-page">
-    <section class="custom-header">
+  <main id="compliance-page" aria-label="Compliance and certifications">
+    <section class="custom-header" aria-labelledby="compliance-heading">
       <div class="container">
-        <h1 class="page-title">Compliance</h1>
-        <p class="page-subtitle">Defguard - Certified, Audited, and Transparent</p>
+        <h1 id="compliance-heading" class="page-title">Compliance</h1>
+        <p class="page-subtitle">
+          Defguard is ISO 27001 certified and built for European digital sovereignty: GDPR-native, NIS2-ready, with biometric MFA, full data residency, and transparent supply chain (SBOM).
+        </p>
       </div>
     </section>
 
-    <FlexibleSection leftRatio={1} title="ISO-27001:2023 Certification" theme="light">
-
+    <FlexibleSection id="compliance-edge" leftRatio={1} title="European Digital Sovereignty: The Defguard Compliance Edge" theme="light">
       <div slot="left">
-        <div>
+        <p class="section-lead">
+          Defguard combines formal certification with practical, auditable controls designed for regulated teams operating under EU legal and security requirements.
+        </p>
+        <div class="compliance-grid">
+          <div class="compliance-item">
+            <h4>100% EU-Based & GDPR Native</h4>
+            <p>Headquartered and developed in Poland, Defguard ensures zero exposure to the US CLOUD Act. It provides a legally "clean" stack for GDPR compliance, where data jurisdiction and residency are non-negotiable.</p>
+          </div>
+          <div class="compliance-item">
+            <h4>Biometric Zero-Trust MFA</h4>
+            <p>Defguard enforces MFA at the protocol level using Desktop & Mobile Biometrics (FaceID/TouchID). This creates a secure "something you are" factor that satisfies NIS2 and ISO 27001 (A.8.5) without the logistics of hardware key distribution.</p>
+          </div>
+          <div class="compliance-item">
+            <h4>Granular Access Control (ISO A.5.15)</h4>
+            <p>Enforce the Principle of Least Privilege with centralized ACLs. Defguard prevents lateral movement by restricting remote users to specific internal resources, directly mapping to ISO 27001 Access Control requirements.</p>
+          </div>
+          <div class="compliance-item">
+            <h4>Total Data Sovereignty</h4>
+            <p>A strictly self-hosted architecture that keeps all cryptographic keys, user metadata, and traffic logs on your private infrastructure. No external cloud relays or third-party auth providers are required, ensuring maximum privacy.</p>
+          </div>
+          <div class="compliance-item">
+            <h4>Open-Source & Rust Transparency</h4>
+            <p>Built with memory-safe Rust, our code is fully open and verifiable. This provides the "Secure Development" evidence required for ISO 27001 (A.8.28) and eliminates the risk of "black box" proprietary backdoors.</p>
+          </div>
+          <div class="compliance-item">
+            <h4>Supply Chain Security (SBOM)</h4>
+            <p>In compliance with the EU Cyber Resilience Act, Defguard provides a detailed Software Bill of Materials (SBOM) and public pen-testing results, allowing your security team to audit every "ingredient" in your remote access stack.</p>
+          </div>
+        </div>
+      </div>
+    </FlexibleSection>
+
+    <FlexibleSection id="why-iso-27001" leftRatio={0.72} title="Why ISO 27001 Matters for Our Users" theme="light">
+      <div slot="left">
+        <p>At Defguard we have always built security into the core of our product — from protocol-level WireGuard® MFA, through open-source transparency, to data sovereignty and zero foreign legal exposure.</p>
+        <p>Achieving ISO 27001 certification formalizes and externally validates our Information Security Management System. It demonstrates to enterprises, regulated organizations and public sector clients that:</p>
+
+        <ul class="benefits-list">
+          <li>Information security risks are systematically identified, assessed and treated</li>
+          <li>Security controls follow international best practices</li>
+          <li>Processes are continuously improved and audited</li>
+          <li>We maintain the same high standards internally that we provide to you</li>
+          <li>Your trust in Defguard as a secure, reliable VPN & zero-trust platform is backed by third-party certification</li>
+        </ul>
+
+        <h3>Complements our existing compliance strengths</h3>
+        <ul>
+          <li>NIS2-ready architecture with true VPN-level MFA</li>
+          <li>Full EU data residency & governance (Poland-based)</li>
+          <li>Audit-ready logs and SIEM integration</li>
+          <li>Support for GDPR, HIPAA, PCI DSS, NIST & similar frameworks through strong technical controls</li>
+          <li><a href="/sbom/">Software Bill of Materials (SBOM)</a> and <a href="/pentesting/">public penetration testing reports</a> for supply chain and transparency audits</li>
+        </ul>
+      </div>
+      <div slot="right">
+        <aside class="compliance-contact-card" aria-label="Compliance contact">
+          <h3>Need Additional Certifications?</h3>
           <p>
-            Our ISO-27001:2013 certification and rigorous internal audits ensure that our systems, processes, and operations meet globally recognized benchmarks.
+            If your procurement or audit process requires additional certifications or evidence,
+            contact our team at <a href="mailto:sales@defguard.net">sales@defguard.net</a>.
+          </p>
+        </aside>
+      </div>
+    </FlexibleSection>
+
+    <FlexibleSection id="iso-27001-certification" leftRatio={1} title="ISO 27001:2023 Certification" theme="light">
+      <div slot="left">
+        <div class="section-lead">
+          <p>
+            Our ISO 27001:2023 certification and rigorous internal audits ensure that our systems, processes, and operations meet globally recognized benchmarks.
           
             Beyond compliance, we offer fully transparent development process and <a href="/security/">Secure By Design approach</a>.
           </p>
@@ -127,32 +215,6 @@ const tags = [
             />
           </div>
         </div>
-      </div>
-    </FlexibleSection>
-
-    <FlexibleSection leftRatio={1} title="Why ISO 27001 Matters for Our Users" theme="light">
-      <div slot="left">
-        <p>At Defguard we have always built security into the core of our product — from protocol-level WireGuard® MFA, through open-source transparency, to data sovereignty and zero foreign legal exposure.</p>
-        <p>Achieving ISO 27001 certification formalizes and externally validates our Information Security Management System. It demonstrates to enterprises, regulated organizations and public sector clients that:</p>
-
-        <ul class="benefits-list">
-          <li>Information security risks are systematically identified, assessed and treated</li>
-          <li>Security controls follow international best practices</li>
-          <li>Processes are continuously improved and audited</li>
-          <li>We maintain the same high standards internally that we provide to you</li>
-          <li>Your trust in Defguard as a secure, reliable VPN & zero-trust platform is backed by third-party certification</li>
-        </ul>
-
-        <h3>Complements our existing compliance strengths</h3>
-        <ul>
-          <li>NIS2-ready architecture with true VPN-level MFA</li>
-          <li>Full EU data residency & governance (Poland-based)</li>
-          <li>Audit-ready logs and SIEM integration</li>
-          <li>Support for GDPR, HIPAA, PCI DSS, NIST & similar frameworks through strong technical controls</li>
-        </ul>
-      </div>
-      <div slot="left">
-        <p>Are you missing any compliance certifications? Feel free to reach out to us at <a href="mailto:sales@defguard.net">sales@defguard.net</a></p>
       </div>
     </FlexibleSection>
 
