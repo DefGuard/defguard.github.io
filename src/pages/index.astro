@@ -18,7 +18,6 @@ import api from "/public/images/data/api.png";
 import Image from "astro/components/Image.astro";
 import YouTubeVideo from "../components/video/YouTubeVideo.astro";
 import CTASection from "../components/CTASection.astro";
-import TextDivider from "../components/TextDivider.astro";
 import TrustedBy from "./_home/components/TrustedBy.astro";
 import HeaderSection from "../components/HeaderSection.astro";
 import ImageURL from "../components/image/ImageURL.astro";
@@ -455,14 +454,14 @@ const tags = [
 
 
 -->
-    <HeaderSection
-      title="Real-world use cases"
-      description="Defguard secure architecture approach and user friendly interface makes it a unique solution in the VPN management space."
-      variant="white"
-    />
-    <TextDivider text="Case Studies" paddingTop="0" />
-    <CaseCapsules
-      cases={[
+    <section id="success-stories">
+      <HeaderSection
+        title="Success Stories"
+        description="Each organisation is unique. See how we've enabled secure remote access for a wide range of use cases."
+        variant="white"
+      />
+      <CaseCapsules
+        cases={[
         { 
           title: "How a Swiss Private Equity fund built a private cloud with Defguard", 
           link: "/blog/self-hosted-vpn-private-cloud-acquinox-defguard",
@@ -470,10 +469,10 @@ const tags = [
           description: "Learn how Acquinox built a secure, compliant private cloud infrastructure using Defguard's enterprise VPN solution."
         },
         { 
-          title: "Replace Fortigate VPN and FortiClient with a lightweight, auditable modern VPN solution", 
-          link: "/defguard-vs-fortinet",
-          image: "/images/landing/defguard.png",
-          description: "Discover how Defguard provides enterprise-grade security with a fraction of the complexity of traditional VPN appliances."
+          title: "How Eskemm Numérique Built Secure Multi-Tenant Remote Access with Defguard", 
+          link: "/blog/eskemm-numerique-multi-tenant-remote-access",
+          image: "/images/blog/eskemm_case_study.png",
+          description: "See how Eskemm Numérique modernized multi-tenant remote access for universities and research institutions while meeting strict HDS and ISO 27001 requirements."
         },
         { 
           title: "How Prusa 3D Adopted Defguard for Secure, Scalable VPN Access", 
@@ -481,12 +480,20 @@ const tags = [
           image: "/images/blog/prusa.png",
           description: "Prusa Research adopted Defguard to build a scalable, self-hosted VPN with WireGuard-level MFA, securing access for 490+ users."
         }
-      ]}
-    />
-    <TextDivider text="Testimonials" />
-    <HomeSection id="testimonials" variant="white">
-      <TestimonialsGrid data={testimonialsData} />
-    </HomeSection>
+        ]}
+      />
+    </section>
+    <section id="testimonials">
+      <HeaderSection
+        title="Approved by Security Experts"
+        description="What CISO, IT Directors, and Cloud/DevOps Engineers say about Defguard."
+        variant="white"
+      />
+      <HomeSection variant="white">
+        <TestimonialsGrid data={testimonialsData} />
+      </HomeSection>
+    </section>
+.
 
     <CTASection
       title="Try Defguard Today – Secure Access Without the Complexity"

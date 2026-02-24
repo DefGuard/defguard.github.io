@@ -40,22 +40,8 @@
     ]
   },
   {
-    "display": "Customers",
-    "url": null,
-    "children": [
-      {
-        "display": "Prusa Research: Scaling Secure Access",
-        "url": "/blog/prusa-vpn-scaling-with-defguard"
-      },
-      {
-        "display": "Acquinox: Private Cloud & Data Sovereignty",
-        "url": "/blog/self-hosted-vpn-private-cloud-acquinox-defguard"
-      },
-      {
-        "display": "Eskemm Numérique: Multi-Tenant Remote Access",
-        "url": "/blog/eskemm-numerique-multi-tenant-remote-access"
-      }
-    ]
+    "display": "Success Stories",
+    "url": "/#success-stories"
   },
   {
     "display": "Pricing",
