@@ -162,7 +162,6 @@ const DealRegistrationForm = ({ submit_text = "Submit" }: DealRegistrationFormPr
               <option value="" disabled>Select a plan</option>
               <option value="Team">Team</option>
               <option value="Business">Business</option>
-              <option value="Enterprise">Enterprise</option>
             </select>
           </label>
           <label htmlFor="billed_to">
