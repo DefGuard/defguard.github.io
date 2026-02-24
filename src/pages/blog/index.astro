@@ -4,6 +4,7 @@ import Navigation from "../../components/base/Navigation.astro";
 import ProductLayout from "../../layouts/ProductLayout.astro";
 import FlexibleSection from "../../components/FlexibleSection.astro";
 import BlogListJSONLD from "../../scripts/BlogListJSONLD.astro";
+import { blogFilterTags } from "../../data/blog-filter-tags";
 
 // Get all blog posts, sorted by date
 const allPosts = await getCollection("blog", ({ data }) => {
@@ -15,6 +16,9 @@ const sortedPosts = allPosts.sort(
   (a, b) =>
     new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf(),
 );
+
+// Filter pills: show all configured tags in config order (so edits to blogFilterTags are visible immediately)
+const allTags = [...blogFilterTags];
 
 // Default fallback image for posts without images
 const defaultImage = "/images/png/defguard.png";
@@ -104,6 +108,14 @@ const blogTags = ["defguard", "blog", "vpn", "wireguard", "cybersecurity", "ente
 
     <section class="blog-posts-listing">
       <div class="container">
+        {sortedPosts.length > 0 && allTags.length > 0 && (
+          <div class="blog-tag-filter" role="group" aria-label="Filter by tag">
+            <button type="button" class="filter-pill active" data-tag="">All</button>
+            {allTags.map((tag) => (
+              <button type="button" class="filter-pill" data-tag={tag}>{tag}</button>
+            ))}
+          </div>
+        )}
         {
           sortedPosts.length === 0 ? (
             <div class="no-posts">
@@ -112,7 +124,11 @@ const blogTags = ["defguard", "blog", "vpn", "wireguard", "cybersecurity", "ente
           ) : (
             <div class="posts-list">
               {sortedPosts.map((post, index) => (
-                <a href={`/blog/${post.slug}`} class="post-row">
+                <a
+                  href={`/blog/${post.slug}`}
+                  class="post-row"
+                  data-tags={post.data.tags?.map((t) => t.toLowerCase()).join(",") ?? ""}
+                >
                   <div class="post-thumbnail">
                     <img 
                       src={getPostImage(post)} 
@@ -159,6 +175,63 @@ const blogTags = ["defguard", "blog", "vpn", "wireguard", "cybersecurity", "ente
     </section>
   </main>
 
+  <script>
+    const tagParam = "tag";
+
+    function getTagFromUrl(): string {
+      const params = new URLSearchParams(window.location.search);
+      const raw = params.get(tagParam);
+      return raw ? raw.toLowerCase().trim() : "";
+    }
+
+    function setTagInUrl(tag: string): void {
+      const url = new URL(window.location.href);
+      if (tag) {
+        url.searchParams.set(tagParam, tag);
+      } else {
+        url.searchParams.delete(tagParam);
+      }
+      window.history.replaceState({ tag }, "", url.toString());
+    }
+
+    function applyFilter(needle: string): void {
+      const pillTags = Array.from(document.querySelectorAll(".blog-tag-filter .filter-pill")).map(
+        (b) => ((b as HTMLButtonElement).dataset.tag ?? "").toLowerCase()
+      );
+      const validNeedle = needle && pillTags.includes(needle) ? needle : "";
+      if (needle && !validNeedle) {
+        setTagInUrl("");
+      }
+      document.querySelectorAll(".blog-tag-filter .filter-pill").forEach((b) => {
+        const pillTag = (b as HTMLButtonElement).dataset.tag ?? "";
+        const isActive = (pillTag.toLowerCase() === validNeedle) || (!validNeedle && pillTag === "");
+        b.classList.toggle("active", isActive);
+      });
+      document.querySelectorAll(".posts-list .post-row").forEach((row) => {
+        const tags = (row.getAttribute("data-tags") ?? "").split(",").filter(Boolean);
+        const show = !validNeedle || tags.some((t) => t === validNeedle);
+        (row as HTMLElement).style.display = show ? "" : "none";
+      });
+    }
+
+    function initFromUrl(): void {
+      const tag = getTagFromUrl();
+      applyFilter(tag);
+    }
+
+    document.querySelectorAll(".blog-tag-filter .filter-pill").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const tag = (e.currentTarget as HTMLButtonElement).dataset.tag ?? "";
+        const needle = tag.toLowerCase();
+        setTagInUrl(needle);
+        applyFilter(needle);
+      });
+    });
+
+    initFromUrl();
+  </script>
+
   <style lang="scss">
     @use "../../styles/mixins/typography" as *;
     @use "../../styles/mixins/breakpoints" as *;
@@ -175,6 +248,38 @@ const blogTags = ["defguard", "blog", "vpn", "wireguard", "cybersecurity", "ente
         max-width: 1200px;
         margin: 0 auto;
         padding: 0 1rem;
+      }
+
+      .blog-tag-filter {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+        padding: 0.25rem 0;
+      }
+
+      .filter-pill {
+        padding: 0.4rem 0.9rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-body-secondary, #555);
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+
+        &:hover {
+          background: #f5f5f5;
+          border-color: #ccc;
+          color: var(--text-body-primary);
+        }
+
+        &.active {
+          background: var(--primary-button-bg, #0c8ce0);
+          border-color: var(--primary-button-bg, #0c8ce0);
+          color: #fff;
+        }
       }
 
       // Posts List
