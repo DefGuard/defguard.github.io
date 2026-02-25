@@ -19,7 +19,6 @@ type DealRegistrationFormValues = {
   billed_to: string;
   business_type: string;
   tell_us_more: string;
-  source: string;
 };
 
 interface DealRegistrationFormProps {
@@ -43,7 +42,6 @@ const DealRegistrationForm = ({ submit_text = "Submit" }: DealRegistrationFormPr
     billed_to: "",
     business_type: "",
     tell_us_more: "",
-    source: "",
   });
 
   const handleAlert = () => {
