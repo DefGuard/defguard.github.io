@@ -57,9 +57,12 @@ const BookDemoForm = ({ submit_text = "Submit" }: BookDemoFormProps) => {
     data.append("street_address", values.street_address);
     data.append("town", values.town);
     data.append("postal_code", values.postal_code);
+    data.append("source", window.location.pathname);
+    data.append("search",window.location.search);
+    data.append("hash",window.location.hash);
     data.append(
       "tell_us_more",
-      `${values.tell_us_more} \n\nform_source:${window.location.pathname + window.location.search + window.location.hash}`,
+      values.tell_us_more,
     );
 
     fetch("https://pkgs.defguard.net/api/customer/signup", {
