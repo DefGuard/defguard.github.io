@@ -73,7 +73,7 @@ const DealRegistrationForm = ({ submit_text = "Submit" }: DealRegistrationFormPr
     data.append("business_type",values.business_type);
     data.append(
       "tell_us_more",
-      values.tell_us_more,
+      `${values.tell_us_more} \n\nform_source:${window.location.pathname + window.location.search + window.location.hash}`,
     );
 
 

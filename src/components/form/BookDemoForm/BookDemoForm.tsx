@@ -77,7 +77,7 @@ const BookDemoForm = ({ submit_text = "Submit" }: BookDemoFormProps) => {
     data.append("source", window.location.pathname);
     data.append(
       "tell_us_more",
-      values.tell_us_more,
+      `${values.tell_us_more}${topicsSection}\n\nform_source:${window.location.pathname + window.location.search + window.location.hash}`,
     );
     data.append("company_name",values.first_name+" "+values.last_name);
     data.append("vat_id", "");
