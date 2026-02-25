@@ -19,6 +19,7 @@ type DealRegistrationFormValues = {
   billed_to: string;
   business_type: string;
   tell_us_more: string;
+  source: string;
 };
 
 interface DealRegistrationFormProps {
@@ -42,6 +43,7 @@ const DealRegistrationForm = ({ submit_text = "Submit" }: DealRegistrationFormPr
     billed_to: "",
     business_type: "",
     tell_us_more: "",
+    source: "",
   });
 
   const handleAlert = () => {
@@ -66,13 +68,14 @@ const DealRegistrationForm = ({ submit_text = "Submit" }: DealRegistrationFormPr
     data.append("street_address", values.street_address);
     data.append("town", values.town);
     data.append("postal_code", values.postal_code);
+    data.append("source",window.location.pathname);
     data.append("partner_registration_email",values.partner_registration_email);
     data.append("license_tier",values.license_tier);
     data.append("billed_to",values.billed_to);
     data.append("business_type",values.business_type);
     data.append(
       "tell_us_more",
-      `${values.tell_us_more} \n\nform_source:${window.location.pathname + window.location.search + window.location.hash}`,
+      values.tell_us_more,
     );
 
 
