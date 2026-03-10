@@ -98,7 +98,7 @@ const faqEntries = [
         Defguard provides better performance, security, and enterprise features.
       </p>
       <div class="cta-buttons">
-        <AstroButton text="See the Difference" link={{ href: "#comparison-interactive", target: "_self" }} />
+        <AstroButton text="See the Difference" link={{ href: "#comparison-table", target: "_self" }} />
         <AstroButton text="Start Free Trial" link={{ href: "/evaluation-license/", target: "_self" }} className="secondary" />
       </div>
     </header>
@@ -259,22 +259,22 @@ const faqEntries = [
           </section>
         </ProductSection>
 
-        <HomeSection id="performance-benefits" variant="white">
-          <h2>Why WireGuard is Faster Than OpenVPN</h2>
-          <p>Your remote teams deserve a VPN that doesn't slow them down. Here's the performance gain when you migrate from OpenVPN to WireGuard.</p>
+        <HomeSection id="why-switch" variant="white">
+          <h2>Why Companies Switch to Defguard</h2>
+          <p>Organizations replace OpenVPN Access Server with Defguard for three key reasons.</p>
           <FeatureCapsules
             features={[
               {
-                title: "3x Faster Throughput",
-                description: "WireGuard's kernel-level processing delivers near-gigabit speeds. Large file transfers, video calls, and cloud applications run without the latency tax of OpenVPN.",
+                title: "Secure Architecture",
+                description: "Isolated control plane separated from the Internet for maximum security.",
               },
               {
-                title: "Instant Connections (<100ms)",
-                description: "WireGuard's stateless handshake connects instantly. No more waiting seconds for OpenVPN to negotiate ciphers and establish tunnels.",
+                title: "Multiple VPN Networks Support",
+                description: "Multiple IPv4 & IPv6 networks, per-location gateways and MFA policies from one control plane.",
               },
               {
-                title: "Seamless Network Roaming",
-                description: "Switch from Wi-Fi to cellular without dropping your connection. WireGuard maintains the tunnel transparently—OpenVPN requires reconnection.",
+                title: "User and Device Management",
+                description: "One-click and QR-code provisioning, real-time config sync, full device visibility for admins.",
               }
             ]}
           />
@@ -290,7 +290,7 @@ const faqEntries = [
                 description: "Deploy VPN to thousands of devices without manual configuration. Integrate with Intune, GPO, or your existing MDM. Users launch the app and connect—no setup required. <a href='/blog/defguard-1.6-release-notes/'>Learn more in our 1.6 release notes →</a>",
               },
               {
-                title: "Pre-logon VPN for AD",
+                title: "Pre-logon VPN for Active Directory and LDAP",
                 description: "Enable Windows login against Active Directory before user authentication. Critical for remote workers who need domain resources from day one. <a href='https://docs.defguard.net/features/service-locations' target='_blank' rel='noopener'>See documentation →</a>",
               },
               {
@@ -299,14 +299,6 @@ const faqEntries = [
               }
             ]}
           />
-        </HomeSection>
-
-        <HomeSection id="trusted-by" variant="white">
-          <div class="trusted-by-content">
-            <h2>Trusted by Organizations Worldwide</h2>
-            <p>Companies have already made the switch from legacy VPNs to Defguard's modern architecture.</p>
-            <TrustedBy forceScroll={false} />
-          </div>
         </HomeSection>
 
         <ProductSection padding="small">
@@ -325,80 +317,189 @@ const faqEntries = [
                 </thead>
                 <tbody>
                   <tr>
-                    <td>VPN Protocol</td>
-                    <td>WireGuard® — Kernel-level, ~4k lines of code</td>
-                    <td>OpenVPN — Userspace, 100k+ lines of code</td>
+                    <td>Automated and real time configuration</td>
+                    <td>✔️</td>
+                    <td>❌<br />Each configuration change requires manual server restart</td>
                   </tr>
                   <tr>
-                    <td>Typical Throughput</td>
-                    <td>Near-gigabit (depends on hardware)</td>
-                    <td>50-100 Mbps typical</td>
+                    <td>SSO</td>
+                    <td>Internal SSO, External SSO, LDAP/Active Directory</td>
+                    <td>Internal SSO, Radius, LDAP, SAML</td>
                   </tr>
                   <tr>
-                    <td>Connection Time</td>
-                    <td>&lt;100ms (instant)</td>
-                    <td>2-5 seconds</td>
+                    <td>Internal SSO</td>
+                    <td>✔️<br />Full OpenID SSO with possibility of integration of external apps to login with Defguard</td>
+                    <td>❌</td>
                   </tr>
                   <tr>
-                    <td>Network Roaming</td>
-                    <td>Seamless — maintains connection</td>
-                    <td>Drops and reconnects</td>
+                    <td>MFA with Authenticator codes</td>
+                    <td>✔️</td>
+                    <td>✔️</td>
                   </tr>
                   <tr>
-                    <td><a href="https://docs.defguard.net/features/wireguard/multi-factor-authentication-mfa-2fa" target="_blank" rel="noopener">MFA Implementation</a></td>
-                    <td>Protocol-level, per-connection</td>
-                    <td>Login-time only, plugin-based</td>
+                    <td>MFA with Email codes</td>
+                    <td>✔️</td>
+                    <td>❌</td>
                   </tr>
                   <tr>
-                    <td><a href="https://docs.defguard.net/features/wireguard/multi-factor-authentication-mfa-2fa" target="_blank" rel="noopener">Biometric Auth</a></td>
-                    <td><strong>Yes</strong> — Mobile biometrics for desktop</td>
-                    <td>No</td>
+                    <td>MFA with Mobile Biometry</td>
+                    <td>✔️</td>
+                    <td>❌</td>
                   </tr>
                   <tr>
-                    <td><a href="/blog/defguard-1.6-release-notes/">Zero-Touch Enrollment</a></td>
-                    <td><strong>Yes</strong> — MSI, PKG, GPO, Intune</td>
-                    <td>Limited — manual config distribution</td>
+                    <td>VPN Access based on Groups</td>
+                    <td>✔️</td>
+                    <td>✔️</td>
                   </tr>
                   <tr>
-                    <td><a href="https://docs.defguard.net/features/service-locations" target="_blank" rel="noopener">Pre-logon VPN (AD)</a></td>
-                    <td><strong>Yes</strong> — Connect before Windows login</td>
-                    <td>No</td>
+                    <td>Multiple VPN networks</td>
+                    <td>✔️<br />Supporting IPv4 &amp; IPv6 multiple VPN networks</td>
+                    <td>❌<br />Only one IPv4 VPN network</td>
                   </tr>
                   <tr>
-                    <td>SSO Integration</td>
-                    <td>Native OIDC — Entra ID, Okta, Google, etc.</td>
-                    <td>Limited — SAML with extra config</td>
+                    <td>Support for IPv6</td>
+                    <td>✔️</td>
+                    <td>❌<br />Only IPv4 VPN network</td>
                   </tr>
                   <tr>
-                    <td>Real-time Config Sync</td>
-                    <td><strong>Yes</strong> — Changes push instantly</td>
-                    <td>No — Manual redistribution</td>
+                    <td>Static IP per device</td>
+                    <td>✔️ (from version 2.0)</td>
+                    <td>❌<br />Only static IP per user</td>
                   </tr>
                   <tr>
-                    <td><a href="https://docs.defguard.net/features/access-control-list" target="_blank" rel="noopener">Built-in Firewall ACLs</a></td>
-                    <td><strong>Yes</strong> — NFTables/PF management</td>
-                    <td>Basic access rules only</td>
+                    <td>Secure Architecture</td>
+                    <td>✔️<br />Separated components with control plane (business logic and connection management) separated from Internet (only accessible from Intranet/VPN)</td>
+                    <td>❌<br />All services are bundled the user and admin pages are bundled providing single point of failure and broad attach surface</td>
                   </tr>
                   <tr>
-                    <td>Open Source</td>
-                    <td><strong>Core</strong> — Server, gateway, and clients</td>
-                    <td>Partially — Community Edition limitations</td>
+                    <td>Multiple VPN location support</td>
+                    <td>✔️<br />Single control plane for all VPN locations with multiple gateways for each location</td>
+                    <td>❌<br />Each location requires dedicated instance of OpenVPN-AS with multiple control planes</td>
                   </tr>
                   <tr>
-                    <td>Self-Hosted</td>
-                    <td><strong>Yes</strong> — Full data sovereignty</td>
-                    <td>Yes</td>
+                    <td>Per VPN location different multi-factor configuration</td>
+                    <td>✔️<br />Each VPN location Internal/External SSO MFA</td>
+                    <td>❌<br />Only one VPN location</td>
                   </tr>
                   <tr>
-                    <td>Language</td>
-                    <td>Rust (memory-safe)</td>
-                    <td>C (memory vulnerabilities possible)</td>
+                    <td>Support For User Multiple Devices</td>
+                    <td>✔️<br />- User can easily manage their devices, name/identify them and automatically configure them with one-click or QR Codes<br />- Administrators can easily see users and what user devices are connected or offline and their configurations, client version, operating system</td>
+                    <td>❌<br />- There are no devices in OpenVPN AS - there are profiles, when user configures the same profile on multiple devices they can not be connected at the same time<br />Admins only see users connected with no information about the device, system, version, ...</td>
+                  </tr>
+                  <tr>
+                    <td>Email based configuration sharing</td>
+                    <td>✔️</td>
+                    <td>❌</td>
+                  </tr>
+                  <tr>
+                    <td>Secure Enrollment</td>
+                    <td>✔️<br />- Dedicated and separated secure stateless interface for secure remote user enrollment/client configuration</td>
+                    <td>❌<br />- User portal with profiles part of the OpenVPN AS solution running on the same machine</td>
+                  </tr>
+                  <tr>
+                    <td>One click Desktop Client configuration</td>
+                    <td>✔️</td>
+                    <td>❌<br />User must download and import a profile</td>
+                  </tr>
+                  <tr>
+                    <td>Automated Mobile Client configuration</td>
+                    <td>✔️<br />With QR Code</td>
+                    <td>❌<br />- User must download and import a profile<br />- Alternatively enter server URL manually and authenticate to download and import the profile</td>
+                  </tr>
+                  <tr>
+                    <td>Real time &amp; secure configuration synchronization for devices</td>
+                    <td>✔️<br />- Dedicated and separated secure stateless interface for secure remote user enrollment/client configuration</td>
+                    <td>❌<br />Profiles must be updated / imported manually</td>
+                  </tr>
+                  <tr>
+                    <td>Network Devices Support</td>
+                    <td>✔️<br />Automated configuration provisioning and real time updates</td>
+                    <td>~<br />OpenVPN command line can be manually configured and run</td>
+                  </tr>
+                  <tr>
+                    <td>Linux Desktop Client with MFA</td>
+                    <td>✔️</td>
+                    <td>❌</td>
+                  </tr>
+                  <tr>
+                    <td>Split tunnel control</td>
+                    <td>✔️<br />- Each user can define connection type in client (full or split-tunnel)</td>
+                    <td>~<br />Global Split Tunnel Definition with no possibility to select in the client</td>
+                  </tr>
+                  <tr>
+                    <td>Firewall based Access Control</td>
+                    <td>✔️<br />Full firewall management for Linux, *BSD/OPNSense</td>
+                    <td>❌<br />No firewall management only simple ACLs</td>
+                  </tr>
+                  <tr>
+                    <td>Detailed Dashboard and statistics for VPN connections</td>
+                    <td>✔️<br />Users, Devices detailed stats with information about client version, operating system, etc.</td>
+                    <td>❌<br />Only activity log</td>
+                  </tr>
+                  <tr>
+                    <td>Secure technology</td>
+                    <td>✔️<br />- Rust based<br />Segmentation &amp; isolation</td>
+                    <td>❌<br />Python based UI<br />No segmentation and isolation</td>
+                  </tr>
+                  <tr>
+                    <td>Detailed Activity log</td>
+                    <td>✔️</td>
+                    <td>✔️</td>
+                  </tr>
+                  <tr>
+                    <td>SIEM system integration</td>
+                    <td>✔️</td>
+                    <td>❌</td>
+                  </tr>
+                  <tr>
+                    <td>SMTP notifications</td>
+                    <td>✔️</td>
+                    <td>❌</td>
+                  </tr>
+                  <tr>
+                    <td>Kubernetes Deployment</td>
+                    <td>✔️</td>
+                    <td>❌</td>
+                  </tr>
+                  <tr>
+                    <td>Terraform Deployment</td>
+                    <td>✔️</td>
+                    <td>❌</td>
+                  </tr>
+                  <tr>
+                    <td>Web-hook support</td>
+                    <td>✔️</td>
+                    <td>❌</td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </section>
         </ProductSection>
+
+        <ProductSection padding="small">
+          <section id="bottom-line">
+            <h2>Ready to Leave OpenVPN Behind?</h2>
+            <p>
+              OpenVPN was revolutionary in its time, but the world has moved on. WireGuard represents the next generation of VPN technology, and Defguard makes it enterprise-ready with the management features, security controls, and deployment options your organization needs.
+            </p>
+            <p>
+              Join the organizations that have already made the switch to faster, more secure, and easier-to-manage VPN infrastructure.
+            </p>
+            <div class="cta-buttons">
+              <AstroButton text="Get 14-Day Trial" link={{ href: "/evaluation-license/", target: "_self" }} />
+              <AstroButton text="Book a Demo" link={{ href: "/book-a-demo/?utm_source=openvpn-migration", target: "_self" }} className="secondary" />
+            </div>
+          </section>
+        </ProductSection>
+
+        <HomeSection id="trusted-by" variant="white">
+          <div class="trusted-by-content">
+            <h2>Trusted by Organizations Worldwide</h2>
+            <p>Companies have already made the switch from legacy VPNs to Defguard's modern architecture.</p>
+            <TrustedBy forceScroll={false} />
+          </div>
+        </HomeSection>
 
         <ProductSection padding="small">
           <section id="migration-path">
@@ -436,22 +537,6 @@ const faqEntries = [
                   <p>Use <a href="https://docs.defguard.net/features/remote-user-enrollment" target="_blank" rel="noopener">zero-touch enrollment</a> to deploy to all users via Intune, GPO, or your MDM. Decommission OpenVPN when ready.</p>
                 </div>
               </div>
-            </div>
-          </section>
-        </ProductSection>
-
-        <ProductSection padding="small">
-          <section id="bottom-line">
-            <h2>Ready to Leave OpenVPN Behind?</h2>
-            <p>
-              OpenVPN was revolutionary in its time, but the world has moved on. WireGuard represents the next generation of VPN technology, and Defguard makes it enterprise-ready with the management features, security controls, and deployment options your organization needs.
-            </p>
-            <p>
-              Join the organizations that have already made the switch to faster, more secure, and easier-to-manage VPN infrastructure.
-            </p>
-            <div class="cta-buttons">
-              <AstroButton text="Get 14-Day Trial" link={{ href: "/evaluation-license/", target: "_self" }} />
-              <AstroButton text="Book a Demo" link={{ href: "/book-a-demo/?utm_source=openvpn-migration", target: "_self" }} className="secondary" />
             </div>
           </section>
         </ProductSection>
@@ -728,7 +813,7 @@ const faqEntries = [
     }
 
     // Home sections styling
-    .home-section#performance-benefits,
+    .home-section#why-switch,
     .home-section#enterprise-features {
       padding: 60px 0;
       
