@@ -1,0 +1,156 @@
+---
+title: "Best OpenVPN Access Server Alternative: Top 3 Reasons to Switch to Defguard"
+seoTitle: "Top 3 reasons to replace OpenVPN Access Server with Defguard VPN/ZTNA"
+description: "OpenVPN Access Server alternative - Compare Defguard, modern WireGuard based enterprise VPN"
+author: "Michał Gryczka"
+publishDate: 2026-03-10
+image: "/images/blog/SSLVPN/SSL-VPN.png"
+tags: ["ssl vpn", "OpenVPN", "OpenVPN Access Server", "wireguard", "comparison", "enterprise vpn"]
+---
+
+OpenVPN Access Server served the community well for a long time. But it’s time to put it into a “legacy” solutions basket and recognize there are better options to secure your remote access.
+
+In this article we’re explaining top 3 reasons why Defguard is a more powerful and robust solution to manage your remote access at scale. 
+
+Both solutions can be categorized as business VPNs that can be deployed on-premises and guarantee access to your infrastructure remotely. But this is where similarities end. 
+
+Let’s take a look at three core requirements for any remote access/VPN solution and see the difference:
+
+## Security
+
+Security is a broad topic. We focus on three fundamental aspects:
+
+- Architecture & technology - how the solution is actually built?
+- Users and devices management - how you can control who is connecting?
+- Access Control - how you can enforce strict access policies?
+
+### Architecture: Monolithic system vs securely segmented services
+
+First let’s take a look at the fundamental thing which is the choice of technology stack.
+
+OpenVPN is itself implemented in C language. Access Server is a commercial wrapper around the open-source core and is implemented in Python. The use of C language is the legacy of OpenVPN, while fast it’s not memory safe, increasing the risk of mistakes and potential vulnerabilities.
+
+Contrast this with Defguard, which is implemented in Rust \- memory safe and modern (recommended by DARPA, CISA and other government agencies) language for security systems. 
+
+In terms of architecture OpenVPN AS has a monolithic architecture \- all services run on a single OS/machine:
+
+- The VPN Engine: The core process that handles encryption and packet routing.  
+- The Web Server: Both the Admin UI (for settings) and the Client UI (for downloading profiles).  
+- Authentication & Management: The internal logic for checking passwords, MFA, and user permissions.
+
+The benefit of that approach is easy deployment and configuration, but you pay for it with an increased risk profile. It creates a large attack surface and significantly increases the chance to gain, through a vulnerability in one of its components.
+
+An example of such an attack is SAML SSO Authentication Bypass on FortiGate with similar monolith architecture (tracked by CVE‑2025‑59718 and CVE‑2025‑59719) where attacker gained control over whole device and system because of vulnerability in SSO component and configuration.
+
+Defguard stands in stark contrast to that approach with Secure by Design architecture. 
+
+In Defguard the control-plane, which handles configuration, integrations with [IdP/SSO providers](https://docs.defguard.net/features/external-openid-providers) and Access Policies configuration is always isolated from the external world. 
+
+The Edge Components that must be exposed to the public internet, the VPN gateway and public proxy that handles authentication & onboarding run as separate microservices and are deployed on separate VMs/machines (and preferably in separate VLANs). Moreover you can place those edge components wherever you need eg. AWS, GCP or in any data center VPS.
+
+The communication between the components is designed to prevent lateral movement from public (proxy, gateway) to private (core) network segments. This can be achieved in several ways on the network level, e.g. through separate VLANs or multiple firewalls.
+
+![Defguard architecture: Segmented, isolated control-plane and edge components](/public/images/blog/openvpn_vs_defguard_top_3/defguard_architecture.png)
+
+Segmented approach significantly reduces the attack surface and makes the whole system more resilient. It also has other benefits like robust scalability that we’re discussing in the Scalability chapter.
+
+### Visibility and control over users and devices
+
+Another major and significant design difference is its approach to users and devices. Secure remote access requires user and device identification and authentication. You need to know who connects to your network and how.
+
+In the OpenVPN Access Server management panel you see only Active Connections with usernames, but it lacks information about the connected devices at all. In fact there is no notion of the device at all.
+
+This can be a serious problem when onboarding users with multiple devices, like most modern organisations do. Without tools like self-enrollment and adding new devices by users, managing OpenVPN can quickly become a hassle. 
+
+Defguard shows you all connected users and devices in a simple and beautiful way along with essential information about users' activity. It also empowers users to add new devices via [enrollment and onboarding workflows](https://docs.defguard.net/help/enrollment). 
+
+![Comparison of OpenVPN Access Server and Defguard: Defguard VPN Locations Overview](/public/images/blog/openvpn_vs_defguard_top_3/VPN%20Overview.png)
+
+
+### Access Control - application based ACLs vs ACLs enforced on firewall
+
+OpenVPN Access Server actually lacks support for Firewall integration and rules management. Instead it acts as a network firewall for your VPN traffic. It leverages the underlying Linux kernel's packet filtering capabilities to control exactly where a user can go once they are connected. It provides a web-based Access Control system. This allows you to define rules based on users or groups. Under the hood, OpenVPN AS automatically manages which user has access to which IP, port and protocol via its business logic.
+
+This approach is limited in many ways including \- every time a packet is processed, the system must check the rule list. Large, complex rule sets with hundreds of users can lead to increased CPU usage and latency. The systems designed to manage access rules at scale are actually firewalls.
+
+In terms of ACLs Defguard takes a much more robust, effective and powerful route by providing integration and management for regular firewalls (most popular: Linux, OPNSense) and a unified interface to manage [Access Control Lists](https://docs.defguard.net/features/access-control-list) rules on all gateways from one place.
+
+This opens a lot of possibilities as you can have multiple gateways each running different firewalls and still manage them using one consistent interface. Benefits: distributing load and more security.
+
+Moreover Defguard Access Control Lists allow you to define rules based on groups, users and network devices. This way you end up with less rules and more control.   
+
+![Defguard Access Control Lists: Unified management of firewall rules across multiple gateways](/public/images/blog/openvpn_vs_defguard_top_3/firewall_rule_acl.png)
+
+
+Overall, while OpenVPN Access Server will serve its purpose when it comes to creating single SSL VPN based access for your organization, it lacks a modern technology stack that guarantees maximum resilience to errors, separation of concerns (data plane / control plane) and essential device and user management tools that you need in order to have ultimate secure access.
+
+Defguard on the other hand is designed to be secure first and foremost and then convenient. It has clear separation and isolation of control plane, perfect user/device traceability and Rust language as a secure foundation. Defguard not only guarantees security on architecture and technology level, but also shows it with open penetration test reports and daily updates Software Bill of Materials.
+
+## Performance
+
+Let’s break performance assessment into two major impacting factors:
+
+- VPN protocol  
+- Network topology
+
+### Legacy SSL VPN vs fast and secure WireGuard
+
+OpenVPN uses SSL VPN protocol just like many other legacy solutions incl. FortiGate, SonicWall. Some major vendors recognized the SSL VPN's outdated nature and high security risk profile, like Fortinet which withdrew support for SSL VPN from Fortinet VPN products as of March 2026 replacing it with IPSec.
+
+OpenVPN is unique in that it can run over almost any transport protocol:
+
+- **UDP** The preferred protocol. Because UDP doesn't have the overhead of "acknowledgments," it is significantly faster and prevents "TCP Meltdown"  
+- **TCP** : Often used to bypass restrictive firewalls. Because it runs on Port 443, OpenVPN traffic can be made to look like standard HTTPS web traffic.
+
+OpenVPN SSL can use multiple transport protocols, but it is still stateful and inherently slower than modern alternatives like WireGuard. To address that issue OpenVPN introduces the Data Channel Offload (DCO) mechanism (running in the kernel) which brings the encryption performance close to WireGuard. You need to remember though to enable DCO because in most OpenVPN Access Server installations it’s not “on” by default. Even if DCO is "enabled", the system will silently fall back to the slower "User-Space" mode on many occasions, making performance unreliable.
+
+
+Defguard uses WireGuard as a VPN Protocol which has multiple advantages over SSL VPN:
+
+- Rust based implementation with minimal codebase  
+- Is actually included with each Linux distribution as it’s part of the Linux kernel  
+- faster by design \- WireGuard is stateless protocol and does not require long session negotiation  
+- It features state of the art encryption  
+- More stable in most modern networking environments, switching networks is fast and stable
+
+Overall, WireGuard’s modern, lightweight design delivers faster and more reliable VPN performance than the legacy SSL-based architecture used by OpenVPN. Defguard makes WireGuard management easy, secure and scalable for enterprise environments, at the same time providing integration with multiple Identity Providers and SSOs like Okta, Google, Microsoft or Keycloak.
+
+You can read a complete comparison of SSL VPN to WireGuard here: [Understanding SSL VPN Limitations: Transport, Mobility and Modern Alternatives](/blog/ssl-vpn-performance-protocol-problem/)
+
+## Scalability
+
+### Single VPN gateway vs flexible multiple gateways management
+
+OpenVPN Access Server does not support multiple locations. Users cannot choose between multiple locations/gateways like HQ office, branch office, data center or offsite facility. 
+
+To give access to multiple locations  (e.g., for isolated access or different entry points), you need to deploy separate OpenVPN Access Server instances at each location. This leads to a whole new set of problems including: duplicated configuration, setup overhead, multiple management panels, additional licensing and costs… 😒
+
+Defguard takes a different approach by enabling you to deploy lightweight WireGuard based gateways where we need to actually terminate the VPN traffic.
+
+Multiple gateways can be deployed on any Linux based machine/VM or using docker in minutes. Once deployed they can be easily adopted and configured in Defguard Control Plane. This gives you a lot of flexibility when it comes to designing optimal network and remote access topology.
+
+Because Defguard separates data plane and control plane, when a user connects to a location (via gateway), the data flows directly to the point where the gateway is deployed, not through the hub like in OpenVPN setup. It’s the most efficient way.
+
+**Adding more locations does not impact the overall performance. This makes Defguard perfectly scalable to hundreds of locations and tens of thousands of users.**
+
+All Gateways are controlled from a single Defguard control plane (core) \- any updates to access policies are applied in real time to managed gateways.  **And you can even see all connected users and their devices in each location in one overview\!**
+
+![Defguard location wizard showing easy multi-gateway setup](/images/blog/openvpn_vs_defguard_top_3/locatoin_wizard.png)
+
+
+The impact on solution scalability is clear. In Defguard you can:
+
+- Add arbitrary number of locations directing traffic exactly where it should go rather than through a hub (like in OpenVPN Access Server)  
+- configure MFA policy per location  
+- Users see only locations they can connect to and you (admin) can change it in real time  
+- Simplified and manageable routing and network topology
+
+## Summary
+
+When evaluating remote access solutions, the gap between OpenVPN Access Server and Defguard becomes clear across every critical dimension. OpenVPN's monolithic architecture, C/Python codebase, and SSL VPN protocol represent a legacy approach that carries real risks — a large attack surface, unreliable performance, and limited visibility into users and devices. 
+
+Defguard was built from the ground up with a modern, security-first philosophy: a Rust-powered codebase, segmented control and data planes, full user and device traceability, and WireGuard as its VPN backbone — delivering the speed, stability, and resilience that today's organizations demand.
+
+Scalability and access control tell the same story. OpenVPN Access Server forces you into a fragmented, multi-instance setup just to support multiple locations, while its application-level ACLs struggle under the weight of complex rule sets. 
+
+Defguard handles all of this natively — multiple gateways deployable anywhere, firewall-integrated ACLs managed from a single control plane, and real-time policy enforcement across every location. Whether you're securing a small team or scaling to tens of thousands of users across hundreds of sites, Defguard offers the architecture, performance, and control that OpenVPN simply can't match.
