@@ -50,7 +50,7 @@ The Edge Components that must be exposed to the public internet, the VPN gateway
 
 The communication between the components is designed to prevent lateral movement from public (proxy, gateway) to private (core) network segments. This can be achieved in several ways on the network level, e.g. through separate VLANs or multiple firewalls.
 
-![Defguard architecture: Segmented, isolated control-plane and edge components](/public/images/blog/openvpn_vs_defguard_top_3/defguard_architecture.png)
+![Defguard architecture: Segmented, isolated control-plane and edge components](/images/blog/openvpn_vs_defguard_top_3/defguard_architecture.png)
 
 Segmented approach significantly reduces the attack surface and makes the whole system more resilient. It also has other benefits like robust scalability that we’re discussing in the Scalability chapter.
 
@@ -64,7 +64,7 @@ This can be a serious problem when onboarding users with multiple devices, like 
 
 Defguard shows you all connected users and devices in a simple and beautiful way along with essential information about users' activity. It also empowers users to add new devices via [enrollment and onboarding workflows](https://docs.defguard.net/help/enrollment). 
 
-![Comparison of OpenVPN Access Server and Defguard: Defguard VPN Locations Overview](/public/images/blog/openvpn_vs_defguard_top_3/VPN%20Overview.png)
+![Comparison of OpenVPN Access Server and Defguard: Defguard VPN Locations Overview](/images/blog/openvpn_vs_defguard_top_3/VPN%20Overview.png)
 
 
 ### Access Control - application based ACLs vs ACLs enforced on firewall
@@ -79,7 +79,7 @@ This opens a lot of possibilities as you can have multiple gateways each running
 
 Moreover Defguard Access Control Lists allow you to define rules based on groups, users and network devices. This way you end up with less rules and more control.   
 
-![Defguard Access Control Lists: Unified management of firewall rules across multiple gateways](/public/images/blog/openvpn_vs_defguard_top_3/firewall_rule_acl.png)
+![Defguard Access Control Lists: Unified management of firewall rules across multiple gateways](/images/blog/openvpn_vs_defguard_top_3/firewall_rule_acl.png)
 
 
 Overall, while OpenVPN Access Server will serve its purpose when it comes to creating single SSL VPN based access for your organization, it lacks a modern technology stack that guarantees maximum resilience to errors, separation of concerns (data plane / control plane) and essential device and user management tools that you need in order to have ultimate secure access.
