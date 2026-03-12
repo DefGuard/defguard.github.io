@@ -1,0 +1,77 @@
+---
+title: "Defguard 2.0 Release Alpha 2 is now available"
+seoTitle: "Defguard 2.0 Release Alpha 2: Feature-Complete Preview for Early Testing"
+description: "Defguard 2.0 Alpha 2 is now nearly feature-complete. This release introduces faster setup, high-availability improvements, firewall management updates, and static IP assignment for users and devices."
+publishDate: 2026-03-10
+author: "Robert Olejnik"
+image: "/images/blog/alpha2.0-2/Alpha%202.png"
+tags: ["defguard", "2.0", "alpha", "release", "wireguard", "enterprise vpn", "high availability", "firewall"]
+draft: false
+---
+
+![Defguard 2.0 Release Alpha 2 hero](/images/blog/alpha2.0-2/Alpha%202.png)
+
+Due to high anticipation from our customers and users, we are excited to release the second alpha of version 2.0, which is now nearly feature-complete.
+
+While we still do not recommend it for production setups, we encourage teams running Proof of Concepts or early testing to deploy 2.0 Alpha 2 instead of the 1.6.x series.
+
+If you missed Alpha 1, read the [technical overview of Defguard 2.0](https://defguard.net/blog/defguard-20-alpha-technical-overview/#why-a-major-upgrade-1), where we explain why these architecture and UX changes were introduced.
+
+## What's changed in Alpha 2 (vs Alpha 1)
+
+### New quick setup wizard and VM images
+
+![Defguard 2.0 quick setup wizard](/images/blog/alpha2.0-2/image4.png)
+
+If you deploy 2.0 using [Docker Compose](https://docs.defguard.net/2.0/deployment-strategies/previewing-defguard-v2.0-alpha) or the new virtual image:
+
+- All components are automatically deployed (Core, Edge, and Gateway)
+- All components are automatically provisioned
+- The remaining steps are basic general settings and first VPN location setup in a guided wizard
+
+We designed this path to make evaluation and onboarding significantly easier.
+
+The main configuration wizard (first introduced in Alpha 1 and updated in this release) remains available and should be used for production-style deployment planning, where each component is launched separately.
+
+### High Availability: multiple Gateways and Edge components
+
+We added gateway setup:
+
+![Gateway setup in Defguard 2.0 Alpha 2](/images/blog/alpha2.0-2/image2.png)
+
+And gateway management:
+
+![Gateway management in Defguard 2.0 Alpha 2](/images/blog/alpha2.0-2/image6.png)
+
+We also updated the testing Docker Compose to deploy multiple gateways that can be load-balanced with [Envoy](https://www.envoyproxy.io/), so you can validate HA behavior in test environments.
+
+### Firewall management
+
+New firewall management is now available for testing:
+
+![Firewall management in Defguard 2.0 Alpha 2](/images/blog/alpha2.0-2/image1.png)
+
+Firewall management builds on 1.x concepts and expands them for 2.0. For deeper context, see [firewall improvements in the Alpha 1 technical overview](https://defguard.net/blog/defguard-20-alpha-technical-overview/#firewall-rules-changes-1).
+
+### Static IP assignment for users and devices
+
+A long-awaited feature is finally here. You can now assign IP addresses to networks and user devices from user and device context menus.
+
+![Static IP assignment for users](/images/blog/alpha2.0-2/image7.png)
+
+![Static IP assignment for devices](/images/blog/alpha2.0-2/image3.png)
+
+### Easier Edge and Gateway deployment
+
+When adding a new Gateway or Edge component, the wizard now includes clearer deployment guidance:
+
+![Edge and Gateway deployment guidance](/images/blog/alpha2.0-2/image5.png)
+
+### Summary and release plan
+
+We included numerous bug fixes and smaller improvements in this alpha. There is still work ahead, but 2.0 Alpha 2 is ready for serious testing and feedback.
+
+Please share your feedback by [opening a GitHub discussion](https://github.com/defguard/defguard/discussions) or [submitting issues](https://github.com/defguard/defguard/issues) for bugs and missing features.
+
+Our plan is to release the first Beta in the coming weeks, including an automated wizard-based migration from 1.x. That will allow all customers to test migration flows in staging before final 2.0 rollout.
+
