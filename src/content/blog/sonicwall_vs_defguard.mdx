@@ -1,0 +1,88 @@
+---
+title: "Why MSPs and MSSPs migrate from SonicWall to Defguard"
+seoTitle: "SonicWall vs Defguard: Performance, Security, and Scalability Comparison"
+publishDate: 2026-03-10
+description: "Case study template comparing SonicWall VPN and Defguard for enterprise remote access, focusing on security architecture, performance, and operational scalability."
+author: "Defguard Team"
+companyName: "Customer Case Study"
+companyDescription: "Enterprise organization evaluating migration from SonicWall SSL VPN to Defguard."
+companySegment: "Enterprise IT and cybersecurity"
+companyWebsite: ""
+image: "/images/blog/sonicwall_vs_defguard/hero.png"
+tags: ["sonicwall", "defguard", "enterprise vpn", "wireguard", "case study", "vpn migration"]
+draft: true
+---
+
+![SonicWall vs Defguard case study hero image](/images/blog/sonicwall_vs_defguard/hero.png)
+
+## Agility vs legacy constraints
+
+In today's enterprise landscape, the choice of a remote access solution is a choice between infrastructure agility and legacy hardware constraints. We will compare the SonicWall SMA 100 and 1000 Series—industry-staple physical and virtual appliances—against defguard, a modern, on-premises Zero Trust security platform.
+
+While SonicWall has long defined the 'appliance-based' VPN era, the shift toward Infrastructure Sovereignty and Secure-by-Design architecture has introduced a new standard. This comparison evaluates how these two solutions handle identity-aware networking, looking specifically at why organizations are moving away from proprietary 'black boxes' toward open-source orchestration that unifies WireGuard® performance with granular firewall control on OPNsense, MikroTik, and Linux.
+
+## SonicWall SMA 100 is gone - what's next?
+
+By declaring the end-of-life (EOL) for the SMA 100 series effective **October 31, 2025**, SonicWall effectively forced customers to migrate by making these devices non-functional after that date. As a result, countless small and medium businesses had no choice but to seek out alternative remote access solutions to maintain their connectivity and security.
+
+This problem is amplified among Managed Service Providers (MSP) and Managed Security Service Providers (MSSP), who manage dozens of clients infrastructure and security.
+
+SonicWall's official guidance is to migrate to their cloud-delivered Cloud Secure Edge (CSE) platform, a subscription-based Zero Trust access offering. This this shift raises strategic questions for teams seeking continued on-premises control or desiring a more open, flexible deployment model. SonicWall response is migration to SMA 1000 Series, but at much higher cost and not much more to offer.
+
+## Defguard ad ideal replacement; on-premise, MFA and SSO built in, Identity based Access Control
+
+FoxIT, a german based MSP partnered with Defguard and undertakes. 
+
+MSP and MSSP are looking to alternative that is more secure (SonicWall has a long history of security issues), supports flexible MFA for VPN and can be easily integrated with existing organisations identity (IdP/SSO).
+
+We're diving into 3 use cases of clients that has successfully migrated from SonicWall SME devices
+
+## Customer Context
+
+- Existing stack: SonicWall firewall and SSL VPN
+- Key requirement: stronger remote access security with better user experience
+- Constraint: keep migration risk low and avoid disruption for users
+
+## Challenges
+
+### 1) Security Architecture Limitations
+
+The team needed a more segmented architecture for remote access services, with clearer separation between control plane and edge components.
+
+wizua### 2) Performance and Stability
+
+Users reported inconsistent performance during network changes and under packet loss, especially for latency-sensitive workflows.
+
+### 3) Operational Complexity
+
+The current setup required too much manual work for onboarding, policy updates, and access reviews.
+
+## Migration considerations
+- Prerequisities
+-- infrastructure prepareation
+-- networking setup
+
+## Why Defguard
+
+- WireGuard-based modern transport
+- Built-in identity and MFA capabilities
+- Centralized policy and access control management
+- Flexible deployment model for multiple locations
+
+## Implementation Summary
+
+1. Deploy Defguard control plane and edge gateway(s)
+2. Integrate identity provider and enforce MFA
+3. Roll out users in phases and validate access policies
+4. Decommission legacy remote access paths
+
+## Results
+
+- Improved access stability and user experience
+- Stronger authentication posture for VPN access
+- Reduced operational overhead for VPN administration
+- Better visibility into users, devices, and access policies
+
+## Key Takeaways
+
+For organizations comparing SonicWall vs Defguard, the biggest gains typically come from modern protocol design, tighter identity integration, and simpler policy operations at scale.
