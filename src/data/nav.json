@@ -27,7 +27,7 @@
   },
   {
     "display": "Compare",
-    "url": "/compare",
+    "url": null,
     "children": [
       {
         "display": "Fortigate VPN Replacement",
