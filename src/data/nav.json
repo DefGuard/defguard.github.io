@@ -26,8 +26,8 @@
     ]
   },
   {
-    "display": "Solutions",
-    "url": null,
+    "display": "Compare",
+    "url": "/compare",
     "children": [
       {
         "display": "Fortigate VPN Replacement",
@@ -36,6 +36,10 @@
       {
         "display": "OpenVPN Access Server replacement",
         "url": "/openvpn"
+      },
+      {
+        "display": "Defguard vs NetBird",
+        "url": "/blog/defguard-vs-netbird"
       }
     ]
   },
