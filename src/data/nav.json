@@ -26,7 +26,7 @@
     ]
   },
   {
-    "display": "Solutions",
+    "display": "Compare",
     "url": null,
     "children": [
       {
@@ -36,6 +36,10 @@
       {
         "display": "OpenVPN Access Server replacement",
         "url": "/openvpn"
+      },
+      {
+        "display": "Defguard vs NetBird",
+        "url": "/blog/defguard-vs-netbird"
       }
     ]
   },

@@ -9,6 +9,7 @@ import AstroButton from "../components/AstroButton.astro";
 import HomeSection from "../components/home/HomeSection.astro";
 import FeatureCapsules from "../pages/_home/components/FeatureCapsules.astro";
 import TrustedBy from "../pages/_home/components/TrustedBy.astro";
+import CTASection from "../components/CTASection.astro";
 
 const title = "FortiGate VPN and FortiClient Alternative: Replace SSL VPN with WireGuard (2025)";
 const description = "Tired of FortiClient VPN? Switch to Defguard: a modern enterprise VPN solution with built-in MFA and SSO with fastest VPN protocol WireGuard.";
@@ -53,22 +54,6 @@ const sections = [
 ];
 
 const faqEntries = [
-  {
-    question: "How does Defguard protect against vulnerabilities like COATHANGER?",
-    answer: "Legacy appliances are vulnerable to persistent malware because they run large, monolithic codebases. Defguard is built on a modern microservices architecture and open-source Rust code, minimizing the attack surface. Unlike legacy protocols which are inherently complex, WireGuard is lean and auditable. <a href='/blog/ssl-vpn-performance-protocol-problem/' target='_blank' rel='noopener noreferrer'>Read about the fundamental limitations of the SSL VPN protocol</a>."
-  },
-  {
-    question: "Can I use Defguard client to connect to my existing FortiGate SSL VPN?",
-    answer: "No. Defguard is not a \"Direct Fortinet Replacement\" client wrapper like OpenFortiVPN. We replace the entire legacy VPN stack. Defguard is a Protocol-Based Solution that requires installing a secure Gateway (Server) to handle traffic using the modern WireGuard® protocol instead of slow SSL VPN tunnels."
-  },
-  {
-    question: "How is Defguard different from OpenVPN or raw WireGuard®?",
-    answer: "Defguard belongs to the Protocol-Based Solutions category (like OpenVPN Access Server) but offers a modern architecture. While OpenVPN is legacy software and raw WireGuard lacks management features, Defguard provides a complete VPN Platform. It combines WireGuard performance with an Enterprise Management UI, MFA/2FA, and SSO — everything included in a self-hosted setup."
-  },
-  {
-    question: "Do I need a separate license for endpoint and device management like FortiClient EMS?",
-    answer: "No. Unlike Fortinet's fragmented model (Gateway + EMS), Defguard is a single, cohesive platform. Identity management, policy enforcement, and device provisioning are integrated directly into the system, not sold as an add-on. You get a unified control plane for both network access and fleet management — eliminating the need to deploy or license a separate EMS server."
-  },
   {
     question: "Can I replace Fortinet's VPN solution without replacing my FortiGate firewall?",
     answer: "Yes. You can keep your existing FortiGate firewall for perimeter security and simply offload the VPN traffic to Defguard. Deploying Defguard alongside your current firewall (as a \"sidecar\") is the fastest way to upgrade your remote access performance without disrupting your core network infrastructure. <a href='/blog/fortigate-wireguard-migration/' target='_blank' rel='noopener noreferrer'>Read our step-by-step guide on how to migrate from SSL VPN to WireGuard</a>."
@@ -162,7 +147,7 @@ const faqEntries = [
           <div class="ready-to-switch-cta">
             <h3>Ready to explore Defguard?</h3>
             <div class="cta-buttons cta-buttons--centered">
-              <AstroButton text="Get Evaluation License" link={{ href: "/pricing/?utm_source=fortinet-comparison#get-evaluation-license", target: "_self" }} />
+              <AstroButton text="Get Evaluation License" link={{ href: "/evaluation-license/?utm_source=fortinet-comparison", target: "_self" }} />
               <AstroButton text="Book a Demo" link={{ href: "/book-a-demo/?utm_source=fortinet-comparison", target: "_self" }} className="secondary" />
             </div>
           </div>
@@ -393,250 +378,6 @@ const faqEntries = [
           </div>
         </HomeSection>
 
-        <ProductSection padding="small">
-          <section id="architecture">
-        <h2>Architecture in depth comparison</h2>
-        <p>
-          <strong>Fortinet's VPN solution</strong> relies on a traditional model where the <strong>FortiClient</strong> endpoint connects to a central <strong>FortiGate</strong> appliance. All traffic is funneled through a central FortiGate appliance. 
-          This monolithic architecture, where dozens of services are bundled into the FortiOS codebase, creates a single, massive point of 
-          failure and a performance bottleneck. For a Head of IT, this means any attack on the gateway can bring the entire remote access 
-          infrastructure down.
-        </p>
-        <p>
-          In stark contrast, Defguard employs a <a href="https://docs.defguard.net/in-depth/architecture" target="_blank" rel="noopener noreferrer">modern microservice architecture</a> that segregates the control and data planes. The control plane operates 
-          exclusively within your internal network, inaccessible from the public internet. The data plane, built on WireGuard®, is decentralized, 
-          enabling direct connections that eliminate bottlenecks, improve latency, and enhance reliability.
-        </p>
-        
-        <div class="architecture-diagram">
-          <h3>Defguard Secure Architecture</h3>
-          <div class="image-container">
-            <img 
-              src="https://docs.defguard.net/~gitbook/image?url=https%3A%2F%2F4041812211-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FkHPDOBrb5X1TB8O3GsjW%252Fuploads%252Fpt7ND0p9Td3qgXLTh03r%252FUntitled%2520Diagram.drawio%2520%281%29.png%3Falt%3Dmedia%26token%3D85175aa6-10e1-4933-85cc-4b7b651431f0&width=768&dpr=4&quality=100&sign=d913b42a&sv=2" 
-              alt="Defguard secure microservice architecture showing internal Core and external Proxy components"
-              class="zoomable-image"
-              data-full-src="https://docs.defguard.net/~gitbook/image?url=https%3A%2F%2F4041812211-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FkHPDOBrb5X1TB8O3GsjW%252Fuploads%252Fpt7ND0p9Td3qgXLTh03r%252FUntitled%2520Diagram.drawio%2520%281%29.png%3Falt%3Dmedia%26token%3D85175aa6-10e1-4933-85cc-4b7b651431f0&width=768&dpr=4&quality=100&sign=d913b42a&sv=2"
-            />
-            <div class="zoom-hint">Click to zoom</div>
-          </div>
-          <p class="diagram-caption">
-            Defguard's secure microservice architecture: Internal Core and external stateless Proxy (public-facing) 
-            ensure sensitive data never leaves your internal network while providing secure remote access.
-          </p>
-        </div>
-        
-        <div class="why-section-testimonial">
-          <blockquote>
-            FortiGate is closed-source. It felt outdated, clunky to operate, complicated to setup and configure, slow (we were using the HTTPS-VPN) and regularly had vulnerabilities disclosed, potentially with exploitable zero-days. The proprietary and closed nature of the product reduced our trust in it. We also evaluated Firezone but chose Defguard as it offered better maintenance guarantees, showed more maturity of the product, and had alignment with our understanding of how such a product should be architected.
-          </blockquote>
-        </div>
-        
-        <!-- Image Modal -->
-        <div id="imageModal" class="image-modal">
-          <span class="close-modal">&times;</span>
-          <img id="modalImage" class="modal-content" />
-        </div>
-        
-        <script>
-          // Image zoom functionality
-          document.addEventListener('DOMContentLoaded', function() {
-            const modal = document.getElementById('imageModal');
-            const modalImg = document.getElementById('modalImage') as HTMLImageElement;
-            const closeBtn = document.querySelector('.close-modal');
-            const zoomableImages = document.querySelectorAll('.zoomable-image');
-            
-            if (!modal || !modalImg || !closeBtn) return;
-            
-            // Open modal on image click
-            zoomableImages.forEach((img: Element) => {
-              img.addEventListener('click', function(this: Element) {
-                const fullSrc = this.getAttribute('data-full-src');
-                if (fullSrc) {
-                  modal.style.display = 'block';
-                  modalImg.src = fullSrc;
-                  document.body.style.overflow = 'hidden';
-                }
-              });
-            });
-            
-            // Close modal on X click
-            closeBtn.addEventListener('click', function() {
-              modal.style.display = 'none';
-              document.body.style.overflow = 'auto';
-            });
-            
-            // Close modal on background click
-            modal.addEventListener('click', function(e) {
-              if (e.target === modal) {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-              }
-            });
-            
-            // Close modal on Escape key
-            document.addEventListener('keydown', function(e) {
-              if (e.key === 'Escape' && modal.style.display === 'block') {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-              }
-            });
-          });
-        </script>
-      </section>
-    </ProductSection>
-
-        <script>
-          // Tab functionality for interactive comparison
-          document.addEventListener('DOMContentLoaded', () => {
-            const tabButtons = document.querySelectorAll('.tab-button');
-            const tabPanes = document.querySelectorAll('.tab-pane');
-            
-            if (tabButtons.length === 0) return;
-            
-            tabButtons.forEach((button) => {
-              button.addEventListener('click', (e) => {
-                const target = e.currentTarget as HTMLElement;
-                const tabId = target.dataset.tab;
-                
-                // Remove active class from all buttons and panes
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                tabPanes.forEach(pane => pane.classList.remove('active'));
-                
-                // Add active class to clicked button and corresponding pane
-                target.classList.add('active');
-                const targetPane = document.querySelector(`.tab-pane[data-content="${tabId}"]`);
-                if (targetPane) {
-                  targetPane.classList.add('active');
-                }
-              });
-            });
-          });
-        </script>
-
-        <ProductSection padding="small">
-          <section id="security">
-        <h2>Security</h2>
-        <p class="critical-section">
-          This is the most critical differentiator. Fortinet's security model has proven to be dangerously fragile against sophisticated threats.
-        </p>
-        <p>
-          The <strong>FortiGate</strong> appliance's design has resulted in a recurring pattern of critical, remotely exploitable vulnerabilities (like <strong><a href="https://nvd.nist.gov/vuln/detail/cve-2024-21762" target="_blank" rel="noopener noreferrer">CVE-2024-21762</a></strong>). These flaws have been actively exploited by state-sponsored actors like <strong><a href="https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-038a" target="_blank" rel="noopener noreferrer">China's Volt Typhoon</a></strong> to gain initial access to critical infrastructure.
-        </p>
-        <p>
-          However, the greatest failure is the <strong>inability to recover from a breach</strong>. According to Dutch intelligence services (MIVD), a custom Remote Access Trojan named <strong><a href="https://www.ncsc.nl/binaries/ncsc/documenten/publicaties/2024/februari/6/mivd-aivd-advisory-coathanger-tlp-clear/TLP-CLEAR+MIVD+AIVD+Advisory+COATHANGER.pdf" target="_blank" rel="noopener noreferrer">COATHANGER</a></strong> was developed specifically for <strong>FortiGate</strong> devices. This malware:
-        </p>
-        <ul>
-          <li><strong>Survives reboots and firmware upgrades.</strong></li>
-          <li><strong>Hides its presence by hooking system calls,</strong> making it invisible to standard admin tools.</li>
-          <li><strong>Was used to compromise at least 20,000 FortiGate devices globally.</strong></li>
-        </ul>
-        <p>
-          For a CISO, this is a catastrophic risk. It means that even after applying a patch, the <strong>FortiGate</strong> device cannot be trusted, creating unacceptable business risk.
-        </p>
-        <p>
-          Defguard's foundation on its <a href="https://github.com/DefGuard" target="_blank" rel="noopener noreferrer">open-source Rust codebase</a> provides a modern, auditable cryptographic suite with a minimal attack surface. You can verify the code, not just trust a vendor's opaque security claims.
-        </p>
-      </section>
-        </ProductSection>
-
-    <ProductSection padding="small">
-      <section id="authentication">
-        <h2>Identity: Native MFA vs. The FortiAuthenticator Trap</h2>
-        <p>
-          Fortinet requires a complex ecosystem for modern authentication, needing separate products like FortiAuthenticator for SSO and 
-          FortiToken for MFA. This fragments security and inflates costs.
-        </p>
-        <p>
-          Defguard simplifies this natively. It includes a built-in Identity Provider (IdP) and supports any OIDC provider (Microsoft, Google, 
-          Okta) out of the box, with no extra licenses, reducing the burden on IT teams.
-        </p>
-      </section>
-    </ProductSection>
-
-    <ProductSection padding="small">
-          <section id="policy">
-        <h2>Access Control: Identity-Based vs. Static IP Rules</h2>
-        <p>
-          Defguard uses a flexible, <a href="https://docs.defguard.net/features/access-control-list" target="_blank" rel="noopener noreferrer">identity-based ACL system</a>. Policies are tied to user identity, not static IP addresses, making them more secure and easier to manage than the complex rule sets on a centralized FortiGate appliance.
-        </p>
-      </section>
-    </ProductSection>
-
-        <ProductSection padding="small">
-          <section id="strategic-difference">
-        <h2>Strategic Impact: Hardware Security vs. Software Agility</h2>
-        <p>
-          The choice between Fortinet and Defguard is a choice between two fundamentally different security philosophies. 
-          The table below shows the real-world consequences of each architectural approach.
-        </p>
-        
-        <div class="table-container">
-          <table class="comparison-table strategic-table">
-            <thead>
-              <tr>
-                <th>Security Principle</th>
-                <th>Legacy Appliance Approach (FortiGate)</th>
-                <th>Modern ZTNA Approach (Defguard)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>ZTNA implementation</td>
-                <td>Perimeter-Based. Trust is assumed once connected. Even with "Fortinet ZTNA" features, the underlying architecture relies on a persistent tunnel that allows lateral movement.</td>
-                <td>Pure identity-first ZTNA: protocol-level MFA with dynamic session keys; no implicit trust, every session fully reauthenticated before tunnel establishment.</td>
-              </tr>
-              <tr>
-                <td>Attack Surface</td>
-                <td>Large, monolithic, and complex; a single vulnerability can lead to full device compromise, as repeatedly demonstrated by multiple critical CVEs.</td>
-                <td>Based on a secure microservice architecture. Each component is independent, eliminating single points of failure and drastically reducing the attack surface.</td>
-              </tr>
-              <tr>
-                <td>Vulnerability Impact</td>
-                <td>High; a perimeter breach grants state-sponsored actors a long-term foothold for lateral movement and deep network access.</td>
-                <td>Contained; breaches are isolated by design. The "blast radius" of any single component failure is minimized.</td>
-              </tr>
-              <tr>
-                <td>System Integrity</td>
-                <td>Assumed & Fragile; vulnerable to persistent threats (e.g., COATHANGER) that survive reboots and patches, rendering the device untrustworthy.</td>
-                <td>Verified & Resilient; employs continuous integrity monitoring and immutable components to ensure the platform remains trustworthy.</td>
-              </tr>
-              <tr>
-                <td>Vendor Transparency</td>
-                <td>Opaque & Vendor-Centric; "silent patching" leaves customers unknowingly exposed while attackers reverse-engineer fixes.</td>
-                <td>Transparent & Customer-Centric; timely disclosure empowers defenders to accurately assess risk and take immediate action.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-        </ProductSection>
-
-        <ProductSection padding="small">
-          <section id="setup">
-        <h2>Management & Setup: Automated Provisioning vs. FortiClient EMS</h2>
-        <p>
-          Scaling remote access creates an "Empty Client" problem: distributing the app is easy, but securely distributing secrets is hard. Fortinet forces you to buy <strong>FortiClient EMS</strong> to solve this. Defguard solves it using the infrastructure you already own: Active Directory or Entra ID.
-        </p>
-        <p>
-          We offer true Zero-Touch Provisioning. Admins batch-generate tokens via API and sync them to user profiles. When you push the MSI via Intune or GPO, the client auto-detects the domain, retrieves the token, and pre-configures itself. Users launch the app and connect immediately: no emails, no copy-pasting, and no Helpdesk tickets.
-        </p>
-        <p>
-          To simplify evaluation, we provide a <strong><a href="https://defguard.net/docs/getting-started/one-line-install-script/" target="_blank" rel="noopener noreferrer">one-line install script</a></strong> to deploy a complete test instance, allowing you to get familiar with the solution's features quickly. For production-ready rollout, we support modern workflows with deployment options for <strong><a href="https://docs.defguard.net/deployment-strategies/docker-compose" target="_blank" rel="noopener noreferrer">Docker Compose</a></strong>, <strong><a href="https://docs.defguard.net/deployment-strategies/terraform" target="_blank" rel="noopener noreferrer">Terraform for AWS</a></strong>, and <strong><a href="https://docs.defguard.net/deployment-strategies/kubernetes" target="_blank" rel="noopener noreferrer">Kubernetes</a></strong>.
-        </p>
-      </section>
-        </ProductSection>
-
-        <ProductSection padding="small">
-          <section id="cost">
-        <h2>Pricing: Transparent Subscription vs. Hidden Licensing Fees</h2>
-        <p>
-          <strong>Fortinet's</strong> pricing requires multiple, separate licenses for <strong>FortiGate</strong> hardware, <strong>FortiClient</strong> endpoints, <strong><a href="https://defguard.net/vpn_mfa/" target="_blank" rel="noopener noreferrer">MFA</a></strong>, SSO, <strong>and mandatory support contracts</strong>, leading to unforeseen costs.
-        </p>
-        <p>
-          Defguard offers several plans, including our comprehensive <strong>Enterprise plan</strong> designed for business-critical deployments. This approach ensures straightforward, subscription-based pricing without the hidden fees common in the Fortinet ecosystem. For a full comparison of our plans, please see our <strong><a href="https://defguard.net/pricing" target="_blank" rel="noopener noreferrer">pricing page</a></strong>.
-        </p>
-      </section>
-        </ProductSection>
 
         <ProductSection padding="small">
           <section id="faq">
@@ -651,6 +392,16 @@ const faqEntries = [
         </ProductSection>
       </div>
         </div>
+    <CTASection
+      title="Ready to replace FortiGate VPN?"
+      description="Try Defguard—modern WireGuard-based remote access with built-in MFA and SSO. Deploy in minutes, not months."
+      buttonText="Get Evaluation License"
+      buttonLink="/evaluation-license/?utm_source=fortinet-comparison"
+      button2Text="Book a Demo"
+      button2Link="/book-a-demo/?utm_source=fortinet-comparison"
+      id="cta-fortinet"
+      variant="white"
+    />
   </main>
 </ProductLayout>
 
