@@ -1,5 +1,5 @@
 ---
-title: "Why MSPs and MSSPs migrate from SonicWall to Defguard"
+title: "Why MSPs and MSSPs choose Defguard over SonicWall"
 seoTitle: "SonicWall vs Defguard: Performance, Security, and Scalability Comparison"
 publishDate: 2026-03-10
 description: "Case study template comparing SonicWall VPN and Defguard for enterprise remote access, focusing on security architecture, performance, and operational scalability."
@@ -15,74 +15,89 @@ draft: true
 
 ![SonicWall vs Defguard case study hero image](/images/blog/sonicwall_vs_defguard/hero.png)
 
-## Agility vs legacy constraints
+## Summary
 
-In today's enterprise landscape, the choice of a remote access solution is a choice between infrastructure agility and legacy hardware constraints. We will compare the SonicWall SMA 100 and 1000 Series—industry-staple physical and virtual appliances—against defguard, a modern, on-premises Zero Trust security platform.
+Managed Service Providers (MSPs) and Security Providers (MSSPs) are increasingly migrating from SonicWall SMA to Defguard because of a fundamental shift in how they want to handle client security.
 
-While SonicWall has long defined the 'appliance-based' VPN era, the shift toward Infrastructure Sovereignty and Secure-by-Design architecture has introduced a new standard. This comparison evaluates how these two solutions handle identity-aware networking, looking specifically at why organizations are moving away from proprietary 'black boxes' toward open-source orchestration that unifies WireGuard® performance with granular firewall control on OPNsense, MikroTik, and Linux.
+The most immediate driver for migration in 2026 is the aftermath of SonicWall’s October 31, 2025, deactivation of the SMA 100 series. Unlike typical "End of Life" where a device simply stops getting updates, SonicWall disabled many backend services required for the SMA 100 units to function. Many MSPs felt "forced" into migrating to SonicWall’s newer Cloud Secure Edge (CSE), which requires a recurring subscription. This led providers to look for "exit ramps" where they could own their infrastructure again.
 
-## SonicWall SMA 100 is gone - what's next?
+While SonicWall has moved toward a "cloud-first," vendor-locked model while Defguard offers a "sovereign," open-source alternative built on the modern WireGuard protocol.
 
-By declaring the end-of-life (EOL) for the SMA 100 series effective **October 31, 2025**, SonicWall effectively forced customers to migrate by making these devices non-functional after that date. As a result, countless small and medium businesses had no choice but to seek out alternative remote access solutions to maintain their connectivity and security.
+FoxIT GmbH (part of FoxGroup), a german based Managed Service Provider partnered with Defguard in order to increase the security.
 
-This problem is amplified among Managed Service Providers (MSP) and Managed Security Service Providers (MSSP), who manage dozens of clients infrastructure and security.
+## TL;DR
 
-SonicWall's official guidance is to migrate to their cloud-delivered Cloud Secure Edge (CSE) platform, a subscription-based Zero Trust access offering. This this shift raises strategic questions for teams seeking continued on-premises control or desiring a more open, flexible deployment model. SonicWall response is migration to SMA 1000 Series, but at much higher cost and not much more to offer.
-
-## Defguard ad ideal replacement; on-premise, MFA and SSO built in, Identity based Access Control
-
-FoxIT, a german based MSP partnered with Defguard and undertakes. 
-
-MSP and MSSP are looking to alternative that is more secure (SonicWall has a long history of security issues), supports flexible MFA for VPN and can be easily integrated with existing organisations identity (IdP/SSO).
-
-We're diving into 3 use cases of clients that has successfully migrated from SonicWall SME devices
-
-## Customer Context
-
-- Existing stack: SonicWall firewall and SSL VPN
-- Key requirement: stronger remote access security with better user experience
-- Constraint: keep migration risk low and avoid disruption for users
-
-## Challenges
-
-### 1) Security Architecture Limitations
-
-The team needed a more segmented architecture for remote access services, with clearer separation between control plane and edge components.
-
-wizua### 2) Performance and Stability
-
-Users reported inconsistent performance during network changes and under packet loss, especially for latency-sensitive workflows.
-
-### 3) Operational Complexity
-
-The current setup required too much manual work for onboarding, policy updates, and access reviews.
-
-## Migration considerations
-- Prerequisities
--- infrastructure prepareation
--- networking setup
-
-## Why Defguard
-
-- WireGuard-based modern transport
-- Built-in identity and MFA capabilities
-- Centralized policy and access control management
-- Flexible deployment model for multiple locations
-
-## Implementation Summary
-
-1. Deploy Defguard control plane and edge gateway(s)
-2. Integrate identity provider and enforce MFA
-3. Roll out users in phases and validate access policies
-4. Decommission legacy remote access paths
-
-## Results
-
-- Improved access stability and user experience
-- Stronger authentication posture for VPN access
-- Reduced operational overhead for VPN administration
+Defguard gives you:
+- A more secure system through modern Secure-by-Design architecture
+- Faster connections through the WireGuard VPN protocol
+- Reduced operational overhead through built-in multi-site management
 - Better visibility into users, devices, and access policies
 
-## Key Takeaways
+## Key Reasons MSPs and MSSPs Are Choosing Defguard
 
-For organizations comparing SonicWall vs Defguard, the biggest gains typically come from modern protocol design, tighter identity integration, and simpler policy operations at scale.
+### Defguard is Secure-by-Design
+
+SMA 100 & 1000 Series (On-Premise Appliances) do not have a physically isolated control plane. They use an "all-in-one" architecture, which means everything is exposes to the public internet. On the other hand with Cloud Secure Edge (CSE) that SonicWall promotes - SonicWall owns the control plane in their cloud.
+
+This approach shares the same inherent weakness as the SSL VPN architecture now being phased out by most enterprise vendors (see Fortinet’s move to IPsec). Most attacks do not target the VPN protocol itself, but rather the management endpoints of these solutions. In the case of SSL VPNs, there are two primary vulnerabilities:
+
+- **Application Layer Exposure:** Since SSL VPNs operate at the application layer, exposing the VPN on a firewall means the main VPN data plane is publicly accessible.
+- **Control Plane Exposure:** SSL VPNs require configuration portals (for user/device enrollment and provisioning), which necessitates exposing the VPN control plane to the public.
+
+In contrast, Defguard is built from the ground up with security as its most important principle, embracing a secure-by-design (SBD) architecture. A key differentiator is the deliberate segmentation of systems and components, which is central to its design philosophy.
+
+Defguard separates its control (core) and data (gateway/proxy) planes, drastically reducing risk by preventing lateral movement between public-facing components and your secure internal infrastructure. This architectural segmentation is explained in [Defguard's secure architecture documentation](https://docs.defguard.com/2.0/security-overview/secure-architecture/).
+
+
+Communication between components is intentionally restricted, and best practices (such as using separate VLANs or multiple firewalls) can be implemented at the network level to enforce this isolation. For more details about recommended deployment patterns, reference [Defguard's deployment documentation](https://docs.defguard.com/2.0/getting-started/deployment/).
+
+![Defguard secure architecture diagram](/images/blog/defguard_vs_netbird/defguard_architecture.png)
+
+*Figure: Defguard separates control and data planes for increased security, while legacy SSL VPNs typically combine them, exposing critical interfaces to the internet.*
+
+> If you are moving to Defguard, you are moving to a sovereign isolated control plane. You own it. You can host the Defguard core (Control) on one secure server and place your WireGuard gateways (Data) in completely different environments.
+
+### MFA enforcement
+
+SonicWall (e.g., SMA 1000) natively supports standard MFA options, including TOTP authenticator apps, email OTP, SMS OTP, client certificates (PKI), and chained local authentication with an extra PIN or secret. This provides baseline second-factor coverage but stays within a legacy SSL VPN model. SonicWall supports also external MFA via SAML and Radius integrations with providers like Microsoft Entra ID, Okta, Google Workspace.
+
+Defguard goes further it enables MFA methods, including:
+* TOTP (Authenticator Codes)
+* Email Codes
+* **Mobile App Biometrics**
+* **Multi-device Desktop Authentication with Mobile Biometrics**
+
+Defguard supports any OIDC-compliant identity provider—including Microsoft Entra ID (Azure AD), Okta, Google Workspace, Keycloak, and other standards-based IdPs—so teams can keep existing SSO workflows while centrally enforcing stronger authentication policies. See [Defguard’s Identity Integrations documentation](https://docs.defguard.com/2.0/integrations/identity/) for setup details.
+
+### Centralized Management for Multiple VPN Locations/Networks
+
+Defguard enables MSPs to manage dozens of client locations with one unified control plane.
+
+This is simply not possible wit SonicWall without significant cost multiplication and bloated infrastructure.
+
+On-premise SonicWall solutions do nor support managing multiple locations. To enforce security policy, inspect traffic, and act as a gateway at a remote location, each physical site needs its own SonicWall appliance. To manage multiple appliance you need cloud based Capture Security Center or install Global Management System.
+
+  With Defguard unified control plane, MSPs and MSSPs can easily manage dozens—or hundreds—of VPN sites and client networks from a single dashboard. Provision new networks, enforce policies globally, and gain fleet wide visibility, all without jumping between appliances. You do not need additional systems like SonicWalls Capture Security Center.
+
+  Defguard is able to provide this thanks to unique decomposed and segmented architecture where each location runs it's own VPN/Wireguard gateway and can be deployed in any location with robust deployment options (linux package, docker, compose, terraform, OVF images). 
+
+  The result is with single Defguard installation you achieve robust multi-site VPN management environment that can be deployed and connected in very short time.
+
+### Superior connection speed & performance
+
+Defguard’s use of WireGuard provides a significant performance leap over traditional SonicWall SSL VPNs by moving the heavy lifting from the application layer to the **operating system kernel**. While SonicWall’s SSL-based connections often run in user-space—triggering high CPU overhead due to constant context switching—WireGuard is integrated directly into the Linux and Windows kernels. This architectural efficiency, combined with a codebase that is roughly **1% the size** of legacy SSL protocols, allows Defguard to achieve near-line-speed throughput with drastically lower latency. In real-world enterprise environments, this means users experience a high-speed connection that feels identical to being on a local office network, rather than the "throttled" sensation typical of older SSL-VPN appliances.
+
+Beyond raw speed, the comparison highlights a fundamental shift in connection stability and cryptography. SonicWall SSL VPNs rely on complex, stateful TLS handshakes that are prone to dropping or hanging when a user switches from Wi-Fi to cellular data. In contrast, Defguard leverages WireGuard’s **stateless UDP design**, enabling instant roaming and "always-on" connectivity without the need for a re-authentication delay. Furthermore, Defguard utilizes modern **ChaCha20-Poly1305** encryption, which is significantly faster on mobile devices and hardware lacking specialized AES-acceleration than the older ciphers often found in legacy SSL implementations. The result is a VPN that connects in milliseconds and maintains peak performance even under heavy load or unstable network conditions.
+
+
+### Zero-touch enrollment 
+
+There's no true zero-touch here — the client software must be manually installed, or pushed via your own software deployment tool (e.g., SCCM, Group Policy). The gateway-side configuration is set by the admin, and users input the gateway IP. SonicWall does offer Simple Client Provisioning, which allows VPN clients to automatically retrieve connection settings from a SonicWall gateway — so users only need to know the WAN IP and everything else is pulled automatically. 
+
+Defguard’s zero-touch enrollment streamlines VPN deployment by using a pre-configured provisioning file containing the server URL and a unique enrollment token. This allows the desktop client to automatically identify and connect to the organization's instance upon its first launch. By eliminating manual configuration, users enjoy a seamless onboarding experience while administrators ensure consistent, secure setups across the entire fleet.
+
+For Windows environments, Defguard integrates with Active Directory or Entra ID to automate deployment via its MSI installer. Administrators can use the REST API to generate tokens and store them in directory attributes, which the client fetches during installation. This process enables the hands-off provisioning of thousands of devices, supporting features like always-on connectivity with minimal manual intervention.
+
+You can explore more about Zero-touch enrollment in this article: [Defguard 1.6 brings Zero-touch Enrollment at Enterprise Scale for WireGuard](https://defguard.net/blog/defguard-16-release-notes/)
+
+# Summary
