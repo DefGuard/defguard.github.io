@@ -12,6 +12,8 @@ import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 
 import partytown from "@astrojs/partytown";
+import rehypeExternalLinks from "rehype-external-links";
+import rehypeSlug from "rehype-slug";
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -49,8 +51,9 @@ export default defineConfig({
   ],
   markdown: {
     rehypePlugins: [
-      // Keep string-based configuration which works with both versions
-      ['rehype-external-links', {
+      // Add id attributes to headings (h1-h6) for direct section linking
+      rehypeSlug,
+      [rehypeExternalLinks, {
         target: "_blank",
         rel: ["nofollow", "noopener", "noreferrer"],
       }],
