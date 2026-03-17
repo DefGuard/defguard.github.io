@@ -19,7 +19,7 @@ const {
 const imageUrls = src.split(',').map(url => url.trim()).filter(url => url.length > 0);
 
 // Generate unique ID for this carousel instance
-const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
+const carouselId = `carousel-${Math.random().toString(36).slice(2, 11)}`;
 ---
 
 {imageUrls.length === 1 ? (

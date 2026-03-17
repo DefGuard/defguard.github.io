@@ -1,7 +1,5 @@
 ---
 import { DownloadIcon } from "../base/icons/DownloadIcon";
-import { CheckIcon } from "../base/icons/CheckIcon";
-import { PlatformType } from "../base/types/platform";
 
 interface Props {
   repoUrl: string;
@@ -23,12 +21,6 @@ const releases = await response.json();
 // Filter only stable releases (not pre-releases) and get the latest one
 const stableReleases = releases.filter((release: any) => !release.prerelease);
 const latestRelease = stableReleases[0]; // Get only the latest release
-
-interface Asset {
-  name: string;
-  browser_download_url: string;
-  size: number;
-}
 
 function getAssetDescription(assetName: string): string {
   // Mapping based on provided examples
@@ -53,22 +45,6 @@ function getAssetDescription(assetName: string): string {
   return "";
 }
 
-function getPlatformType(assetName: string): PlatformType {
-  if (assetName.includes("windows")) return PlatformType.WINDOWS;
-  if (assetName.includes("linux") && assetName.includes(".deb"))
-    return PlatformType.DEBIAN;
-  if (
-    assetName.includes("macos") &&
-    (assetName.includes("aarch64") || assetName.includes("arm64"))
-  )
-    return PlatformType.MACOSARM;
-  if (
-    assetName.includes("macos") &&
-    (assetName.includes("x86_64") || assetName.includes("amd64"))
-  )
-    return PlatformType.MACOSINTEL;
-  return PlatformType.DEBIAN; // Default to Debian if unknown
-}
 ---
 
 <div class="github-releases">

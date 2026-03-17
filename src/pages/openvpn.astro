@@ -80,7 +80,7 @@ const faqEntries = [
   <OrganizationJSONLD slot="schema" title={title} description={description} url={url} tags={tags} />
   <TechArticleJSONLD slot="schema" title={title} description={description} url={url} publishedDate={publishedDate} lastUpdated={lastUpdated} />
   <FAQPageJSONLD slot="schema" entries={faqEntries} />
-  <script slot="schema" type="application/ld+json" set:html={JSON.stringify({
+  <script is:inline slot="schema" type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
@@ -595,10 +595,10 @@ const faqEntries = [
       padding: 50px 1rem 60px;
       
       h1 {
-        @include typography(title);
         color: var(--text-body-primary);
         padding-bottom: 40px;
         text-wrap: balance;
+        @include typography(title);
       }
       
       .description {

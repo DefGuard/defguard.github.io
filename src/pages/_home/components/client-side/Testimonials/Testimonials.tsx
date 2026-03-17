@@ -1,6 +1,6 @@
 import "./style.scss";
 
-import { Fragment, useMemo, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import ClientMarkdown from "../../../../../components/client-side/ClientMarkdown";
 import type { TestimonialData } from "./type";

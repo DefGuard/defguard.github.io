@@ -9,7 +9,6 @@ import FAQPageJSONLD from "../scripts/FAQPageJSONLD.astro";
 const title = "Best WireGuard Client - Free WireGuard VPN Client Download for Windows, macOS, Linux";
 const description = "Download the best free WireGuard client alternative for Windows, macOS, and Linux. Defguard Client is an open-source WireGuard VPN client with modern UI and enterprise security.";
 const url = "https://defguard.net/wireguard-client";
-const canonicalUrl = "https://defguard.net/wireguard-client";
 const featuredImage = "/images/png/defguard.png";
 const imageWidth = "1080";
 const imageHeight = "540";
@@ -1052,7 +1051,7 @@ const faqItems = [
           <p>Everything you need to know about the Defguard WireGuard client.</p>
         </div>
         <div class="wireguard-faq__list">
-          {faqItems.map((item, index) => (
+          {faqItems.map((item) => (
             <details class="wireguard-faq__item">
               <summary>
                 <span>{item.question}</span>

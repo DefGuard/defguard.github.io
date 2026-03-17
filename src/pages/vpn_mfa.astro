@@ -5,8 +5,6 @@ import ProductLayout from "../layouts/ProductLayout.astro";
 import FlexibleSection from "../components/FlexibleSection.astro";
 import HomeHeader from "./_home/components/HomeHeader.astro";
 import CTASection from "../components/CTASection.astro";
-import HeaderSection from "../components/HeaderSection.astro";
-import ImageURL from "../components/image/ImageURL.astro";
 import YouTubeVideo from "../components/video/YouTubeVideo.astro";
 
 const title = "[Open Source] WireGuard MFA & VPN Gateway - defguard";
@@ -581,10 +579,10 @@ const tags = [
       padding-bottom: 10px;
       text-align: left;
       text-wrap: balance;
-      @include typography(title);
       font-size: calc(3.2rem * var(--font-scale-factor));
       max-width: 800px;
       line-height: 1.2;
+      @include typography(title);
 
       @include break-up(md) {
         max-width: 900px;

@@ -60,9 +60,6 @@ const tags = [
 <style lang="scss" is:global>
   #error-page {
     --page-spacing-factor: 0.5;
-    @include break-up(lg) {
-      --page-spacing-factor: 1;
-    }
 
     .flexible-content {
       padding-top: page-spacing(80px);
@@ -80,12 +77,12 @@ const tags = [
       }
 
       .error-number {
-        @include typography(title);
         font-size: 8rem;
         font-weight: 900;
         color: var(--text-body-primary);
         margin-bottom: 1rem;
         line-height: 1;
+        @include typography(title);
         //text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 
         @media (max-width: 768px) {
@@ -179,6 +176,10 @@ const tags = [
           }
         }
       }
+    }
+
+    @include break-up(lg) {
+      --page-spacing-factor: 1;
     }
   }
 </style>
