@@ -100,34 +100,65 @@ const tags = [
       <ContentLimiter maxWidth={1100}>
         <h2 id="wge-partners-headline" class="wge-partners__headline">Our Partners</h2>
         <p class="wge-partners__sub">Trusted partners delivering Defguard solutions worldwide</p>
-        <div class="wge-partners__grid" aria-label="Trusted by xcomp, epssi, Entisso and FOX IT">
+        <div class="wge-partners__grid" aria-label="Trusted by Movaci, Dynamate, xcomp, epssi, Entisso, FOX IT and WorldWideWAN">
+          <article class="wge-partners__card">
+            <a href="https://movaci.com/" target="_blank" rel="noopener noreferrer" class="wge-partners__link" aria-label="Movaci – Defguard Partner">
+              <div class="wge-partners__logo-wrapper">
+                <img src="/images/partnering-with-defguard/movaci-logo.png" alt="Movaci" class="wge-partners__logo" width="125" height="125" loading="lazy" />
+              </div>
+              <p class="wge-partners__label">MSP/MSSP Partner US, Australia and UK</p>
+            </a>
+            <p class="wge-partners__description">Movaci is a cybersecurity solutions company and MSSP headquartered in Thailand with offices in the US, Australia and UK.</p>
+          </article>
+          <article class="wge-partners__card">
+            <a href="https://www.dynamate.be/" target="_blank" rel="noopener noreferrer" class="wge-partners__link" aria-label="Dynamate – Defguard MSP Partner Belgium">
+              <div class="wge-partners__logo-wrapper">
+                <img src="/images/partnering-with-defguard/dynamate-logo.svg" alt="Dynamate" class="wge-partners__logo" width="125" height="125" loading="lazy" />
+              </div>
+              <p class="wge-partners__label">MSP Partner Belgium</p>
+            </a>
+            <p class="wge-partners__description">Belgian IT services company offering cloud infrastructure, modern workplace, security, and digital transformation across Flanders.</p>
+          </article>
+          <article class="wge-partners__card">
+            <a href="https://www.wwwan.de/" target="_blank" rel="noopener noreferrer" class="wge-partners__link" aria-label="WorldWideWAN – Defguard MSP Partner Germany">
+              <div class="wge-partners__logo-wrapper">
+                <img src="/images/partnering-with-defguard/wwwan-logo.svg" alt="WorldWideWAN" class="wge-partners__logo" width="125" height="125" loading="lazy" />
+              </div>
+              <p class="wge-partners__label">MSP Partner Germany</p>
+            </a>
+            <p class="wge-partners__description">Globally operating IT system house since 1992, offering hybrid infrastructure, security solutions, and managed services in over 150 countries.</p>
+          </article>
           <article class="wge-partners__card">
             <a href="https://xcomp.pl/en/home/" target="_blank" rel="noopener noreferrer" class="wge-partners__link" aria-label="Xcomp – Defguard MSP Partner Poland">
               <div class="wge-partners__logo-wrapper">
                 <img src="/images/partnering-with-defguard/xcomp-logo.png" alt="xcomp" class="wge-partners__logo" width="125" height="125" loading="lazy" />
               </div>
-              <p class="wge-partners__label">Defguard MSP Partner Poland</p>
+              <p class="wge-partners__label">MSP Partner Poland</p>
             </a>
+            <p class="wge-partners__description">IT infrastructure and consulting specialist with over 20 years of experience, offering networking, security, storage and certified hardware solutions across Poland and Europe.</p>
           </article>
           <article class="wge-partners__card">
             <a href="https://fox-it.de/" target="_blank" rel="noopener noreferrer" class="wge-partners__link" aria-label="FOX IT – Defguard MSP Partner Germany">
               <div class="wge-partners__logo-wrapper">
                 <img src="/images/partnering-with-defguard/foxit-logo.png" alt="FOX IT" class="wge-partners__logo" width="125" height="125" loading="lazy" />
               </div>
-              <p class="wge-partners__label">Defguard MSP Partner Germany</p>
+              <p class="wge-partners__label">MSP Partner Germany</p>
             </a>
+            <p class="wge-partners__description">IT system house based in Bavaria since 1992, specializing in IT security and managed services for enterprises.</p>
           </article>
           <article class="wge-partners__card">
             <div class="wge-partners__logo-wrapper">
               <img src="/images/partnering-with-defguard/epssi-logo.png" alt="epssi" class="wge-partners__logo" width="125" height="125" loading="lazy" />
             </div>
-            <p class="wge-partners__label">Defguard MSP Partner France</p>
+            <p class="wge-partners__label">MSP Partner France</p>
+            <p class="wge-partners__description">French IT managed services provider delivering infrastructure, cybersecurity and support solutions for businesses.</p>
           </article>
           <article class="wge-partners__card">
             <div class="wge-partners__logo-wrapper">
               <img src="/images/partnering-with-defguard/entisso-logo.png" alt="Entisso" class="wge-partners__logo" width="125" height="125" loading="lazy" />
             </div>
-            <p class="wge-partners__label">Defguard MSP Partner Switzerland</p>
+            <p class="wge-partners__label">MSP Partner Switzerland</p>
+            <p class="wge-partners__description">Swiss IT company specializing in infrastructure, cloud, Microsoft 365 and modern workplace solutions for digital transformation.</p>
           </article>
         </div>
       </ContentLimiter>
@@ -715,9 +746,12 @@ const tags = [
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
     gap: 1rem;
     text-decoration: none;
     width: 100%;
+    flex: 1;
+    min-height: 0;
     color: inherit;
   }
 
@@ -764,6 +798,19 @@ const tags = [
 
   .wge-partners__card:hover .wge-partners__label {
     color: #3d72c1;
+  }
+
+  .wge-partners__description {
+    margin: 0.5rem 0 0;
+    padding: 0 0.25rem;
+    flex-shrink: 0;
+    align-self: stretch;
+    @include typography(paragraph);
+    font-size: calc(14px * var(--font-scale-factor));
+    font-weight: 400;
+    color: #4b5563;
+    text-align: center;
+    line-height: 1.5;
   }
 
   .wge-why {
