@@ -34,6 +34,22 @@ const tags = [
   "reseller",
   "integration",
 ];
+
+const partnersRaw = [
+  { name: "Movaci", url: "https://movaci.com/", regions: ["asia-pacific", "americas", "uk"], labels: ["Thailand", "US", "Australia", "UK"], description: "Cybersecurity solutions company and MSSP headquartered in Thailand with offices in the US, Australia and UK.", logo: "movaci-logo.png" },
+  { name: "Dynamate", url: "https://www.dynamate.be/", regions: ["europe"], labels: ["Belgium"], description: "IT services company offering cloud infrastructure, modern workplace, security, and digital transformation across Flanders.", logo: "dynamate-logo.svg" },
+  { name: "WorldWideWAN", url: "https://www.wwwan.de/", regions: ["europe"], labels: ["Germany"], description: "Globally operating IT system house, offering hybrid infrastructure, security solutions, and managed services in over 150 countries.", logo: "wwwan-logo.svg" },
+  { name: "Xcomp", url: "https://xcomp.pl/en/home/", regions: ["europe"], labels: ["Poland"], description: "IT infrastructure and consulting company, offering networking, security, storage and certified hardware solutions across Poland and Europe.", logo: "xcomp-logo.png" },
+  { name: "FOXiT GmbH – Member of FOXGroup", url: "https://fox-it.de/", regions: ["europe"], labels: ["Germany"], description: "The FOXGroup is a network of highly specialized companies in the fields of Data Protection & Information Security, IT Security and Managed Services.", logo: "foxit-logo.png" },
+  { name: "epssi", url: "", regions: ["europe"], labels: ["France"], description: "IT managed services provider delivering infrastructure, cybersecurity and support solutions for businesses.", logo: "epssi-logo.png" },
+  { name: "Entisso", url: "https://www.entiiso.com/", regions: ["europe"], labels: ["Switzerland"], description: "IT company specializing in infrastructure, cloud, Microsoft 365 and modern workplace solutions for digital transformation.", logo: "entisso-logo.png" },
+];
+
+const partners = partnersRaw.sort((a, b) => {
+  const countryA = (a.labels[0] ?? "").toLowerCase();
+  const countryB = (b.labels[0] ?? "").toLowerCase();
+  return countryA.localeCompare(countryB);
+});
 ---
 
 <ProductLayout
@@ -100,67 +116,55 @@ const tags = [
       <ContentLimiter maxWidth={1100}>
         <h2 id="wge-partners-headline" class="wge-partners__headline">Defguard Partners (MSP/MSSP)</h2>
         <p class="wge-partners__sub">Find authorized Defguard Managed Service Providers and Managed Security Service Providers in your region.</p>
-        <div class="wge-partners__grid" aria-label="Trusted by Movaci, Dynamate, xcomp, epssi, Entisso, FOX IT and WorldWideWAN">
-          <article class="wge-partners__card">
-            <a href="https://movaci.com/" target="_blank" rel="noopener noreferrer" class="wge-partners__link" aria-label="Movaci – Defguard Partner">
-              <div class="wge-partners__logo-wrapper">
-                <img src="/images/partnering-with-defguard/movaci-logo.png" alt="Movaci" class="wge-partners__logo" width="125" height="125" loading="lazy" />
-              </div>
-              <p class="wge-partners__label">Thailand, US, Australia, UK</p>
-            </a>
-            <p class="wge-partners__description">Cybersecurity solutions company and MSSP headquartered in Thailand with offices in the US, Australia and UK.</p>
-          </article>
-          <article class="wge-partners__card">
-            <a href="https://www.dynamate.be/" target="_blank" rel="noopener noreferrer" class="wge-partners__link" aria-label="Dynamate – Defguard MSP Partner Belgium">
-              <div class="wge-partners__logo-wrapper">
-                <img src="/images/partnering-with-defguard/dynamate-logo.svg" alt="Dynamate" class="wge-partners__logo" width="125" height="125" loading="lazy" />
-              </div>
-              <p class="wge-partners__label">Belgium</p>
-            </a>
-            <p class="wge-partners__description">IT services company offering cloud infrastructure, modern workplace, security, and digital transformation across Flanders.</p>
-          </article>
-          <article class="wge-partners__card">
-            <a href="https://www.wwwan.de/" target="_blank" rel="noopener noreferrer" class="wge-partners__link" aria-label="WorldWideWAN – Defguard MSP Partner Germany">
-              <div class="wge-partners__logo-wrapper">
-                <img src="/images/partnering-with-defguard/wwwan-logo.svg" alt="WorldWideWAN" class="wge-partners__logo" width="125" height="125" loading="lazy" />
-              </div>
-              <p class="wge-partners__label">Germany</p>
-            </a>
-            <p class="wge-partners__description">Globally operating IT system house, offering hybrid infrastructure, security solutions, and managed services in over 150 countries.</p>
-          </article>
-          <article class="wge-partners__card">
-            <a href="https://xcomp.pl/en/home/" target="_blank" rel="noopener noreferrer" class="wge-partners__link" aria-label="Xcomp – Defguard MSP Partner Poland">
-              <div class="wge-partners__logo-wrapper">
-                <img src="/images/partnering-with-defguard/xcomp-logo.png" alt="xcomp" class="wge-partners__logo" width="125" height="125" loading="lazy" />
-              </div>
-              <p class="wge-partners__label">Poland</p>
-            </a>
-            <p class="wge-partners__description">IT infrastructure and consulting company, offering networking, security, storage and certified hardware solutions across Poland and Europe.</p>
-          </article>
-          <article class="wge-partners__card">
-            <a href="https://fox-it.de/" target="_blank" rel="noopener noreferrer" class="wge-partners__link" aria-label="FOX IT – Defguard MSP Partner Germany">
-              <div class="wge-partners__logo-wrapper">
-                <img src="/images/partnering-with-defguard/foxit-logo.png" alt="FOX IT" class="wge-partners__logo" width="125" height="125" loading="lazy" />
-              </div>
-              <p class="wge-partners__label">Germany</p>
-            </a>
-            <p class="wge-partners__description">IT system house, specializing in IT security and managed services for enterprises.</p>
-          </article>
-          <article class="wge-partners__card">
-            <div class="wge-partners__logo-wrapper">
-              <img src="/images/partnering-with-defguard/epssi-logo.png" alt="epssi" class="wge-partners__logo" width="125" height="125" loading="lazy" />
-            </div>
-            <p class="wge-partners__label">France</p>
-            <p class="wge-partners__description">IT managed services provider delivering infrastructure, cybersecurity and support solutions for businesses.</p>
-          </article>
-          <article class="wge-partners__card">
-            <div class="wge-partners__logo-wrapper">
-              <img src="/images/partnering-with-defguard/entisso-logo.png" alt="Entisso" class="wge-partners__logo" width="125" height="125" loading="lazy" />
-            </div>
-            <p class="wge-partners__label">Switzerland</p>
-            <p class="wge-partners__description">IT company specializing in infrastructure, cloud, Microsoft 365 and modern workplace solutions for digital transformation.</p>
-          </article>
+
+        <div class="wge-partners__filter" role="group" aria-label="Filter by region">
+          <button type="button" class="wge-partners__filter-btn is-active" data-region="all">All</button>
+          <button type="button" class="wge-partners__filter-btn" data-region="europe">Europe</button>
+          <button type="button" class="wge-partners__filter-btn" data-region="asia-pacific">Asia-Pacific</button>
+          <button type="button" class="wge-partners__filter-btn" data-region="americas">Americas</button>
+          <button type="button" class="wge-partners__filter-btn" data-region="uk">UK</button>
         </div>
+
+        <div class="wge-partners__grid" id="partners-grid" aria-label="Trusted Defguard partners">
+          {partners.map((partner) => {
+            const introEmail = `mailto:partner@defguard.net?subject=Request%20Introduction%20to%20${encodeURIComponent(partner.name)}`;
+            return (
+              <article class="wge-partners__card" data-regions={partner.regions.join(" ")}>
+                <div class="wge-partners__logo-wrapper">
+                  <img src={`/images/partnering-with-defguard/${partner.logo}`} alt={partner.name} class="wge-partners__logo" width="125" height="60" loading="lazy" />
+                </div>
+                <h3 class="wge-partners__name">{partner.name}</h3>
+                <div class="wge-partners__badges">
+                  {partner.labels.map((country) => (
+                    <span class="wge-partners__badge">{country}</span>
+                  ))}
+                </div>
+                <p class="wge-partners__description">{partner.description}</p>
+                <div class="wge-partners__actions">
+                  <a href={introEmail} class="wge-partners__btn wge-partners__btn--primary">Request an Introduction</a>
+                  {partner.url ? (
+                    <a href={partner.url} target="_blank" rel="noopener noreferrer" class="wge-partners__btn wge-partners__btn--ghost">Visit Website</a>
+                  ) : null}
+                </div>
+              </article>
+            );
+          })}
+        </div>
+
+        <script is:inline>
+          document.querySelectorAll(".wge-partners__filter-btn").forEach(function(btn) {
+            btn.addEventListener("click", function() {
+              document.querySelectorAll(".wge-partners__filter-btn").forEach(function(b) { b.classList.remove("is-active"); });
+              btn.classList.add("is-active");
+              var region = btn.getAttribute("data-region");
+              document.querySelectorAll(".wge-partners__card").forEach(function(card) {
+                var regions = card.getAttribute("data-regions") || "";
+                var show = region === "all" || regions.indexOf(region) >= 0;
+                card.classList.toggle("is-hidden", !show);
+              });
+            });
+          });
+        </script>
       </ContentLimiter>
     </section>
 
@@ -703,7 +707,7 @@ const tags = [
   }
 
   .wge-partners__sub {
-    margin: 0 auto 3rem;
+    margin: 0 auto 2rem;
     text-align: center;
     @include typography(paragraph);
     color: #6b7280;
@@ -711,15 +715,52 @@ const tags = [
     max-width: 56ch;
   }
 
+  .wge-partners__filter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .wge-partners__filter-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 9999px;
+    background: #fff;
+    @include typography(paragraph);
+    font-size: calc(14px * var(--font-scale-factor));
+    font-weight: 500;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .wge-partners__filter-btn:hover {
+    border-color: #3d72c1;
+    color: #3d72c1;
+  }
+
+  .wge-partners__filter-btn.is-active {
+    background: #3d72c1;
+    border-color: #3d72c1;
+    color: #fff;
+  }
+
   .wge-partners__grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 2rem;
     margin: 0 auto;
 
-    @include break-up(md) {
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
+    @include break-up(sm) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.5rem;
+    }
+
+    @include break-up(lg) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
     }
   }
 
@@ -727,30 +768,19 @@ const tags = [
     background: #fff;
     border: 1px solid #e5e7eb;
     border-radius: 12px;
-    padding: 2rem;
+    padding: 2.75rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    align-self: start;
-    gap: 1rem;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    gap: 1.25rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    min-height: 420px;
   }
 
   .wge-partners__card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-
-  .wge-partners__link {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 1rem;
-    text-decoration: none;
-    width: 100%;
-    color: inherit;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   }
 
   .wge-partners__logo-wrapper {
@@ -758,19 +788,19 @@ const tags = [
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 125px;
+    height: 60px;
+    flex-shrink: 0;
     transition: transform 0.2s ease;
   }
 
   .wge-partners__card:hover .wge-partners__logo-wrapper {
-    transform: scale(1.05);
+    transform: scale(1.03);
   }
 
   .wge-partners__logo {
     width: auto;
-    max-width: 125px;
-    max-height: 125px;
-    height: auto;
+    max-width: 100%;
+    height: 60px;
     object-fit: contain;
     display: block;
     filter: grayscale(100%);
@@ -783,32 +813,97 @@ const tags = [
     opacity: 1;
   }
 
-  .wge-partners__label {
+  .wge-partners__name {
     margin: 0;
-    @include typography(paragraph);
-    font-size: calc(16px * var(--font-scale-factor));
-    font-weight: 500;
-    color: #374151;
+    @include typography(h3);
+    font-size: calc(18px * var(--font-scale-factor));
+    font-weight: 600;
+    color: #222;
     text-align: center;
-    line-height: 1.4;
-    transition: color 0.2s ease;
+    line-height: 1.3;
   }
 
-  .wge-partners__card:hover .wge-partners__label {
-    color: #3d72c1;
+  .wge-partners__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    justify-content: center;
+  }
+
+  .wge-partners__badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: #f3f4f6;
+    border-radius: 9999px;
+    @include typography(paragraph);
+    font-size: calc(12px * var(--font-scale-factor));
+    font-weight: 500;
+    color: #6b7280;
   }
 
   .wge-partners__description {
-    margin: 0.5rem 0 0;
-    padding: 0 0.25rem;
-    flex-shrink: 0;
-    align-self: stretch;
+    margin: 0;
+    flex: 1;
+    min-height: 6em;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
     @include typography(paragraph);
     font-size: calc(14px * var(--font-scale-factor));
     font-weight: 400;
-    color: #4b5563;
+    color: rgba(75, 85, 99, 0.75);
     text-align: center;
-    line-height: 1.5;
+    line-height: 1.6;
+  }
+
+  .wge-partners__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    margin-top: auto;
+    padding-top: 0.5rem;
+  }
+
+  .wge-partners__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    @include typography(paragraph);
+    font-size: calc(14px * var(--font-scale-factor));
+    font-weight: 500;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.2s ease;
+  }
+
+  .wge-partners__btn--primary {
+    background: #3d72c1;
+    border: 1px solid #3d72c1;
+    color: #fff !important;
+  }
+
+  .wge-partners__btn--primary:hover {
+    background: #3565a8;
+    border-color: #3565a8;
+  }
+
+  .wge-partners__btn--ghost {
+    background: transparent;
+    border: 1px solid #d1d5db;
+    color: #374151 !important;
+  }
+
+  .wge-partners__btn--ghost:hover {
+    border-color: #3d72c1;
+    color: #3d72c1 !important;
+  }
+
+  .wge-partners__card.is-hidden {
+    display: none;
   }
 
   .wge-why {
