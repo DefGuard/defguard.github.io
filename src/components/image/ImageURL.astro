@@ -58,7 +58,7 @@ function isExternalUrl(url: string): boolean {
 }
 
 // Function to optimize image URL based on format and quality (for external images)
-function optimizeImageUrl(url: string, format?: string, quality?: number): string {
+function optimizeImageUrl(url: string, _format?: string, _quality?: number): string {
   // For external URLs, we can't optimize them directly
   // But we can add query parameters if the service supports it
   // This is a placeholder for future enhancement
@@ -70,7 +70,7 @@ const isExternal = isExternalUrl(src);
 const processedSrc = isExternal ? optimizeImageUrl(src, format, quality) : src;
 
 // Build srcset for responsive images (basic implementation)
-function buildSrcSet(baseSrc: string): string | undefined {
+function buildSrcSet(_baseSrc: string): string | undefined {
   if (!sizes || isExternal) return undefined;
   
   // For internal images, we could generate different sizes

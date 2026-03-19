@@ -256,12 +256,12 @@ const hasCaseStudy =
       }
     });
 
-    // Add anchors to headers
+    // Add anchors to headers (rehype-slug already sets IDs at build time; we only add anchor links)
     const addAnchorsToHeaders = () => {
       const postContent = document.querySelector('.post-content');
       if (!postContent) return;
 
-      // Function to generate a slug from text
+      // Function to generate a slug from text (used only when header has no id)
       const slugify = (text: string): string => {
         return text
           .toLowerCase()
@@ -278,20 +278,19 @@ const hasCaseStudy =
         const text = header.textContent || '';
         if (!text.trim()) return;
 
-        // Generate ID from header text
-        let id = slugify(text);
-        
-        // Ensure unique IDs (in case of duplicate headers)
-        let counter = 1;
-        let uniqueId = id;
-        while (document.getElementById(uniqueId)) {
-          uniqueId = `${id}-${counter}`;
-          counter++;
+        // Use existing ID from rehype-slug if present; otherwise generate one
+        let id = header.id;
+        if (!id) {
+          id = slugify(text);
+          let counter = 1;
+          let uniqueId = id;
+          while (document.getElementById(uniqueId)) {
+            uniqueId = `${id}-${counter}`;
+            counter++;
+          }
+          id = uniqueId;
+          header.id = id;
         }
-        id = uniqueId;
-
-        // Set the ID on the header
-        header.id = id;
 
         // Create anchor link
         const anchor = document.createElement('a');

@@ -1,28 +1,10 @@
 ---
 import Navigation from "../components/base/Navigation.astro";
-import HomeSection from "../components/home/HomeSection.astro";
 import ProductLayout from "../layouts/ProductLayout.astro";
-import Testimonials from "./_home/components/client-side/Testimonials/Testimonials";
-import TestimonialsGrid from "./_home/components/client-side/TestimonialsGrid/TestimonialsGrid.astro";
-import type { TestimonialData } from "./_home/components/client-side/Testimonials/type";
-import { testimonialSchema } from "./_home/components/client-side/Testimonials/type";
-import FlexibleIdentitySection from "./_home/components/FlexibleIdentity/FlexibleIdentitySection.astro";
 import HomeHeader from "./_home/components/HomeHeader.astro";
-import Roadmap from "./_home/components/Roadmap/Roadmap.astro";
-import FeatureCapsules from "./_home/components/FeatureCapsules.astro";
-import CaseCapsules from "./_home/components/CaseCapsules.astro";
 import FlexibleSection from "../components/FlexibleSection.astro";
-import signinwith from "/public/images/data/signinwith.png";
-import enrollment from "/public/images/data/enrollment-screen.png";
-import api from "/public/images/data/api.png";
-import Image from "astro/components/Image.astro";
-import YouTubeVideo from "../components/video/YouTubeVideo.astro";
 import CTASection from "../components/CTASection.astro";
-import TextDivider from "../components/TextDivider.astro";
-import TrustedBy from "./_home/components/TrustedBy.astro";
-import HeaderSection from "../components/HeaderSection.astro";
 import ImageURL from "../components/image/ImageURL.astro";
-import ImageCarousel from "../components/image/ImageCarousel.astro";
 import ContentLimiter from "../components/ContentLimiter.astro";
 import CodeBlock from "../components/CodeBlock.astro";
 
@@ -42,14 +24,6 @@ curl -X POST https://your.defguard.insn.ce/api/v1/device/network/start_cli \
 
 bash# dg enroll -t hiiJGYyQ69KbEyLk3OhTkIhXYKzHoIdi -u "https://enrollyour.defguard.insn.ce"
 `;
-
-const testimonialsImportData = await Astro.glob("../data/home/testimonials/**/*.md");
-
-const testimonialsData: Array<TestimonialData> = testimonialsImportData.map((val) => {
-  const toValidate = { ...val.frontmatter, markdownRaw: val.rawContent() };
-  const res = testimonialSchema.parse(toValidate);
-  return res;
-});
 
 const title = "defguard - Secure Zero-Trust for Internet of Things";
 const featuredImage =

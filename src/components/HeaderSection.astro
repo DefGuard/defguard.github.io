@@ -36,11 +36,8 @@ const { title, description, variant = "white" } = Astro.props;
       padding-bottom: 10px;
       text-align: left;
       text-wrap: balance;
+      font-size: calc(3.2rem * var(--font-scale-factor));
       @include typography(title);
-
-      & {
-        font-size: calc(3.2rem * var(--font-scale-factor));
-      }
     }
   }
 </style>

@@ -1,4 +1,3 @@
-import { PlatformType } from "../types/platform";
 
 interface DownloadIconProps {
   width?: number;

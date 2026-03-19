@@ -56,7 +56,7 @@ const webPageSchema = {
   url={url}
   tags={tags}
 >
-  <script slot="schema" type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />
+  <script is:inline slot="schema" type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />
   <Navigation activeSlug="/compliance/" />
 
   <main id="compliance-page" aria-label="Compliance and certifications">
