@@ -35,6 +35,66 @@ const tags = [
   "integration",
 ];
 
+const faqEntries = [
+  {
+    question: "In whose name is the license issued for Defguard partners?",
+    answer:
+      "The license is issued in the name of the End-Customer (the entity using the software). Partners facilitate purchase and deployment, but the End-Customer is the legal owner of the license. For MSP or whitelabel setups, the partner may manage the instance, while the legal right to use the software remains tied to the specific client deployment.",
+  },
+  {
+    question: "Can partners transfer a Defguard license to another customer or environment?",
+    answer:
+      "Yes for environment transfer: because Defguard is self-hosted, you can migrate a license to a new server, but you must decommission the old instance before activating the new one. Customer transfer between different legal entities is generally non-transferable; any reassignment due to contract termination must be cleared with the Defguard team directly.",
+  },
+  {
+    question:
+      "What does the ordering process look like, and how long does it take to receive the license key?",
+    answer:
+      "Partners complete deal registration to initiate the request, Defguard prepares pro-forma or payment instructions, the license key is issued once payment is confirmed, and digital delivery is typically completed within 24 hours (one business day) of payment processing.",
+  },
+  {
+    question:
+      "Are we required to provide any customer-identifying or personal data when placing an order?",
+    answer:
+      "Yes, but only organizational details necessary for the license and billing: company name, tax ID/VAT number, business address, and a technical contact email for key delivery and security bulletins. No individual end-user data (such as your client's employees) is required.",
+  },
+  {
+    question:
+      "What customer personal data would Defguard have access to during service delivery?",
+    answer:
+      "None. Defguard is strictly self-hosted, so all user metadata, cryptographic keys, and VPN traffic remain within the infrastructure controlled by you or your customer. Defguard has no remote access to the internal database or user logs.",
+  },
+  {
+    question: "Who is expected to provide end-customer support: Defguard or the partner?",
+    answer:
+      "The partner provides level 1 and level 2 support (deployment and user-facing issues). Defguard provides level 3 support to the partner for core software issues or bugs.",
+  },
+  {
+    question:
+      "Are there any usage limitations for the trial version beyond the time restriction?",
+    answer:
+      "The trial is feature-complete. It unlocks enterprise capabilities (such as OIDC sync and multi-tenancy) that are usually limited in the free starter version. The main limitation is the time window, typically 14 to 30 days.",
+  },
+  {
+    question: "How quickly can a trial license be issued?",
+    answer:
+      "Trial keys are usually issued within 24 hours of the request being processed.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqEntries.map((entry) => ({
+    "@type": "Question",
+    name: entry.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: entry.answer,
+    },
+  })),
+};
+
 const partnersRaw = [
   { name: "Movaci", url: "https://movaci.com/", regions: ["asia-pacific", "americas", "uk"], labels: ["Thailand", "US", "Australia", "UK"], description: "Cybersecurity solutions company and MSSP headquartered in Thailand with offices in the US, Australia and UK.", logo: "movaci-logo.png" },
   { name: "Dynamate", url: "https://www.dynamate.be/", regions: ["europe"], labels: ["Belgium"], description: "IT services company offering cloud infrastructure, modern workplace, security, and digital transformation across Flanders.", logo: "dynamate-logo.svg" },
@@ -350,6 +410,29 @@ const partners = partnersRaw.sort((a, b) => {
             </article>
           ))}
         </div>
+      </ContentLimiter>
+    </section>
+
+    <!-- Partner FAQ (SEO + AI/robots friendly via JSON-LD) -->
+    <section class="wge-faq" aria-labelledby="wge-faq-headline">
+      <ContentLimiter maxWidth={1100}>
+        <h2 id="wge-faq-headline" class="wge-faq__headline">Defguard Partner FAQ</h2>
+        <p class="wge-faq__sub">
+          Answers about licensing, ordering, data privacy, support responsibilities, and trial licenses for Defguard partners.
+        </p>
+
+        <div class="wge-faq__list">
+          {faqEntries.map((entry) => (
+            <details class="wge-faq__item">
+              <summary class="wge-faq__question">{entry.question}</summary>
+              <div class="wge-faq__answer">
+                <p>{entry.answer}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+
+        <script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)} />
       </ContentLimiter>
     </section>
   </main>
@@ -1669,5 +1752,92 @@ const partners = partnersRaw.sort((a, b) => {
     font-size: calc(16px * var(--font-scale-factor));
     color: #6b7280;
     line-height: 1.5;
+  }
+
+  .wge-faq {
+    background: #f9fafb;
+    padding: page-spacing(80px) 0;
+  }
+
+  .wge-faq__headline {
+    margin: 0 0 0.5rem;
+    text-align: center;
+    @include typography(section);
+    font-weight: 400;
+    color: #222;
+  }
+
+  .wge-faq__sub {
+    margin: 0 auto 2.5rem;
+    text-align: center;
+    @include typography(paragraph);
+    color: #6b7280;
+    line-height: 1.6;
+    max-width: 60ch;
+  }
+
+  .wge-faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .wge-faq__item {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &[open] {
+      border-color: #3d72c1;
+      box-shadow: 0 4px 16px rgba(61, 114, 193, 0.12);
+    }
+  }
+
+  .wge-faq__question {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    @include typography(h3);
+    font-weight: 600;
+    color: #222;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::after {
+      content: "+";
+      flex-shrink: 0;
+      width: 1.25rem;
+      height: 1.25rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      @include typography(paragraph);
+      font-weight: 700;
+      color: #3d72c1;
+      margin-top: 0.1rem;
+    }
+  }
+
+  .wge-faq__item[open] .wge-faq__question::after {
+    content: "-";
+  }
+
+  .wge-faq__answer {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    @include typography(paragraph);
+    color: #374151;
+    line-height: 1.6;
+  }
+
+  .wge-faq__answer p {
+    margin: 0;
   }
 </style>
