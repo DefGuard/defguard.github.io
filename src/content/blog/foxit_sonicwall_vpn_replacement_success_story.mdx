@@ -1,0 +1,155 @@
+---
+title: "How a German MSSP Replaced Legacy VPN Appliances with Defguard to Secure Customer Infrastructure and Reclaim Digital Sovereignty"
+publishDate: 2026-04-07
+description: "Foxit replaced legacy SonicWall VPN with Defguard to improve security, simplify access management, and deliver a modern self-hosted remote access experience based on WireGuard and MFA."
+author: "Michał Gryczka"
+companyName: "FOXIT, Bavaria, Germany"
+companyDescription: "Serves SMBs and critical infrastructure across Germany."
+companySegment: "Managed Security Services (MSSP)"
+companyWebsite: "https://foxgroup.de/"
+
+image: "/images/blog/foxit_success_story/german_mssp_replaces_sonicwall_with_defguard_hero.png"
+tags: ["SonicWall", "case study"]
+---
+
+![How a German MSSP Replaced Legacy VPN Appliances with Defguard](/images/blog/foxit_success_story/german_mssp_replaces_sonicwall_with_defguard_hero.png)
+
+## TL;DR
+
+A 34-year Bavarian MSSP hit the limits of its legacy VPN stack — mounting vulnerabilities, broken licensing promises, and no real MFA at the protocol layer. Defguard was the only solution that met every requirement.
+
+- **Problem:** SonicWall vulnerabilities, revoked licenses, and VPN clients storing credentials on endpoints with no cryptographic MFA
+- **Why Defguard:** The only European, open-source platform offering centrally managed multi-site WireGuard VPN with MFA built into the key exchange
+- **Scale:** 6–7 customer environments live and growing, with plans to standardize all VPN access on Defguard
+- **Key wins:** ~10x throughput over legacy SSL VPN · genuine MFA in the WireGuard handshake · zero-trust architecture · flexible identity integration (Entra ID, LDAP, Keycloak, or local)
+- **Bigger picture:** A sovereign, inspectable partner FOXIT can build on — not another vendor lock-in
+
+---
+
+## The Challenge
+
+FOXIT is a family business with 34 years of history in German IT services. Founded as a one-man software development shop in the early 1990s, the company evolved into a full-service managed security provider, today operating a security operations center (SOC) and managing infrastructure for clients ranging from mid-sized family businesses to power-plant operators.
+
+For years, FOXIT relied on SonicWall SMA appliances to provide VPN access into customer networks. The hardware was easy to deploy — plug in the box, run the setup wizard, and it worked. Alongside SonicWall, FOXiT uses the built-in IPsec VPN for other connectivity needs, where they are now working on integrating Defguard VPN into the firewall, which already works in test environments. The stack was functional, familiar, and deeply embedded in their service delivery.
+
+Then the cracks appeared.
+
+SonicWall vulnerabilities accelerated — more frequent, more severe. A cloud backup incident exposed customer pre-shared keys to attackers. And then came the licensing shock: SonicWall informed FOXIT that devices licensed through 2027 would no longer be supported, effectively forcing a premature, expensive migration. FOXIT had sold those licenses to their own clients.
+
+"Security is built on trust," says Franz Obermayer, CEO of FOXIT. "When the manufacturer says you cannot use your licenses anymore, the customers lose trust in us — because we told them they were covered until 2027, and now we have to say it doesn't work anymore."
+
+This was not an isolated event. The VMware-to-Broadcom acquisition had just multiplied licensing costs by a factor of ten for some of FOXIT's customers. A pattern was emerging: reliable sovereign partners are the cornerstone of secure infrastructures — and the supply of those partners was shrinking.
+
+The existing VPN architecture also had a deeper, technical problem. Former VPN clients stored configuration files — including credentials — on client devices. Multi-factor authentication was available through TOTP, but only at the client application layer. The underlying VPN connection itself remained protected by a static pre-shared key sitting on the filesystem.
+
+"I want to know if the VPN connection is secured, not just the client," Franz explains. "That's real multi-factor authentication — not just a client with a funny UI that asks for a six-digit PIN."
+
+FOXIT needed a replacement, but not a one-to-one swap. They wanted a generational leap.
+
+## The Search
+
+Franz assembled a small evaluation team: himself (responsible for security and operations), Stefan (CTO), and Alex (their deployment engineer). They set strict criteria:
+
+- **Modern VPN architecture** — not a 10-year-old design wrapped in a new box
+- **Built-in Zero Trust** — native, not bolted on
+- **Built-in MFA** — real cryptographic MFA in the VPN handshake, not just a TOTP prompt on the client
+- **Central management for multiple sites** — essential for an MSP serving dozens of customers from a single operations team
+- **European origin** — digital sovereignty was no longer a nice-to-have
+
+The last point had become non-negotiable. With US-based vendors abruptly changing licensing terms, discontinuing products, and suffering high-profile breaches, FOXIT's customers — and FOXIT itself — wanted infrastructure they could control.
+
+"We don't need to rely on US politics that they hopefully don't do any bad things," Franz says. "I'm sure we can build really good IT infrastructure with European-based companies."
+
+After filtering the market, one solution met every requirement: Defguard.
+
+No other product they evaluated offered centrally managed, multi-site WireGuard VPN with built-in MFA and Zero Trust — certainly not from a European, [open-source vendor](https://github.com/defguard/defguard).
+
+## The Solution
+
+FOXIT tested Defguard's free installation first, validated the architecture, and then engaged Defguard as a company. The deployment model they arrived at reflects the dual nature of MSP work:
+
+**For FOXIT's own technician access:** A single Defguard core server runs in FOXIT's data center. At each customer site, a lightweight Defguard gateway is deployed. FOXIT's support engineers, service desk, and SOC analysts connect through the Defguard client to reach any customer environment — all managed from one control plane.
+
+**For customers who need their own VPN:** Each customer receives a fully isolated Defguard environment — their own core server, their own user management, their own policies. FOXIT deploys and manages it, but the customer's data and configuration remain completely separated.
+
+This flexibility extends to identity management. One customer authenticates through Microsoft Entra ID. Another uses on-premise LDAP. FOXIT itself is migrating to Keycloak to eliminate its dependency on Microsoft Active Directory for VPN authentication. A third customer with 40 users could run entirely on Defguard's local user database.
+
+"I have the technical infrastructure to exit the US cloud," Franz says. "Maybe I connect Defguard to Microsoft today, but when Microsoft goes the VMware way with licensing, I can switch away at any time."
+
+The open-source nature of Defguard was a strong factor in the selection — not as a hard requirement, but as a trust signal.
+
+"I know the components, I can look into them. I know what the parts are doing. I see the changes, I see the history. When WireGuard has a vulnerability, I can see which version is implemented and whether you're already addressing it. That was important."
+
+## The Results
+
+### Performance Gains
+
+Franz tested running a popular enterprise application through the Defguard VPN from his home office — something that had never worked over the previous SSL VPN due to insufficient throughput. Over Defguard's WireGuard tunnel, it worked without issues.
+
+"I just wanted to try it, and it worked. We always use a terminal server because the performance is too low over SSL VPN. Now, at least I could work for one to two hours without a problem."
+
+The improvement comes from the protocol itself. WireGuard operates at the kernel level rather than in userspace, delivering [roughly 10x the throughput of OpenVPN and significantly better performance than IPsec](https://docs.defguard.net/2.0/features/wireguard), with near-instant handshakes where legacy protocols can take several seconds to establish a connection. For high-throughput environments, Defguard also provides [Linux kernel tuning guidance](https://docs.defguard.net/2.0/deployment-strategies/linux-kernel-wireguard-tuning) to maximize gateway performance at scale.
+
+The immediate implication is clear: workloads that were previously forced onto terminal servers due to VPN bottlenecks may now run natively over the tunnel.
+
+### Genuine Multi-Factor Security
+
+Most VPN products that advertise MFA implement it only at the client application layer — the user enters a TOTP code to unlock the VPN client, but the underlying tunnel is still secured by a static pre-shared key sitting in a configuration file on the device. Copy that file to another machine, use a different client, and the MFA is bypassed entirely.
+
+Defguard takes a fundamentally different approach. Its [Multi-Factor Authentication (MFA/2FA)](https://docs.defguard.net/2.0/features/wireguard/multi-factor-authentication-mfa-2fa) integrates the one-time code into the WireGuard key exchange itself. When a user connects to an MFA-enabled location, the Desktop Client communicates through a proxy to the Defguard Core, which validates the MFA token and generates a session-specific pre-shared key. The Gateway only adds peers that present a valid, freshly issued key. If a peer's handshake goes stale (no renegotiation within three minutes), the key is deleted and the peer is removed — enforcing an automatic logout.
+
+This means the MFA is not a front-end convenience; it is embedded in the cryptographic session. There is no configuration file an attacker can extract to bypass it.
+
+Franz specifically calls out Defguard's [documentation of this key-exchange flow](https://docs.defguard.net/2.0/features/wireguard/multi-factor-authentication-mfa-2fa) as a selling point in conversations with fellow security professionals: "When you show that diagram to other technicians — how the key is created and exchanged between the user, the client, the core, and the gateway — they understand immediately. They see that it's real multi-factor authentication. That's a really cool implementation."
+
+Defguard currently supports TOTP, email, and mobile biometric authentication — with hardware token support (FIDO2 / WebAuthn) on the roadmap, a feature FOXIT is actively anticipating for phishing-resistant authentication using European-made SwissBit security keys.
+
+### Resilient, Zero-Trust Architecture
+
+Traditional VPN appliances combine the management plane, authentication, and the VPN tunnel in a single box exposed to the internet. A vulnerability in any component — as demonstrated by the December FortiGate SSO breach — can hand an attacker full control.
+
+Defguard's [architecture](https://docs.defguard.net/2.0/in-depth/architecture) follows a strict [Secure by Design](https://docs.defguard.net/2.0/in-depth/secure-by-design) philosophy that separates concerns across isolated components:
+
+- **Core** (control plane) — handles user management, policies, and configuration. Runs entirely inside the private network and is never exposed to the internet.
+- **Gateway** (data plane) — handles WireGuard VPN traffic. The only component that faces the internet, but has no access to user data, credentials, or the management interface.
+- **Proxy** — mediates enrollment and MFA flows at the network edge with a minimal attack surface.
+
+Even if an attacker compromises a gateway, they gain access to nothing beyond the VPN data plane for that single location. No user database, no configuration secrets, no lateral path to the core. The entire platform is built in Rust — recommended by CISA, NSA, and ANSSI for memory safety — and Defguard publishes [penetration test reports, signed container images, and daily SBOM CVE scans](https://docs.defguard.net/2.0/in-depth/secure-by-design) for full transparency.
+
+"I know the components, I can look into them," Franz says. "When WireGuard has a vulnerability, I can see which version is implemented and whether you're already addressing it."
+
+### Flexible Identity Management
+
+A major driver of FOXIT's selection was Defguard's ability to meet each customer wherever they are on the identity-provider spectrum — without locking anyone in.
+
+Defguard supports [external OpenID Connect providers](https://docs.defguard.net/2.0/features/openid-connect) including [Microsoft Entra ID](https://docs.defguard.net/2.0/features/external-openid-providers/microsoft), Google, Okta, Keycloak, Zitadel, JumpCloud, and Authentik, as well as [two-way LDAP and Active Directory synchronization](https://docs.defguard.net/2.0/features/ldap-and-active-directory-integration). For smaller environments with no external provider, Defguard's built-in local user database and its own OpenID Connect SSO provider are sufficient on their own.
+
+This means FOXIT can deploy a Microsoft-integrated instance for one customer, a Keycloak-backed sovereign instance for another, and a standalone local-database instance for a third — all using the same Defguard platform. If any external provider changes pricing or terms, the migration path to an alternative is a configuration change, not a rearchitecture.
+
+### Simple Enrollment and Day-to-Day Operations
+
+FOXIT's first-level support team manages user provisioning and access changes through Defguard's web interface without needing Linux or Docker expertise. The initial deployment requires container knowledge, but once the system is running, operations are GUI-driven.
+
+End-user enrollment uses Defguard's [guided enrollment flow](https://docs.defguard.net/2.0/features/remote-user-enrollment), which walks users through device setup, VPN configuration, and MFA registration in a single session. When SSO is configured with an external provider like Entra ID, users see their familiar corporate login — no new passwords to memorize or share.
+
+"The enrollment process is really great," Franz says. "It's so easy. They just go through the enrollment steps, and then it just works."
+
+FOXIT documents the process for their customers in a short PDF with screenshots — and that's all it takes.
+
+### A Partner, Not a Vendor
+
+When FOXIT encountered an edge-case issue with users on shared IPv4 connections from a budget ISP, the Defguard team worked alongside FOXIT's engineers to diagnose and resolve it — no ticket escalation loops, no finger-pointing.
+
+"It's okay to have some bugs or some problems. The way you're dealing with them and the way you try to solve it — that's much more important. It's just working together, not pushing the ball to each other. That's what you get when you work with smaller companies instead of a big vendor who says 'it works on my machine, I don't care.'"
+
+Defguard's [open-source repository on GitHub](https://github.com/defguard/defguard) also means FOXIT can file issues, track fixes, and see exactly how the team responds to reported vulnerabilities — a level of accountability that closed-source appliance vendors never offered.
+
+## What's Next
+
+FOXIT is preparing to test Defguard 2.0, which introduces wizard-based setup, [high availability and failover](https://docs.defguard.net/2.0/deployment-strategies/high-availability-and-failover), and a redesigned UI. They plan to progressively migrate all customer VPN connections to Defguard, standardizing and replacing different remaining VPN setups.
+
+A proof of concept is underway to run Defguard gateways as Docker containers directly on Lancom firewalls — a potential integration that could simplify deployments for the many German businesses already running Lancom infrastructure.
+
+FOXIT is also exploring European FIDO2 hardware tokens from SwissBit as a path to phishing-resistant authentication, and eagerly anticipates Defguard's planned device posture policies for verifying endpoint security before granting VPN access.
+
+"European open-source solutions will be the future," Franz says. "The trend is going back from all-cloud. Some things should be on-premise — things that are critical for my company. We like Defguard to have a future, because I think it's really great."
