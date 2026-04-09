@@ -1,0 +1,93 @@
+---
+title: "Defguard 2.0 is now feature-complete and entering the Beta stabilization phase."
+seoTitle: "Defguard 2.0 Beta 1: migration, built-in SSL, and video tutorials"
+description: "Defguard 2.0 Beta 1 introduces guided migration from 1.x, built-in SSL termination for Core and Edge, new certificate settings, and a video tutorial center."
+publishDate: 2026-04-09
+author: "Robert Olejnik"
+image: "/images/blog/defguard-2-0-beta-1/migration.png"
+tags: ["product update"]
+draft: true
+---
+![Defguard 2.0 Beta 1 migration flow](/images/blog/defguard-2-0-beta-1/migration.png)
+
+Defguard 2.0 is now feature-complete and entering the Beta stabilization phase.
+
+Although we have been running and testing this version in production-like environments, we still recommend using it first in staging. Beta 1 includes a simple migration path from 1.x and a set of tutorial videos to make evaluation easier.
+
+If you are new to 2.0, start with the [Defguard 2.0 technical overview](https://defguard.net/blog/defguard-20-alpha-technical-overview/#why-a-major-upgrade-1) and [Alpha 2 release post](https://defguard.net/blog/defguard-2-0-release-alpha-2/).
+
+## What's changed in Beta 1 (vs Alpha 2 and Alpha 1)
+
+### Migration from 1.x
+
+Testing migration is straightforward: deploy Core 2.0 and connect it to a PostgreSQL snapshot of your existing 1.x environment. Core detects the previous setup and runs a guided step-by-step migration.
+
+The migration flow includes:
+
+1. Confirming or changing general configuration and URLs.
+2. Adopting Edge (previously Proxy) with the new UI-driven deployment process.
+3. Migrating each VPN location by deploying or upgrading a Gateway and adopting it.
+
+Make a database backup before production migration.
+
+![Defguard 2.0 migration wizard](/images/blog/defguard-2-0-beta-1/migration.png)
+
+### Defguard Core and Edge built-in SSL termination
+
+Starting in 2.0, Core and Edge can be configured with built-in SSL termination, reducing setup complexity for new deployments.
+
+#### Core SSL termination options
+
+For Core (internal Defguard URL), you can choose:
+
+- Do not configure SSL (recommended when an external reverse proxy handles TLS).
+- Generate certificates based on Defguard internal CA.
+- Upload your own certificate.
+
+![Core SSL termination options](/images/blog/defguard-2-0-beta-1/internal-url-ssl.png)
+
+Using a reverse proxy in production remains the best path for security and traffic control.
+
+#### Edge SSL termination options
+
+Edge supports the same options as Core and can additionally auto-configure a Let's Encrypt certificate via HTTP challenge when ports 80 and 443 are publicly reachable.
+
+![Edge SSL termination options](/images/blog/defguard-2-0-beta-1/edge-url-ssl.png)
+
+### New certificate settings
+
+A new certificate section in settings lets you view the Defguard Root CA certificate and update SSL termination settings for both Core and Edge.
+
+![Certificate settings in Defguard 2.0 Beta 1](/images/blog/defguard-2-0-beta-1/settings-ca.png)
+
+### Video tutorials and contextual help
+
+Beta 1 introduces a dedicated video tutorial section where users can browse and play published tutorials.
+
+![Video tutorials section in Defguard 2.0 Beta 1](/images/blog/defguard-2-0-beta-1/video-tutorials.png)
+
+When a tutorial is relevant to a specific module, Defguard also shows a contextual button for section-specific guidance.
+
+![Contextual video tutorial support button](/images/blog/defguard-2-0-beta-1/video-support.png)
+
+### Easier VM/OVA upgrades
+
+We also introduced [OVA Virtual Images](https://docs.defguard.net/2.0/deployment-strategies/ova) for all-in-one testing and component-based VM deployments.
+
+Until a native self-update mechanism is available, OVA updates are handled through container image refreshes. For this, OVA includes [Dockge](https://github.com/louislam/dockge), making updates simpler from a UI.
+
+To enable Dockge:
+
+1. Enable it via Cloud Init: [Dockge docs](https://docs.defguard.net/2.0/deployment-strategies/ova#dockge)
+2. Open `https://<vm-ip>:5001`
+3. Create your Dockge credentials
+
+You can also update via SSH and Docker Compose if preferred.
+
+## Summary and release plan
+
+Beta 1 is intended to validate migration and operational workflows before the final 2.0 stable release.
+
+We plan to release 2.0.0 final after remaining minor, non-blocking bugs are resolved. You can track progress on the [2.0.0 project board](https://github.com/orgs/DefGuard/projects/5/views/23?sliceBy%5Bvalue%5D=2.0.0).
+
+Feedback from testing is highly appreciated.
