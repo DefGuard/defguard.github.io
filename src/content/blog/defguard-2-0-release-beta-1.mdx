@@ -39,6 +39,21 @@ In case you skipped previous release announcement - here is a quick tutorial on 
 
 Testing migration is straightforward: deploy Core 2.0 and connect it to a PostgreSQL snapshot of your existing 1.x environment. Core detects the previous setup and runs a guided step-by-step migration.
 
+We've recorded a guided migration - we walk through a full migration from Defguard 1.6 to 2.0 using a production-like setup on AWS with separate Core, Edge, and Gateway instances. You’ll learn how to update the components, run the built-in migration process, adopt the Edge component, and securely migrate your locations and gateways — all step by step, with no VPN downtime.
+
+<div style={{ position: "relative", width: "100%", paddingBottom: "56.25%", height: 0 }}>
+  <iframe 
+    src="https://www.youtube.com/embed/-clRBRZNX9M" 
+    title="Defguard 2.0 migration guide"
+    style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerPolicy="strict-origin-when-cross-origin"
+    allowFullScreen
+  ></iframe>
+</div>
+
+
 The migration flow includes:
 
 1. Confirming or changing general configuration and URLs.
