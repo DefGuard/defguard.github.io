@@ -12,10 +12,10 @@ import FlexibleSection from "../components/FlexibleSection.astro";
 // Per-component metadata (id, name, version, repo) to build exact URLs
 interface ComponentDef { id: 'defguard' | 'defguard-client' | 'defguard-mobile' | 'defguard-proxy' | 'defguard-gateway'; name: string; version: string; repo: string; status: string }
 const COMPONENTS: ComponentDef[] = [
-  { id: 'defguard', name: 'Core', version: '1.6.4', repo: 'defguard', status: '' },
+  { id: 'defguard', name: 'Core', version: '1.6.5', repo: 'defguard', status: '' },
   { id: 'defguard-proxy', name: 'Proxy', version: '1.6.3', repo: 'proxy', status: '' },
-  { id: 'defguard-gateway', name: 'Gateway', version: '1.6.3', repo: 'gateway', status: '' },
-  { id: 'defguard-client', name: 'Desktop App', version: '1.6.6', repo: 'client', status: ''  },
+  { id: 'defguard-gateway', name: 'Gateway', version: '1.6.4', repo: 'gateway', status: '' },
+  { id: 'defguard-client', name: 'Desktop App', version: '1.6.7', repo: 'client', status: ''  },
   { id: 'defguard-mobile', name: 'Mobile App', version: '1.6.2', repo: 'mobile-client', status: '' },
 ];
 
@@ -39,8 +39,8 @@ const pickHighestSeverity = (items: string[]): string => {
 
 // Group by component/version
 interface SbomEntry { name: string; version: string; url: string; status: string }
-interface Vulnerability { 
-  Severity?: string; 
+interface Vulnerability {
+  Severity?: string;
   VulnerabilityID?: string;
   PkgID?: string;
   PrimaryURL?: string;
@@ -169,13 +169,13 @@ const tags = [
       </div>
     </FlexibleSection>
 
-  
+
     <FlexibleSection leftRatio={1} title="SBOM file list with vulnerability status" theme="light" id="sbom-list">
       <div slot="left" class="sbom-filelist">
         <p>
           Separate SBOMs are available for <strong>mobile apps</strong> (Android, iOS), the <strong>desktop app</strong>
-          (Windows, macOS, Linux), and <strong>server components</strong> (Core, Proxy, Gateway). 
-          Alongside each SBOM, <strong>advisories files</strong> are also published to summarize known vulnerabilities in detail. 
+          (Windows, macOS, Linux), and <strong>server components</strong> (Core, Proxy, Gateway).
+          Alongside each SBOM, <strong>advisories files</strong> are also published to summarize known vulnerabilities in detail.
         </p>
         <p>
           We use <a href="https://trivy.dev/" target="_blank">Trivy</a> to generate SBOM files and scan for vulnerabilities in our dependencies.
@@ -211,14 +211,14 @@ const tags = [
               const hasVulns = vulns.length !== 0;
               const hasIgnores = ignores.length !== 0;
               const detailsId = `details-${index}`;
-              
+
               return (
                 <>
                   <tr>
                     <td>
                       {(hasVulns || hasIgnores) ? (
-                        <button 
-                          class="vuln-toggle" 
+                        <button
+                          class="vuln-toggle"
                           data-target={detailsId}
                           aria-expanded="false"
                           aria-controls={detailsId}
@@ -256,7 +256,7 @@ const tags = [
                                   if (vulns.length === 0) {
                                     return <p>Vulnerabilities detected but no specific details available.</p>;
                                   }
-                                  
+
                                   return (
                                     <div class="vuln-items">
                                       {vulns.slice(0, 10).map((vuln) => (
@@ -310,7 +310,7 @@ const tags = [
                                   if (ignores.length === 0) {
                                     return <p>Upstream vulnerabilities detected but no specific details available.</p>;
                                   }
-                                  
+
                                   return (
                                     <div class="vuln-items">
                                       {ignores.slice(0, 10).map((ignore) => {
@@ -373,7 +373,7 @@ const tags = [
         </div>
       </div>
     </FlexibleSection>
-    
+
     </main>
 </ProductLayout>
 
@@ -471,7 +471,7 @@ const tags = [
     color: #555;
     border-color: #e5e5e5;
   }
-  
+
   /* Vulnerability toggle button */
   .vuln-toggle {
     background: none;
@@ -497,7 +497,7 @@ const tags = [
   .vuln-toggle[aria-expanded="true"] .toggle-icon {
     transform: rotate(90deg);
   }
-  
+
   /* Vulnerability details row */
   .vuln-details {
     background: #f8f9fa;
@@ -615,18 +615,18 @@ const tags = [
   // Handle vulnerability details toggle for multiple rows
   document.addEventListener('DOMContentLoaded', function() {
     const toggleButtons = document.querySelectorAll<HTMLButtonElement>('.vuln-toggle');
-    
+
     toggleButtons.forEach((button) => {
       button.addEventListener('click', function() {
         const targetId = this.getAttribute('data-target');
         if (!targetId) return;
-        
+
         // Find all related detail rows (vulnerabilities and ignores)
         const vulnRow = document.getElementById(`${targetId}-vulns`);
         const ignoreRow = document.getElementById(`${targetId}-ignores`);
-        
+
         const isExpanded = this.getAttribute('aria-expanded') === 'true';
-        
+
         // Toggle visibility of all related rows
         if (vulnRow) {
           vulnRow.style.display = isExpanded ? 'none' : 'table-row';
@@ -634,7 +634,7 @@ const tags = [
         if (ignoreRow) {
           ignoreRow.style.display = isExpanded ? 'none' : 'table-row';
         }
-        
+
         // Update button state
         this.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
       });
